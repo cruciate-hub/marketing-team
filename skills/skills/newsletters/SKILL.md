@@ -44,14 +44,19 @@ https://github.com/socialplus-tools/marketing-team/blob/main/design-system/color
 
 ## Step 2: Fetch the email template references
 
+Fetch all three — they work together:
+
 ```
-https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter.md
+https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter-spec.md
+https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter-components.md
+https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter-assembly.md
 https://github.com/socialplus-tools/marketing-team/blob/main/emails/emails.md
 ```
 
-`product-update-newsletter.md` contains the HTML component library, MailerLite merge tags, responsive patterns, tier-to-layout mapping, and the complete base template. Follow it exactly when generating HTML.
-
-`emails.md` contains email content strategy — subject line rules, body structure, CTA best practices, and email type guidelines. Apply these when writing the email copy.
+- `product-update-newsletter-spec.md` — MailerLite technical requirements, brand colors, typography, merge tags, image placeholder convention
+- `product-update-newsletter-components.md` — complete HTML for every component: base shell, preheader, header, intro, hero, tiers 1-4, divider, CTA, closing, footer. Follow this exactly when generating HTML.
+- `product-update-newsletter-assembly.md` — assembly orders for both email types and the pre-delivery checklist
+- `emails.md` — email content strategy: subject line rules, body structure, CTA best practices, email type guidelines
 
 ## Step 3: Determine email type
 
@@ -60,8 +65,8 @@ Identify which of the two email types applies based on the user's request or sou
 ### Type A — Product / Feature / Release email
 Use when: the user shares a product update doc, release notes, a Google Doc with feature tiers, or asks for a "what's new", "feature launch", or "release note" email.
 
-- **Monthly Product Update** — Multiple features across tiers, subject line pattern "What's New in [month year]", has Newsletter section with tiered features. Use the "Assembly Order: Monthly Product Update" from `product-update-newsletter.md`.
-- **Feature Launch Announcement** — Single major feature with sub-features, subject line focuses on one launch (e.g., "Events is now live"), no tier structure. Use the "Assembly Order: Feature Launch Announcement" from `product-update-newsletter.md`.
+- **Monthly Product Update** — Multiple features across tiers, subject line pattern "What's New in [month year]", has Newsletter section with tiered features. Use the "Assembly Order: Monthly Product Update" from `product-update-newsletter-assembly.md`.
+- **Feature Launch Announcement** — Single major feature with sub-features, subject line focuses on one launch (e.g., "Events is now live"), no tier structure. Use the "Assembly Order: Feature Launch Announcement" from `product-update-newsletter-assembly.md`.
 
 → Continue to Step 4.
 
@@ -72,9 +77,18 @@ Use when: the user asks for a campaign email, one-off announcement, promotional 
   ```
   https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter-examples/email-template.html
   ```
+- Fetch `boilerplates.md` for standardized descriptions and elevator pitches — use these as starting points for body copy:
+  ```
+  https://github.com/socialplus-tools/marketing-team/blob/main/messaging/boilerplates.md
+  ```
 - Apply `terminology.md` and `tone.md` for copy.
 - Apply `colors.md` for all color values (hex only — no CSS variables).
-- Follow the email content guidelines in `emails.md` for subject line, body structure, and CTA.
+- Follow the email content guidelines in `emails.md` for body structure and CTA.
+- **Subject line rules (mandatory):**
+  - 40–50 characters maximum
+  - Lead with the value or hook — front-load the most important word
+  - No spam trigger words ("FREE", "Act now", all-caps, multiple exclamation marks)
+  - One emoji max, only if it adds meaning
 - Output complete HTML ready to paste into MailerLite.
 
 → Skip to Step 6 after generating the HTML.
