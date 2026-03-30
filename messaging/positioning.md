@@ -199,50 +199,37 @@ The value compounds over time as engagement deepens, data improves, and new acti
 
 ---
 
-# Product Pillars
+# How the Platform Works
 
-The social.plus platform is built around a progression.
+The social.plus platform is built around a natural progression.
 
-Engagement creates participation.
-Participation generates intelligence.
-Intelligence unlocks monetization.
+Meaningful participation generates real user understanding. Real user understanding creates the conditions for sustainable revenue growth. Each builds on the last, compounding in value as activity deepens.
 
-Each pillar strengthens the next, forming a compounding system that increases in value as activity grows.
+## Participation as the foundation
 
-## Engage
+At its core, social.plus enables applications to move beyond passive usage. Users interact, share, and contribute in ways that feel natural and familiar.
 
-Engage is the foundation.
+Not every user participates actively. Many observe, react, or learn from others. These behaviors matter equally — they signal presence, interest, and trust.
 
-We enable applications to move beyond passive usage and create environments where users interact, share, and participate in ways that feel natural and familiar.
+When participation becomes embedded in the product experience, engagement stops being occasional and becomes continuous.
 
-Not every user contributes actively. Many observe, react, or learn from others. These behaviors are equally important, because they signal presence, interest, and trust.
-
-When participation becomes part of the product experience, engagement stops being occasional and becomes continuous.
-
-## Analyze
-
-Analyze turns participation into understanding.
+## Understanding users through interaction
 
 Because interactions happen inside the product, companies gain access to first-party and zero-party data that reflects real user intent.
 
-This layer reveals what audiences care about, how they influence each other, and where opportunities for activation exist.
+This reveals what audiences care about, how they influence each other, and where opportunities for activation exist. The more engagement a company builds, the more precise and valuable this intelligence becomes.
 
-The more engagement a company builds, the more precise and valuable this intelligence becomes.
-
-## Monetize
-
-Monetize is the outcome of meaningful engagement.
+## Revenue as an outcome
 
 When companies cultivate active, trusted environments, they create the conditions required for sustainable revenue expansion.
 
-This can include partner activations, sponsored content, commerce integrations, and other models that align naturally with user behavior.
-
-Monetization is not the starting point. It is the result of building a system where participation and insight already thrive.
+This can include partner activations, sponsored content, commerce integrations, and other models that align naturally with user behavior. Revenue is not the starting point — it is the result of building a system where participation and insight already thrive.
 
 ## A system that compounds
-Customers typically experience these pillars as a progression.
+
+Customers typically experience these as a natural progression.
 
 As engagement deepens, intelligence improves.
-As intelligence improves, monetization becomes more effective.
+As intelligence improves, revenue opportunities become more effective.
 
 The long-term advantage comes from owning the full journey inside the product.
