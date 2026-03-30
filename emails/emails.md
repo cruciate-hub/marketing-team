@@ -3,7 +3,7 @@
 Read this file before creating any email — marketing campaigns, newsletters, or
 transactional messages — for social.plus.
 
-Also read: `colors.md`, `typography.md`, `tone.md`
+Also read: `colors-palette.md`, `colors-usage.md`, `typography.md`, `tone.md`
 
 ---
 

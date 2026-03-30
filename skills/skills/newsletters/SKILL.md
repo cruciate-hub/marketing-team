@@ -39,7 +39,8 @@ Follow its "Any content task" routing to fetch `terminology.md` and `tone.md`. F
 Fetch the color system directly (emails need hex values, not CSS variables):
 
 ```
-https://github.com/socialplus-tools/marketing-team/blob/main/design-system/colors.md
+https://github.com/socialplus-tools/marketing-team/blob/main/design-system/colors-palette.md
+https://github.com/socialplus-tools/marketing-team/blob/main/design-system/colors-usage.md
 ```
 
 ## Step 2: Fetch the email template references
@@ -84,7 +85,7 @@ Use when: the user asks for a campaign email, one-off announcement, promotional 
   https://github.com/socialplus-tools/marketing-team/blob/main/messaging/boilerplates.md
   ```
 - Apply `terminology.md` and `tone.md` for copy.
-- Apply `colors.md` for all color values (hex only — no CSS variables).
+- Apply `colors-palette.md` and `colors-usage.md` for all color values (hex only — no CSS variables).
 - Follow the email content guidelines in `emails.md` for body structure and CTA.
 - **Subject line rules (mandatory):**
   - 40–50 characters maximum

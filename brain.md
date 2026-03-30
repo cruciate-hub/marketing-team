@@ -32,7 +32,7 @@ When two reference files give guidance on the same topic, the more specific file
 - **UI copy tasks:** `ui-micro-copy.md` overrides `tone.md` for voice, style, and capitalisation.
 - **Social media tasks:** `social-posts.md` overrides `tone.md` for platform-specific tone, format, and structure.
 - **Email tasks:** `emails/emails.md` overrides `tone.md` for email-specific structure, subject lines, and CTAs.
-- **Design tokens always win.** If `colors.md` specifies a hex value, use it exactly — never approximate or substitute.
+- **Design tokens always win.** If `colors-palette.md` or `colors-usage.md` specifies a hex value, use it exactly — never approximate or substitute.
 - **Terminology is always law.** `terminology.md` is never overridden by any file. Approved terms and forbidden terms apply everywhere, in every context, no exceptions.
 
 ## Compliance check

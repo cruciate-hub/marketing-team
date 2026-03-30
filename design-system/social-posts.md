@@ -4,7 +4,7 @@
 
 Read this file before creating any social media content for social.plus.
 
-Also read: `tone.md`, `colors.md`
+Also read: `tone.md`, `colors-palette.md`, `colors-usage.md`
 
 ---
 

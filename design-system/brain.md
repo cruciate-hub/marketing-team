@@ -20,7 +20,8 @@ All files are hosted at:
 ## Routing table
 
 ### Any visual task (always fetch these)
-- `colors.md` — Full colour palette, gradients, Webflow CSS variables, usage rules. This is law.
+- `colors-palette.md` — Brand colours, supporting colours, neutrals, state colours, text colours, borders.
+- `colors-usage.md` — Gradients, flat gradient pairs, usage principles, Webflow CSS variables. Fetch both — together they are the full colour system. This is law.
 - `typography.md` — Figtree type scale, weights, minimum sizes, line heights.
 
 ### Visual output with layout (HTML pages, decks, documents, multi-section designs)
@@ -65,7 +66,8 @@ All files are hosted at:
 
 | File | Contains |
 |---|---|
-| `colors.md` | Full palette, gradients, surfaces, Webflow CSS variables, usage rules |
+| `colors-palette.md` | Brand colours, supporting colours, neutrals, state colours, text colours, borders |
+| `colors-usage.md` | Gradients, flat gradient pairs, usage principles, Webflow CSS variables |
 | `typography.md` | Figtree type scale, weights, line heights, email/social typography |
 | `spacing.md` | 12-token spacing scale, component/section/page spacing guide |
 | `border-radius.md` | 7-token radius scale, component defaults |
