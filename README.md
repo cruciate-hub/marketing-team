@@ -1,4 +1,4 @@
-# social.plus Marketing Team
+# Product Marketing Team
 
 Shared plugin marketplace and brand reference for the marketing team. Skills fetch content live from this repo, so updates here are instantly available to everyone.
 
