@@ -2,21 +2,21 @@
 name: newsletters
 description: >
   Generate MailerLite-compatible responsive HTML marketing emails for social.plus.
-  Use this skill for: email campaigns, newsletters, product update emails, feature
-  announcement emails, monthly release emails, or any HTML email content for social.plus.
+  This skill handles ALL email HTML output — two types:
+  (1) Product/feature/release emails: product update emails, feature announcement emails,
+  monthly release emails, release notes, "what's new" emails, or when the user pastes
+  content from a product update doc or shares a Google Doc with release notes.
+  (2) General marketing emails: campaign emails, one-off announcements, promotional emails,
+  outreach emails, or any email that is NOT about a product update or feature release.
   Trigger on phrases like "create an email", "write a newsletter", "email HTML",
   "MailerLite email", "campaign email", "product update email", "monthly update email",
-  "feature announcement email", "email template", "newsletter HTML", or when the user
-  wants to generate HTML that will be pasted into MailerLite. Also trigger when the user
-  pastes content from a product update document and wants it turned into an email, or
-  shares a Google Doc link containing release notes.
-  This skill owns all HTML email output. Do NOT use brand-messaging for emails —
-  this skill handles both copy and HTML generation with email-specific rules.
+  "feature announcement email", "email template", "newsletter HTML".
+  Do NOT use brand-messaging for emails — this skill handles both copy and HTML.
 ---
 
-# social.plus Newsletter HTML Generator
+# social.plus Email HTML Generator
 
-Generate MailerLite-compatible responsive HTML emails from Bam's docs. Supports two email types: **Monthly Product Updates** (multi-feature roundup with tiered layout) and **Feature Launch Announcements** (single-feature spotlight with sub-features in zigzag layout). The output is complete HTML that gets pasted directly into MailerLite's custom HTML editor.
+Generate MailerLite-compatible responsive HTML emails. This skill handles two distinct email types — determine which one applies before proceeding.
 
 ## Step 0: Fetch the main brain
 
@@ -55,10 +55,29 @@ https://github.com/socialplus-tools/marketing-team/blob/main/emails/emails.md
 
 ## Step 3: Determine email type
 
-Look at Bam's source document to identify which type of email to generate:
+Identify which of the two email types applies based on the user's request or source document:
 
-- **Monthly Product Update** — Multiple features across tiers, subject line pattern "What's New in [month year]", has Newsletter section with tiered features. Use the "Assembly Order: Monthly Product Update" from reference.md.
-- **Feature Launch Announcement** — Single major feature with sub-features, subject line focuses on one launch (e.g., "Events is now live"), no tier structure. Use the "Assembly Order: Feature Launch Announcement" from reference.md.
+### Type A — Product / Feature / Release email
+Use when: the user shares a product update doc, release notes, a Google Doc with feature tiers, or asks for a "what's new", "feature launch", or "release note" email.
+
+- **Monthly Product Update** — Multiple features across tiers, subject line pattern "What's New in [month year]", has Newsletter section with tiered features. Use the "Assembly Order: Monthly Product Update" from `product-update-newsletter.md`.
+- **Feature Launch Announcement** — Single major feature with sub-features, subject line focuses on one launch (e.g., "Events is now live"), no tier structure. Use the "Assembly Order: Feature Launch Announcement" from `product-update-newsletter.md`.
+
+→ Continue to Step 4.
+
+### Type B — General marketing email
+Use when: the user asks for a campaign email, one-off announcement, promotional email, or any email not tied to a product update or feature release.
+
+- Fetch and use the base HTML template:
+  ```
+  https://github.com/socialplus-tools/marketing-team/blob/main/emails/product-update-newsletter-examples/email-template.html
+  ```
+- Apply `terminology.md` and `tone.md` for copy.
+- Apply `colors.md` for all color values (hex only — no CSS variables).
+- Follow the email content guidelines in `emails.md` for subject line, body structure, and CTA.
+- Output complete HTML ready to paste into MailerLite.
+
+→ Skip to Step 6 after generating the HTML.
 
 ## Step 4: Parse the input
 
