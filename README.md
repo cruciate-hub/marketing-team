@@ -10,7 +10,7 @@ Shared plugin marketplace and brand reference for the marketing team. Skills fet
 4. Click **Browse plugins** → select the **Personal** tab
 5. Click **+** → select **Add marketplace**
 6. Enter `cruciate-hub/marketing-team` → click **Sync**
-7. Click **Install** on the **social-plus-marketing** plugin
+7. Click **Install** on the **product-marketing-team** plugin
 
 When new skills are added to the plugin, click the **three dots** next to the marketplace name to refresh, then **Update** the plugin.
 
