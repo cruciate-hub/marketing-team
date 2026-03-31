@@ -43,8 +43,10 @@ async function fetchFile(
 
   const data = (await res.json()) as GitHubContentResponse;
 
-  // GitHub returns base64-encoded content
-  const decoded = atob(data.content.replace(/\n/g, ""));
+  // GitHub returns base64-encoded content — decode properly for UTF-8
+  const raw = atob(data.content.replace(/\n/g, ""));
+  const bytes = Uint8Array.from(raw, (c) => c.charCodeAt(0));
+  const decoded = new TextDecoder().decode(bytes);
   return decoded;
 }
 
@@ -114,7 +116,9 @@ export async function getSiteContent(env: Env): Promise<Record<string, any> | nu
   }
 
   const data = (await res.json()) as GitHubContentResponse;
-  const decoded = atob(data.content.replace(/\n/g, ""));
+  const raw = atob(data.content.replace(/\n/g, ""));
+  const bytes = Uint8Array.from(raw, (c) => c.charCodeAt(0));
+  const decoded = new TextDecoder().decode(bytes);
   const parsed = JSON.parse(decoded);
 
   await env.CACHE.put(cacheKey, JSON.stringify(parsed), {

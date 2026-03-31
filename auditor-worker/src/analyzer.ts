@@ -139,7 +139,7 @@ export async function analyzeContent(
   env: Env,
 ): Promise<AuditResult> {
   // Check content hash cache
-  const cacheKey = `analysis:${await hashContent(request.content + request.mode + (request.persona || ""))}`;
+  const cacheKey = `analysis:${await hashContent(request.content + request.mode + request.contentType + (request.persona || ""))}`;
   const cached = await env.CACHE.get(cacheKey, "json") as AuditResult | null;
   if (cached) {
     return cached;
@@ -174,14 +174,23 @@ export async function analyzeContent(
   });
 
   if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`Claude API error: ${response.status} — ${errText}`);
+    const status = response.status;
+    const errText = await response.text().catch(() => "");
+    if (status === 429) {
+      throw new Error("Rate limited by Claude API. Please try again in a moment.");
+    }
+    throw new Error(`Claude API error (${status}). Please try again.`);
   }
 
   const data = (await response.json()) as {
     content: Array<{ type: string; text: string }>;
     stop_reason: string;
   };
+
+  // Check if response was truncated
+  if (data.stop_reason === "max_tokens") {
+    throw new Error("Analysis was too large for the content provided. Try a focused mode (Terminology, Tone, etc.) instead of Full Audit.");
+  }
 
   // Extract the text response
   const textBlock = data.content.find((b) => b.type === "text");

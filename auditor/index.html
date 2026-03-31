@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lighthouse — Brand Messaging Auditor</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,9 +38,12 @@
     .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
     .btn-primary { background: linear-gradient(135deg, #3769EC 0%, #3B41EC 50%, #45A5ED 100%); transition: all 0.15s ease; border-radius: 8px; }
     .btn-primary:hover { filter: brightness(1.08); box-shadow: 0 4px 16px rgba(59, 65, 236, 0.4); }
+    .btn-primary:focus-visible { outline: 2px solid #3B41EC; outline-offset: 3px; }
     .btn-primary:active { transform: scale(0.97); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
     .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.3); transition: all 0.15s ease; border-radius: 8px; }
     .btn-secondary:hover { border-color: rgba(255,255,255,0.6); }
+    .btn-secondary:focus-visible { outline: 2px solid #3B41EC; outline-offset: 3px; }
     .btn-secondary:active { transform: scale(0.97); }
     .card-elevated { box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
     .modal-elevated { box-shadow: 0 8px 32px rgba(0,0,0,0.7); }
@@ -228,7 +231,7 @@
       };
 
       // ─── Real Analysis Handler ──────────────────
-      const handleAnalyze = async () => {
+      const handleAnalyze = async (urlOverride) => {
         setAnalyzing(true);
         setError(null);
         setAnalyzeStep(0);
@@ -244,8 +247,9 @@
           let label = "";
 
           if (inputMode === "url") {
-            if (!urlValue.trim()) throw new Error("Please enter a URL");
-            sourceUrl = urlValue.trim();
+            const url = urlOverride || urlValue.trim();
+            if (!url) throw new Error("Please enter a URL");
+            sourceUrl = url;
             label = sourceUrl.replace("https://", "");
 
             // Step 1: Extract content from URL
@@ -321,15 +325,19 @@
         setInputMode("url");
       };
 
-      // Quick page auto-analyze
+      // Quick page auto-analyze — pass URL directly to avoid stale state race
+      const [pendingQuickUrl, setPendingQuickUrl] = useState(null);
       const handleQuickAnalyze = (url) => {
         setUrlValue(url);
         setInputMode("url");
-        // Use timeout so state updates first
-        setTimeout(() => {
-          document.getElementById("analyze-btn")?.click();
-        }, 100);
+        setPendingQuickUrl(url);
       };
+      useEffect(() => {
+        if (pendingQuickUrl) {
+          setPendingQuickUrl(null);
+          handleAnalyze(pendingQuickUrl);
+        }
+      }, [pendingQuickUrl]);
 
       const getScoreColor = (score) => {
         if (score >= 80) return "text-status-green";
@@ -652,12 +660,12 @@
             </div>
 
             <div className={`${cardBg} border ${borderColor} rounded-2xl p-6 ${darkMode ? "card-elevated" : ""}`}>
-              <p className={`text-xs font-medium ${textMuted} uppercase tracking-widerr mb-4`}>Dimension Scores</p>
+              <p className={`text-xs font-medium ${textMuted} uppercase tracking-wider mb-4`}>Dimension Scores</p>
               {RechartsOK && dimensions.length > 0 ? (
               <RC.ResponsiveContainer width="100%" height={200}>
                 <RC.RadarChart data={dimensions}>
                   <RC.PolarGrid stroke={darkMode ? "#272727" : "#e5e7eb"} />
-                  <RC.PolarAngleAxis dataKey="dimension" tick={{ fill: darkMode ? "#A0A1A3" : "#6b7280", fontSize: 11 }} />
+                  <RC.PolarAngleAxis dataKey="dimension" tick={{ fill: darkMode ? "#A0A1A3" : "#717275", fontSize: 12 }} />
                   <RC.PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
                   <RC.Radar dataKey="score" stroke="#3B41EC" fill="#3B41EC" fillOpacity={0.15} strokeWidth={2} />
                 </RC.RadarChart>
@@ -680,7 +688,7 @@
             </div>
 
             <div className={`${cardBg} border ${borderColor} rounded-2xl p-6 space-y-4 ${darkMode ? "card-elevated" : ""}`}>
-              <p className={`text-xs font-medium ${textMuted} uppercase tracking-widerr`}>Issue Breakdown</p>
+              <p className={`text-xs font-medium ${textMuted} uppercase tracking-wider`}>Issue Breakdown</p>
               {[
                 { label: "Critical", count: criticalCount, config: SEVERITY_CONFIG.critical, filter: "critical" },
                 { label: "Warnings", count: warningCount, config: SEVERITY_CONFIG.warning, filter: "warning" },
@@ -838,7 +846,7 @@
                 <a key={section.file}
                   href={`https://github.com/cruciate-hub/marketing-team/blob/main/messaging/${section.file}`}
                   target="_blank" rel="noopener noreferrer"
-                  className={`w-full text-left px-3 py-2 rounded-lg text-xs ${textSecondary} ${hoverBg} transition-colors flex items-center gap-2 block`}>
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs ${textSecondary} ${hoverBg} transition-colors flex items-center gap-2`}>
                   <ChevronRight size={12} className={textMuted} />
                   <span className="flex-1">{section.label}</span>
                   <ExternalLink size={10} className={textMuted} />
@@ -855,7 +863,7 @@
           <div className="p-4 flex-1 overflow-y-auto">
             {/* Messaging Doc */}
             <div className="mb-6">
-              <p className={`text-xs font-medium ${textMuted} uppercase tracking-widerr mb-2`}>Source of Truth</p>
+              <p className={`text-xs font-medium ${textMuted} uppercase tracking-wider mb-2`}>Source of Truth</p>
               <button onClick={() => setDocPanelOpen(true)}
                 className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl ${inputBg} border ${inputBorder} ${hoverBg} transition-colors text-left`}>
                 <FileText size={16} className="text-brand-blue flex-shrink-0" />
@@ -868,7 +876,7 @@
 
             {/* Quick Pages */}
             <div className="mb-6">
-              <p className={`text-xs font-medium ${textMuted} uppercase tracking-widerr mb-2`}>Quick Check</p>
+              <p className={`text-xs font-medium ${textMuted} uppercase tracking-wider mb-2`}>Quick Check</p>
               <div className="space-y-1">
                 {QUICK_PAGES.slice(0, 6).map(page => (
                   <button key={page.url} onClick={() => handleQuickAnalyze(page.url)}
@@ -883,7 +891,7 @@
 
             {/* History */}
             <div>
-              <p className={`text-xs font-medium ${textMuted} uppercase tracking-widerr mb-2`}>Recent</p>
+              <p className={`text-xs font-medium ${textMuted} uppercase tracking-wider mb-2`}>Recent</p>
               <div className="space-y-1">
                 {history.length === 0 && <p className={`text-xs ${textMuted} px-3`}>No analyses yet</p>}
                 {history.map((item, i) => (
