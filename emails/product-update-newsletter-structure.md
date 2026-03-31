@@ -40,6 +40,7 @@ Every email starts with this HTML wrapper. Place all components inside `<body>`.
       .row { padding-left: 20px !important; padding-right: 20px !important; }
       .mobile-stack { display: block !important; width: 100% !important; max-width: 100% !important; }
       .mobile-stack img { width: 100% !important; height: auto !important; margin-bottom: 16px !important; }
+      img.icon-img { width: 16px !important; height: 16px !important; margin-bottom: 0 !important; }
       .mobile-hide { display: none !important; }
       .mobile-center { text-align: center !important; }
       .mobile-full-width { width: 100% !important; }
