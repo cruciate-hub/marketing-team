@@ -1,9 +1,9 @@
 {
-  "name": "social-plus-marketing",
+  "name": "product-marketing-team",
   "version": "0.7.0",
-  "description": "Shared marketing plugin for the social.plus team. 9 skills covering brand messaging, design system, newsletters, blog content, social media, campaign copy, case studies, site intelligence, and product-update-vs-website — all fetched live from GitHub.",
+  "description": "Shared marketing plugin for the team. 9 skills covering brand messaging, design system, newsletters, blog content, social media, campaign copy, case studies, site intelligence, and product-update-vs-website — all fetched live from GitHub.",
   "author": {
-    "name": "social.plus"
+    "name": "The Cruciate Hub"
   },
   "repository": "https://github.com/cruciate-hub/marketing-team"
 }
