@@ -98,7 +98,7 @@ Use when: the user asks for a campaign email, one-off announcement, promotional 
 
 ## Step 4: Parse the input
 
-Bam's source document is a Google Doc (or pasted text from one).
+The source document is typically a Google Doc (or pasted text from one).
 
 ### For Monthly Product Updates:
 
