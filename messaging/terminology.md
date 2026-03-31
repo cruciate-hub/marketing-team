@@ -76,14 +76,6 @@ Select based on context. "In-app community" is a preferred and encouraged term.
 
 Avoid referring to social.plus as a social network.
 
-## Pillar references
-
-Engage, Analyze, and Monetize can be used when helpful, but they do not need to appear in every communication.
-
-They are a narrative structure, not mandatory vocabulary.
-
----
-
 # Forbidden and Risky Terminology
 
 Precision in language protects credibility and prevents misalignment between expectation and reality.
