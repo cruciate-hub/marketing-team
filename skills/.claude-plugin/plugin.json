@@ -1,7 +1,7 @@
 {
   "name": "product-marketing-team",
-  "version": "0.7.0",
-  "description": "Shared marketing plugin for the team. 9 skills covering brand messaging, design system, newsletters, blog content, social media, campaign copy, case studies, site intelligence, and product-update-vs-website — all fetched live from GitHub.",
+  "version": "0.8.0",
+  "description": "Shared marketing plugin for the team. 11 skills covering brand messaging, design system, newsletters, blog content, social media, campaign copy, case studies, site intelligence, product-update-vs-website, link-building-vetter, and backlink-placement-finder — all fetched live from GitHub.",
   "author": {
     "name": "The Cruciate Hub"
   },

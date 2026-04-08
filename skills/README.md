@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (9)
+## Skills (11)
 
 ### Content creation
 
@@ -22,6 +22,13 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | design-system | Fetches the full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
 | site-intelligence | Queries, audits, and analyzes the 37 marketing pages via the site-content.json snapshot. |
 | product-update-vs-website | Compares product updates against website content to find gaps. |
+
+### Link building
+
+| Skill | What it does |
+|---|---|
+| link-building-vetter | Vets incoming ABC link exchange requests, scores them 1-10, and drafts response emails. |
+| backlink-placement-finder | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. |
 
 ## How it works
 
