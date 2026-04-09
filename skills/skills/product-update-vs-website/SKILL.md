@@ -80,12 +80,22 @@ For each new feature or capability in the product update:
 3. **Check the product landing page** — does `/social` (or `/chat`, `/video`) mention this capability?
 4. **Check relevant use case pages** — would any use case page benefit from mentioning this feature?
 5. **Check relevant industry pages** — does any industry page reference this type of capability?
-6. **Check pricing** — does this feature affect plan tiers or pricing?
+6. **Check pricing** — the `/pricing` page has a detailed Core vs Max feature comparison table organized by group (Chat, Activity Feeds, Communities, Stories, User Profiles, Video, AI, Analytics, Moderation, Security & Compliance, Integrations). For each new feature, check:
+   - Should it appear as a **new line item** in the comparison table? (e.g., a new chat capability, a new post type, a new moderation tool)
+   - Does it **change the Core/Max availability** of an existing line item? (e.g., a feature moving from Max-only to Core, or a new limit change)
+   - Does it affect **add-on status**? (e.g., a feature becoming an add-on, or an add-on becoming included)
+   - Does it affect **AI feature limits**? (e.g., Analyze posts/month or Research topics/month changing)
+   - Does it introduce a **new feature group** that doesn't exist in the table yet?
+
+### Mandatory pricing pass
+
+After completing the page-by-page scan above, do a **dedicated pricing check**. This is a separate, mandatory step — not optional. Take every new feature from the product update and verify whether it exists as a line item in the `/pricing` comparison table. If a feature is missing from the table and is comparable in granularity to existing line items (e.g., "Feed Pagination", "Change User Roles", "Poll Posts"), flag it as a pricing gap. This step must run even if no other pricing gaps were found during the main scan.
 
 ### What counts as a gap
 - The feature name does not appear anywhere on the page
 - The feature exists but the description is outdated or doesn't match the new capability
 - A use case or industry page describes a workflow that this feature enables, but doesn't mention it
+- A new feature is missing from the `/pricing` comparison table as a line item
 
 ### What does NOT count as a gap
 - The feature is already listed with an accurate description
@@ -126,6 +136,15 @@ Section: What you get with social.plus
 Status: Could be enhanced — lists live video but no scheduling or RSVPs
 Suggested heading: Event Scheduling & RSVPs
 Suggested copy: Create events in advance, collect RSVPs, and send reminders so your audience is ready when you go live.
+
+---
+
+https://www.social.plus/pricing
+Feature: Event Creation and Management
+Section: Communities (comparison table)
+Status: Missing — no line item for events in the Communities group
+Suggested line item: Event Creation and Management: Core=✓, Max=✓
+Priority: 🟡 Medium — pricing comparison table should list this alongside other community features
 Priority: 🟡 Medium — livestream use case page omits pre-stream planning
 
 ---
