@@ -118,7 +118,7 @@ social.plus copy is **direct, confident, and human**. It never talks down to use
 
 - No full stops at the end of labels, button text, or headings
 - Full stops in body copy, helper text, and error messages that are full sentences
-- Em dash `—` for interruption or emphasis in marketing copy — no spaces either side
+- Do not use em dashes. Use a full stop, comma, or semicolon instead
 - Ellipsis `…` for truncation and loading states — use the unicode character `…`, not three dots `...`
 - Apostrophes: use curly quotes `'` not straight `'`
 - Quotation marks: use curly `"` not straight `"`
