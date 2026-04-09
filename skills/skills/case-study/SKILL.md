@@ -38,6 +38,22 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 4. Also follow **"Short-form content"** routing for:
    - `boilerplates.md` (company descriptions for reference)
 
+## Step 1: Gather missing information before drafting
+
+**Before writing anything**, review what the user has provided and ask for any missing information. Do NOT start drafting the customer story until you have enough data to avoid placeholders. Present one clear list of questions — not multiple rounds.
+
+Check for and ask about:
+- **Metrics / engagement data** — specific numbers for the metric boxes (e.g., engagement rate increase, user growth, retention lift, integration timeline). Without real numbers, the metric boxes cannot be filled.
+- **Customer quote** — do they have a direct quote from the customer? If yes, who said it (name + title)?
+- **Challenge details** — what specific problem was the customer trying to solve?
+- **Why social.plus** — why did they choose social.plus over alternatives?
+- **Implementation details** — which SDKs, UIKits, platforms (web/app), customization level, and timeline?
+- **Results / outcomes** — quantified impact after launch.
+- **Company basics** — headquarters location, founding year or scale indicator, industry.
+- **Use cases** — which social.plus features does the customer use (Activity Feed, Group Chat, Live Chat, Livestream, etc.)?
+
+Only ask about items that are genuinely missing from the user's input — don't re-ask what they already provided. Once you have enough information to write without placeholders, proceed to drafting.
+
 ## Webflow CMS field mapping
 
 Every customer story is a CMS item in the `💼 Customer Stories` collection. When writing a customer story, produce content for each of these fields. Present each field clearly labeled so the user can paste directly into Webflow.
@@ -73,12 +89,14 @@ Examples:
 **Metric Box 1–3** (`numbers-box-1`, `numbers-box-2`, `numbers-box-3`, RichText)
 Each metric box uses custom HTML tags for styling. Format:
 ```html
-<p><big-nr>[VALUE]<big-nr><br><cs-number-text>[DESCRIPTION]<cs-number-text></p>
+<big-nr>[VALUE]<big-nr><br><cs-number-text>[DESCRIPTION]<cs-number-text>
 ```
+Do NOT wrap metric boxes in `<p>` tags — only the custom tags and `<br>`.
+
 Examples:
-- `<p><big-nr>60%<big-nr><br><cs-number-text>community growth rate MoM<cs-number-text></p>`
-- `<p><big-nr>1.5M<big-nr><br><cs-number-text>Patients<cs-number-text></p>`
-- `<p><big-nr>18%<big-nr><br><cs-number-text>Increase in betting rate of casual users<cs-number-text></p>`
+- `<big-nr>60%<big-nr><br><cs-number-text>community growth rate MoM<cs-number-text>`
+- `<big-nr>1.5M<big-nr><br><cs-number-text>Patients<cs-number-text>`
+- `<big-nr>18%<big-nr><br><cs-number-text>Increase in betting rate of casual users<cs-number-text>`
 
 Metrics can be: company facts (founded year, employees, revenue), platform stats (users, downloads, locations), or social.plus outcomes (engagement growth, retention lift, integration timeline). Aim for at least 2 boxes. If the user doesn't provide specific numbers, ask — don't invent them.
 
@@ -111,36 +129,62 @@ This is the full story. It uses rich text with custom HTML tags for section divi
 
 2. **The Challenge** section
    ```html
-   <p><sprscript-green>The Challenge<sprscript-green></p>
+   <sprscript-green>The Challenge<sprscript-green>
    ```
-   Followed by an H2 or H3 subheading that frames the specific problem.
+   Followed by an `<h3>` subheading that frames the specific problem.
    Then 2-3 paragraphs describing the challenge in detail. Frame using the core problems from `value-story.md` where they map naturally.
 
 3. **Why social.plus** section
    ```html
-   <p><sprscript-green>Why social.plus<sprscript-green></p>
+   <sprscript-green>Why social.plus<sprscript-green>
    ```
-   Followed by an H2 or H3 subheading about why they chose social.plus.
+   Followed by an `<h3>` subheading about why they chose social.plus.
    Then 2-3 paragraphs explaining the selection rationale. Use product pillar language from `positioning.md` but keep the customer as the subject.
 
 4. **Implementation** section (optional, include when the user provides technical details)
    ```html
-   <p><sprscript-green>Implementation<sprscript-green></p>
+   <sprscript-green>Implementation<sprscript-green>
    ```
-   Followed by H2/H3 and paragraphs about how they built it — SDKs used, UIKits, customization, timeline.
+   Followed by `<h3>` and paragraphs about how they built it — SDKs used, UIKits, customization, timeline.
 
 5. **Results / Impact** section (optional, include when outcome data is available)
    ```html
-   <p><sprscript-green>The Results<sprscript-green></p>
+   <sprscript-green>The Results<sprscript-green>
    ```
    Quantified outcomes. Map to the value creation model from `value-story.md`: functional → strategic → economic → compounding.
 
-#### Body guidelines
+#### Body formatting rules
+- **Output the body as a single raw text block** — NOT inside a code fence, NOT as rendered markdown. The user pastes this directly into Webflow's rich text field (HTML source view). It must be copyable as-is.
+- **Do NOT use `<p>` tags anywhere.** No `<p>` wrapping on paragraphs, section dividers, headings, or anything else. Webflow handles paragraph formatting.
+- **`<sprscript-green>` tags stand alone on their own line**, bare — no `<p>`, no other wrapper. These are picked up by JavaScript on the site for styled section dividers.
+- **`<h3>` tags stand alone on their own line** for subheadings within each section. The paragraph text that follows must start on the **next line** — never on the same line as the `</h3>`.
+- Use `<strong>` for inline emphasis where needed.
+- Separate paragraphs with blank lines.
 - Target length: 4,000–7,000 characters (matching existing stories on the site).
 - The customer is the hero. social.plus is the tool they chose. Write "they implemented" not "we provided."
-- Use `<strong>` for emphasis within paragraphs where needed.
 - Images can be referenced with `<figure>` tags but leave image URLs as placeholders for the user to upload.
-- The `<sprscript-green>` tag renders as a styled green section divider on the website. Always use it for section headers. Always close it: `<sprscript-green>Text<sprscript-green>`.
+
+#### Example body output
+
+The body should look exactly like this when output (raw text, not in a code block):
+
+Founded in 2015, Acme Fitness has grown into one of Latin America's largest digital fitness platforms, serving over 3 million active members across 12 countries.
+
+What started as a simple workout logger evolved into a full lifestyle platform. As their user base scaled, the team recognized that social connection was the missing ingredient.
+
+<sprscript-green>The Challenge<sprscript-green>
+
+<h3>Keeping members engaged beyond the workout</h3>
+Acme Fitness faced a familiar problem: users would log workouts for a few weeks, then drop off. The app lacked any social layer — no way to share progress or find workout partners.
+
+They needed a solution that could deliver community features at the quality level their 3M+ users expected, without rebuilding their app architecture.
+
+<sprscript-green>Why social.plus<sprscript-green>
+
+<h3>Infrastructure-grade social, without the infrastructure burden</h3>
+After evaluating three providers, Acme chose social.plus for its pre-built UIKits and flexible SDK. The team integrated Activity Feeds and Group Chat within four weeks.
+
+Note: the text after each `<h3>` always starts on the next line, never on the same line as the heading tag.
 
 ### Sidebar
 
@@ -205,7 +249,7 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 **Top Quote | Job Title:** [value]
 
 **Customer Story (body):**
-[Full rich text HTML]
+(Output the full body as raw text below this label — NOT in a code block. The user copies everything between this label and the next field label directly into Webflow's rich text HTML source.)
 
 **Sidebar | About:** [value]
 **Sidebar | Location:** [value]
