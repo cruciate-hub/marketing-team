@@ -21,6 +21,6 @@ Fetch all three:
 ## Rules
 
 - Always load `writing-style.md` when generating any written content. It ensures brand compliance.
-- The output is a clean, readable article — not HTML. Joy (or another team member) pastes it into a Google Doc. The Make.com pipeline handles HTML conversion and Webflow publishing separately.
+- The output is a clean, readable article — not HTML. The writer pastes it into a Google Doc. The Make.com pipeline handles HTML conversion and Webflow publishing separately.
 - Never invent statistics, customer names, quotes, or performance claims. Only use data from fetched reference files.
 - Run the compliance check from the main `brain.md` before delivering.

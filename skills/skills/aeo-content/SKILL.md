@@ -8,7 +8,7 @@ description: >
   Trigger on phrases like "AEO article", "answer article", "write an answer
   for", "generate an AEO", "answers page", "AI-optimized article", or when
   someone provides an article title and wants content for the /answers/
-  collection. Also trigger when the user mentions Joy's AEO workflow or the
+  collection. Also trigger when the user mentions the AEO workflow or the
   AEO pipeline.
   Do NOT trigger for regular blog posts (use blog-seo-content skill), general
   website copy (use brand-messaging skill), or customer stories (use case-study

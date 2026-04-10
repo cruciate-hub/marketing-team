@@ -8,7 +8,7 @@ These are not blog posts. They are structured reference content: clear definitio
 
 ## Who writes them
 
-Joy (senior Google Ads team member) leads AEO article creation. Other team members may also generate articles using this skill.
+The Google Ads team leads AEO article creation. Other team members may also generate articles using this skill.
 
 ## Workflow
 
