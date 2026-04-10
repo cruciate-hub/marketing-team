@@ -1,16 +1,15 @@
 ---
 name: aeo-content
 description: >
-  Generate AEO (Answer Engine Optimization) answer articles and hero image
-  prompts for the social.plus /answers/ CMS collection. Use this skill for:
-  AEO articles, answer page content, AI-optimized reference content, hero
-  image prompts for answer articles, or any content destined for the /answers/
-  collection on social.plus.
+  Generate AEO (Answer Engine Optimization) answer articles for the social.plus
+  /answers/ CMS collection. Use this skill for: AEO articles, answer page
+  content, AI-optimized reference content, or any content destined for the
+  /answers/ collection on social.plus.
   Trigger on phrases like "AEO article", "answer article", "write an answer
   for", "generate an AEO", "answers page", "AI-optimized article", or when
   someone provides an article title and wants content for the /answers/
-  collection. Also trigger when the user mentions Joy's AEO workflow, the
-  AEO pipeline, or asks for a hero image prompt for an answer article.
+  collection. Also trigger when the user mentions Joy's AEO workflow or the
+  AEO pipeline.
   Do NOT trigger for regular blog posts (use blog-seo-content skill), general
   website copy (use brand-messaging skill), or customer stories (use case-study
   skill).
@@ -18,7 +17,7 @@ description: >
 
 # social.plus AEO Content
 
-This skill generates AEO answer articles and hero image prompts for the social.plus `/answers/` CMS collection. AEO articles are structured reference content optimized so AI search engines (ChatGPT, Claude, Perplexity, Gemini, Google AI Overview, Copilot) can index and cite them.
+This skill generates AEO answer articles for the social.plus `/answers/` CMS collection. AEO articles are structured reference content optimized so AI search engines (ChatGPT, Claude, Perplexity, Gemini, Google AI Overview, Copilot) can index and cite them.
 
 ## What to do
 
@@ -32,10 +31,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 https://github.com/cruciate-hub/marketing-team/blob/main/skills/skills/aeo-content/brain.md
 ```
 
-3. Follow the AEO router's instructions for the user's task:
-   - **Writing an article** → router loads `article-generation.md`, `article-structure.md`, and `writing-style.md`
-   - **Generating a hero image prompt** → router loads `image-generation.md` and `docs/aeo-image-prompt-template.md`
-   - **Both** → router loads all of the above
+3. Follow the AEO router's instructions — it loads `article-generation.md`, `article-structure.md`, and `writing-style.md`.
 
 4. `writing-style.md` will direct you to fetch the brand messaging files:
    - `messaging/terminology.md` + `messaging/tone.md` (always)
@@ -52,9 +48,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/website/site-content.js
 
 ## Output
 
-**For articles:** A clean, readable document with title, meta description, and article body. No HTML markup — the writer pastes this into a Google Doc, and the Make.com pipeline handles conversion.
-
-**For image prompts:** A complete Gemini prompt in a code block, ready to paste into Google AI Studio or use via the Gemini API.
+A clean, readable document with title, meta description, and article body. No HTML markup — the writer pastes this into a Google Doc, and the Make.com pipeline handles conversion.
 
 ## What NOT to do
 

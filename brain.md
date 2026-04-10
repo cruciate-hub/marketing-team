@@ -43,7 +43,7 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **product-update-vs-website** | Compare a product release or changelog against the website to find pages that need updating | `skills/skills/product-update-vs-website/SKILL.md` |
 | **link-building-vetter** | Vet incoming ABC link exchange requests — score anchors, text mods, and article eligibility, then draft response emails | `skills/skills/link-building-vetter/SKILL.md` |
 | **backlink-placement-finder** | Find contextually relevant backlink placement opportunities on partner sites and draft request emails | `skills/skills/backlink-placement-finder/SKILL.md` |
-| **aeo-content** | AEO answer articles for /answers/ collection, AI-optimized reference content, hero image prompts for answer articles | `skills/skills/aeo-content/SKILL.md` |
+| **aeo-content** | AEO answer articles for /answers/ collection, AI-optimized reference content for AI search engines | `skills/skills/aeo-content/SKILL.md` |
 
 Fetch skill files using the same `github.com/.../blob/...` URL pattern as all other files.
 

@@ -47,7 +47,7 @@ Meta description: [Max 160 characters. Include the target keyword. Write a compe
 
 - **Length:** 1,200 to 1,500 words. Stay within this range — if you're over, cut the least essential content from tables (reduce rows) or shorten the implementation steps. Do not exceed 1,500 words.
 - **Meta description:** Maximum 160 characters including spaces
-- **Alt text:** Generate as "Abstract visualization of [main topic from title]" — this is used for the hero image
+- **Alt text:** Generate as "Abstract visualization of [main topic from title]"
 - **Slug:** Lowercase, hyphens, no spaces. Derived from title. Example: `guide-to-adding-activity-feeds-to-apps`
 
 ## What makes a good AEO article

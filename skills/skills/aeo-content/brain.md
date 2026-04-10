@@ -18,15 +18,6 @@ Fetch all three:
 - `article-structure.md` — Exact section-by-section template, table patterns, FAQ format, social.plus pitch wording.
 - `writing-style.md` — AEO-specific writing rules + pointers to brand messaging files (terminology, tone, narrative, positioning, value story).
 
-### Generate a hero image prompt
-
-Fetch:
-- `image-generation.md` — Composition mode selection, topic classification, object selection, prompt assembly. Note: the full visual style guide with icon tables and example prompts is not yet published. It will be linked from `image-generation.md` once ready.
-
-### Write an article AND generate its image prompt
-
-Fetch all files from both tasks above.
-
 ## Rules
 
 - Always load `writing-style.md` when generating any written content. It ensures brand compliance.
