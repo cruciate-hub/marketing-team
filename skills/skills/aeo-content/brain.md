@@ -5,7 +5,7 @@ This file is the entry point for all AEO (Answer Engine Optimization) content ta
 AEO articles are published to the social.plus `/answers/` CMS collection. They are structured to be indexed and cited by AI search engines like ChatGPT, Claude, Perplexity, Gemini, Google AI Overview, and Copilot.
 
 All files are hosted at:
-`https://github.com/cruciate-hub/marketing-team/blob/main/aeo/`
+`https://github.com/cruciate-hub/marketing-team/blob/main/skills/skills/aeo-content/`
 
 **Warning:** Always use `github.com/.../blob/...` URLs when fetching. Never convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress restrictions and will fail.
 

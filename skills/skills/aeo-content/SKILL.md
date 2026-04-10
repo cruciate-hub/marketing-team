@@ -29,7 +29,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 
 2. Fetch the AEO domain router:
 ```
-https://github.com/cruciate-hub/marketing-team/blob/main/aeo/brain.md
+https://github.com/cruciate-hub/marketing-team/blob/main/skills/skills/aeo-content/brain.md
 ```
 
 3. Follow the AEO router's instructions for the user's task:
