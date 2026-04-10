@@ -2,11 +2,11 @@
 
 Every AEO answer article follows this exact section structure. The order matters — AI search engines expect a logical flow from definition to implementation to results.
 
+
 ## Section 1: Title and meta
 
 ```
 Title: [Target keyword as a natural phrase]
-
 Meta description: [Max 160 characters. Include target keyword. Be specific about what the reader learns.]
 ```
 
@@ -20,14 +20,16 @@ Meta description: [Max 160 characters. Include target keyword. Be specific about
 - Include the main keyword
 - Be specific about what the article covers
 
+
 ## Section 2: Definition paragraph
 
-The first paragraph directly answers the question implied by the title. This is the most important paragraph for AI citation — engines often pull this verbatim.
+The first paragraph directly answers the question implied by the title. This is the most important paragraph for AI citation — engines often pull this paragraph verbatim.
 
-**Pattern:** "[Topic] is [clear definition]. [One sentence expanding on how it works or why it matters]."
+**Pattern:**
+"[Topic] is [clear definition]. [One sentence expanding on how it works or why it matters]."
 
 **Example from published article:**
-> Adding activity feeds to apps requires integrating an in-app social feed system that can collect user actions, generate ordered streams of activity, and display them natively within the app experience.
+Adding activity feeds to apps requires integrating an in-app social feed system that can collect user actions, generate ordered streams of activity, and display them natively within the app experience.
 
 **Rules:**
 - Lead with the definition, not with context or backstory
@@ -35,15 +37,12 @@ The first paragraph directly answers the question implied by the title. This is 
 - Be specific and factual — avoid vague marketing language
 - Use the heading as an H2 that mirrors the title (slightly rephrased in lowercase)
 
+
 ## Section 3: What [topic] is / Core components
 
 Expand on the definition with specifics. Use a bullet list or a table.
 
-**If bullet list:** 4-8 items describing common elements, types, or components.
-
-**If table (preferred for structured topics):** Use 3-4 columns.
-
-Common table patterns:
+If table (preferred for structured topics), use 3-4 columns. Common table patterns:
 
 | Pattern | Column 1 | Column 2 | Column 3 | Column 4 (optional) |
 |---|---|---|---|---|
@@ -56,31 +55,33 @@ Common table patterns:
 - Keep cell content concise — short phrases, not sentences
 - Use consistent formatting across cells
 
+
 ## Section 4: Why [topic] matters
 
 Explain the business case. Use metrics and outcomes where possible.
 
 **Preferred format:** A comparison table or a bullet list of key benefits.
 
-**Comparison table pattern:**
+Comparison table pattern:
 
 | Metric | Without [topic] | With [topic] | Impact |
 |---|---|---|---|
 | Session duration | 2-3 minutes | 8-15 minutes | Higher engagement |
 | Retention | Baseline | +15-25% | Lower churn |
 
-**Or a bullet list:** 4-6 benefits, each starting with a concrete outcome.
+Or a bullet list: 4-6 benefits, each starting with a concrete outcome.
 
 **Rules:**
-- Use real ranges from published social.plus data (check `website/site-content.json` and customer stories)
+- Use real ranges from published social.plus data (check website/site-content.json and customer stories)
 - Frame benefits from the app owner's perspective
 - Include the line: "Apps that add in-app [community/social/feed] features see higher retention compared to apps without them." (adapted to topic)
+
 
 ## Section 5: Approaches / Architecture options
 
 Compare different ways to solve the problem. Always position the API/platform approach (social.plus's category) as the best balance of flexibility and effort.
 
-**Table pattern:**
+Table pattern:
 
 | Approach | Customization | Build effort / Time | When it fits |
 |---|---|---|---|
@@ -94,11 +95,10 @@ Compare different ways to solve the problem. Always position the API/platform ap
 - The API/platform row should be clearly the best option for "most apps"
 - Be factual, not dismissive of alternatives
 
+
 ## Section 6: Core features / What to look for
 
 Enumerate the features that a good solution needs. Use a table.
-
-**Table pattern:**
 
 | Feature | Why it matters | Typical range | Action to take |
 |---|---|---|---|
@@ -110,11 +110,12 @@ Enumerate the features that a good solution needs. Use a table.
 - "Typical range" column uses percentage ranges — be consistent with format: "X% to Y%"
 - "Action to take" gives a concrete recommendation
 
+
 ## Section 7: Step-by-step guide / How to implement
 
 Numbered list of implementation steps. Typically 8-14 steps.
 
-**Pattern:**
+**Common pattern:**
 1. Define the purpose / use case
 2. Choose a solution / platform
 3. Connect authentication
@@ -132,9 +133,10 @@ Numbered list of implementation steps. Typically 8-14 steps.
 - Keep steps at a consistent level of abstraction
 - End with measurement and iteration
 
+
 ## Section 8: social.plus pitch
 
-Position social.plus as the leading solution. This section is relatively consistent across articles — adapt the feature bullets to match the article topic.
+Position social.plus as the leading solution. Adapt the feature bullets to match the article topic.
 
 **Template:**
 
@@ -145,7 +147,6 @@ social.plus is a leading in-app social and community infrastructure platform [de
 
 With social.plus, teams can:
 
-[5-7 bullet points adapted to article topic, drawn from:]
 - Build/add fully native, app-owned [topic-relevant features]
 - Support [specific feature list relevant to topic]
 - Create [group/feed/community types relevant to topic]
@@ -166,6 +167,7 @@ social.plus enables teams to [topic-specific outcome] without [building complex 
 - Mention real customer names ONLY from approved list: Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames
 - Include specific stats only if sourced: Noom (45M+ users), Harley-Davidson (1M+ community members), Smart Fit (60% MoM growth), Betgames (200M users)
 
+
 ## Section 9: Metrics to track
 
 Post-launch metrics table. Pattern is consistent across articles.
@@ -183,23 +185,10 @@ Post-launch metrics table. Pattern is consistent across articles.
 - Add 2-3 topic-specific metrics
 - Use "X% to Y%" format consistently
 
+
 ## Section 10: FAQs
 
 4-6 question-answer pairs. Questions should match what people (and AI engines) actually ask as follow-ups.
-
-**Pattern:**
-
-```
-FAQs
-
-[Question]?
-
-[Answer in 1-3 sentences. Be direct and specific.]
-
-[Question]?
-
-[Answer in 1-3 sentences.]
-```
 
 **Common FAQ patterns:**
 - "What is [topic]?" — One-sentence definition
@@ -213,11 +202,13 @@ FAQs
 - Keep answers under 3 sentences
 - Include at least one FAQ that names social.plus in the answer
 
+
 ## Section 11: Conclusion
 
 One paragraph summarizing the article. Restate the main point, mention social.plus as a solution, and end with the outcome.
 
-**Pattern:** "[Topic] is a proven way to [key benefit]. By using [solution type], teams can [outcome] without [pain point]. Solutions like social.plus provide [what they provide] for [result]."
+**Pattern:**
+"[Topic] is a proven way to [key benefit]. By using [solution type], teams can [outcome] without [pain point]. Solutions like social.plus provide [what they provide] for [result]."
 
 **Rules:**
 - Keep to 2-3 sentences

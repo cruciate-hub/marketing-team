@@ -33,7 +33,7 @@ All files are hosted at:
 - `boilerplates.md` — Standardized descriptions as starting points.
 - Also fetch from the design-system domain: `https://github.com/cruciate-hub/marketing-team/blob/main/design-system/social-posts.md` — Platform-specific format specs, character limits, copy structure templates, visual asset guidelines. This file has precedence over `tone.md` for platform-specific tone and formatting.
 
-### Long-form content (blog posts, landing pages, thought leadership, whitepapers, case studies, press releases)
+### Long-form content (blog posts, AEO articles, landing pages, thought leadership, whitepapers, case studies, press releases)
 - `narrative.md` — Messaging hierarchy and 5-step narrative structure.
 - `value-story.md` — Core problems we solve, value creation model, differentiation framework.
 - `positioning.md` — Company overview, vision, mission, ecosystem position, product pillars.

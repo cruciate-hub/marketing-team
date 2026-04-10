@@ -22,7 +22,7 @@ Most tasks need references from more than one domain. Use this table to determin
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
 | Website audit or content analysis | `website/site-content.json` + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
-| AEO answer articles (/answers/ collection) | `skills/skills/aeo-content/brain.md` + `messaging/brain.md` |
+| AEO answer articles (/answers/ collection) | `skills/skills/aeo-content/SKILL.md` + `messaging/brain.md` |
 
 If your skill's SKILL.md already specifies which domain router to fetch, follow that. Use this table to decide whether you also need the *other* domain router.
 
