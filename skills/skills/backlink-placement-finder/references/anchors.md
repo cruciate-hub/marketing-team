@@ -28,6 +28,29 @@ These are the approved anchor texts for backlink placements. When matching partn
 - community building tools
 - community engagement app
 - community engagement mobile app
+- online community
+- online communities
+- digital community
+- digital communities
+- brand community
+- brand communities
+- niche community
+- community engagement
+- community members
+
+## Customer Engagement Anchors
+- customer engagement
+- customer engagement strategy
+- customer engagement strategies
+- customer engagement platform
+
+## App Retention Anchors
+- app retention
+- user retention
+- mobile app retention
+- retention strategy
+- retention strategies
+- app retention strategies
 
 ## App Engagement Anchors
 - app engagement
@@ -95,6 +118,11 @@ These are the approved anchor texts for backlink placements. When matching partn
 - user engagement kpis
 - digital user engagement
 
+## Social Features Anchors
+- social features
+- in-app social features
+- social features sdk
+
 ## SDK & API Anchors
 - social networking api
 - social media api
@@ -104,3 +132,40 @@ These are the approved anchor texts for backlink placements. When matching partn
 - community api
 - community sdk
 - activity feed api
+- chat api
+- chat sdk
+- messaging api
+- messaging sdk
+- in-app chat
+- in-app messaging
+- real-time messaging
+- live chat
+
+## User Generated Content Anchors
+- user generated content
+- user-generated content
+- ugc platform
+- ugc strategy
+
+## Brand Loyalty Anchors
+- brand loyalty
+- build brand loyalty
+- brand advocate
+
+## App Stickiness & Feed Anchors
+- app stickiness
+- user stickiness
+- activity feed
+- social feed
+- news feed
+
+## Monetization Anchors
+- app monetization
+- community monetization
+- monetize your app
+
+## Streaming, Commerce & Personalization Anchors
+- live streaming
+- live stream app
+- social commerce
+- app personalization
