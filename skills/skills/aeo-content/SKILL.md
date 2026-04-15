@@ -23,17 +23,14 @@ If the user gives a clear, detailed brief, move on. If the brief is vague (e.g.,
 
 AEO articles must sound like social.plus, not like generic AI output. Before writing, fetch these files from GitHub. They are non-negotiable.
 
-Always fetch (every article):
+Always fetch:
 ```
 https://github.com/cruciate-hub/marketing-team/blob/main/messaging/terminology.md
 https://github.com/cruciate-hub/marketing-team/blob/main/messaging/tone.md
-```
-
-Also fetch (all AEO articles are long-form content):
-```
 https://github.com/cruciate-hub/marketing-team/blob/main/messaging/narrative.md
 https://github.com/cruciate-hub/marketing-team/blob/main/messaging/value-story.md
 https://github.com/cruciate-hub/marketing-team/blob/main/messaging/positioning.md
+https://github.com/cruciate-hub/marketing-team/blob/main/messaging/boilerplates.md
 ```
 
 Always use `github.com/.../blob/...` URLs. Never convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress.
