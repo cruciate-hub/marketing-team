@@ -20,7 +20,7 @@ Most tasks need references from more than one domain. Use this table to determin
 | Social media posts | `messaging/brain.md` + `design-system/brain.md` — brain.md routes to `social-posts.md` for platform specs |
 | HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It fetches `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
-| Website audit or content analysis | `website/site-content.json` + `messaging/brain.md` |
+| Website audit or content analysis | `website/marketing-pages.json` + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
 | AEO answer articles (/answers/ collection) | `skills/skills/aeo-content/SKILL.md` + `messaging/brain.md` |
 

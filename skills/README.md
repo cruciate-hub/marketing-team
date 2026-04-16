@@ -21,7 +21,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | Skill | Lines | Size | What it does |
 |---|---:|---:|---|
 | [design-system](./skills/design-system/SKILL.md) | 43 | 1.9 KB | Fetches the full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
-| [site-intelligence](./skills/site-intelligence/SKILL.md) | 308 | 17.0 KB | Queries, audits, and analyzes the 37 marketing pages via the site-content.json snapshot. |
+| [site-intelligence](./skills/site-intelligence/SKILL.md) | 308 | 17.0 KB | Queries, audits, and analyzes the 37 marketing pages via the marketing-pages.json snapshot. |
 | [product-update-vs-website](./skills/product-update-vs-website/SKILL.md) | 190 | 11.0 KB | Compares product updates against website content to find gaps. |
 
 ### Link building

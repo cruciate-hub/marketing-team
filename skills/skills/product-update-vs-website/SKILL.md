@@ -1,6 +1,6 @@
 ---
 name: product-update-vs-website
-description: Compare new product releases or monthly updates against the current social.plus website content to identify gaps — pages that should mention a new feature but don't yet. Use this skill when someone pastes a release note, monthly product update, or changelog entry and wants to know which website pages need updating. Also trigger when someone asks "what's missing from the site", "does the website reflect this update", "which pages need to change", or references the site-content.json file. Always use this skill for any product-update-to-website comparison task, even if the user doesn't explicitly name the skill.
+description: Compare new product releases or monthly updates against the current social.plus website content to identify gaps — pages that should mention a new feature but don't yet. Use this skill when someone pastes a release note, monthly product update, or changelog entry and wants to know which website pages need updating. Also trigger when someone asks "what's missing from the site", "does the website reflect this update", "which pages need to change", or references the marketing-pages.json file. Always use this skill for any product-update-to-website comparison task, even if the user doesn't explicitly name the skill.
 ---
 
 # Product Update vs Website
@@ -13,7 +13,7 @@ Compares social.plus product updates (release notes, monthly updates) against th
 ```
 https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 ```
-2. **Load current site content** from `website/site-content.json` in this repo (or fetch the raw file from GitHub)
+2. **Load current site content** from `website/marketing-pages.json` in this repo (or fetch the raw file from GitHub)
 3. **Take the product update** — a release note, monthly product update, or changelog entry provided by the user
 4. **Cross-reference** every new feature/capability mentioned in the update against every page in the JSON
 5. **Output a gap report** showing which pages should mention this feature but currently don't
@@ -23,8 +23,8 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 
 The site content JSON is maintained automatically by a Cloudflare Worker that regenerates it on every Webflow site publish. It lives at:
 
-**Repo path:** `website/site-content.json`
-**GitHub URL:** `https://github.com/cruciate-hub/marketing-team/blob/main/website/site-content.json`
+**Repo path:** `website/marketing-pages.json`
+**GitHub URL:** `https://github.com/cruciate-hub/marketing-team/blob/main/website/marketing-pages.json`
 
 The JSON structure:
 ```json
@@ -174,7 +174,7 @@ Files loaded:
 
 ## Instructions for Claude
 
-1. Always load the site-content.json first. If running in an environment with file access (Cowork, Claude Desktop), read it from the local repo. Otherwise, fetch from the raw GitHub URL.
+1. Always load the marketing-pages.json first. If running in an environment with file access (Cowork, Claude Desktop), read it from the local repo. Otherwise, fetch from the raw GitHub URL.
 2. **Load the brand messaging guidelines** by fetching the router file first, then the files it specifies:
    ```
    https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md

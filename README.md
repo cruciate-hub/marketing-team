@@ -32,7 +32,7 @@ When new skills are added to the plugin, click the **three dots** next to the ma
 | Skill | What it does |
 |---|---|
 | **design-system** | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
-| **site-intelligence** | Queries, audits, and analyzes the 37 marketing pages via the site-content.json snapshot. |
+| **site-intelligence** | Queries, audits, and analyzes the 37 marketing pages via the marketing-pages.json snapshot. |
 | **product-update-vs-website** | Compares product release notes against live website content to find pages that need updating. |
 
 ### Link building
@@ -60,4 +60,4 @@ When new skills are added to the plugin, click the **three dots** next to the ma
 
 **Skill logic** (SKILL.md files in `skills/`): Changes require team members to update the plugin.
 
-**Website snapshot** (`website/site-content.json`): Regenerated automatically by a Cloudflare Worker on every Webflow publish.
+**Website snapshot** (`website/marketing-pages.json`): Regenerated automatically by a Cloudflare Worker on every Webflow publish.
