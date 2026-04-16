@@ -32,7 +32,7 @@ When new skills are added to the plugin, click the **three dots** next to the ma
 | Skill | What it does |
 |---|---|
 | **design-system** | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
-| **site-intelligence** | Queries, audits, and analyzes the 37 marketing pages via the pages-marketing.json snapshot. |
+| **site-intelligence** | Queries, audits, and analyzes the 9 website inventory files (marketing, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
 | **product-update-vs-website** | Compares product release notes against live website content to find pages that need updating. |
 
 ### Link building
