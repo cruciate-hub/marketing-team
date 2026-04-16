@@ -1,0 +1,168 @@
+{
+  "_meta": {
+    "generatedAt": "2026-04-16T14:43:51.480Z",
+    "itemCount": 26,
+    "method": "webflow-data-api",
+    "errors": [
+      "/pricing"
+    ]
+  },
+  "pages": [
+    {
+      "url": "https://www.social.plus/",
+      "metaTitle": "social.plus - Build an in-app community that powers growth",
+      "metaDescription": "Drive engagement, collect data and grow revenues – directly inside your app.",
+      "content": "# Build an in-app community that powers growth\n# Build an in-app community that powers growth\nDrive engagement, collect data and grow revenues – directly inside your app.\nExplore Demos\nEngage\n## Boost app engagement with pre-built social features\nLaunch social features in weeks, not months\nCustomize seamlessly with our UIKits\nKeep your in-app community safe with AI moderation\nUnderstand\n## Learn what drives customer behavior\nTurn zero- and first-party data into insight\nDetect intent from real-time behavior\nTrack performance across every interaction\nMonetize\n## Turn attention into action and revenue\nPromote with native sponsored content\nManage offers and campaigns from one place\nEnable monetization without third-party networks\n## Use cases for every app\nActivity Feeds\nExplore\nGroups\nProfiles\nStories\nClips\nLivestream\nGroup Chat\nActivity Feeds\nExplore\nGroups\nProfiles\nStories\nClips\nLivestreams\nGroup Chat\n100+\nEnterprise clients\n100M+\nEnd users\n350M+\nMonthly social interactions\nWe’ve seen an increase in engagement, retention and time spent on the app. We started with a small community and now players come back every day. They feel more invested in our app.\nAdnan J'Abour, Head of CRM at Winner"
+    },
+    {
+      "url": "https://www.social.plus/product",
+      "metaTitle": "↳ Modules Template",
+      "metaDescription": "",
+      "content": ""
+    },
+    {
+      "url": "https://www.social.plus/social",
+      "metaTitle": "Social SDK | Build Social Features with API-based Social SDKs",
+      "metaDescription": "Ready-to-use feeds, groups and forums, stories, user profiles, and more customizable white-label social media features.",
+      "content": "# Build your in-app community faster with a Social SDK\nBuild a social ecosystem effortlessly with our enterprise-ready SDKs, designed for seamless scalability and integration across all platforms.\nActivity Feeds\n## Deliver content that matters with personalized activity feeds\nBy adding Feeds to your app, users can access relevant updates via algorithmically ranked content and engage with likes and comments.\nGroups and Forums\n## Unite your community with groups & forums\nHarness the power of communities within your app with Groups & Forums, allowing users to share their thoughts and engage with each other.\nPROFILES\n## Let users express themselves with personal profiles\nEmpower users to showcase their personalities and connect with others through personalized profiles that highlight their interests and foster meaningful relationships.\nSTORIES\n## Capture & share every moment with stories\nAllow users to share video and image stories, popularized by all the major social apps, and share life’s best moments as they happen on your platform.\n## The most feature rich social SDK available\nWith social.plus, you can get up and running quickly with all the features of an engaging social platform.\n## Leading brands grow with social.plus\nDiscover how hundreds of companies use social.plus to accelerate app growth and unlock new revenue streams\n## Explore more of social.plus\nsocial.plus enables you to quickly add white-label social features to your app or website with our ready-to-use SDKs and APIs.\nChat SDK\n### Turn connections into conversations\nElevate your app’s social experience with chat that keeps users talking, sharing, and building connections in real time.\nVideo SDK\n### Bring moments to life with video\nFrom live streams to social commerce, bring immersive video experiences straight to your app. Let users step inside the moment."
+    },
+    {
+      "url": "https://www.social.plus/social/features",
+      "metaTitle": "White-label Social Features for Your App",
+      "metaDescription": "All the pre-built and customizable white-label social features you need to build engaging social experiences in your app.",
+      "content": "# All the white-label social features your app needs\n## Social essentials\nThe essentials to building engaging social experiences that easily integrate into your app or digital platform.\n## Activity feeds\nFeeds are a great way for users to get relevant updates, communicate and express themselves via chronological or algorithmically ranked content.\nNo items found.\n## Posts & comments\nIncrease user engagement by allowing user-generated content through multiple social media post types and the possibility to comment and discuss any content on your platform.\nNo items found.\n## Communities\nBuild and nurture vibrant community groups where users can exchange ideas and connect.\nNo items found.\n## User profiles\nAllow users to express themselves with their own profiles and interact with others.\nNo items found.\n## Get started with social.plus SDK\nsocial.plus modules are ready to use — launch faster with our SDKs and APIs to create social media features. Available for Android, iOS, Flutter, TypeScript, ReactJS, React Native, Ionic, Vue.js, and Angular.\nJava / Kotlin\nSwift / Objective-C\nFlutter\nReactJS\nReact Native\nTypeScript\nAngular\nIonic"
+    },
+    {
+      "url": "https://www.social.plus/social/sdk",
+      "metaTitle": "Social SDK | Build Social Features with API-based Social SDKs",
+      "metaDescription": "Build engaging social features in your app with Social SDKs for iOS, Android, Flutter, React, JavaScript, TypeScript, Ionic, Vue.js, and Angular.",
+      "content": "# Build social network features with Social SDK\nWith social.plus Social SDK, you have everything you need to build in-app community and social media experiences, without the hassle of deploying and maintaining any server infrastructure.\n## Get started with social.plus\nBuild engaging social network features in your app with our Social APIs and SDKs for Android, iOS, Flutter, React, React Native, TypeScript, Ionic, Vue.js, and Angular."
+    },
+    {
+      "url": "https://www.social.plus/social/uikit",
+      "metaTitle": "Social UI Kit | Pre-built UIKit for iOS, Android, Flutter and React",
+      "metaDescription": "Integrate social media features into apps with ready-to-use UIKits and UI components.",
+      "content": "# Save time with ready-to-use UIKits\nOur white-label social network UIKit includes user interfaces and components to seamlessly integrate social media features into applications, and can be fully customized to meet your app's unique requirements.\n## Open Source Social UIKits\nYou can fork our UIKit source code to gain complete control over the visual style of the social media features in your app. Customize targeted UX flows, specific views, and respond to user interactions to tailor the user experience specifically for your application.\n## Figma Social UI Kit\nAccess the white-label Figma social media UI Kit for iOS, Android and Web. Modify all components, colors, fonts, icons, and layouts with ease, ensuring the UI perfectly complements your app's style and functionality.\nFirst name\nLast name\nBusiness email\nBy clicking 'Access Figma UI Kit,' you allow social.plus to process and store your information for contact purposes and agree to the Privacy Policy.\nOops! Something went wrong while submitting the form."
+    },
+    {
+      "url": "https://www.social.plus/chat",
+      "metaTitle": "Chat SDK | Build In-App Messaging Faster",
+      "metaDescription": "Chat SDKs enable building chat in your app using Chat API, enabling in-app messaging, group chat, live chat, reactions, rich messages, and push notifications.",
+      "content": "# Build in-app messaging faster with a Chat SDK\nAccelerate development with pre-built chat features that you can easily customize to meet your app's unique requirements. Get started with social.plus Chat SDK and Chat API.\nSocial Chat\n## Harness the power of communication with in-app chats\nEffortlessly embed messaging and connect your users with social.plus Chat SDK to power your messaging services and increase real-time engagement.\nLive Chat\n## Increase user engagement in real-time with live chat\nOur ready-to-use SDK and Chat API provide everything you need to create a Live Chat Overlay for live streams in your app so that you can focus on creating great user experience.\nBROADCAST CHAT\n## Deliver vital messages to all users with broadcasts\nEasily reach your entire user base with important updates such as announcements and promotions through broadcast chat channels.\n## All the messaging features your app needs\nWith social.plus, you can build messaging in your app with all the features of an instant messaging platform.\n## Leading brands grow with social.plus\nDiscover how hundreds of companies use social.plus to accelerate app growth and unlock new revenue streams\n## Explore more of social.plus\nsocial.plus enables you to quickly add white-label social features to your app or website with our ready-to-use SDKs and APIs.\nSocial SDK\n### Build a community that thrives\nCreate spaces where users connect, share, and engage effortlessly. Scalable, seamless, ready for any social use case.\nVideo SDK\n### Bring moments to life with video\nFrom live streams to social commerce, bring immersive video experiences straight to your app. Let users step inside the moment."
+    },
+    {
+      "url": "https://www.social.plus/chat/features",
+      "metaTitle": "Pre-built Chat Messaging Features for Your App",
+      "metaDescription": "All the customizable chat features you need to build engaging messaging experiences in your app.",
+      "content": "# All the white-label messaging features your app needs\n## Messaging essentials\nThe essential chat features to build engaging messaging experiences for users.\nNo items found.\n## Chat channels\nOur instant messaging channels enable you to seamlessly implement different types of chat messaging capabilities into your applications.\n## Message types\nGive users the possibility to express themselves in through different message formats to increase engagement.\n## Chat moderation\nModeration is a crucial part of any chat environment to make it a safe space for users. Our tools make it super easy for moderators to track content manually & automatically.\n## User moderation\nProvide a positive and safe social experience with tools to moderate users.\nNo items found.\n## Get started with social.plus Chat SDK\nsocial.plus modules are ready to use — launch messaging faster with our Chat SDKs and Chat API to create engaging chat experiences. Available for Android, iOS, Flutter, ReactJS, React Native, TypeScript, Angular, Ionic, and Vue.js.\nJava / Kotlin\nSwift / Objective-C\nFlutter\nReactJS\nReact Native\nTypeScript\nAngular\nIonic"
+    },
+    {
+      "url": "https://www.social.plus/chat/sdk",
+      "metaTitle": "Chat SDK | Build Messaging in your app",
+      "metaDescription": "Build chat with a Chat SDK and API for Android, iOS, Flutter, React, React Native, TypeScript, Ionic, and Angular.",
+      "content": "# Build messaging in your app with our Chat SDK\nWith the social.plus Chat SDK and Chat API, you have everything you need to build engaging chat and instant messaging experiences, without the hassle of deploying and maintaining any server infrastructure.\n## Get started with social.plus Chat\nBuild engaging chat messaging features in your app with our Chat API and SDK for Android, iOS, Flutter, React, React Native, TypeScript, Ionic, Vue.js, and Angular."
+    },
+    {
+      "url": "https://www.social.plus/chat/uikit",
+      "metaTitle": "Chat UIKit | Pre-built UIKits for iOS, Android and React",
+      "metaDescription": "User interface kits for chat messaging, including all the UI components needed for fast integration of chat features into applications.",
+      "content": "# Save time with our ready-to-use Chat UIKits\nOur white-label UIKits include user interfaces and components that enable fast integration of chat messaging into applications. They can be fully customized to meet your app's unique requirements.\n## Open Source Chat UIKits\nYou can fork our Chat UIKit source code to gain complete control over the visual style of your chat messaging user experience. Customize targeted UX flows, specific views, and respond to user interactions to tailor the user experience specifically for your application.\n## Figma Chat UI Kit\nAccess the white-label Figma chat UI Kit for iOS, Android and Web. Modify all components, colors, fonts, icons, and layouts with ease, ensuring the UI perfectly complements your app's style and functionality.\nFirst name\nLast name\nBusiness email\nBy clicking 'Access Figma UI Kit,' you allow social.plus to process and store your information for contact purposes and agree to the Privacy Policy.\nOops! Something went wrong while submitting the form."
+    },
+    {
+      "url": "https://www.social.plus/video",
+      "metaTitle": "Video SDK | Live Video Stream with Live Chat",
+      "metaDescription": "Add live streaming to your app, Use pre-built and customizable video features for  in-app broadcast streaming, and Live e-commerce.",
+      "content": "# Build in-app video features faster with a Video SDK\nAccelerate development with pre-built video features that you can easily customize to meet your app's unique requirements. Get started with social.plus Video SDK and Video API.\nLive Streaming\n## Broadcast anytime, anywhere with live video streaming\nsocial.plus Video SDK delivers a high-quality video stream so you can host immersive in-app live events, and Broadcast Live Streaming to people from all over the world.\nLive Commerce\n## Bring in-store magic to your online platform with live commerce\nIntegrate seamless e-commerce experiences during live streams to engage customers with real-time product demos and sell your items on the spot to your users.\n## Leading brands grow with social.plus\nDiscover how hundreds of companies use social.plus to accelerate app growth and unlock new revenue streams\n## Explore more of social.plus\nsocial.plus enables you to quickly add white-label social features to your app or website with our ready-to-use SDKs and APIs.\nSocial SDK\n### Build a community that thrives\nCreate spaces where users connect, share, and engage effortlessly. Scalable, seamless, ready for any social use case.\nChat SDK\n### Turn connections into conversations\nElevate your app’s social experience with chat that keeps users talking, sharing, and building connections in real time."
+    },
+    {
+      "url": "https://www.social.plus/video/features",
+      "metaTitle": "Pre-built Video Features for Your App",
+      "metaDescription": "All the pre-built and customizable video features you need to build engaging video experiences in your app.",
+      "content": "# All the white-label video features your app needs\n## Video essentials\nThe essentials to building immersive video experiences that easily integrates into your app or website.\nNo items found.\n## Get started with social.plus Video SDK\nsocial.plus modules are ready to use — launch faster with a video SDK that connects with all the video APIs you need to create immersive video experiences. Available for iOS, Android, Javascript, TypeScript, Flutter and React Native.\nJava / Kotlin\nSwift / Objective-C\nReact Native\nTypeScript\nFlutter"
+    },
+    {
+      "url": "https://www.social.plus/video/sdk",
+      "metaTitle": "Video SDK - Build video features with API-based Video SDKs",
+      "metaDescription": "Build engaging video features in your app with Video SDKs for iOS, Android, JavaScript, TypeScript, and React Native.",
+      "content": "# Launch faster with social.plus Video SDK\nWith our Video SDK, you have everything you need to build interactive and immersive video features, such as live streaming, stories, and live commerce, without the hassle of deploying and maintaining any server infrastructure.\n## Get started with our Video SDK\nBuild engaging video features in your app with our SDK for iOS, Android, JavaScript, TypeScript, Flutter and React Native."
+    },
+    {
+      "url": "https://www.social.plus/analytics",
+      "metaTitle": "Live Analytics & AI Insights | social.plus",
+      "metaDescription": "Real-time analytics and AI-driven insights, empowering you to boost average revenue per app user.",
+      "content": "# Maximize growth with live analytics & AI Insights\nLeverage powerful AI tools to get to know your users like never before and make informed business decisions.\n## Take your data analysis to new heights with powerful AI tools\nOur easy-to-use dashboard allows you to analyze your first-party data in real-time and access AI-powered Insights and recommendations to drive your business strategy.\nTopic Analysis\n### See what users are talking about\nAccess all the real-time data you need to effectively shape your user engagement strategies:\nDiscover trending topics posted by users\nTrack volume and frequency of posts\nEasily identify and predict trends\nSentiment Analysis\n### Track user emotions in real-time\nUnderstand how your users feel about different topics to create strategies that resonate and drive revenue:\nMonitor overall user emotions\nDive deeper into sentiments per topic\nTrack positive and negative reactions\nContent Insights\n### Understand user reactions to topics\nDive deeper into sentiments with AI-powered recommendations to guide your strategies:\nSee detailed post summaries\nUnderstand the emotional context\nGet tailored recommendations\n## Unlock next level insights with GPT-powered research\nTake advantage of everything AI has to offer with our GPT-powered conversational research tool to help you understand your users like never before.\nResearch Prompt\n### Get started with a simple question\nAsk a question in Research to get personalized answers based on the content your users post:\nType a question to get started\nOr use the prompt templates\nSet custom date/time for research\nResearch Result and Chat\n### Interactive insights at your fingertips\nThe research bot analyzes all your posts to generate detailed research reports:\nGet personalized community insights\nDig deeper with follow up questions\nDownload the final reports\nContent Reference\n### Ground your research in facts\nThe research bot gives you access to the original user-generated content cited in the research:\nCitation and links included in the research\nClick to easily see the original content\nHistory display of research questions\n## Data-driven decisions made easy\nAccess all your live engagement data and analytics from one dashboard to stay updated on your community and make agile decisions.\n## Social Analytics\n### Content Data\nDive into user-generated content on your platform to create better engagement strategies. See how often users posts, their daily habits on your platform, and so much more.\n### User Data\nEasily see the growth of your community and identify the top voices leading the way. Access all the user data you need from big picture down to individual members.\n## Chat Analytics\n### Channel Data\nDiscover which channels your community prefers for communication, how frequently they send messages, and their active times. Compare the data to the previous month to track your growth or refine your engagement strategies.\n### User Data\nGain insights into your chat users with detailed statistics and analytics that help you understand key trends and the overall health of your community's communications.\n## Explore more of social.plus\nsocial.plus goes beyond offering the complete suite of social features to include powerful tools to analyze, moderate, and monetize your in-app communities.\n### Maximize your app's revenue potential with social.plus\nDiscover how to transform user engagement into unparalleled monetization opportunities with social.plus\n### Build positive and safe communities\nWe power moderators with all the necessary tools to control and impose permissions to make your app a safer place for all users."
+    },
+    {
+      "url": "https://www.social.plus/moderation",
+      "metaTitle": "Moderate User-Generated Content with social.plus",
+      "metaDescription": "Protect your community with advanced AI moderation.",
+      "content": "# Ensure a safe digital space for every user\nElevate user experience with advanced moderation tools, ensuring a vibrant, inclusive, and secure space for all users.\n## Moderation Panel\nWith our Moderation Panel, you can moderate massive amounts of content manually and automatically.\n### Equip moderators with the right tools\nEasily monitor the environment and save valuable time with automatic and manual moderation capabilities.\n### Customize & automate moderation\nAutomatically filter out profanity and images that contain nudity, violence, suggestive, or disturbing images.\n## Protect your community with advanced AI moderation\nWe use AI for real-time content moderation, creating a safer and more engaging online environment. Our advanced tools detect and manage harmful content seamlessly.\n### Pre-Moderation\nAutomatically review content before it goes live. If the AI confidence score exceeds your set threshold, the content is blocked to protect your community.\n### Post-Moderation\nMonitor content after it’s published. Based on confidence scores, the system can flag, hide, or remove harmful content without manual intervention.\n## Content Moderation\nContent moderation is a crucial part of any community to make it a safe space for users. Our tools make it super easy for moderators to track content manually & automatically.\n## User Moderation\nContent is posted by users, so moderating people is just as important as moderating content. Our tools help your admins and moderators preserve positivity on your platform at all times.\n## Administrators & Moderators\nCreate positive experiences and encourage more engagement on your platform for all members of your community with our administrator & moderator capabilities and customizable user roles.\n## Explore more of social.plus\nsocial.plus goes beyond offering the complete suite of social features to include powerful tools to analyze, moderate, and monetize your in-app communities.\n### Own and analyze your data in real-time\nAccess and analyze your engagement data in real-time to gain valuable user insights.\n### Maximize your app's revenue potential with social.plus\nDiscover how to transform user engagement into unparalleled monetization opportunities with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/monetization",
+      "metaTitle": "Monetize your App with social.plus",
+      "metaDescription": "Discover how to transform user engagement into monetization opportunities.",
+      "content": "# Maximize your app's revenue potential\nDiscover how to transform user engagement into unparalleled monetization opportunities with social.plus\n## Drive revenue with embedded commerce and tailored campaigns\nIntegrate direct commerce into your platform, fostering an interactive and transactional social ecosystem.\n## Unlock new revenue streams with sponsored partner placements\nPartner with brands to leverage your community’s potential, enriching the user experience while boosting your revenue.\nSponsored Groups\n### Create win-win partnerships with sponsored groups\nLease spaces to partners with official groups, creating a new revenue stream and enriching your community with fresh content and added credibility.\nDrive engagement with partner brands\nIncrease brand reputation with trusted partners\nEnable partners to sell directly through groups\nSponsored Content\n### Enable partners to sponsor content\nGenerate revenue by offering sponsored native placements to your partners. Select partners that align with your audience to maximize revenue potential.\nA variety of placement options\nNative placements for optimal UX\nManage sponsored content in the social.plus Console\n## Make your community exclusive with in-app subscription models\nDrive sustainable revenue and offer value through tailored subscription options.\nPaid subscriptions\n### Make community a part of your subscription model\nInclude your community in the subscription tiers you offer to encourage user investment in your app's unique experiences and ensure a steady revenue stream.\nSubscriber only groups\n### Create subscriber-only areas in your community\nBuild exclusive spaces where subscribers can interact, share, and engage with content not available to the general audience, incentivizing others to join.\n## Explore more of social.plus\nsocial.plus goes beyond offering the complete suite of social features to include powerful tools to analyze, moderate, and monetize your in-app communities.\n### Own and analyze your data in real-time\nAccess and analyze your engagement data in real-time to gain valuable user insights.\n### Build positive and safe communities\nWe power moderators with all the necessary tools to control and impose permissions to make your app a safer place for all users."
+    },
+    {
+      "url": "https://www.social.plus/industry/retail",
+      "metaTitle": "Retail - social.plus for the Retail industry",
+      "metaDescription": "Transform browsing into shared discovery with shoppable content, real customer stories, and in-app community.",
+      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/fitness",
+      "metaTitle": "Fitness - social.plus for the Fitness industry",
+      "metaDescription": "Boost motivation, retention, and lifetime value through in-app social features that inspire progress and connection.",
+      "content": "## Key in-app use cases for fitness & wellness\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/travel",
+      "metaTitle": "Travel - social.plus for the Travel industry",
+      "metaDescription": "Transform every trip, check-in, and review into shared experiences that inspire others – all inside your app.",
+      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/sports",
+      "metaTitle": "Sport - social.plus for the Sport industry",
+      "metaDescription": "Bring fans, teams, and players together through real-time feeds, chat, and fan-driven content – all inside your app.",
+      "content": "## Key in-app use cases for sports\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/health-and-wellness",
+      "metaTitle": "Health and Wellness - social.plus for the Health and Wellness industry",
+      "metaDescription": "Help people stay engaged, informed, and motivated through trusted in-app conversations and shared progress.",
+      "content": "## Use cases that build trust, consistency, and progress\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/fintech",
+      "metaTitle": "Fintech - social.plus for the Fintech industry",
+      "metaDescription": "Help users learn, engage, and make confident decisions through in-app discussion, education, and shared insights.",
+      "content": "## Use cases that build confidence and long-term engagement\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/media-and-news",
+      "metaTitle": "Media and News - social.plus for the Media and News industry",
+      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
+      "content": "## Use cases that turn readers into participants\n## Everything you need to make your media app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/edtech",
+      "metaTitle": "Edtech - social.plus for the Edtech industry",
+      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
+      "content": "## Use cases that improve completion and outcomes\n## Everything you need to make your learning app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/gaming",
+      "metaTitle": "Gaming - social.plus for the Gaming industry",
+      "metaDescription": "Keep players engaged between sessions with social features that turn play into participation.",
+      "content": "## Use cases that keep players coming back\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/betting",
+      "metaTitle": "Betting - social.plus for the Betting industry",
+      "metaDescription": "Bring bettors together with real-time discussion, shared insights, and social experiences — all inside your app.",
+      "content": "## Use cases that keep bettors engaged between bets\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    }
+  ]
+}
