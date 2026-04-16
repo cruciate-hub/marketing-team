@@ -38,10 +38,19 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 
 4. `value-story.md` is already loaded via the long-form routing above. For comparison or competitive content, lean on its differentiation framework especially heavily.
 
-5. If the article needs awareness of what the website already says (to avoid contradicting it or to link to relevant pages), also fetch:
+5. If the article needs awareness of what the website already says (to avoid contradicting it, to link to relevant marketing pages, or to cross-link to existing blog posts), fetch any of these as relevant:
 ```
 https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
+https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-blog.json
+https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-glossary.json
 ```
+
+`pages-blog.json` is especially useful for:
+- **Avoiding duplicates** — check if a similar topic has been covered before; if yes, suggest updating the existing post rather than writing a new one
+- **Internal links** — suggest 3-5 contextually relevant blog posts to link to from the new article (strengthens SEO)
+- **Cross-topic references** — find adjacent content to reference (e.g., a "user retention" article linking to an existing "app engagement" post)
+
+Each item in `pages-blog.json` has `url`, `metaTitle`, `metaDescription`, and `content` (heading hierarchy). Scan `metaTitle` and `content` for topic overlap.
 
 ## Webflow CMS field mapping
 
