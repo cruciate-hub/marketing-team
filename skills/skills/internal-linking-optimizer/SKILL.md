@@ -140,17 +140,34 @@ For each surviving candidate:
 - **Anchor variety** (have we already used this anchor in the draft?)
 - **Intent fit** (definitional anchor → glossary; commercial anchor → product/use-case page)
 
-**4. Apply count rules by content type.**
+**4. Apply the link budget for the article's type.**
 
-- **Blog post draft:** target 3-7 internal links (per `link-strategy.md` and `blog-seo-content`).
-- **AEO article draft:** target 1-3 internal links MAX. Allowed only in definition paragraph, "why it matters", architecture/features, step-by-step. Disallowed in FAQs, conclusion, metrics table.
-- **Generic/standalone draft:** default 3-5 unless user specifies.
+The draft's article type determines the Min / Target / Max link count. Look up the type in `link-strategy.md` §"Link budgets by article type" (14 types: marketing/product page, pillar landing, use-case page, white-label, industry, blog by length band, AEO, glossary entry, customer story, product update, webinar).
 
-Quality over quantity. Better to return 3 strong suggestions than 7 weak ones.
+If the count falls below **Min**, add links until it reaches Target. If it exceeds **Max**, drop the weakest candidates until it reaches Target. For AEO, the table also constrains placement (disallowed in FAQs, conclusion, metrics table) — enforce both count and placement rules.
 
-**5. Apply per-cluster anchor variation rules.**
+Link count excludes header, footer, and nav. Only in-content links count.
 
-If the draft would result in the same anchor pointing to the same page more than twice, use a variant from the cluster's anchor pool in `link-strategy.md`.
+Quality over quantity. Better to return 3 strong suggestions at the floor than 7 weak ones at the ceiling.
+
+**5. Apply anchor-text distribution targets + per-cluster variation rules.**
+
+Two constraints run simultaneously:
+
+- **Per-article anchor distribution** — match the per-article proportions in `link-strategy.md` §"Anchor text distribution targets": exact-match ≤ 20%, partial 30–50%, branded 10–25%, natural 20–35%, generic ≤ 10% (and at most 1 in short posts). Count proposed anchors across all your suggestions and reject combinations that overweight exact-match or generic.
+- **Per-cluster variation** — if the same anchor would point to the same page more than twice in the draft, use a variant from the cluster's anchor pool in `link-strategy.md` §"Per-cluster anchor variation rules".
+
+Also forbidden: using the same anchor text pointing to two different targets within one draft (cannibalization trap). Reject any suggestion combination that would do this.
+
+**6. Run the 8 evaluation questions + placement check before finalizing.**
+
+For each proposed link, run through the 8 evaluation questions from `link-strategy.md` §"Evaluation questions — per-link quality gate". If any answer is "no" or "unclear", drop the suggestion.
+
+Then run the placement check from `link-strategy.md` §"Placement & avoidance rules" — reject any suggestion placed in a forbidden location (AEO FAQ/conclusion/metrics table, blog conclusion CTA, image caption, footnote, author bio, or a paragraph already containing 2 other links).
+
+Finally, check every suggested target against `link-strategy.md` §"Do-not-link list" — if a target URL is on that list, drop it and surface the issue to the writer (e.g., `/use-cases/*` plural URLs).
+
+This is the final quality gate. Only links that pass this step appear in the output.
 
 ### Draft mode output format
 
@@ -231,17 +248,43 @@ For each page across all 10 data files, count the internal links present in its 
 | pages-product-updates | 58 | [n] | [n] | [n] |
 | pages-release-notes | 31 | [n] | [n] | [n] |
 | pages-webinars | 25 | [n] | [n] | [n] |
+
+### Structure Score
+
+Compute per the rubric in `link-strategy.md` §"Scoring & measurement" → "Structure Score /10". Output as a single number plus per-criterion breakdown:
+
+| Criterion | Max | Actual |
+|---|---|---|
+| Orphan pages (0=3, 1-3=2, 4-10=1, >10=0) | 3 | [n] |
+| Max click depth (≤3=2, 4=1, >4=0) | 2 | [n] |
+| Pillar → cluster coverage (100%=2, 80%+=1, <80%=0) | 2 | [n] |
+| Cluster → pillar bidirectional | 1 | [n] |
+| Bridge-link coverage | 1 | [n] |
+| Industry-lattice coverage | 1 | [n] |
+| **Total** | **10** | **[score]** |
+
+Target: ≥ 8 / 10. Compare to last audit if available.
 ```
 
-**2. Orphan and under-linked pages.**
+**2. Orphan and under-linked pages (classified by tier).**
 
-Cross-reference Ahrefs orphan candidates from `link-strategy.md` against the fetched data. Flag pages with no contextual inbound links from other pages in the data set (header/footer nav doesn't count for SEO purposes).
+Cross-reference Ahrefs orphan candidates from `link-strategy.md` against the fetched data. Flag pages with no contextual inbound links from other pages in the data set (header/footer nav doesn't count for SEO purposes). Classify each flagged page per `link-strategy.md` §"Orphan priority tiers":
+
+- **P1 — critical:** has organic traffic AND 0 inbound contextual links. Fix in week 1.
+- **P2 — important:** has commercial intent but < 2 inbound contextual links. Fix in week 2.
+- **P3 — optional:** no traffic and < 2 inbound. Evaluate for consolidation, noindex, or deletion.
 
 ```markdown
 ## Orphans and under-linked pages
 
-[For each:]
-- **[full URL]** ([file]) — Currently linked from: [list, or "no contextual inbound"]. Should be linked from: [list with reasoning].
+### P1 — critical (week 1)
+- **[full URL]** ([file]) — Currently linked from: [list, or "no contextual inbound"]. Should be linked from: [≥3 source URLs with reasoning + suggested anchors].
+
+### P2 — important (week 2)
+- **[full URL]** ([file]) — Currently linked from: [list]. Should be linked from: [≥2 source URLs with reasoning + suggested anchors].
+
+### P3 — optional (evaluate for pruning)
+- **[full URL]** ([file]) — Assessment: [consolidate into X / noindex / delete / leave as-is].
 ```
 
 **3. Anchor text distribution + canonical compliance.**
@@ -270,6 +313,21 @@ Extract every anchor used across all pages. Cross-reference against the canonica
 ### Definitional vs commercial intent violations
 | Anchor | Page (source) | Current target (intent mismatch) | Recommended target |
 |---|---|---|---|
+
+### Anchor Score
+
+Compute per the rubric in `link-strategy.md` §"Scoring & measurement" → "Anchor Score /10":
+
+| Criterion | Max | Actual |
+|---|---|---|
+| Exact-match share ≤ 15% site-wide | 3 | [n] |
+| Generic share ≤ 5% site-wide | 2 | [n] |
+| No same-anchor-to-different-targets in any article | 2 | [n] |
+| All anchors descriptive (no bare "click here") | 2 | [n] |
+| Per-cluster anchor variation respected | 1 | [n] |
+| **Total** | **10** | **[score]** |
+
+Report site-wide percentages for exact-match and generic shares — these are the most actionable data points.
 ```
 
 **4. Topic cluster analysis.**
@@ -295,6 +353,21 @@ For each cluster (Chat, Social, Video, Industry, Cross), check:
 - ✅/❌ Blog → cluster pillar: [findings]
 
 [Repeat for Social, Video, Industry]
+```
+
+**4b. Authority-flow redistribution check.**
+
+Apply the rules in `link-strategy.md` §"Link-equity hubs & authority flow" → "Authority-flow rules (external → internal redistribution)". For each high-UR source page (homepage UR 11.0, `/white-label/social-network` UR 7.0, and the UR 4.4+ glossary/blog pages), verify the required downstream links are in place. Flag any missing downstream link as a **Priority 1** fix — these are the highest-leverage wins because they redirect accumulated external link equity toward commercial pages.
+
+```markdown
+## Authority-flow gaps (Priority 1)
+
+| Source page (UR) | Required downstream | Currently linked? | Action |
+|---|---|---|---|
+| `https://www.social.plus/` (11.0) | 3 pillars, /pricing, 1–2 customer stories | [yes/no per target] | [add links with anchors] |
+| `https://www.social.plus/white-label/social-network` (7.0) | /social, /social/sdk, /social/features, /white-label/in-app-community, /moderation, /pricing | ... | ... |
+| `https://www.social.plus/glossary/social-feed` (4.6) | /use-case/activity-feed (commercial alt), /social | ... | ... |
+| [etc. per the rule table in link-strategy.md] | | | |
 ```
 
 **5. Contextual link gaps.**
@@ -344,24 +417,20 @@ Use the two-phase pattern here too:
 
 **7. Prioritized implementation plan.**
 
-Synthesize all findings into a phased plan.
+Synthesize all findings using the 4-phase template in `link-strategy.md` §"Audit mode — phased implementation plan template". Fill in the actual numbers from steps 1–6: Structure Score and Anchor Score (current vs target), orphan counts by tier, cannibalization violations, pillar → cluster gaps, authority-flow gaps, and over-optimization data.
 
-```markdown
-## Implementation plan
+Include the expected-outcomes table from the template (effort hours + typical traffic/ranking impact + time-to-measure) so the user can prioritize by ROI. Pull those numbers from `link-strategy.md` §"Success metrics per fix type".
 
-### Week 1: High-impact, low-effort
-1. [Specific action: page, anchor, target]
+### Monitoring cadence (include in plan)
 
-### Week 2-3: Medium effort
-1. [...]
+Per `link-strategy.md` §"Monitoring cadence":
 
-### Week 4+: Strategic / requires content changes
-1. [...]
+- **Weekly:** broken internal links, new content linked within 48 h.
+- **Bi-weekly:** orphan candidates via Ahrefs `pages-by-internal-links`.
+- **Monthly:** anchor distribution drift vs targets + new cannibalization candidates + cluster rank tracking.
+- **Quarterly (90 days):** full refresh via `link-strategy.md` §"Refresh procedure".
 
-### Tracking
-- Re-run this audit in 90 days to measure progress.
-- Key metrics: orphan count, generic anchor count, canonical violations, AEO over-linking instances.
-```
+Re-score Structure and Anchor monthly after implementation starts. Target ≥ 8 / 10 on both within 90 days.
 
 ### Audit mode "While looking at this..."
 
@@ -377,7 +446,67 @@ After the 7-step audit, always add a "While looking at this..." section with 2-3
 
 ---
 
-## General principles (both modes)
+## Mode: Reverse
+
+**When:** A new page just shipped in Webflow (detected by a `_meta.itemCount` change in a `pages-*.json` between publishes, or flagged by the user with "what should link to this new page?").
+
+### Workflow
+
+**1. Add canonical anchors to `link-strategy.md`.**
+
+Edit the canonical anchor map to include a row for each new page: `anchor term(s) → target URL`. Pick the anchor(s) from the new page's H1, metaTitle, and target keyword. If the anchor conflicts with an existing canonical entry (would create cannibalization), stop and escalate to Stefan per the escalation-triggers list — don't add both.
+
+**2. Identify inbound-link candidates (prioritized).**
+
+For the new page, grep the 10 `pages-*.json` files and optionally live-fetch to find 3–10 existing pages that should link *to* the new page:
+
+- Parent pillar (bidirectional link required).
+- Sibling cluster pages within the same pillar.
+- Related glossary entries (apply the commercial-alt / definitional split rule).
+- Industry pages, if the new page has industry affinity.
+- Top 3 blog posts whose headings reference the topic.
+- Top 1–2 AEO articles on the same topic (for definitional cross-references).
+
+Rank by link-equity benefit (higher-UR sources first).
+
+**3. Draft inbound edits.**
+
+For each candidate source page, propose:
+
+- Source page URL
+- Insertion location (H2 section or specific paragraph anchor)
+- Anchor text (from canonical map + cluster variation pool)
+- Why it fits (cite the rule or data point)
+
+**4. Run the quality gates.**
+
+Apply the placement check, forbidden-pattern check, do-not-link-list check, and the 8 evaluation questions from `link-strategy.md` §"Quality gates" to each proposed edit.
+
+**5. Output a ready-to-implement edit list.**
+
+```markdown
+## Inbound links to add for [new page URL]
+
+**Canonical anchor row to add to link-strategy.md:**
+- Anchors: "[term 1]", "[term 2]"
+- Target: [new page URL]
+- Cluster: [Chat / Social / Video / Cross / Industry]
+
+### Proposed inbound edits
+
+1. **From:** [source URL]
+   **Section/anchor point:** [H2 name + quoted sentence]
+   **Anchor text:** "[anchor]"
+   **Why:** [rule citation]
+
+2. [...]
+```
+
+Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for a new blog post, 1–3 for a new glossary entry.
+
+---
+
+## General principles (all modes)
 
 **Quote, don't paraphrase.** When citing page content, quote it exactly. For headings or metadata, the JSON is the source. For body sentences (e.g., insertion-point context), you must have live-fetched the page first — never quote body content from memory or speculation.
 
@@ -423,6 +552,20 @@ If any check fails, fix the output before delivering.
 - **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter` for outbound work.
 - **Live Ahrefs runtime calls.** This skill stays static-data-driven for cannibalization/strategy decisions (`link-strategy.md` is regenerated quarterly). Live WebFetch is used only for verifying link insertion points on social.plus pages, not for SEO data.
 - **Auto-publishing changes to Webflow.** This skill recommends; the user implements.
+
+## Escalation triggers (stop and ask Stefan)
+
+Stop execution and surface to the user when any of these fire:
+
+- A draft violates a cannibalization rule but the writer insists the commercial framing is correct. Surface the rule and the writer's rationale; let Stefan decide.
+- A new page's canonical anchor would conflict with an existing anchor (would create a new cannibalization trap).
+- `pages-*.json` `_meta.itemCount` jumps by > 10% between publishes (possible CMS migration or bulk-import — needs review before running audit).
+- DR drops by > 5 points since last `link-strategy.md` refresh.
+- A proposed anchor would use a forbidden positioning term (e.g., "social network" as a product anchor per `messaging/terminology.md`).
+- The draft's target keyword is already cannibalized across 10+ URLs per GSC, and the proposed article would add an 11th. Recommend consolidation rather than publishing.
+- `link-strategy.md` §"Refresh by:" date is more than 14 days in the past. Surface as "strategy is stale — needs refresh" before running audits.
+
+Format the escalation as a clearly-flagged block at the top of the output so Stefan sees it before the linking details.
 
 ## Adoption credit
 

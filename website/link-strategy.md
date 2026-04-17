@@ -1,6 +1,6 @@
 # social.plus internal linking strategy
 
-This file is the single source of truth for **canonical anchor → page** decisions, **cannibalization warnings**, and **anchor variation rules** across the social.plus content ecosystem. The `internal-linking-optimizer` skill consumes this file at runtime.
+This file is the single source of truth for **site architecture**, **canonical anchor → page** decisions, **cannibalization warnings**, **link budgets**, **anchor distribution targets**, **placement rules**, and **scoring** across the social.plus content ecosystem. The `internal-linking-optimizer` skill consumes this file at runtime. Other content skills (`blog-seo-content`, `aeo-content`, `case-study`, `brand-messaging`) defer to the optimizer and, by extension, to this file.
 
 **Generated:** 2026-04-17
 **Refresh by:** 2026-07-16 (90 days)
@@ -14,6 +14,115 @@ This file is the single source of truth for **canonical anchor → page** decisi
 - Top organic page (non-brand): `https://www.social.plus/white-label/social-network` (606 monthly traffic, UR 7.0)
 - Highest-UR page: `https://www.social.plus/` (UR 11.0) — primary authority hub
 - Total ranked keywords surveyed: top 200 by traffic, top 300 by GSC clicks
+
+---
+
+## Executive summary
+
+**Architecture:** hub-and-spoke with soft silos per product cluster (chat / social / video), plus three cross-cluster capability pillars (moderation / monetization / analytics) and an industry lattice (10 `/industry/*` pages) that links across clusters. Definitional/informational content lives in the glossary + AEO answers and routes intent separately from commercial content.
+
+**Primary problems this file solves:**
+1. Picking the right target URL for any anchor (canonical anchor map).
+2. Preventing keyword cannibalization across 646 pages (cannibalization warnings, grounded in 90d GSC data).
+3. Keeping commercial intent separate from definitional intent (glossary vs product/use-case split).
+4. Redistributing authority from high-UR glossary/blog pages *to* product pages (authority-flow rules).
+5. Catching orphans and under-linked pages before they lose rankings.
+6. Enforcing anchor diversity so nothing looks over-optimized.
+
+**Quantitative targets:**
+- Structure Score ≥ 8 / 10 site-wide
+- Anchor Score ≥ 8 / 10 site-wide
+- 0 real orphans (pagination/RSS artifacts excluded)
+- Max click depth from homepage: 3
+- Exact-match anchor share: ≤ 15% site-wide
+- Generic anchor share ("learn more", "this article"): ≤ 5% site-wide
+
+See **Scoring & measurement** for how these are computed.
+
+---
+
+## Architecture model
+
+**Model:** Hub-and-spoke with soft silos.
+
+- **Hubs (pillars)** are the product cluster landers: `/chat`, `/social`, `/video`, plus cross-cluster capability pillars `/moderation`, `/monetization`, `/analytics`, and `/pricing`.
+- **Spokes (clusters)** are feature pages (`/chat/features`, `/chat/sdk`, `/chat/uikit`), use-cases (`/use-case/*`), white-label variants (`/white-label/*`), and supporting glossary / blog / AEO / customer-story content.
+- **Soft silos**: within a pillar, cluster pages link bidirectionally with the pillar and freely with sibling clusters in the same pillar. Cross-pillar links (e.g. chat → video) are allowed as **bridge links** only when the user intent overlaps (a "live chat during live events" article legitimately bridges chat ↔ video).
+- **Industry lattice**: `/industry/*` pages are not part of any single pillar — they are a horizontal lattice that should link across into all three product pillars plus `/moderation`, `/monetization`, `/analytics`, and a customer story from that industry (where approved).
+- **Definitional vs commercial routing**: glossary + AEO answers are a parallel universe. Cannibalization warnings below enforce the split (definitional → glossary; commercial → product/use-case).
+
+**Why not a strict silo?** Strict silos trap link equity. Our pillars overlap at the product level (many customers buy chat + social + video), so we want bridge links to reflect real buying journeys.
+
+**Why not flat?** 646 pages is beyond what flat architecture supports without everything ending up 2–3 clicks deep *and* undifferentiated. Hub-and-spoke concentrates authority where we want it (the pillar landers) while letting long-tail content cluster naturally.
+
+**Max click depth from the homepage: 3.** Any page deeper than that should be flagged in audit mode.
+
+---
+
+## Pillar → cluster map
+
+Enforce bidirectional links (pillar ↔ every cluster page) and sibling cross-links within each pillar.
+
+### Chat pillar — `/chat`
+
+| Role | Page |
+|---|---|
+| Pillar | `https://www.social.plus/chat` |
+| Sub-product | `/chat/features`, `/chat/sdk`, `/chat/uikit` |
+| Use-cases | `/use-case/live-chat`, `/use-case/group-chat`, `/use-case/1-1-chat` |
+| White-label | `/white-label/chat-software` |
+| Definitional (glossary) | `/glossary/chat-api`, `/glossary/chat-widget`, `/glossary/chat-channel`, `/glossary/white-label-chat` |
+
+### Social pillar — `/social`
+
+| Role | Page |
+|---|---|
+| Pillar | `https://www.social.plus/social` |
+| Sub-product | `/social/features`, `/social/sdk`, `/social/uikit`, `/social/stories` |
+| Use-cases | `/use-case/activity-feed`, `/use-case/groups`, `/use-case/user-profiles`, `/use-case/custom-posts`, `/use-case/polls` |
+| White-label | `/white-label/social-network`, `/white-label/in-app-community` |
+| Definitional (glossary) | `/glossary/social-feed`, `/glossary/activity-feed`, `/glossary/community-app`, `/glossary/vertical-social-network`, `/glossary/white-label-social-network`, `/glossary/white-label-social-features` |
+
+### Video pillar — `/video`
+
+| Role | Page |
+|---|---|
+| Pillar | `https://www.social.plus/video` |
+| Sub-product | `/video/features`, `/video/sdk` |
+| Use-cases | `/use-case/livestream`, `/use-case/stories-and-clips`, `/use-case/events` |
+| Competitor compare | `/vs-stream` |
+| Definitional (glossary) | `/glossary/video-sdk` |
+
+### Cross-cluster capability pillars
+
+| Pillar | Role | Notes |
+|---|---|---|
+| `/moderation` | Horizontal — linked from chat + social + video clusters | Currently under-linked (see Orphan section) |
+| `/monetization` | Horizontal — linked from social + use-case pages | Currently under-linked |
+| `/analytics` | Horizontal — owns the "social.plus AI" query cluster (42 ranking URLs) | See cannibalization rule |
+| `/pricing` | Conversion endpoint — linked from every pillar and most use-cases |
+| `/product` | Product overview — linked from homepage, blog, AEO |
+
+### Industry lattice
+
+10 `/industry/*` pages (retail, fitness, travel, sports, health-and-wellness, fintech, media-and-news, edtech, gaming, betting). Each industry page must link to:
+- The three product pillars (`/chat`, `/social`, `/video`) using industry-framed anchors.
+- `/moderation`, `/monetization`, `/analytics` — whichever is most relevant to that industry.
+- 1–2 customer stories from that industry (where approved per `messaging/terminology.md`).
+- 1–3 glossary entries most relevant to the industry vocabulary.
+
+### Bridge-link policy
+
+Cross-pillar links are allowed when:
+- The user intent spans pillars (e.g., "live chat during livestreams" → chat + video).
+- A use-case draws on multiple pillars (e.g., `/use-case/events` touches video + social + chat).
+- A customer story uses multiple products.
+
+Cross-pillar links are **not** allowed when:
+- The linked pillar is only tangentially related. Err on the side of not linking.
+- The bridge dilutes the article's primary keyword focus.
+
+Maximum 2 bridge links per article.
 
 ---
 
@@ -45,6 +154,7 @@ All entries share the same shape: `{url, metaTitle, metaDescription, content}`. 
 **Which files to fetch by context** (the optimizer applies these defaults):
 - **Blog draft (called by `blog-seo-content`):** marketing + use-cases + industry + glossary + blog + customer-stories
 - **AEO draft (called by `aeo-content`):** marketing + use-cases + glossary + answers (related-answers)
+- **Customer story draft (called by `case-study`):** marketing + use-cases + industry + customer-stories + pillar that matches the customer's product usage
 - **Standalone audit:** all 10 files
 - **Standalone draft (user-pasted content):** marketing + use-cases + industry + glossary by default; ask if more is needed
 
@@ -56,20 +166,35 @@ All entries share the same shape: `{url, metaTitle, metaDescription, content}`. 
 
 ## How to use this file
 
-**Draft mode (when called by `blog-seo-content`, `aeo-content`, etc.):**
+**Draft mode (when called by `blog-seo-content`, `aeo-content`, `case-study`, etc.):**
 
 1. Identify candidate anchor terms in the draft.
-2. For each candidate, check the **canonical anchor map** below — if the anchor matches a row, use the listed target URL.
+2. For each candidate, check the **canonical anchor map** — if the anchor matches a row, use the listed target URL.
 3. Cross-check against **cannibalization warnings** — if a warning fires, follow its rule (use the recommended target, or split intent: definitional → glossary, commercial → product page).
-4. Apply **per-cluster anchor variation rules** — no anchor should appear more than twice per article pointing to the same page.
-5. Prefer **link-equity hubs** as targets when contextually appropriate (homepage, white-label pages, top-traffic glossary entries).
+4. Apply the **link budget by article type** below to cap total link count.
+5. Apply the **anchor text distribution targets** — match site-wide proportions.
+6. Apply the **placement rules** — allowed/disallowed locations per article type.
+7. Apply **per-cluster anchor variation rules** — no anchor should appear more than twice per article pointing to the same page.
+8. Apply the **forbidden patterns** check — run the bad/good example filter on every proposed link.
+9. Prefer **link-equity hubs** as targets when contextually appropriate, but follow authority-flow rules (high-UR glossary pages should redistribute *to* product pages).
+10. Before delivering, run the **evaluation questions** as a final quality gate on every link.
 
 **Audit mode (standalone):**
 
-1. Compare site-wide anchor usage against the canonical anchor map. Flag mismatches.
-2. Cross-reference cannibalization warnings against current link patterns. Flag violations.
-3. Identify orphans by looking for pages with no contextual inbound links across all 10 files.
-4. Recommend phased fixes.
+1. Compute **Structure Score** and **Anchor Score** against the rubric.
+2. Compare site-wide anchor usage against the canonical anchor map. Flag mismatches.
+3. Cross-reference cannibalization warnings against current link patterns. Flag violations.
+4. Identify orphans and under-linked pages across all 10 files and via Ahrefs `pages-by-internal-links`.
+5. Compute anchor distribution and flag over-optimization (exact-match > 15% site-wide or generic > 5%).
+6. Output the **phased implementation plan** (see template below).
+7. Estimate impact per fix using the success-metrics table.
+
+**Reverse mode (when a new page ships in Webflow):**
+
+1. Add canonical anchor row(s) to the appropriate cluster section of this file.
+2. Identify 3–10 existing pages that should link *to* the new page (pillar, sibling clusters, related glossary, related blog posts).
+3. Propose the inbound edits with specific anchor text and insertion points.
+4. Run the placement + forbidden-pattern check on each proposed edit.
 
 ---
 
@@ -159,6 +284,118 @@ For glossary terms not in this table, use them as link targets only in genuinely
 
 ---
 
+## Link budgets by article type
+
+**Rule of thumb:** 3–10 internal links per 1,000 words, depending on article type. Quality beats quantity — skipping a weak link is better than forcing one.
+
+| Article type | Min | Target | Max | Notes |
+|---|---|---|---|---|
+| **Marketing/product page** | 5 | 8 | 15 | Must link to at least 2 siblings, 1 pillar (if not pillar itself), `/pricing`, and 1 supporting use-case |
+| **Pillar landing (e.g. `/chat`)** | 8 | 12 | 20 | Must link to every cluster page in its sub-product + use-cases + at least 1 customer story |
+| **Use-case page (e.g. `/use-case/live-chat`)** | 3 | 5 | 8 | Must link to pillar, 1–2 sibling use-cases, 1 related glossary, 1 industry page, 1 customer story |
+| **White-label page** | 5 | 7 | 10 | Must link to parent pillar + matching glossary definitional page + `/pricing` |
+| **Industry page** | 5 | 8 | 12 | Must link to all 3 product pillars, 1–2 customer stories from industry, 1–2 use-cases, 1–2 glossary |
+| **Blog post (< 1,000 words)** | 3 | 4 | 6 | At least 1 pillar or use-case link |
+| **Blog post (1,000–2,000 words)** | 4 | 6 | 8 | Add 1 cross-link to a sibling blog post |
+| **Blog post (2,000+ words)** | 5 | 8 | 12 | Full cluster hub behavior — link to pillar + 2 siblings + customer story + glossary |
+| **AEO article (`/answers/*`)** | 1 | 2 | 3 | Stricter — over-linking dilutes AI-citation value |
+| **Glossary entry** | 2 | 3 | 5 | Must link to 1 product/use-case (commercial alt) + 1 sibling glossary + 1 pillar |
+| **Customer story** | 3 | 5 | 7 | Must link to customer's industry page + product pillar(s) they use + 1 related use-case |
+| **Product update / release note** | 2 | 3 | 5 | Link to the feature page being updated + `/product` + relevant use-case |
+| **Webinar / event page** | 2 | 3 | 5 | Link to the pillar the topic matches + 1 blog post on the same topic |
+
+**Enforcement:**
+- Optimizer warns when a draft is below `Min` or above `Max`. Min is a floor (add links); Max is a ceiling (remove or consolidate).
+- Link count excludes navigation, header, and footer — only counts in-content links.
+
+---
+
+## Anchor text distribution targets
+
+Over-optimization is a site-wide risk (see the "social plus AI" cannibalization: 42 URLs ranking). Keep anchor distribution under these caps **site-wide** and within reason per-article.
+
+| Anchor type | Share (site-wide) | Share (per article) | Examples |
+|---|---|---|---|
+| **Exact match** | ≤ 15% | ≤ 20% | "chat SDK" → `/chat/sdk` |
+| **Partial match** | 35–45% | 30–50% | "our chat SDK gives you", "modern chat SDK for apps" |
+| **Branded** | 15–20% | 10–25% | "social.plus analytics", "our chat infrastructure" |
+| **Natural/contextual** | 20–30% | 20–35% | "as covered in this customer story", "in the moderation dashboard" |
+| **Generic** | ≤ 5% | ≤ 10% (1 max in short posts) | "learn more", "read this", "see here" — only when surrounded by descriptive context |
+
+**Never mix exact-match identical anchors within one article pointing to different pages** (the core cannibalization trap).
+
+**Never repeat the same anchor-target pair more than twice in one article.** Use the per-cluster anchor variation pool (below) for additional links.
+
+---
+
+## Placement & avoidance rules
+
+### Where internal links belong inside an article
+
+Ranked by value and placement priority:
+
+1. **Body paragraphs introducing a concept** (peak SEO + user value). The first 1–2 uses of a concept should link. Later mentions don't re-link.
+2. **Lists where items have dedicated pages**. E.g., "key capabilities include [chat SDK], [social SDK], and [video SDK]" — each list item anchor points to its product page.
+3. **After a pain point or problem statement** — link to the solution page. This is the highest-conversion placement.
+4. **In the first 1–2 paragraphs** (high attention). One strategic link maximum.
+5. **Mid-article** — most contextual links land here.
+6. **Before a section break** — linking to a deeper dive of the preceding topic.
+
+### Where internal links do **not** belong
+
+- **AEO article FAQs, conclusions, and metrics tables** (already enforced in AEO section below).
+- **Blog post conclusions / CTAs**. The final CTA goes to `/pricing` or a demo form — not a nested internal link.
+- **Image captions** (rarely useful, often broken).
+- **Footnotes** (no SEO value, often missed by crawlers).
+- **Author bios** (should have branded home link only, nothing else).
+- **More than 2 links in one paragraph** (feels spammy, dilutes each).
+- **The same page linked more than twice in one article**, regardless of anchor variation.
+
+### Good vs bad placement — worked examples
+
+❌ **Bad (forced, generic, bottom-of-page):**
+
+> If you want to build community features into your app, [click here](https://www.social.plus/social) to learn more.
+
+✅ **Good (contextual, mid-body, descriptive):**
+
+> Teams that need user profiles, groups, and activity feeds without building from scratch typically reach for an [in-app community SDK](https://www.social.plus/social/sdk) that bundles the data layer, moderation hooks, and UI components.
+
+❌ **Bad (over-optimized, repeating exact match):**
+
+> Our [chat SDK](https://www.social.plus/chat/sdk) is the best [chat SDK](https://www.social.plus/chat/sdk) for fintech apps — learn more about our [chat SDK](https://www.social.plus/chat/sdk).
+
+✅ **Good (variation, descriptive, natural):**
+
+> Our [chat SDK](https://www.social.plus/chat/sdk) is built for fintech apps. It ships with [compliance-ready moderation](https://www.social.plus/moderation) and plugs into the [React Native UIKit](https://www.social.plus/chat/uikit) when you want UI out of the box.
+
+❌ **Bad (wrong intent routing — commercial anchor pointing to glossary):**
+
+> Pitching a customer: "When you integrate our [chat API](https://www.social.plus/glossary/chat-api) you get…"
+
+✅ **Good (commercial intent → commercial page):**
+
+> When you integrate our [chat API](https://www.social.plus/chat/sdk) you get…
+
+❌ **Bad (forbidden positioning term as anchor to product):**
+
+> Build a [social network](https://www.social.plus/social) for your community.
+
+✅ **Good (approved positioning):**
+
+> Build an [in-app community](https://www.social.plus/social) for your users.
+
+### Links to always avoid
+
+- "Click here", "read more", "this", "here" as standalone anchors.
+- Same anchor pointing to different pages within a single article.
+- Repeating the same link more than twice.
+- Linking to outdated content (check `metaTitle` for year references — flag pre-2024 posts).
+- Linking to Webflow pagination query strings (`?*_page=N`) or RSS feeds.
+- Linking to `/use-cases/*` (plural) — canonical is `/use-case/*` (singular). See Do-not-link list.
+
+---
+
 ## Cannibalization warnings
 
 Pairs or groups of pages competing for the same query. Follow the recommendation strictly.
@@ -220,9 +457,9 @@ Per `messaging/terminology.md`, do not call social.plus a "social network" or "f
 
 ---
 
-## Link-equity hubs (concentration of authority)
+## Link-equity hubs & authority flow
 
-When suggesting link **destinations** in draft mode, these are high-priority targets — linking *to* them reinforces site-wide authority. When suggesting link **sources** in audit mode, these pages are also where outbound links matter most.
+When suggesting link **destinations** in draft mode, these are high-priority targets. When suggesting link **sources** in audit mode, these pages are also where outbound links matter most.
 
 | Page | URL Rating | File |
 |---|---|---|
@@ -235,7 +472,23 @@ When suggesting link **destinations** in draft mode, these are high-priority tar
 | `https://www.social.plus/glossary/chat-api` | 4.4 | pages-glossary |
 | `https://www.social.plus/blog/what-is-community-based-marketing-cbm` | 4.4 | pages-blog |
 
-Notable absence: no in-scope product/feature page broke UR 4.0 at generation time. **This is a finding, not a bug** — product pages are commercial/short-tail and don't accumulate organic backlinks the way glossary/blog content does. Audit mode should propose internal linking patterns that direct authority *from* the high-UR glossary/blog pages *to* product pages.
+Notable absence: no in-scope product/feature page broke UR 4.0 at generation time. **This is a finding, not a bug** — product pages are commercial/short-tail and don't accumulate organic backlinks the way glossary/blog content does.
+
+### Authority-flow rules (external → internal redistribution)
+
+The glossary and blog collect backlinks; the product pages need the authority. Audit mode enforces:
+
+| High-UR source | Required downstream links |
+|---|---|
+| `https://www.social.plus/` (UR 11.0) | Prominent nav/body links to all 3 pillars + `/pricing` + 1–2 customer stories |
+| `https://www.social.plus/white-label/social-network` (UR 7.0) | Body links to `/social`, `/social/sdk`, `/social/features`, `/white-label/in-app-community`, `/moderation`, `/pricing` |
+| `https://www.social.plus/glossary/social-feed` (UR 4.6) | Commercial-alternative link to `/use-case/activity-feed` + link to `/social` |
+| `https://www.social.plus/glossary/community-app` (UR 4.5) | Link to `/social` + `/white-label/in-app-community` |
+| `https://www.social.plus/glossary/video-sdk` (UR 4.5) | Commercial-alternative link to `/video/sdk` + `/video` |
+| `https://www.social.plus/glossary/chat-api` (UR 4.4) | Commercial-alternative link to `/chat/sdk` + `/chat` |
+| `https://www.social.plus/blog/what-is-community-based-marketing-cbm` (UR 4.4) | Links to `/social`, 2–3 sibling blog posts, 1 customer story |
+
+**Audit rule:** If any of these source pages is missing its required downstream links, flag as a Priority 1 fix (biggest authority-flow gains per fix).
 
 ---
 
@@ -252,6 +505,14 @@ From Ahrefs `pages-by-internal-links` (ascending). Most "orphan" results were pa
   - `/use-case/groups`, `/use-case/user-profiles` — fewer inbound contextual links than other use cases
 
 **Note:** The contextual under-linking is a hypothesis from data patterns. Confirm with audit mode runs against the JSON data before acting.
+
+**Orphan priority tiers:**
+
+| Tier | Criteria | Action |
+|---|---|---|
+| **P1 — critical** | Page has organic traffic AND 0 inbound contextual links | Add ≥ 3 inbound links from related pillar/use-case/blog within week 1 |
+| **P2 — important** | Page has commercial intent but < 2 inbound contextual links | Add ≥ 2 inbound links within week 2 |
+| **P3 — optional** | Page has no traffic and < 2 inbound links | Evaluate for consolidation, noindex, or deletion |
 
 ---
 
@@ -353,6 +614,233 @@ Anchor variants pool (substitute industry name):
 
 ---
 
+## Reverse workflow — when a new page ships
+
+Triggered when `pages-*.json` reports a new entry after a Webflow publish, or when the user explicitly asks "what should link to this new page?"
+
+1. **Add canonical anchors.** Edit the canonical anchor map above to include the new anchor → target row.
+2. **Identify inbound-link candidates.** Run this prioritized list:
+   - Parent pillar (bidirectional link required).
+   - Sibling cluster pages (within same pillar).
+   - Related glossary entries (commercial-alt rule).
+   - Industry pages, if the new page has industry affinity.
+   - Top 3 blog posts whose headings reference the topic (grep the JSON).
+   - Top 1–2 AEO articles on the same topic (for definitional cross-references).
+3. **Draft inbound edits.** For each candidate, propose:
+   - Source page URL
+   - Insertion location (H2 section or paragraph anchor)
+   - Anchor text (using canonical map + variation pool)
+   - Why it fits
+4. **Apply forbidden-pattern + placement checks** on each proposed edit.
+5. **Schedule the implementation** in the next Webflow publish window.
+
+### Stale content handling
+
+When a blog post / page is confirmed outdated:
+
+| State | Action |
+|---|---|
+| Outdated but historically traffic-earning | Rewrite + republish with same URL; add updated date |
+| Outdated and zero traffic, topic covered elsewhere | 301 redirect to the best replacement; remove from canonical anchor map; audit inbound links and update anchors |
+| Outdated and topic no longer relevant | Noindex, remove from canonical anchor map; prune inbound links |
+
+---
+
+## Scoring & measurement
+
+### Structure Score /10
+
+Computed site-wide in audit mode. Target: **≥ 8 / 10**.
+
+| Criterion | Points |
+|---|---|
+| Orphan pages (0 = 3 pts; 1–3 = 2; 4–10 = 1; > 10 = 0) | 3 |
+| Max click depth from homepage (all ≤ 3 clicks = 2 pts; some at 4 = 1; > 4 = 0) | 2 |
+| Pillar → cluster coverage (all pillars link to 100% of their clusters = 2 pts; 80%+ = 1; < 80% = 0) | 2 |
+| Cluster → pillar bidirectional coverage (all clusters link back = 1 pt) | 1 |
+| Bridge-link coverage (each cross-cluster capability pillar linked from ≥ 5 cluster pages = 1 pt) | 1 |
+| Industry-lattice coverage (every industry page links to all 3 product pillars = 1 pt) | 1 |
+
+### Anchor Score /10
+
+Computed site-wide in audit mode. Target: **≥ 8 / 10**.
+
+| Criterion | Points |
+|---|---|
+| Exact-match share ≤ 15% site-wide (pass = 3 pts) | 3 |
+| Generic share ≤ 5% site-wide (pass = 2 pts) | 2 |
+| No same-anchor-to-different-targets within any article (pass = 2 pts) | 2 |
+| All anchors descriptive (no "click here" bare) (pass = 2 pts) | 2 |
+| Per-cluster anchor variation respected (no single anchor > 2 uses in one article) | 1 |
+
+### Success metrics per fix type
+
+Track these after each fix. Use as ROI signal for prioritization.
+
+| Fix | Typical impact | Time to measure |
+|---|---|---|
+| Resolve P1 orphan (add ≥ 3 inbound links) | +15–30% traffic to that page | 2–4 weeks |
+| Complete a pillar → cluster coverage gap | +10–25% traffic to new cluster pages | 4–8 weeks |
+| Rebalance over-optimized anchor (exact-match reduction to ≤ 15%) | +5–10% ranking improvement for target keyword | 4–12 weeks |
+| Consolidate a cannibalization cluster (e.g., "social plus AI" → `/analytics`) | +10–30% traffic consolidation to winning URL | 4–8 weeks |
+| Redirect a do-not-link orphan (e.g., `/use-cases/*` plural) | Recovers lost clicks (42/90d in the known case) | Immediate |
+| Bridge-link between pillars where intent overlaps | +5–15% traffic to the receiving pillar for cross-intent queries | 4–8 weeks |
+
+### Monitoring cadence
+
+| Cadence | Check | Source |
+|---|---|---|
+| **Weekly** | Broken internal links; new content linked within 48 h | Ahrefs site-audit or crawler |
+| **Bi-weekly** | Orphan candidates from `pages-by-internal-links` (ascending) | Ahrefs site-explorer |
+| **Monthly** | Anchor-text distribution drift vs targets; new cannibalization candidates | Ahrefs organic-keywords + GSC |
+| **Monthly** | Cluster rank tracking for pillar keywords | Ahrefs rank-tracker |
+| **Quarterly (90 days)** | Full refresh via the **Refresh procedure** at the bottom of this file | Multiple |
+| **Annual** | Re-evaluate the architecture model — is hub-and-spoke still the right fit? | Stefan + data |
+
+---
+
+## Audit mode — phased implementation plan template
+
+When audit mode runs, output this template. Phases are sequenced so each builds on the prior foundation.
+
+```markdown
+# Internal Linking Audit — social.plus
+
+**Audit date:** YYYY-MM-DD
+**Structure Score:** X / 10
+**Anchor Score:** X / 10
+**Estimated traffic impact of full plan:** +X% over 90 days
+
+## Current state
+
+| Metric | Current | Target | Gap |
+|---|---|---|---|
+| Structure Score | X | 8+ | X |
+| Anchor Score | X | 8+ | X |
+| Orphan pages (real) | X | 0 | X |
+| Max click depth | X | ≤ 3 | X |
+| Exact-match anchor share | X% | ≤ 15% | X |
+| Generic anchor share | X% | ≤ 5% | X |
+| Pillar → cluster coverage | X% | 100% | X |
+| Cannibalization violations | X | 0 | X |
+
+## Phase 1 — Critical fixes (Week 1)
+
+### 1a. Resolve P1 orphans
+- [ ] [URL] — add inbound from [3–5 specific source URLs with anchor text]
+- [ ] [URL] — ...
+
+### 1b. Fix cannibalization violations
+- [ ] In [article URL], anchor "chat API" currently points to [X] — rewrite to [correct target] per rule
+- [ ] ...
+
+### 1c. Fix do-not-link targets in existing content
+- [ ] Any occurrence of `/use-cases/temporary-live-1-1-chat` → replace with `/chat/sdk`
+
+## Phase 2 — Pillar → cluster coverage (Week 2–3)
+
+### 2a. Close pillar → cluster gaps
+- [ ] `/chat` currently links to [N / M] cluster pages — add missing: [list]
+- [ ] `/social` ...
+- [ ] `/video` ...
+
+### 2b. Close cluster → pillar gaps
+- [ ] [Cluster URL] missing backlink to [Pillar URL]
+- [ ] ...
+
+### 2c. Authority-flow redistribution
+- [ ] High-UR glossary page [URL] missing commercial-alt link to [product page]
+- [ ] ...
+
+## Phase 3 — Anchor optimization (Week 4+)
+
+### 3a. Rebalance over-optimized anchors
+- [ ] "chat SDK" exact-match currently X% — reduce to ≤ 15% by rewriting [N] instances to partial/natural variants
+- [ ] ...
+
+### 3b. Eliminate generic anchors
+- [ ] Replace "click here" / "learn more" bare anchors: [N] occurrences
+- [ ] ...
+
+## Phase 4 — Industry lattice & bridge links (Week 5+)
+
+- [ ] `/industry/edtech` under-linked — add inbound from [specific pages]
+- [ ] `/use-case/events` missing bridge to `/video` — add contextual link
+- [ ] ...
+
+## Expected outcomes
+
+| Phase | Effort | Traffic impact | Ranking impact |
+|---|---|---|---|
+| Phase 1 | ~8 h | +15–30% to fixed orphans | Within 2–4 wks |
+| Phase 2 | ~16 h | +10–25% to cluster pages | Within 4–8 wks |
+| Phase 3 | ~12 h | +5–10% ranking lift | Within 4–12 wks |
+| Phase 4 | ~8 h | +5–15% on bridged intents | Within 4–8 wks |
+
+## Tracking
+
+Re-score Structure and Anchor monthly after implementation. Target Structure ≥ 8 and Anchor ≥ 8 within 90 days.
+```
+
+---
+
+## Quality gates
+
+### Input validation (before optimizer runs)
+
+- [ ] If draft mode: draft content provided (URL or pasted text).
+- [ ] If audit mode: the 10 `pages-*.json` snapshots are current (check `_meta.generatedAt` — warn if > 30 days old).
+- [ ] If reverse mode: new page URL + its canonical anchor candidate provided.
+
+### Output validation (before optimizer returns)
+
+- [ ] Every proposed link cites its source rule (canonical map row / cannibalization warning / UR data / orphan tier).
+- [ ] Link budget for the article type is respected (within Min / Max).
+- [ ] Anchor distribution falls within per-article targets.
+- [ ] No forbidden patterns present.
+- [ ] No proposed target is on the do-not-link list.
+- [ ] All anchors are descriptive (no bare "click here").
+- [ ] No anchor repeated more than twice per article pointing to same target.
+- [ ] No same anchor pointing to two different targets within one article.
+
+### Evaluation questions — per-link quality gate
+
+Before proposing any link, the optimizer must confirm:
+
+1. **Would a reader genuinely click this?** If no, drop it.
+2. **Is this the best target page given all candidates in the data?** If a higher-UR or more-aligned alternative exists, switch.
+3. **Does the anchor match the target's primary keyword intent?** If not, pick a different anchor from the variation pool.
+4. **Have I already linked to this page in this article?** If yes (≥ 2×), stop.
+5. **Is the surrounding context definitional or commercial?** Route intent accordingly — don't cross-wire.
+6. **Does this link add to the target's topical authority?** If it's orthogonal, drop it.
+7. **Does placing this link violate any placement rule?** (In an FAQ, conclusion-of-AEO, caption, etc.)
+8. **Is this anchor + target combination already near the article's link budget cap?** If so, prioritize the highest-value link and drop lower-value.
+
+If any answer is "no" or "unclear", do not propose the link.
+
+---
+
+## Ownership & process
+
+| Action | Owner | When |
+|---|---|---|
+| Publish new marketing page in Webflow | Content team | Ongoing |
+| Regenerate `pages-*.json` snapshots | Webflow publish automation | On every publish |
+| Add new page to canonical anchor map | Stefan | Within 48 h of publish, or optimizer flags gap |
+| Run audit mode | Stefan (or scheduled agent) | Weekly for broken-link / orphan check; monthly for full audit |
+| Refresh this file (90-day full refresh) | Stefan | Every 90 days per Refresh procedure |
+| Resolve cannibalization warning during drafting | Content author + this file | At draft time — writer follows rule; if ambiguous, ask Stefan |
+| Approve new customer story references | Stefan per `messaging/terminology.md` | At draft time |
+| Escalate DR drift > ±5 | Optimizer → Stefan | On refresh |
+
+**Escalation triggers (optimizer → human):**
+- A draft violates a cannibalization rule but the writer insists the commercial framing is correct.
+- A new page's canonical anchor conflicts with an existing anchor (would create cannibalization).
+- `pages-*.json` itemCount jumps by > 10% between publishes (signal of CMS migration or bulk-import — needs review).
+- DR drops by > 5 points since last refresh.
+
+---
+
 ## Refresh procedure
 
 To regenerate this file, re-run these Ahrefs MCP queries (current values noted for diff comparison):
@@ -373,5 +861,8 @@ After running, review:
 3. **New orphans:** pages with `links_to_target` ≤ 2 that should not be (skip pagination/RSS artifacts).
 4. **DR drift:** if DR moves more than ±5, re-evaluate the linking strategy at a higher level (Stefan).
 5. **New pages in the JSON snapshots:** check `_meta.itemCount` for each `pages-*.json` — a jump in count means new pages need to be added to the canonical map and cannibalization analysis.
+6. **Re-score Structure and Anchor** against the rubric — compare to last refresh to spot regressions.
+7. **Review pillar → cluster map** for new pages that belong in it.
+8. **Update link-equity hubs** if any new URL broke UR 4.0.
 
 Update the `Generated:` and `Refresh by:` dates at the top.
