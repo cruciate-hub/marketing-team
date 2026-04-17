@@ -26,6 +26,21 @@ This skill produces SEO-grounded internal link recommendations for social.plus c
 
 Every recommendation is grounded in `link-strategy.md` (canonical anchor map, cannibalization warnings, hub pages, anchor variation rules), regenerated quarterly from Ahrefs and GSC data.
 
+## Architecture: two-phase shortlist + live fetch
+
+The `pages-*.json` files are intentionally a **lightweight heading index** — full H1-H6 plus metaTitle and metaDescription, no body. Body content lives on the live web. This keeps snapshots small and the auto-regen cheap.
+
+**Trade-off:** heading-only data isn't enough to confidently pick an insertion point or quote surrounding context. So the optimizer always runs in two phases:
+
+1. **Phase 1 — Shortlist (from JSON).** Scan the headings + metadata in the relevant `pages-*.json` files to identify candidate link targets. Cheap, fast, no network beyond the GitHub fetches.
+2. **Phase 2 — Verify + extract (live WebFetch).** For the top N shortlisted candidates only, fetch the live page. Use the fresh body to confirm the topic match, find the specific insertion sentence, and quote the surrounding context.
+
+**Live-fetch budget:**
+- Draft mode: at most **one WebFetch per shortlisted candidate**, capped at **8 candidates per draft** (so ≤8 live fetches per invocation). If the shortlist returns more than 8 strong candidates, take the top 8 by score.
+- Audit mode: live fetch is reserved for the **top 5-10 highest-impact gaps** in the implementation plan. The rest of the audit is JSON-only.
+
+**Why this works even when the JSON is sparse:** known limitations of the snapshot generator (e.g., the static-page extractor can't reach Webflow Components, so industry pages capture only the headings outside components) are compensated by the Phase 2 live fetch — the live page sees everything.
+
 ## Step 0: Fetch the main brain
 
 Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
@@ -95,16 +110,32 @@ Scan the draft for any phrase that matches a cannibalization-warning anchor in `
 - Note the canonical target per the warning's rule.
 - If the draft *itself* targets a cannibalized term as its primary keyword, flag this **before** proposing links — the article may compete with existing pages and the user should know.
 
-**3. Scan the draft for natural link insertion points.**
+**3a. Phase 1 — Shortlist candidate target pages from JSON.**
 
-For each page in the fetched JSON files:
-- Look for mentions of the page's topic in the draft (heading hierarchy, key terms from the page's `metaTitle`/`metaDescription`/`content`).
-- Score each candidate insertion point on:
-  - **Contextual relevance** (does the surrounding sentence's meaning match the target page's topic?)
-  - **Canonical-anchor compliance** (does the suggested anchor match the canonical map in `link-strategy.md`?)
-  - **Link-equity benefit** (is the target a hub page or under-linked priority page?)
-  - **Anchor variety** (have we already used this anchor in the draft?)
-  - **Intent fit** (definitional anchor → glossary; commercial anchor → product/use-case page)
+For each page in the fetched JSON files, score topic relevance against the draft:
+- Match draft headings, key terms, and target keyword against each page's `metaTitle`, `metaDescription`, and heading hierarchy in `content`.
+- Apply the canonical anchor map: if a draft sentence is reaching for an anchor that has a canonical target in `link-strategy.md`, that target is a strong candidate.
+- Filter by intent fit (definitional anchor → glossary; commercial anchor → product/use-case page).
+
+Rank candidates and **take the top 8 maximum** (the live-fetch budget). Quality over quantity — if only 3 candidates are clearly relevant, only shortlist 3.
+
+**3b. Phase 2 — Live-fetch verification and insertion-point extraction.**
+
+For each shortlisted candidate, WebFetch the live page (URL from the JSON's `url` field — already a full `https://www.social.plus/...`). Then for each page, ask the fetched content:
+- Does the topic match still hold? (The live page may have changed since the JSON snapshot.)
+- Where in the *draft* would a link to this page make the most sense? Identify the specific sentence or paragraph.
+- What surrounding context from the live page confirms it's the right destination?
+
+If a candidate doesn't pan out on live verification, drop it. If you discover a stronger target during live exploration that wasn't in the original shortlist, you may add it (subject to the 8-fetch budget).
+
+**3c. Score and rank final suggestions.**
+
+For each surviving candidate:
+- **Contextual relevance** (does the surrounding sentence's meaning match the target page's topic?)
+- **Canonical-anchor compliance** (does the suggested anchor match the canonical map in `link-strategy.md`?)
+- **Link-equity benefit** (is the target a hub page or under-linked priority page per `link-strategy.md`?)
+- **Anchor variety** (have we already used this anchor in the draft?)
+- **Intent fit** (definitional anchor → glossary; commercial anchor → product/use-case page)
 
 **4. Apply count rules by content type.**
 
@@ -258,7 +289,11 @@ For each cluster (Chat, Social, Video, Industry, Cross), check:
 
 **5. Contextual link gaps.**
 
-Find places where one page mentions a concept that has its own dedicated page but doesn't link to it. This is the most actionable kind of internal linking work. Use the canonical anchor map to identify high-value gaps.
+Find places where one page mentions a concept that has its own dedicated page but doesn't link to it. This is the most actionable kind of internal linking work.
+
+Use the two-phase pattern here too:
+- **Phase 1 (JSON):** scan headings + meta to identify candidate gaps (page A's heading mentions a concept that page B owns canonically).
+- **Phase 2 (live fetch):** for the top 5-10 most-likely gaps, WebFetch both the source page and the target page. Confirm the gap is real (the source's body doesn't already link to the target — JSON only sees headings, so the body might already have the link). Quote the specific sentence where the link should go.
 
 ```markdown
 ## Contextual link gaps
@@ -266,7 +301,8 @@ Find places where one page mentions a concept that has its own dedicated page bu
 [For each:]
 - **[source URL]** ([file]) — mentions "[concept]" in [section] but doesn't link to [target URL] (its canonical target).
   Suggested anchor: "[anchor]"
-  Suggested insertion point: [quoted sentence]
+  Suggested insertion point: [quoted sentence from live page]
+  Verified live: [date]
 ```
 
 **6. Cluster-specific reviews.**
@@ -333,7 +369,7 @@ After the 7-step audit, always add a "While looking at this..." section with 2-3
 
 ## General principles (both modes)
 
-**Quote, don't paraphrase.** When citing page content, quote it exactly from the JSON.
+**Quote, don't paraphrase.** When citing page content, quote it exactly. For headings or metadata, the JSON is the source. For body sentences (e.g., insertion-point context), you must have live-fetched the page first — never quote body content from memory or speculation.
 
 **Be specific about locations.** Don't say "link from the chat page". Say "in `https://www.social.plus/chat`, under the `## Real-time messaging` section, after the existing paragraph about typing indicators, anchor 'in-app chat' to..."
 
@@ -370,9 +406,8 @@ If any check fails, fix the output before delivering.
 
 - **`docs.social.plus`** — developer documentation lives on a separate subdomain not yet captured in any `pages-*.json` file. When draft content references docs, surface this as "no in-scope link target" rather than guessing a URL.
 - **The forum.** Same reason as docs.
-- **`/events/*` pages.** Per Ahrefs orphan analysis, events pages exist but aren't yet in the data files.
 - **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter` for outbound work.
-- **Live Ahrefs runtime calls.** This skill stays static-data-driven (`link-strategy.md` is regenerated quarterly).
+- **Live Ahrefs runtime calls.** This skill stays static-data-driven for cannibalization/strategy decisions (`link-strategy.md` is regenerated quarterly). Live WebFetch is used only for verifying link insertion points on social.plus pages, not for SEO data.
 - **Auto-publishing changes to Webflow.** This skill recommends; the user implements.
 
 ## Adoption credit

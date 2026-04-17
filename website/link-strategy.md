@@ -32,15 +32,25 @@ The optimizer reads from these files (all in `website/` of this repo). Together 
 | `pages-answers.json` | 123 | AEO related-answer links (`/answers/*`) |
 | `pages-product-updates.json` | 58 | "What's new" reference links |
 | `pages-release-notes.json` | 31 | Specific release reference links |
-| `pages-webinars.json` | 25 | Webinar reference links |
+| `pages-webinars.json` | 25 | Webinar reference links — URLs serve at `/events/{slug}` (the Webflow slug-base is "events", not "webinars") |
 
 All entries share the same shape: `{url, metaTitle, metaDescription, content}`. URLs are full `https://www.social.plus/...`.
+
+**The JSON files are a heading-level index, not full content.** Each entry contains H1-H6 plus metaTitle/metaDescription, no body. Body content lives on the live web. The optimizer compensates with a two-phase workflow: shortlist candidate target pages from the JSON, then live-fetch the top candidates to verify and find precise insertion points. See the optimizer skill's "Architecture: two-phase shortlist + live fetch" section for details.
+
+**Known JSON capture gaps:**
+- **Static marketing/industry pages:** the snapshot generator uses Webflow's Pages DOM API, which doesn't traverse Components/Symbols. Headings inside reusable blocks (most of the industry pages and parts of marketing) won't appear in the JSON. The live-fetch phase backfills this completely.
+- **Other CMS files** (blog, glossary, answers, etc.) capture all H1-H6 from the rich-text field but don't include the page-template chrome (e.g., the "Subscribe to our newsletter" sections). Live fetch backfills these too.
 
 **Which files to fetch by context** (the optimizer applies these defaults):
 - **Blog draft (called by `blog-seo-content`):** marketing + use-cases + industry + glossary + blog + customer-stories
 - **AEO draft (called by `aeo-content`):** marketing + use-cases + glossary + answers (related-answers)
 - **Standalone audit:** all 10 files
 - **Standalone draft (user-pasted content):** marketing + use-cases + industry + glossary by default; ask if more is needed
+
+**Live-fetch budget** (per optimizer invocation):
+- Draft mode: max 8 live WebFetch calls (one per shortlisted candidate)
+- Audit mode: live fetch reserved for the top 5-10 highest-impact gaps in the implementation plan
 
 ---
 
