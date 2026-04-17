@@ -51,8 +51,7 @@ When new skills are added to the plugin, click the **three dots** next to the ma
 | [`design-system/`](./design-system) | Full visual design system — colors, typography, spacing, buttons, shadows, layout, accessibility, and more. [View brand guidelines live](https://cruciate-hub.github.io/marketing-team/design-system/brand-guidelines.html) |
 | [`assets/`](./assets) | Official logo SVGs |
 | [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
-| [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via Cloudflare Worker) |
-| [`worker/`](./worker) | Cloudflare Worker source code — the thing that writes `website/pages-*.json` and runs product-update gap analysis |
+| [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
 | [`skills/`](./skills) | The plugin source — contains the 9 skill definitions that fetch from the folders above |
 
 ## How updates work
