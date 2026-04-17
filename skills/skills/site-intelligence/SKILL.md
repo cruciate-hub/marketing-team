@@ -28,13 +28,14 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 
 ## Step 1: Load the relevant site content
 
-The site is split across 9 auto-generated JSON files in `website/`. All share the same shape: `{url, metaTitle, metaDescription, content}` per item, with `content` preserving heading hierarchy as markdown markers (`#`, `##`, `###`).
+The site is split across 10 auto-generated JSON files in `website/`. All share the same shape: `{url, metaTitle, metaDescription, content}` per item, with `content` preserving heading hierarchy as markdown markers (`#`, `##`, `###`).
 
-Pick the files relevant to the user's question — don't load all 9 unless the query genuinely spans the whole site.
+Pick the files relevant to the user's question — don't load all 10 unless the query genuinely spans the whole site.
 
 | File | Covers | Items (approx) |
 |---|---|---|
-| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, industry, feature/SDK/UIKit, white-label, sales/partner pages | ~37 |
+| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, feature/SDK/UIKit, white-label, vs-stream | ~22 |
+| `website/pages-industry.json` | Static `/industry/*` pages | ~10 |
 | `website/pages-use-cases.json` | `/use-case/*` | ~11 |
 | `website/pages-blog.json` | `/blog/*` | ~250 |
 | `website/pages-glossary.json` | `/glossary/*` | ~75 |
@@ -54,7 +55,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing
 - **"Does our pricing page mention X?"** → `pages-marketing.json` only.
 - **"Have we ever written about X?"** → `pages-blog.json` + `pages-answers.json` + `pages-glossary.json`.
 - **"Are our customer stories consistent?"** → `pages-customer-stories.json` only.
-- **"Audit the site for term drift"** → all 9 (but warn the user this is expensive on context window).
+- **"Audit the site for term drift"** → all 10 (but warn the user this is expensive on context window).
 - **"What changes shipped last month?"** → `pages-release-notes.json` + `pages-product-updates.json`.
 - **When in doubt** — start with marketing + use cases; expand only if the answer requires it.
 
@@ -62,7 +63,7 @@ All files are regenerated automatically by a Cloudflare Worker on every Webflow 
 
 ### Scope notice
 
-Every response that discusses "the website" should be explicit about which file(s) you loaded. Don't say "across the website" if you only loaded marketing — say "across the 27 marketing pages" or "across marketing + use cases". This skill does **not** cover docs.social.plus, legal pages, the forum, or any page that isn't a published Webflow page in one of the 9 inventories above.
+Every response that discusses "the website" should be explicit about which file(s) you loaded. Don't say "across the website" if you only loaded marketing — say "across the 22 marketing pages" or "across marketing + industry + use cases". This skill does **not** cover docs.social.plus, legal pages, the forum, or any page that isn't a published Webflow page in one of the 10 inventories above.
 
 ## Step 2: Load brand guidelines (when needed)
 
@@ -308,7 +309,7 @@ Keep it to 2-3 observations. Make each one specific, quotable, and actionable. T
 ### Use case pages
 - `/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/livestream`, `/use-case/polls`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
 
-### Industry pages
+### Industry pages (in `pages-industry.json`)
 - `/industry/retail`, `/industry/fitness`, `/industry/travel`, `/industry/sports`, `/industry/health-and-wellness`, `/industry/fintech`, `/industry/media-and-news`, `/industry/edtech`, `/industry/gaming`, `/industry/betting`
 
 ### Other

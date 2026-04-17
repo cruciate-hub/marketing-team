@@ -41,6 +41,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 5. If the article needs awareness of what the website already says (to avoid contradicting it, to link to relevant marketing pages, or to cross-link to existing blog posts), fetch any of these as relevant:
 ```
 https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
+https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-industry.json
 https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-blog.json
 https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-glossary.json
 ```

@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "generatedAt": "2026-04-16T17:35:09.509Z",
+    "itemCount": 10,
+    "method": "webflow-data-api"
+  },
+  "pages": [
+    {
+      "url": "https://www.social.plus/industry/retail",
+      "metaTitle": "Retail - social.plus for the Retail industry",
+      "metaDescription": "Transform browsing into shared discovery with shoppable content, real customer stories, and in-app community.",
+      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/fitness",
+      "metaTitle": "Fitness - social.plus for the Fitness industry",
+      "metaDescription": "Boost motivation, retention, and lifetime value through in-app social features that inspire progress and connection.",
+      "content": "## Key in-app use cases for fitness & wellness\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/travel",
+      "metaTitle": "Travel - social.plus for the Travel industry",
+      "metaDescription": "Transform every trip, check-in, and review into shared experiences that inspire others – all inside your app.",
+      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/sports",
+      "metaTitle": "Sport - social.plus for the Sport industry",
+      "metaDescription": "Bring fans, teams, and players together through real-time feeds, chat, and fan-driven content – all inside your app.",
+      "content": "## Key in-app use cases for sports\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
+    },
+    {
+      "url": "https://www.social.plus/industry/health-and-wellness",
+      "metaTitle": "Health and Wellness - social.plus for the Health and Wellness industry",
+      "metaDescription": "Help people stay engaged, informed, and motivated through trusted in-app conversations and shared progress.",
+      "content": "## Use cases that build trust, consistency, and progress\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/fintech",
+      "metaTitle": "Fintech - social.plus for the Fintech industry",
+      "metaDescription": "Help users learn, engage, and make confident decisions through in-app discussion, education, and shared insights.",
+      "content": "## Use cases that build confidence and long-term engagement\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/media-and-news",
+      "metaTitle": "Media and News - social.plus for the Media and News industry",
+      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
+      "content": "## Use cases that turn readers into participants\n## Everything you need to make your media app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/edtech",
+      "metaTitle": "Edtech - social.plus for the Edtech industry",
+      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
+      "content": "## Use cases that improve completion and outcomes\n## Everything you need to make your learning app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/gaming",
+      "metaTitle": "Gaming - social.plus for the Gaming industry",
+      "metaDescription": "Keep players engaged between sessions with social features that turn play into participation.",
+      "content": "## Use cases that keep players coming back\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    },
+    {
+      "url": "https://www.social.plus/industry/betting",
+      "metaTitle": "Betting - social.plus for the Betting industry",
+      "metaDescription": "Bring bettors together with real-time discussion, shared insights, and social experiences — all inside your app.",
+      "content": "## Use cases that keep bettors engaged between bets\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
+    }
+  ]
+}

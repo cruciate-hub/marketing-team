@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generatedAt": "2026-04-16T17:35:09.509Z",
-    "itemCount": 37,
+    "itemCount": 22,
     "method": "webflow-data-api"
   },
   "pages": [
@@ -114,100 +114,10 @@
       "content": "# Launch faster with social.plus Video SDK\nWith our Video SDK, you have everything you need to build interactive and immersive video features, such as live streaming, stories, and live commerce, without the hassle of deploying and maintaining any server infrastructure.\n## Get started with our Video SDK\nBuild engaging video features in your app with our SDK for iOS, Android, JavaScript, TypeScript, Flutter and React Native."
     },
     {
-      "url": "https://www.social.plus/industry/retail",
-      "metaTitle": "Retail - social.plus for the Retail industry",
-      "metaDescription": "Transform browsing into shared discovery with shoppable content, real customer stories, and in-app community.",
-      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
-    },
-    {
-      "url": "https://www.social.plus/industry/fitness",
-      "metaTitle": "Fitness - social.plus for the Fitness industry",
-      "metaDescription": "Boost motivation, retention, and lifetime value through in-app social features that inspire progress and connection.",
-      "content": "## Key in-app use cases for fitness & wellness\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
-    },
-    {
-      "url": "https://www.social.plus/industry/travel",
-      "metaTitle": "Travel - social.plus for the Travel industry",
-      "metaDescription": "Transform every trip, check-in, and review into shared experiences that inspire others – all inside your app.",
-      "content": "## Use cases that turn browsing into buying\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
-    },
-    {
-      "url": "https://www.social.plus/industry/sports",
-      "metaTitle": "Sport - social.plus for the Sport industry",
-      "metaDescription": "Bring fans, teams, and players together through real-time feeds, chat, and fan-driven content – all inside your app.",
-      "content": "## Key in-app use cases for sports\n## Build quickly with modern, developer-friendly SDKs\n## Trusted by leading retail brands"
-    },
-    {
-      "url": "https://www.social.plus/industry/health-and-wellness",
-      "metaTitle": "Health and Wellness - social.plus for the Health and Wellness industry",
-      "metaDescription": "Help people stay engaged, informed, and motivated through trusted in-app conversations and shared progress.",
-      "content": "## Use cases that build trust, consistency, and progress\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/industry/fintech",
-      "metaTitle": "Fintech - social.plus for the Fintech industry",
-      "metaDescription": "Help users learn, engage, and make confident decisions through in-app discussion, education, and shared insights.",
-      "content": "## Use cases that build confidence and long-term engagement\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/industry/media-and-news",
-      "metaTitle": "Media and News - social.plus for the Media and News industry",
-      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
-      "content": "## Use cases that turn readers into participants\n## Everything you need to make your media app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/industry/edtech",
-      "metaTitle": "Edtech - social.plus for the Edtech industry",
-      "metaDescription": "Transform viewers and readers into contributors through in-app discussion, storytelling, and real-time interaction.",
-      "content": "## Use cases that improve completion and outcomes\n## Everything you need to make your learning app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/industry/gaming",
-      "metaTitle": "Gaming - social.plus for the Gaming industry",
-      "metaDescription": "Keep players engaged between sessions with social features that turn play into participation.",
-      "content": "## Use cases that keep players coming back\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/industry/betting",
-      "metaTitle": "Betting - social.plus for the Betting industry",
-      "metaDescription": "Bring bettors together with real-time discussion, shared insights, and social experiences — all inside your app.",
-      "content": "## Use cases that keep bettors engaged between bets\n## Everything you need to make your app social-powered\n## Leading brands grow with social.plus"
-    },
-    {
-      "url": "https://www.social.plus/app-audit",
-      "metaTitle": "🤖 App Audit",
-      "metaDescription": "",
-      "content": "# App Audit\nWhich category best describes your app?\nSelect option\nSelect link\nWhat is your app’s primary goal right now?\nEngagement\nIncrease daily and weekly active users, boost interaction, and encourage UGC\nGrowth\nExpand membership, improve retention, and broaden reach\nRetention\nMaintain loyalty, building habits, reducing churn\nMonetization\nGenerate revenue and provide value-added services\nAdoption\nDriving first-time sign-ups and onboarding completion\nKnowledge Sharing\nHelping users exchange information and learn together\nCollaboration\nFoster collaboration and encourage networking\nFeedback\nGather insights and improve the community\nSupport\nProvide peer support and enhance customer support\nWhat is your current challenge?\nExample: We have sign-ups but low week-2 retention\nUpload screenshots of your app\nPlease upload 2-3 screenshots of your app. Suggested: onboarding screen, main/home screen, profile/content screen.\nWhat is your email?\nThank you!\nYou’ll receive your results by email within 5 minutes after submitting the form.\nOops! Something went wrong while submitting the form."
-    },
-    {
-      "url": "https://www.social.plus/developer-kits",
-      "metaTitle": "Developer Kits",
-      "metaDescription": "",
-      "content": "# Developer Kits\nExplore social.plus UI Kit and Template Apps\n## UI Kit\nOur UI Kit include user interfaces to enable fast integration of standard social.plus features into new or existing applications.\n### Social Kit\nReady-to-use kit for social.plus that includes everything you need to add social experiences to your app. The Social Kit includes pages to display user's personal feed, explore, join and view group feed as well as other user's feed.\niOS\nAndroid\nReactJS\nReact Native\n### Chat Kit\nReady-to-use kit for social.plus chat features that includes pages and components you'll need to add instant messaging to your app. The Chat Kit includes pages to display user's active channel and chat conversation page.\niOS\nAndroid\n## Template Apps\nUse our ready made template applications to kickstart your own social.plus Project.\n### Sample App\nThe sample app is an application that includes all social.plus functions into one application and can be used as an example application for developers to learn how to develop each functionality.\niOS\nAndroid\nReact Native\n### Simple Chat App\nA simple chat application on web that is designed for both desktop and mobile experiences. The chat app displays a list of active chats of a user on the left inbox panel and the chat conversation on the main panel with the ability to send and receive chat messages.\nReactJS\nVueJS\nAngular\n### Video Chat App\nComponentized chat conversation widget that is incorporated alongside a video component. This template app is ideal for users who're looking into adding chat conversation component into existing media to enable conversational engagement.\niOS\nAndroid\n### Social Feed App\nComponentized chat conversation widget that is incorporated alongside a video component. This template app is ideal for users who're looking into adding chat conversation component into existing media to enable conversational engagement.\nVueJS\nIonic"
-    },
-    {
       "url": "https://www.social.plus/vs-stream",
       "metaTitle": "social.plus vs Stream | Which platform is right for your product?",
       "metaDescription": "Compare social.plus and Stream to find the best fit for your app’s social engagement needs.",
       "content": "# Which platform is right for your product?\nCompare social.plus and Stream to find the best fit for your app’s social engagement needs. See how they stack up in features, customization, AI capabilities, and scalability.\n## How does social.plus compare with Stream?\nsocial.plus and Stream are both powerful API-driven solutions for integrating social and chat features into applications. While both offer robust SDKs and developer flexibility, social.plus provides a full social suite with UIKit for customization, advanced moderation tools, AI-driven insights, and in-depth analytics. Stream focuses on high-performance chat and activity feeds, with strong moderation and developer control.\nSDKs\nUIKits\nAPIs\nSolutions overview\n## SDKs\nFeature-rich toolkit for building apps across platforms and developer languages, enabling efficient feature integration\nSocial+\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\n## UIKits\nUser interfaces and components that can be fully customized to meet your app's unique requirements.\nSocial+\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\nDesign files\n## APIs\nUser interfaces and components that can be fully customized to meet your app's unique requirements.\nSocial+\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\n## Solutions overview\nCompare platform capabilities, from integration approach to built-in growth tools, to understand which solution best suits your needs.\nsocial.plus\nStream\nIntegration approach\nAPI/SDK-driven with UIKit 4.0, offering both low-code customization and open-source flexibility.\nAPI/SDK-driven with high developer control. Various sample applications available for key use cases.\nUI customization\nFully customizable, supporting both quick out-of-the-box configurations and deep open-source modifications.\nDevelopers must build their own UI components, though detailed sample applications are provided.\nAds & sponsored content\nNative advertising solutions with sponsored content features.\nDoes not include built-in ad or sponsored content features.\nAnalytics\nComplete social and chat analytics AI-powered insights to analyze community trends, sentiments, and engagement.\nBasic analytics to track user interactions and behaviors.\nModeration tools\nAI-driven moderation with customizable rules and filtering.\nAdvanced moderation with auto-moderation, flagging, and profanity filters.\n### Who is social.plus best suited for?\nsocial.plus is ideal for companies seeking a full social engagement suite beyond chat and feeds. With AI-powered insights, built-in monetization, and flexible moderation, it’s designed for product teams and developers who need scalability and deep customization. social.plus UIKits offers both quick configurations and open-source flexibility, making social.plus a strong choice for driving engagement and revenue.\n### Who is Stream best suited for?\nStream is best for developers needing high-performance chat and feeds with strong moderation. It offers detailed documentation and sample apps, allowing for flexible integration. While great for real-time communication, its UI components require custom development, making it well-suited for teams that prefer full control over their front-end implementation."
-    },
-    {
-      "url": "https://www.social.plus/partner-program",
-      "metaTitle": "Partner Program | social.plus",
-      "metaDescription": "",
-      "content": "# Partner Program\nUnlock new revenue streams and enhance your offerings with our cutting-edge social features. Join us to drive engagement, build communities, and grow together!\n## Why partnering with social.plus\n### Expand your offering\nEnhance your portfolio with social.plus cutting-edge social features, providing more value to your clients.\n### Grow your revenue\nEarn commissions on revenue generated by your referrals or integrated solutions, with attractive incentive structures.\n### Become a market leader\nPartner with a leading technology company known for innovation and excellence in social feature integration.\n## What you’ll get\n### Support and resources\nReceive dedicated support from social.plus Partner Team, including help with sales strategies, marketing campaigns, and technical inquiries.\n### Co-marketing opportunities\nElevate your brand through joint marketing initiatives such as webinars, case studies, and whitepapers.\n## Explore our partnership opportunities\n### Referral partner program\nEarn commissions by referring social.plus social features to your network. Get support and incentives to help you introduce our solutions to potential customers and grow your revenue.\n### Technology partner program\nWork with social.plus to integrate our social functionalities into your product. Enjoy easy integration, priority technical support, and revenue-sharing opportunities to enhance your product and reach more users.\n### Other partner opportunities\nHave a different type of collaboration in mind? We’re open to exploring new partnership ideas. Talk to us – we’d love to hear from you and explore how we can work together!"
-    },
-    {
-      "url": "https://www.social.plus/professional-services",
-      "metaTitle": "Professional Services | social.plus",
-      "metaDescription": "",
-      "content": "# Professional Services\niOS\nAndroid\nReact\nReact Native\nFlutter\nSystem Integration\nSIT & UAT\nGo-Live\nView all details\n+ Annual License Fee\nFeatures\nIntegration and basic customization\nImplementation process\nAdditional services\nUI customization\nAdd-on\nUse case customization\nAdd-on\nThird-party integrations\nAdd-on\nSystem Integration\nSIT & UAT\nGo-Live\nView all details\n+ Annual License Fee\nFeatures\nIntegration and basic customization\nImplementation process\nAdditional services\nUI customization\nAdd-on\nUse case customization\nAdd-on\nThird-party integrations\nAdd-on\nSystem Integration\nSIT & UAT\nGo-Live\nView all details\n+ Annual License Fee\nFeatures\nIntegration and basic customization\nImplementation process\nAdditional services\nUI customization\nAdd-on\nUse case customization\nAdd-on\nThird-party integrations\nAdd-on\nSystem Integration\nSIT & UAT\nGo-Live\nView all details\n+ Annual License Fee\nFeatures\nIntegration and basic customization\nImplementation process\nAdditional services\nUI customization\nAdd-on\nUse case customization\nAdd-on\nThird-party integrations\nAdd-on\nSystem Integration\nSIT & UAT\nGo-Live\nView all details\n+ Annual License Fee\nFeatures\nIntegration and basic customization\nImplementation process\nAdditional services\nUI customization\nAdd-on\nUse case customization\nAdd-on\nThird-party integrations\nAdd-on"
-    },
-    {
-      "url": "https://www.social.plus/collaborate",
-      "metaTitle": "Social+ Events | Collaborate",
-      "metaDescription": "",
-      "content": "# Interested in collaborating?\nAre you interested in partnering with us on an event? We’re always on the lookout for cool co-hosts, venues, and speakers. Let us know if you want to host an event at your space, sponsor drinks, or recommend a speaker.\nYour full name\nYour email address\nHow would you like to collaborate?\nPartner with us\nBecome speaker\nRecommend speaker\nPlease tell us more\nThank You! We have received your submission.\nOops! Something went wrong while submitting the form."
     },
     {
       "url": "https://www.social.plus/white-label/chat-software",

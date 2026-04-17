@@ -72,7 +72,7 @@ Comparison table pattern:
 Or a bullet list: 4-6 benefits, each starting with a concrete outcome.
 
 **Rules:**
-- Use real ranges from published social.plus data (check website/pages-marketing.json and customer stories)
+- Use real ranges from published social.plus data (check website/pages-marketing.json, website/pages-industry.json, and customer stories)
 - Frame benefits from the app owner's perspective
 - Include the line: "Apps that add in-app [community/social/feed] features see higher retention compared to apps without them." (adapted to topic)
 

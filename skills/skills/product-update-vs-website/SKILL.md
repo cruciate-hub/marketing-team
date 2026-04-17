@@ -13,10 +13,11 @@ Compares social.plus product updates (release notes, monthly updates) against th
 ```
 https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 ```
-2. **Load current site content** from TWO JSON files in this repo (fetch both — they cover different page types):
-   - `website/pages-marketing.json` — static marketing pages (homepage, pricing, product, industry, feature/SDK/UIKit pages)
+2. **Load current site content** from THREE JSON files in this repo (fetch all three — they cover different page types):
+   - `website/pages-marketing.json` — static marketing pages (homepage, pricing, product, feature/SDK/UIKit pages, white-label, vs-stream)
+   - `website/pages-industry.json` — all `/industry/*` pages (retail, fitness, travel, sports, health-and-wellness, fintech, media-and-news, edtech, gaming, betting)
    - `website/pages-use-cases.json` — all `/use-case/*` pages (activity feed, group chat, livestream, polls, etc.)
-   Combine the `pages` arrays from both files before running gap detection — they are one logical dataset split into two files for maintenance reasons.
+   Combine the `pages` arrays from all three files before running gap detection — they are one logical dataset split into three files for maintenance reasons.
 3. **Take the product update** — a release note, monthly product update, or changelog entry provided by the user
 4. **Cross-reference** every new feature/capability mentioned in the update against every page in the JSON
 5. **Output a gap report** showing which pages should mention this feature but currently don't
@@ -24,16 +25,17 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 
 ## Site content reference
 
-The site content JSONs are maintained automatically by a Cloudflare Worker that regenerates them on every Webflow site publish (`pages-marketing.json`) and every use-case CMS publish (`pages-use-cases.json`).
+The site content JSONs are maintained automatically by a Cloudflare Worker. Marketing and industry are regenerated on every Webflow site publish (both are static-page inventories); use cases are regenerated on every Use Cases CMS publish.
 
-**Files to fetch (both):**
+**Files to fetch (all three):**
 - `website/pages-marketing.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
+- `website/pages-industry.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-industry.json
 - `website/pages-use-cases.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-use-cases.json
 
-Both files share the same JSON structure:
+All three files share the same JSON structure:
 ```json
 {
-  "_meta": { "generatedAt": "...", "itemCount": 27 },
+  "_meta": { "generatedAt": "...", "itemCount": 22 },
   "pages": [
     {
       "url": "https://www.social.plus/social/features",
@@ -69,7 +71,7 @@ URLs are fully qualified (`https://www.social.plus/...`) — use them as-is in r
 - `/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/livestream`, `/use-case/polls`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
 - New use cases are auto-included when published — the JSON reflects whatever currently exists in the Webflow Use Cases CMS collection.
 
-### Industry pages
+### Industry pages (loaded from `pages-industry.json`)
 - `/industry/retail`, `/industry/fitness`, `/industry/travel`, `/industry/sports`, `/industry/health-and-wellness`, `/industry/fintech`, `/industry/media-and-news`, `/industry/edtech`, `/industry/gaming`, `/industry/betting`
 
 ### Other
@@ -179,7 +181,7 @@ Files loaded:
 
 ## Instructions for Claude
 
-1. Always load BOTH `pages-marketing.json` and `pages-use-cases.json` first. Merge their `pages` arrays into one combined dataset before gap detection. If running in an environment with file access (Cowork, Claude Desktop), read from the local repo. Otherwise, fetch from `github.com/.../blob/...` URLs. **Never use `raw.githubusercontent.com`** — it is blocked by network egress and will fail.
+1. Always load `pages-marketing.json`, `pages-industry.json`, AND `pages-use-cases.json` first. Merge their `pages` arrays into one combined dataset before gap detection. If running in an environment with file access (Cowork, Claude Desktop), read from the local repo. Otherwise, fetch from `github.com/.../blob/...` URLs. **Never use `raw.githubusercontent.com`** — it is blocked by network egress and will fail.
 2. **Load the brand messaging guidelines** by fetching the router file first, then the files it specifies:
    ```
    https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
