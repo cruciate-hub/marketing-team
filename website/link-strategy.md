@@ -3,7 +3,7 @@
 This file is the single source of truth for **canonical anchor → page** decisions, **cannibalization warnings**, and **anchor variation rules** across the social.plus content ecosystem. The `internal-linking-optimizer` skill consumes this file at runtime.
 
 **Generated:** 2026-04-17
-**Refresh by:** 2026-07-17 (90 days)
+**Refresh by:** 2026-07-16 (90 days)
 **Data sources:**
 - Ahrefs site-explorer (organic-keywords, top-pages, pages-by-internal-links, domain-rating) for `social.plus` (subdomains, both protocols)
 - Ahrefs GSC integration (gsc-keywords, gsc-pages) for project `7031381` — last 90 days of real Google Search Console data
@@ -201,6 +201,16 @@ The data layer now has BOTH a glossary entry and a commercial page for these ter
 ### ⚠️ "engagement rate" — weak SERP, not a linking issue
 **Page:** `https://www.social.plus/glossary/engagement-rate` (12,393 impressions, 0.19% CTR over 90d per GSC)
 **Note:** Page exists and ranks but underperforms in SERP. **No linking action required.** Flag for the content team as a separate page-health issue (title/meta refresh).
+
+### 🚫 Do-not-link list (orphan URLs serving wrong content)
+
+These URLs return 200 but serve content that doesn't match the URL slug. Do not propose them as link targets in any draft. The user should clean them up in Webflow (delete or 301-redirect).
+
+| Orphan URL | What it actually serves | Redirect target (recommended) | GSC clicks/90d |
+|---|---|---|---|
+| `https://www.social.plus/use-cases/temporary-live-1-1-chat` (note plural `/use-cases/`) | The Chat SDK landing page (H1: "Build in-app messaging faster with a Chat SDK") | `https://www.social.plus/chat/sdk` (where the served content actually lives) or `https://www.social.plus/use-case/1-1-chat` (canonical use-case for the slug intent) | 42 |
+
+If you find more `/use-cases/*` (plural) URLs ranking in GSC, treat them the same way until cleaned up. The canonical use-cases collection is `/use-case/` (singular) per `pages-use-cases.json`.
 
 ### ⚠️ Brand URL splitting — informational only
 54+ URLs rank for "socialplus" / "social plus" / "social+". For brand terms, Google routes correctly to `/`. **No action required**, but be aware: when writing about social.plus on third-party sites or guest posts, always link the brand mention to `https://www.social.plus/`, never to a feature page.
