@@ -179,7 +179,7 @@ Files loaded:
 
 ## Instructions for Claude
 
-1. Always load BOTH `pages-marketing.json` and `pages-use-cases.json` first. Merge their `pages` arrays into one combined dataset before gap detection. If running in an environment with file access (Cowork, Claude Desktop), read from the local repo. Otherwise, fetch from the raw GitHub URLs.
+1. Always load BOTH `pages-marketing.json` and `pages-use-cases.json` first. Merge their `pages` arrays into one combined dataset before gap detection. If running in an environment with file access (Cowork, Claude Desktop), read from the local repo. Otherwise, fetch from `github.com/.../blob/...` URLs. **Never use `raw.githubusercontent.com`** — it is blocked by network egress and will fail.
 2. **Load the brand messaging guidelines** by fetching the router file first, then the files it specifies:
    ```
    https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md

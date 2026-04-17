@@ -34,7 +34,7 @@ Pick the files relevant to the user's question — don't load all 9 unless the q
 
 | File | Covers | Items (approx) |
 |---|---|---|
-| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, industry, feature/SDK/UIKit pages | ~27 |
+| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, industry, feature/SDK/UIKit, white-label, sales/partner pages | ~37 |
 | `website/pages-use-cases.json` | `/use-case/*` | ~11 |
 | `website/pages-blog.json` | `/blog/*` | ~250 |
 | `website/pages-glossary.json` | `/glossary/*` | ~75 |
