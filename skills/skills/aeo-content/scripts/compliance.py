@@ -559,6 +559,32 @@ def check_approved_customers(body: str) -> CheckResult:
     )
 
 
+def check_internal_links(body: str) -> CheckResult:
+    """Warn (not fail) if the article has zero internal social.plus links.
+
+    The internal-linking-optimizer skill is supposed to add 0-3 links to
+    related social.plus pages (/answers/, /glossary/, /use-cases/, etc.).
+    A zero here usually means that step was skipped, not that no related
+    page existed. Field testing showed this step gets dropped silently in
+    parallel-subagent orchestration. Surfacing it as a WARN lets the
+    parent session notice and backfill.
+    """
+    links = MARKDOWN_LINK_PATTERN.findall(body)
+    internal = [u for _, u in links if "social.plus" in u]
+    if internal:
+        return CheckResult(
+            "internal_links",
+            "PASS",
+            f"{len(internal)} internal social.plus link(s)",
+        )
+    return CheckResult(
+        "internal_links",
+        "WARN",
+        "0 internal social.plus links — did internal-linking-optimizer run? "
+        "Zero is legitimate only if no related social.plus page exists for this topic.",
+    )
+
+
 def check_no_jsonld(body: str) -> CheckResult:
     """Webflow handles schema at the template level; the body should not emit
     JSON-LD. Catch the common fenced form.
@@ -614,6 +640,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.append(check_no_jsonld(body))
     report.results.extend(check_headings(body_with_h1))
     report.results.append(check_citations(body, intent))
+    report.results.append(check_internal_links(body))
     report.results.append(check_approved_customers(body))
 
     return report

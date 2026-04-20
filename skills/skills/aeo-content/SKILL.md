@@ -50,7 +50,11 @@ Never ask about word count, audience, or must-cover sub-topics. Never ask a foll
 If the resulting article misses the mark, the colleague will tell you via chat edits. That round-trip is cheaper than front-loading a 4-question survey.
 
 ### 2. Duplicate-topic check
-Fetch `https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-answers.json` and scan `metaTitle` and heading hierarchy for topic overlap. If a close match exists, surface it and ask whether to update instead. Also scan `pages-glossary.json` — if the topic is a definition that belongs in the glossary, route there.
+Run `python3 scripts/duplicate_check.py "<topic phrase>"`. The script scans `pages-answers.json` and `pages-glossary.json` and lists matches above a 0.35 Jaccard threshold, sorted by score. Exit code 1 = likely duplicate found; 0 = clean.
+
+- If the script flags a close match in `/answers/`, surface the URL and ask the user whether to update that page instead of writing a new one. Duplicate pages split authority across the same citation slot.
+- If the script flags a match in `/glossary/`, consider whether the topic actually belongs in the glossary instead. Route the user there if so.
+- If the script is unavailable for some reason, fall back to manually fetching `pages-answers.json` and `pages-glossary.json` from GitHub and scanning titles — but this is slower and noisier than the script.
 
 ### 3. Brand-messaging fetch (non-negotiable)
 Run `scripts/fetch_brand.py` to pull:
@@ -165,7 +169,10 @@ Intent: [definition | procedural | comparative]
 Rules for the intermediate:
 - `# Title` is the only H1.
 - The four labeled-paragraph metadata lines sit between the H1 and the answer-first block. They become body paragraphs in the Word doc and the Webflow automation parses and strips them.
-- The answer-first block and TL;DR sit under the metadata, above the first H2.
+- **Exactly two paragraphs sit between the metadata block and the first H2**, in this order:
+  1. The answer-first block (sentences 1-2, 40-60 words combined). **No heading, no prefix.**
+  2. The TL;DR paragraph (120-160 words). **No heading, no "TL;DR:" prefix, and never wrap it in a `## TL;DR` section.**
+  Any additional paragraphs in this region will be mis-identified by the compliance script and fail the TL;DR check. Compliance detects the TL;DR by position (second paragraph), not by label.
 - Markdown tables (pipes and dashes), numbered/bulleted lists, `**bold**`, and inline markdown links `[anchor](URL)` are all supported by the docx skill's conversion.
 - External citations as markdown links where the intent calls for them. Internal links (to social.plus URLs) are handled by `internal-linking-optimizer`.
 
@@ -180,9 +187,15 @@ After drafting and before running compliance, invoke the `internal-linking-optim
 - Disallowed sections: FAQs, conclusion, metrics table — these stay link-free for clean citation extraction.
 - Never force links. Zero is acceptable.
 
-## Compliance — deterministic
+## Compliance is non-negotiable
 
-Run `python3 scripts/compliance.py outputs/[slug].draft.md` before converting to `.docx`. The script reads the markdown intermediate. Exit 0 = ready to convert; exit 1 = fix first.
+**Before delivering any draft, run `python3 scripts/compliance.py outputs/[slug].draft.md` and paste the full stdout into your response.**
+
+- Manual / eyeball review is **not** a substitute for the script. Field testing shows eyeball review consistently misses meta-description length, em dashes (Unicode `—` mixed with hyphens), filler openers, TL;DR position edge cases, and customer-whitelist violations.
+- If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary ("all checks passed"), not a paraphrase — the literal script output. The parent session re-runs the script and treats any disagreement as a failure.
+- If any check fails, fix it and re-run. Do not ship-and-flag. Do not claim the script "is not available in the sandbox" — if you can read the markdown file with the Read tool, you can run the script with `python3`.
+
+The script reads the markdown intermediate. Exit 0 = ready to convert; exit 1 = fix first.
 
 Checks:
 - Required labeled-paragraph metadata present (title from H1; Meta description, Slug, Alt text, Intent from labeled paragraphs under H1)
@@ -197,6 +210,7 @@ Checks:
 - Heading hierarchy well-formed (single H1, no skipped levels)
 - External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
 - Approved-customer whitelist — no mentions of unapproved customer names
+- Internal-link presence — at least one `https://social.plus/...` link somewhere in the body (WARN only — a zero usually means the `internal-linking-optimizer` step was skipped; a legitimate zero happens when no related page exists)
 - Word count inside the intent-specific typical range (warning only, does not fail)
 
 Fix every failure before delivering. Warnings are informational — address if it makes the article stronger, skip if not.
@@ -216,7 +230,9 @@ Any "no" → revise before delivering. Do not ship with unresolved "no".
 
 ## Delivery
 
-1. After compliance passes, convert `outputs/[slug].draft.md` to `outputs/[slug].docx` by invoking the `anthropic-skills:docx` skill with the intermediate as input.
+1. After compliance passes, convert `outputs/[slug].draft.md` to `outputs/[slug].docx`. Two equivalent options:
+   - **Preferred:** invoke the `anthropic-skills:docx` skill with the intermediate as input.
+   - **Fast fallback (if docx skill unavailable):** `pandoc outputs/[slug].draft.md -o outputs/[slug].docx` — sufficient for this markdown profile (H1/H2, tables, lists, bold, inline links) and produces a clean Word file.
 2. Tell the user the `.docx` is ready in the artifact panel and the `.draft.md` is kept alongside for diff-able revisions.
 3. In the same message, list the FAQ source URLs used in the research step (since they are not embedded in the document).
 4. For edit requests, edit the `.draft.md`, re-run compliance, then re-convert to `.docx` and overwrite. Always keep the `.draft.md` in sync with the `.docx`.
@@ -284,7 +300,41 @@ next
 - Brand fetch fails → stop at Phase A, tell her, do not proceed on memorized brand.
 - No gaps found in `pages-answers.json` → surface this at Phase A, ask whether to update existing articles instead.
 - Compliance failures in Phase C that can't be auto-fixed after one rewrite → surface to her before moving to Phase D.
-- `anthropic-skills:docx` unavailable → tell her; skip Phase D conversion; deliver the `.draft.md` files as fallback.
+- `anthropic-skills:docx` unavailable → fall back to `pandoc outputs/[slug].draft.md -o outputs/[slug].docx` (see Delivery section). If pandoc is also unavailable, deliver the `.draft.md` files and tell the user.
+
+### Parallel-subagent orchestration (alternative to the phased flow)
+
+The four-phase workflow is a gated review loop — it fits "help me decide which ideas are worth pursuing, then iterate each draft." Some briefs are different: **"draft all N articles in parallel, no per-phase review"** (the user already knows the topics and just wants drafts fast). Parallel subagents are the right tool for this.
+
+Field testing has shown subagents consistently rationalize around the skill's rules when orchestrated in parallel. The mitigations below are mandatory in this mode.
+
+**Required parent-session setup (do this once before spawning subagents):**
+
+1. Fetch brand files centrally (`scripts/fetch_brand.py --out outputs/brand/`). Pass the folder path to each subagent instead of having each subagent refetch.
+2. Run duplicate check once against `pages-answers.json` and `pages-glossary.json` for all N topics. Do not spawn a subagent for a topic that duplicates an existing page without user confirmation.
+3. Decide the intent for each topic up front from title phrasing, and pass the matching `references/patterns/<intent>.md` path in the subagent brief.
+
+**Required subagent contract (each subagent's return payload must include):**
+
+1. The path to `outputs/[slug].draft.md`.
+2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary. If the subagent claims compliance without pasting the output, treat the draft as suspect.
+3. Confirmation that `internal-linking-optimizer` was invoked, with the returned links listed (or an explicit "optimizer returned zero relevant links").
+4. A list of FAQ source URLs used.
+
+**Required parent-session verification (do this after subagents return, before converting to `.docx`):**
+
+1. Re-run `python3 scripts/compliance.py` on every `.draft.md`. If the re-run disagrees with the subagent's claimed output, fix in the parent and re-verify. Do not trust the subagent's claim alone.
+2. Confirm each draft includes at least one `https://social.plus/...` internal link (the `internal_links` check flags this as a WARN). If zero, invoke `internal-linking-optimizer` from the parent and re-insert.
+3. Convert each `.draft.md` to `.docx`, either via `anthropic-skills:docx` or `pandoc`.
+4. Zip via `scripts/make_zip.py`.
+5. Report per-article status in the chat summary.
+
+**Known subagent failure modes to guard against:**
+
+- "Manual compliance check ✓" without running the script. → Re-run in the parent; treat as failure.
+- `## TL;DR` heading or extra paragraph between metadata and first H2. → Compliance script catches this; do not override.
+- Em dashes introduced despite the writing-style ban. → Compliance script catches; do not override.
+- Dropped `internal-linking-optimizer` call "to simplify orchestration." → The parent runs it as a backstop when the internal_links check WARNs.
 
 ## Related skills
 
