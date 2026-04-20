@@ -311,15 +311,59 @@ Field testing has shown subagents consistently rationalize around the skill's ru
 **Required parent-session setup (do this once before spawning subagents):**
 
 1. Fetch brand files centrally (`scripts/fetch_brand.py --out outputs/brand/`). Pass the folder path to each subagent instead of having each subagent refetch.
-2. Run duplicate check once against `pages-answers.json` and `pages-glossary.json` for all N topics. Do not spawn a subagent for a topic that duplicates an existing page without user confirmation.
+2. Run `scripts/duplicate_check.py "<topic>"` for each topic. **Check the exit code.** `0` = clean to proceed; `1` = likely duplicates found, get user confirmation before drafting; `2` = the script could not reach the data ("RESULT: UNVERIFIED") — do not proceed without manually checking the collections via the GitHub UI. Do not silently assume "clean" on an UNVERIFIED result.
 3. Decide the intent for each topic up front from title phrasing, and pass the matching `references/patterns/<intent>.md` path in the subagent brief.
 
 **Required subagent contract (each subagent's return payload must include):**
 
 1. The path to `outputs/[slug].draft.md`.
-2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary. If the subagent claims compliance without pasting the output, treat the draft as suspect.
-3. Confirmation that `internal-linking-optimizer` was invoked, with the returned links listed (or an explicit "optimizer returned zero relevant links").
+2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary, not a paraphrase, not an invented format. See the "Compliance-output fingerprint rule" and "Sample expected compliance output" below for what the parent enforces.
+3. Evidence that `internal-linking-optimizer` was invoked. Paste one of the two:
+   - **Concrete pass:** the link(s) returned by the optimizer AND the exact location(s) where they were inserted in the draft (section heading + first 8 words of the paragraph). Example: `Returned [activity feed SDK](https://social.plus/chat/sdk). Inserted in "## How activity feeds work", paragraph starting "A modern feed platform adds a ranking layer…".`
+   - **Legitimate zero:** `optimizer returned zero relevant links` AND a one-line reason (no adjacent /answers/ page, topic is too narrow, etc.).
+   
+   Memory-guessed URLs without an insertion-point proof are an auto-failure. The parent's `check_internal_links` backstop catches this when the claim doesn't match what's actually in the draft.
 4. A list of FAQ source URLs used.
+
+**Compliance-output fingerprint rule.** Before trusting any subagent's claimed compliance status, the parent checks the pasted payload for two literal strings:
+
+1. `AEO compliance report for`
+2. At least one line matching `[PASS]`, `[FAIL]`, or `[WARN]`
+
+If either is missing, the claim is treated as "script not run" regardless of what the subagent says. The parent still re-runs the script as a backstop — and marks the subagent's draft as higher-risk, because a subagent that fabricates output once will fabricate again.
+
+**Sample expected compliance output.** The script's stdout looks exactly like this:
+
+```
+AEO compliance report for outputs/[slug].draft.md
+
+  [PASS] metadata_title
+  [PASS] metadata_metaDescription
+  [PASS] metadata_slug
+  [PASS] metadata_altText
+  [PASS] metadata_intent
+  [PASS] metadata_intent_valid — intent=definition
+  [PASS] meta_description_length — 135 chars (max 160)
+  [PASS] word_count — 1247 words (target 900-1400)
+  [PASS] answer_first_block — first two sentences = 48 words (target 40-60)
+  [PASS] tldr_word_count — TL;DR = 138 words (target 120-160)
+  [PASS] keyword_in_first_sentence — full phrase '...' found in sentence 1
+  [PASS] no_filler_opener
+  [PASS] no_em_dashes — 0
+  [PASS] no_emojis — 0
+  [PASS] no_forbidden_terms — 0
+  [PASS] no_html — 0
+  [PASS] no_jsonld_block
+  [PASS] single_h1 — found 1 H1 heading(s)
+  [PASS] no_skipped_heading_levels — well-formed
+  [PASS] external_citations — 2 external citation(s); intent=definition (minimum 2)
+  [PASS] internal_links — 1 internal social.plus link(s)
+  [PASS] approved_customers_only — 0
+
+All checks passed.
+```
+
+Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks or percentage bars or headings. The fingerprint rule above is looking for the literal `AEO compliance report for` and `[PASS]` / `[FAIL]` / `[WARN]` lines — if you produce anything else, the parent treats the claim as unverified.
 
 **Required parent-session verification (do this after subagents return, before converting to `.docx`):**
 
@@ -332,9 +376,12 @@ Field testing has shown subagents consistently rationalize around the skill's ru
 **Known subagent failure modes to guard against:**
 
 - "Manual compliance check ✓" without running the script. → Re-run in the parent; treat as failure.
+- **Fabricated compliance output** in a format that isn't the script's real output (e.g., `1. METADATA REQUIREMENTS ✓ Title present: True` with unicode checkmarks). → Caught by the fingerprint rule above; treat as "script not run" and re-run in the parent.
+- **Prose-summary compliance claim** with no pasted output at all ("Compliance status: All checks PASSED (exit code 0)"). → Same as above; fingerprint rule catches it.
 - `## TL;DR` heading or extra paragraph between metadata and first H2. → Compliance script catches this; do not override.
 - Em dashes introduced despite the writing-style ban. → Compliance script catches; do not override.
 - Dropped `internal-linking-optimizer` call "to simplify orchestration." → The parent runs it as a backstop when the internal_links check WARNs.
+- **Claimed internal links that aren't actually in the draft** (or URLs fabricated from memory). → The parent's compliance re-run's `internal_links` check catches zero real links; if that WARNs while the subagent claimed N links, the subagent's optimizer claim was fabricated — invoke the optimizer from the parent and re-insert.
 
 ## Related skills
 
