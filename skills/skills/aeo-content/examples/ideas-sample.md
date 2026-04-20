@@ -1,7 +1,7 @@
 # AEO Article Ideas
 
-Brief: Articles on community infrastructure for fitness apps
-Generated: 2026-04-20 · 10 candidates · approved: 0 of 10
+Brief: 3 /answers/ ideas around community infrastructure for fitness apps
+Generated: 2026-04-20 · approved: 0 of 3 target (from 10 candidates)
 
 | # | Title | Intent | Rationale | Target keyword | Fit |
 |---|---|---|---|---|---|

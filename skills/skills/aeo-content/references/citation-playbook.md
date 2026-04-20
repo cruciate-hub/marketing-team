@@ -6,8 +6,8 @@ Why this file exists: for the topics where external citations genuinely support 
 
 | Intent | External citations | Rationale |
 |---|---|---|
-| Definition | ≥2 recommended | Definitions and scale claims benefit from authoritative backing. Cite the concept's canonical source (spec, paper, analyst report) and one scale statistic. |
-| Comparative | ≥3 recommended | You're comparing things — link each compared option to its canonical source. Minimum one citation per compared option plus one for the decision criteria. |
+| Definition | ≥2 required | Definitions and scale claims benefit from authoritative backing. Cite the concept's canonical source (spec, paper, analyst report) and one scale statistic. The compliance script enforces this minimum as a hard FAIL. |
+| Comparative | ≥3 required | You're comparing things — link each compared option to its canonical source. Minimum one citation per compared option plus one for the decision criteria. The compliance script enforces this minimum as a hard FAIL. |
 | Procedural | 0 required | Procedural articles about using social.plus rely on internal product consistency. A real social.plus how-to should name real surfaces (SDK, dashboard, moderation queues). External citations are only welcome if they support a claim about impact (e.g., retention lift from published research). |
 
 Universal rule across all intents: **every numeric claim needs a source.** Either from the approved-data list in SKILL.md or an external citation. A number without a source is a fabrication risk.

@@ -60,7 +60,8 @@ Generated: YYYY-MM-DD · 12 candidates · approved: 0 of 12
 ```
 
 Rules for the idea list:
-- 8-15 candidates. Fewer if the topic is narrow; more if the brief is wide.
+- **8-15 candidates, always more than the user's requested count.** The extras exist so she has real choice. If she asked for 3 articles, show 8-12 candidates. If she asked for 10, show 12-15. Never show fewer candidates than the target. Narrow topics cap at 8, wide briefs go to 15.
+- Show the target selection in the header so she isn't confused by the count mismatch: `approved: 0 of 3 target (from 10 candidates)`.
 - **Intent column** is one of: definition, procedural, comparative.
 - **Rationale** is one clause. Why this is a gap, or what query it would capture.
 - **Target keyword** is the phrase that would appear in sentence 1 of the drafted article.

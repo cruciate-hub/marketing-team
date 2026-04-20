@@ -105,8 +105,8 @@ Forcing external citations into product how-tos produces faked or irrelevant lin
 
 | Intent | External citations | Internal grounding |
 |---|---|---|
-| Definition | ≥2 recommended — cite authoritative sources for the definition and scale | Named social.plus entities and inline glosses |
-| Comparative | ≥3 recommended — you're comparing things, cite the things | Dimension-specific data points, honest positioning |
+| Definition | ≥2 required — cite authoritative sources for the definition and scale | Named social.plus entities and inline glosses |
+| Comparative | ≥3 required — you're comparing things, cite the things | Dimension-specific data points, honest positioning |
 | Procedural | None required | Internal product consistency, named methods, numeric ranges, concrete timelines |
 
 All intents: every numeric claim needs a source (internal approved list or external link). No anonymous or content-farm citations.
@@ -149,7 +149,7 @@ Keep the `.draft.md` alongside the `.docx` so maintainers can diff edits across 
 # [Article title]
 
 Meta description: [≤160 chars including spaces]
-Slug: [lowercase-with-hyphens, derived from title]
+Slug: [lowercase-with-hyphens; preserve compound modifiers like "in-app" or "multi-user"; drop leading articles ("a", "the"); keep the keyword phrase intact]
 Alt text: Abstract visualization of [main topic from title]
 Intent: [definition | procedural | comparative]
 
@@ -175,7 +175,7 @@ Alt text pattern: `Abstract visualization of [main topic from title]`.
 
 After drafting and before running compliance, invoke the `internal-linking-optimizer` skill in **draft mode**:
 - Pass: full article markdown, the article title (= target keyword), content type `AEO`.
-- The optimizer returns 1-3 markdown links. AEO articles use markdown links only, never HTML.
+- The optimizer returns 0-3 markdown links (it returns zero when no genuinely relevant target exists — never force links). AEO articles use markdown links only, never HTML.
 - Allowed sections: the definition chunk, "why it matters", architecture/features, step-by-step.
 - Disallowed sections: FAQs, conclusion, metrics table — these stay link-free for clean citation extraction.
 - Never force links. Zero is acceptable.
@@ -243,7 +243,7 @@ When the brief covers multiple articles, run these four phases instead of the si
 - If the brief already names a topic area and count ("5 articles on community infrastructure"), **skip intake** and proceed to brand fetch + gap scan. Only ask one `AskUserQuestion` when the user said "give me ideas" with no topic area at all — and even then, ask about topic area and count, nothing else.
 - Fetch brand once, then scan `pages-answers.json` (and `pages-glossary.json`) for gaps.
 - **Fit scoring:** if the Ahrefs MCP tools are available, use `keywords-explorer-overview` to attach real search volume and difficulty to each candidate's target keyword, and use `site-explorer-organic-keywords` on existing /answers/ URLs to catch semantic duplicates the JSON scan missed. If Ahrefs is unavailable, fall back to qualitative fit (high/medium/low) based on topic relevance and gap coverage.
-- Write `outputs/ideas.md` — 8-15 candidate articles with: #, title, intent, rationale, target keyword, fit (volume + difficulty if Ahrefs is available, or qualitative otherwise).
+- Write `outputs/ideas.md` with **8-15 candidate articles** (columns: #, title, intent, rationale, target keyword, fit). This is always more than the user's requested count — the extras exist so she has real choice. If she asked for 3 articles, show 8-12 candidates and note the target in the header: `approved: 0 of 3 target (from 10 candidates)`. If she asked for 10, show 12-15. Never show fewer candidates than the target.
 - She approves a subset. The skill rewrites `outputs/ideas.md` to show only the approved set.
 
 ### Phase B — Questions
