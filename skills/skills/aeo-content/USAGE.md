@@ -178,23 +178,13 @@ Free-form messages also work. "Make number 3 more technical" will be understood 
 
 ---
 
-## 7. Check if your skill is up to date
-
-The skill changes occasionally (new features, bug fixes, tone tweaks). The copy of the skill you're running is whatever got loaded when you last installed or updated the `product-marketing-team` plugin. To check whether your copy is current, paste this prompt into a new chat:
-
-> Check if my aeo-content skill is up to date. Fetch https://github.com/cruciate-hub/marketing-team/blob/main/skills/skills/aeo-content/SKILL.md and find the "Last updated" date near the top. Compare it to the aeo-content skill loaded in this session. If mine is older, tell me what changed since my version and remind me to update the product-marketing-team plugin in Claude Cowork. If they match, just say I'm current.
-
-If the answer is "out of date," update the plugin in Cowork: **Customize** → **Personal plugins** → find `product-marketing-team` → click the three dots → **Update**. Start a fresh chat afterwards so the updated skill loads.
-
----
-
-## 8. Where your articles end up
+## 7. Where your articles end up
 
 The skill gives you `.docx` files. A separate automation (outside this skill) converts each `.docx` into Webflow-ready HTML and publishes it to `social.plus/answers/[slug]`. Your job is to produce the `.docx`; the rest is automatic.
 
 ---
 
-## 9. What this skill does NOT do
+## 8. What this skill does NOT do
 
 This skill is only for AEO answer articles. For other content types, switch skills:
 

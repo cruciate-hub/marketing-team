@@ -5,8 +5,6 @@ description: "Use this skill to write AEO / GEO articles for the social.plus /an
 
 # AEO Article Generation
 
-_Last updated: 2026-04-20_
-
 AEO articles live at `social.plus/answers/[slug]`. They exist so large-language models will extract and cite them. Every rule in this skill serves that goal.
 
 ## Standing instructions
