@@ -49,9 +49,15 @@ Without Ahrefs, the skill falls back to generic WebSearch and still works — ju
 
 ## 2. First test (2 min)
 
-Start a new chat and type:
+Start a new chat and type something like:
 
-> `write an AEO article on in-app activity feeds`
+> `I need an answer page for /answers/ on in-app activity feeds.`
+
+Or, in plain English:
+
+> `Help me draft an /answers/ article explaining what in-app activity feeds are.`
+
+You do not need to say "AEO" or "GEO" — the skill picks itself up from "/answers/" or "answer page."
 
 What should happen:
 
@@ -68,10 +74,11 @@ If all four things happen, you're set. The skill should not ask you any question
 
 When you want a single AEO answer article:
 
-1. **Start a chat** and describe what you want. Examples:
-   - `write an AEO article on how to add chat to a mobile app`
-   - `write an answer page defining zero-party data`
-   - `write an AEO comparison of activity feeds vs. group chats`
+1. **Start a chat** and describe what you want in plain English. Mentioning "/answers/" or "answer page" is usually enough for the skill to pick up. Examples:
+   - `Draft an answer page on how to add chat to a mobile app.`
+   - `I need an /answers/ article explaining zero-party data.`
+   - `Help me write a comparison page for /answers/ — activity feeds vs group chats.`
+   - `Can you create an answer page about community moderation for consumer apps?`
 2. **Wait for the draft**. The skill does not ask intake questions when the brief is clear — it goes straight to drafting. The draft appears in the artifact panel in about 90 seconds. If the skill does ask a clarifying question (rare — only when the topic itself is ambiguous), answer it and move on.
 3. **Ask for edits in chat**. Examples:
    - `make the intro shorter`
@@ -90,7 +97,7 @@ When you want multiple articles in one session:
 
 Ask for ideas:
 
-> `give me 5 AEO article ideas about community infrastructure for fitness apps`
+> `Give me 5 /answers/ ideas around community infrastructure for fitness apps.`
 
 The skill produces a list of 8-15 candidates with title, intent, rationale, target keyword, and fit score.
 
