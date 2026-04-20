@@ -30,8 +30,24 @@ When unclear, ask: "Single article now, or a batch of ideas to work through in p
 
 ## Before writing
 
-### 1. Intake
-Use `AskUserQuestion` to capture: topic, the exact question the article answers, intent (definition / procedural / comparative), target audience, must-cover sub-topics, and any related content. If the brief is vague, ask follow-ups before anything else. Vague briefs produce vague articles.
+### 1. Intake — minimal, only when the brief is genuinely ambiguous
+
+**Default behavior: do not ask intake questions.** If the brief names a topic ("write an AEO article on in-app activity feeds", "answer page on zero-party data"), proceed straight to the duplicate check. Infer everything else:
+
+- **Intent** — infer from the title phrasing. "What is X?" → definition. "How to X?" / "How do you X?" → procedural. "X vs Y" / "alternatives to X" → comparative. If the phrasing could be multiple, default to definition.
+- **Audience** — social.plus's default audience is product and engineering teams at consumer apps. Use that unless told otherwise.
+- **Must-cover sub-topics** — pick the sub-topics the intent pattern naturally calls for (see `references/patterns/*.md`). Do not ask.
+- **Word count** — use the intent-specific typical range (definition 900-1400, procedural 1100-1800, comparative 1000-1600). Do not ask.
+
+**Only use `AskUserQuestion`** when something is genuinely unresolvable:
+
+- The topic name has multiple plausible meanings (`feeds` — activity feeds? news feeds? RSS?) → ask *one* question: which one?
+- The title phrasing doesn't clearly map to an intent and the wrong intent would produce a structurally different article → ask *one* question: definition, how-to, or comparison?
+- Batch mode only: the user said "give me ideas" without a topic → ask *one* question: what topic area and roughly how many.
+
+Never ask about word count, audience, or must-cover sub-topics. Never ask a follow-up "just to confirm." Never chain multiple `AskUserQuestion` calls for a single brief — that's the bad UX this rule exists to prevent.
+
+If the resulting article misses the mark, the colleague will tell you via chat edits. That round-trip is cheaper than front-loading a 4-question survey.
 
 ### 2. Duplicate-topic check
 Fetch `https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-answers.json` and scan `metaTitle` and heading hierarchy for topic overlap. If a close match exists, surface it and ask whether to update instead. Also scan `pages-glossary.json` — if the topic is a definition that belongs in the glossary, route there.
@@ -217,13 +233,15 @@ Any "no" → revise before delivering. Do not ship with unresolved "no".
 | "I can pad to hit the word count target." | Padding dilutes chunk quality. Under target → the brief is thinner than expected; raise it with the user. Over target → cut padding, not substance. |
 | "The pitch template is easier than adapting from brand files." | The pitch is brand-driven, not template-driven. Generic pitches get skipped by LLMs. |
 | "I can invent a plausible customer example." | Never. Use the approved list or leave the example out. |
+| "I should confirm what the user wants before drafting." | Only if something is genuinely unresolvable. A clear brief ("write an AEO article on X") is a green light to draft. Asking 3-4 intake questions on a clear brief is the single most annoying failure mode this skill has. |
 
 ## Batch workflow
 
 When the brief covers multiple articles, run these four phases instead of the single-article flow. Each phase produces a markdown artifact in `outputs/` that the colleague reviews. She approves or refines via chat using the approval syntax below. The skill updates the artifact and moves to the next phase when she says `next`. Full specs for each phase live in `references/workflow-phases.md`.
 
 ### Phase A — Ideas
-- Run intake once, then the brand fetch once, then scan `pages-answers.json` (and `pages-glossary.json`) for gaps.
+- If the brief already names a topic area and count ("5 articles on community infrastructure"), **skip intake** and proceed to brand fetch + gap scan. Only ask one `AskUserQuestion` when the user said "give me ideas" with no topic area at all — and even then, ask about topic area and count, nothing else.
+- Fetch brand once, then scan `pages-answers.json` (and `pages-glossary.json`) for gaps.
 - **Fit scoring:** if the Ahrefs MCP tools are available, use `keywords-explorer-overview` to attach real search volume and difficulty to each candidate's target keyword, and use `site-explorer-organic-keywords` on existing /answers/ URLs to catch semantic duplicates the JSON scan missed. If Ahrefs is unavailable, fall back to qualitative fit (high/medium/low) based on topic relevance and gap coverage.
 - Write `outputs/ideas.md` — 8-15 candidate articles with: #, title, intent, rationale, target keyword, fit (volume + difficulty if Ahrefs is available, or qualitative otherwise).
 - She approves a subset. The skill rewrites `outputs/ideas.md` to show only the approved set.
