@@ -11,14 +11,15 @@
 1. **Title** — `[X] vs [Y]` or `[X] vs [Y]: [practical framing]`.
 
 2. **Answer-first block** (no H2):
-   - Sentence 1: the short verdict — which to choose and when. Must contain the target-keyword phrase. 15-25 words.
-   - Sentence 2: the decision dimension that drives the verdict ("if X matters most, pick A; if Y matters most, pick B"). 15-25 words.
-   - Combined = 30-50 words.
+   - Sentence 1: the short verdict — which to choose and when. Must contain the target-keyword phrase. 20-30 words.
+   - Sentence 2: the decision dimension that drives the verdict ("if X matters most, pick A; if Y matters most, pick B"). 20-30 words.
+   - Combined = 40-60 words.
 
-3. **TL;DR paragraph** immediately after. 80-120 words. Structure:
+3. **TL;DR paragraph** immediately after. 120-160 words. Structure:
    - Expanded verdict (1-2 sentences)
-   - The dimensions that actually matter (1-2 sentences)
-   - The clear "choose X if / choose Y if" framing (1-2 sentences)
+   - The dimensions that actually matter (2-3 sentences)
+   - The clear "choose X if / choose Y if" framing (2 sentences)
+   - Optional: one citation that grounds the comparison
 
 4. `## At-a-glance comparison` — the first and most important table in the article. Columns: dimension, X, Y (and Z if relevant). 6-10 rows covering the dimensions a decision-maker weighs (cost, time-to-build, customization, governance, scale, vendor lock-in, total cost of ownership).
 

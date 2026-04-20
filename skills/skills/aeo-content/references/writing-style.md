@@ -22,15 +22,16 @@ If any file is unavailable at fetch time, stop and surface the failure. Do not w
 AEO content exists to be extracted. That changes four things:
 
 ### Answer-first block
-- **Sentence 1** = a literal answer to the title's question. 15-25 words. Must contain the exact target-keyword phrase.
-- **Sentence 2** = the mechanism, scope, or outcome. 15-25 words.
-- **Combined = 30-50 words.** This is what LLMs extract.
+- **Sentence 1** = a literal answer to the title's question. 20-30 words. Must contain the exact target-keyword phrase.
+- **Sentence 2** = the mechanism, scope, or outcome. 20-30 words.
+- **Combined = 40-60 words.** This is the block LLMs extract as the direct answer.
 - No H2 heading sits between H1 and this block.
 
 ### TL;DR paragraph
-- Immediately after the answer-first block. 80-120 words.
-- Structure: expanded definition → mechanism → outcome (optional proof point at the end).
+- Immediately after the answer-first block. 120-160 words.
+- Structure: expanded definition → mechanism → outcome → proof point (statistic or citation).
 - Reads as a self-contained passage extractable on its own.
+- The 120-160 range is research-backed: 94% of passages selected by Google AI Overviews fall in 134-167 words (2025 ranking-factor study). Paragraphs shorter than ~100 words are consistently passed over.
 
 ### Chunk structure
 Every H2 section is a ~150-word self-contained passage. A reader landing mid-page should still understand it.

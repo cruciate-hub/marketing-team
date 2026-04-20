@@ -338,11 +338,47 @@ def check_word_count(body: str, lo: int, hi: int) -> CheckResult:
 
 def check_answer_first(body: str) -> CheckResult:
     _, wc = first_two_sentences(body)
-    ok = 30 <= wc <= 50
+    ok = 40 <= wc <= 60
     return CheckResult(
         "answer_first_block",
         "PASS" if ok else "FAIL",
-        f"first two sentences = {wc} words (target 30-50)",
+        f"first two sentences = {wc} words (target 40-60)",
+    )
+
+
+def check_tldr_word_count(body: str) -> CheckResult:
+    """The TL;DR paragraph is the chunk AI engines extract as the citation
+    candidate. The research-backed sweet spot is 120-160 words (94% of
+    passages selected by Google AI Overviews fall in 134-167 words per the
+    2025 ranking-factor study). Shorter paragraphs get passed over for
+    longer, more self-contained competitor chunks.
+
+    The TL;DR is the paragraph immediately after the answer-first block
+    (i.e., the second substantive paragraph of the body, before any H2).
+    """
+    # Consider only paragraphs before the first H2.
+    paragraphs: list[str] = []
+    for p in body.split("\n\n"):
+        stripped = p.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("#"):
+            break
+        paragraphs.append(stripped)
+    if len(paragraphs) < 2:
+        return CheckResult(
+            "tldr_word_count",
+            "FAIL",
+            "TL;DR paragraph not found (expected below the answer-first block, above the first H2)",
+        )
+    tldr = paragraphs[1]
+    plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", tldr)
+    wc = len(re.findall(r"\b[\w'-]+\b", plain))
+    ok = 120 <= wc <= 160
+    return CheckResult(
+        "tldr_word_count",
+        "PASS" if ok else "FAIL",
+        f"TL;DR = {wc} words (target 120-160)",
     )
 
 
@@ -568,6 +604,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.append(check_meta_description(meta))
     report.results.append(check_word_count(body, lo, hi))
     report.results.append(check_answer_first(body))
+    report.results.append(check_tldr_word_count(body))
     report.results.append(check_keyword_in_sentence_1(meta, body))
     report.results.append(check_filler_opener(body))
     report.results.append(check_em_dashes(body))

@@ -11,15 +11,15 @@
 1. **Title** — `What is [X]?` or a noun phrase that mirrors the query exactly.
 
 2. **Answer-first block** (no H2, sits directly under H1):
-   - Sentence 1: literal definition of X containing the exact target-keyword phrase. 15-25 words.
-   - Sentence 2: mechanism or scope. 15-25 words.
-   - Combined = 30-50 words. This is what LLMs extract.
+   - Sentence 1: literal definition of X containing the exact target-keyword phrase. 20-30 words.
+   - Sentence 2: mechanism or scope. 20-30 words.
+   - Combined = 40-60 words. This is the block LLMs extract as the direct answer.
 
-3. **TL;DR paragraph** immediately after the answer-first block. 80-120 words. Structure:
+3. **TL;DR paragraph** immediately after the answer-first block. 120-160 words. Structure:
    - Definition expanded (1-2 sentences)
    - Mechanism or how it works (1-2 sentences)
    - Outcome or why it matters (1 sentence)
-   - Optional proof point (1 sentence — approved stat or external citation)
+   - Proof point (1 sentence — approved stat or external citation)
 
 4. `## How [X] works` — the mechanism in plain language. 150-200 words. One chunk or a short numbered list. If it's a pipeline, describe the stages; if it's a concept, describe the relationships.
 

@@ -196,7 +196,7 @@ FAQ source URLs (for your research log):
 - add-chat: https://…, https://…
 - zero-party-data: https://…, https://…
 
-Save the .docx files or the zip to Google Drive manually. When a Drive MCP connector is installed, this skill can push directly.
+Click any file above to download it from the chat. The zip is the fastest way to grab the whole batch.
 ```
 
 ### What the downstream automation does

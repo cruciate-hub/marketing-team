@@ -15,7 +15,7 @@ This file is loaded once per session and cached in context. Everything below is 
 
 Every structural and stylistic decision ties back to one of these. If a decision doesn't obviously serve one of them, reconsider.
 
-1. **Answer-first extractability.** First sentence answers the title's question using the exact target-keyword phrase. First two sentences fit in 30-50 words. TL;DR paragraph of 80-120 words sits immediately below. This is the block LLMs extract verbatim.
+1. **Answer-first extractability.** First sentence answers the title's question using the exact target-keyword phrase. First two sentences fit in 40-60 words. TL;DR paragraph of 120-160 words sits immediately below. This is the block LLMs extract verbatim. The 120-160 range is the 94th-percentile sweet spot for Google AI Overview passage selection (2025 ranking-factor study); shorter chunks are consistently passed over for longer, more self-contained competitor chunks.
 2. **Semantic chunking.** Every major section is a self-contained ~150-word passage. Entities are defined inline on first mention within a chunk, not only in the intro.
 3. **Concrete grounding.** Named examples, numeric ranges, and internal consistency with product terminology. Citations where they genuinely support a claim — not as SEO padding.
 
@@ -68,15 +68,15 @@ Match structure to query intent. Do not force every article into one template. E
 | "How to X?" / "How do you X?" / "Steps to..." | `references/patterns/procedural.md` |
 | "X vs Y" / "X or Y" / "alternatives to X" | `references/patterns/comparative.md` |
 
-Every pattern shares these required elements: answer-first block (sentences 1-2 = 30-50 words, TL;DR paragraph = 80-120 words), at least one markdown table, 4-6 FAQ pairs from real phrasings, pitch section (brand-driven), conclusion. No fixed section count beyond those elements — if a sub-topic doesn't belong in this article, don't add it.
+Every pattern shares these required elements: answer-first block (sentences 1-2 = 40-60 words, TL;DR paragraph = 120-160 words), at least one markdown table, 4-6 FAQ pairs from real phrasings, pitch section (brand-driven), conclusion. No fixed section count beyond those elements — if a sub-topic doesn't belong in this article, don't add it.
 
 ## Writing rules (essentials)
 
 Full rules: `references/writing-style.md`. Non-negotiables:
 
-- **Sentence 1** = a direct definition containing the exact target-keyword phrase. 15-25 words.
-- **Sentence 2** = the mechanism, scope, or outcome. 15-25 words. Combined with sentence 1: 30-50 words total.
-- **TL;DR paragraph** immediately below = 80-120 words, structured as expanded definition → mechanism → outcome.
+- **Sentence 1** = a direct definition containing the exact target-keyword phrase. 20-30 words.
+- **Sentence 2** = the mechanism, scope, or outcome. 20-30 words. Combined with sentence 1: 40-60 words total.
+- **TL;DR paragraph** immediately below = 120-160 words, structured as expanded definition → mechanism → outcome → proof point. This is the block AI engines extract verbatim; 120-160 is the research-backed sweet spot for AI-Overview passage selection.
 - **~150-word chunks.** Each H2 section is self-contained. A reader landing mid-page still understands it.
 - **First mention of a technical entity gets an inline one-clause gloss** using canonical phrasing from `terminology.md`.
 - **Citation density depends on intent** (see below) — don't force citations into product how-tos where they'd be faked.
@@ -137,9 +137,9 @@ Slug: [lowercase-with-hyphens, derived from title]
 Alt text: Abstract visualization of [main topic from title]
 Intent: [definition | procedural | comparative]
 
-[Answer-first block — sentences 1-2, 30-50 words combined]
+[Answer-first block — sentences 1-2, 40-60 words combined]
 
-[TL;DR paragraph — 80-120 words]
+[TL;DR paragraph — 120-160 words]
 
 ## [First body section]
 
@@ -174,7 +174,8 @@ Checks:
 - Meta description ≤ 160 characters including spaces
 - Title-keyword phrase appears in sentence 1 of the answer-first block
 - Sentence 1 does not start with a filler opener ("In today's…", "Now more than ever…", "In the ever-evolving…", "In a world where…")
-- First two sentences in 30-50 word range
+- First two sentences in 40-60 word range
+- TL;DR paragraph in 120-160 word range
 - No em dashes, no emojis, no forbidden terms
 - No HTML of any kind — no tags, no comments, no JSON-LD. The output is a Word document.
 - Heading hierarchy well-formed (single H1, no skipped levels)
@@ -189,7 +190,7 @@ Fix every failure before delivering. Warnings are informational — address if i
 After the compliance script passes, answer each of these yes/no before returning the article:
 
 1. Does sentence 1 literally answer the question the title asks, using the target-keyword phrase?
-2. Does the TL;DR paragraph stand alone as an extractable 80-120 word passage?
+2. Does the TL;DR paragraph stand alone as an extractable 120-160 word passage?
 3. Does every numeric claim have a source (approved-data list or external citation)?
 4. Does the pitch section reflect the fetched `positioning.md` / `value-story.md` / `boilerplates.md`, not a template from memory?
 5. Are the FAQ questions phrased from real-user research (not invented patterns)?
@@ -240,7 +241,7 @@ When the brief covers multiple articles, run these four phases instead of the si
 ### Phase D — Delivery
 - When all drafts pass compliance, convert each `[slug].draft.md` to `outputs/[slug].docx` via the `anthropic-skills:docx` skill.
 - Run `python3 scripts/make_zip.py` to bundle all `.docx` files into `outputs/aeo-batch-YYYY-MM-DD.zip`.
-- Send the colleague a final chat summary listing: each `.docx` filename, the zip filename, and the FAQ source URLs per article. Google Docs save is deferred — she uploads the `.docx` or the zip to Drive manually.
+- Send the colleague a final chat summary listing: each `.docx` filename, the zip filename, and the FAQ source URLs per article. The `.docx` and `.zip` files appear in the artifact panel; she clicks each to download.
 
 ### Approval syntax
 

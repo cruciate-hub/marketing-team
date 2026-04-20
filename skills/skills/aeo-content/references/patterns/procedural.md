@@ -11,15 +11,16 @@
 1. **Title** — `How to [verb] [object]` or `Guide to [verb]ing [object]`.
 
 2. **Answer-first block** (no H2):
-   - Sentence 1: state the overall approach in a single sentence containing the target-keyword phrase. 15-25 words.
-   - Sentence 2: name the 3-5 highest-level phases or the expected outcome. 15-25 words.
-   - Combined = 30-50 words.
+   - Sentence 1: state the overall approach in a single sentence containing the target-keyword phrase. 20-30 words.
+   - Sentence 2: name the 3-5 highest-level phases or the expected outcome. 20-30 words.
+   - Combined = 40-60 words.
 
-3. **TL;DR paragraph** immediately after. 80-120 words. Structure:
+3. **TL;DR paragraph** immediately after. 120-160 words. Structure:
    - The approach in one sentence
-   - Why this approach over alternatives (1 sentence)
-   - The 3-5 phases named (1-2 sentences)
+   - Why this approach over alternatives (1-2 sentences)
+   - The 3-5 phases named (2 sentences)
    - The outcome or time-to-value (1 sentence)
+   - Optional: one citation or stat (1 sentence)
 
 4. `## Prerequisites` — short bulleted list. What the reader needs before starting (accounts, integrations, design decisions). Keep to 4-6 items.
 
