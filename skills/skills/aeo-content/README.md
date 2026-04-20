@@ -163,11 +163,15 @@ python3 scripts/make_zip.py --out outputs/custom-batch.zip
 python3 scripts/make_zip.py --files outputs/a.docx outputs/b.docx
 ```
 
+## Boundary with `blog-seo-content`
+
+This skill and `blog-seo-content` are explicitly separated to prevent router collisions. In a real Cowork session, a colleague typed "write an AEO article on ..." and the router loaded `blog-seo-content` instead — "AEO" and "SEO" differ by one letter, and the blog skill's larger trigger list was dominating the embedding match. Both skills' `description:` fields now include explicit anti-triggers pointing at each other, plus a reminder that AEO articles go to `/answers/` as `.docx` files while SEO blog posts go to the blog as markdown. **Do not weaken the anti-trigger wording in this skill's description without making the matching edit in `blog-seo-content/SKILL.md`** — drop one side and the collision returns. Any request mentioning AEO, GEO, answer pages, `/answers/`, AI citation, or AI search must route here, not to the blog skill.
+
 ## Related skills
 
 - `anthropic-skills:docx` — called by this skill in Phase D to produce the final `.docx`
 - `internal-linking-optimizer` — called by this skill to add internal links; do not re-implement
-- `blog-seo-content` — long-form blog posts, pillar pages
+- `blog-seo-content` — long-form blog posts, pillar pages (see boundary note above)
 - `case-study` — customer stories
 - `social-media` — LinkedIn, Instagram, X
 - `brand-messaging` — website and general copy

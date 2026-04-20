@@ -111,3 +111,7 @@ A clearly labeled field-by-field mapping. Example:
 ## URL format
 
 Always fetch via `github.com/.../blob/...` URLs. Never use `raw.githubusercontent.com` — blocked by network egress.
+
+## Boundary with `aeo-content`
+
+This skill and `aeo-content` are explicitly separated to prevent router collisions. In a real Cowork session, a colleague typed "write an AEO article on ..." and the router loaded `blog-seo-content` instead — "AEO" and "SEO" differ by one letter, and this skill's trigger list was dominating the embedding match. Both skills' `description:` fields now include explicit anti-triggers pointing at each other. This skill is for SEO blog posts only; AEO articles go through `aeo-content` and deliver a `.docx` for the `/answers/` collection, not markdown for the blog. **Do not remove the AEO exclusion from this skill's description without making the matching edit in `aeo-content/SKILL.md`** — drop one side and the collision returns. Any request mentioning AEO, GEO, answer pages, `/answers/`, AI citation, or AI search must route to `aeo-content`, not here.

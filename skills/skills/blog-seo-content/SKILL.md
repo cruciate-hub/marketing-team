@@ -1,6 +1,12 @@
 ---
 name: blog-seo-content
 description: >
+  Do NOT use this skill for AEO articles, GEO articles, answer pages, or any
+  content destined for /answers/ — use aeo-content instead. This skill is for
+  SEO blog posts only. aeo-content and blog-seo-content are different formats
+  with different delivery pipelines: aeo-content delivers .docx for /answers/;
+  this skill delivers markdown for the blog.
+
   Write SEO-optimized blog posts and long-form articles for social.plus.
   Use this skill for: blog posts, thought leadership articles, SEO content,
   pillar pages, comparison articles ("social.plus vs X"), how-to guides,
@@ -9,9 +15,9 @@ description: >
   Trigger on phrases like "write a blog post", "SEO article", "thought leadership
   piece", "comparison article", "content marketing", "pillar page", or when the
   user wants long-form content that will be published on the web.
-  Do NOT trigger for website page copy (use brand-messaging), email content
-  (use newsletters), social media posts (use social-media), or customer stories
-  (use case-study).
+  Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
+  (use brand-messaging), email content (use newsletters), social media posts
+  (use social-media), or customer stories (use case-study).
 ---
 
 # social.plus Blog & SEO Content
