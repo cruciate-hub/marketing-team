@@ -9,13 +9,13 @@ work together to communicate depth.
 
 ## Elevation Scale
 
-| Token | Shadow | Surface colour | Typical use |
-|-------|--------|----------------|-------------|
-| `elevation-0` | none | `#111111` | Page background — base canvas |
-| `elevation-1` | `0 1px 4px rgba(0,0,0,0.5)` | `#1e1e1e` | Cards, inputs, table rows |
-| `elevation-2` | `0 4px 16px rgba(0,0,0,0.6)` | `#272727` | Dropdowns, popovers, tooltips |
-| `elevation-3` | `0 8px 32px rgba(0,0,0,0.7)` | `#2e2e2e` | Modals, drawers, bottom sheets |
-| `elevation-4` | `0 16px 48px rgba(0,0,0,0.8)` | `#2e2e2e` | Sticky nav (scrolled), floating bars |
+| Token | Shadow | Surface colour | Primitive | Typical use |
+|-------|--------|----------------|-----------|-------------|
+| `elevation-0` | none | `#111111` | `slate-950` | Page background — base canvas |
+| `elevation-1` | `0 1px 4px rgba(0,0,0,0.5)` | `#1A1A1A` | `slate-900` | Cards, inputs, table rows |
+| `elevation-2` | `0 4px 16px rgba(0,0,0,0.6)` | `#272727` | `slate-800` | Dropdowns, popovers, tooltips |
+| `elevation-3` | `0 8px 32px rgba(0,0,0,0.7)` | `#404040` | `slate-700` | Modals, drawers, bottom sheets |
+| `elevation-4` | `0 16px 48px rgba(0,0,0,0.8)` | `#404040` | `slate-700` | Sticky nav (scrolled), floating bars |
 
 ---
 
@@ -23,22 +23,22 @@ work together to communicate depth.
 
 Glows are used sparingly on interactive or highlighted elements where brand energy needs
 to surface — hover states, active selections, feature callouts. Each accent colour has
-its own glow token.
+its own glow token, keyed to a primitive in the palette.
 
-| Token | Value | Colour |
-|-------|-------|--------|
-| `glow-ultramarine` | `0 4px 20px rgba(59, 65, 236, 0.45)` | Ultramarine `#3B41EC` |
-| `glow-blue`        | `0 4px 20px rgba(55, 105, 236, 0.40)` | Blue `#3769EC` |
-| `glow-sky`         | `0 4px 20px rgba(69, 165, 237, 0.40)` | Sky Blue `#45A5ED` |
-| `glow-pink`        | `0 4px 20px rgba(245, 104, 240, 0.40)` | Electric Pink `#F568F0` |
-| `glow-orange`      | `0 4px 20px rgba(246, 96, 5, 0.40)` | Orange `#F66005` |
-| `glow-yellow`      | `0 4px 20px rgba(247, 197, 6, 0.35)` | Yellow `#F7C506` |
-| `glow-navy`        | `0 4px 20px rgba(39, 38, 94, 0.60)` | Dark Navy `#27265E` |
+| Token | Value | Based on |
+|-------|-------|----------|
+| `glow-ultramarine` | `0 4px 20px rgba(59, 65, 236, 0.45)` | `ultramarine-600` `#3B41EC` |
+| `glow-ultramarine-mid` | `0 4px 20px rgba(92, 110, 248, 0.40)` | `ultramarine-500` `#5C6EF8` |
+| `glow-sky` | `0 4px 20px rgba(69, 165, 237, 0.40)` | `picton-blue-400` `#45A5ED` |
+| `glow-pink` | `0 4px 20px rgba(245, 104, 240, 0.40)` | `pink-flamingo-400` `#F568F0` |
+| `glow-orange` | `0 4px 20px rgba(246, 96, 5, 0.40)` | `blaze-orange-600` `#F66005` |
+| `glow-yellow` | `0 4px 20px rgba(247, 197, 6, 0.35)` | `supernova-500` `#F7C506` |
+| `glow-navy` | `0 4px 20px rgba(25, 27, 77, 0.60)` | `ultramarine-950` `#191B4D` |
 
 ### Glow usage rules
 
 - **`glow-ultramarine`** — primary button hover, focus rings, active UI states
-- **`glow-blue` / `glow-sky`** — gradient button hover (paired), card accent highlights
+- **`glow-ultramarine-mid` / `glow-sky`** — gradient button hover (paired), card accent highlights
 - **`glow-pink`** — campaign/marketing callouts, feature spotlights
 - **`glow-orange`** — notification badges, alert states, energy moments
 - **`glow-yellow`** — achievement states, success highlights, celebratory moments
@@ -58,20 +58,20 @@ its own glow token.
   --shadow-3: 0 8px 32px rgba(0,0,0,0.7);
   --shadow-4: 0 16px 48px rgba(0,0,0,0.8);
 
-  /* Elevation surfaces */
-  --surface-0: #111111;
-  --surface-1: #1e1e1e;
-  --surface-2: #272727;
-  --surface-3: #2e2e2e;
+  /* Elevation surfaces (map to Slate primitives) */
+  --surface-0: #111111; /* slate-950 */
+  --surface-1: #1A1A1A; /* slate-900 */
+  --surface-2: #272727; /* slate-800 */
+  --surface-3: #404040; /* slate-700 */
 
   /* Brand glows */
-  --glow-ultramarine: 0 4px 20px rgba(59, 65, 236, 0.45);
-  --glow-blue:        0 4px 20px rgba(55, 105, 236, 0.40);
-  --glow-sky:         0 4px 20px rgba(69, 165, 237, 0.40);
-  --glow-pink:        0 4px 20px rgba(245, 104, 240, 0.40);
-  --glow-orange:      0 4px 20px rgba(246, 96, 5, 0.40);
-  --glow-yellow:      0 4px 20px rgba(247, 197, 6, 0.35);
-  --glow-navy:        0 4px 20px rgba(39, 38, 94, 0.60);
+  --glow-ultramarine:     0 4px 20px rgba(59, 65, 236, 0.45);
+  --glow-ultramarine-mid: 0 4px 20px rgba(92, 110, 248, 0.40);
+  --glow-sky:             0 4px 20px rgba(69, 165, 237, 0.40);
+  --glow-pink:            0 4px 20px rgba(245, 104, 240, 0.40);
+  --glow-orange:          0 4px 20px rgba(246, 96, 5, 0.40);
+  --glow-yellow:          0 4px 20px rgba(247, 197, 6, 0.35);
+  --glow-navy:            0 4px 20px rgba(25, 27, 77, 0.60);
 }
 ```
 
@@ -80,7 +80,7 @@ its own glow token.
 ## Principles
 
 **Shadow alone is not enough on dark backgrounds.** Always pair elevation shadow with the
-corresponding surface colour — `elevation-1` cards sit on `#1e1e1e`, not `#111`.
+corresponding surface colour — `elevation-1` cards sit on `slate-900` (`#1A1A1A`), not `slate-950`.
 
 **Glows communicate brand energy, not depth.** Do not use glow tokens to imply elevation —
 they exist purely for interactive feedback and accent moments.

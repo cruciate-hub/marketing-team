@@ -67,10 +67,15 @@ Body copy is never all-caps. Headlines are sentence case or title case.
 
 ## Colour on Text
 
-- **Primary text:** White (`#FFFFFF`) on dark backgrounds
-- **Secondary text:** `#D0D0D1` (subtle) or `#A0A1A3` (muted) for less important copy
-- **On light backgrounds:** Use Brand Black (`#111111`) for primary text
-- **Links and CTAs:** Ultramarine (`#3B41EC`) on light backgrounds; white with underline on dark
+Colour tokens below reference primitives from `colors-palette.md`.
+
+- **Primary text on dark:** White (`neutral-white` / `#FFFFFF`)
+- **Secondary text on dark:** `slate-300` (`#D3D3D3`) for subtle, `slate-400` (`#A3A3A3`) for muted
+- **On light backgrounds:** Use `slate-950` (`#111111`) for primary text
+- **Body text on light:** `slate-700` (`#404040`)
+- **Secondary text on light:** `slate-500` (`#727272`)
+- **Muted text on light:** `slate-400` (`#A3A3A3`)
+- **Links and CTAs:** `ultramarine-600` (`#3B41EC`) on light backgrounds; white with underline on dark
 
 ---
 

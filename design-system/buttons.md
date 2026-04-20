@@ -5,11 +5,11 @@
 ### Primary
 The main call-to-action. Use once per section maximum.
 
-- **Background:** Brand Blue Gradient — `linear-gradient(135deg, #3769EC 0%, #3B41EC 50%, #45A5ED 100%)`
+- **Background:** Brand Blue Gradient — `linear-gradient(135deg, #45A5ED 0%, #5C6EF8 50%, #3B41EC 100%)` (`picton-blue-400` → `ultramarine-500` → `ultramarine-600`)
 - **Text:** `#FFFFFF`
 - **Border:** none
-- **Hover:** gradient shifts slightly brighter via `filter: brightness(1.08)` + subtle `box-shadow: 0 4px 16px rgba(59, 65, 236, 0.4)`
-- **Active:** `transform: scale(0.97)`
+- **Hover:** background becomes solid `ultramarine-700` `#3133D1` + `box-shadow: 0 4px 16px rgba(59, 65, 236, 0.4)`
+- **Pressed:** background becomes solid `ultramarine-800` `#2B2FA8`, `transform: scale(0.97)`
 - **Disabled:** `opacity: 0.4`, `cursor: not-allowed`, gradient preserved
 
 ### Secondary
@@ -33,7 +33,7 @@ Low-emphasis actions. No border, no background.
 - **Disabled:** `opacity: 0.4`, `cursor: not-allowed`
 
 ### Destructive
-Dangerous or irreversible actions only. Use sparingly.
+Dangerous or irreversible actions only. Use sparingly. Destructive uses a system-only red (not part of the primitive palette).
 
 - **Background:** `#FF5252`
 - **Text:** `#FFFFFF`
@@ -65,12 +65,14 @@ All sizes use `font-family: 'Figtree', sans-serif` and `text-transform: none`.
 
 ## States
 
+Primary button hover and pressed follow a clean step ladder up the Ultramarine scale: default `ultramarine-600` → hover `ultramarine-700` → pressed `ultramarine-800`.
+
 | State    | Behaviour |
 |----------|-----------|
 | Default  | As defined per variant above |
 | Hover    | As defined per variant above |
 | Focus    | `outline: 2px solid #3B41EC; outline-offset: 3px` — always visible for accessibility |
-| Active   | `transform: scale(0.97)` — all variants |
+| Active / Pressed | Primary: solid `ultramarine-800` `#2B2FA8`. All variants: `transform: scale(0.97)` |
 | Disabled | `opacity: 0.4; cursor: not-allowed; pointer-events: none` — all variants |
 | Loading  | Label replaced with spinner SVG; button width locked to prevent layout shift; `cursor: wait` |
 
@@ -99,8 +101,10 @@ When a button contains only an icon (no label):
 --btn-px-md: 20px;
 --btn-px-lg: 28px;
 
-/* Primary gradient */
---btn-primary-bg: linear-gradient(135deg, #3769EC 0%, #3B41EC 50%, #45A5ED 100%);
+/* Primary gradient + state ladder */
+--btn-primary-bg: linear-gradient(135deg, #45A5ED 0%, #5C6EF8 50%, #3B41EC 100%);
+--btn-primary-bg-hover: #3133D1;    /* ultramarine-700 */
+--btn-primary-bg-pressed: #2B2FA8;  /* ultramarine-800 */
 --btn-primary-shadow-hover: 0 4px 16px rgba(59, 65, 236, 0.4);
 
 /* Secondary */

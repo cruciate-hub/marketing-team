@@ -4,15 +4,15 @@
 
 ## Foundation
 
-All inputs share the same foundational visual language:
+All inputs share the same foundational visual language. Colour references below use the primitive token names from `colors-palette.md` where applicable. Error red is a system-only token — it is not part of the primitive palette.
 
 | Property | Value |
 |----------|-------|
-| Background | `--surface-2` (`#272727`) — one step above cards, feels inset |
+| Background | `--surface-2` (`slate-800` / `#272727`) — one step above cards, feels inset |
 | Border (default) | `1px solid rgba(255,255,255,0.1)` |
 | Border (hover) | `1px solid rgba(255,255,255,0.2)` |
-| Border (focus) | `1px solid var(--ultramarine)` + `box-shadow: 0 0 0 3px rgba(59,65,236,0.25)` |
-| Border (error) | `1px solid #FF5252` + `box-shadow: 0 0 0 3px rgba(255,82,82,0.2)` |
+| Border (focus) | `1px solid var(--ultramarine)` (`ultramarine-600` / `#3B41EC`) + `box-shadow: 0 0 0 3px rgba(59,65,236,0.25)` |
+| Border (error) | `1px solid #FF5252` (system) + `box-shadow: 0 0 0 3px rgba(255,82,82,0.2)` |
 | Border radius | `var(--radius-2)` — 8px |
 | Font | Figtree 400, 15px |
 | Placeholder colour | `rgba(255,255,255,0.35)` |
@@ -82,7 +82,7 @@ Custom-styled. Size: **18×18px**.
 | State | Appearance |
 |-------|------------|
 | Unchecked | `surface-2` background, `rgba(255,255,255,0.3)` border, `radius-1` |
-| Checked | `var(--ultramarine)` background and border, white `check` icon (FILL 1, weight 600) |
+| Checked | `var(--ultramarine)` (`ultramarine-600`) background and border, white `check` icon (FILL 1, weight 600) |
 | Disabled | `opacity: 0.4` |
 
 ### Radio
@@ -92,7 +92,7 @@ Custom-styled. Size: **18×18px**, fully circular.
 | State | Appearance |
 |-------|------------|
 | Unselected | `surface-2` background, `rgba(255,255,255,0.3)` border |
-| Selected | Ultramarine border, 8px ultramarine dot centred inside |
+| Selected | `ultramarine-600` border, 8px `ultramarine-600` dot centred inside |
 | Disabled | `opacity: 0.4` |
 
 ### Toggle
@@ -102,7 +102,7 @@ Pill-shaped switch. Track: **40×22px**, `radius-full`. Thumb: **16×16px**, whi
 | State | Track | Thumb |
 |-------|-------|-------|
 | Off | `rgba(255,255,255,0.15)` | White, `opacity: 0.5`, left |
-| On | `var(--ultramarine)` | White, `opacity: 1`, right (translateX 18px) |
+| On | `var(--ultramarine)` (`ultramarine-600`) | White, `opacity: 1`, right (translateX 18px) |
 
 Transition: `background 0.2s`, `transform 0.2s`.
 
@@ -114,7 +114,7 @@ Transition: `background 0.2s`, `transform 0.2s`.
 |-------|--------|
 | Default | `rgba(255,255,255,0.1)` border |
 | Hover | `rgba(255,255,255,0.2)` border |
-| Focus | Ultramarine border + `0 0 0 3px rgba(59,65,236,0.25)` ring |
+| Focus | `ultramarine-600` border + `0 0 0 3px rgba(59,65,236,0.25)` ring |
 | Filled | `rgba(255,255,255,0.2)` border — slightly brighter to show value |
 | Error | `#FF5252` border + `0 0 0 3px rgba(255,82,82,0.2)` ring + error message below |
 | Disabled | `opacity: 0.4`, `cursor: not-allowed`, `pointer-events: none` |
