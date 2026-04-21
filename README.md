@@ -11,6 +11,9 @@ Shared plugin marketplace and brand reference for the marketing team. Skills fet
 5. Click **+** → select **Add marketplace**
 6. Enter `cruciate-hub/marketing-team` → click **Sync**
 7. Click the **+** to install
+8. Click the **⋯** next to `marketing-team` → turn **Sync automatically** **on**
+
+Step 8 is important: it pulls in new skills and skill improvements automatically whenever a commit lands on `main`. Without it, you'll stay frozen on the version you installed and miss every future update. If you ever skipped it, just toggle it on and click **Check for updates** to catch up.
 
 ## Available skills (15)
 
