@@ -13,7 +13,7 @@ description: >
   copy (use brand-messaging skill).
 ---
 
-# social.plus Campaign & Ad Copy
+# social.plus Campaign & Ad Copy (BETA/v1, needs optimization)
 
 This skill produces high-converting ad copy and campaign landing page content for social.plus. Ad copy operates under extreme space constraints, so every word must earn its place — while still following brand terminology and positioning.
 
