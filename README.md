@@ -4,23 +4,40 @@ Shared plugin marketplace and brand reference for the marketing team. Skills fet
 
 ## Installation
 
-| Step | Action |
-|:----:|--------|
-| 1 🚀 | Open Claude Cowork |
-| 2 ⚙️ | Click <kbd>Customize</kbd> in the sidebar |
-| 3 ➕ | Next to **Personal plugins**, click <kbd>+</kbd> |
-| 4 🔍 | Click <kbd>Browse plugins</kbd> → select the **Personal** tab |
-| 5 🏪 | Click <kbd>+</kbd> → select **Add marketplace** |
-| 6 🔗 | Enter `cruciate-hub/marketing-team` → click <kbd>Sync</kbd> |
-| 7 ➕ | Click the <kbd>+</kbd> to install |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="10%">Step</th>
+      <th align="left">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td align="center">1 🚀</td><td>Open Claude Cowork</td></tr>
+    <tr><td align="center">2 ⚙️</td><td>Click <kbd>Customize</kbd> in the sidebar</td></tr>
+    <tr><td align="center">3 ➕</td><td>Next to <strong>Personal plugins</strong>, click <kbd>+</kbd></td></tr>
+    <tr><td align="center">4 🔍</td><td>Click <kbd>Browse plugins</kbd> → select the <strong>Personal</strong> tab</td></tr>
+    <tr><td align="center">5 🏪</td><td>Click <kbd>+</kbd> → select <strong>Add marketplace</strong></td></tr>
+    <tr><td align="center">6 🔗</td><td>Enter <code>cruciate-hub/marketing-team</code> → click <kbd>Sync</kbd></td></tr>
+    <tr><td align="center">7 ➕</td><td>Click the <kbd>+</kbd> to install</td></tr>
+  </tbody>
+</table>
 
-Steps 8–10 are important: they pull in new skills and skill improvements automatically (whenever a commit lands on `main`). Without them, you'll stay frozen on the version you installed and miss every future update. Toggle <kbd>Sync automatically</kbd> on, click <kbd>Check for updates</kbd>, then close and re-open Claude.
+Steps 8–11 pull in new skills and skill improvements automatically (whenever a commit lands on `main`). Without them, you'll stay frozen on the version you installed and miss every future update.
 
-| Step | Action |
-|:----:|--------|
-| 8 ⋯ | Click the <kbd>⋯</kbd> next to `marketing-team` |
-| 9 🔵 | Toggle <kbd>Sync automatically</kbd> |
-| 10 🔄 | Click <kbd>Check for updates</kbd> |
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="10%">Step</th>
+      <th align="left">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td align="center">8 ⋯</td><td>Click the <kbd>⋯</kbd> next to <code>marketing-team</code></td></tr>
+    <tr><td align="center">9 🔵</td><td>Toggle <kbd>Sync automatically</kbd></td></tr>
+    <tr><td align="center">10 🔄</td><td>Click <kbd>Check for updates</kbd></td></tr>
+    <tr><td align="center">11 🔁</td><td>Close and reopen the Claude Desktop App</td></tr>
+  </tbody>
+</table>
 
 ![Sync automatically and Check for updates in the Cowork plugin menu](./assets/cowork-sync-automatically.png)
 
