@@ -4,16 +4,23 @@ Shared plugin marketplace and brand reference for the marketing team. Skills fet
 
 ## Installation
 
-1. Open Claude Cowork
-2. Click **Customize** in the sidebar
-3. Next to **Personal plugins**, click **+**
-4. Click **Browse plugins** → select the **Personal** tab
-5. Click **+** → select **Add marketplace**
-6. Enter `cruciate-hub/marketing-team` → click **Sync**
-7. Click the **+** to install
-8. Click the **⋯** next to `marketing-team` → turn **Sync automatically** **on**
+| Step | Action |
+|:----:|--------|
+| 1 🚀 | Open Claude Cowork |
+| 2 ⚙️ | Click <kbd>Customize</kbd> in the sidebar |
+| 3 ➕ | Next to **Personal plugins**, click <kbd>+</kbd> |
+| 4 🔍 | Click <kbd>Browse plugins</kbd> → select the **Personal** tab |
+| 5 🏪 | Click <kbd>+</kbd> → select **Add marketplace** |
+| 6 🔗 | Enter `cruciate-hub/marketing-team` → click <kbd>Sync</kbd> |
+| 7 ➕ | Click the <kbd>+</kbd> to install |
 
-Step 8 is important: it pulls in new skills and skill improvements automatically (whenever a commit lands on `main`). Without it, you'll stay frozen on the version you installed and miss every future update. Toggle it on, and click **'Check for updates'** Then, close and re-open Claude.
+Steps 8–10 are important: they pull in new skills and skill improvements automatically (whenever a commit lands on `main`). Without them, you'll stay frozen on the version you installed and miss every future update. Toggle <kbd>Sync automatically</kbd> on, click <kbd>Check for updates</kbd>, then close and re-open Claude.
+
+| Step | Action |
+|:----:|--------|
+| 8 ⋯ | Click the <kbd>⋯</kbd> next to `marketing-team` |
+| 9 🔵 | Toggle <kbd>Sync automatically</kbd> |
+| 10 🔄 | Click <kbd>Check for updates</kbd> |
 
 ![Sync automatically and Check for updates in the Cowork plugin menu](./assets/cowork-sync-automatically.png)
 
