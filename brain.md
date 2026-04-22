@@ -1,7 +1,5 @@
 # social.plus — Main Brain
 
-**social.plus** is an in-app community infrastructure platform. It lets digital products embed social experiences (feeds, chats, groups, events) directly inside their apps — so companies own engagement without building from scratch or depending on external social networks.
-
 This is the master router for all social.plus marketing content. Every skill fetches this file alongside its domain-specific router to get cross-domain awareness, precedence rules, and the compliance check.
 
 All reference files are hosted at:
