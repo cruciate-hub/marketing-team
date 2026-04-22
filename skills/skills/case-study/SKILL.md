@@ -82,6 +82,7 @@ Check for and ask about:
 - **Results / outcomes** — quantified impact after launch.
 - **Company basics** — headquarters location, founding year or scale indicator, industry.
 - **Use cases** — which social.plus features does the customer use (Activity Feed, Group Chat, Live Chat, Livestream, etc.)?
+- **Customer's product vocabulary** — what does the customer call their own product and its key features internally (e.g. "Wrist Feed," "Community Tab," "H-D app," "Rides," "Bikes")? Use their names in the body, not social.plus's generic feature names. This is the single biggest lever for a story that reads specific rather than templated.
 
 Only ask about items that are genuinely missing from the user's input — don't re-ask what they already provided. Once you have enough information to write without placeholders, proceed to drafting.
 
@@ -131,7 +132,7 @@ Examples:
 - `<big-nr>1.5M<big-nr><br><cs-number-text>Patients<cs-number-text>`
 - `<big-nr>18%<big-nr><br><cs-number-text>Increase in betting rate of casual users<cs-number-text>`
 
-Metrics can be: company facts (founded year, employees, revenue), platform stats (users, downloads, locations), or social.plus outcomes (engagement growth, retention lift, integration timeline). Aim for at least 2 boxes. If the user doesn't provide specific numbers, ask — don't invent them.
+Always push the writer to fill at least 2 of the 3 metric boxes — they anchor the visual layout and signal credibility. Preferred content, in order: post-launch outcomes (engagement, retention, growth lifts) > platform scale (users, communities, locations) > company facts (founded year, employees, revenue). If the writer confirms numbers genuinely can't be shared (confidentiality, pending customer approval, data-isolation issues), **leave the box empty** — don't fabricate a number, don't substitute a vague descriptor, and don't reshape the story to hide the gap. An empty box is better than an invented one. Keep pushing across drafts, though — previously-blocked numbers sometimes get approved on a later sign-off round.
 
 **Keep phrasings durable.** Customer stories stay live for years — anchor metrics to fixed windows ("in 2025", "within their first year", "since launch") rather than rolling ones ("last 12 months", "currently", "recently"). A rolling window reads wrong the day the calendar turns.
 
