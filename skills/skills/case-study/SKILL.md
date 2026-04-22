@@ -38,10 +38,11 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 4. Also follow **"Short-form content"** routing for:
    - `boilerplates.md` (company descriptions for reference)
 
-5. Fetch the existing customer stories inventory for narrative-consistency and cross-referencing:
+5. Fetch the existing customer stories inventory for narrative-consistency and cross-referencing. This file is large (~750 KB) so use the GitHub Contents API — a `blob/` URL returns a lazy-loaded HTML shell without the JSON contents. See **URL format for fetching files** at the bottom of this file for the full rule.
 ```
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-customer-stories.json
+https://api.github.com/repos/cruciate-hub/marketing-team/contents/website/pages-customer-stories.json
 ```
+Send with header `Accept: application/vnd.github.raw+json`.
 
 Use this to:
 - **Avoid contradictions** — check how similar customers are already described on the site (e.g., if writing a fitness industry customer, scan existing fitness stories for metrics/framing consistency).
@@ -52,8 +53,26 @@ Use this to:
 
 **Before writing anything**, review what the user has provided and ask for any missing information. Do NOT start drafting the customer story until you have enough data to avoid placeholders. Present one clear list of questions — not multiple rounds.
 
+### 1a. Auto-research public facts first
+
+Once the customer name is known, run web searches to pre-fill what's publicly available: headquarters city/country, founding year, founder names, scale indicators (users, customers, locations, revenue), market position, and key product surface.
+
+Present the findings back to the user in a labelled block so they only need to say "correct" or edit values — never type them from scratch. Only fall back to asking the user if web research genuinely fails.
+
+### 1b. Ask only for what's genuinely missing
+
+**Before sending the question list, filter out anything already answered by the Step 1a web research or by the user's original message. Only ask for what's genuinely missing.**
+
 Check for and ask about:
-- **Metrics / engagement data** — specific numbers for the metric boxes (e.g., engagement rate increase, user growth, retention lift, integration timeline). Without real numbers, the metric boxes cannot be filled.
+- **Metrics / engagement data** — For real post-launch customer metrics (engagement lift, DAU/MAU trend, retention delta, feature adoption, integration timeline vs. actuals), the `bq-business-query` skill against the social.plus data warehouse is the source of truth. **Do NOT invoke it from this skill** — direct the user to run it separately and paste results back. Rationale: sales decks and memory-sourced numbers are rounded or wrong; BQ is authoritative. Suggest concrete questions modelled on metrics already used in social.plus customer stories:
+  - Month-over-month or year-over-year growth rate for `[customer]`
+  - Current user / member / active-community count
+  - Launch date (first API activity) — for "time to launch" framing
+  - Engagement lift in the months after integration
+  - Cumulative content produced since launch (posts, comments, reactions)
+  - Top features by usage (which endpoints see the most traffic)
+
+  Company-scale stats (total users, locations, revenue) can also come from public sources via Step 1a. Any BQ-derived number needs customer sign-off before publishing. If `bq-business-query` isn't available, skip the warehouse pull and rely on user-provided figures.
 - **Customer quote** — do they have a direct quote from the customer? If yes, who said it (name + title)?
 - **Challenge details** — what specific problem was the customer trying to solve?
 - **Why social.plus** — why did they choose social.plus over alternatives?
@@ -109,6 +128,8 @@ Examples:
 - `<big-nr>18%<big-nr><br><cs-number-text>Increase in betting rate of casual users<cs-number-text>`
 
 Metrics can be: company facts (founded year, employees, revenue), platform stats (users, downloads, locations), or social.plus outcomes (engagement growth, retention lift, integration timeline). Aim for at least 2 boxes. If the user doesn't provide specific numbers, ask — don't invent them.
+
+**Keep phrasings durable.** Customer stories stay live for years — anchor metrics to fixed windows ("in 2025", "within their first year", "since launch") rather than rolling ones ("last 12 months", "currently", "recently"). A rolling window reads wrong the day the calendar turns.
 
 **Thumbnail Metric** (`thumbnail-cs-overview-page-large-metric`, PlainText)
 The most impressive single number, displayed on the customer stories overview page. Short format: `60%`, `1M`, `200k`, `4 weeks`. Pick the metric that stops someone scrolling.
@@ -199,13 +220,19 @@ Note: the text after each `<h3>` always starts on the next line, never on the sa
 ### Sidebar
 
 **Sidebar | About** (`sidebar-about`, PlainText)
-2-3 sentences describing the customer's company. Factual, third person. Include: what they do, founding year or scale indicator, and headquarters/region.
+1–2 sentences. Factual, third person. Format: **what they are + scale indicator + distinct positioning angle**. Do NOT include founding year or headquarters — those live in dedicated sidebar fields (`sidebar-location`) and repeating them here is redundant.
+
+Reference patterns from existing live stories:
+- "Snai is Italy's favorite sports betting platform with millions of users and a retail network of 1,500+ locations offering gaming and entertainment services."
+- "Talkspace is a leading virtual mental health care provider with 5,000+ licensed clinicians, delivering accessible, evidence-based care to over 130 million people through health plans, employers, and institutions."
 
 **Sidebar | Location** (`sidebar-location`, PlainText)
 Company headquarters. Format: "City, Country" or just "Country". Examples: "São Paulo, Brazil", "United States", "Limassol, Cyprus".
 
 **Sidebar | Use Cases** (`new-use-cases`, MultiReference)
-References to Use Case CMS items. Tell the user which use cases apply (e.g., "Activity Feed", "Group Chat", "Live Chat", "Livestream") so they can link them in Webflow.
+References to Use Case CMS items. Tell the user which use cases apply so they can link them in Webflow.
+
+**Valid options (from the `🗳️ Use Cases` collection in Webflow, verified 2026-04-22):** Events, Live Chat, Group Chat, 1-1 Chat, Custom Posts, Polls, Stories & Clips, Live Stream, Groups, User Profiles, Activity Feed. Do not invent labels outside this list — these are CMS reference items and must match exactly.
 
 **Sidebar | Implementation** (`implementation-web`, `implementation-mobile-app`, Switches)
 Tell the user which to toggle: Web, App, or both.
@@ -225,6 +252,7 @@ SEO meta description, under 155 characters. Pattern: "Discover how [Company] [ou
 
 - **Order and ID** — The user assigns this based on where they want the story in the list.
 - **Industry** — Tell the user which industry reference(s) to link.
+  **Valid options (from the `↳ Customer Stories - Industry References` collection, verified 2026-04-22):** Health & Wellness, Healthcare, Sports, Software, News & Media, Lifestyle & Community, Travel & Hospitality, Gaming, Fitness, Fintech, Education, E-commerce & Retail, Betting, Automotive, Other. Pick the closest match and state it explicitly; use "Other" only if none apply. Note that **Health & Wellness** (consumer wellness/fitness apps) and **Healthcare** (clinical or provider-facing) are distinct — pick the right one.
 - **Show on homepage / /chat / /social / /video** — Recommend which product pages should feature this story based on what the customer uses.
 - **Show on industry pages** — Recommend which industry page toggles to enable.
 - **Demo Link** — If a demo exists, format: `https://www.social.plus/demo/[slug]`
@@ -291,6 +319,16 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 
 Run the compliance check from `brain.md`. Customer stories are permanent, public-facing assets — a terminology violation or fabricated claim lives on the website indefinitely.
 
-## Important: URL format
+## Important: URL format for fetching files
 
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings.
+For files under ~500 KB, `github.com/.../blob/...` works. For larger files — including `pages-customer-stories.json` at ~750 KB — blob URLs return a lazy-loaded HTML shell without the JSON contents, and `raw.githubusercontent.com` is blocked by network egress. The cross-reference step silently returns empty if you use the wrong URL.
+
+**Use the GitHub Contents API for JSON files above ~500 KB:**
+
+```
+https://api.github.com/repos/cruciate-hub/marketing-team/contents/<path-to-file>
+```
+
+Send with header `Accept: application/vnd.github.raw+json` — this returns raw content directly without redirects.
+
+If `api.github.com` turns out not to be on the network egress allowlist, flag it to the user as a capability fix. Fallback option if unresolved: sync a local copy of `pages-customer-stories.json` into the plugin's `skills/case-study/assets/` directory, and instruct the skill to read local first with a GitHub fallback when the local copy is stale (>N days old).
