@@ -132,7 +132,13 @@ Examples:
 - `<big-nr>1.5M<big-nr><br><cs-number-text>Patients<cs-number-text>`
 - `<big-nr>18%<big-nr><br><cs-number-text>Increase in betting rate of casual users<cs-number-text>`
 
-Always push the writer to fill at least 2 of the 3 metric boxes — they anchor the visual layout and signal credibility. Preferred content, in order: post-launch outcomes (engagement, retention, growth lifts) > platform scale (users, communities, locations) > company facts (founded year, employees, revenue). If the writer confirms numbers genuinely can't be shared (confidentiality, pending customer approval, data-isolation issues), **leave the box empty** — don't fabricate a number, don't substitute a vague descriptor, and don't reshape the story to hide the gap. An empty box is better than an invented one. Keep pushing across drafts, though — previously-blocked numbers sometimes get approved on a later sign-off round.
+Each box gets one number that stops the reader. Aim for 2 or 3 filled. Good sources, strongest first:
+
+- **Post-launch outcomes** — what changed because of social.plus (engagement lift, retention, growth rate, session frequency). Pull from `bq-business-query` where available, or from the customer's own reporting.
+- **Platform scale** — size of the community or user base (MAU, members, countries, locations).
+- **Company facts** — founded year, employees, revenue, vehicles sold, patients served, etc.
+
+If a metric isn't available yet, leave the box blank and move on — the story works without it, and the number can be added on a later pass once the customer approves it. Never fill a box with a vague descriptor or an invented figure.
 
 **Keep phrasings durable.** Customer stories stay live for years — anchor metrics to fixed windows ("in 2025", "within their first year", "since launch") rather than rolling ones ("last 12 months", "currently", "recently"). A rolling window reads wrong the day the calendar turns.
 
