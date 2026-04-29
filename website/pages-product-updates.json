@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-04-16T17:07:12.300Z",
-    "itemCount": 58,
+    "generatedAt": "2026-04-29T11:47:19.054Z",
+    "itemCount": 59,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-commerce-make-your-community-the-storefront",
+      "metaTitle": "Introducing Commerce: Make Your Community The Storefront",
+      "metaDescription": "social.plus Commerce bridges the gap between community intent and action. Enable product tagging in posts, shoppable livestreams, and a centralized product catalogue to turn social conversations into conversions without leaving the app.",
+      "content": "# Introducing Commerce: Make Your Community The Storefront\n### What is social.plus Commerce\n### Product Catalogue: the foundation of discoverable assortment\n### Product Tagging in Posts: close the discovery-to-action gap\n### Tag and Pin Products in Livestream: interactive moments without the disruption\n### Commerce is not only about commerce"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-march-2026",
       "metaTitle": "What's new in social.plus | March 2026",
