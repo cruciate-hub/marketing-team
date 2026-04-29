@@ -31,7 +31,7 @@
 
 8. `## [Brand-driven pitch heading]` — the pitch section. Heading and body are generated from the fetched brand-messaging files (`positioning.md`, `value-story.md`, `boilerplates.md`). The skill does not prescribe a template here. Use the approved customer list (Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames) and approved stats only if they fit the topic naturally. 150-250 words.
 
-9. `## FAQs` — 4-6 question-answer pairs. Questions come from real user research (PAA + Reddit), not invented patterns. Each answer starts directly ("Yes.", "No.", or the definition). Answers are ≤3 sentences. Do not embed source URLs in the document — the output is a Word document. List source URLs in the final chat summary when the skill delivers the batch.
+9. `## FAQs` — 4-6 question-answer pairs. Questions come from real user research (PAA via Ahrefs or WebSearch), not invented patterns. Each answer starts directly ("Yes.", "No.", or the definition). Answers are ≤3 sentences. Do not embed source URLs in the document — the output is a Word document. List source URLs in the final chat summary when the skill delivers the batch.
 
 10. `## Conclusion` — 2-3 sentences. Restate the definition in a single sentence, name the outcome, end without a call-to-action.
 

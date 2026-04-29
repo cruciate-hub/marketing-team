@@ -85,7 +85,7 @@ Rules for the idea list:
 - The approved ideas from Phase A.
 - For each approved idea, research candidate FAQ questions:
   - **Preferred (Ahrefs MCP tools available):** `serp-overview` for the core question (returns the literal PAA block), `keywords-explorer-search-suggestions` for question-form variants.
-  - **Fallback (no Ahrefs):** `WebSearch` on the core question + a scan of the most relevant subreddit (top-of-all-time + top-of-year).
+  - **Fallback (no Ahrefs):** `WebSearch` on the core question; capture any "People Also Ask" phrasings visible in the results.
 
 ### Output — `outputs/questions.md`
 
@@ -96,14 +96,14 @@ Approved articles: 3 · approved questions: 0 of 24
 
 ## Article 1 — What are in-app activity feeds?
 
-Source: PAA for "activity feed", r/gamedev "community features" thread (2024)
+Source: PAA for "activity feed", WebSearch results
 
 | # | Question | Source |
 |---|---|---|
 | 1 | What is an activity feed? | PAA |
 | 2 | Do activity feeds require a social graph? | PAA |
 | 3 | Can activity feeds be added to existing apps? | PAA |
-| 4 | Is an activity feed suitable for a fitness app? | Reddit r/gamedev |
+| 4 | Is an activity feed suitable for a fitness app? | WebSearch |
 | 5 | How long does it take to ship a feed? | PAA |
 | ... |
 
@@ -117,7 +117,7 @@ Source: PAA for "activity feed", r/gamedev "community features" thread (2024)
 
 Rules:
 - 8-10 candidate questions per article.
-- Each question has a **Source** column — one of `Ahrefs PAA` / `Ahrefs suggestions` / `WebSearch PAA` / `Reddit` / `LLM` — so the colleague can override any LLM-generated fillers.
+- Each question has a **Source** column — one of `Ahrefs PAA` / `Ahrefs suggestions` / `WebSearch PAA` / `LLM` — so the colleague can override any LLM-generated fillers.
 - Approved questions become the FAQ section of the eventual draft.
 - Final FAQ in each article = 4-6 of the approved questions. If the colleague approves more than 6 for one article, the skill picks the 6 best (most distinct, most citation-worthy) and lists the rest as "deferred" in `overview.md`.
 
@@ -126,7 +126,7 @@ Rules:
 - On `next`, proceed to Phase C and start drafting. Require all Phase A-approved articles to have at least 4 approved questions. If any article has fewer, tell her and stay in Phase B.
 
 ### Abort
-- Question research fails for an article (no PAA, subreddit rate-limit, etc.) → flag it, offer a fallback list of LLM-generated questions marked as such, let her proceed or skip.
+- Question research fails for an article (no PAA, WebSearch returns nothing usable, etc.) → flag it, offer a fallback list of LLM-generated questions marked as such, let her proceed or skip.
 
 ---
 

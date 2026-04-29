@@ -36,7 +36,7 @@
 
 8. `## [Brand-driven pitch heading]` — the pitch section. Heading and body are generated from the fetched brand-messaging files (`positioning.md`, `value-story.md`, `boilerplates.md`). Tie the pitch to why social.plus accelerates **this specific procedure** (not generic capability bullets). 150-250 words.
 
-9. `## FAQs` — 4-6 real questions about the procedure (timeline, prerequisites, cost, alternatives, who owns the work, common gotchas). Questions come from PAA + Reddit research. Answers start directly, ≤3 sentences each. Do not embed source URLs in the document — list them in the final chat summary.
+9. `## FAQs` — 4-6 real questions about the procedure (timeline, prerequisites, cost, alternatives, who owns the work, common gotchas). Questions come from PAA research (Ahrefs MCP preferred, WebSearch fallback). Answers start directly, ≤3 sentences each. Do not embed source URLs in the document — list them in the final chat summary.
 
 10. `## Conclusion` — 2-3 sentences. The outcome plus an explicit next step ("…then instrument feed engagement and iterate weekly.").
 
