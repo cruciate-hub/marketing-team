@@ -74,8 +74,7 @@ Before writing the FAQ section, surface real follow-up questions. The skill uses
   - `keywords-explorer-overview` for the target keyword itself — confirms volume and intent alignment.
 - **Fallback (no Ahrefs):**
   - `WebSearch` on the core question; capture any "People Also Ask" phrasings visible in the results.
-  - Check the most relevant subreddit (top-of-all-time + top-of-year for the topic).
-- Write the FAQ section using these real phrasings, not invented ones. In `outputs/questions.md`, the **Source** column records where each candidate came from (Ahrefs PAA, Ahrefs suggestions, WebSearch, Reddit, LLM fallback).
+- Write the FAQ section using these real phrasings, not invented ones. In `outputs/questions.md`, the **Source** column records where each candidate came from (Ahrefs PAA, Ahrefs suggestions, WebSearch, LLM fallback).
 - Do not embed source URLs in the document itself (no HTML comments — the output is a Word document). List the source URLs in the final message to the user so the team can log them wherever they track FAQ research.
 
 ## Article structure — choose by intent
@@ -263,7 +262,7 @@ When the brief covers multiple articles, run these four phases instead of the si
 - She approves a subset. The skill rewrites `outputs/ideas.md` to show only the approved set.
 
 ### Phase B — Questions
-- For each approved idea, run the question research (PAA + Reddit).
+- For each approved idea, run the question research (PAA via Ahrefs or WebSearch fallback).
 - Write `outputs/questions.md` — one section per approved idea, 8-10 candidate FAQ questions each.
 - She approves per-article. The skill updates the file.
 

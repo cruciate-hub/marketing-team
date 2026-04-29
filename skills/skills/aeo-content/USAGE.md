@@ -112,7 +112,7 @@ next
 
 ### Phase B — FAQ questions
 
-For each approved idea, the skill surfaces 8-10 candidate FAQ questions (real ones from search results and Reddit).
+For each approved idea, the skill surfaces 8-10 candidate FAQ questions (real ones from search results).
 
 Approve per article:
 

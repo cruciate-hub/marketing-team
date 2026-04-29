@@ -12,7 +12,7 @@ Two modes, chosen from the brief:
 1. Asks for topic + intent (definition / procedural / comparative).
 2. Checks `pages-answers.json` for duplicates.
 3. Fetches the brand-messaging stack from GitHub.
-4. Surfaces real PAA + Reddit FAQ questions before writing.
+4. Surfaces real PAA-based FAQ questions before writing.
 5. Drafts the article with an answer-first block, self-contained chunks, and intent-appropriate citation density.
 6. Delegates internal linking to `internal-linking-optimizer`.
 7. Runs the deterministic compliance script.
@@ -22,7 +22,7 @@ Two modes, chosen from the brief:
 Four phases, each producing a markdown artifact for chat-based approval:
 
 - **Phase A — Ideas.** Skill produces `outputs/ideas.md` (8-15 candidates with title, intent, rationale, target keyword, fit). Colleague approves a subset via chat.
-- **Phase B — Questions.** For each approved idea, skill runs PAA + Reddit research and writes `outputs/questions.md` (8-10 questions per article). Colleague approves per-article.
+- **Phase B — Questions.** For each approved idea, skill runs PAA research (Ahrefs MCP preferred, WebSearch fallback) and writes `outputs/questions.md` (8-10 questions per article). Colleague approves per-article.
 - **Phase C — Drafts.** Skill drafts each approved article into `outputs/[slug].draft.md` and writes `outputs/overview.md` as a batch-wide status table. Colleague chats edits; skill updates individual drafts and re-runs compliance.
 - **Phase D — Delivery.** When all drafts pass compliance, skill converts each to `.docx` via `anthropic-skills:docx`, bundles them into `outputs/aeo-batch-YYYY-MM-DD.zip` via `scripts/make_zip.py`, and sends a final chat summary with file list + FAQ source URLs.
 

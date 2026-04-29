@@ -33,7 +33,7 @@
 
 9. `## Where social.plus fits` — the pitch section, but **honest positioning first**, not a closing sales pitch. Generated from the fetched brand-messaging files. If X or Y is genuinely better for some use case, say so — don't contradict the comparison above. 150-200 words.
 
-10. `## FAQs` — 4-6 real questions (migration between X and Y, switching costs, hybrid setups, lock-in, common decision regrets). Questions come from PAA + Reddit research. Do not embed source URLs in the document — list them in the final chat summary.
+10. `## FAQs` — 4-6 real questions (migration between X and Y, switching costs, hybrid setups, lock-in, common decision regrets). Questions come from PAA research (Ahrefs MCP preferred, WebSearch fallback). Do not embed source URLs in the document — list them in the final chat summary.
 
 11. `## Conclusion` — one paragraph restating the decision rule. Do not end with a product push.
 
