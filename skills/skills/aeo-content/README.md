@@ -1,4 +1,4 @@
-# AEO Content (v2)
+# AEO Content (v3)
 
 Claude skill for writing AEO (Answer Engine Optimization) articles for `social.plus/answers/[slug]`. Designed to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI Overviews, and Copilot.
 
