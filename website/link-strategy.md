@@ -153,7 +153,7 @@ All entries share the same shape: `{url, metaTitle, metaDescription, content}`. 
 
 **Which files to fetch by context** (the optimizer applies these defaults):
 - **Blog draft (called by `blog-seo-content`):** marketing + use-cases + industry + glossary + blog + customer-stories
-- **AEO draft (called by `aeo-content`):** marketing + use-cases + glossary + answers (related-answers)
+- **AEO draft (called by `aeo-content`):** marketing + use-cases + glossary + answers (related-answers) + customer-stories
 - **Customer story draft (called by `case-study`):** marketing + use-cases + industry + customer-stories + pillar that matches the customer's product usage
 - **Standalone audit:** all 10 files
 - **Standalone draft (user-pasted content):** marketing + use-cases + industry + glossary by default; ask if more is needed
@@ -298,7 +298,9 @@ For glossary terms not in this table, use them as link targets only in genuinely
 | **Blog post (< 1,000 words)** | 3 | 4 | 6 | At least 1 pillar or use-case link |
 | **Blog post (1,000–2,000 words)** | 4 | 6 | 8 | Add 1 cross-link to a sibling blog post |
 | **Blog post (2,000+ words)** | 5 | 8 | 12 | Full cluster hub behavior — link to pillar + 2 siblings + customer story + glossary |
-| **AEO article (`/answers/*`)** | 1 | 2 | 3 | Stricter — over-linking dilutes AI-citation value |
+| **AEO article (`/answers/*`) — short (< 1,000 words)** | 2 | 3 | 4 | Topical links only; customer-story links are a separate class (see §AEO related-answers) |
+| **AEO article (`/answers/*`) — medium (1,000-1,500 words)** | 3 | 4 | 5 | Topical links only; customer-story links separate |
+| **AEO article (`/answers/*`) — long (1,500+ words)** | 4 | 5 | 6 | Topical links only; customer-story links separate |
 | **Glossary entry** | 2 | 3 | 5 | Must link to 1 product/use-case (commercial alt) + 1 sibling glossary + 1 pillar |
 | **Customer story** | 3 | 5 | 7 | Must link to customer's industry page + product pillar(s) they use + 1 related use-case |
 | **Product update / release note** | 2 | 3 | 5 | Link to the feature page being updated + `/product` + relevant use-case |
@@ -594,8 +596,10 @@ Anchor variants pool (substitute industry name):
 
 `pages-answers.json` contains 123 AEO articles. AEO articles are reference content cited by AI engines — over-linking dilutes citation value. Guidelines:
 
-- **Maximum 1-3 internal links per AEO article.** Stricter than blog.
+- **Topical link budget scales with article length** — ~1 per 300 words, with floor 2 and ceiling 6. Per-length-band Min/Target/Max in §"Link budgets by article type". Stricter than blog because AEO chunks need clean extraction.
 - **Allowed link locations:** definition paragraph, "why it matters", architecture/features sections, step-by-step. **Disallowed:** FAQs, conclusion, metrics table.
+- **Max 1 topical link per section** — prevents stacking multiple links inside one ~150-word chunk, which tanks that chunk's extraction quality.
+- **Customer-story links are a separate class.** When an approved customer is named in the article, link the **first mention** of that customer's name to their `/customer-story/*` page. Subsequent mentions of the same customer stay plain text. Multiple customers can each get their own first-mention link. These links are **not counted toward the topical budget**; the 5-customer approved list is the de facto cap. Anchor = customer name (per `internal-linking-optimizer/SKILL.md`).
 - **AEO → AEO related-answer links:** at most 1 per article, placed in the definition paragraph or step-by-step. Use when the linked article extends a concept (e.g., "API for Integrating Complete Social Features into Apps" can link to a more specific "Chat API" answer).
 - **AEO → glossary links** are usually a better fit than AEO → product pages for the definitional sections.
 - **AEO → product page links** belong in the "social.plus pitch" section.

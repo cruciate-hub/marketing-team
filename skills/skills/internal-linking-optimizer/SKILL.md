@@ -59,7 +59,7 @@ Always fetch `link-strategy.md`. Then pick `pages-*.json` files based on context
 | Calling context | Files to fetch |
 |---|---|
 | Called by `blog-seo-content` (draft mode) | `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json`, `pages-blog.json`, `pages-customer-stories.json` |
-| Called by `aeo-content` (draft mode) | `pages-marketing.json`, `pages-use-cases.json`, `pages-glossary.json`, `pages-answers.json` |
+| Called by `aeo-content` (draft mode) | `pages-marketing.json`, `pages-use-cases.json`, `pages-glossary.json`, `pages-answers.json`, `pages-customer-stories.json` |
 | Standalone draft mode (user-pasted content) | `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json` (default — ask if blog/customer-stories/answers should also be considered) |
 | Audit mode | All 10 files: `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json`, `pages-blog.json`, `pages-customer-stories.json`, `pages-answers.json`, `pages-product-updates.json`, `pages-release-notes.json`, `pages-webinars.json` |
 
@@ -522,7 +522,8 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 **Don't over-link.** Targets per content type:
 - Blog: 3-7
-- AEO: 1-3 max
+- AEO topical links: scaled by length — ~1 per 300 words (floor 2, ceiling 6). See `link-strategy.md` §"Link budgets by article type" for per-length-band Min/Target/Max.
+- AEO customer-story links: separate class, **not counted toward the topical budget**. First mention of an approved customer becomes a `/customer-story/*` link; subsequent mentions of the same customer stay plain text. Multiple customers can each get their own first-mention link. The 5-customer approved list is the de facto cap.
 - Generic: 3-5
 
 **No same-anchor-twice-to-same-target in one piece.** Use cluster anchor variants from `link-strategy.md`.
