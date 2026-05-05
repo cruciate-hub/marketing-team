@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-05T07:04:39.636Z",
+    "generatedAt": "2026-05-05T07:08:41.388Z",
     "itemCount": 32,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
@@ -9,7 +9,7 @@
     {
       "url": "https://www.social.plus/release-note/ios-xcode-compatibility-update",
       "metaTitle": "iOS Xcode Compatibility Update",
-      "metaDescription": "iOS Xcode Compatibility Update",
+      "metaDescription": "Official migration of the iOS SDK away from Realm",
       "content": "# iOS Xcode Compatibility Update"
     },
     {
