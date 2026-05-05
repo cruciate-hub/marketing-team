@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-05T04:52:11.008Z",
+    "generatedAt": "2026-05-05T07:13:58.942Z",
     "itemCount": 253,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -34,7 +34,7 @@
       "url": "https://www.social.plus/blog/how-to-build-a-product-catalogue-your-community-can-actually-discover",
       "metaTitle": "How to Build a Product Catalogue Your Community Can Actually Discover",
       "metaDescription": "Learn how to set up and manage your product catalogue. This guide covers CSV imports, product visibility, status management, and team permissions for your community.",
-      "content": "# How to Build a Product Catalogue Your Community Can Actually Discover\n### Adding Products: CSV or Manual\n### What Makes a Product Easy to Find and Tap On\n### Managing Status: Active and Archive\n### Permissions: Keeping the Catalogue Accurate as Your Team Grows\n### Once the Catalogue Is Live"
+      "content": "# How to Build a Product Catalogue Your Community Can Actually Discover\n## Adding Products: CSV or Manual\n## What Makes a Product Easy to Find and Tap On\n## Managing Status: Active and Archive\n## Permissions: Keeping the Catalogue Accurate as Your Team Grows\n## Once the Catalogue Is Live"
     },
     {
       "url": "https://www.social.plus/blog/how-to-structure-events-for-your-community-a-playbook-for-every-platform-type",
