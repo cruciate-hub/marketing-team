@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-05T07:17:59.689Z",
-    "itemCount": 253,
+    "generatedAt": "2026-05-05T10:01:50.717Z",
+    "itemCount": 254,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/what-your-livestream-product-data-is-telling-you",
+      "metaTitle": "What Your Livestream Product Data Is Telling You",
+      "metaDescription": "Understand the nuance of livestream metrics. Learn how to interpret impression spikes, high-intent click data, and the difference between live and replay intent.",
+      "content": "# What Your Livestream Product Data Is Telling You\n## The Two Metrics and What They Actually Measure\n### Total product impressions\n### Total CTA and product card clicks\n## Reading the Patterns That Matter\n### High impressions, low clicks\n### Low impressions, high clicks\n### Consistent clicks across multiple products\n## Live Analytics vs. Replay Analytics: Two Different Audiences\n## Using the Data to Improve the Next Stream\n## The Feedback Loop Worth Building"
+    },
     {
       "url": "https://www.social.plus/blog/how-to-tag-and-pin-products-in-a-livestream-without-losing-your-audience",
       "metaTitle": "How to Tag and Pin Products in a Livestream Without Losing Your Audience",
