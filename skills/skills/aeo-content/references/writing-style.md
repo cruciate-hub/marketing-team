@@ -54,6 +54,21 @@ Intent-conditional rules (full guidance in `references/citation-playbook.md`):
 - **Comparative** articles → ≥3 external citations recommended (one per compared option minimum).
 - **Procedural** articles → no external-citation minimum. Internal product consistency and named methods carry the weight. Forcing citations for "how to use social.plus" produces faked links and degrades trust.
 
+### Anchor text length
+
+External link anchor text describes the source, not the claim. The claim lives in the prose; the anchor names who said it.
+
+- Hard limit: 8 words per anchor (compliance fails above this).
+- Target: 3-6 words.
+
+Bad:
+`[member organizations that adopted mobile-first engagement strategies saw retention rates improve by 25%](https://...)`
+
+Good:
+`Member organizations on mobile-first engagement programs see retention rise 25%, per [Higher Logic's 2024 engagement report](https://...).`
+
+Pattern: state the claim in prose, then attach a short anchor that names the source. Long anchors hide the citation signal from LLM extractors and look like anchor-text spam to search engines.
+
 ## Tone calibration
 
 AEO articles sit between a blog post and a technical reference.

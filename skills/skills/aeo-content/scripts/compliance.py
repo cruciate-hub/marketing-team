@@ -585,6 +585,31 @@ def check_internal_links(body: str) -> CheckResult:
     )
 
 
+def check_anchor_text_length(body: str, max_words: int = 8) -> CheckResult:
+    """External link anchors must be <= max_words words.
+
+    Long anchor text wraps the claim instead of naming the source, which
+    degrades LLM citation extraction and is treated as anchor-text spam by
+    search engines. The claim belongs in the prose; the anchor is the source
+    name (3-6 words target, 8 hard limit).
+    """
+    pattern = r'\[([^\]]+)\]\(https?://[^)]+\)'
+    links = re.findall(pattern, body)
+    too_long = [(a, len(a.split())) for a in links if len(a.split()) > max_words]
+    if too_long:
+        sample = "; ".join(f"({n}w) {a[:50]}..." for a, n in too_long[:3])
+        return CheckResult(
+            "anchor_text_length",
+            "FAIL",
+            f"{len(too_long)} anchor(s) exceed {max_words} words: {sample}",
+        )
+    return CheckResult(
+        "anchor_text_length",
+        "PASS",
+        f"all {len(links)} link anchor(s) <= {max_words} words",
+    )
+
+
 def check_no_jsonld(body: str) -> CheckResult:
     """Webflow handles schema at the template level; the body should not emit
     JSON-LD. Catch the common fenced form.
@@ -641,6 +666,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.extend(check_headings(body_with_h1))
     report.results.append(check_citations(body, intent))
     report.results.append(check_internal_links(body))
+    report.results.append(check_anchor_text_length(body))
     report.results.append(check_approved_customers(body))
 
     return report

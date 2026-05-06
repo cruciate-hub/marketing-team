@@ -252,6 +252,7 @@ Any "no" → revise before delivering. Do not ship with unresolved "no".
 | "The pitch template is easier than adapting from brand files." | The pitch is brand-driven, not template-driven. Generic pitches get skipped by LLMs. |
 | "I can invent a plausible customer example." | Never. Use the approved list or leave the example out. |
 | "I should confirm what the user wants before drafting." | Only if something is genuinely unresolvable. A clear brief ("write an AEO article on X") is a green light to draft. Asking 3-4 intake questions on a clear brief is the single most annoying failure mode this skill has. |
+| "Long anchor text gives the link more context." | Wrong. The claim belongs in the prose. The anchor names the source in 3-6 words. Anchors over 8 words fail compliance - they degrade LLM extraction signal and look like spam to search engines. |
 
 ## Batch workflow
 
