@@ -1,6 +1,6 @@
 # Marketing Team
 
-Shared plugin marketplace and brand reference for the marketing team. Skills fetch content live from this repo, so updates here are instantly available to everyone.
+Shared plugin marketplace and brand reference for the marketing team. Skills load content live from this repo via a shallow git clone (`git clone --depth 1`) at the start of each session, so updates pushed here propagate to every teammate's next skill run — no plugin reinstall needed.
 
 ## Installation
 

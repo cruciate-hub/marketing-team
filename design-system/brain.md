@@ -1,27 +1,24 @@
 # social.plus Design System — Router
 
-This file is the entry point for all social.plus visual design tasks. It tells you which files to fetch based on what you're creating.
+This file is the entry point for all social.plus visual design tasks. It tells you which files to load based on what you're creating.
 
-All files are hosted at:
-`https://github.com/cruciate-hub/marketing-team/blob/main/design-system/`
-
-**Warning:** Always use `github.com/.../blob/...` URLs when fetching. Never convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress restrictions and will fail.
+Reference files live in the public `cruciate-hub/marketing-team` repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`). Paths in this file are relative to the design-system folder — for example `colors-palette.md` is at `$MT_REPO/design-system/colors-palette.md`.
 
 ## How to use this file
 
-1. You fetched this file first. Good.
-2. Also fetch the main brain if you haven't already: `https://github.com/cruciate-hub/marketing-team/blob/main/brain.md` — it has cross-domain routing, precedence rules, and the compliance check you must run before delivering.
+1. You loaded this file first. Good.
+2. Also load the main brain if you haven't already: `cat "$MT_REPO/brain.md"` — it has cross-domain routing, precedence rules, and the compliance check you must run before delivering.
 3. Read the user's request.
 4. Match it against the routing table below.
-5. Fetch the listed files using WebFetch on the GitHub blob URLs above.
-6. Apply everything you fetch. Design tokens are non-negotiable.
-7. **If the output includes any text content** (headings, labels, descriptions, CTAs), you also need the messaging router: `https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md` — follow its instructions to fetch terminology and tone files. Visual output without correct brand language is incomplete.
+5. Read the listed files with `cat "$MT_REPO/design-system/<file>"`.
+6. Apply everything you load. Design tokens are non-negotiable.
+7. **If the output includes any text content** (headings, labels, descriptions, CTAs), you also need the messaging router: `cat "$MT_REPO/messaging/brain.md"` — follow its instructions to load terminology and tone files. Visual output without correct brand language is incomplete.
 
 ## Routing table
 
-### Any visual task (always fetch these)
+### Any visual task (always load these)
 - `colors-palette.md` — Brand colours, supporting colours, neutrals, state colours, text colours, borders.
-- `colors-usage.md` — Gradients, flat gradient pairs, usage principles, Webflow CSS variables. Fetch both — together they are the full colour system. This is law.
+- `colors-usage.md` — Gradients, flat gradient pairs, usage principles, Webflow CSS variables. Load both — together they are the full colour system. This is law.
 - `typography.md` — Figtree type scale, weights, minimum sizes, line heights.
 
 ### Visual output with layout (HTML pages, decks, documents, multi-section designs)
@@ -48,7 +45,7 @@ All files are hosted at:
 - `social-posts.md` — LinkedIn, Instagram, Twitter/X format specs and copy guidelines.
 
 ### Design review or audit (checking existing designs against the system)
-- Fetch ALL files. Compare the design under review against every guideline.
+- Load ALL files. Compare the design under review against every guideline.
 
 ## Rules
 
@@ -59,7 +56,7 @@ All files are hosted at:
 - **One primary button per section.** Never stack two gradient CTAs.
 - **12px minimum.** No UI text below 12px. Ever.
 - **Use `var()` for CSS.** When writing CSS for the website, always use Webflow CSS variables. Hex codes for non-CSS contexts only.
-- **If a fetch fails**, tell the user the GitHub content is unavailable and you cannot guarantee brand alignment. Do not proceed with stale or memorized tokens.
+- **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule — do not proceed with stale or memorized tokens.
 - **Run the compliance check** from `brain.md` (the main brain) before delivering your output.
 
 ## Available files

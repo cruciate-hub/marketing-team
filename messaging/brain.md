@@ -1,24 +1,21 @@
 # social.plus Brand Messaging — Router
 
-This file is the entry point for all social.plus brand-aligned content tasks. It tells you which files to fetch based on what the user needs.
+This file is the entry point for all social.plus brand-aligned content tasks. It tells you which files to load based on what the user needs.
 
-All files are hosted at:
-`https://github.com/cruciate-hub/marketing-team/blob/main/messaging/`
-
-**Warning:** Always use `github.com/.../blob/...` URLs when fetching. Never convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress restrictions and will fail.
+Reference files live in the public `cruciate-hub/marketing-team` repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`). Paths in this file are relative to the messaging folder — for example `terminology.md` is at `$MT_REPO/messaging/terminology.md`.
 
 ## How to use this file
 
-1. You fetched this file first. Good.
-2. Also fetch the main brain if you haven't already: `https://github.com/cruciate-hub/marketing-team/blob/main/brain.md` — it has cross-domain routing, precedence rules, and the compliance check you must run before delivering.
+1. You loaded this file first. Good.
+2. Also load the main brain if you haven't already: `$MT_REPO/brain.md` — it has cross-domain routing, precedence rules, and the compliance check you must run before delivering.
 3. Read the user's request.
 4. Match it against the routing table below.
-5. Fetch the listed files using WebFetch on the GitHub blob URLs above.
-6. Apply everything you fetch. Terminology and tone are non-negotiable.
+5. Read the listed files with `cat "$MT_REPO/messaging/<file>"`.
+6. Apply everything you load. Terminology and tone are non-negotiable.
 
 ## Routing table
 
-### Any content task (always fetch these)
+### Any content task (always load these)
 - `terminology.md` — Approved and forbidden terms. This is law.
 - `tone.md` — Tone of voice and writing style rules.
 
@@ -30,7 +27,7 @@ All files are hosted at:
 ### Social media posts (LinkedIn, Instagram, X)
 - `boilerplates.md` — Standardized descriptions as starting points.
 - `positioning.md` — Company overview, vision, mission, product pillars. Needed when posts reference what social.plus is or does.
-- Also fetch from the design-system domain: `https://github.com/cruciate-hub/marketing-team/blob/main/design-system/social-posts.md` — Platform-specific format specs, character limits, copy structure templates, visual asset guidelines. This file has precedence over `tone.md` for platform-specific tone and formatting.
+- Also load from the design-system domain: `design-system/social-posts.md` (`cat "$MT_REPO/design-system/social-posts.md"`) — Platform-specific format specs, character limits, copy structure templates, visual asset guidelines. This file has precedence over `tone.md` for platform-specific tone and formatting.
 
 ### Long-form content (blog posts, AEO articles, landing pages, thought leadership, whitepapers, case studies, press releases)
 - `narrative.md` — Messaging hierarchy and 5-step narrative structure.
@@ -44,16 +41,16 @@ All files are hosted at:
 - `ui-micro-copy.md` — Capitalisation, punctuation, microcopy patterns, and anti-patterns. This file has precedence over `tone.md` for UI copy voice and style.
 
 ### Content review or audit (checking existing copy against brand guidelines)
-- Fetch ALL files. Compare the content under review against every guideline.
+- Load ALL files. Compare the content under review against every guideline.
 
 ## Rules
 
 - **Terminology is law.** Always use approved terms. Never use forbidden terms. No exceptions.
 - **Tone comes from the documents, not from your defaults.** Override your natural writing style with what the tone file specifies.
-- **Never invent.** Do not fabricate statistics, customer names, quotes, features, or performance claims. If it's not in the fetched documents, don't state it.
+- **Never invent.** Do not fabricate statistics, customer names, quotes, features, or performance claims. If it's not in the loaded documents, don't state it.
 - **Messaging hierarchy matters.** For content longer than a paragraph: establish the market shift → define infrastructure → engagement → intelligence → revenue → long-term advantage.
 - **Boilerplates are starting points.** Adapt to context but preserve meaning and claims.
-- **If a fetch fails**, tell the user the GitHub content is unavailable and you cannot guarantee brand alignment. Do not proceed with stale or memorized content.
+- **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule — do not proceed with stale or memorized content.
 - **Run the compliance check** from `brain.md` (the main brain) before delivering your output.
 
 ## Available files

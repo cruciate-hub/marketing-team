@@ -7,6 +7,57 @@ description: "Use this skill whenever the user mentions AEO, GEO, answer pages, 
 
 AEO articles live at `social.plus/answers/[slug]`. They exist so large-language models will extract and cite them. Every rule in this skill serves that goal.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v2 -->
+Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fetch them by shallow-cloning the repo once per session, then loading individual files with `cat`. Use this exact pattern at the start of every skill that needs reference files:
+
+    REPO="${MT_REPO:-/tmp/cruciate-hub-marketing-team}"
+    if [ ! -d "$REPO/.git" ]; then
+      git clone --depth 1 --quiet https://github.com/cruciate-hub/marketing-team.git "$REPO"
+    else
+      git -C "$REPO" pull --ff-only --quiet
+    fi
+
+After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
+
+The Bash tool truncates large stdout to a small preview when the output exceeds the harness's display cap (the exact size varies by environment — observed in the 20–50 KB range). When that happens you'll see a marker like `Output too large (NkB). Full output saved to: …` followed by a short preview, and the rest is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see the marker. **If you do see the marker, never proceed using the preview as if it were the whole file** — switch to one of the patterns below.
+
+- **Truncated markdown** — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
+
+      sed -n '1,250p'     "$REPO/<path>"
+      sed -n '251,500p'   "$REPO/<path>"
+      sed -n '501,$p'     "$REPO/<path>"
+
+  Each ~250-line chunk fits under the preview cap. Concatenate the chunks mentally. For files much larger than 750 lines, add more chunks at 250-line intervals until you reach the total.
+
+  **If a chunk itself comes back as a truncated preview** (output above the harness's display cap — visible as an "Output too large" or similar marker, with the rest spilled to a file you can't see in-call), halve the chunk size and retry. For example, swap `sed -n '1,250p'` for `sed -n '1,125p'` then `sed -n '126,250p'`. Repeat until each chunk lands in full. Never proceed using a truncated chunk as if it were complete.
+
+- **Large JSON inventories** (`website/pages-*.json`, up to 228 KB) — never `cat` raw. Process with `python3` or `jq` and emit only the fields you need:
+
+      python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
+      jq '.pages[].url' "$REPO/website/pages-blog.json"
+
+  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+
+Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
+
+Validate every file before using it:
+- Markdown: content must start with `#`
+- JSON: content must start with `{` or `[`
+- HTML: content must start with `<`
+- Content must be non-empty
+
+If anything fails — clone error, missing file, empty content, or wrong format:
+- Do NOT reconstruct from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v2 -->
+
+The Python helper scripts in `scripts/` (e.g. `duplicate_check.py`) read files from `$MT_REPO`. Set the env var when invoking them: `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic>"`.
+
 ## Standing instructions
 
 This file is loaded once per session and cached in context. Everything below is a standing rule for the whole task, not a one-time checklist. Treat each numbered step as a gate — if you can't satisfy it, stop and surface the problem rather than proceeding.
@@ -50,20 +101,23 @@ Never ask about word count, audience, or must-cover sub-topics. Never ask a foll
 If the resulting article misses the mark, the colleague will tell you via chat edits. That round-trip is cheaper than front-loading a 4-question survey.
 
 ### 2. Duplicate-topic check
-Run `python3 scripts/duplicate_check.py "<topic phrase>"`. The script scans `pages-answers.json` and `pages-glossary.json` and lists matches above a 0.35 Jaccard threshold, sorted by score. Exit code 1 = likely duplicate found; 0 = clean.
+Run the canonical fetch block first (so `$MT_REPO` is populated), then `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic phrase>"`. The script reads `website/pages-answers.json` and `website/pages-glossary.json` from the cloned repo and lists matches above a 0.35 Jaccard threshold, sorted by score. Exit code 1 = likely duplicate found; 0 = clean.
 
 - If the script flags a close match in `/answers/`, surface the URL and ask the user whether to update that page instead of writing a new one. Duplicate pages split authority across the same citation slot.
 - If the script flags a match in `/glossary/`, consider whether the topic actually belongs in the glossary instead. Route the user there if so.
-- If the script is unavailable for some reason, fall back to manually fetching `pages-answers.json` and `pages-glossary.json` from GitHub and scanning titles — but this is slower and noisier than the script.
 
-### 3. Brand-messaging fetch (non-negotiable)
-Run `scripts/fetch_brand.py` to pull:
-```
-terminology.md  tone.md  narrative.md  value-story.md  positioning.md  boilerplates.md
-```
-Always use `github.com/.../blob/...` URLs — raw and API hosts are blocked by network egress. If any fetch fails, stop and tell the user. Do not proceed on memorized brand content.
+### 3. Brand-messaging read (non-negotiable)
+Read these files from the cloned repo (the canonical fetch block at the top of this file ensures the clone exists):
+- `messaging/terminology.md`
+- `messaging/tone.md`
+- `messaging/narrative.md`
+- `messaging/value-story.md`
+- `messaging/positioning.md`
+- `messaging/boilerplates.md`
 
-The pitch section at the end of every article is **generated from the fetched brand-messaging files**, not from a template inside this skill. `positioning.md` and `value-story.md` define what social.plus says about itself; `boilerplates.md` provides the approved long-form company descriptions. The skill defers to those files.
+Use the canonical fetch block's validation rules. If any file is missing or fails validation, stop and tell the user. Do not proceed on memorized brand content.
+
+The pitch section at the end of every article is **generated from these brand-messaging files**, not from a template inside this skill. `positioning.md` and `value-story.md` define what social.plus says about itself; `boilerplates.md` provides the approved long-form company descriptions. The skill defers to those files.
 
 ### 4. Question research
 Before writing the FAQ section, surface real follow-up questions. The skill uses Ahrefs MCP tools when available and falls back to WebSearch otherwise:
@@ -314,8 +368,8 @@ Field testing has shown subagents consistently rationalize around the skill's ru
 
 **Required parent-session setup (do this once before spawning subagents):**
 
-1. Fetch brand files centrally (`scripts/fetch_brand.py --out outputs/brand/`). Pass the folder path to each subagent instead of having each subagent refetch.
-2. Run `scripts/duplicate_check.py "<topic>"` for each topic. **Check the exit code.** `0` = clean to proceed; `1` = likely duplicates found, get user confirmation before drafting; `2` = the script could not reach the data ("RESULT: UNVERIFIED") — do not proceed without manually checking the collections via the GitHub UI. Do not silently assume "clean" on an UNVERIFIED result.
+1. Run the canonical fetch block (clones the repo to `$MT_REPO`). Brand files are then available at `$MT_REPO/messaging/*.md`. Pass `$MT_REPO` to each subagent so they read from the same clone instead of re-cloning.
+2. Run `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic>"` for each topic. **Check the exit code.** `0` = clean to proceed; `1` = likely duplicates found, get user confirmation before drafting; `2` = the script could not reach the data ("RESULT: UNVERIFIED") — do not proceed without manually checking the collections via the GitHub UI. Do not silently assume "clean" on an UNVERIFIED result.
 3. Decide the intent for each topic up front from title phrasing, and pass the matching `references/patterns/<intent>.md` path in the subagent brief.
 
 **Required subagent contract (each subagent's return payload must include):**

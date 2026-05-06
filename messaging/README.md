@@ -25,4 +25,4 @@ Brand messaging source of truth for social.plus. These files are fetched live fr
 
 ## Fetching
 
-Always fetch via `github.com/cruciate-hub/marketing-team/blob/main/messaging/...` URLs. Do **not** convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress and will fail.
+All messaging files are read from the shallow clone of this repo at `$MT_REPO/messaging/...`. The canonical fetch block at the top of each SKILL.md handles the clone.

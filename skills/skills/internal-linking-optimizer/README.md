@@ -129,9 +129,9 @@ If `link-strategy.md` is missing or its `Refresh by:` date is > 14 days in the p
 - `link-building-vetter` — incoming link exchange requests (sister skill, opposite direction)
 - `site-intelligence` — site-wide content audits beyond linking
 
-## URL format
+## How files are loaded
 
-Always fetch via `github.com/.../blob/...` URLs. Never use `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress.
+All reference files are loaded from a shallow clone of this repo (`git clone --depth 1`) into `$MT_REPO`. The canonical fetch block at the top of the SKILL.md handles the clone; the skill then reads files with `cat "$MT_REPO/<path>"`.
 
 ## Adoption credit
 

@@ -7,13 +7,59 @@ description: Compare new product releases or monthly updates against the current
 
 Compares social.plus product updates (release notes, monthly updates) against the current website content to identify which marketing pages are missing new features and need updating.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v2 -->
+Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fetch them by shallow-cloning the repo once per session, then loading individual files with `cat`. Use this exact pattern at the start of every skill that needs reference files:
+
+    REPO="${MT_REPO:-/tmp/cruciate-hub-marketing-team}"
+    if [ ! -d "$REPO/.git" ]; then
+      git clone --depth 1 --quiet https://github.com/cruciate-hub/marketing-team.git "$REPO"
+    else
+      git -C "$REPO" pull --ff-only --quiet
+    fi
+
+After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
+
+The Bash tool truncates large stdout to a small preview when the output exceeds the harness's display cap (the exact size varies by environment — observed in the 20–50 KB range). When that happens you'll see a marker like `Output too large (NkB). Full output saved to: …` followed by a short preview, and the rest is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see the marker. **If you do see the marker, never proceed using the preview as if it were the whole file** — switch to one of the patterns below.
+
+- **Truncated markdown** — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
+
+      sed -n '1,250p'     "$REPO/<path>"
+      sed -n '251,500p'   "$REPO/<path>"
+      sed -n '501,$p'     "$REPO/<path>"
+
+  Each ~250-line chunk fits under the preview cap. Concatenate the chunks mentally. For files much larger than 750 lines, add more chunks at 250-line intervals until you reach the total.
+
+  **If a chunk itself comes back as a truncated preview** (output above the harness's display cap — visible as an "Output too large" or similar marker, with the rest spilled to a file you can't see in-call), halve the chunk size and retry. For example, swap `sed -n '1,250p'` for `sed -n '1,125p'` then `sed -n '126,250p'`. Repeat until each chunk lands in full. Never proceed using a truncated chunk as if it were complete.
+
+- **Large JSON inventories** (`website/pages-*.json`, up to 228 KB) — never `cat` raw. Process with `python3` or `jq` and emit only the fields you need:
+
+      python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
+      jq '.pages[].url' "$REPO/website/pages-blog.json"
+
+  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+
+Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
+
+Validate every file before using it:
+- Markdown: content must start with `#`
+- JSON: content must start with `{` or `[`
+- HTML: content must start with `<`
+- Content must be non-empty
+
+If anything fails — clone error, missing file, empty content, or wrong format:
+- Do NOT reconstruct from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v2 -->
+
 ## What to do
 
-1. **Fetch the main brain** for cross-domain routing, precedence rules, and the compliance check:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
-2. **Load current site content** from THREE JSON files in this repo (fetch all three — they cover different page types):
+1. **Read `brain.md`** for cross-domain routing, precedence rules, and the compliance check.
+2. **Load current site content** from THREE JSON files in this repo (read all three — they cover different page types):
    - `website/pages-marketing.json` — static marketing pages (homepage, pricing, product, feature/SDK/UIKit pages, white-label, vs-stream)
    - `website/pages-industry.json` — all `/industry/*` pages (retail, fitness, travel, sports, health-and-wellness, fintech, media-and-news, edtech, gaming, betting)
    - `website/pages-use-cases.json` — all `/use-case/*` pages (activity feed, group chat, livestream, polls, etc.)
@@ -26,11 +72,6 @@ https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
 ## Site content reference
 
 The site content JSONs are maintained automatically by a Cloudflare Worker. Marketing and industry are regenerated on every Webflow site publish (both are static-page inventories); use cases are regenerated on every Use Cases CMS publish.
-
-**Files to fetch (all three):**
-- `website/pages-marketing.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
-- `website/pages-industry.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-industry.json
-- `website/pages-use-cases.json` → https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-use-cases.json
 
 All three files share the same JSON structure:
 ```json
@@ -181,12 +222,8 @@ Files loaded:
 
 ## Instructions for Claude
 
-1. Always load `pages-marketing.json`, `pages-industry.json`, AND `pages-use-cases.json` first. Merge their `pages` arrays into one combined dataset before gap detection. If running in an environment with file access (Cowork, Claude Desktop), read from the local repo. Otherwise, fetch from `github.com/.../blob/...` URLs. **Never use `raw.githubusercontent.com`** — it is blocked by network egress and will fail.
-2. **Load the brand messaging guidelines** by fetching the router file first, then the files it specifies:
-   ```
-   https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-   ```
-   At minimum, fetch `terminology.md`, `tone.md`, `positioning.md`, and `boilerplates.md` from the base URL in that router. All suggested copy must follow these guidelines.
+1. Always load `pages-marketing.json`, `pages-industry.json`, AND `pages-use-cases.json` first (via the fetch block at the top of this file). Merge their `pages` arrays into one combined dataset before gap detection.
+2. **Load the brand messaging guidelines** by reading `messaging/brain.md` first, then the files it routes to. At minimum, read `messaging/terminology.md`, `messaging/tone.md`, `messaging/positioning.md`, and `messaging/boilerplates.md`. All suggested copy must follow these guidelines.
 3. Read the full product update the user provides.
 4. Extract every distinct feature, capability, or improvement mentioned.
 5. For each one, scan ALL pages in the JSON — not just the obvious ones. A chat feature might be relevant to a use case page or industry page.

@@ -1,32 +1,29 @@
 # social.plus — Main Brain
 
-This is the master router for all social.plus marketing content. Every skill fetches this file alongside its domain-specific router to get cross-domain awareness, precedence rules, and the compliance check.
+This is the master router for all social.plus marketing content. Every skill loads this file alongside its domain-specific router to get cross-domain awareness, precedence rules, and the compliance check.
 
-All reference files are hosted at:
-`https://github.com/cruciate-hub/marketing-team/blob/main/`
-
-**Warning:** Always use `github.com/.../blob/...` URLs when fetching. Never convert to `raw.githubusercontent.com` or `api.github.com` — both are blocked by network egress restrictions and will fail.
+All reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`) once per session and reads files with `cat`. Paths in this file are relative to the repo root — for example `messaging/brain.md` is at `$MT_REPO/messaging/brain.md`.
 
 ## Cross-domain routing
 
-Most tasks need references from more than one domain. Use this table to determine which routers to fetch:
+Most tasks need references from more than one domain. Use this table to determine which routers to load:
 
-| Task type | Fetch these routers |
+| Task type | Load these routers |
 |---|---|
 | Written content (articles, blog posts, scripts, copy) | `messaging/brain.md` |
 | Visual output (HTML, CSS, components, decks, emails) | `messaging/brain.md` + `design-system/brain.md` |
 | Social media posts | `messaging/brain.md` + `design-system/brain.md` — brain.md routes to `social-posts.md` for platform specs |
-| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It fetches `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
+| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
 | Website audit or content analysis | `website/pages-*.json` (10 files, pick relevant ones) + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
 | AEO answer articles (/answers/ collection) | `skills/skills/aeo-content/SKILL.md` + `messaging/brain.md` |
 
-If your skill's SKILL.md already specifies which domain router to fetch, follow that. Use this table to decide whether you also need the *other* domain router.
+If your skill's SKILL.md already specifies which domain router to load, follow that. Use this table to decide whether you also need the *other* domain router.
 
 ## Available skills
 
-Skills are pre-built instruction sets for recurring task types. When a task matches, fetch the skill's SKILL.md first and follow it — it handles all routing and generation steps.
+Skills are pre-built instruction sets for recurring task types. When a task matches, load the skill's SKILL.md first and follow it — it handles all routing and generation steps.
 
 | Skill | Trigger | SKILL.md |
 |---|---|---|
@@ -43,7 +40,7 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **backlink-placement-finder** | Find contextually relevant backlink placement opportunities on partner sites and draft request emails | `skills/skills/backlink-placement-finder/SKILL.md` |
 | **aeo-content** | AEO answer articles for /answers/ collection, AI-optimized reference content for AI search engines | `skills/skills/aeo-content/SKILL.md` |
 
-Fetch skill files using the same `github.com/.../blob/...` URL pattern as all other files.
+Load skill files via the canonical fetch block, same as every other reference file.
 
 ## Precedence rules
 
@@ -59,7 +56,7 @@ When two reference files give guidance on the same topic, the more specific file
 
 Before delivering ANY content to the user, run this check:
 
-1. **Terminology.** Re-read `terminology.md` (you already fetched it). Scan your output for forbidden terms. Common violations: "social network", "forum", "chat tool", "plug and play" (forbidden outside dev docs), growth guarantees.
+1. **Terminology.** Re-read `terminology.md` (you already loaded it). Scan your output for forbidden terms. Common violations: "social network", "forum", "chat tool", "plug and play" (forbidden outside dev docs), growth guarantees.
 2. **Tone.** Compare your output against `tone.md`. Does it sound like the social.plus brand — or like default Claude? If you can't tell the difference, it's default Claude. Rewrite.
 3. **Claims.** You did not invent any statistics, customer names, quotes, features, or performance claims. If it's not in the fetched reference files, don't state it as fact.
 4. **Design tokens.** If your output includes visual styling (CSS, HTML, color references), confirm every value matches the design system files exactly. No eyeballing.

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# audit-skills.sh — verify every SKILL.md that fetches from GitHub uses the
-# canonical fetch block (v1) verbatim. Exits non-zero on any drift or missing
-# block in a skill that still references github.com.
+# audit-skills.sh — verify every SKILL.md that uses the shared fetch
+# architecture contains the canonical fetch block (v2) verbatim.
 #
 # Run from the repo root:
 #   ./scripts/audit-skills.sh
@@ -11,9 +10,9 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-CANONICAL="$REPO_ROOT/scripts/canonical-fetch-block-v1.md"
-START_MARK='<!-- FETCH-BLOCK:START v1 -->'
-END_MARK='<!-- FETCH-BLOCK:END v1 -->'
+CANONICAL="$REPO_ROOT/scripts/canonical-fetch-block-v2.md"
+START_MARK='<!-- FETCH-BLOCK:START v2 -->'
+END_MARK='<!-- FETCH-BLOCK:END v2 -->'
 
 if [ ! -f "$CANONICAL" ]; then
   echo "ERROR: canonical block missing at $CANONICAL" >&2
@@ -35,23 +34,35 @@ extract_block() {
   ' "$1"
 }
 
-# Check whether a SKILL.md actually fetches from the marketing-team repo.
-references_repo() {
-  grep -qE 'github\.com/cruciate-hub/marketing-team|raw\.githubusercontent\.com/cruciate-hub/marketing-team|api\.github\.com/repos/cruciate-hub/marketing-team' "$1"
+# Skills that genuinely don't need to fetch from the repo. Listed explicitly so
+# any new skill that needs fetching but lacks the block is caught.
+NON_FETCHING_SKILLS=(
+  "link-building-vetter"
+  "legal-docs-formatter"
+  "svg-icon-transformer"
+)
+
+is_non_fetching() {
+  local name="$1"
+  for ns in "${NON_FETCHING_SKILLS[@]}"; do
+    [ "$ns" = "$name" ] && return 0
+  done
+  return 1
 }
 
 for skill in "$REPO_ROOT"/skills/skills/*/SKILL.md; do
   [ -f "$skill" ] || continue
   rel="${skill#$REPO_ROOT/}"
+  name="$(basename "$(dirname "$skill")")"
 
   block=$(extract_block "$skill")
 
   if [ -z "$block" ]; then
-    if references_repo "$skill"; then
-      echo "MISSING: $rel — references the repo but has no FETCH-BLOCK markers"
-      drift=1
-    else
+    if is_non_fetching "$name"; then
       skipped=$((skipped + 1))
+    else
+      echo "MISSING: $rel — fetch-using skill but has no FETCH-BLOCK markers"
+      drift=1
     fi
     continue
   fi
@@ -65,5 +76,5 @@ for skill in "$REPO_ROOT"/skills/skills/*/SKILL.md; do
 done
 
 echo
-echo "Checked: $checked   Skipped (no fetches): $skipped   Drift: $drift"
+echo "Checked: $checked   Skipped (non-fetching): $skipped   Drift: $drift"
 exit "$drift"

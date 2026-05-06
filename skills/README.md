@@ -41,7 +41,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 
 ## How it works
 
-Each skill fetches its reference files live from GitHub every time it triggers. All skills also fetch `brain.md` (the main brain) which provides cross-domain routing, precedence rules, and a compliance check. The actual content lives at:
+Each skill loads its reference files via a shallow `git clone --depth 1` of this repo into `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`) once per session. The canonical fetch block at the top of every fetch-using SKILL.md handles the clone and validation; skills then read individual files with `cat "$MT_REPO/<path>"`. All skills also load `brain.md` (the main brain) which provides cross-domain routing, precedence rules, and a compliance check. The actual content lives at:
 
 - [`messaging/`](../messaging) — Brand messaging files (tone, terminology, positioning, narrative, boilerplates, UI micro-copy)
 - [`design-system/`](../design-system) — Full visual design system (colors, typography, spacing, buttons, shadows, layout, accessibility, and more)
@@ -51,10 +51,10 @@ Each skill fetches its reference files live from GitHub every time it triggers. 
 
 ## Installation
 
-Install via the marketplace in Claude Cowork, or download the plugin folder and install manually. Works in Cowork and Claude Code (any environment with WebFetch or bash access).
+Install via the marketplace in Claude Cowork, or download the plugin folder and install manually. Works in any environment with `git` and `bash` (Cowork, Claude Desktop, Claude Code).
 
 ## Updating content
 
-Edit the markdown files in `messaging/` or `design-system/` on GitHub. Changes are live immediately for all team members — no plugin reinstall needed.
+Edit the markdown files in `messaging/` or `design-system/` on GitHub and push to `main`. The next teammate session does a `git pull --ff-only` and picks up the change — no plugin reinstall needed.
 
-Skill logic changes (SKILL.md files) require team members to update the plugin.
+Skill logic changes (SKILL.md files) ride along with the same pull and don't require manual reinstall either, but bumping the plugin version (in `.claude-plugin/marketplace.json` and `skills/.claude-plugin/plugin.json`) forces a session-snapshot refresh, which is the cleanest way to roll out behavioral changes.

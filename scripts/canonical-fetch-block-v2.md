@@ -1,25 +1,3 @@
----
-name: design-system
-description: >
-  Reference for the social.plus design system — colors, typography, spacing, buttons,
-  inputs, layout, shadows, icons, imagery, accessibility, and logo usage.
-  Use this skill for: writing CSS, styling components, building Webflow elements,
-  creating HTML mockups, designing visual layouts, or any output where visual accuracy
-  matters for social.plus. Also trigger when someone asks about brand colors, the
-  color palette, button states, dark mode colors, design tokens, spacing, border
-  radius, typography, or layout. Trigger even for quick questions like "what blue
-  do we use" or "what's the hover color for buttons."
-  Do NOT trigger for written content only (use brand-messaging skill) — this skill
-  is for visual output and design token reference.
----
-
-# social.plus Design System
-
-This skill provides the full social.plus design system reference. The source of truth lives on GitHub and must be fetched fresh every time.
-
-## How to fetch reference files
-
-<!-- FETCH-BLOCK:START v2 -->
 Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fetch them by shallow-cloning the repo once per session, then loading individual files with `cat`. Use this exact pattern at the start of every skill that needs reference files:
 
     REPO="${MT_REPO:-/tmp/cruciate-hub-marketing-team}"
@@ -64,16 +42,3 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 - Stop immediately and respond with exactly this line:
 
   `Fetch failed: <path>. Please check your network connection and rerun.`
-<!-- FETCH-BLOCK:END v2 -->
-
-## What to do
-
-1. Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
-
-2. Fetch `design-system/brain.md` (the design system router).
-
-3. Follow the design system router's instructions — it tells you which additional files to fetch based on the user's task.
-
-4. If the output includes any text content (headings, labels, CTAs, descriptions), also fetch `messaging/brain.md`.
-
-5. Before delivering, run the compliance check from the main brain.

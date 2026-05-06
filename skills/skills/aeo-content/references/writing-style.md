@@ -1,10 +1,10 @@
 # AEO Writing Style
 
-Two layers of rules: brand (from the fetched `messaging/*` files) and AEO-specific (this file). Where they conflict, `messaging/terminology.md` wins.
+Two layers of rules: brand (from the loaded `messaging/*` files) and AEO-specific (this file). Where they conflict, `messaging/terminology.md` wins.
 
-## Required brand-messaging fetch
+## Required brand-messaging files
 
-Fetched during intake by `scripts/fetch_brand.py`. Six files, in order of precedence:
+Loaded during intake via the canonical fetch block (which clones the repo to `$MT_REPO`). Read each with `cat "$MT_REPO/messaging/<file>"`. Six files, in order of precedence:
 
 1. **terminology.md** — approved and forbidden terms. Non-negotiable.
 2. **tone.md** — social.plus voice.
@@ -13,7 +13,7 @@ Fetched during intake by `scripts/fetch_brand.py`. Six files, in order of preced
 5. **positioning.md** — pillars, vision, boilerplates.
 6. **boilerplates.md** — approved company descriptions.
 
-If any file is unavailable at fetch time, stop and surface the failure. Do not write on memorized brand content.
+If any file is missing or fails the canonical fetch block's validation, stop and surface the failure. Do not write on memorized brand content.
 
 **The pitch section in every article is generated from these files**, not from a template inside this skill. The skill defers to brand messaging for what social.plus says about itself. See each pattern file (`references/patterns/*.md`) for the placement of the pitch in the section order.
 

@@ -77,7 +77,7 @@ aeo-content/
 │   └── questions-sample.md              Phase B artifact sample
 └── scripts/
     ├── compliance.py                    Deterministic compliance checker (20 checks)
-    ├── fetch_brand.py                   GitHub blob-HTML fetcher for brand-messaging files
+    ├── duplicate_check.py               Jaccard-similarity dedupe against `pages-answers.json` and `pages-glossary.json`
     └── make_zip.py                      Bundles `outputs/*.docx` into a timestamped batch zip
 ```
 
@@ -135,20 +135,27 @@ The 20 checks:
 | Citations | intent-conditional minimum (definition ≥2, comparative ≥3, procedural any) |
 | Claims | approved-customer whitelist (Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames) |
 
-## Brand-fetch helper — local use
+## Brand-file loading
+
+Brand-messaging files (`messaging/terminology.md`, `messaging/tone.md`, `messaging/narrative.md`, `messaging/value-story.md`, `messaging/positioning.md`, `messaging/boilerplates.md`) are loaded by the canonical fetch block at the top of the SKILL.md, which shallow-clones the repo to `$MT_REPO`. Skills then read each file with `cat "$MT_REPO/messaging/<file>"`. There is no separate fetch helper — the fetch block is the contract.
+
+## Duplicate-check helper — local use
 
 ```bash
-# Fetch all six brand files to stdout
-python3 scripts/fetch_brand.py
+# Run from the cloned repo path (default $MT_REPO or /tmp/cruciate-hub-marketing-team)
+MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "in-app activity feeds"
 
-# Single file
-python3 scripts/fetch_brand.py --file tone.md
+# Custom threshold
+python3 scripts/duplicate_check.py "activity feeds" --threshold 0.5
 
-# Write to a directory
-python3 scripts/fetch_brand.py --out /tmp/brand/
+# Custom repo path
+python3 scripts/duplicate_check.py "..." --repo /custom/path
+
+# Machine-readable
+python3 scripts/duplicate_check.py "zero-party data" --json
 ```
 
-Uses `github.com/.../blob/...` URLs exclusively — raw and API hosts are blocked by runtime network egress. Extraction uses stdlib `html.parser` with a regex fallback; fetches retry with exponential backoff on transient errors.
+Exit codes: 0 = clean, 1 = duplicates found, 2 = unverified (could not read snapshots — re-run the canonical fetch block first).
 
 ## Batch zip helper — local use
 
