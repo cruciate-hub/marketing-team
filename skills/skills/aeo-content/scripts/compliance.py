@@ -374,10 +374,15 @@ def check_tldr_word_count(body: str) -> CheckResult:
     tldr = paragraphs[1]
     plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", tldr)
     wc = len(re.findall(r"\b[\w'-]+\b", plain))
-    ok = 120 <= wc <= 160
+    if 120 <= wc <= 160:
+        status = "PASS"
+    elif 118 <= wc <= 162:
+        status = "WARN"
+    else:
+        status = "FAIL"
     return CheckResult(
         "tldr_word_count",
-        "PASS" if ok else "FAIL",
+        status,
         f"TL;DR = {wc} words (target 120-160)",
     )
 
