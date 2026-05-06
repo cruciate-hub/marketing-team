@@ -42,19 +42,39 @@ The `pages-*.json` files are intentionally a **lightweight heading index** — f
 
 **Why this works even when the JSON is sparse:** known limitations of the snapshot generator (e.g., the static-page extractor can't reach Webflow Components, so industry pages capture only the headings outside components) are compensated by the Phase 2 live fetch — the live page sees everything.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## Step 0: Fetch the main brain
 
-Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
-
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
 If the fetch fails, proceed with the link suggestions but append this notice at the end of your output: "⚠️ brain.md was unreachable — the compliance check (terminology, tone, claims, em-dashes, emojis) was not applied. The calling skill should run its own compliance pass before publishing." Linking decisions don't depend on brain.md, so a missing brain.md is a soft failure, not a stop condition.
 
 ## Step 1: Determine which data files to fetch
 
-Always fetch `link-strategy.md`. Then pick `pages-*.json` files based on context:
+Always fetch `website/link-strategy.md`. Then pick `pages-*.json` files based on context:
 
 | Calling context | Files to fetch |
 |---|---|
@@ -63,29 +83,13 @@ Always fetch `link-strategy.md`. Then pick `pages-*.json` files based on context
 | Standalone draft mode (user-pasted content) | `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json` (default — ask if blog/customer-stories/answers should also be considered) |
 | Audit mode | All 10 files: `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json`, `pages-blog.json`, `pages-customer-stories.json`, `pages-answers.json`, `pages-product-updates.json`, `pages-release-notes.json`, `pages-webinars.json` |
 
-Always fetch in parallel using WebFetch. URLs follow the pattern:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/website/link-strategy.md
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-use-cases.json
-... etc
-```
+Run all fetches in parallel via the canonical fetch block at the top of this file. Files live under `website/` (e.g. `website/link-strategy.md`, `website/pages-marketing.json`).
 
 If `link-strategy.md` is missing or its `Refresh by:` date is in the past, surface this to the user before continuing. Stale strategy beats no strategy, but the user should know.
 
-### GitHub HTML parsing
+### File contents
 
-These are GitHub HTML pages. Extract the markdown content from the `<article>` element with class `markdown-body`. Use Python:
-
-```python
-import re, html
-match = re.search(r'<article[^>]*class="[^"]*markdown-body[^"]*"[^>]*>(.*?)</article>', content, re.DOTALL)
-if match:
-    text = re.sub(r'<[^>]+>', '\n', match.group(1))
-    text = html.unescape(text)
-```
-
-For JSON files served as HTML on GitHub, extract the same way then `json.loads(text.strip())`. Each `pages-*.json` has shape `{"_meta": {...}, "pages": [{"url", "metaTitle", "metaDescription", "content"}, ...]}`. URLs are full `https://www.social.plus/...`.
+Each `pages-*.json` has shape `{"_meta": {...}, "pages": [{"url", "metaTitle", "metaDescription", "content"}, ...]}`. URLs are full `https://www.social.plus/...`. Because `curl` returns raw JSON, parse directly with `json.loads(content)` — no HTML extraction needed.
 
 ## Step 2: Determine mode
 

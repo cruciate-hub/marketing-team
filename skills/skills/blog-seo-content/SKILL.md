@@ -24,17 +24,35 @@ description: >
 
 This skill produces long-form, brand-aligned content for the social.plus blog. The output maps directly to the Webflow CMS collection fields so content can be pasted into the CMS without reformatting.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## What to do
 
-1. Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+1. Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
-2. Fetch the messaging router:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-```
+2. Fetch `messaging/brain.md` (the messaging router).
 
 3. Follow the messaging router's **"Long-form content"** routing. This loads:
    - `terminology.md` + `tone.md` (always)
@@ -45,12 +63,10 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 4. `value-story.md` is already loaded via the long-form routing above. For comparison or competitive content, lean on its differentiation framework especially heavily.
 
 5. If the article needs awareness of what the website already says (to avoid contradicting it or to find adjacent content to reference), fetch any of these as relevant:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-industry.json
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-blog.json
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-glossary.json
-```
+   - `website/pages-marketing.json`
+   - `website/pages-industry.json`
+   - `website/pages-blog.json`
+   - `website/pages-glossary.json`
 
 These fetches serve **content awareness** (not linking — internal linking is handled by the `internal-linking-optimizer` skill in a dedicated step). Use them for:
 - **Avoiding duplicates** — check if a similar topic has been covered before; if yes, suggest updating the existing post rather than writing a new one.
@@ -245,6 +261,3 @@ Never improvise internal links — the optimizer is the source of truth. The 3-7
 
 Run the compliance check from `brain.md`. Blog posts are high-visibility, long-lived content — terminology violations and tone drift compound over time.
 
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings.

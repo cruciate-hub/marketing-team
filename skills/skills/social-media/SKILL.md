@@ -17,17 +17,35 @@ description: >
 
 This skill produces platform-specific social media content for social.plus. Each platform has different format constraints, tone expectations, and content structures — this skill ensures they're all followed.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## What to do
 
-1. Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+1. Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
-2. Fetch the messaging router:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-```
+2. Fetch `messaging/brain.md` (the messaging router).
 
 3. Follow the messaging router's **"Social media posts"** routing. This loads:
    - `terminology.md` + `tone.md` (always)
@@ -37,11 +55,7 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
 
 4. Social posts are short-form content, so `value-story.md` is also loaded via the **"Short-form content"** routing. Use it when posts make value claims or reference product capabilities.
 
-5. If the post needs visual assets or image specs, also fetch:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/design-system/brain.md
-```
-Follow its routing for colors, typography, and imagery guidelines.
+5. If the post needs visual assets or image specs, also fetch `design-system/brain.md`. Follow its routing for colors, typography, and imagery guidelines.
 
 ## Platform-specific rules
 
@@ -138,6 +152,3 @@ When the user asks for a batch of posts or a calendar:
 
 Run the compliance check from `brain.md`. Social posts are public and permanent — a forbidden term in a LinkedIn post is visible to your entire network.
 
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings.

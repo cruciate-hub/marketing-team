@@ -17,17 +17,35 @@ description: >
 
 This skill produces high-converting ad copy and campaign landing page content for social.plus. Ad copy operates under extreme space constraints, so every word must earn its place — while still following brand terminology and positioning.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## What to do
 
-1. Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+1. Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
-2. Fetch the messaging router:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-```
+2. Fetch `messaging/brain.md` (the messaging router).
 
 3. Follow the messaging router's **"Short-form content"** routing. This loads:
    - `terminology.md` + `tone.md` (always)
@@ -35,13 +53,10 @@ https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
    - `positioning.md` (product pillars for framing)
    - `value-story.md` (differentiation framework, core problems — essential for ad copy)
 
-5. If the campaign includes a landing page, also follow **"Long-form content"** routing for:
+4. If the campaign includes a landing page, also follow **"Long-form content"** routing for:
    - `narrative.md` (messaging hierarchy for page structure)
 
-6. If the landing page needs visual design, also fetch:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/design-system/brain.md
-```
+5. If the landing page needs visual design, also fetch `design-system/brain.md`.
 
 ## Ad copy guidelines
 
@@ -198,6 +213,3 @@ RSAs allow up to 15 headlines and 4 descriptions. Google dynamically tests combi
 
 Run the compliance check from `brain.md`. Ad copy is high-spend content — a terminology violation wastes budget and confuses prospects.
 
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings.

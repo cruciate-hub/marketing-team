@@ -18,13 +18,33 @@ description: >
 
 This skill gives you full awareness of what the social.plus marketing website says — every page, every heading, every claim — so you can query it, audit it, find gaps, and generate site-aware recommendations.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## Step 0: Fetch the main brain
 
-Fetch the main brain for cross-domain routing, precedence rules, and the compliance check:
-
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
 ## Step 1: Load the relevant site content
 
@@ -45,10 +65,7 @@ Pick the files relevant to the user's question — don't load all 10 unless the 
 | `website/pages-product-updates.json` | `/product-update/*` (monthly) | ~58 |
 | `website/pages-webinars.json` | `/webinars/*` | ~25 |
 
-Fetch via GitHub blob URLs. Example for marketing pages:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/website/pages-marketing.json
-```
+Fetch each as `website/<file>.json` per the canonical fetch block at the top of this file (e.g. `website/pages-marketing.json`).
 
 ### How to choose which files
 
@@ -67,11 +84,7 @@ Every response that discusses "the website" should be explicit about which file(
 
 ## Step 2: Load brand guidelines (when needed)
 
-For any analysis that involves evaluating messaging quality, suggesting copy, or checking brand consistency, also fetch the brand routing file:
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-```
-Follow its instructions to load the relevant guideline files. Not every query needs this — simple lookups ("what does page X say about Y") don't. But audits, gap analysis, and copy suggestions always do.
+For any analysis that involves evaluating messaging quality, suggesting copy, or checking brand consistency, also fetch `messaging/brain.md`. Follow its instructions to load the relevant guideline files. Not every query needs this — simple lookups ("what does page X say about Y") don't. But audits, gap analysis, and copy suggestions always do.
 
 ## Step 3: Determine the analysis mode
 
@@ -283,10 +296,6 @@ Keep it to 2-3 observations. Make each one specific, quotable, and actionable. T
 **Don't over-flag.** Not every minor difference is a problem. Some pages intentionally use different framing for different audiences (enterprise vs. developer). Use judgment about what's genuinely problematic vs. what's intentional variation. When in doubt, flag it but note that it may be intentional.
 
 **Combine modes when natural.** If someone asks "audit the pricing page and compare it to [competitor]," run both Page Health Check and Competitive Comparison. Don't force a single-mode answer.
-
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings and will throw an error.
 
 ## Pages covered
 

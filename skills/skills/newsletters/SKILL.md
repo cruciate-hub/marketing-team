@@ -18,42 +18,54 @@ description: >
 
 Generate MailerLite-compatible responsive HTML emails. This skill handles two distinct email types — determine which one applies before proceeding.
 
+## How to fetch reference files
+
+<!-- FETCH-BLOCK:START v1 -->
+Fetch reference files ONLY with `curl` from `raw.githubusercontent.com`, using these exact flags:
+
+    curl -fsSL --max-time 30 --connect-timeout 10 --retry 2 --retry-delay 1 \
+      https://raw.githubusercontent.com/cruciate-hub/marketing-team/main/<path>
+
+The repo is public — no authentication required. When fetching multiple files in one step, run the curl commands in parallel (single Bash message, multiple commands) — do not serialise.
+
+Validate every response before using it:
+- Markdown files must start with `#` (a leading heading line)
+- JSON files must start with `{` or `[`
+- HTML files must start with `<`
+- Content must be non-empty
+
+If any fetch fails (non-zero exit, empty output, or content that fails the above check):
+- Do NOT reconstruct the file from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v1 -->
+
 ## Step 0: Fetch the main brain
 
-Fetch the main brain for cross-domain routing, precedence rules, and the compliance check you must run before delivering:
-
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
-```
+Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check you must run before delivering.
 
 ## Step 1: Fetch brand guidelines
 
-Fetch the messaging router to get terminology and tone:
-
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
-```
+Fetch `messaging/brain.md` to get the messaging router.
 
 Follow its "Any content task" routing to fetch `terminology.md` and `tone.md`. For email subject lines and body copy, also check if "Short-form content" routing applies.
 
 Fetch the color system directly (emails need hex values, not CSS variables):
 
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/design-system/colors-palette.md
-https://github.com/cruciate-hub/marketing-team/blob/main/design-system/colors-usage.md
-```
+- `design-system/colors-palette.md`
+- `design-system/colors-usage.md`
 
 ## Step 2: Fetch the email template references
 
-Fetch all three — they work together:
+Fetch all five — they work together:
 
-```
-https://github.com/cruciate-hub/marketing-team/blob/main/emails/product-update-newsletter-spec.md
-https://github.com/cruciate-hub/marketing-team/blob/main/emails/product-update-newsletter-structure.md
-https://github.com/cruciate-hub/marketing-team/blob/main/emails/product-update-newsletter-blocks.md
-https://github.com/cruciate-hub/marketing-team/blob/main/emails/product-update-newsletter-assembly.md
-https://github.com/cruciate-hub/marketing-team/blob/main/emails/emails.md
-```
+- `emails/product-update-newsletter-spec.md`
+- `emails/product-update-newsletter-structure.md`
+- `emails/product-update-newsletter-blocks.md`
+- `emails/product-update-newsletter-assembly.md`
+- `emails/emails.md`
 
 - `product-update-newsletter-spec.md` — MailerLite technical requirements, brand colors, typography, merge tags, image placeholder convention
 - `product-update-newsletter-structure.md` — HTML for: base shell, preheader, header, intro text, hero image
@@ -76,14 +88,8 @@ Use when: the user shares a product update doc, release notes, a Google Doc with
 ### Type B — General marketing email
 Use when: the user asks for a campaign email, one-off announcement, promotional email, or any email not tied to a product update or feature release.
 
-- Fetch and use the base HTML template:
-  ```
-  https://github.com/cruciate-hub/marketing-team/blob/main/emails/product-update-newsletter-examples/email-template.html
-  ```
-- Fetch `boilerplates.md` for standardized descriptions and elevator pitches — use these as starting points for body copy:
-  ```
-  https://github.com/cruciate-hub/marketing-team/blob/main/messaging/boilerplates.md
-  ```
+- Fetch the base HTML template at `emails/product-update-newsletter-examples/email-template.html`.
+- Fetch `messaging/boilerplates.md` for standardized descriptions and elevator pitches — use these as starting points for body copy.
 - Apply `terminology.md` and `tone.md` for copy.
 - Apply `colors-palette.md` and `colors-usage.md` for all color values (hex only — no CSS variables).
 - Follow the email content guidelines in `emails.md` for body structure and CTA.
@@ -166,7 +172,3 @@ Remind the user to:
 4. **Upload a white version of the social.plus logo** to MailerLite and replace `REPLACE_WITH_WHITE_LOGO.png` in the header with the actual MailerLite CDN URL (needed for dark mode logo swap)
 5. Preview in MailerLite using Preview and Test before sending — check both light and dark mode rendering
 6. Enable "Automatic CSS inline" in MailerLite's Settings tab
-
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** The `raw.githubusercontent.com` domain is blocked by network egress settings.
