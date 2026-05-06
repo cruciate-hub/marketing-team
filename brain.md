@@ -39,6 +39,9 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **link-building-vetter** | Vet incoming ABC link exchange requests — score anchors, text mods, and article eligibility, then draft response emails | `skills/skills/link-building-vetter/SKILL.md` |
 | **backlink-placement-finder** | Find contextually relevant backlink placement opportunities on partner sites and draft request emails | `skills/skills/backlink-placement-finder/SKILL.md` |
 | **aeo-content** | AEO answer articles for /answers/ collection, AI-optimized reference content for AI search engines | `skills/skills/aeo-content/SKILL.md` |
+| **internal-linking-optimizer** | Suggest SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content` as a pre-delivery step) or run a site-wide internal-linking audit | `skills/skills/internal-linking-optimizer/SKILL.md` |
+| **legal-docs-formatter** | Format legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item | `skills/skills/legal-docs-formatter/SKILL.md` |
+| **svg-icon-transformer** | Transform raw SVG input into clean, accessible, inline-embed-ready icon markup; strips editor noise and applies accessibility defaults | `skills/skills/svg-icon-transformer/SKILL.md` |
 
 Load skill files via the canonical fetch block, same as every other reference file.
 
