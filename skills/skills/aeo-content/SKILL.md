@@ -226,7 +226,8 @@ After the compliance script passes, answer each of these yes/no before returning
 3. Does every numeric claim have a source (approved-data list or external citation)?
 4. Does the pitch section reflect the fetched `positioning.md` / `value-story.md` / `boilerplates.md`, not a template from memory?
 5. Are the FAQ questions phrased from real-user research (not invented patterns)?
-6. Did the compliance script exit 0?
+6. Did I check the deferred-tool list for Ahrefs MCP tools before defaulting to WebSearch?
+7. Did the compliance script exit 0?
 
 Any "no" → revise before delivering. Do not ship with unresolved "no".
 
