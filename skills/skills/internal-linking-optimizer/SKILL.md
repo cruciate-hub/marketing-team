@@ -199,7 +199,7 @@ Use exactly one of these three states:
 
 2. ...
 
-[3-7 for blog, 1-3 for AEO]
+[3-7 for blog topical, 2-6 for AEO topical (scaled by length per `link-strategy.md`), plus customer-story links when approved customers are named]
 
 ### Notes for the writer
 

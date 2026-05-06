@@ -181,10 +181,13 @@ Alt text pattern: `Abstract visualization of [main topic from title]`.
 
 After drafting and before running compliance, invoke the `internal-linking-optimizer` skill in **draft mode**:
 - Pass: full article markdown, the article title (= target keyword), content type `AEO`.
-- The optimizer returns 0-3 markdown links (it returns zero when no genuinely relevant target exists — never force links). AEO articles use markdown links only, never HTML.
-- Allowed sections: the definition chunk, "why it matters", architecture/features, step-by-step.
-- Disallowed sections: FAQs, conclusion, metrics table — these stay link-free for clean citation extraction.
-- Never force links. Zero is acceptable.
+- The optimizer returns two classes of markdown links for AEO drafts:
+  - **Topical links**, scaled by article length (~1 per 300 words; floor 2, ceiling 6 — a 900-word definition typically gets 2-3, a 1.5k+ word pillar gets 4-6). Zero only when no genuinely relevant target exists — never force them.
+  - **Customer-story links**, a separate class not counted toward the topical budget. When an approved customer is named (Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames), the **first mention** becomes a `[customer name](https://social.plus/customer-story/[customer])` link; subsequent mentions of the same customer stay plain text. Multiple customers each get their own first-mention link.
+- Allowed sections (both classes): the definition chunk, "why it matters", architecture/features, step-by-step, and the social.plus pitch section.
+- Disallowed sections (both classes): FAQs, conclusion, metrics table — these stay link-free for clean citation extraction. If a customer's first mention falls in a disallowed section, the optimizer waits for the next allowed-section mention.
+- AEO articles use markdown links only, never HTML.
+- Never force links. Zero topical and zero customer-story is acceptable when no relevant target exists and no approved customer is named.
 
 ## Compliance is non-negotiable
 
@@ -209,7 +212,7 @@ Checks:
 - Heading hierarchy well-formed (single H1, no skipped levels)
 - External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
 - Approved-customer whitelist — no mentions of unapproved customer names
-- Internal-link presence — at least one `https://social.plus/...` link somewhere in the body (WARN only — a zero usually means the `internal-linking-optimizer` step was skipped; a legitimate zero happens when no related page exists)
+- Internal-link presence — at least one `https://social.plus/...` link somewhere in the body (WARN only — a zero usually means the `internal-linking-optimizer` step was skipped). This is a binary presence check, **not a topical-link-floor check**: the optimizer enforces its own per-length floor (2 for short articles, up to 6 for long). Compliance is just here to catch "the optimizer never ran." A legitimate zero happens only when no related page exists AND no approved customer was named.
 - Word count inside the intent-specific typical range (warning only, does not fail)
 
 Fix every failure before delivering. Warnings are informational — address if it makes the article stronger, skip if not.
@@ -317,11 +320,11 @@ Field testing has shown subagents consistently rationalize around the skill's ru
 
 1. The path to `outputs/[slug].draft.md`.
 2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary, not a paraphrase, not an invented format. See the "Compliance-output fingerprint rule" and "Sample expected compliance output" below for what the parent enforces.
-3. Evidence that `internal-linking-optimizer` was invoked. Paste one of the two:
-   - **Concrete pass:** the link(s) returned by the optimizer AND the exact location(s) where they were inserted in the draft (section heading + first 8 words of the paragraph). Example: `Returned [activity feed SDK](https://social.plus/chat/sdk). Inserted in "## How activity feeds work", paragraph starting "A modern feed platform adds a ranking layer…".`
-   - **Legitimate zero:** `optimizer returned zero relevant links` AND a one-line reason (no adjacent /answers/ page, topic is too narrow, etc.).
-   
-   Memory-guessed URLs without an insertion-point proof are an auto-failure. The parent's `check_internal_links` backstop catches this when the claim doesn't match what's actually in the draft.
+3. Evidence that `internal-linking-optimizer` was invoked. Paste both classes:
+   - **Topical links** (count + each link's anchor + URL + insertion-point quote — section heading + first 8 words of the paragraph). Example: `Returned 3 topical links: [activity feed SDK](https://social.plus/chat/sdk) — inserted in "## How activity feeds work", paragraph starting "A modern feed platform adds a ranking layer…". [list the rest]`. If zero, state the reason (no adjacent /answers/ page, topic too narrow, etc.).
+   - **Customer-story links** (count + each customer-name anchor + URL + first-mention location). Example: `Returned 1 customer-story link: [Noom](https://social.plus/customer-story/noom) — first mention inside "## Where social.plus fits", paragraph starting "social.plus is a leading…".` If no approved customer was named in the article, write `none — no approved customer mentioned`.
+
+   Memory-guessed URLs without an insertion-point proof are an auto-failure for either class. The parent's `check_internal_links` backstop catches absence; per-class evidence is what catches fabrication.
 4. A list of FAQ source URLs used.
 
 **Compliance-output fingerprint rule.** Before trusting any subagent's claimed compliance status, the parent checks the pasted payload for two literal strings:
