@@ -21,9 +21,13 @@ Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fe
 
 After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
 
-The Bash tool truncates large stdout to a small preview when the output exceeds the harness's display cap (the exact size varies by environment — observed in the 20–50 KB range). When that happens you'll see a marker like `Output too large (NkB). Full output saved to: …` followed by a short preview, and the rest is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see the marker. **If you do see the marker, never proceed using the preview as if it were the whole file** — switch to one of the patterns below.
+The Bash tool truncates large stdout when the output exceeds the harness's token/byte cap (observed at ~50 KB in Cowork; varies by environment). When this happens the harness emits one of these signals — both mean the same thing:
+- `Output too large (NkB). Full output saved to: …` followed by a short preview, OR
+- `Error: result (N characters) exceeds maximum allowed tokens` with no preview, just a sidecar-file pointer.
 
-- **Truncated markdown** — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
+In either case, the rest of the file is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see either signal. **If you do see either form, never proceed using the partial output as if it were the whole file** — switch to one of the patterns below.
+
+- **Truncated markdown** (you saw either truncation signal above) — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
 
       sed -n '1,250p'     "$REPO/<path>"
       sed -n '251,500p'   "$REPO/<path>"
@@ -101,7 +105,13 @@ Never ask about word count, audience, or must-cover sub-topics. Never ask a foll
 If the resulting article misses the mark, the colleague will tell you via chat edits. That round-trip is cheaper than front-loading a 4-question survey.
 
 ### 2. Duplicate-topic check
-Run the canonical fetch block first (so `$MT_REPO` is populated), then `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic phrase>"`. The script reads `website/pages-answers.json` and `website/pages-glossary.json` from the cloned repo and lists matches above a 0.35 Jaccard threshold, sorted by score. Exit code 1 = likely duplicate found; 0 = clean.
+Run the canonical fetch block first (so `$MT_REPO` is populated), then `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic phrase>"`. The script reads `website/pages-answers.json` and `website/pages-glossary.json` from the cloned repo and lists matches above a 0.5 query-coverage threshold, sorted by score.
+
+The script signals its outcome in two redundant ways — use whichever your environment makes more reliable:
+- **Exit code**: `0` = clean, `1` = matches found, `2` = unverified (read failure)
+- **Final stdout line**: `RESULT: CLEAN`, `RESULT: MATCHES`, or `RESULT: UNVERIFIED`
+
+Both signals must agree. If they disagree (e.g. exit `0` but stdout says `RESULT: MATCHES`), treat the run as `UNVERIFIED` and surface to the user — that mismatch indicates an environment quirk and the result can't be trusted.
 
 - If the script flags a close match in `/answers/`, surface the URL and ask the user whether to update that page instead of writing a new one. Duplicate pages split authority across the same citation slot.
 - If the script flags a match in `/glossary/`, consider whether the topic actually belongs in the glossary instead. Route the user there if so.

@@ -201,12 +201,16 @@ def main() -> int:
             "from SKILL.md first to populate it"
         )
         print(f"error: {msg}", file=sys.stderr)
+        # Also emit the canonical stdout marker so the calling skill's
+        # grep-based signal path sees it consistently with the exit code.
+        print("\nRESULT: UNVERIFIED")
         return 2
 
     try:
         result = check(args.topic, args.threshold, repo_root)
     except RuntimeError as e:
         print(str(e), file=sys.stderr)
+        print("\nRESULT: UNVERIFIED")
         return 2
 
     matches = result.matches
@@ -238,7 +242,7 @@ def main() -> int:
     else:
         if unverified:
             print(
-                f"RESULT: UNVERIFIED — could not read duplicate data for '{args.topic}'."
+                f"Could not read duplicate data for '{args.topic}'."
             )
             print()
             print("Collections that failed to read:")
@@ -273,6 +277,17 @@ def main() -> int:
                     f"WARNING: at least one collection could not be read ({failed}); "
                     f"results may be incomplete — verify the missing snapshots manually."
                 )
+
+        # Final canonical stdout marker — calling skills can grep this as a
+        # redundant signal alongside the exit code. Both must agree; if they
+        # disagree, treat as UNVERIFIED and surface to the user.
+        print()
+        if unverified:
+            print("RESULT: UNVERIFIED")
+        elif matches:
+            print("RESULT: MATCHES")
+        else:
+            print("RESULT: CLEAN")
 
     if unverified:
         return 2
