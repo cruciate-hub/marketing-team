@@ -567,7 +567,7 @@ def check_approved_customers(body: str) -> CheckResult:
 def check_internal_links(body: str) -> CheckResult:
     """Warn (not fail) if the article has zero internal social.plus links.
 
-    The internal-linking-optimizer skill is supposed to add 0-3 links to
+    The internal-linking-strategist skill is supposed to add 0-3 links to
     related social.plus pages (/answers/, /glossary/, /use-cases/, etc.).
     A zero here usually means that step was skipped, not that no related
     page existed. Field testing showed this step gets dropped silently in
@@ -585,7 +585,7 @@ def check_internal_links(body: str) -> CheckResult:
     return CheckResult(
         "internal_links",
         "WARN",
-        "0 internal social.plus links — did internal-linking-optimizer run? "
+        "0 internal social.plus links — did internal-linking-strategist run? "
         "Zero is legitimate only if no related social.plus page exists for this topic.",
     )
 

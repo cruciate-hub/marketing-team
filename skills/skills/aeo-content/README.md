@@ -14,7 +14,7 @@ Two modes, chosen from the brief:
 3. Fetches the brand-messaging stack from GitHub.
 4. Surfaces real PAA-based FAQ questions before writing.
 5. Drafts the article with an answer-first block, self-contained chunks, and intent-appropriate citation density.
-6. Delegates internal linking to `internal-linking-optimizer`.
+6. Delegates internal linking to `internal-linking-strategist`.
 7. Runs the deterministic compliance script.
 8. Converts the markdown intermediate to `.docx` via `anthropic-skills:docx`.
 
@@ -177,7 +177,7 @@ This skill and `blog-seo-content` are explicitly separated to prevent router col
 ## Related skills
 
 - `anthropic-skills:docx` — called by this skill in Phase D to produce the final `.docx`
-- `internal-linking-optimizer` — called by this skill to add internal links; do not re-implement
+- `internal-linking-strategist` — called by this skill to add internal links; do not re-implement
 - `blog-seo-content` — long-form blog posts, pillar pages (see boundary note above)
 - `case-study` — customer stories
 - `social-media` — LinkedIn, Instagram, X

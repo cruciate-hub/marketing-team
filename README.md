@@ -67,7 +67,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 
 | Skill | What it does |
 |---|---|
-| **internal-linking-optimizer** | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`) and runs site-wide link audits. Uses a canonical anchor map and cannibalization warnings from `link-strategy.md`, with live page-fetch to verify insertion points. |
+| **internal-linking-strategist** | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`) and runs site-wide link audits. Uses a canonical anchor map and cannibalization warnings from `link-strategy.md`, with live page-fetch to verify insertion points. |
 | **link-building-vetter** | Vets incoming ABC link exchange requests against social.plus guidelines, scores them 1-10, and drafts response emails. |
 | **backlink-placement-finder** | Finds contextually relevant backlink placement opportunities on partner websites and drafts request emails. |
 

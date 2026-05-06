@@ -83,7 +83,7 @@ Pick the files relevant to the context — don't load all 10 unless the question
 ## Files
 
 ```
-internal-linking-optimizer/
+internal-linking-strategist/
 ├── SKILL.md                          Skill entry point — three modes, two-phase architecture, workflow
 └── README.md                         This file
 ```
@@ -135,4 +135,4 @@ All reference files are loaded from a shallow clone of this repo (`git clone --d
 
 ## Adoption credit
 
-The 7-step audit framework adapts patterns from [openclaw/skills internal-linking-optimizer](https://github.com/openclaw/skills/tree/main/skills/aaron-he-zhu/internal-linking-optimizer) (Apache-2.0). The cannibalization handling, canonical anchor map, social.plus-specific data layer, intent-aware definitional/commercial split, and skill-to-skill invocation pattern are net-new for this skill.
+The 7-step audit framework adapts patterns from [openclaw/skills internal-linking-strategist](https://github.com/openclaw/skills/tree/main/skills/aaron-he-zhu/internal-linking-strategist) (Apache-2.0). The cannibalization handling, canonical anchor map, social.plus-specific data layer, intent-aware definitional/commercial split, and skill-to-skill invocation pattern are net-new for this skill.

@@ -97,7 +97,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
    - `website/pages-blog.json`
    - `website/pages-glossary.json`
 
-These fetches serve **content awareness** (not linking — internal linking is handled by the `internal-linking-optimizer` skill in a dedicated step). Use them for:
+These fetches serve **content awareness** (not linking — internal linking is handled by the `internal-linking-strategist` skill in a dedicated step). Use them for:
 - **Avoiding duplicates** — check if a similar topic has been covered before; if yes, suggest updating the existing post rather than writing a new one.
 - **Cross-topic references** — find adjacent content to reference (e.g., a "user retention" article that mentions concepts from an existing "app engagement" post).
 - **Tone and terminology calibration** — see how similar topics have been written about previously.
@@ -155,7 +155,7 @@ Follow the narrative structure from `narrative.md`: Context → Tension → Infr
 
 - Target length: 5,000–12,000 characters (matching the typical range on the live blog).
 - Include the target keyword in the H1 (page title), first paragraph of post-content, and at least one H2.
-- Internal links: do NOT improvise. Internal links are inserted by the `internal-linking-optimizer` skill in a dedicated step before delivery (see "Internal links" section below). Write the draft without internal links; the optimizer adds 3-7 SEO-grounded `<a href>` tags using the canonical anchor map and cannibalization warnings in `link-strategy.md`.
+- Internal links: do NOT improvise. Internal links are inserted by the `internal-linking-strategist` skill in a dedicated step before delivery (see "Internal links" section below). Write the draft without internal links; the optimizer adds 3-7 SEO-grounded `<a href>` tags using the canonical anchor map and cannibalization warnings in `link-strategy.md`.
 - Never fabricate statistics, customer names, quotes, or performance claims.
 - Never use emojis in blog content.
 
@@ -269,7 +269,7 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 
 ## Internal links
 
-After writing the draft and before the compliance check, invoke the `internal-linking-optimizer` skill in **draft mode**. Pass it:
+After writing the draft and before the compliance check, invoke the `internal-linking-strategist` skill in **draft mode**. Pass it:
 
 - The full draft article (title + post-content HTML + post-summary)
 - The target keyword

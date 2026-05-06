@@ -1,5 +1,5 @@
 ---
-name: internal-linking-optimizer
+name: internal-linking-strategist
 description: >
   Optimize internal linking for social.plus content. Two modes: (1) Draft mode
   suggests inline link targets and anchor text for a specific piece of new
@@ -599,4 +599,4 @@ Format the escalation as a clearly-flagged block at the top of the output so Ste
 
 ## Adoption credit
 
-The 7-step audit framework adapts patterns from [openclaw/skills internal-linking-optimizer](https://github.com/openclaw/skills/tree/main/skills/aaron-he-zhu/internal-linking-optimizer) (Apache-2.0). The cannibalization handling, canonical anchor map, social.plus-specific data layer, intent-aware definitional/commercial split, and skill-to-skill invocation pattern are net-new for this skill.
+The 7-step audit framework adapts patterns from [openclaw/skills internal-linking-strategist](https://github.com/openclaw/skills/tree/main/skills/aaron-he-zhu/internal-linking-strategist) (Apache-2.0). The cannibalization handling, canonical anchor map, social.plus-specific data layer, intent-aware definitional/commercial split, and skill-to-skill invocation pattern are net-new for this skill.

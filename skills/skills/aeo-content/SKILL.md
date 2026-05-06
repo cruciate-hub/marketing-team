@@ -237,13 +237,13 @@ Rules for the intermediate:
   2. The TL;DR paragraph (120-160 words). **No heading, no "TL;DR:" prefix, and never wrap it in a `## TL;DR` section.**
   Any additional paragraphs in this region will be mis-identified by the compliance script and fail the TL;DR check. Compliance detects the TL;DR by position (second paragraph), not by label.
 - Markdown tables (pipes and dashes), numbered/bulleted lists, `**bold**`, and inline markdown links `[anchor](URL)` are all supported by the docx skill's conversion.
-- External citations as markdown links where the intent calls for them. Internal links (to social.plus URLs) are handled by `internal-linking-optimizer`.
+- External citations as markdown links where the intent calls for them. Internal links (to social.plus URLs) are handled by `internal-linking-strategist`.
 
 Alt text pattern: `Abstract visualization of [main topic from title]`.
 
 ## Internal linking
 
-After drafting and before running compliance, invoke the `internal-linking-optimizer` skill in **draft mode**:
+After drafting and before running compliance, invoke the `internal-linking-strategist` skill in **draft mode**:
 - Pass: full article markdown, the article title (= target keyword), content type `AEO`.
 - The optimizer returns two classes of markdown links for AEO drafts:
   - **Topical links**, scaled by article length (~1 per 300 words; floor 2, ceiling 6 — a 900-word definition typically gets 2-3, a 1.5k+ word pillar gets 4-6). Zero only when no genuinely relevant target exists — never force them.
@@ -276,7 +276,7 @@ Checks:
 - Heading hierarchy well-formed (single H1, no skipped levels)
 - External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
 - Approved-customer whitelist — no mentions of unapproved customer names
-- Internal-link presence — at least one `https://social.plus/...` link somewhere in the body (WARN only — a zero usually means the `internal-linking-optimizer` step was skipped). This is a binary presence check, **not a topical-link-floor check**: the optimizer enforces its own per-length floor (2 for short articles, up to 6 for long). Compliance is just here to catch "the optimizer never ran." A legitimate zero happens only when no related page exists AND no approved customer was named.
+- Internal-link presence — at least one `https://social.plus/...` link somewhere in the body (WARN only — a zero usually means the `internal-linking-strategist` step was skipped). This is a binary presence check, **not a topical-link-floor check**: the optimizer enforces its own per-length floor (2 for short articles, up to 6 for long). Compliance is just here to catch "the optimizer never ran." A legitimate zero happens only when no related page exists AND no approved customer was named.
 - Word count inside the intent-specific typical range (warning only, does not fail)
 
 Fix every failure before delivering. Warnings are informational — address if it makes the article stronger, skip if not.
@@ -386,7 +386,7 @@ Field testing has shown subagents consistently rationalize around the skill's ru
 
 1. The path to `outputs/[slug].draft.md`.
 2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary, not a paraphrase, not an invented format. See the "Compliance-output fingerprint rule" and "Sample expected compliance output" below for what the parent enforces.
-3. Evidence that `internal-linking-optimizer` was invoked. Paste both classes:
+3. Evidence that `internal-linking-strategist` was invoked. Paste both classes:
    - **Topical links** (count + each link's anchor + URL + insertion-point quote — section heading + first 8 words of the paragraph). Example: `Returned 3 topical links: [activity feed SDK](https://social.plus/chat/sdk) — inserted in "## How activity feeds work", paragraph starting "A modern feed platform adds a ranking layer…". [list the rest]`. If zero, state the reason (no adjacent /answers/ page, topic too narrow, etc.).
    - **Customer-story links** (count + each customer-name anchor + URL + first-mention location). Example: `Returned 1 customer-story link: [Noom](https://social.plus/customer-story/noom) — first mention inside "## Where social.plus fits", paragraph starting "social.plus is a leading…".` If no approved customer was named in the article, write `none — no approved customer mentioned`.
 
@@ -436,7 +436,7 @@ Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks o
 **Required parent-session verification (do this after subagents return, before converting to `.docx`):**
 
 1. Re-run `python3 scripts/compliance.py` on every `.draft.md`. If the re-run disagrees with the subagent's claimed output, fix in the parent and re-verify. Do not trust the subagent's claim alone.
-2. Confirm each draft includes at least one `https://social.plus/...` internal link (the `internal_links` check flags this as a WARN). If zero, invoke `internal-linking-optimizer` from the parent and re-insert.
+2. Confirm each draft includes at least one `https://social.plus/...` internal link (the `internal_links` check flags this as a WARN). If zero, invoke `internal-linking-strategist` from the parent and re-insert.
 3. Convert each `.draft.md` to `.docx`, either via `anthropic-skills:docx` or `pandoc`.
 4. Zip via `scripts/make_zip.py`.
 5. Report per-article status in the chat summary.
@@ -448,7 +448,7 @@ Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks o
 - **Prose-summary compliance claim** with no pasted output at all ("Compliance status: All checks PASSED (exit code 0)"). → Same as above; fingerprint rule catches it.
 - `## TL;DR` heading or extra paragraph between metadata and first H2. → Compliance script catches this; do not override.
 - Em dashes introduced despite the writing-style ban. → Compliance script catches; do not override.
-- Dropped `internal-linking-optimizer` call "to simplify orchestration." → The parent runs it as a backstop when the internal_links check WARNs.
+- Dropped `internal-linking-strategist` call "to simplify orchestration." → The parent runs it as a backstop when the internal_links check WARNs.
 - **Claimed internal links that aren't actually in the draft** (or URLs fabricated from memory). → The parent's compliance re-run's `internal_links` check catches zero real links; if that WARNs while the subagent claimed N links, the subagent's optimizer claim was fabricated — invoke the optimizer from the parent and re-insert.
 
 ## Related skills
@@ -458,5 +458,5 @@ Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks o
 - `social-media` — LinkedIn, Instagram, X
 - `brand-messaging` — general website copy
 - `campaign-copy` — ads and campaign landing pages
-- `internal-linking-optimizer` — called by this skill; do not re-implement
+- `internal-linking-strategist` — called by this skill; do not re-implement
 - `site-intelligence` — content audits beyond `pages-answers.json`

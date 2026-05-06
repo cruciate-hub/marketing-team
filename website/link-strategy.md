@@ -1,6 +1,6 @@
 # social.plus internal linking strategy
 
-This file is the single source of truth for **site architecture**, **canonical anchor → page** decisions, **cannibalization warnings**, **link budgets**, **anchor distribution targets**, **placement rules**, and **scoring** across the social.plus content ecosystem. The `internal-linking-optimizer` skill consumes this file at runtime. Other content skills (`blog-seo-content`, `aeo-content`, `case-study`, `brand-messaging`) defer to the optimizer and, by extension, to this file.
+This file is the single source of truth for **site architecture**, **canonical anchor → page** decisions, **cannibalization warnings**, **link budgets**, **anchor distribution targets**, **placement rules**, and **scoring** across the social.plus content ecosystem. The `internal-linking-strategist` skill consumes this file at runtime. Other content skills (`blog-seo-content`, `aeo-content`, `case-study`, `brand-messaging`) defer to the optimizer and, by extension, to this file.
 
 **Generated:** 2026-04-17
 **Refresh by:** 2026-07-16 (90 days)
@@ -599,7 +599,7 @@ Anchor variants pool (substitute industry name):
 - **Topical link budget scales with article length** — ~1 per 300 words, with floor 2 and ceiling 6. Per-length-band Min/Target/Max in §"Link budgets by article type". Stricter than blog because AEO chunks need clean extraction.
 - **Allowed link locations:** definition paragraph, "why it matters", architecture/features sections, step-by-step. **Disallowed:** FAQs, conclusion, metrics table.
 - **Max 1 topical link per section** — prevents stacking multiple links inside one ~150-word chunk, which tanks that chunk's extraction quality.
-- **Customer-story links are a separate class.** When an approved customer is named in the article, link the **first mention** of that customer's name to their `/customer-story/*` page. Subsequent mentions of the same customer stay plain text. Multiple customers can each get their own first-mention link. These links are **not counted toward the topical budget**; the 5-customer approved list is the de facto cap. Anchor = customer name (per `internal-linking-optimizer/SKILL.md`).
+- **Customer-story links are a separate class.** When an approved customer is named in the article, link the **first mention** of that customer's name to their `/customer-story/*` page. Subsequent mentions of the same customer stay plain text. Multiple customers can each get their own first-mention link. These links are **not counted toward the topical budget**; the 5-customer approved list is the de facto cap. Anchor = customer name (per `internal-linking-strategist/SKILL.md`).
 - **AEO → AEO related-answer links:** at most 1 per article, placed in the definition paragraph or step-by-step. Use when the linked article extends a concept (e.g., "API for Integrating Complete Social Features into Apps" can link to a more specific "Chat API" answer).
 - **AEO → glossary links** are usually a better fit than AEO → product pages for the definitional sections.
 - **AEO → product page links** belong in the "social.plus pitch" section.
