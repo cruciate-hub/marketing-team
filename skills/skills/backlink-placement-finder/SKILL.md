@@ -102,6 +102,8 @@ Surface borderline cases to Stefan with the metrics — never auto-decline based
 
 ### Target URL Rules
 
+**Context:** This rule scopes to reciprocal/exchange link building — the mode this skill serves. Other inbound link-building modes (digital PR, HARO, guest posts, broken-link outreach) have different risk calculus where commercial-page targets are appropriate, but those modes don't use this skill.
+
 - **Only blog posts (`/blog/...`) and glossary entries (`/glossary/...`).** Nothing else.
 - **Off-limits page types** (never link to any of these): homepage, product pages, feature pages, SDK/UIKit pages, use case pages, industry pages, pricing, and any marketing landing page.
 - The target page should not compete with the partner article's keywords.
