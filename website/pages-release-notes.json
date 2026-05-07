@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-05T10:40:03.495Z",
-    "itemCount": 33,
+    "generatedAt": "2026-05-07T09:05:11.963Z",
+    "itemCount": 34,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/hyperlinks-in-posts-and-comments",
+      "metaTitle": "Hyperlinks in Posts and Comments",
+      "metaDescription": "Users can now add hyperlinks to any word or phrase in posts and comments.",
+      "content": "# Hyperlinks in Posts and Comments"
+    },
     {
       "url": "https://www.social.plus/release-note/social-plus-mcp-server",
       "metaTitle": "social.plus MCP server",
