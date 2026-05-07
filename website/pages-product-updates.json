@@ -1,16 +1,22 @@
 {
   "_meta": {
-    "generatedAt": "2026-04-29T11:51:00.906Z",
-    "itemCount": 59,
+    "generatedAt": "2026-05-07T10:29:12.508Z",
+    "itemCount": 60,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
     {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-april-2026",
+      "metaTitle": "What's new in social.plus | April 2026",
+      "metaDescription": "This month we focused on making interactions richer and safer from how your community talks to each other to how you keep things in check behind the scenes.",
+      "content": "# What's new in social.plus | April 2026\n## Multi-Level Comment Replies in Posts and Feeds\n## AI Moderation and Admin Reset for User Profiles\n## We also added"
+    },
+    {
       "url": "https://www.social.plus/product-update/introducing-commerce-make-your-community-the-storefront",
       "metaTitle": "Introducing Commerce: Make Your Community The Storefront",
       "metaDescription": "social.plus Commerce bridges the gap between community intent and action. Enable product tagging in posts, shoppable livestreams, and a centralized product catalogue to turn social conversations into conversions without leaving the app.",
-      "content": "# Introducing Commerce: Make Your Community The Storefront\n### What is social.plus Commerce\n### Product Catalogue: the foundation of discoverable assortment\n### Product Tagging in Posts: close the discovery-to-action gap\n### Tag and Pin Products in Livestream: interactive moments without the disruption\n### Commerce is not only about commerce"
+      "content": "# Introducing Commerce: Make Your Community The Storefront\n## What is social.plus Commerce\n## Product Catalogue: the foundation of discoverable assortment\n## Product Tagging in Posts: close the discovery-to-action gap\n## Tag and Pin Products in Livestream: interactive moments without the disruption\n## Commerce is not only about commerce"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-march-2026",
