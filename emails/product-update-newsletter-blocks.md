@@ -43,7 +43,9 @@ Lead feature — full-width image, heading, description, outlined CTA. Use `#f9f
 
 ## Component: Tier 2 Feature (Zigzag)
 
-Image on one side, text on the other. Alternate direction for each row. No character limit for description. Module tag is a separate `<p>` element — never inline inside the `<h3>`. Use `#ffffff` background. Alternate between `#ffffff` and `#f9f9f9` if multiple Tier 2 features.
+Image on one side, text on the other. Alternate direction for each row. No character limit for description. Module tag renders as a coloured pill badge inside its own `<p>` wrapper — never inline inside the `<h3>`. Use `#ffffff` background. Alternate between `#ffffff` and `#f9f9f9` if multiple Tier 2 features.
+
+Look up `{{MODULE_BG}}` and `{{MODULE_TEXT}}` in spec.md → Module Color Accents.
 
 **Image Left, Text Right:**
 
@@ -60,7 +62,7 @@ Image on one side, text on the other. Alternate direction for each row. No chara
                   <img class="img-rounded" src="{{IMAGE_TIER2}}" alt="{{FEATURE_ALT}}" width="315" style="display:block; width:315px; height:auto; border:0; border-radius:16px;" />
                 </td>
                 <td class="mobile-stack" width="335" valign="middle">
-                  <p class="text-secondary" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#717275; line-height:18px; padding-bottom:8px;">{{MODULE_TAG}}</p>
+                  <p style="padding-bottom:8px; line-height:18px;"><span style="display:inline-block; padding:2px 8px; border-radius:4px; background-color:{{MODULE_BG}}; color:{{MODULE_TEXT}}; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:18px;">{{MODULE_TAG}}</span></p>
                   <h3 class="text-dark" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:18px; font-weight:700; color:#111111; line-height:26px; padding-bottom:4px;">{{FEATURE_HEADING}}</h3>
                   <p class="text-body" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:16px; font-weight:400; color:#414347; line-height:26px; padding-bottom:16px;">{{FEATURE_DESCRIPTION}}</p>
                   <a href="{{FEATURE_CTA_URL}}" target="_blank" class="btn-outline" style="display:inline-block; padding:10px 24px; border:2px solid #3b41ec; border-radius:6px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; color:#3b41ec; text-decoration:none; line-height:20px;">{{FEATURE_CTA_TEXT}}</a>
@@ -92,7 +94,7 @@ Image is first in the DOM so it stacks on top on mobile. `direction:rtl` on the 
                   <img class="img-rounded" src="{{IMAGE_TIER2}}" alt="{{FEATURE_ALT}}" width="315" style="display:block; width:315px; height:auto; border:0; border-radius:16px;" />
                 </td>
                 <td class="mobile-stack" width="335" valign="middle" style="direction:ltr;">
-                  <p class="text-secondary" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#717275; line-height:18px; padding-bottom:8px;">{{MODULE_TAG}}</p>
+                  <p style="padding-bottom:8px; line-height:18px;"><span style="display:inline-block; padding:2px 8px; border-radius:4px; background-color:{{MODULE_BG}}; color:{{MODULE_TEXT}}; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:18px;">{{MODULE_TAG}}</span></p>
                   <h3 class="text-dark" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:18px; font-weight:700; color:#111111; line-height:26px; padding-bottom:4px;">{{FEATURE_HEADING}}</h3>
                   <p class="text-body" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:16px; font-weight:400; color:#414347; line-height:26px; padding-bottom:16px;">{{FEATURE_DESCRIPTION}}</p>
                   <a href="{{FEATURE_CTA_URL}}" target="_blank" class="btn-outline" style="display:inline-block; padding:10px 24px; border:2px solid #3b41ec; border-radius:6px; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; font-weight:600; color:#3b41ec; text-decoration:none; line-height:20px;">{{FEATURE_CTA_TEXT}}</a>
@@ -111,7 +113,9 @@ Image is first in the DOM so it stacks on top on mobile. `direction:rtl` on the 
 
 ## Component: Tier 3 Feature Row (Zigzag)
 
-Image on one side, text on the other. Alternate direction for each row. Max 280 chars for description. Module tag is a separate `<p>` element — never inline inside the `<h3>`.
+Image on one side, text on the other. Alternate direction for each row. Max 280 chars for description. Module tag renders as a coloured pill badge inside its own `<p>` wrapper — never inline inside the `<h3>`.
+
+Look up `{{MODULE_BG}}` and `{{MODULE_TEXT}}` in spec.md → Module Color Accents.
 
 **Image Left, Text Right:**
 
@@ -128,7 +132,7 @@ Image on one side, text on the other. Alternate direction for each row. Max 280 
                   <img class="img-rounded" src="{{IMAGE_TIER3}}" alt="{{FEATURE_ALT}}" width="315" style="display:block; width:315px; height:auto; border:0; border-radius:16px;" />
                 </td>
                 <td class="mobile-stack" width="335" valign="middle">
-                  <p class="text-secondary" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#717275; line-height:18px; padding-bottom:8px;">{{MODULE_TAG}}</p>
+                  <p style="padding-bottom:8px; line-height:18px;"><span style="display:inline-block; padding:2px 8px; border-radius:4px; background-color:{{MODULE_BG}}; color:{{MODULE_TEXT}}; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:18px;">{{MODULE_TAG}}</span></p>
                   <h3 class="text-dark" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:18px; font-weight:700; color:#111111; line-height:26px; padding-bottom:4px;">{{FEATURE_HEADING}}</h3>
                   <p class="text-body" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:16px; font-weight:400; color:#414347; line-height:26px;">{{FEATURE_DESCRIPTION}}</p>
                 </td>
@@ -159,7 +163,7 @@ Image is first in the DOM so it stacks on top on mobile. `direction:rtl` on the 
                   <img class="img-rounded" src="{{IMAGE_TIER3}}" alt="{{FEATURE_ALT}}" width="315" style="display:block; width:315px; height:auto; border:0; border-radius:16px;" />
                 </td>
                 <td class="mobile-stack" width="335" valign="middle" style="direction:ltr;">
-                  <p class="text-secondary" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#717275; line-height:18px; padding-bottom:8px;">{{MODULE_TAG}}</p>
+                  <p style="padding-bottom:8px; line-height:18px;"><span style="display:inline-block; padding:2px 8px; border-radius:4px; background-color:{{MODULE_BG}}; color:{{MODULE_TEXT}}; font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:18px;">{{MODULE_TAG}}</span></p>
                   <h3 class="text-dark" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:18px; font-weight:700; color:#111111; line-height:26px; padding-bottom:4px;">{{FEATURE_HEADING}}</h3>
                   <p class="text-body" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:16px; font-weight:400; color:#414347; line-height:26px;">{{FEATURE_DESCRIPTION}}</p>
                 </td>
@@ -177,7 +181,9 @@ Image is first in the DOM so it stacks on top on mobile. `direction:rtl` on the 
 
 ## Component: Tier 4 List
 
-Simple bullet list — no images. Use for brief feature mentions.
+Simple bullet list — no images. Use for brief feature mentions. The module tag renders as a coloured pill badge inline with the bullet text.
+
+Look up `{{MODULE_BG}}` and `{{MODULE_TEXT}}` in spec.md → Module Color Accents. If the source doc does not provide a module tag for an item, omit the badge entirely and render only the bullet text — never guess a module.
 
 ```html
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f5;" class="body-bg">
@@ -192,7 +198,7 @@ Simple bullet list — no images. Use for brief feature mentions.
         <tr>
           <td class="row" style="padding:0 40px 24px 40px;">
             <p class="text-body" style="font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:16px; font-weight:400; color:#414347; line-height:32px;">
-              &#8226;&nbsp; <span class="text-secondary" style="font-size:13px; font-weight:600; color:#717275;">{{MODULE_TAG}}</span>&nbsp; {{FEATURE_TITLE}}
+              &#8226;&nbsp; <span style="display:inline-block; padding:2px 8px; border-radius:4px; background-color:{{MODULE_BG}}; color:{{MODULE_TEXT}}; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; line-height:18px; vertical-align:middle;">{{MODULE_TAG}}</span>&nbsp; {{FEATURE_TITLE}}
             </p>
           </td>
         </tr>

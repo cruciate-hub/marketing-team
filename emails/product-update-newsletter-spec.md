@@ -51,18 +51,23 @@ Hardcoded hex values only — email clients do not support CSS custom properties
 
 ## Module Color Accents
 
-Each product module has a background/text color pair used for category badges. Apply as a small inline badge next to feature headings when the module tag is present.
+Each product module has a background/text color pair used for category badges. Apply as a small inline badge next to feature headings when the module tag is present. Templates in `product-update-newsletter-blocks.md` reference these as `{{MODULE_BG}}` and `{{MODULE_TEXT}}`.
 
-| Module | Background | Text/Accent |
-|--------|-----------|-------------|
-| Console | `#e8deff` | `#c5aaff` |
-| UI Kit | `#fff4d9` | `#f7c506` |
-| Chat | `#e8f9f5` | `#1dc497` |
-| Video | `#fff4d9` | `#ffd500` |
-| Analytics | `#8abfff` | `#222222` |
-| Social | `#ffe9ed` | `#ff456b` |
-| Flutter | `#fff1f0` | `#ff5a36` |
-| React Native | `#d6ede2` | `#084c41` |
+All pairs meet WCAG 2.1 AA (≥ 4.5:1) for normal text. Badge text is 11px bold uppercase — that's classified as normal size, so 4.5:1 is the threshold (large-text 3:1 does not apply). Re-run a contrast checker before changing any value.
+
+| Module | Background | Text/Accent | Contrast |
+|--------|-----------|-------------|----------|
+| Console | `#e8deff` | `#5b21b6` | 6.98:1 |
+| UI Kit | `#fff4d9` | `#86510d` | 6.00:1 |
+| Chat | `#e8f9f5` | `#065f46` | 7.06:1 |
+| Video | `#fff4d9` | `#946700` | 4.57:1 |
+| Analytics | `#8abfff` | `#222222` | 8.32:1 |
+| Social | `#ffe9ed` | `#9b1c2f` | 6.97:1 |
+| Flutter | `#fff1f0` | `#9e370e` | 6.35:1 |
+| React Native | `#d6ede2` | `#084c41` | 8.05:1 |
+| Commerce | `#e8eaff` | `#3b41ec` | 5.60:1 |
+
+Commerce is interim — it reuses the brand-blue placeholder pair from this spec's image convention (matches the visual system) and is awaiting confirmation from design.
 
 Badge HTML pattern:
 ```html
