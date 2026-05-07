@@ -1,11 +1,23 @@
 {
   "_meta": {
-    "generatedAt": "2026-04-16T17:04:59.163Z",
-    "itemCount": 11,
+    "generatedAt": "2026-05-07T05:56:09.467Z",
+    "itemCount": 13,
     "collectionId": "66e2765d540e1939a89db7a6",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/use-case/live-commerce",
+      "metaTitle": "Live Commerce",
+      "metaDescription": "Live commerce connects products, services, and offerings directly to your livestreams. Hosts can tag and pin items as overlays during a broadcast, giving viewers a way to explore and engage with what is being featured in real time. It transforms passive viewing into an active discovery experience, capturing intent at the exact moment your audience is most engaged and keeping them inside your platform throughout.",
+      "content": "# Live Commerce\nLive commerce connects products, services, and offerings directly to your livestreams. Hosts can tag and pin items as overlays during a broadcast, giving viewers a way to explore and engage with what is being featured in real time. It transforms passive viewing into an active discovery experience, capturing intent at the exact moment your audience is most engaged and keeping them inside your platform throughout.\n## Why use live commerce?\n### Capture content at its peak\nSurface any product, service, or offering at the exact moment your audience is most engaged.\n### Seamless viewing experience\nViewers can explore and interact with featured items without ever leaving the stream.\n### Creates new revenue opportunities\nCommerce becomes part of the live experience instead of a separate journey.\n## Examples of live commerce you can build\n### Live Product Showcase\nBrands tag and pin new collections as overlays, letting viewers explore featured items live.\n### Live Fitness\nCoaches pin gears, supplements, or programs for viewers to explore in real time.\n### Live Destination Experiences\nHosts pin destinations and experiences, letting viewers discover offerings live.\n### Live Matchday Showcase\nPin merchandise and exclusive items at the highest intent moments of a broadcast.\n### Product Catalog Management\nManage products and metadata through the social.plus console.\n### Product Tags\nAttach products directly to posts, stories, and clips.\n### Product Placements\nDisplay products within visual content for natural discovery.\n### Content Integration\nProducts appear seamlessly within feeds and media formats.\n### Flexible Catalog Structure\nSupport large product sets with consistent metadata.\n### Analytics\nTrack product interactions and content performance."
+    },
+    {
+      "url": "https://www.social.plus/use-case/social-commerce",
+      "metaTitle": "Social Commerce",
+      "metaDescription": "Social commerce connects products, services, and offerings directly to your content. Users can tag items across any post type, giving their audience a way to explore and engage with what is being featured within the natural flow of conversation. It transforms everyday posts into an active discovery experience, capturing intent where engagement is already happening and keeping users inside your platform throughout.",
+      "content": "# Social Commerce\nSocial commerce connects products, services, and offerings directly to your content. Users can tag items across any post type, giving their audience a way to explore and engage with what is being featured within the natural flow of conversation. It transforms everyday posts into an active discovery experience, capturing intent where engagement is already happening and keeping users inside your platform throughout.\n## Why use Social Commerce?\n### Transforms discovery into action\nUsers can move from inspiration to product exploration instantly.\n### Reach users at peak intent\nMeet users in high-intent moments where interest already exists.\n### Creates new revenue opportunities\nCommerce becomes part of the social experience instead of a separate journey.\n## Examples of social commerce you can build\n### Product Discovery Tag\nBrands and retailers tag products directly across campaign and launch posts.\n### Recovery Routine Post\nCoaches and athletes tag gear, supplements, and products in posts.\n### Trip Essentials Posts\nTravel creators tag products across packing lists, guides, and recaps.\n### Game Day Tag\nFans and creators tag merch, picks, and partner offers across game day posts.\n### Product Catalog Management\nManage products and metadata through the social.plus console.\n### Product Tags\nAttach products directly to posts, stories, and clips.\n### Product Placements\nDisplay products within visual content for natural discovery.\n### Content Integration\nProducts appear seamlessly within feeds and media formats.\n### Flexible Catalog Structure\nSupport large product sets with consistent metadata.\n### Analytics\nTrack product interactions and content performance."
+    },
     {
       "url": "https://www.social.plus/use-case/events",
       "metaTitle": "Events",
