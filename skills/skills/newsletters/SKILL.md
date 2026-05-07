@@ -149,7 +149,7 @@ The doc also contains Website, Video, and Product Activation sections — **igno
 If the user shares a Google Doc link, use the google_drive_fetch tool to read it. If they paste text, parse it directly.
 
 Extract from the Newsletter section:
-1. The subject line (from the heading pattern "What's New in [month year]: [highlights]")
+1. The subject line. Take the most important word/value from the doc's heading — a feature name, headline benefit, or hook. **Do not preserve the "What's New in [month] [year]:" prefix** — it consumes 24+ characters of the 40–50 char budget mandated by `emails.md` and forces verbose subjects. The month/edition context already lives in the preheader.
 2. The opening remark paragraph
 3. Each tiered feature with its title, description, module tag, image reference, and link
 4. The closing remark
@@ -163,6 +163,15 @@ Extract:
 4. Sub-features (each with: title, short description, image reference)
 5. CTA link (full announcement page)
 6. The closing remark
+
+## Step 4a: Clean the source content before generating HTML
+
+Source docs are written for the website, not for email — they often contain noise that has to be stripped, and gaps that have to be filled with deterministic defaults instead of guesses. Apply these rules to every extracted field before passing it into the templates.
+
+1. **Strip emojis from CTA labels** in the source (e.g., "Explore further 🔍" → "Explore further", "Read more →" → "Read more"). `tone.md` forbids emojis in public-facing communication.
+2. **Strip Webflow CMS shortcodes** that appear in scraped content, e.g., `[[pu-commerce="/cta"]]`, `[[pu-console="/cta"]]`, `[[pu-chat="/blog"]]`. They are noise — module attribution is already captured in the tier's `MODULE_TAG`. A simple regex match on `\[\[pu-[a-z]+="[^"]*"\]\]` is enough.
+3. **For Tier 4 items without an explicit module tag in the source:** omit the badge entirely and render only the bullet text. Do not infer a module from the feature title or description — a wrong guess is worse than no tag, and the Tier 4 component in `blocks.md` documents this same rule.
+4. **For Tier 1 / Tier 2 / Tier 3 "Learn more" / "Read the announcement" CTA URLs:** if the source doc does not provide a deeper destination, default to the product-update article URL itself (e.g., `https://social.plus/product-updates/[slug]`). This is the documented fallback — never invent or guess a URL, never leave it empty.
 
 ## Step 5: Generate the HTML
 
