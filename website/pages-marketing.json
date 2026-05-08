@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-08T01:59:15.485Z",
+    "generatedAt": "2026-05-08T02:23:06.723Z",
     "itemCount": 22,
     "method": "webflow-data-api"
   },
@@ -63,7 +63,7 @@
       "url": "https://www.social.plus/social/features",
       "metaTitle": "White-label Social Features for Your App",
       "metaDescription": "All the pre-built and customizable white-label social features you need to build engaging social experiences in your app.",
-      "content": "# All the white-label social features your app needs\n## Social essentials\nThe essentials to building engaging social experiences that easily integrate into your app or digital platform.\n## Activity feeds\nFeeds are a great way for users to get relevant updates, communicate and express themselves via chronological or algorithmically ranked content.\nNo items found.\n## Posts & comments\nIncrease user engagement by allowing user-generated content through multiple social media post types and the possibility to comment and discuss any content on your platform.\nNo items found.\n## Communities\nBuild and nurture vibrant community groups where users can exchange ideas and connect.\nNo items found.\n## User profiles\nAllow users to express themselves with their own profiles and interact with others.\nNo items found.\n## Get started with social.plus SDK\nsocial.plus modules are ready to use — launch faster with our SDKs and APIs to create social media features. Available for Android, iOS, Flutter, TypeScript, ReactJS, React Native, Ionic, Vue.js, and Angular.\nJava / Kotlin\nSwift / Objective-C\nFlutter\nReactJS\nReact Native\nTypeScript\nAngular\nIonic"
+      "content": "# All the white-label social features your app needs\n## Social essentials\nThe essentials to building engaging social experiences that easily integrate into your app or digital platform.\n## Activity feeds\nFeeds are a great way for users to get relevant updates, communicate and express themselves via chronological or algorithmically ranked content.\nNo items found.\n## Posts & comments\nIncrease user engagement by allowing user-generated content through multiple social media post types and the possibility to comment and discuss any content on your platform.\nNo items found.\n## Communities\nBuild and nurture vibrant community groups where users can exchange ideas and connect.\nNo items found.\n## User profiles\nAllow users to express themselves with their own profiles and interact with others.\nNo items found.\n## Commerce\nBridge the gap between content and conversion by letting users tag, discover, and interact with products and offering without ever leaving your platform.\nNo items found.\n## Get started with social.plus SDK\nsocial.plus modules are ready to use — launch faster with our SDKs and APIs to create social media features. Available for Android, iOS, Flutter, TypeScript, ReactJS, React Native, Ionic, Vue.js, and Angular.\nJava / Kotlin\nSwift / Objective-C\nFlutter\nReactJS\nReact Native\nTypeScript\nAngular\nIonic"
     },
     {
       "url": "https://www.social.plus/social/sdk",
