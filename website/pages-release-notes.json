@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-08T12:00:45.645Z",
-    "itemCount": 35,
+    "generatedAt": "2026-05-08T12:01:31.428Z",
+    "itemCount": 36,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/full-comment-coverage-for-sentiment-analysis",
+      "metaTitle": "Full Comment Coverage for Sentiment Analysis",
+      "metaDescription": "Sentiment analysis now covers all comments on a post.",
+      "content": "# Full Comment Coverage for Sentiment Analysis"
+    },
     {
       "url": "https://www.social.plus/release-note/sentiment-analysis-dashboard-redesign",
       "metaTitle": "Sentiment Analysis Dashboard Redesign",
