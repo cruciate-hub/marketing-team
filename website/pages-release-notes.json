@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-08T12:02:30.315Z",
-    "itemCount": 37,
+    "generatedAt": "2026-05-08T12:03:33.071Z",
+    "itemCount": 38,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/keyword-level-sentiment-override-for-individual-posts",
+      "metaTitle": "Keyword-Level Sentiment Override for Individual Posts",
+      "metaDescription": "Admins and community managers can now select a specific post and override keyword-level sentiment outputs directly from the Sentiment Dashboard.",
+      "content": "# Keyword-Level Sentiment Override for Individual Posts"
+    },
     {
       "url": "https://www.social.plus/release-note/custom-sentiment-keywords-and-categories-configuration",
       "metaTitle": "Custom Sentiment Keywords and Categories Configuration",
