@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-08T12:01:31.428Z",
-    "itemCount": 36,
+    "generatedAt": "2026-05-08T12:02:30.315Z",
+    "itemCount": 37,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/custom-sentiment-keywords-and-categories-configuration",
+      "metaTitle": "Custom Sentiment Keywords and Categories Configuration",
+      "metaDescription": "Admins can now configure sentiment analysis directly from the Console.",
+      "content": "# Custom Sentiment Keywords and Categories Configuration"
+    },
     {
       "url": "https://www.social.plus/release-note/full-comment-coverage-for-sentiment-analysis",
       "metaTitle": "Full Comment Coverage for Sentiment Analysis",
