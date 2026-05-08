@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-08T12:03:33.071Z",
-    "itemCount": 38,
+    "generatedAt": "2026-05-08T12:07:14.059Z",
+    "itemCount": 39,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/filter-social-insights-by-user-tags",
+      "metaTitle": "Filter Social Insights by User Tags",
+      "metaDescription": "Admins can now filter social insights and sentiment analysis results by custom user tags to understand sentiment patterns across different user segments.",
+      "content": "# Filter Social Insights by User Tags"
+    },
     {
       "url": "https://www.social.plus/release-note/keyword-level-sentiment-override-for-individual-posts",
       "metaTitle": "Keyword-Level Sentiment Override for Individual Posts",
