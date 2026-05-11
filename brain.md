@@ -27,8 +27,9 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | Skill | Trigger | SKILL.md |
 |---|---|---|
 | **newsletters** | Any email HTML output — product update emails, feature launch announcements, campaign emails, newsletters | `skills/skills/newsletters/SKILL.md` |
-| **brand-messaging** | Marketing copy, website copy, landing pages, press releases, pitch materials, taglines, brand voice questions | `skills/skills/brand-messaging/SKILL.md` |
-| **blog-seo-content** | Blog posts, thought leadership articles, SEO content, pillar pages, comparison articles, how-to guides | `skills/skills/blog-seo-content/SKILL.md` |
+| **brand-messaging** | Marketing copy, website copy, landing pages, pitch materials, taglines, brand voice questions | `skills/skills/brand-messaging/SKILL.md` |
+| **blog-seo-content** | Blog posts for social.plus/blog | `skills/skills/blog-seo-content/SKILL.md` |
+| **press-release** | Newswire-ready press releases (PR Newswire / Cision), embargoed announcements, product/funding/partnership announcements | `skills/skills/press-release/SKILL.md` |
 | **case-study** | Customer stories, case studies, success stories, testimonial write-ups, Webflow customer story CMS items | `skills/skills/case-study/SKILL.md` |
 | **design-system** | CSS, HTML styling, Webflow components, brand colors, typography, spacing, design tokens, dark mode | `skills/skills/design-system/SKILL.md` |
 | **site-intelligence** | Query, audit, or analyze website content — what pages say, messaging consistency, gaps, competitive comparisons | `skills/skills/site-intelligence/SKILL.md` |

@@ -24,7 +24,7 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 - `positioning.md` — Company overview, vision, mission, product pillars. Needed to frame even short copy accurately.
 - `value-story.md` — Differentiation framework, core problems we solve, value creation model. Short copy almost always makes value claims — load this every time.
 
-### Long-form content (blog posts, AEO articles, landing pages, thought leadership, whitepapers, case studies, press releases)
+### Long-form content (blog posts, AEO articles, landing pages, case studies, press releases)
 - `narrative.md` — Messaging hierarchy and 5-step narrative structure.
 - `value-story.md` — Core problems we solve, value creation model, differentiation framework.
 - `positioning.md` — Company overview, vision, mission, ecosystem position, product pillars.
