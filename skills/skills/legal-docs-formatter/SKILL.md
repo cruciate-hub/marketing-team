@@ -10,9 +10,8 @@ description: >
   destined for pages under `/legal/` on social.plus. Also trigger when the user
   pastes legal copy and asks to convert, reformat, or prepare it for Webflow,
   or when they provide a Google Doc URL containing legal content. Trigger on
-  phrases like "format this legal doc", "convert MSA to HTML", "Webflow HTML
-  for DPA", "legal page for Webflow", "format for /legal/", "turn this into a
-  legal page", "prep this contract for Webflow".
+  phrases like "format this legal doc", "convert MSA to HTML", or "format for
+  /legal/".
   Do NOT trigger for blog posts, marketing copy, landing pages, or product
   copy (use the corresponding content skill instead). Do NOT trigger for
   generic HTML conversion that isn't destined for a Webflow `.w-richtext`
