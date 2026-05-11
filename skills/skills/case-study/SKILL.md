@@ -286,7 +286,7 @@ Company headquarters. Format: "City, Country" or just "Country". Examples: "São
 **Sidebar | Use Cases** (`new-use-cases`, MultiReference)
 References to Use Case CMS items. Tell the user which use cases apply so they can link them in Webflow.
 
-**Valid options (from the `🗳️ Use Cases` collection in Webflow, verified 2026-04-22):** Events, Live Chat, Group Chat, 1-1 Chat, Custom Posts, Polls, Stories & Clips, Live Stream, Groups, User Profiles, Activity Feed. Do not invent labels outside this list — these are CMS reference items and must match exactly.
+**Valid options (from the `🗳️ Use Cases` collection in Webflow, verified 2026-05-12):** 1-1 Chat, Activity Feed, Custom Posts, Events, Group Chat, Groups, Live Chat, Live Commerce, Live Stream, Polls, Social Commerce, Stories & Clips, User Profiles. Do not invent labels outside this list — these are CMS reference items and must match exactly.
 
 **Sidebar | Implementation** (`implementation-web`, `implementation-mobile-app`, Switches)
 Tell the user which to toggle: Web, App, or both.
