@@ -95,6 +95,5 @@ Decorative visuals are abstract and use the brand palette directly:
 | Empty states and onboarding | Product illustration |
 | Hero section of marketing page | Photography or gradient abstract |
 | Blog post header | Photography |
-| Social media post | Photography or brand gradient |
 | Section divider / background texture | Decorative visual |
 | Email header | Gradient abstract or product illustration |

@@ -19,15 +19,10 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 - `terminology.md` — Approved and forbidden terms. This is law.
 - `tone.md` — Tone of voice and writing style rules.
 
-### Short-form content (social posts, email subject lines, ad copy, taglines, product descriptions)
+### Short-form content (email subject lines, taglines, product descriptions)
 - `boilerplates.md` — Standardized descriptions and elevator pitches as starting points.
 - `positioning.md` — Company overview, vision, mission, product pillars. Needed to frame even short copy accurately.
 - `value-story.md` — Differentiation framework, core problems we solve, value creation model. Short copy almost always makes value claims — load this every time.
-
-### Social media posts (LinkedIn, Instagram, X)
-- `boilerplates.md` — Standardized descriptions as starting points.
-- `positioning.md` — Company overview, vision, mission, product pillars. Needed when posts reference what social.plus is or does.
-- Also load from the design-system domain: `design-system/social-posts.md` (`cat "$MT_REPO/design-system/social-posts.md"`) — Platform-specific format specs, character limits, copy structure templates, visual asset guidelines. This file has precedence over `tone.md` for platform-specific tone and formatting.
 
 ### Long-form content (blog posts, AEO articles, landing pages, thought leadership, whitepapers, case studies, press releases)
 - `narrative.md` — Messaging hierarchy and 5-step narrative structure.
@@ -64,9 +59,3 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 | `narrative.md` | Messaging hierarchy, standard narrative structure |
 | `boilerplates.md` | Boilerplates, elevator pitches |
 | `ui-micro-copy.md` | UI copy patterns, capitalisation rules, microcopy do/don'ts |
-
-### Cross-domain file (hosted outside messaging/)
-
-| File | Contains |
-|---|---|
-| `design-system/social-posts.md` | Platform-specific format specs, character limits, copy structure, visual guidelines |

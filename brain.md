@@ -12,7 +12,6 @@ Most tasks need references from more than one domain. Use this table to determin
 |---|---|
 | Written content (articles, blog posts, scripts, copy) | `messaging/brain.md` |
 | Visual output (HTML, CSS, components, decks, emails) | `messaging/brain.md` + `design-system/brain.md` |
-| Social media posts | `messaging/brain.md` + `design-system/brain.md` — brain.md routes to `social-posts.md` for platform specs |
 | HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
 | Website audit or content analysis | `website/pages-*.json` (10 files, pick relevant ones) + `messaging/brain.md` |
@@ -48,7 +47,6 @@ Load skill files via the canonical fetch block, same as every other reference fi
 When two reference files give guidance on the same topic, the more specific file wins:
 
 - **UI copy tasks:** `ui-micro-copy.md` overrides `tone.md` for voice, style, and capitalisation.
-- **Social media tasks:** `social-posts.md` overrides `tone.md` for platform-specific tone, format, and structure.
 - **Email tasks:** `emails/emails.md` overrides `tone.md` for email-specific structure, subject lines, and CTAs.
 - **Design tokens always win.** If `colors-palette.md` or `colors-usage.md` specifies a hex value, use it exactly — never approximate or substitute.
 - **Terminology is always law.** `terminology.md` is never overridden by any file. Approved terms and forbidden terms apply everywhere, in every context, no exceptions.

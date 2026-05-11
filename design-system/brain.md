@@ -41,9 +41,6 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 ### Output containing or referencing the logo
 - `logo.md` — SVG data, variants, clearspace, background rules, do/don'ts.
 
-### Social media content
-- `social-posts.md` — LinkedIn, Instagram, Twitter/X format specs and copy guidelines.
-
 ### Design review or audit (checking existing designs against the system)
 - Load ALL files. Compare the design under review against every guideline.
 
@@ -76,4 +73,3 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 | `imagery.md` | Illustration style, photography, decorative rules |
 | `accessibility.md` | WCAG 2.1 AA, contrast, focus, ARIA, motion, checklist |
 | `logo.md` | SVG paths, variants, clearspace, usage rules, do/don'ts |
-| `social-posts.md` | Platform specs, copy structure, visual guidelines |
