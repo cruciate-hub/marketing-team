@@ -8,8 +8,7 @@ description: >
 
   Write SEO-optimized blog posts and long-form articles for social.plus.
   Use this skill for: blog posts that will be published on social.plus/blog.
-  Trigger on phrases like "write a blog post", "SEO article", "thought leadership
-  piece", or "pillar page".
+  Trigger on phrases like "write a blog post" or "SEO article".
   Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
   (use brand-messaging), email content (use newsletters), or customer stories
   (use case-study).
