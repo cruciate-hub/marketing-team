@@ -8,7 +8,7 @@
       "name": "marketing-team",
       "source": "./skills",
       "version": "11.0",
-      "description": "Shared tools and guidelines for the marketing team. 14 skills covering the full B2B marketing workflow — all fetched live from GitHub."
+      "description": "Shared skills for the marketing team."
     }
   ]
 }
