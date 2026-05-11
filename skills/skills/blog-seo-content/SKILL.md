@@ -7,9 +7,7 @@ description: >
   delivers markdown for the blog.
 
   Write SEO-optimized blog posts and long-form articles for social.plus.
-  Use this skill for: blog posts, thought leadership articles, pillar pages,
-  comparison articles, how-to guides, or any long-form content for the
-  social.plus blog or external publication.
+  Use this skill for: blog posts that will be published on social.plus/blog.
   Trigger on phrases like "write a blog post", "SEO article", "thought leadership
   piece", or "pillar page".
   Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
