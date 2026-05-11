@@ -6,38 +6,38 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 
 ### Content creation
 
-| Skill | Lines | Size | What it does |
-|---|---:|---:|---|
-| [brand-messaging](./skills/brand-messaging/SKILL.md) | 43 | 1.9 KB | Fetches brand guidelines from GitHub and applies them to any written content. |
-| [blog-seo-content](./skills/blog-seo-content/SKILL.md) | 230 | 10.5 KB | SEO-optimized blog posts, thought leadership articles, and long-form content. |
-| [social-media](./skills/social-media/SKILL.md) | 143 | 5.4 KB | Platform-specific posts for LinkedIn, Instagram, and X. |
-| [campaign-copy](./skills/campaign-copy/SKILL.md) | 203 | 6.7 KB | Ad copy, campaign landing pages, and paid media content. |
-| [newsletters](./skills/newsletters/SKILL.md) | 172 | 9.9 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. |
-| [case-study](./skills/case-study/SKILL.md) | 286 | 14.3 KB | Customer stories and success case studies. |
-| [aeo-content](./skills/aeo-content/SKILL.md) | 138 | 8.0 KB | AEO (Answer Engine Optimization) articles for the /answers/ collection, structured for AI search engine citation. |
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [brand-messaging](../docs/brand-messaging.md) | 43 | 1.9 KB | Fetches brand guidelines from GitHub and applies them to any written content. | [SKILL.md →](./skills/brand-messaging/SKILL.md) |
+| [blog-seo-content](../docs/blog-seo-content.md) | 230 | 10.5 KB | SEO-optimized blog posts, thought leadership articles, and long-form content. | [SKILL.md →](./skills/blog-seo-content/SKILL.md) |
+| [social-media](../docs/social-media.md) | 143 | 5.4 KB | Platform-specific posts for LinkedIn, Instagram, and X. | [SKILL.md →](./skills/social-media/SKILL.md) |
+| [campaign-copy](../docs/campaign-copy.md) | 203 | 6.7 KB | Ad copy, campaign landing pages, and paid media content. | [SKILL.md →](./skills/campaign-copy/SKILL.md) |
+| [newsletters](../docs/newsletters.md) | 172 | 9.9 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. | [SKILL.md →](./skills/newsletters/SKILL.md) |
+| [case-study](../docs/case-study.md) | 286 | 14.3 KB | Customer stories and success case studies. | [SKILL.md →](./skills/case-study/SKILL.md) |
+| [aeo-content](../docs/aeo-content.md) | 138 | 8.0 KB | AEO (Answer Engine Optimization) articles for the /answers/ collection, structured for AI search engine citation. | [SKILL.md →](./skills/aeo-content/SKILL.md) |
 
 ### Design & analysis
 
-| Skill | Lines | Size | What it does |
-|---|---:|---:|---|
-| [design-system](./skills/design-system/SKILL.md) | 43 | 1.9 KB | Fetches the full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
-| [site-intelligence](./skills/site-intelligence/SKILL.md) | 308 | 17.0 KB | Queries, audits, and analyzes the 10 website inventory files — marketing pages, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, and webinars. |
-| [product-update-vs-website](./skills/product-update-vs-website/SKILL.md) | 190 | 11.0 KB | Compares product updates against website content to find gaps. |
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [design-system](../docs/design-system.md) | 43 | 1.9 KB | Fetches the full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. | [SKILL.md →](./skills/design-system/SKILL.md) |
+| [site-intelligence](../docs/site-intelligence.md) | 308 | 17.0 KB | Queries, audits, and analyzes the 10 website inventory files — marketing pages, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, and webinars. | [SKILL.md →](./skills/site-intelligence/SKILL.md) |
+| [product-update-vs-website](../docs/product-update-vs-website.md) | 190 | 11.0 KB | Compares product updates against website content to find gaps. | [SKILL.md →](./skills/product-update-vs-website/SKILL.md) |
 
 ### SEO & linking
 
-| Skill | Lines | Size | What it does |
-|---|---:|---:|---|
-| [internal-linking-strategist](./skills/internal-linking-strategist/SKILL.md) | 572 | 32.1 KB | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`), runs site-wide link audits with Structure Score + Anchor Score, and proposes inbound edits when a new page ships (Reverse mode). Uses a canonical anchor map, cannibalization warnings, link budgets for 14 article types, and authority-flow rules from `link-strategy.md`, with live page-fetch to verify insertion points. |
-| [link-building-vetter](./skills/link-building-vetter/SKILL.md) | 111 | 4.6 KB | Vets incoming ABC link exchange requests, scores them 1-10, and drafts response emails. |
-| [backlink-placement-finder](./skills/backlink-placement-finder/SKILL.md) | 527 | 40.9 KB | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. |
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [internal-linking-strategist](../docs/internal-linking-strategist.md) | 572 | 32.1 KB | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`), runs site-wide link audits with Structure Score + Anchor Score, and proposes inbound edits when a new page ships (Reverse mode). Uses a canonical anchor map, cannibalization warnings, link budgets for 14 article types, and authority-flow rules from `link-strategy.md`, with live page-fetch to verify insertion points. | [SKILL.md →](./skills/internal-linking-strategist/SKILL.md) |
+| [link-building-vetter](../docs/link-building-vetter.md) | 111 | 4.6 KB | Vets incoming ABC link exchange requests, scores them 1-10, and drafts response emails. | [SKILL.md →](./skills/link-building-vetter/SKILL.md) |
+| [backlink-placement-finder](../docs/backlink-placement-finder.md) | 527 | 40.9 KB | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. | [SKILL.md →](./skills/backlink-placement-finder/SKILL.md) |
 
 ### Formatting & conversion
 
-| Skill | Lines | Size | What it does |
-|---|---:|---:|---|
-| [legal-docs-formatter](./skills/legal-docs-formatter/SKILL.md) | 211 | 7.1 KB | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. |
-| [svg-icon-transformer](./skills/svg-icon-transformer/SKILL.md) | 168 | 7.6 KB | Transforms SVG input into clean, accessible, inline-embed-ready icon markup. Strips editor noise, applies accessibility defaults, and uses `1em` sizing that avoids the Safari flex/absolute collapse bug. |
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [legal-docs-formatter](../docs/legal-docs-formatter.md) | 211 | 7.1 KB | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. | [SKILL.md →](./skills/legal-docs-formatter/SKILL.md) |
+| [svg-icon-transformer](../docs/svg-icon-transformer.md) | 168 | 7.6 KB | Transforms SVG input into clean, accessible, inline-embed-ready icon markup. Strips editor noise, applies accessibility defaults, and uses `1em` sizing that avoids the Safari flex/absolute collapse bug. | [SKILL.md →](./skills/svg-icon-transformer/SKILL.md) |
 
 ## How it works
 
