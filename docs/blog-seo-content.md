@@ -14,7 +14,7 @@ Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so c
 
 ## When it triggers
 
-When the user wants long-form written content that will be published on the web. Trigger phrases include "write a blog post", "SEO article", "thought leadership piece", "comparison article", "content marketing", "pillar page", or any long-form blog-style request.
+When the user wants a blog post for social.plus/blog. Trigger phrases include "write a blog post" or "SEO article".
 
 The skill is not for website page copy (use `brand-messaging`), email content (use `newsletters`), or customer stories (use `case-study`).
 
