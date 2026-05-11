@@ -124,7 +124,7 @@ Check for and ask about:
 - **Implementation details** — which SDKs, UIKits, platforms (web/app), customization level, and timeline?
 - **Results / outcomes** — quantified impact after launch.
 - **Company basics** — headquarters location, founding year or scale indicator, industry.
-- **Use cases** — which social.plus features does the customer use (Activity Feed, Group Chat, Live Chat, Livestream, etc.)?
+- **Use cases** — which social.plus features does the customer use? See the `Sidebar | Use Cases` field below for the canonical list of valid options.
 - **Customer's product vocabulary** — what does the customer call their own product and its key features internally (e.g. "Wrist Feed," "Community Tab," "H-D app," "Rides," "Bikes")? Use their names in the body, not social.plus's generic feature names. This is the single biggest lever for a story that reads specific rather than templated.
 
 Only ask about items that are genuinely missing from the user's input — don't re-ask what they already provided. Once you have enough information to write without placeholders, proceed to drafting.
