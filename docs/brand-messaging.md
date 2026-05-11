@@ -31,7 +31,7 @@ The skill is not for:
 
 `brand-messaging` is intentionally minimal — a dispatcher, not a content producer. The heavy lifting lives in the routing layer (`messaging/brain.md`) and the actual guideline files (`terminology.md`, `tone.md`, `narrative.md`, `value-story.md`, `positioning.md`, `boilerplates.md`). Keeping the skill shell small means guideline updates flow through without needing to rewrite this skill.
 
-For format-heavy tasks (emails, social posts, case studies), a dedicated skill loads additional format-specific files that this generic skill does not — which is why those tasks have their own skills.
+For format-heavy tasks (emails, case studies), a dedicated skill loads additional format-specific files that this generic skill does not — which is why those tasks have their own skills.
 
 ## Files
 
