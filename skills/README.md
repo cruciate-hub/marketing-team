@@ -9,7 +9,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | Skill | Lines | Size | What it does | SKILL.md |
 |---|---:|---:|---|---|
 | [brand-messaging](../docs/brand-messaging.md) | 43 | 1.9 KB | Fetches brand guidelines from GitHub and applies them to any written content. | [SKILL.md →](./skills/brand-messaging/SKILL.md) |
-| [blog-seo-content](../docs/blog-seo-content.md) | 230 | 10.5 KB | SEO-optimized blog posts, thought leadership articles, and long-form content. | [SKILL.md →](./skills/blog-seo-content/SKILL.md) |
+| [blog-seo-content](../docs/blog-seo-content.md) | 230 | 10.5 KB | SEO-optimized blog posts for social.plus/blog. | [SKILL.md →](./skills/blog-seo-content/SKILL.md) |
 | [newsletters](../docs/newsletters.md) | 172 | 9.9 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. | [SKILL.md →](./skills/newsletters/SKILL.md) |
 | [case-study](../docs/case-study.md) | 286 | 14.3 KB | Customer stories and success case studies. | [SKILL.md →](./skills/case-study/SKILL.md) |
 | [aeo-content](../docs/aeo-content.md) | 138 | 8.0 KB | AEO (Answer Engine Optimization) articles for the /answers/ collection, structured for AI search engine citation. | [SKILL.md →](./skills/aeo-content/SKILL.md) |

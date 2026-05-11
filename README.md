@@ -48,7 +48,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 | Skill | What it does |
 |---|---|
 | **brand-messaging** | Applies brand voice, terminology, tone, and messaging frameworks to any written content. |
-| **blog-seo-content** | SEO-optimized blog posts, thought leadership articles, and long-form content. |
+| **blog-seo-content** | SEO-optimized blog posts for social.plus/blog. |
 | **aeo-content** | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
 | **newsletters** | Generates MailerLite-compatible HTML emails from monthly product update docs. |
 | **case-study** | Customer stories and success case studies following the social.plus narrative structure. |

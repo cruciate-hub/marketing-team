@@ -196,7 +196,7 @@ This skill is only for AEO answer articles. For other content types, switch skil
 
 | You want to write | Use |
 |---|---|
-| Blog post, long-form article, pillar page | `blog-seo-content` |
+| Blog post for social.plus/blog | `blog-seo-content` |
 | Customer story / case study | `case-study` |
 | Website page copy | `brand-messaging` |
 | Monthly newsletter or release email | `newsletters` |
@@ -375,7 +375,7 @@ This skill and `blog-seo-content` are explicitly separated to prevent router col
 
 - `anthropic-skills:docx` — called by this skill in Phase D to produce the final `.docx`
 - `internal-linking-strategist` — called by this skill to add internal links; do not re-implement
-- `blog-seo-content` — long-form blog posts, pillar pages (see boundary note above)
+- `blog-seo-content` — blog posts for social.plus/blog (see boundary note above)
 - `case-study` — customer stories
 - `brand-messaging` — website and general copy
 - `site-intelligence` — content audits beyond `pages-answers.json`

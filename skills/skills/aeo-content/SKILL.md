@@ -453,7 +453,7 @@ Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks o
 
 ## Related skills
 
-- `blog-seo-content` — long-form blog posts and pillar pages
+- `blog-seo-content` — blog posts for social.plus/blog
 - `case-study` — customer stories
 - `brand-messaging` — general website copy
 - `internal-linking-strategist` — called by this skill; do not re-implement
