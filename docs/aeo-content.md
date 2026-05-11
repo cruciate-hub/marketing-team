@@ -198,8 +198,6 @@ This skill is only for AEO answer articles. For other content types, switch skil
 |---|---|
 | Blog post, long-form article, pillar page | `blog-seo-content` |
 | Customer story / case study | `case-study` |
-| Social media post (LinkedIn, Instagram, X) | `social-media` |
-| Ad copy or campaign landing page | `campaign-copy` |
 | Website page copy | `brand-messaging` |
 | Monthly newsletter or release email | `newsletters` |
 
@@ -254,9 +252,7 @@ Free-form chat also works — the skill falls back to natural-language understan
 **Do not use for:**
 - Regular blog posts → `blog-seo-content`
 - Customer stories → `case-study`
-- Social media posts → `social-media`
 - Website page copy → `brand-messaging`
-- Ad copy → `campaign-copy`
 
 ## File layout
 
@@ -381,9 +377,7 @@ This skill and `blog-seo-content` are explicitly separated to prevent router col
 - `internal-linking-strategist` — called by this skill to add internal links; do not re-implement
 - `blog-seo-content` — long-form blog posts, pillar pages (see boundary note above)
 - `case-study` — customer stories
-- `social-media` — LinkedIn, Instagram, X
 - `brand-messaging` — website and general copy
-- `campaign-copy` — paid-campaign copy
 - `site-intelligence` — content audits beyond `pages-answers.json`
 
 ## Research sources that shaped this skill

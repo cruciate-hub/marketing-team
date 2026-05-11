@@ -8,9 +8,8 @@ description: >
   social.plus brand. Also trigger when reviewing or auditing existing copy against
   brand guidelines, or when someone asks about brand voice, tone, approved terminology,
   messaging frameworks, value propositions, competitive positioning, or boilerplates.
-  Do NOT trigger for HTML email generation (use newsletters skill) or social media
-  posts (use social-media skill) — those have dedicated skills with format-specific
-  instructions.
+  Do NOT trigger for HTML email generation (use newsletters skill) — that has a
+  dedicated skill with format-specific instructions.
 ---
 
 # social.plus Brand Messaging

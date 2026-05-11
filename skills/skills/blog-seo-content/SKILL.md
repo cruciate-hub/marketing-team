@@ -16,8 +16,8 @@ description: >
   piece", "comparison article", "content marketing", "pillar page", or when the
   user wants long-form content that will be published on the web.
   Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
-  (use brand-messaging), email content (use newsletters), social media posts
-  (use social-media), or customer stories (use case-study).
+  (use brand-messaging), email content (use newsletters), or customer stories
+  (use case-study).
 ---
 
 # social.plus Blog & SEO Content

@@ -16,10 +16,8 @@ This is the generic brand-alignment skill — it routes to the appropriate messa
 For general marketing copy, blog posts, landing page text, press releases, pitch materials, website copy, product descriptions, investor communications, taglines, subject lines, or any text representing the social.plus brand. Also for reviewing or auditing existing copy against brand guidelines, or when someone asks about brand voice, tone, approved terminology, messaging frameworks, value propositions, competitive positioning, or boilerplates.
 
 The skill is not for:
-- Social media posts — use `social-media` (loads platform-specific guidelines).
 - Blog posts — use `blog-seo-content` (maps to Webflow CMS fields).
 - Customer stories — use `case-study` (has CMS-specific structure).
-- Ad copy / campaign landing pages — use `campaign-copy` (platform character limits, A/B variants).
 - AEO articles — use `aeo-content` (structured for AI citation).
 
 ## Workflow

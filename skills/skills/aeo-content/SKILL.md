@@ -1,6 +1,6 @@
 ---
 name: aeo-content
-description: "Use this skill whenever the user mentions AEO, GEO, answer pages, /answers/, answer engine optimization, generative engine optimization, or AI citation. The skill writes reference-style articles for the social.plus /answers/ collection, engineered to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI Overviews, and Copilot, and delivers a .docx (a downstream automation converts it to Webflow HTML). Trigger on phrases like 'AEO article', 'GEO article', 'answer page', 'answer article', 'AI-optimized content', 'write for AI search', 'make this citable by AI', 'content for /answers/', 'reference-style page for LLMs', 'answer engine optimization', 'generative engine optimization'. Do NOT trigger blog-seo-content for these requests — AEO articles and SEO blog posts are different formats with different delivery pipelines. This skill delivers .docx; blog-seo-content delivers markdown. Do NOT use for regular blog posts (use blog-seo-content), customer stories (use case-study), social posts (use social-media), website page copy (use brand-messaging), or paid-campaign copy (use campaign-copy)."
+description: "Use this skill whenever the user mentions AEO, GEO, answer pages, /answers/, answer engine optimization, generative engine optimization, or AI citation. The skill writes reference-style articles for the social.plus /answers/ collection, engineered to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI Overviews, and Copilot, and delivers a .docx (a downstream automation converts it to Webflow HTML). Trigger on phrases like 'AEO article', 'GEO article', 'answer page', 'answer article', 'AI-optimized content', 'write for AI search', 'make this citable by AI', 'content for /answers/', 'reference-style page for LLMs', 'answer engine optimization', 'generative engine optimization'. Do NOT trigger blog-seo-content for these requests — AEO articles and SEO blog posts are different formats with different delivery pipelines. This skill delivers .docx; blog-seo-content delivers markdown. Do NOT use for regular blog posts (use blog-seo-content), customer stories (use case-study), or website page copy (use brand-messaging)."
 ---
 
 # AEO Article Generation
@@ -455,8 +455,6 @@ Paste it verbatim. Do not reformat, do not summarize, do not invent checkmarks o
 
 - `blog-seo-content` — long-form blog posts and pillar pages
 - `case-study` — customer stories
-- `social-media` — LinkedIn, Instagram, X
 - `brand-messaging` — general website copy
-- `campaign-copy` — ads and campaign landing pages
 - `internal-linking-strategist` — called by this skill; do not re-implement
 - `site-intelligence` — content audits beyond `pages-answers.json`

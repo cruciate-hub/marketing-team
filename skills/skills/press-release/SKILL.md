@@ -10,9 +10,8 @@ description: >
   "PR Newswire", "Cision", "embargoed announcement", "press announcement", "media release",
   "draft a release for", "write a release about", or "announcement for the wire". This skill
   always outputs a properly formatted Word document (.docx) ready to upload to a newswire
-  portal. Do NOT trigger for blog posts (use blog-seo-content), social media posts (use
-  social-media), email campaigns (use newsletters), or customer case studies (use
-  case-study).
+  portal. Do NOT trigger for blog posts (use blog-seo-content), email campaigns (use
+  newsletters), or customer case studies (use case-study).
 ---
 
 # social.plus Press Release Generator
