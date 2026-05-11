@@ -41,7 +41,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 
 ![Sync automatically and Check for updates in the Cowork plugin menu](./assets/cowork-sync-automatically.png)
 
-## Available skills (13)
+## Available skills (14)
 
 ### Content creation
 
@@ -52,6 +52,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 | **aeo-content** | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
 | **newsletters** | Generates MailerLite-compatible HTML emails from monthly product update docs. |
 | **case-study** | Customer stories and success case studies following the social.plus narrative structure. |
+| **press-release** | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. |
 
 ### Design & analysis
 
@@ -86,7 +87,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 | [`assets/`](./assets) | Official logo SVGs |
 | [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
 | [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
-| [`skills/`](./skills) | The plugin source — contains the 13 skill definitions that fetch from the folders above |
+| [`skills/`](./skills) | The plugin source — contains the 14 skill definitions that fetch from the folders above |
 
 ## How updates work
 
