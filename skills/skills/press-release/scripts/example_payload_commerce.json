@@ -1,0 +1,53 @@
+{
+  "release_type": "product_launch",
+  "embargo": null,
+  "headline": "social.plus Launches Commerce: Turning Community Into the New Storefront",
+  "subhead": "New capabilities bring product discovery directly into community posts and livestreams, closing the gap between high-intent conversation and action",
+  "dateline": {"city": "LONDON", "date": "April 29, 2026"},
+  "lede": "social.plus, the community infrastructure platform powering in-app social experiences for some of the world's leading brands, announced the launch of Commerce, a suite of capabilities that connects high-intent community moments to the products, services, and offerings users can actually act on, without leaving the app.",
+  "second_para": "Commerce is now available across social.plus and includes three interconnected capabilities: Product Catalogue, Product Tagging in Posts, and Tag and Pin Products in Livestream.",
+
+  "sections": [
+    {
+      "subhead": "The gap Commerce is built to close",
+      "paragraphs": [
+        "Community platforms generate some of the highest-intent signals in digital commerce. A member posts about a product they love. A creator holds something up on a livestream. A traveller asks where to book the hotel in the photo. These moments happen millions of times each day, yet most platforms have no infrastructure to act on them.",
+        "The result: engagement happens inside the community, but conversion happens somewhere else. The community created the intent; another platform captured the outcome.",
+        "Commerce changes this. It is the layer that connects community conversations to the products and offerings users can engage with right where the moment happened."
+      ],
+      "quote": {
+        "text": "Until commerce is a core part of the community experience, justifying investment in community remains challenging. Commerce gives our customers the infrastructure to close that loop: not by bolting on a shop, but by making every high-intent moment inside the community actionable.",
+        "speaker_name": "Amadeus Norén",
+        "speaker_title": "VP of Marketing"
+      }
+    },
+    {
+      "subhead": "What's new",
+      "paragraphs": [
+        {"lead": "Product Catalogue", "body": "is the foundation of Commerce. Brands can upload products, properties, courses, or any other offerings in bulk via CSV or individually through the Console. Everything inside is instantly searchable, filterable by status, and ready to be tagged anywhere in the community the moment it is added."},
+        {"lead": "Product Tagging in Posts", "body": "allows brands and moderators to tag catalogue items directly inside any post: text, image, video, or mixed-media. Users can engage with tagged products without leaving the platform, while every view and click is captured as structured data to measure content-to-product attribution."},
+        {"lead": "Tag and Pin Products in Livestream", "body": "brings shoppable experiences to live video without disrupting the viewer. Hosts can tag up to 20 items from the catalogue and pin one as a live overlay, showing viewers the product image, title, price, and a CTA in real time. Tapping opens the product in an in-app browser while the stream continues playing. The tagged product list can be edited live and persists for replay viewers."}
+      ]
+    },
+    {
+      "subhead": "Built for every industry, not just retail",
+      "paragraphs": [
+        "While Commerce is purpose-built for retail and e-commerce brands, its architecture supports any use case where surfacing something specific within a community moment creates value. A fitness app can tag training programmes in a live workout. A travel platform can pin a property the instant it comes up in conversation. A sports operator can surface live odds during a match broadcast. A media company can tag articles and content inside editorial posts.",
+        "Commerce is designed to close the distance between intent and action, whatever form that action takes."
+      ]
+    },
+    {
+      "subhead": "Availability",
+      "paragraphs": [
+        "social.plus Commerce is available now across the social.plus platform. Existing customers can enable Commerce through Feature Settings in the Console. For a personalized walkthrough, teams can contact the social.plus sales team at social.plus/contact/contact-sales. Full documentation is available at learn.social.plus."
+      ]
+    }
+  ],
+
+  "boilerplate": {
+    "title": "About social.plus",
+    "body": "social.plus is the infrastructure layer for in-app community. The platform gives brands the building blocks to create owned social experiences — connection, conversation, content, and commerce — inside their own apps, with full ownership of the data, the design, and the customer relationship. Brands across fitness, travel, retail, sports, and entertainment use social.plus to make community core to how their product works. The best version of every app is Social+."
+  },
+  "media_contact": "marketing@social.plus | social.plus",
+  "second_boilerplate": null
+}
