@@ -17,6 +17,7 @@ Most tasks need references from more than one domain. Use this table to determin
 | Website audit or content analysis | `website/pages-*.json` (10 files, pick relevant ones) + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
 | AEO answer articles (/answers/ collection) | `skills/skills/aeo-content/SKILL.md` + `messaging/brain.md` |
+| Press releases (newswire, PR Newswire / Cision, embargoed announcements, product/funding/partnership announcements) | `skills/skills/press-release/SKILL.md` + `messaging/brain.md` |
 
 If your skill's SKILL.md already specifies which domain router to load, follow that. Use this table to decide whether you also need the *other* domain router.
 

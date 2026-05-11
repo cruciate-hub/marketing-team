@@ -1,5 +1,18 @@
 # Changelog
 
+## 11.0
+
+Breaking changes and structural cleanup — removed two skills, added one (press-release), reorganised per-skill docs per Anthropic's Agent Skills guide, narrowed blog-seo-content to social.plus/blog, and aligned the routing brains so every cross-reference reflects the new skill set.
+
+- Removed the campaign-copy and social-media skills entirely — full directory deletion plus every cross-reference: [brain.md](brain.md) routing rows, anti-trigger clauses in other SKILL.md descriptions, the design-system/social-posts.md format guide that only social-media loaded, and the Typography in Social Media + Social media post imagery rows in the design system. brand-messaging is now the fallback for LinkedIn/Instagram/X posts and ad copy. Breaking change — semver major.
+- Added the press-release skill ([skills/skills/press-release/](skills/skills/press-release/)) — produces newswire-ready .docx files for PR Newswire / Cision, embargoed announcements, and product/funding/partnership announcements. Added to brain.md's task-type routing table and the Available skills index. [skills/skills/press-release/INSTALL.md](skills/skills/press-release/INSTALL.md) moved to [docs/press-release.md](docs/press-release.md) to match the new doc layout.
+- Restructured per-skill docs to comply with Anthropic's Agent Skills guide ("no README.md inside skill folders") — moved every per-skill README from `skills/skills/<name>/README.md` to [`docs/<name>.md`](docs/) at repo root. Merged aeo-content's USAGE.md into the README before the move as a "Getting started" section. Updated [skills/README.md](skills/README.md) to dual-link each row (skill name → `../docs/<name>.md`, trailing column → SKILL.md). Header now reads "Skills (14)" across the plugin index and the root [README.md](README.md).
+- Narrowed [blog-seo-content](skills/skills/blog-seo-content/SKILL.md) to "blog posts for social.plus/blog" only — dropped thought leadership pieces, pillar pages, comparison articles, how-to guides, and external publication from its triggers and use-case lists. Cleaned five cross-references in other skill docs (aeo-content's Related skills, etc.). SKILL.md description trimmed from 1112 to 566 chars.
+- Aligned the routing brains: [brain.md](brain.md) now adds a press-release task-type row and drops the stale "Social media posts" routing row and precedence rule; [messaging/brain.md](messaging/brain.md) drops the dedicated "Social media posts" section, the cross-domain file table pointing at social-posts.md, and "thought leadership" / "whitepapers" from the Long-form content section heading; [design-system/brain.md](design-system/brain.md) drops the "Social media content" routing section and the corresponding row from Available files.
+- Trimmed three SKILL.md description fields that exceeded Anthropic's 1024-char limit: aeo-content (1036 → 850), blog-seo-content (1112 → 566), legal-docs-formatter (1081 → 969). Anti-trigger clauses preserved.
+- Aligned both manifest `description` fields to `"Shared skills for the marketing team."` (was inconsistent — marketplace.json had a short form, plugin.json still claimed 15 skills).
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 10.3 to 11.0 (semver major — skill removal is breaking).
+
 ## 10.3
 
 Newsletter skill consistency fixes — driven by a low-quality March 2026 product-update render that surfaced contradictions between the spec and the templates, and gaps that forced LLM guesswork.
