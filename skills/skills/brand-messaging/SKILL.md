@@ -2,14 +2,18 @@
 name: brand-messaging
 description: >
   Enforces social.plus brand messaging consistency across all written content.
-  Use this skill for: marketing copy, blog posts, landing page text, press releases,
-  pitch materials, website copy, product descriptions,
-  investor communications, taglines, subject lines, or any text representing the
-  social.plus brand. Also trigger when reviewing or auditing existing copy against
-  brand guidelines, or when someone asks about brand voice, tone, approved terminology,
-  messaging frameworks, value propositions, competitive positioning, or boilerplates.
-  Do NOT trigger for HTML email generation (use newsletters skill) — that has a
-  dedicated skill with format-specific instructions.
+  Use this skill for: marketing copy, landing page text, pitch materials,
+  website copy, product descriptions, investor communications, taglines, or
+  any text representing the social.plus brand that doesn't have a dedicated
+  skill. Also trigger when reviewing or auditing existing copy against brand
+  guidelines, or when someone asks about brand voice, tone, approved
+  terminology, messaging frameworks, value propositions, competitive
+  positioning, or boilerplates.
+  Do NOT trigger for: blog posts for social.plus/blog (use blog-seo-content),
+  press releases (use press-release), customer stories or case studies
+  (use case-study), AEO/answer-page content (use aeo-content), HTML emails
+  or email copy including subject lines (use newsletters), or legal documents
+  (use legal-docs-formatter).
 ---
 
 # social.plus Brand Messaging
