@@ -1,6 +1,6 @@
 # Blog SEO Content (BETA/v1, needs optimization)
 
-Claude skill for writing long-form, SEO-optimized blog posts and articles for the social.plus blog.
+Claude skill for writing SEO-optimized blog posts for social.plus/blog.
 
 Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so content can be pasted in without reformatting — page title, slug, meta description, introduction, post content HTML, taxonomy, author, reading time, image specs.
 

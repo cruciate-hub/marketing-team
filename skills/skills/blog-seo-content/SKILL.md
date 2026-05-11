@@ -6,7 +6,6 @@ description: >
   SEO blog posts only. aeo-content delivers .docx for /answers/; this skill
   delivers markdown for the blog.
 
-  Write SEO-optimized blog posts and long-form articles for social.plus.
   Use this skill for: blog posts that will be published on social.plus/blog.
   Trigger on phrases like "write a blog post" or "SEO article".
   Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
@@ -16,7 +15,7 @@ description: >
 
 # social.plus Blog & SEO Content
 
-This skill produces long-form, brand-aligned content for the social.plus blog. The output maps directly to the Webflow CMS collection fields so content can be pasted into the CMS without reformatting.
+This skill produces brand-aligned blog posts for the social.plus blog. The output maps directly to the Webflow CMS collection fields so content can be pasted into the CMS without reformatting.
 
 ## How to fetch reference files
 
@@ -162,7 +161,7 @@ Tell the user which single primary category to select. Choose from:
 |---|---|
 | Community | Building, growing, or managing digital communities |
 | App Growth | User acquisition, growth strategies, app marketing |
-| Insights | Industry trends, thought leadership, market analysis |
+| Insights | Industry trends and market analysis |
 | Engagement | User engagement, retention mechanics, social features |
 | Retention | User retention, churn reduction, loyalty |
 | Acquisition | User acquisition specifically |
