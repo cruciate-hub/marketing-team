@@ -76,16 +76,14 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 2. Read `messaging/brain.md` (the messaging router).
 
-3. Follow the messaging router's **"Long-form content"** routing. This loads:
-   - `terminology.md` + `tone.md` (always)
-   - `narrative.md` (messaging hierarchy and narrative structure)
-   - `value-story.md` (value creation model — maps directly to customer story outcomes)
+3. Customer stories hit every conditional row in the router. Load each with `cat "$REPO/messaging/<file>"`:
+   - `terminology.md` + `tone.md` (always-load)
    - `positioning.md` (product pillars for framing the solution)
+   - `value-story.md` (value creation model — maps directly to customer story outcomes)
+   - `narrative.md` (messaging hierarchy and narrative structure)
+   - `boilerplates.md` (company description blurb in the story footer / sidebar)
 
-4. Also follow **"Short-form content"** routing for:
-   - `boilerplates.md` (company descriptions for reference)
-
-5. Read `website/pages-customer-stories.json` for narrative-consistency and cross-referencing.
+4. Read `website/pages-customer-stories.json` for narrative-consistency and cross-referencing.
 
 Use this to:
 - **Avoid contradictions** — check how similar customers are already described on the site (e.g., if writing a fitness industry customer, scan existing fitness stories for metrics/framing consistency).

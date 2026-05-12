@@ -79,7 +79,7 @@ Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance 
 
 Fetch `messaging/brain.md` to get the messaging router.
 
-Follow its "Any content task" routing to fetch `terminology.md` and `tone.md`. For email subject lines and body copy, also check if "Short-form content" routing applies.
+Always load `terminology.md` and `tone.md` (the always-load rows). Email body copy that frames the product or makes value claims also needs `positioning.md` and/or `value-story.md`. For "About social.plus" footers, hero subtitles, taglines, and CTAs sourced from approved copy, load `boilerplates.md` (the 25w version is the canonical tagline source).
 
 Fetch the color system directly (emails need hex values, not CSS variables):
 

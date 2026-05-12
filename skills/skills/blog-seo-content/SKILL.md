@@ -76,13 +76,13 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 2. Fetch `messaging/brain.md` (the messaging router).
 
-3. Follow the messaging router's **"Long-form content"** routing. This loads:
-   - `terminology.md` + `tone.md` (always)
-   - `narrative.md` (messaging hierarchy and 5-step narrative structure)
-   - `value-story.md` (differentiation framework, core problems)
-   - `positioning.md` (company overview, product pillars)
+3. Blog posts hit these conditional rows in the router. Load each with `cat "$REPO/messaging/<file>"`:
+   - `terminology.md` + `tone.md` (always-load)
+   - `positioning.md` (the post mentions or frames social.plus)
+   - `value-story.md` (the post makes value, comparison, or differentiation claims)
+   - `narrative.md` (multi-section content using the 5-step messaging hierarchy)
 
-4. `value-story.md` is already loaded via the long-form routing above. For comparison or competitive content, lean on its differentiation framework especially heavily.
+4. For comparison or competitive content, lean on `value-story.md`'s differentiation framework especially heavily.
 
 5. If the article needs awareness of what the website already says (to avoid contradicting it or to find adjacent content to reference), fetch any of these as relevant:
    - `website/pages-marketing.json`

@@ -23,29 +23,82 @@ This skill produces newswire-ready press releases at the standard of a world-cla
 1. **Consistency.** Every release follows the same structural skeleton: FOR IMMEDIATE RELEASE → headline → subhead → dateline lede → narrative body → executive quote → product/proof detail → customer or partner quote → industry framing → availability → boilerplate → media contact → end marker.
 2. **Conviction over excitement.** The release earns attention through specificity, not adjectives. Hyperbole, throat-clearing ("is pleased to announce"), and quote-as-summary are banned. See `references/anti-patterns.md`.
 
-## Step 0 — Fetch the main brain
+## How to fetch reference files
 
-Fetch the cross-domain routing, precedence rules, and the compliance check you must run before delivering:
+<!-- FETCH-BLOCK:START v2 -->
+Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fetch them by shallow-cloning the repo once per session, then loading individual files with `cat`. Use this exact pattern at the start of every skill that needs reference files:
+
+    REPO="${MT_REPO:-/tmp/cruciate-hub-marketing-team}"
+    if [ ! -d "$REPO/.git" ]; then
+      git clone --depth 1 --quiet https://github.com/cruciate-hub/marketing-team.git "$REPO"
+    else
+      git -C "$REPO" pull --ff-only --quiet
+    fi
+
+After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
+
+The Bash tool truncates large stdout when the output exceeds the harness's token/byte cap (observed at ~50 KB in Cowork; varies by environment). When this happens the harness emits one of these signals — both mean the same thing:
+- `Output too large (NkB). Full output saved to: …` followed by a short preview, OR
+- `Error: result (N characters) exceeds maximum allowed tokens` with no preview, just a sidecar-file pointer.
+
+In either case, the rest of the file is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see either signal. **If you do see either form, never proceed using the partial output as if it were the whole file** — switch to one of the patterns below.
+
+- **Truncated markdown** (you saw either truncation signal above) — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
+
+      sed -n '1,250p'     "$REPO/<path>"
+      sed -n '251,500p'   "$REPO/<path>"
+      sed -n '501,$p'     "$REPO/<path>"
+
+  Each ~250-line chunk fits under the preview cap. Concatenate the chunks mentally. For files much larger than 750 lines, add more chunks at 250-line intervals until you reach the total.
+
+  **If a chunk itself comes back as a truncated preview** (output above the harness's display cap — visible as an "Output too large" or similar marker, with the rest spilled to a file you can't see in-call), halve the chunk size and retry. For example, swap `sed -n '1,250p'` for `sed -n '1,125p'` then `sed -n '126,250p'`. Repeat until each chunk lands in full. Never proceed using a truncated chunk as if it were complete.
+
+- **Large JSON inventories** (`website/pages-*.json`, up to 228 KB) — never `cat` raw. Process with `python3` or `jq` and emit only the fields you need:
+
+      python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
+      jq '.pages[].url' "$REPO/website/pages-blog.json"
+
+  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+
+Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
+
+Validate every file before using it:
+- Markdown: content must start with `#`
+- JSON: content must start with `{` or `[`
+- HTML: content must start with `<`
+- Content must be non-empty
+
+If anything fails — clone error, missing file, empty content, or wrong format:
+- Do NOT reconstruct from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+<!-- FETCH-BLOCK:END v2 -->
+
+## Step 0 — Read the main brain
+
+Read the cross-domain routing, precedence rules, and the compliance check you must run before delivering:
 
 ```
-https://github.com/cruciate-hub/marketing-team/blob/main/brain.md
+cat "$REPO/brain.md"
 ```
 
-## Step 1 — Fetch the messaging router and load long-form content references
+## Step 1 — Read the messaging router and load brand-messaging references
 
-Fetch the messaging router:
+Read the messaging router:
 
 ```
-https://github.com/cruciate-hub/marketing-team/blob/main/messaging/brain.md
+cat "$REPO/messaging/brain.md"
 ```
 
-Follow its **"Long-form content"** routing. This loads:
+Press releases trigger every conditional row in the router. Load each file with `cat "$REPO/messaging/<file>"`:
 
-- `terminology.md` and `tone.md` — voice, capitalization, banned/preferred terms
-- `narrative.md` — messaging hierarchy and narrative structure
-- `value-story.md` — value creation model (functional → strategic → economic → compounding)
+- `terminology.md` and `tone.md` — voice, capitalization, banned/preferred terms (always-load)
 - `positioning.md` — product pillars used for category framing
-- `boilerplates.md` — approved company description (default source for the "About social.plus" block)
+- `value-story.md` — value creation model (functional → strategic → economic → compounding)
+- `narrative.md` — messaging hierarchy and 5-step narrative structure
+- `boilerplates.md` — approved company description for the "About social.plus" block (Block 15)
 
 Press releases are public, permanent, and indexed. Terminology and tone compliance are mandatory.
 
@@ -175,7 +228,3 @@ Deliver the .docx with a `computer://` link. Include in the message:
 - **Never names a customer or partner** unless the brief explicitly authorizes naming them.
 - **Never includes forward-looking financial guidance** without explicit instruction (this triggers regulatory issues even for private companies in some jurisdictions).
 - **Never publishes without human review.** Output is always a draft for review by Marketing/PR and the named executive speaker.
-
-## Important: URL format
-
-**Always use `github.com/.../blob/...` URLs when fetching files.** Never attempt `raw.githubusercontent.com` — it is blocked by network egress settings.
