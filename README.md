@@ -9,7 +9,7 @@ This marketplace ships **two plugins** — install one, not both.
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
 | **`marketing-team`** | The marketing team — full kit | 14 skills (content, design, SEO, linking, formatting) | `/plugin install marketing-team@cruciate-hub` |
-| **`branding`** | Everyone else — execs, sales, engineers, anyone outside marketing who needs to stay on-brand | 3 skills: `brand-messaging`, `press-release`, `design-system` | `/plugin install branding@cruciate-hub` |
+| **`branding`** | Everyone else | 3 skills: `brand-messaging`, `press-release`, `design-system` | `/plugin install branding@cruciate-hub` |
 
 Both plugins read from the same source files (`branding`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`branding/`](./branding) folder for that plugin's README, or the [team install guide](https://github.com/cruciate-hub/marketing-team#which-plugin-should-i-install) for step-by-step setup instructions.
 
@@ -43,7 +43,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 </tr>
 </thead>
 <tbody>
-<tr><td style="text-align: center;">8 🎛️</td><td>Click the <kbd>⋯</kbd> next to <code>marketing-team</code></td></tr>
+<tr><td style="text-align: center;">8 🎛️</td><td>Click the <kbd>⋯</kbd> next to your installed plugin (<code>marketing-team</code> or <code>branding</code>)</td></tr>
 <tr><td style="text-align: center;">9 🔵</td><td>Toggle <kbd>Sync automatically</kbd></td></tr>
 <tr><td style="text-align: center;">10 🔄</td><td>Click <kbd>Check for updates</kbd></td></tr>
 <tr><td style="text-align: center;">11 🔁</td><td>Close and reopen the Claude Desktop App</td></tr>
