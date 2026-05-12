@@ -11,7 +11,7 @@ This marketplace ships **two plugins** — install one, not both.
 | **`marketing-team`** | The marketing team — full kit | 14 skills (content, design, SEO, linking, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`branding`** | Everyone else | 3 skills: `brand-messaging`, `press-release`, `design-system` | `/plugin install branding@cruciate-hub` |
 
-Both plugins read from the same source files (`branding`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`branding/`](./branding) folder for that plugin's README, or the [team install guide](https://github.com/cruciate-hub/marketing-team#which-plugin-should-i-install) for step-by-step setup instructions.
+Both plugins read from the same source files (`branding`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`branding/`](./branding) folder for that plugin's README, or the [step-by-step team install guide](./branding/INSTALL.md) for the full Cowork walkthrough with screenshots, verification, and troubleshooting.
 
 ## Installation
 

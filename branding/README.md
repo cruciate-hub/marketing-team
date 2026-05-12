@@ -28,7 +28,7 @@ Install one or the other — not both. (You won't get duplicates if you install 
 
 After restart, skills are namespaced as `branding:brand-messaging`, `branding:press-release`, `branding:design-system` — and auto-trigger on relevant prompts ("review this for brand voice", "draft a press release about X", "what blue do we use", etc.).
 
-For the full team install guide, see [`branding-plugin-install.md`](https://github.com/cruciate-hub/marketing-team#which-plugin-should-i-install).
+For the full team install guide — Cowork screenshots, troubleshooting, verification — see [INSTALL.md](./INSTALL.md).
 
 ## How it stays up to date
 
