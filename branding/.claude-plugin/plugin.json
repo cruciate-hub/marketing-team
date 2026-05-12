@@ -1,0 +1,9 @@
+{
+  "name": "branding",
+  "version": "1.0",
+  "description": "Brand voice + press release format + design system reference for social.plus. Install this if you write copy, draft press releases, or design visuals and need to stay on-brand. Uses the same skill files as the full marketing-team plugin.",
+  "author": {
+    "name": "The Cruciate Hub"
+  },
+  "repository": "https://github.com/cruciate-hub/marketing-team"
+}

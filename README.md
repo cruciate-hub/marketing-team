@@ -1,6 +1,17 @@
 # Marketing Team
 
-Shared plugin marketplace and brand reference for the marketing team. Skills load content live from this repo via a shallow git clone (`git clone --depth 1`) at the start of each session, so updates pushed here propagate to every teammate's next skill run — no plugin reinstall needed.
+Shared plugin marketplace and brand reference for social.plus. Skills load content live from this repo via a shallow git clone (`git clone --depth 1`) at the start of each session, so updates pushed here propagate to every teammate's next skill run — no plugin reinstall needed.
+
+## Which plugin should I install?
+
+This marketplace ships **two plugins** — install one, not both.
+
+| Plugin | Who it's for | Skills | Install command |
+|---|---|---|---|
+| **`marketing-team`** | The marketing team — full kit | 14 skills (content, design, SEO, linking, formatting) | `/plugin install marketing-team@cruciate-hub` |
+| **`branding`** | Everyone else — execs, sales, engineers, anyone outside marketing who needs to stay on-brand | 3 skills: `brand-messaging`, `press-release`, `design-system` | `/plugin install branding@cruciate-hub` |
+
+Both plugins read from the same source files (`branding`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`branding/`](./branding) folder for that plugin's README, or the [team install guide](https://github.com/cruciate-hub/marketing-team#which-plugin-should-i-install) for step-by-step setup instructions.
 
 ## Installation
 
@@ -18,7 +29,7 @@ Shared plugin marketplace and brand reference for the marketing team. Skills loa
 <tr><td style="text-align: center;">4 🔍</td><td>Click <kbd>Browse plugins</kbd> → select the <strong>Personal</strong> tab</td></tr>
 <tr><td style="text-align: center;">5 🏪</td><td>Click <kbd>+</kbd> → select <strong>Add marketplace</strong></td></tr>
 <tr><td style="text-align: center;">6 🔗</td><td>Enter <code>cruciate-hub/marketing-team</code> → click <kbd>Sync</kbd></td></tr>
-<tr><td style="text-align: center;">7 ➕</td><td>Click the <kbd>+</kbd> to install</td></tr>
+<tr><td style="text-align: center;">7 ➕</td><td>Click the <kbd>+</kbd> next to <strong>your plugin</strong> to install — <code>marketing-team</code> (marketing team, 14 skills) or <code>branding</code> (everyone else, 3 skills). See "Which plugin should I install?" above.</td></tr>
 </tbody>
 </table>
 
@@ -87,7 +98,8 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 | [`assets/`](./assets) | Official logo SVGs |
 | [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
 | [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
-| [`skills/`](./skills) | The plugin source — contains the 14 skill definitions that fetch from the folders above |
+| [`skills/`](./skills) | `marketing-team` plugin — the 14 skill definitions that fetch from the folders above |
+| [`branding/`](./branding) | `branding` plugin — a 3-skill subset (`brand-messaging`, `press-release`, `design-system`), symlinked from `skills/` so updates flow automatically |
 
 ## How updates work
 
