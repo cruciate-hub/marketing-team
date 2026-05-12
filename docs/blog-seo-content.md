@@ -20,7 +20,7 @@ The skill is not for website page copy (use `brand-messaging`), email content (u
 
 ## Workflow
 
-1. Fetch `brain.md` and `messaging/brain.md`. Follow the **"Long-form content"** routing to load terminology, tone, narrative, value-story, and positioning.
+1. Fetch `brain.md` and `messaging/brain.md`. Load `terminology.md`, `tone.md`, `positioning.md`, `value-story.md`, and `narrative.md` from `messaging/`.
 2. For comparison or competitive content, lean on `value-story.md`'s differentiation framework.
 3. If the article needs site-awareness (to avoid contradictions or add internal links), fetch any of `website/pages-marketing.json`, `pages-industry.json`, `pages-blog.json`, `pages-glossary.json`.
 4. Scan `pages-blog.json` `metaTitle` + `content` for topic overlap before drafting.

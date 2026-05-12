@@ -92,7 +92,7 @@ Read the messaging router:
 cat "$REPO/messaging/brain.md"
 ```
 
-Press releases trigger every conditional row in the router. Load each file with `cat "$REPO/messaging/<file>"`:
+Press releases trigger every conditional row in the router except UI. Load each file with `cat "$REPO/messaging/<file>"`:
 
 - `terminology.md` and `tone.md` — voice, capitalization, banned/preferred terms (always-load)
 - `positioning.md` — product pillars used for category framing

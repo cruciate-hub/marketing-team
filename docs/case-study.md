@@ -20,7 +20,7 @@ The skill is not for general blog posts without a customer focus (use `blog-seo-
 
 ## Workflow
 
-1. Fetch `brain.md` and `messaging/brain.md`. Follow **"Long-form content"** routing for terminology, tone, narrative, value-story, positioning. Also follow **"Short-form content"** routing for boilerplates.
+1. Fetch `brain.md` and `messaging/brain.md`. Load `terminology.md`, `tone.md`, `positioning.md`, `value-story.md`, `narrative.md`, and `boilerplates.md` from `messaging/` (every conditional row in the router except UI applies to customer stories).
 2. Fetch `website/pages-customer-stories.json` to check for duplicates and cross-link opportunities.
 3. **Gather missing info before drafting** — present one consolidated list of questions covering metrics, quote, challenge, why social.plus, implementation, results, company basics, and use cases. Don't draft with placeholders.
 4. Once enough data is in hand, produce every CMS field labeled for copy-paste into Webflow.

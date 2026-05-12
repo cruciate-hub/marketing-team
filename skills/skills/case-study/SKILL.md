@@ -76,7 +76,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 2. Read `messaging/brain.md` (the messaging router).
 
-3. Customer stories hit every conditional row in the router. Load each with `cat "$REPO/messaging/<file>"`:
+3. Customer stories hit every conditional row in the router except UI. Load each with `cat "$REPO/messaging/<file>"`:
    - `terminology.md` + `tone.md` (always-load)
    - `positioning.md` (product pillars for framing the solution)
    - `value-story.md` (value creation model — maps directly to customer story outcomes)
