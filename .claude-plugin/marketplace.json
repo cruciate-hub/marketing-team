@@ -1,7 +1,7 @@
 {
   "name": "cruciate-hub",
   "metadata": {
-    "description": "Shared brand and marketing resources for social.plus. Two plugins: marketing-team (14 skills, full kit) and branding (3 skills, for non-marketing teammates who just need to stay on-brand)."
+    "description": "Shared brand and marketing resources for social.plus. Two plugins: marketing-team (14 skills, full kit) and branding (3 skills, for non-marketing colleagues)."
   },
   "owner": {
     "name": "The Cruciate Hub"
@@ -11,13 +11,13 @@
       "name": "marketing-team",
       "source": "./skills",
       "version": "11.1",
-      "description": "Shared skills for the marketing team."
+      "description": "All shared skills for the marketing team."
     },
     {
       "name": "branding",
       "source": "./branding",
       "version": "1.1",
-      "description": "Just brand voice + press release + design system. Pick this instead of marketing-team if you only need to stay on-brand."
+      "description": "Branding skills: brand-messaging, press-release, and design-system."
     }
   ]
 }
