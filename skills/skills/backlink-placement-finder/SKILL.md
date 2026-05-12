@@ -417,112 +417,114 @@ For every article opened in Step 2.5 (including those that had no Phase 1 matche
 
 #### Presenting Both Phases
 
-**Always present Phase 1 results first** (if any exist), then Phase 2 opportunities separately. Stefan needs to see the distinction clearly:
+Track Phase 1 and Phase 2 placements distinctly during matching so Stefan can see which is which:
 - Phase 1 = "these anchors already exist, just add the link" (easy ask for the partner)
 - Phase 2 = "these articles are topically relevant, here's where and how a link could fit" (requires partner cooperation to modify text)
 
-If Phase 1 has zero results, say so explicitly, then present Phase 2 opportunities. Never declare a site "no fit" without checking Phase 2 first. A site is only "no fit" when BOTH phases come up empty — meaning no exact matches AND no topically relevant paragraphs across any articles.
+The summary table in Step 5 surfaces the distinction via the Phase column. The reply email itself (Step 4) mixes Phase 1 and Phase 2 placements in a single unnumbered list — the "Suggested text:" line is the only marker between them.
+
+If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never declare a site "no fit" without checking Phase 2 first. A site is only "no fit" when BOTH phases come up empty — meaning no exact matches AND no topically relevant paragraphs across any articles.
 
 ### 4. Draft the Reply Email
 
-Write a casual-but-professional reply email. The tone is direct, friendly, no corporate fluff — like texting a business contact.
+Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every placement uses the plain-text "Add link from / Add link to / Anchor" format so it renders consistently on email, LinkedIn, and any other channel without depending on markdown rendering.
 
-Every placement must use the **plain-text placement format** with "Add link from / Add link to / Anchor." This format works on LinkedIn, email, and any platform — no markdown rendering required. Partners can see exactly which article, which anchor text, and which target URL at a glance.
+**Canonical email structure (same for Phase 1, Phase 2, or mixed):**
 
-**Email structure when Phase 1 placements exist:**
 
 ```
-Hi [Name if known, otherwise skip],
+Hi [Name],
 
-Thanks for reaching out / sharing these sites.
+Thanks for sharing. I reviewed [the blog / the docs / your articles] and found [N] good placement[s], which I'd like to request with you:
 
-I've gone through [the content / your articles] and found some great placement opportunities:
+Add link from: [partner article URL]
+Add link to: [social.plus target URL]
+Anchor: [anchor text]
 
-**[Partner Site Name/Domain]**
+[Repeat the three-line block for each placement, with a blank line between blocks.]
 
-1. **Article:** [Article Title]
-   **URL:** [article URL]
+[For Phase 2 placements only, add one extra line below Anchor:]
+Suggested text: [the sentence the partner adds or modifies]
 
-   Add link from: [article URL]
-   Add link to: [social.plus target URL]
-   Anchor: [anchor text]
-
-2. [Next placement...]
-
-[If Phase 2 opportunities also exist, add:]
-
-I also found some articles where a link could fit with a small text addition:
-
-3. **Article:** [Article Title]
-   **URL:** [article URL]
-
-   Add link from: [article URL]
-   Add link to: [social.plus target URL]
-   Anchor: [anchor text]
-   Suggested text: [the sentence or text modification the partner could add/use]
-
-[If multiple sites, repeat the block]
-
-Let me know if these work for you.
+Let me know if [that works / these work].
 
 Cheers,
 Stefan
 ```
 
-**Email structure when only Phase 2 opportunities exist (no exact matches):**
+
+
+**Format rules:**
+- One blank line between each Add-link-from / to / Anchor block
+- Never number the placements
+- Never include the article title or a separate "URL:" line — the "Add link from" URL is sufficient
+- Mix Phase 1 and Phase 2 blocks in the same list; do not separate with a header. The "Suggested text:" line is the only visual cue between them, and that's enough
+- Match singular/plural to the count: "one good placement" / "that works" vs "N good placements" / "these work"
+- If both Phase 1 and Phase 2 came up empty, do NOT use the request template. Replace the body with one sentence explaining why the site isn't a fit, then sign off. Don't fabricate placements to fill space
+
+**Example — single Phase 1 placement:**
+
 
 ```
-Hi [Name if known, otherwise skip],
+Hi Muhammad,
 
-Thanks for sharing these. I've gone through the content — I didn't find direct anchor matches, but I found some articles where a link to social.plus could fit naturally with a small addition.
+Thanks for sharing. I reviewed the blog and found one good placement, which I'd like to request with you:
 
-**[Partner Site Name/Domain]**
+Add link from: https://example.com/blog/customer-engagement-digital-growth
+Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
+Anchor: customer engagement
 
-1. **Article:** [Article Title]
-   **URL:** [article URL]
-
-   Add link from: [article URL]
-   Add link to: [social.plus target URL]
-   Anchor: [anchor text]
-   Suggested text: [the sentence or text modification the partner could add/use]
-
-2. [Next placement...]
-
-Let me know if any of these work for you — happy to adjust the wording.
+Let me know if that works.
 
 Cheers,
 Stefan
 ```
 
-**Example of a Phase 1 placement:**
+
+
+**Example — single Phase 2 placement (note the extra Suggested text line):**
+
 
 ```
-1. **Article:** The Role of Customer Engagement in Digital Growth
-   **URL:** https://example.com/blog/customer-engagement-digital-growth
+Hi Alex,
 
-   Add link from: https://example.com/blog/customer-engagement-digital-growth
-   Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
-   Anchor: customer engagement
+Thanks for sharing. I reviewed the articles and found one good placement, which I'd like to request with you:
+
+Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
+Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
+Anchor: customer engagement strategies
+Suggested text: Brands that invest in customer engagement strategies — like in-app communities and personalized social experiences — see significantly higher retention alongside their AI-driven optimizations.
+
+Let me know if that works.
+
+Cheers,
+Stefan
 ```
 
-**Example of a Phase 2 placement:**
+
+
+**Example — mixed Phase 1 and Phase 2 in one email (no header between them):**
+
 
 ```
-1. **Article:** AI in Ecommerce: A Complete Guide
-   **URL:** https://example.com/blog/ai-in-ecommerce-a-complete-guide
+Hi Jamie,
 
-   Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
-   Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
-   Anchor: customer engagement strategies
-   Suggested text: Brands that invest in customer engagement strategies — like in-app communities and personalized social experiences — see significantly higher retention alongside their AI-driven optimizations.
+Thanks for sharing. I reviewed your blog and found two good placements, which I'd like to request with you:
+
+Add link from: https://example.com/blog/customer-retention-saas
+Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
+Anchor: customer engagement
+
+Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
+Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
+Anchor: customer engagement strategies
+Suggested text: Brands that invest in customer engagement strategies — like in-app communities and personalized social experiences — see significantly higher retention alongside their AI-driven optimizations.
+
+Let me know if these work.
+
+Cheers,
+Stefan
 ```
-
-**Important email guidelines:**
-- The plain-text placement format (Add link from / Add link to / Anchor) is mandatory for every placement — never use markdown hyperlinks in the email since partners often communicate via LinkedIn where markdown doesn't render
-- Phase 2 placements must always include the "Suggested text" line — the partner needs to see exactly what you're proposing
-- If a site has no good opportunities from either phase, say so honestly rather than forcing bad placements
-- If you found opportunities on some sites but not others, mention which ones had no fit
-- When mixing Phase 1 and Phase 2 placements in one email, list Phase 1 placements first (they're the easier ask), then Phase 2 below with a brief transition like "I also found some articles where a link could fit with a small text addition:"
 
 ### 5. Present Results
 
