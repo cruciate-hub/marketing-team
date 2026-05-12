@@ -23,3 +23,34 @@ Newsletter skill consistency fixes — driven by a low-quality March 2026 produc
 - Reworked the subject-line extraction rule in [skills/skills/newsletters/SKILL.md](skills/skills/newsletters/SKILL.md) Step 4 — the old "What's New in [month year]:" pattern conflicted with the 40–50 char limit in [emails/emails.md](emails/emails.md).
 - Added a new "Step 4a: Clean the source content" section to [skills/skills/newsletters/SKILL.md](skills/skills/newsletters/SKILL.md) covering emoji stripping in CTAs, Webflow CMS shortcode stripping, missing-module-tag handling for Tier 4, and the CTA URL fallback rule.
 - Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 10.2 to 10.3.
+
+## 10.2
+
+Renamed `internal-linking-optimizer` → `internal-linking-strategist` — the skill covers both draft-mode link suggestions for new content AND site-wide audits (orphans, cannibalization, anchor drift), so "optimizer" only captured half of what it does.
+
+- Renamed the skill directory to [skills/skills/internal-linking-strategist/](skills/skills/internal-linking-strategist/SKILL.md); updated `name` + `description` in SKILL.md and moved the per-skill doc to [docs/internal-linking-strategist.md](docs/internal-linking-strategist.md).
+- Updated every cross-reference: [brain.md](brain.md) Available skills table, [skills/README.md](skills/README.md) SEO & linking row, root [README.md](README.md), [aeo-content/SKILL.md](skills/skills/aeo-content/SKILL.md) and its `compliance.py` mention, [blog-seo-content/SKILL.md](skills/skills/blog-seo-content/SKILL.md), and `website/link-strategy.md` (the file the skill consumes).
+- Version bumped because the skill name is part of the trigger surface — restarting Cowork forces a snapshot refresh so "use the internal-linking-strategist skill" resolves correctly.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 10.1 to 10.2.
+
+## 10.1
+
+Hardening on the v10.0 fetch architecture — strictly additive, surfaced by Cowork cold-tests; the git-clone + cat + sed-chunks design from v10.0 is unchanged.
+
+- [scripts/canonical-fetch-block-v2.md](scripts/canonical-fetch-block-v2.md) now covers both harness truncation-marker formats — the `Output too large (NkB). Full output saved to: …` preview form AND the `Error: result (N characters) exceeds maximum allowed tokens` sidecar-only form. v10.0 only documented the first; an LLM hitting the second could miss the truncation signal and proceed on partial output. Re-stamped across all 12 fetch-using SKILL.md files (audit drift=0).
+- Calibrated the truncation threshold empirically at ~50,000 characters of JSON-wrapped tool result (~48–55 KB raw stdout depending on token density); the 250-line `sed` chunks (~17 KB each) recommended in the canonical block keep ~3× safety margin.
+- [skills/skills/aeo-content/scripts/duplicate_check.py](skills/skills/aeo-content/scripts/duplicate_check.py) now emits a dual signal — exit code AND a final stdout line: `RESULT: MATCHES` (exit 1), `RESULT: CLEAN` (exit 0), `RESULT: UNVERIFIED` (exit 2). [aeo-content/SKILL.md](skills/skills/aeo-content/SKILL.md) documents both paths and tells the calling LLM to treat any disagreement between exit code and stdout marker as UNVERIFIED.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 10.0 to 10.1.
+
+## 10.0
+
+New fetch architecture — every skill that loads reference content now does a single shallow `git clone` per session into a local /tmp folder, then reads files with `cat` (or `sed` chunks for outliers) instead of fetching per-read over HTTP.
+
+- Replaced the WebFetch + `github.com/.../blob/…` model, which returned 40–55× HTML overhead per file, occasionally tripped GitHub's anonymous abuse-detection on parallel fetches (newsletters fetches 11), and silently rewrote brand-critical strings via WebFetch's internal LLM (e.g. `social.plus` → `Social.plus`).
+- Confirmed empirically that every clean-content alternative is blocked in Cowork — `raw.githubusercontent.com`, `cdn.jsdelivr.net`, `api.github.com`, and `codeload.github.com` all return 403; only `github.com` is reachable, which is what made shallow clone the answer. Reviewed by Gemini and a separate Claude session, both converged on the same recommendation.
+- Added [scripts/canonical-fetch-block-v2.md](scripts/canonical-fetch-block-v2.md) as the single source of truth for the fetch instructions and [scripts/audit-skills.sh](scripts/audit-skills.sh) to enforce byte-identity across all 12 fetch-using SKILL.md files.
+- One clone per session into `/tmp/cruciate-hub-marketing-team`; `cat` for files that fit, 250-line `sed` chunks when the harness's truncation marker fires, halve-and-retry if a chunk itself truncates; `python3`/`jq` for large JSON inventories. Hard-fail on any fetch error with `Fetch failed: <path>. Please check your network connection and rerun.` — no reconstruction from memory, no WebFetch fallback.
+- Removed `skills/skills/aeo-content/scripts/fetch_brand.py` (the fragile HTML-parsing helper) and rewrote [duplicate_check.py](skills/skills/aeo-content/scripts/duplicate_check.py) to read directly from `$MT_REPO/website/pages-*.json` instead of fetching at runtime.
+- Dropped the stale "raw is blocked" warning copy-pasted across three `brain.md` files; corrected the architecture description in 12 README files.
+- Fallout from the v10.0 verification battery (test D1 — "brain.md mentions all 15 skills"): added `internal-linking-optimizer`, `legal-docs-formatter`, and `svg-icon-transformer` to [brain.md](brain.md)'s Available skills table; three skills had been added in earlier commits but never reached the master router.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 0.9.2 to 10.0.
