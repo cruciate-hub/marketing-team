@@ -1,11 +1,20 @@
 #!/usr/bin/env bash
-# audit-skills.sh — verify every SKILL.md that uses the shared fetch
-# architecture contains the canonical fetch block (v2) verbatim.
+# audit-skills.sh — repo-wide drift audit:
+#
+#   1. Fetch-block coherence — every fetch-using SKILL.md contains the
+#      canonical fetch block (v2) verbatim.
+#   2. Manifest coherence — every plugin entry's `version` in
+#      `.claude-plugin/marketplace.json` matches the corresponding plugin's
+#      own `plugin.json` `version`.
+#   3. Branding symlink integrity — every entry under `branding/skills/` is
+#      a real symlink (mode 120000) pointing at an existing skill folder
+#      under `skills/skills/`, with a readable SKILL.md at the target.
 #
 # Run from the repo root:
 #   ./scripts/audit-skills.sh
 #
-# Wire into CI / pre-commit to prevent silent drift across the 14+ skills.
+# Wire into CI / pre-commit to prevent silent drift across the 14+ skills
+# and the meta-plugin (branding).
 
 set -euo pipefail
 
@@ -75,6 +84,86 @@ for skill in "$REPO_ROOT"/skills/skills/*/SKILL.md; do
   checked=$((checked + 1))
 done
 
+# ---------------------------------------------------------------------------
+# Check 2 — manifest version coherence
+# ---------------------------------------------------------------------------
+
+manifest_drift=0
+MARKETPLACE_JSON="$REPO_ROOT/.claude-plugin/marketplace.json"
+
+if [ -f "$MARKETPLACE_JSON" ]; then
+  while IFS=$'\t' read -r plugin_name plugin_source plugin_market_version; do
+    [ -n "$plugin_name" ] || continue
+    plugin_json="$REPO_ROOT/${plugin_source#./}/.claude-plugin/plugin.json"
+    if [ ! -f "$plugin_json" ]; then
+      echo "MISSING:    $plugin_name — plugin.json not found at ${plugin_json#$REPO_ROOT/}"
+      manifest_drift=1
+      continue
+    fi
+    plugin_local_version=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['version'])" "$plugin_json")
+    if [ "$plugin_market_version" != "$plugin_local_version" ]; then
+      echo "VERSION MISMATCH: $plugin_name — marketplace.json=$plugin_market_version, plugin.json=$plugin_local_version"
+      manifest_drift=1
+    fi
+  done < <(python3 -c '
+import json, sys
+m = json.load(open(sys.argv[1]))
+for p in m.get("plugins", []):
+    print("\t".join([p.get("name",""), p.get("source",""), p.get("version","")]))
+' "$MARKETPLACE_JSON")
+else
+  echo "ERROR: marketplace.json missing at $MARKETPLACE_JSON" >&2
+  manifest_drift=1
+fi
+
+# ---------------------------------------------------------------------------
+# Check 3 — branding symlink integrity
+# ---------------------------------------------------------------------------
+
+symlink_drift=0
+symlinks_checked=0
+BRANDING_SKILLS_DIR="$REPO_ROOT/branding/skills"
+
+if [ -d "$BRANDING_SKILLS_DIR" ]; then
+  for entry in "$BRANDING_SKILLS_DIR"/*; do
+    [ -e "$entry" ] || [ -L "$entry" ] || continue
+    name="$(basename "$entry")"
+    rel="branding/skills/$name"
+
+    if [ ! -L "$entry" ]; then
+      echo "NOT A SYMLINK: $rel — should be a symlink to ../../skills/skills/$name"
+      symlink_drift=1
+      continue
+    fi
+
+    target=$(readlink "$entry")
+    expected="../../skills/skills/$name"
+    if [ "$target" != "$expected" ]; then
+      echo "UNEXPECTED TARGET: $rel -> $target (expected $expected)"
+      symlink_drift=1
+    fi
+
+    if [ ! -r "$entry/SKILL.md" ]; then
+      echo "BROKEN SYMLINK: $rel -> $target (target SKILL.md unreadable)"
+      symlink_drift=1
+    fi
+
+    symlinks_checked=$((symlinks_checked + 1))
+  done
+else
+  echo "WARN: branding/skills/ not found — meta-plugin missing? Skipping symlink check."
+fi
+
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+
+total_drift=$((drift + manifest_drift + symlink_drift))
+
 echo
-echo "Checked: $checked   Skipped (non-fetching): $skipped   Drift: $drift"
-exit "$drift"
+echo "Fetch-blocks:  $checked checked, $skipped skipped (non-fetching), $drift drift"
+echo "Manifests:     coherence drift = $manifest_drift"
+echo "Symlinks:      $symlinks_checked checked, $symlink_drift drift"
+echo "TOTAL DRIFT:   $total_drift"
+
+exit "$total_drift"
