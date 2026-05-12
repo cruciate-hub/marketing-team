@@ -294,9 +294,9 @@ Slug: lowercase-with-hyphens
 Alt text: Abstract visualization of [main topic]
 Intent: definition | procedural | comparative
 
-[Answer-first block — sentences 1-2, 30-50 words combined]
+[Answer-first block — sentences 1-2, 40-60 words combined]
 
-[TL;DR paragraph — 80-120 words]
+[TL;DR paragraph — 120-160 words]
 
 ## First body section
 ...
@@ -320,16 +320,17 @@ python3 scripts/compliance.py outputs/my-article.draft.md --json
 
 Exit 0 if no failures (warnings allowed), 1 if any failure.
 
-The 20 checks:
+The 22 checks:
 
 | Category | Checks |
 |---|---|
 | Metadata | H1 title, Meta description, Slug, Alt text, Intent (+ intent validity) |
 | Length | meta description ≤160 chars; word count inside intent-specific typical range (WARN, not fail) |
-| Answer-first | sentences 1-2 in 30-50 word range; target-keyword phrase in sentence 1 |
+| Answer-first | sentences 1-2 in 40-60 word range; TL;DR in 120-160 word range; target-keyword phrase in sentence 1 |
 | Style | no em dashes, no emojis, no forbidden terms, no filler openers |
 | Structure | no HTML of any kind (tags, comments, JSON-LD); single H1; no skipped heading levels |
 | Citations | intent-conditional minimum (definition ≥2, comparative ≥3, procedural any) |
+| Internal linking | at least one social.plus internal link present (WARN only — flags when `internal-linking-strategist` was skipped) |
 | Claims | approved-customer whitelist (Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames) |
 
 ## Brand-file loading

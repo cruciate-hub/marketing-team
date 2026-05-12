@@ -1,4 +1,4 @@
-# Blog SEO Content (BETA/v1, needs optimization)
+# Blog SEO Content
 
 Claude skill for writing SEO-optimized blog posts for social.plus/blog.
 
@@ -8,7 +8,7 @@ Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so c
 
 - Fetches the full messaging stack via the brain + router — terminology, tone, narrative, value-story, positioning.
 - Checks `website/pages-blog.json` for duplicate topics; suggests updating an existing post when a close match exists.
-- Recommends 3–5 internal links from the existing blog inventory to strengthen SEO.
+- Delegates internal links to the `internal-linking-strategist` skill before delivery — the optimizer returns 3–7 SEO-grounded `<a href>` tags via the canonical anchor map in `link-strategy.md`.
 - Produces clean HTML body copy (5,000–12,000 characters) following the Context → Tension → Infrastructure → Impact → Advantage narrative structure.
 - Labels every CMS field so the user can copy-paste into Webflow field-by-field.
 
@@ -22,10 +22,11 @@ The skill is not for website page copy (use `brand-messaging`), email content (u
 
 1. Fetch `brain.md` and `messaging/brain.md`. Load `terminology.md`, `tone.md`, `positioning.md`, `value-story.md`, and `narrative.md` from `messaging/`.
 2. For comparison or competitive content, lean on `value-story.md`'s differentiation framework.
-3. If the article needs site-awareness (to avoid contradictions or add internal links), fetch any of `website/pages-marketing.json`, `pages-industry.json`, `pages-blog.json`, `pages-glossary.json`.
+3. If the article needs site-awareness (to avoid contradicting existing pages or to find adjacent topics to reference), fetch any of `website/pages-marketing.json`, `pages-industry.json`, `pages-blog.json`, `pages-glossary.json`.
 4. Scan `pages-blog.json` `metaTitle` + `content` for topic overlap before drafting.
 5. Produce every CMS field labeled clearly for copy-paste into Webflow.
-6. Run the compliance check from `brain.md` before delivering.
+6. Invoke `internal-linking-strategist` in **draft mode** before final output — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Embed them in the `post-content` HTML.
+7. Run the compliance check from `brain.md` before delivering.
 
 ## Webflow CMS fields
 
@@ -72,7 +73,7 @@ Plus `image-alt-text` (real description, not "decorative") and a suggested image
 
 - **Length:** 5,000–12,000 characters (matches existing blog posts on the live site).
 - **Keyword placement:** target keyword in H1 (page title), first paragraph of post-content, and at least one H2.
-- **Internal links:** suggest 3–5 relevant social.plus pages (strengthens SEO).
+- **Internal links:** delegated to `internal-linking-strategist` — it returns 3–7 anchor + URL + insertion-point suggestions using the canonical map in `link-strategy.md`. Never improvise.
 - **No `<sprscript-green>` tags** — those are for customer stories only.
 - **No emojis.**
 - **No fabricated statistics, customer names, quotes, or performance claims.**

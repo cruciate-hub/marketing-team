@@ -22,9 +22,11 @@ The skill is not for general blog posts without a customer focus (use `blog-seo-
 
 1. Fetch `brain.md` and `messaging/brain.md`. Load `terminology.md`, `tone.md`, `positioning.md`, `value-story.md`, `narrative.md`, and `boilerplates.md` from `messaging/` (every conditional row in the router except UI applies to customer stories).
 2. Fetch `website/pages-customer-stories.json` to check for duplicates and cross-link opportunities.
-3. **Gather missing info before drafting** — present one consolidated list of questions covering metrics, quote, challenge, why social.plus, implementation, results, company basics, and use cases. Don't draft with placeholders.
-4. Once enough data is in hand, produce every CMS field labeled for copy-paste into Webflow.
-5. Run the compliance check from `brain.md`.
+3. **Auto-research public facts first.** Web-search the customer name for headquarters, founding year, founders, scale indicators, market position, and key product surface. Present findings as a labelled block the writer can edit, not type from scratch.
+4. **Ask only for what's genuinely missing.** One consolidated list covering metrics (route to `bq-business-query` against the social.plus warehouse if available — sales-deck and memory-sourced numbers are unreliable), quote, challenge, why social.plus, implementation, results, and use cases. Don't draft with placeholders. Trust the writer's intent — don't gate on NDA / contract / brand-legal questions; those belong to their team.
+5. **Ask once whether the `webflow-socialplus` MCP connector is activated.** If yes, the skill creates the customer story directly as a **draft** item in the `💼 Customer Stories` CMS collection via MCP; if no, it produces paste-ready field-by-field output.
+6. Produce every CMS field labeled for copy-paste into Webflow (or create the draft via MCP).
+7. Run the compliance check from `brain.md`.
 
 ## Webflow CMS fields
 
@@ -73,7 +75,7 @@ Follows a consistent section pattern:
 ### Sidebar
 - **About** — 2–3 sentences: what they do, founding year or scale, headquarters/region.
 - **Location** — "City, Country" or just "Country".
-- **Use Cases** — multi-reference to Use Case CMS items (Activity Feed, Group Chat, Live Chat, Livestream, etc.).
+- **Use Cases** — multi-reference to Use Case CMS items. Canonical list (verified 2026-05-12): 1-1 Chat, Activity Feed, Custom Posts, Events, Group Chat, Groups, Live Chat, Live Commerce, Live Stream, Polls, Social Commerce, Stories & Clips, User Profiles.
 - **Implementation** — Web / App toggles.
 - **SDK** and **UIKit** — multi-reference lists; say "Ask customer" if unknown.
 - **UIKit Customization** — Low / Medium / High / Custom UI.
