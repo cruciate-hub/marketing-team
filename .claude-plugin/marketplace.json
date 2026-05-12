@@ -10,13 +10,13 @@
     {
       "name": "marketing-team",
       "source": "./skills",
-      "version": "11.0",
+      "version": "11.1",
       "description": "Shared skills for the marketing team."
     },
     {
       "name": "branding",
       "source": "./branding",
-      "version": "1.0",
+      "version": "1.1",
       "description": "Just brand voice + press release + design system. Pick this instead of marketing-team if you only need to stay on-brand."
     }
   ]

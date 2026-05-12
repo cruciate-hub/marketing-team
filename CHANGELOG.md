@@ -1,5 +1,15 @@
 # Changelog
 
+## 11.1
+
+Routing taxonomy rework + press-release v10 migration. [messaging/brain.md](messaging/brain.md) now routes by what content does, not by length; [press-release](skills/skills/press-release/SKILL.md) adopts the v10 canonical fetch block (was the last skill missing it); three downstream skills updated to match the new router.
+
+- Rewrote [messaging/brain.md](messaging/brain.md) routing table around purpose: each row now states a condition based on what the output IS or CONTAINS, and triggers one file load. Replaces the prior length-based "Short-form content" / "Long-form content" split, which miscategorised `boilerplates.md` (used in both 25-word taglines and 70-word press-release "About" blocks) and forced workarounds in case-study and press-release. Structure now mirrors [design-system/brain.md](design-system/brain.md).
+- Press-release: full v10 migration. Inserted the canonical FETCH-BLOCK v2 markers ([scripts/canonical-fetch-block-v2.md](scripts/canonical-fetch-block-v2.md)) — was the last fetch-using skill missing them per audit. Replaced two `github.com/.../blob/...` URLs with `cat "$REPO/..."`. Dropped the obsolete "Important: URL format" trailing section. Reordered Step 1's messaging file list to match the new conditional rows; `boilerplates.md` now loads naturally instead of via a "Short-form content" workaround.
+- Updated [blog-seo-content](skills/skills/blog-seo-content/SKILL.md), [case-study](skills/skills/case-study/SKILL.md), and [newsletters](skills/skills/newsletters/SKILL.md) to replace dead `"Long-form content"` / `"Short-form content"` category references with explicit per-row conditions. case-study drops its boilerplates workaround step; the file now loads under its own conditional row.
+- Audit ([scripts/audit-skills.sh](scripts/audit-skills.sh)): 11 checked, 0 drift (was 1 drift on press-release before this revision).
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 11.0 to 11.1. Bumped [branding/.claude-plugin/plugin.json](branding/.claude-plugin/plugin.json) from 1.0 to 1.1 — branding uses press-release as a symlinked skill and inherits the v10 migration.
+
 ## 11.0
 
 Breaking changes and structural cleanup — removed two skills, added one (press-release), reorganised per-skill docs per Anthropic's Agent Skills guide, narrowed blog-seo-content to social.plus/blog, and aligned the routing brains so every cross-reference reflects the new skill set.
