@@ -89,12 +89,14 @@ Lede paragraph:
 - Active voice. Past or present tense. Never future.
 
 Descriptor format (first mention of social.plus):
-> social.plus, the community infrastructure platform powering in-app social experiences for some of the world's leading brands, [verbed] [the news].
+> social.plus, the platform powering in-app social and community experiences for leading consumer brands, [verbed] [the news].
+
+This descriptor is the canonical first-mention introduction across every release type. Do not change it inline — if it needs updating, edit `references/structure-template.md` and `references/release-type-playbooks.md` together so every lede formula stays consistent.
 
 Variants depending on release type:
-- Funding: `social.plus, the community infrastructure platform [...], today announced a $X [Series Y] funding round led by [investor].`
-- Partnership: `social.plus, the community infrastructure platform [...], today announced a partnership with [partner] to [outcome].`
-- Customer: `social.plus, the community infrastructure platform [...], today announced that [customer], the [customer descriptor], has [verbed].`
+- Funding: `social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced a $X [Series Y] funding round led by [investor].`
+- Partnership: `social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced a partnership with [partner] to [outcome].`
+- Customer: `social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced that [customer], the [customer descriptor], has [verbed].`
 
 ### Block 5 — Second paragraph
 

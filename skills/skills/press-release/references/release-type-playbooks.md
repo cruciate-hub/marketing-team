@@ -9,7 +9,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** New product, new module, major feature suite, public availability of something previously in beta.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform powering in-app social experiences for some of the world's leading brands, announced the launch of [Product Name], [one-clause descriptor of what it does or who it serves].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, announced the launch of [Product Name], [one-clause descriptor of what it does or who it serves].`
 
 **Mandatory blocks:** All 17 from the structure template.
 
@@ -37,7 +37,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Seed, Series A/B/C/D, growth round, debt facility, strategic investment.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced it has raised $[Amount] in [Round Type] funding led by [Lead Investor], with participation from [Other Investors]. The investment brings total funding to $[Total] and will [primary use of funds].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced it has raised $[Amount] in [Round Type] funding led by [Lead Investor], with participation from [Other Investors]. The investment brings total funding to $[Total] and will [primary use of funds].`
 
 **Mandatory blocks:**
 - All structure blocks PLUS:
@@ -71,7 +71,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Strategic partnership, integration partnership, GTM partnership, co-selling agreement.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced a partnership with [Partner], the [partner descriptor], to [shared outcome for joint customers].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced a partnership with [Partner], the [partner descriptor], to [shared outcome for joint customers].`
 
 **Mandatory blocks:**
 - Skeleton 1–17 with one addition: both companies' boilerplates (Block 15 carries both, in alphabetical order)
@@ -99,7 +99,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Notable customer signs, deploys, expands. Often paired with a case study.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced that [Customer], the [customer descriptor], has [verbed past-tense outcome] using social.plus.`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced that [Customer], the [customer descriptor], has [verbed past-tense outcome] using social.plus.`
 
 **Mandatory blocks:**
 - Skeleton 1–17 with customer as the protagonist of Blocks 7–10
@@ -128,7 +128,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** C-suite or VP-level hire, board appointment, advisory hire.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced the appointment of [Name] as [Title]. [Name] joins social.plus from [previous company], where [s/he/they] [most-relevant achievement].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced the appointment of [Name] as [Title]. [Name] joins social.plus from [previous company], where [s/he/they] [most-relevant achievement].`
 
 **Mandatory blocks:**
 - Compressed problem framing (one paragraph, not three)
@@ -158,7 +158,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Funding total, user count, customers, revenue (private companies rarely), processing volume, anniversary, geographic expansion.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced [the milestone number] [unit], [time frame or comparison anchor].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced [the milestone number] [unit], [time frame or comparison anchor].`
 
 **Mandatory blocks:**
 - Compressed skeleton (12–14 blocks instead of 17)
@@ -186,7 +186,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Gartner placement, Forbes list, industry award, analyst report inclusion.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced that it has been recognized as a [recognition name] by [recognizing body] for [criteria].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced that it has been recognized as a [recognition name] by [recognizing body] for [criteria].`
 
 **Mandatory blocks:**
 - Compressed skeleton (10–12 blocks)
@@ -212,7 +212,7 @@ Each release type has its own lede formula, mandatory blocks, and traps. Pick th
 **When:** Acquiring another company, being acquired, asset purchase.
 
 **Lede formula:**
-> `[CITY], [Date] — social.plus, the community infrastructure platform [...], today announced the acquisition of [Target], the [target descriptor]. The acquisition [strategic rationale in one clause].`
+> `[CITY], [Date] — social.plus, the platform powering in-app social and community experiences for leading consumer brands, today announced the acquisition of [Target], the [target descriptor]. The acquisition [strategic rationale in one clause].`
 
 **Mandatory blocks:**
 - Both companies' boilerplates

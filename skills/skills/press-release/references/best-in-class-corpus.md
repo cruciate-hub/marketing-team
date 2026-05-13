@@ -24,7 +24,7 @@ Stripe consistently writes ledes that an intelligent generalist reader can parse
 The descriptor never includes phrases like "AI-powered", "next-generation", "blockchain-enabled". It says what the product *is* in the words a customer would use.
 
 **Applied to social.plus:**
-> "social.plus, the community infrastructure platform powering in-app social experiences for some of the world's leading brands, announced..." ✓
+> "social.plus, the platform powering in-app social and community experiences for leading consumer brands, announced..." ✓
 >
 > NOT: "social.plus, the AI-powered, next-generation, blockchain-enabled community SaaS platform, announced..." ✗
 

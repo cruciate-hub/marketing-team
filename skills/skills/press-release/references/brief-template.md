@@ -146,7 +146,7 @@ legal_flags: []
 ```yaml
 release_type: funding
 news_in_one_sentence: |
-  social.plus has raised $30M in Series B funding led by Index Ventures to expand its community infrastructure platform globally.
+  social.plus has raised $30M in Series B funding led by Index Ventures to expand its platform globally.
 
 key_facts:
   - Round: Series B
@@ -267,7 +267,7 @@ target_audience: |
   Tech press, engineering recruiting community, and existing engineering team (internal credibility).
 
 angle: |
-  social.plus is investing in technical leadership to scale its community infrastructure platform into a developer-first product category.
+  social.plus is investing in technical leadership to scale its platform into a developer-first product category.
 
 speakers:
   - name: Maria González
