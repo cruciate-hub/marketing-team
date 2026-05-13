@@ -430,7 +430,7 @@ Track Phase 1 and Phase 2 placements distinctly during matching so Stefan can se
 - Phase 1 = "these anchors already exist, just add the link" (easy ask for the partner)
 - Phase 2 = "these articles are topically relevant, here's where and how a link could fit" (requires partner cooperation to modify text)
 
-The summary table in Step 5 surfaces the distinction via the Phase column. The reply email itself (Step 4) mixes Phase 1 and Phase 2 placements in a single unnumbered list — the "Suggested text:" line is the only marker between them.
+The summary table in Step 5 surfaces the distinction via the Phase column. The reply email itself (Step 4) mixes Phase 1 and Phase 2 placements in a single numbered list — the `Placement:` line on Phase 1 entries vs the `Suggested text:` line on Phase 2 entries is the only marker between them.
 
 If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never declare a site "no fit" without checking Phase 2 first. A site is only "no fit" when BOTH phases come up empty — meaning no exact matches AND no topically relevant paragraphs across any articles.
 
