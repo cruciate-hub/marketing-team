@@ -369,9 +369,16 @@ For each partner article opened in Step 2.5:
    - **Target URL Rating check (when Ahrefs is available):** Run `site-explorer-url-rating-history` (or pull from `pages-by-traffic` filtered to the exact URL) on the proposed social.plus target. If URL Rating < 5, swap to a stronger target. Partners reject low-UR targets as "not a fair trade" — DR of social.plus as a domain doesn't help if the specific page has no authority.
    - **Competitor overlap check:** If Tier 2 of Step 0 flagged that the partner already links to social.plus competitors (Bettermode, Mighty Networks, Discourse, Tribe, Circle, etc.), check whether THIS specific article already contains a competitor link. If yes, either pick a different article or note the conflict to Stefan so he can decide whether to ask the partner to swap rather than insert.
 
-5. **Score the fit:**
-   - ⭐⭐⭐ **Perfect** — The anchor text exists verbatim in the article, in a body paragraph where linking out makes sense
-   - ⭐⭐ **Strong** — A close semantic match exists, minor rewording needed, context is right, body paragraph placement
+5. **Capture traffic and authority signals:**
+   - Record the partner article's monthly organic traffic from the Ahrefs `sum_traffic` field already pulled in Step 0 Tier 3.
+   - Record the social.plus target page's URL Rating (UR). Pull from `site-explorer-url-rating-history` if not already cached. Each UR call costs ~7 Ahrefs units — budget ~21 units for a 3-placement session. Skip the UR call only if the target is a glossary entry and the partner is low-DR (< 30), where the marginal SEO weight isn't worth the call.
+   - These numbers are NOT shown to the partner. They appear only in the internal summary table for Stefan's decision.
+
+6. **Score the fit:**
+   - ⭐⭐⭐ **Perfect** — Phase 1 anchor verbatim in body paragraph AND partner article traffic ≥ 50/month AND target UR ≥ 10
+   - ⭐⭐ **Strong** — Phase 1 anchor verbatim OR close semantic match in body paragraph, but either partner traffic < 50 OR target UR < 10. Add a `[low-value]` flag in the summary table when partner traffic = 0 AND target UR < 5, with caveat to Stefan: "low-value link both directions — only ship if relationship maintenance is the goal."
+
+The 50, 10, and 5 thresholds are starting heuristics, not absolutes. Adjust based on observed acceptance rates across exchanges.
 
 If Phase 1 produces ⭐⭐ or ⭐⭐⭐ placements, present them as the primary recommendations. Then **always proceed to Phase 2** to find additional opportunities.
 
@@ -413,6 +420,8 @@ For every article opened in Step 2.5 (including those that had no Phase 1 matche
 4. **Score as:**
    - ⭐ **Opportunity** — Topic is relevant, specific paragraph identified, text modification suggested. The partner would need to add or edit a sentence.
 
+When a Phase 2 opportunity sits on a high-traffic article (≥ 200/month), append the note "high-traffic article — Phase 2 ask may face more editorial resistance. Write the suggested sentence to read seamlessly in their style."
+
 ---
 
 #### Presenting Both Phases
@@ -427,9 +436,9 @@ If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never
 
 ### 4. Draft the Reply Email
 
-Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every placement uses the plain-text "Add link from / Add link to / Anchor" format so it renders consistently on email, LinkedIn, and any other channel without depending on markdown rendering.
+Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every line in every placement block sits flush-left so the email renders cleanly in email, LinkedIn, Slack, and any chat box where markdown doesn't render — indented sub-fields wrap weirdly when the surface strips formatting.
 
-**Canonical email structure (same for Phase 1, Phase 2, or mixed):**
+**Canonical Phase 1 email structure (anchor already in body — partner just adds the link):**
 
 
 ```
@@ -437,16 +446,79 @@ Hi [Name],
 
 Thanks for sharing. I reviewed [the blog / the docs / your articles] and found [N] good placement[s], which I'd like to request with you:
 
-Add link from: [partner article URL]
+1. Article: [Article Title]
+URL: [article URL]
+
+Add link from: [article URL]
 Add link to: [social.plus target URL]
 Anchor: [anchor text]
+Placement: [section name + verbatim sentence]
 
-[Repeat the three-line block for each placement, with a blank line between blocks.]
+[Repeat the numbered block for each additional placement, with a blank line between blocks.]
 
-[For Phase 2 placements only, add one extra line below Anchor:]
+Please let me know which work for you, and what we can do for you in return.
+
+Cheers,
+Stefan
+```
+
+
+
+**Canonical Phase 2 email structure (partner adds or modifies a sentence to host the link):**
+
+
+```
+Hi [Name],
+
+Thanks for sharing. I reviewed [the blog / the docs / your articles] and found [N] good placement[s], which I'd like to request with you:
+
+1. Article: [Article Title]
+URL: [article URL]
+
+Add link from: [article URL]
+Add link to: [social.plus target URL]
+Anchor: [anchor text]
 Suggested text: [the sentence the partner adds or modifies]
 
-Let me know if [that works / these work].
+[Repeat the numbered block for each additional placement, with a blank line between blocks.]
+
+Please let me know which work for you, and what we can do for you in return.
+
+Cheers,
+Stefan
+```
+
+
+
+**Email structure when offering alternatives (partner has limited capacity or relationship calls for flexibility):**
+
+
+```
+Hi [Name if known, otherwise skip],
+
+Thanks for sharing these. I went through [the content / your articles] and found [N] solid placement opportunities on [partner site] — we're happy with either one, or both if it works for you.
+
+**[Partner Site Name/Domain]**
+
+Option 1
+Article: [Article Title]
+URL: [article URL]
+
+Add link from: [article URL]
+Add link to: [social.plus target URL]
+Anchor: [anchor text]
+Placement: [section name + verbatim sentence]
+
+Option 2
+Article: [Article Title]
+URL: [article URL]
+
+Add link from: [article URL]
+Add link to: [social.plus target URL]
+Anchor: [anchor text]
+Placement: [section name + verbatim sentence]
+
+Please let me know which one you'd like to go with, or if both work, and what we can do for you in return.
 
 Cheers,
 Stefan
@@ -455,11 +527,12 @@ Stefan
 
 
 **Format rules:**
-- One blank line between each Add-link-from / to / Anchor block
-- Never number the placements
-- Never include the article title or a separate "URL:" line — the "Add link from" URL is sufficient
-- Mix Phase 1 and Phase 2 blocks in the same list; do not separate with a header. The "Suggested text:" line is the only visual cue between them, and that's enough
-- Match singular/plural to the count: "one good placement" / "that works" vs "N good placements" / "these work"
+- Every line in every placement block is flush-left — no indentation under the numbered/Option line. Indented sub-fields wrap weirdly in LinkedIn, Slack, and most chat boxes where markdown doesn't render
+- One blank line between each numbered placement block
+- Phase 1 placements use `Placement:` (section name + verbatim sentence from the partner's article). Phase 2 placements use `Suggested text:` (the sentence the partner adds or modifies)
+- Mix Phase 1 and Phase 2 blocks in the same numbered list when both exist — the `Placement:` vs `Suggested text:` line is the only marker between them
+- Match singular/plural to the count: "one good placement" / "two good placements"
+- Always close with "Please let me know which work for you, and what we can do for you in return." Link exchanges are reciprocal — the partner expects us to ask back, so never drop this line
 - If both Phase 1 and Phase 2 came up empty, do NOT use the request template. Replace the body with one sentence explaining why the site isn't a fit, then sign off. Don't fabricate placements to fill space
 
 **Example — single Phase 1 placement:**
@@ -470,11 +543,15 @@ Hi Muhammad,
 
 Thanks for sharing. I reviewed the blog and found one good placement, which I'd like to request with you:
 
+1. Article: The Role of Customer Engagement in Digital Growth
+URL: https://example.com/blog/customer-engagement-digital-growth
+
 Add link from: https://example.com/blog/customer-engagement-digital-growth
 Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
 Anchor: customer engagement
+Placement: "Building Long-Term Loyalty" section — the sentence "Brands that invest in customer engagement see significantly higher retention."
 
-Let me know if that works.
+Please let me know which work for you, and what we can do for you in return.
 
 Cheers,
 Stefan
@@ -482,7 +559,7 @@ Stefan
 
 
 
-**Example — single Phase 2 placement (note the extra Suggested text line):**
+**Example — single Phase 2 placement (`Suggested text:` replaces `Placement:`):**
 
 
 ```
@@ -490,37 +567,15 @@ Hi Alex,
 
 Thanks for sharing. I reviewed the articles and found one good placement, which I'd like to request with you:
 
-Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
-Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
-Anchor: customer engagement strategies
-Suggested text: Brands that invest in customer engagement strategies — like in-app communities and personalized social experiences — see significantly higher retention alongside their AI-driven optimizations.
-
-Let me know if that works.
-
-Cheers,
-Stefan
-```
-
-
-
-**Example — mixed Phase 1 and Phase 2 in one email (no header between them):**
-
-
-```
-Hi Jamie,
-
-Thanks for sharing. I reviewed your blog and found two good placements, which I'd like to request with you:
-
-Add link from: https://example.com/blog/customer-retention-saas
-Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
-Anchor: customer engagement
+1. Article: AI in Ecommerce: A Complete Guide
+URL: https://example.com/blog/ai-in-ecommerce-a-complete-guide
 
 Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
 Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
 Anchor: customer engagement strategies
 Suggested text: Brands that invest in customer engagement strategies — like in-app communities and personalized social experiences — see significantly higher retention alongside their AI-driven optimizations.
 
-Let me know if these work.
+Please let me know which work for you, and what we can do for you in return.
 
 Cheers,
 Stefan
@@ -530,10 +585,9 @@ Stefan
 
 After the draft email, provide a summary table for Stefan's reference:
 
-| Partner Article | Anchor Text | social.plus Target | Phase | Fit Score |
-|----------------|-------------|-------------------|-------|-----------|
-| [title] | [anchor] | [URL] | 1 | ⭐⭐⭐ |
-| [title] | [anchor] | [URL] | 2 | ⭐ |
+| Partner Article | Partner Traffic | Anchor | social.plus Target | Target UR | Phase | Fit Score |
+|----------------|----------------|--------|-------------------|-----------|-------|-----------|
+| [title] | [monthly traffic] | [anchor] | [URL] | [UR] | 1 or 2 | ⭐⭐⭐/⭐⭐/⭐ |
 
 This helps Stefan quickly see which placements are direct matches (Phase 1) vs. which require partner cooperation (Phase 2), and decide which to prioritize.
 
@@ -589,5 +643,6 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't process partner sites in restricted categories (crypto, casino, converter tools, etc.) — flag them and stop
 - Don't skip Step 0 (Ahrefs pre-screen) on Mode A sites just because the partner "looks legit." DR + traffic + topical fit must be checked before crawling
 - Don't trust DR alone as a quality signal — DR 70+ with no traffic and no topical fit is a PBN, not a publisher
+- Don't propose a placement without checking both partner-article traffic and social.plus target URL Rating. The fit score is meaningless without these two numbers
 - Don't use `sum_traffic_merged` as an Ahrefs `order_by` value — it's select-only and the call will fail. Use `sum_traffic`
 - Don't skip the existing-backlink check (Step 0.0) on Mode B just because there's no live site to crawl — the domain is still known and the check is cheap
