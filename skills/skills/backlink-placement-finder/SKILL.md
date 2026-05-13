@@ -434,6 +434,25 @@ The summary table in Step 5 surfaces the distinction via the Phase column. The r
 
 If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never declare a site "no fit" without checking Phase 2 first. A site is only "no fit" when BOTH phases come up empty — meaning no exact matches AND no topically relevant paragraphs across any articles.
 
+### 3.5. Decision Gate (Before Drafting the Email)
+
+Before writing any email, show Stefan the full internal summary table from Step 5 — every viable placement with its traffic, UR, phase, and fit score. Then stop and ask which packaging he wants. Auto-drafting strips Stefan's control over how the request lands with the partner; the gate keeps him in the loop on relationship-side decisions that scoring alone can't make.
+
+**The prompt to Stefan:**
+
+> I found [N] viable placements above. How do you want to package the email?
+>
+> (a) Stacked list — propose all [N] to the partner in one email, partner picks what works
+> (b) Alternatives framing — propose top 2-3 as Option 1 / Option 2 / Option 3, partner picks one or more, "happy with either"
+> (c) Single ask — propose only the top-rated one, save the rest for future exchanges
+
+**Wait for Stefan's choice before drafting.** Then map his answer to the corresponding Step 4 template:
+- (a) Stacked list → Canonical Phase 1 or Phase 2 structure (numbered placements; mix Phase 1 + Phase 2 entries in the same list as needed)
+- (b) Alternatives framing → "Email structure when offering alternatives" (Option 1 / Option 2 / Option 3)
+- (c) Single ask → Same canonical structure, but with only the top-rated placement included
+
+See Edge Cases for behavior when only one placement is viable, or when more than 5 are viable.
+
 ### 4. Draft the Reply Email
 
 Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every line in every placement block sits flush-left so the email renders cleanly in email, LinkedIn, Slack, and any chat box where markdown doesn't render — indented sub-fields wrap weirdly when the surface strips formatting.
@@ -624,6 +643,8 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **`get_page_text` returns garbage on ad-heavy sites**: Fall back to JavaScript DOM extraction using the text-to-script ratio pattern described in Step 2.5. This works reliably on most ad-heavy sites where `get_page_text` fails.
 - **No relevant content found**: Only declare "no fit" after both Phase 1 and Phase 2 come up empty. Report: "I checked all [X] articles on this site via their sitemap. None have existing anchor matches (Phase 1) or topically relevant sections for suggested placements (Phase 2). The blog covers [brief topic summary]. Skip this one."
 - **Multiple good placements on one article**: Include the best 2, max 3 per article. More than that looks spammy.
+- **Single viable placement**: Skip the decision gate (Step 3.5) and proceed directly to Step 4 with the single-ask format. There's nothing for Stefan to choose between.
+- **More than 5 placements**: Default to recommending option (b) alternatives framing on the top 3 — proposing 6+ placements in one email reads as spam.
 - **Partner site is low quality**: Flag it — "This site looks thin/spammy. Worth considering if the link value justifies the effort."
 
 ## What NOT to Do
@@ -644,5 +665,6 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't skip Step 0 (Ahrefs pre-screen) on Mode A sites just because the partner "looks legit." DR + traffic + topical fit must be checked before crawling
 - Don't trust DR alone as a quality signal — DR 70+ with no traffic and no topical fit is a PBN, not a publisher
 - Don't propose a placement without checking both partner-article traffic and social.plus target URL Rating. The fit score is meaningless without these two numbers
+- Don't auto-draft the email when multiple viable placements exist. Always show the summary table first and let Stefan choose the packaging
 - Don't use `sum_traffic_merged` as an Ahrefs `order_by` value — it's select-only and the call will fail. Use `sum_traffic`
 - Don't skip the existing-backlink check (Step 0.0) on Mode B just because there's no live site to crawl — the domain is still known and the check is cheap
