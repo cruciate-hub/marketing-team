@@ -1,7 +1,7 @@
 {
   "name": "branding",
-  "version": "1.1",
-  "description": "Brand voice + press release format + design system reference for social.plus. Install this if you write copy, draft press releases, or design visuals and need to stay on-brand. Uses the same skill files as the full marketing-team plugin.",
+  "version": "1.2",
+  "description": "The minimum on-brand kit for social.plus — brand voice, press releases, and design system. For non-marketing teammates who need to stay on-brand.",
   "author": {
     "name": "The Cruciate Hub"
   },

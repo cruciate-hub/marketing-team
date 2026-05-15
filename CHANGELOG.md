@@ -1,5 +1,12 @@
 # Changelog
 
+## branding 1.2
+
+Aligned the `branding` plugin's description across `.claude-plugin/marketplace.json` and `branding/.claude-plugin/plugin.json` — they previously diverged (one was a skill inventory list, the other a longer value-prop paragraph). Both now use a single canonical line that matches the README's tagline. No skill or behavior changes.
+
+- Set `description` to "The minimum on-brand kit for social.plus — brand voice, press releases, and design system. For non-marketing teammates who need to stay on-brand." in both [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [branding/.claude-plugin/plugin.json](branding/.claude-plugin/plugin.json).
+- Bumped [branding/.claude-plugin/plugin.json](branding/.claude-plugin/plugin.json) and the branding entry in [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) from 1.1 to 1.2. Version bump is necessary for teammates' clients to re-fetch the manifest and display the new description; without it the catalog and installed-plugin views stay frozen on the old text.
+
 ## 12.0
 
 Renamed the `marketing-team` plugin's internal name in `skills/.claude-plugin/plugin.json` from `product-marketing-team` to `marketing-team`, aligning it with `.claude-plugin/marketplace.json`. **Breaking change** — every skill's direct-invoke shortcut moves from `/product-marketing-team:<skill>` to `/marketing-team:<skill>`. Auto-trigger (the normal use path) is unaffected, and the install command (`/plugin install marketing-team@cruciate-hub`) was already using the correct name.

@@ -16,8 +16,8 @@
     {
       "name": "branding",
       "source": "./branding",
-      "version": "1.1",
-      "description": "Branding skills: brand-messaging, press-release, and design-system."
+      "version": "1.2",
+      "description": "The minimum on-brand kit for social.plus — brand voice, press releases, and design system. For non-marketing teammates who need to stay on-brand."
     }
   ]
 }
