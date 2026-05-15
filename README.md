@@ -15,42 +15,11 @@ Both plugins read from the same source files (`brand-kit`'s skills are symlinks 
 
 ## Installation
 
-<table style="width: 100%;">
-<thead>
-<tr>
-<th style="width: 80px; text-align: center;">Step</th>
-<th style="text-align: left;">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr><td style="text-align: center;">1 🚀</td><td>Open Claude Cowork</td></tr>
-<tr><td style="text-align: center;">2 ⚙️</td><td>Click <kbd>Customize</kbd> in the sidebar</td></tr>
-<tr><td style="text-align: center;">3 ➕</td><td>Next to <strong>Personal plugins</strong>, click <kbd>+</kbd></td></tr>
-<tr><td style="text-align: center;">4 🔍</td><td>Click <kbd>Browse plugins</kbd> → select the <strong>Personal</strong> tab</td></tr>
-<tr><td style="text-align: center;">5 🏪</td><td>Click <kbd>+</kbd> → select <strong>Add marketplace</strong></td></tr>
-<tr><td style="text-align: center;">6 🔗</td><td>Enter <code>cruciate-hub/marketing-team</code> → click <kbd>Sync</kbd></td></tr>
-<tr><td style="text-align: center;">7 ➕</td><td>Click the <kbd>+</kbd> next to <strong>your plugin</strong> to install — <code>marketing-team</code> (marketing team, 14 skills) or <code>brand-kit</code> (everyone else, 2 skills). See "Which plugin should I install?" above.</td></tr>
-</tbody>
-</table>
+A click-by-click visual guide with annotated screenshots walks you through opening the marketplace, installing the right plugin for your role, and turning on auto-sync. Takes about two minutes — you only do this once.
 
-Steps 8–11 pull in new skills and skill improvements automatically (whenever a commit lands on `main`). Without them, you'll stay frozen on the version you installed and miss every future update.
-
-<table style="width: 100%;">
-<thead>
-<tr>
-<th style="width: 80px; text-align: center;">Step</th>
-<th style="text-align: left;">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr><td style="text-align: center;">8 🎛️</td><td>Click the <kbd>⋯</kbd> next to your installed plugin (<code>marketing-team</code> or <code>brand-kit</code>)</td></tr>
-<tr><td style="text-align: center;">9 🔵</td><td>Toggle <kbd>Sync automatically</kbd></td></tr>
-<tr><td style="text-align: center;">10 🔄</td><td>Click <kbd>Check for updates</kbd></td></tr>
-<tr><td style="text-align: center;">11 🔁</td><td>Close and reopen the Claude Desktop App</td></tr>
-</tbody>
-</table>
-
-![Sync automatically and Check for updates in the Cowork plugin menu](./assets/cowork-sync-automatically.png)
+<a href="./docs/install.md">
+  <img alt="Open the install guide" src="https://img.shields.io/badge/%F0%9F%93%96%20Open%20the%20install%20guide-1f6feb?style=for-the-badge">
+</a>
 
 ## Available skills (14)
 
