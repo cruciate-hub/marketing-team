@@ -1,6 +1,6 @@
 # social.plus — Main Brain
 
-This is the master router for all social.plus marketing content. Every skill loads this file alongside its domain-specific router to get cross-domain awareness, precedence rules, and the compliance check.
+This is the master router for all social.plus marketing content. Most skills load this file alongside their domain-specific router to get cross-domain awareness, precedence rules, and the compliance check.
 
 All reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`) once per session and reads files with `cat`. Paths in this file are relative to the repo root — for example `messaging/brain.md` is at `$MT_REPO/messaging/brain.md`.
 
