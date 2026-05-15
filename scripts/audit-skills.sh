@@ -6,7 +6,7 @@
 #   2. Manifest coherence — every plugin entry's `version` in
 #      `.claude-plugin/marketplace.json` matches the corresponding plugin's
 #      own `plugin.json` `version`.
-#   3. Branding symlink integrity — every entry under `branding/skills/` is
+#   3. brand-kit symlink integrity — every entry under `brand-kit/skills/` is
 #      a real symlink (mode 120000) pointing at an existing skill folder
 #      under `skills/skills/`, with a readable SKILL.md at the target.
 #
@@ -14,7 +14,7 @@
 #   ./scripts/audit-skills.sh
 #
 # Wire into CI / pre-commit to prevent silent drift across the 14+ skills
-# and the meta-plugin (branding).
+# and the meta-plugin (brand-kit).
 
 set -euo pipefail
 
@@ -117,18 +117,18 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# Check 3 — branding symlink integrity
+# Check 3 — brand-kit symlink integrity
 # ---------------------------------------------------------------------------
 
 symlink_drift=0
 symlinks_checked=0
-BRANDING_SKILLS_DIR="$REPO_ROOT/branding/skills"
+BRAND_KIT_SKILLS_DIR="$REPO_ROOT/brand-kit/skills"
 
-if [ -d "$BRANDING_SKILLS_DIR" ]; then
-  for entry in "$BRANDING_SKILLS_DIR"/*; do
+if [ -d "$BRAND_KIT_SKILLS_DIR" ]; then
+  for entry in "$BRAND_KIT_SKILLS_DIR"/*; do
     [ -e "$entry" ] || [ -L "$entry" ] || continue
     name="$(basename "$entry")"
-    rel="branding/skills/$name"
+    rel="brand-kit/skills/$name"
 
     if [ ! -L "$entry" ]; then
       echo "NOT A SYMLINK: $rel — should be a symlink to ../../skills/skills/$name"
@@ -151,7 +151,7 @@ if [ -d "$BRANDING_SKILLS_DIR" ]; then
     symlinks_checked=$((symlinks_checked + 1))
   done
 else
-  echo "WARN: branding/skills/ not found — meta-plugin missing? Skipping symlink check."
+  echo "WARN: brand-kit/skills/ not found — meta-plugin missing? Skipping symlink check."
 fi
 
 # ---------------------------------------------------------------------------

@@ -1,8 +1,11 @@
-# Branding Plugin
+# Brand Kit Plugin
 
 The minimum on-brand kit for social.plus — three skills only. Install this if you need to stay on-brand but you're not on the marketing team.
 
-> **Marketing team:** install `marketing-team` instead of `branding`. Same setup — just substitute the plugin name in Step 3 below. See "Which plugin should I install?" at the bottom of this doc if you're not sure which one fits.
+> [!IMPORTANT]
+> **Renamed from `branding` in v2.0.** If you previously installed `branding@cruciate-hub`, run `/plugin uninstall branding@cruciate-hub` before installing the new `brand-kit`. Your direct-invoke shortcuts also change from `/branding:<skill>` to `/brand-kit:<skill>`. Auto-trigger behavior is unchanged.
+
+> **Marketing team:** install `marketing-team` instead of `brand-kit`. Same setup — just substitute the plugin name in Step 3 below. See "Which plugin should I install?" at the bottom of this doc if you're not sure which one fits.
 
 ## Skills (3)
 
@@ -36,20 +39,20 @@ In the terminal:
 /plugin marketplace add cruciate-hub/marketing-team
 ```
 
-### Step 3 — Install the `branding` plugin
+### Step 3 — Install the `brand-kit` plugin
 
-In Cowork: in the plugin browser, click the **+** next to **`branding`**.
+In Cowork: in the plugin browser, click the **+** next to **`brand-kit`**.
 
 In the terminal:
 ```shell
-/plugin install branding@cruciate-hub
+/plugin install brand-kit@cruciate-hub
 ```
 
 ### Step 4 — Enable auto-sync (so you stay current)
 
 Without this, you'll miss future updates.
 
-1. Click **⋯** next to `branding` (the plugin you just installed)
+1. Click **⋯** next to `brand-kit` (the plugin you just installed)
 2. Toggle **Sync automatically**
 3. Click **Check for updates**
 4. Close and reopen Claude Desktop
@@ -70,11 +73,11 @@ Claude should automatically use `press-release` to produce a `.docx` file with t
 
 ## Verify the install worked
 
-Type `/help` in any session. You should see three skills under the `branding:` namespace:
+Type `/help` in any session. You should see three skills under the `brand-kit:` namespace:
 
-- `branding:brand-messaging`
-- `branding:press-release`
-- `branding:design-system`
+- `brand-kit:brand-messaging`
+- `brand-kit:press-release`
+- `brand-kit:design-system`
 
 If you don't see them, restart Claude Desktop and try again. If still missing, ping Stefan.
 
@@ -85,16 +88,16 @@ You don't need to do anything. Reference content (voice rules, terminology, desi
 If something feels stale, run `/plugin marketplace update cruciate-hub` to force a refresh.
 
 <details>
-<summary><strong>Which plugin should I install — branding or marketing-team?</strong></summary>
+<summary><strong>Which plugin should I install — brand-kit or marketing-team?</strong></summary>
 
 This marketplace has **two plugins**. Pick one, not both.
 
 | If you're… | Install | Why |
 |---|---|---|
 | On the marketing team | `marketing-team` | Full kit — 14 skills covering content (blog, AEO, newsletters, case studies, press releases, brand voice), design system, SEO & internal linking, backlink work, site intelligence, and formatting utilities (legal docs, SVG icons). |
-| Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `branding` | Minimum on-brand kit — 3 skills covering voice, press releases, and visual design. No SEO/marketing clutter. |
+| Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `brand-kit` | Minimum on-brand kit — 3 skills covering voice, press releases, and visual design. No SEO/marketing clutter. |
 
-The `branding` plugin's three skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
+The `brand-kit` plugin's three skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
 
 </details>
 
@@ -102,16 +105,16 @@ The `branding` plugin's three skills are **the same files** as the equivalents i
 <summary><strong>Troubleshooting</strong></summary>
 
 **Skills don't trigger automatically.**
-Make sure you restarted after install. Then try invoking directly: `/branding:brand-messaging`.
+Make sure you restarted after install. Then try invoking directly: `/brand-kit:brand-messaging`.
 
 **"Fetch failed" error in a skill.**
 The skill couldn't reach GitHub. Check your internet, then re-run the skill. If it keeps failing, run `rm -rf /tmp/cruciate-hub-marketing-team` to clear the local cache and try again.
 
 **I'm seeing skills I don't want.**
-You probably installed `marketing-team` instead of `branding`. Uninstall: `/plugin uninstall marketing-team@cruciate-hub`, then install `branding`.
+You probably installed `marketing-team` instead of `brand-kit`. Uninstall: `/plugin uninstall marketing-team@cruciate-hub`, then install `brand-kit`.
 
 **I edit copy a lot and want stricter enforcement.**
-The `brand-messaging` skill auto-triggers, but you can also force it: `/branding:brand-messaging [paste your text]`. Useful for hard reviews.
+The `brand-messaging` skill auto-triggers, but you can also force it: `/brand-kit:brand-messaging [paste your text]`. Useful for hard reviews.
 
 </details>
 

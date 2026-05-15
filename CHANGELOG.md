@@ -1,5 +1,16 @@
 # Changelog
 
+## brand-kit 2.0
+
+Renamed the `branding` plugin to `brand-kit`. The new name is more precise about what teammates get (a kit of brand-related skills) and avoids confusion with the `brand-messaging` skill that lives inside it. **Breaking change** — install command, plugin identifier, skill namespace prefix, and on-disk directory all change. Auto-trigger behavior and the underlying skill files are unchanged (skills still symlink into `marketing-team` as before).
+
+- Renamed top-level directory `branding/` → `brand-kit/` via `git mv` (history preserved). Symlinks inside are relative (`../../skills/skills/<name>`) so they survive the move without modification.
+- Updated `name` field in [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) from `branding` to `brand-kit`. Skill namespace prefix follows: 3 skills now register under `brand-kit:*` instead of `branding:*`.
+- Updated the plugin entry in [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json): `name` → `brand-kit`, `source` → `./brand-kit`. Marketplace-level metadata `description` field also updated to mention `brand-kit`.
+- Updated every internal reference: [README.md](README.md) (5 hits — install command, plugin comparison table, install steps 7 and 8, repo structure row), [brand-kit/README.md](brand-kit/README.md) (full rewrite of plugin identifier and namespace references, plus a migration callout at the top), [scripts/audit-skills.sh](scripts/audit-skills.sh) (Check 3 comments, `BRANDING_SKILLS_DIR` → `BRAND_KIT_SKILLS_DIR`, path strings, warning message).
+- **Migration for teammates on the old `branding` plugin:** run `/plugin uninstall branding@cruciate-hub`, then `/plugin install brand-kit@cruciate-hub`, then restart Claude Code (or `/reload-plugins`). Direct-invoke shortcuts move from `/branding:<skill>` to `/brand-kit:<skill>`. The marketplace itself (`cruciate-hub`) is unchanged.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) from 1.2 to 2.0 (semver major — rename is breaking). The `marketing-team` plugin is unaffected and stays at 12.0.
+
 ## branding 1.2
 
 Aligned the `branding` plugin's description across `.claude-plugin/marketplace.json` and `branding/.claude-plugin/plugin.json` — they previously diverged (one was a skill inventory list, the other a longer value-prop paragraph). Both now use a single canonical line that matches the README's tagline. No skill or behavior changes.
