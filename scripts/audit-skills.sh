@@ -8,7 +8,7 @@
 #      own `plugin.json` `version`.
 #   3. brand-kit symlink integrity — every entry under `brand-kit/skills/` is
 #      a real symlink (mode 120000) pointing at an existing skill folder
-#      under `skills/skills/`, with a readable SKILL.md at the target.
+#      under `marketing-team/skills/`, with a readable SKILL.md at the target.
 #
 # Run from the repo root:
 #   ./scripts/audit-skills.sh
@@ -59,7 +59,7 @@ is_non_fetching() {
   return 1
 }
 
-for skill in "$REPO_ROOT"/skills/skills/*/SKILL.md; do
+for skill in "$REPO_ROOT"/marketing-team/skills/*/SKILL.md; do
   [ -f "$skill" ] || continue
   rel="${skill#$REPO_ROOT/}"
   name="$(basename "$(dirname "$skill")")"
@@ -131,13 +131,13 @@ if [ -d "$BRAND_KIT_SKILLS_DIR" ]; then
     rel="brand-kit/skills/$name"
 
     if [ ! -L "$entry" ]; then
-      echo "NOT A SYMLINK: $rel — should be a symlink to ../../skills/skills/$name"
+      echo "NOT A SYMLINK: $rel — should be a symlink to ../../marketing-team/skills/$name"
       symlink_drift=1
       continue
     fi
 
     target=$(readlink "$entry")
-    expected="../../skills/skills/$name"
+    expected="../../marketing-team/skills/$name"
     if [ "$target" != "$expected" ]; then
       echo "UNEXPECTED TARGET: $rel -> $target (expected $expected)"
       symlink_drift=1

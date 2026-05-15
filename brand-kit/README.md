@@ -2,11 +2,6 @@
 
 The minimum on-brand kit for social.plus — three skills only. Install this if you need to stay on-brand but you're not on the marketing team.
 
-> [!IMPORTANT]
-> **Renamed from `branding` in v2.0.** If you previously installed `branding@cruciate-hub`, run `/plugin uninstall branding@cruciate-hub` before installing the new `brand-kit`. Your direct-invoke shortcuts also change from `/branding:<skill>` to `/brand-kit:<skill>`. Auto-trigger behavior is unchanged.
-
-> **Marketing team:** install `marketing-team` instead of `brand-kit`. Same setup — just substitute the plugin name in Step 3 below. See "Which plugin should I install?" at the bottom of this doc if you're not sure which one fits.
-
 ## Skills (3)
 
 | Skill | Triggers on | What it does |

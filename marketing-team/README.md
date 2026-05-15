@@ -56,4 +56,4 @@ Install via the marketplace in Claude Cowork, or download the plugin folder and 
 
 Edit the markdown files in `messaging/` or `design-system/` on GitHub and push to `main`. The next teammate session does a `git pull --ff-only` and picks up the change — no plugin reinstall needed.
 
-Skill logic changes (SKILL.md files) ride along with the same pull and don't require manual reinstall either, but bumping the plugin version (in `.claude-plugin/marketplace.json` and `skills/.claude-plugin/plugin.json`) forces a session-snapshot refresh, which is the cleanest way to roll out behavioral changes.
+Skill logic changes (SKILL.md files) ride along with the same pull and don't require manual reinstall either, but bumping the plugin version (in `.claude-plugin/marketplace.json` and `marketing-team/.claude-plugin/plugin.json`) forces a session-snapshot refresh, which is the cleanest way to roll out behavioral changes.

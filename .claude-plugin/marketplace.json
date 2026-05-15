@@ -9,14 +9,14 @@
   "plugins": [
     {
       "name": "marketing-team",
-      "source": "./skills",
-      "version": "12.0",
-      "description": "All shared skills for the marketing team."
+      "source": "./marketing-team",
+      "version": "12.1",
+      "description": "The complete marketing kit for social.plus — 14 skills covering content, design, SEO, and linking. For the marketing team."
     },
     {
       "name": "brand-kit",
       "source": "./brand-kit",
-      "version": "2.0",
+      "version": "2.1",
       "description": "The minimum on-brand kit for social.plus — brand voice, press releases, and design system. For non-marketing teammates who need to stay on-brand."
     }
   ]
