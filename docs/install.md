@@ -114,17 +114,3 @@ Still in the same menu, click **Check for updates** to pull the latest version r
 ### Step 11 — Quit and reopen the Claude desktop app
 
 Close the Claude desktop app completely (<kbd>⌘</kbd>+<kbd>Q</kbd> on Mac, or right-click the dock icon → Quit), then open it again. Plugins load on startup, so this is what makes the new skills actually available in your chats.
-
-That's it — you'll now pull in new and improved skills as they ship.
-
----
-
-## Troubleshooting
-
-**The Sync button does nothing.** Double-check the URL is exactly `cruciate-hub/marketing-team` — no `https://`, no `.git`, no trailing slash. If it still fails, your network may be blocking GitHub.
-
-**I don't see the new plugins in my chats.** Quit and reopen the Claude desktop app — plugins load on startup.
-
-**I installed the wrong one.** Click the **`···`** next to it in Customize → **Uninstall**, then repeat Step 7 with the other plugin.
-
-For anything else, ping #marketing-ops on Slack.
