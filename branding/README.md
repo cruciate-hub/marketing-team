@@ -2,36 +2,119 @@
 
 The minimum on-brand kit for social.plus — three skills only. Install this if you need to stay on-brand but you're not on the marketing team.
 
+> **Marketing team:** install `marketing-team` instead of `branding`. Same setup — just substitute the plugin name in Step 3 below. See "Which plugin should I install?" at the bottom of this doc if you're not sure which one fits.
+
 ## Skills (3)
 
-| Skill | What it does |
-|---|---|
-| [brand-messaging](./skills/brand-messaging/SKILL.md) | Brand voice, tone, terminology, positioning, boilerplates. Use for any written copy that represents social.plus. |
-| [press-release](./skills/press-release/SKILL.md) | Drafts press releases following social.plus structure — headline, dateline, boilerplate, quote engineering, distribution checklist. |
-| [design-system](./skills/design-system/SKILL.md) | Visual reference — colors, typography, spacing, buttons, layout, accessibility. Use for decks, mockups, CSS, or any visual output. |
+| Skill | Triggers on | What it does |
+|---|---|---|
+| [brand-messaging](./skills/brand-messaging/SKILL.md) | "review this for brand voice", "is this on-brand?", "write copy for…" | Applies social.plus voice, terminology, tone, and approved phrasings. Catches things like accidentally capitalizing "social.plus" or using forbidden terms. |
+| [press-release](./skills/press-release/SKILL.md) | "draft a press release", "we're launching X" | Generates newswire-ready press releases as `.docx`, following social.plus structure (headline, dateline, boilerplate, quote engineering, distribution checklist). |
+| [design-system](./skills/design-system/SKILL.md) | "what blue do we use?", "give me the heading sizes", any CSS/visual question | Returns the canonical color palette, type scale, spacing tokens, button states, etc. Don't approximate — get the real values. |
 
 All three are **symlinks** to the canonical skill files inside the sibling `marketing-team` plugin. There's only one copy on disk; both plugins serve the same up-to-date content. See [Anthropic's docs on share-with-symlinks](https://code.claude.com/docs/en/plugins-reference#plugin-caching-and-file-resolution).
 
-## Who installs this vs `marketing-team`
+You don't need to invoke skills manually. Claude loads them when your request matches.
 
-- **`branding`** — non-marketing teammates who occasionally need brand-consistent output (e.g. an exec drafting a deck, a sales lead writing a customer email, an engineer drafting a launch press release).
-- **`marketing-team`** — the marketing team itself. Includes these three plus 11 other skills covering SEO, social media, campaign copy, link strategy, site intelligence, and more.
+## Setup — one time (~2 minutes)
 
-Install one or the other — not both. (You won't get duplicates if you install both, but there's no benefit either.)
+### Step 1 — Open Claude Cowork (or Claude Code in the terminal)
 
-## Installation
+Either works. The flow is identical.
 
+### Step 2 — Add the marketplace
+
+In Cowork:
+1. Click **Customize** in the sidebar
+2. Next to **Personal plugins**, click **+**
+3. Click **Browse plugins** → select the **Personal** tab
+4. Click **+** → select **Add marketplace**
+5. Enter `cruciate-hub/marketing-team` → click **Sync**
+
+In the terminal:
 ```shell
 /plugin marketplace add cruciate-hub/marketing-team
+```
+
+### Step 3 — Install the `branding` plugin
+
+In Cowork: in the plugin browser, click the **+** next to **`branding`**.
+
+In the terminal:
+```shell
 /plugin install branding@cruciate-hub
 ```
 
-After restart, skills are namespaced as `branding:brand-messaging`, `branding:press-release`, `branding:design-system` — and auto-trigger on relevant prompts ("review this for brand voice", "draft a press release about X", "what blue do we use", etc.).
+### Step 4 — Enable auto-sync (so you stay current)
 
-For the full team install guide — Cowork screenshots, troubleshooting, verification — see [INSTALL.md](./INSTALL.md).
+Without this, you'll miss future updates.
+
+1. Click **⋯** next to `branding` (the plugin you just installed)
+2. Toggle **Sync automatically**
+3. Click **Check for updates**
+4. Close and reopen Claude Desktop
+
+### Step 5 — Test it
+
+In a new conversation, paste any text and say:
+
+> "Review this for brand voice."
+
+Claude should automatically use `brand-messaging` to check tone, terminology, and approved phrasings.
+
+Or try:
+
+> "Draft a press release about a new partnership with Acme Corp."
+
+Claude should automatically use `press-release` to produce a `.docx` file with the canonical social.plus structure.
+
+## Verify the install worked
+
+Type `/help` in any session. You should see three skills under the `branding:` namespace:
+
+- `branding:brand-messaging`
+- `branding:press-release`
+- `branding:design-system`
+
+If you don't see them, restart Claude Desktop and try again. If still missing, ping Stefan.
 
 ## How it stays up to date
 
-Each skill loads its reference files via a shallow `git clone --depth 1` of this repo at runtime, so brand voice updates, design tokens, terminology changes, and press release patterns are always fresh from `main` — no plugin reinstall needed.
+You don't need to do anything. Reference content (voice rules, terminology, design tokens) updates live from GitHub on every skill run. Skill logic updates ride in via the auto-sync you turned on in Step 4.
 
-When the SKILL.md files themselves change (rare), users run `/plugin marketplace update cruciate-hub` to pick up the new version.
+If something feels stale, run `/plugin marketplace update cruciate-hub` to force a refresh.
+
+<details>
+<summary><strong>Which plugin should I install — branding or marketing-team?</strong></summary>
+
+This marketplace has **two plugins**. Pick one, not both.
+
+| If you're… | Install | Why |
+|---|---|---|
+| On the marketing team | `marketing-team` | Full kit — 14 skills covering content (blog, AEO, newsletters, case studies, press releases, brand voice), design system, SEO & internal linking, backlink work, site intelligence, and formatting utilities (legal docs, SVG icons). |
+| Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `branding` | Minimum on-brand kit — 3 skills covering voice, press releases, and visual design. No SEO/marketing clutter. |
+
+The `branding` plugin's three skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
+
+</details>
+
+<details>
+<summary><strong>Troubleshooting</strong></summary>
+
+**Skills don't trigger automatically.**
+Make sure you restarted after install. Then try invoking directly: `/branding:brand-messaging`.
+
+**"Fetch failed" error in a skill.**
+The skill couldn't reach GitHub. Check your internet, then re-run the skill. If it keeps failing, run `rm -rf /tmp/cruciate-hub-marketing-team` to clear the local cache and try again.
+
+**I'm seeing skills I don't want.**
+You probably installed `marketing-team` instead of `branding`. Uninstall: `/plugin uninstall marketing-team@cruciate-hub`, then install `branding`.
+
+**I edit copy a lot and want stricter enforcement.**
+The `brand-messaging` skill auto-triggers, but you can also force it: `/branding:brand-messaging [paste your text]`. Useful for hard reviews.
+
+</details>
+
+## Questions
+
+Ping Stefan (`stefan@social.plus`) or open an issue at https://github.com/cruciate-hub/marketing-team/issues.
