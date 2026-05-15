@@ -76,7 +76,7 @@ Hard rules enforced on every placement:
 ## What the skill will NOT do
 
 - Trust Google search snippets as source — always verifies on the actual page.
-- Use `product-marketing-team:site-intelligence` to pick targets — that skill catalogs static marketing pages, which are exactly the off-limits set.
+- Use `marketing-team:site-intelligence` to pick targets — that skill catalogs static marketing pages, which are exactly the off-limits set.
 - Decline a partner on category alone for incoming links — only the outbound direction has category restrictions.
 - Auto-reject high-DR-low-traffic sites — surfaces them to Stefan with metrics and lets him call it.
 - Suggest more than 5 placements per partner (best 2–3 per article, max).

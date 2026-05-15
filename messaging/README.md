@@ -1,6 +1,6 @@
 # Messaging
 
-Brand messaging source of truth for social.plus. These files are fetched live from GitHub by the `brand-messaging` skill and other content skills in the [`product-marketing-team`](../skills) plugin — edits here go live immediately, no reinstall needed.
+Brand messaging source of truth for social.plus. These files are fetched live from GitHub by the `brand-messaging` skill and other content skills in the [`marketing-team`](../skills) plugin — edits here go live immediately, no reinstall needed.
 
 `brain.md` is the router: skills read it first, then pull whichever other files the task requires.
 

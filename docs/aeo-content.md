@@ -175,7 +175,7 @@ Free-form messages also work. "Make number 3 more technical" will be understood 
 
 | Symptom | What to do |
 |---|---|
-| The skill does not trigger | In **Customize** → **Personal plugins**, confirm `product-marketing-team` is enabled. If an update badge shows, click the three dots → **Update**. |
+| The skill does not trigger | In **Customize** → **Personal plugins**, confirm `marketing-team` is enabled. If an update badge shows, click the three dots → **Update**. |
 | The skill produces a `.md` file instead of a `.docx` | `anthropic-skills` is not installed. Install it from **Browse plugins** → **Anthropic** tab. |
 | Brand fetch fails | Reply `retry brand fetch`. If it keeps failing, ping the team — it is usually a GitHub access issue. |
 | A customer name you don't recognize appears | Reply `stop, [customer name] is not approved`. Only Noom, Harley-Davidson, Smart Fit, Ulta Beauty, and Betgames are pre-cleared. |

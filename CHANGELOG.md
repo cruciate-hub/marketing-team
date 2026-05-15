@@ -1,5 +1,14 @@
 # Changelog
 
+## 12.0
+
+Renamed the `marketing-team` plugin's internal name in `skills/.claude-plugin/plugin.json` from `product-marketing-team` to `marketing-team`, aligning it with `.claude-plugin/marketplace.json`. **Breaking change** — every skill's direct-invoke shortcut moves from `/product-marketing-team:<skill>` to `/marketing-team:<skill>`. Auto-trigger (the normal use path) is unaffected, and the install command (`/plugin install marketing-team@cruciate-hub`) was already using the correct name.
+
+- Renamed `name` field in [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from `product-marketing-team` to `marketing-team`. The skill namespace prefix follows from this field, so all 14 skills now register under `marketing-team:*`.
+- Updated every internal cross-reference to the old namespace: [docs/aeo-content.md](docs/aeo-content.md) (troubleshooting row), [docs/backlink-placement-finder.md](docs/backlink-placement-finder.md), [messaging/README.md](messaging/README.md), and [skills/skills/backlink-placement-finder/SKILL.md](skills/skills/backlink-placement-finder/SKILL.md) (two occurrences).
+- Teammates with auto-update on will receive this at next Claude Code startup, then need to run `/reload-plugins` (or restart) to pick up the new namespace. Anyone using direct-invoke shortcuts in scripts, prompts, or muscle memory needs to update `/product-marketing-team:*` → `/marketing-team:*`.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [skills/.claude-plugin/plugin.json](skills/.claude-plugin/plugin.json) from 11.1 to 12.0 (semver major — namespace change is breaking). The `branding` plugin is unaffected; its skills continue to register under `branding:*`.
+
 ## 11.1
 
 Routing taxonomy rework + press-release v10 migration. [messaging/brain.md](messaging/brain.md) now routes by what content does, not by length; [press-release](skills/skills/press-release/SKILL.md) adopts the v10 canonical fetch block (was the last skill missing it); three downstream skills updated to match the new router.
