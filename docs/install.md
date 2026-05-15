@@ -97,10 +97,25 @@ Not sure? Pick **Brand kit**. You can swap to the full Marketing team plugin lat
 
 The skills load their content live from GitHub every session, so most updates reach you automatically. But the plugin manifest itself — new skills, renamed skills — needs a one-time auto-sync setup. Without it, you stay frozen on the version you installed and miss every future update.
 
-1. In the Customize screen, click the **`···`** next to your installed plugin (`marketing-team` or `brand-kit`).
-2. Toggle **Sync automatically** on.
-3. Click **Check for updates**.
-4. Quit and reopen the Claude desktop app.
+Open the Directory again (the same window from Steps 3–6). Your installed plugin's pill is now selected at the top of the marketplace row. The next three steps all happen in one menu — see the highlighted callouts in the screenshot below.
+
+![Auto-sync setup: click the three dots, toggle Sync automatically, then Check for updates](./install-assets/07-sync-and-update.png)
+
+### Step 7 — Open the plugin's settings menu
+
+Click the **`···`** next to your installed plugin's pill (`marketing-team` or `brand-kit`) at the top of the marketplace row. A small menu opens.
+
+### Step 8 — Toggle "Sync automatically" on
+
+In the menu, find **Sync automatically** and click the toggle so it turns on. This is what makes future updates flow to you without manual intervention.
+
+### Step 9 — Click "Check for updates"
+
+Still in the same menu, click **Check for updates** to pull the latest version right now. You'll see the synced commit hash update at the top of the menu.
+
+### Step 10 — Quit and reopen the Claude desktop app
+
+Close the Claude desktop app completely (<kbd>⌘</kbd>+<kbd>Q</kbd> on Mac, or right-click the dock icon → Quit), then open it again. Plugins load on startup, so this is what makes the new skills actually available in your chats.
 
 That's it — you'll now pull in new and improved skills as they ship.
 
