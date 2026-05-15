@@ -1,5 +1,18 @@
 # Changelog
 
+## brand-kit 3.0
+
+Removed `press-release` from the `brand-kit` plugin. The skill itself is untouched — it remains a canonical skill in `marketing-team` and is unchanged. **Breaking change** for anyone using `/brand-kit:press-release` directly, or for any teammate whose press-release auto-trigger was firing through brand-kit alone.
+
+Reasoning: press-release was an unusual fit for the "minimum on-brand kit" framing. Brand voice and design system are everyday brand-defense surfaces that any teammate touches; drafting a newswire-ready press release is a more specialized act that belongs squarely with the marketing team.
+
+- Removed the symlink at `brand-kit/skills/press-release` (was a relative link to `../../marketing-team/skills/press-release`). The canonical skill at [marketing-team/skills/press-release/](marketing-team/skills/press-release/) is unchanged — every byte of SKILL.md, every reference file, every helper script stays where it was.
+- Updated [brand-kit/README.md](brand-kit/README.md): tagline "three skills only" → "two skills only", `## Skills (3)` → `## Skills (2)`, dropped the press-release table row, replaced the press-release test prompt in Step 5 with a design-system example, dropped `brand-kit:press-release` from the verify list, "3 skills covering voice, press releases, and visual design" → "2 skills covering voice and visual design" in the comparison table, "three skills" → "two skills" in the symlink-explanation line.
+- Updated [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) `description` to remove "press releases" from the canonical line: now reads "The minimum on-brand kit for social.plus — brand voice and design system. For non-marketing teammates who need to stay on-brand." Marketplace-level metadata description also updated (`3 skills` → `2 skills`).
+- Updated [README.md](README.md) (root) in 3 spots: which-plugin install table, install Step 7 caption, and repo-structure row — all drop the press-release skill reference and update "3 skills"/"3-skill subset" to "2 skills"/"2-skill subset".
+- **Migration for teammates relying on `brand-kit:press-release`:** install `marketing-team@cruciate-hub` alongside `brand-kit` (or replace `brand-kit` with `marketing-team`), then use `marketing-team:press-release`. Non-marketing teammates who occasionally need a press release should ping a marketer or install marketing-team for the duration.
+- Bumped [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) from 2.1 to 3.0 (semver major — skill removal is breaking, matching the precedent set in marketing-team 11.0).
+
 ## marketing-team 12.1
 
 Renamed the `marketing-team` plugin source directory from `skills/` to `marketing-team/`, aligning the folder name with the plugin name (mirroring `brand-kit`'s setup). Also aligned both `description` fields on the plugin so the marketplace catalog and installed-plugin display agree, and updated historical CHANGELOG markdown links so they still resolve after the directory move. **Non-breaking** — plugin name, skill namespace (`marketing-team:*`), install command, and teammate UI are all unchanged.

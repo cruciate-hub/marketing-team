@@ -9,7 +9,7 @@ This marketplace ships **two plugins** — install one, not both.
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
 | **`marketing-team`** | The marketing team — full kit | 14 skills (content, design, SEO, linking, formatting) | `/plugin install marketing-team@cruciate-hub` |
-| **`brand-kit`** | Everyone else | 3 skills: `brand-messaging`, `press-release`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
+| **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
 
@@ -29,7 +29,7 @@ Both plugins read from the same source files (`brand-kit`'s skills are symlinks 
 <tr><td style="text-align: center;">4 🔍</td><td>Click <kbd>Browse plugins</kbd> → select the <strong>Personal</strong> tab</td></tr>
 <tr><td style="text-align: center;">5 🏪</td><td>Click <kbd>+</kbd> → select <strong>Add marketplace</strong></td></tr>
 <tr><td style="text-align: center;">6 🔗</td><td>Enter <code>cruciate-hub/marketing-team</code> → click <kbd>Sync</kbd></td></tr>
-<tr><td style="text-align: center;">7 ➕</td><td>Click the <kbd>+</kbd> next to <strong>your plugin</strong> to install — <code>marketing-team</code> (marketing team, 14 skills) or <code>brand-kit</code> (everyone else, 3 skills). See "Which plugin should I install?" above.</td></tr>
+<tr><td style="text-align: center;">7 ➕</td><td>Click the <kbd>+</kbd> next to <strong>your plugin</strong> to install — <code>marketing-team</code> (marketing team, 14 skills) or <code>brand-kit</code> (everyone else, 2 skills). See "Which plugin should I install?" above.</td></tr>
 </tbody>
 </table>
 
@@ -99,7 +99,7 @@ Steps 8–11 pull in new skills and skill improvements automatically (whenever a
 | [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
 | [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
 | [`marketing-team/`](./marketing-team) | `marketing-team` plugin — the 14 skill definitions that fetch from the folders above |
-| [`brand-kit/`](./brand-kit) | `brand-kit` plugin — a 3-skill subset (`brand-messaging`, `press-release`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
+| [`brand-kit/`](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
 
 ## How updates work
 

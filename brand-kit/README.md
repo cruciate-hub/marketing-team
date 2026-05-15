@@ -1,13 +1,12 @@
 # Brand Kit Plugin
 
-The minimum on-brand kit for social.plus — three skills only. Install this if you need to stay on-brand but you're not on the marketing team.
+The minimum on-brand kit for social.plus — two skills only. Install this if you need to stay on-brand but you're not on the marketing team.
 
-## Skills (3)
+## Skills (2)
 
 | Skill | Triggers on | What it does |
 |---|---|---|
 | [brand-messaging](./skills/brand-messaging/SKILL.md) | "review this for brand voice", "is this on-brand?", "write copy for…" | Applies social.plus voice, terminology, tone, and approved phrasings. Catches things like accidentally capitalizing "social.plus" or using forbidden terms. |
-| [press-release](./skills/press-release/SKILL.md) | "draft a press release", "we're launching X" | Generates newswire-ready press releases as `.docx`, following social.plus structure (headline, dateline, boilerplate, quote engineering, distribution checklist). |
 | [design-system](./skills/design-system/SKILL.md) | "what blue do we use?", "give me the heading sizes", any CSS/visual question | Returns the canonical color palette, type scale, spacing tokens, button states, etc. Don't approximate — get the real values. |
 
 All three are **symlinks** to the canonical skill files inside the sibling `marketing-team` plugin. There's only one copy on disk; both plugins serve the same up-to-date content. See [Anthropic's docs on share-with-symlinks](https://code.claude.com/docs/en/plugins-reference#plugin-caching-and-file-resolution).
@@ -62,16 +61,15 @@ Claude should automatically use `brand-messaging` to check tone, terminology, an
 
 Or try:
 
-> "Draft a press release about a new partnership with Acme Corp."
+> "What blue does social.plus use, and at what hex?"
 
-Claude should automatically use `press-release` to produce a `.docx` file with the canonical social.plus structure.
+Claude should automatically use `design-system` to return the canonical color palette.
 
 ## Verify the install worked
 
-Type `/help` in any session. You should see three skills under the `brand-kit:` namespace:
+Type `/help` in any session. You should see two skills under the `brand-kit:` namespace:
 
 - `brand-kit:brand-messaging`
-- `brand-kit:press-release`
 - `brand-kit:design-system`
 
 If you don't see them, restart Claude Desktop and try again. If still missing, ping Stefan.
@@ -90,9 +88,9 @@ This marketplace has **two plugins**. Pick one, not both.
 | If you're… | Install | Why |
 |---|---|---|
 | On the marketing team | `marketing-team` | Full kit — 14 skills covering content (blog, AEO, newsletters, case studies, press releases, brand voice), design system, SEO & internal linking, backlink work, site intelligence, and formatting utilities (legal docs, SVG icons). |
-| Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `brand-kit` | Minimum on-brand kit — 3 skills covering voice, press releases, and visual design. No SEO/marketing clutter. |
+| Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `brand-kit` | Minimum on-brand kit — 2 skills covering voice and visual design. No press-release, SEO, or marketing clutter. |
 
-The `brand-kit` plugin's three skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
+The `brand-kit` plugin's two skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
 
 </details>
 
