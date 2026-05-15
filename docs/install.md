@@ -114,3 +114,7 @@ Still in the same menu, click **Check for updates** to pull the latest version r
 ### Step 11 — Quit and reopen the Claude desktop app
 
 Close the Claude desktop app completely (<kbd>⌘</kbd>+<kbd>Q</kbd> on Mac, or right-click the dock icon → Quit), then open it again. Plugins load on startup, so this is what makes the new skills actually available in your chats.
+
+---
+
+That's it — auto-sync is on. New and improved skills will reach you on the next Claude desktop startup whenever an update lands on `main`.
