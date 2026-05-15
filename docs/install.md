@@ -2,8 +2,6 @@
 
 A visual, click-by-click walkthrough for installing the `cruciate-hub/marketing-team` marketplace in the Claude desktop app — then picking the right plugin (`marketing-team` or `brand-kit`) for your role.
 
-Takes about two minutes. You only do this once.
-
 ---
 
 ## Before you start
@@ -36,7 +34,7 @@ A small dropdown opens with two options. Click **Browse plugins** (the top one).
 
 The **Directory** window opens. Make sure **Plugins** is selected in its left sidebar (it should be by default).
 
-Just under the search bar you'll see a row of marketplace pills — `skills`, `ui-ux-pro-max-skill`, `webflow-skills`, etc. Hover over the **`skills`** pill (or whichever one is selected) until the **`···`** (three dots) appear next to it. Click the **`···`**.
+Hover over the **`skills`** pill (or whichever one is selected) until the **`···`** (three dots) appear next to it. Click the **`···`**.
 
 ![Click the three-dot menu next to the skills marketplace pill](./install-assets/03-open-menu.png)
 
