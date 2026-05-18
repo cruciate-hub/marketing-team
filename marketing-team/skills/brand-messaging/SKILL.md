@@ -1,15 +1,17 @@
 ---
 name: brand-messaging
 description: >
-  Owns ALL content about a social.plus product, feature, module, or
-  capability — regardless of format. Use for: feature pages, landing pages,
-  use-case pages, industry pages, homepage copy, product descriptions,
+  Primary skill for content about a social.plus product, feature, module,
+  or capability where no format-specific skill applies. Use for: feature/
+  landing/use-case/industry pages, homepage copy, product descriptions,
   feature-announcement blog posts, blog posts about any social.plus product
-  (Chat, Block, UIKit, AI Copilot, Live Stream, etc.), Webflow CMS
-  release-note items, taglines, pitch materials, investor copy, and any
-  general marketing text without a dedicated skill. Also for brand voice
-  audits and questions about tone, terminology, value props, positioning,
-  or boilerplates.
+  (Chat, Block, UIKit, AI Copilot, Live Stream, etc.), Webflow CMS release-
+  note items, taglines, pitch materials, investor copy, and any general
+  marketing text without a dedicated skill. Also for brand voice audits and
+  questions about tone, terminology, value props, positioning, or
+  boilerplates. When writing for social.plus/blog, this skill also produces
+  the full SEO blog format (meta description, slug, Webflow blog CMS
+  fields, content rules) by loading the blog-seo-content format spec.
 
   Do NOT use for: blog posts on NON-product topics like industry trends or
   listicles (use blog-seo-content); press releases (use press-release);
@@ -91,4 +93,14 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 4. If the output includes any visual styling (HTML, CSS, colors, layout), also fetch `design-system/brain.md`.
 
-5. Before delivering, run the compliance check from the main brain.
+5. **Blog post mode.** If the output is a blog post for `social.plus/blog` (a product/feature blog post per the product routing rule), additionally load the blog format spec:
+
+   ```
+   cat "$REPO/docs/blog-seo-content.md"
+   ```
+
+   Apply the **Webflow CMS fields** section (page title, slug, meta description, introduction text, post content HTML, taxonomy, reading time, image sizes, alt text, display controls) and the **Content rules** section (length 5,000–12,000 chars, keyword placement, no fabricated stats/quotes, no emojis, no `<sprscript-green>` tags). The brand voice and product focus from steps 1–4 still apply on top of that format.
+
+   Invoke `internal-linking-strategist` in **draft mode** before delivery — it returns 3–7 SEO-grounded `<a href>` tags to embed in the post-content HTML.
+
+6. Before delivering, run the compliance check from the main brain.

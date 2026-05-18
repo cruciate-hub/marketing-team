@@ -13,10 +13,10 @@ This is the generic brand-alignment skill — it routes to the appropriate messa
 
 ## When it triggers
 
-Owns ALL content about a social.plus product, feature, module, or capability — regardless of format. Use for:
+Primary skill for content about a social.plus product, feature, module, or capability — where no format-specific skill applies. Use for:
 
 - Feature pages, landing pages, use-case pages, industry pages, homepage copy.
-- **Blog posts about any social.plus product/feature** (Chat, Block, UIKit, AI Copilot, Live Stream, etc.) — even though the prompt says "blog post", these belong here, not in `blog-seo-content`.
+- **Blog posts about any social.plus product/feature** (Chat, Block, UIKit, AI Copilot, Live Stream, etc.) — even though the prompt says "blog post", these belong here, not in `blog-seo-content`. When the destination is `social.plus/blog`, this skill also applies the SEO blog format (see Blog post mode below).
 - Feature announcement blogs.
 - Webflow CMS release-note items.
 - Taglines, pitch materials, investor copy, product descriptions.
@@ -33,14 +33,15 @@ The skill is **not** for:
 
 ### Why product-content lives here (not in `blog-seo-content`)
 
-The product/non-product split keeps brand voice consistent across every surface that describes social.plus's own offering. A blog post about the Block feature, a homepage feature card, and a Webflow CMS release-note item all draw from the same messaging stack (`positioning.md`, `value-story.md`, `terminology.md`) and must read as one voice. `blog-seo-content` is reserved for blogs whose subject is **not** our product — industry trends, opinion, listicles — where SEO structure dominates over brand voice.
+The product/non-product split keeps brand voice consistent across every surface that describes social.plus's own offering. A blog post about the Block feature, a homepage feature card, and a Webflow CMS release-note item all draw from the same messaging stack (`positioning.md`, `value-story.md`, `terminology.md`) and must read as one voice. `blog-seo-content` is reserved for blogs whose subject is **not** our product — industry trends, opinion, listicles — where SEO structure dominates over brand voice. **For product blog posts, brand-messaging composes with the blog format spec at runtime** (see Blog post mode below) so you don't lose SEO mechanics by routing through brand voice.
 
 ## Workflow
 
 1. Fetch `brain.md` — cross-domain routing, precedence rules, compliance check.
 2. Fetch `messaging/brain.md` — the router — and follow its task-specific instructions.
 3. If the output includes HTML, CSS, colors, or layout, also fetch `design-system/brain.md`.
-4. Run the main brain's compliance check before delivering.
+4. **Blog post mode.** If the output is a blog post for `social.plus/blog` (product/feature blog post), additionally load `docs/blog-seo-content.md` and apply its **Webflow CMS fields** section (every CMS field with schema — page title, slug, meta description, intro, post content HTML, taxonomy, reading time, image sizes, alt text, display controls) and its **Content rules** section (length 5,000–12,000 chars, keyword placement, no fabricated stats/quotes, no emojis). Invoke `internal-linking-strategist` in draft mode before delivery.
+5. Run the main brain's compliance check before delivering.
 
 ## Why this skill is thin
 
