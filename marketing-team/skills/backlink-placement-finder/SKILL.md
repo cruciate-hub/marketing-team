@@ -193,44 +193,85 @@ For each survivor, run these in parallel:
 
 **Tier 3 — Candidate URL discovery (run only on confirmed-fit survivors, in parallel)**
 
-1. `site-explorer-pages-by-traffic` (NOT `top-pages` — `pages-by-traffic` supports `limit: 500-1000` for big blogs; `top-pages` caps at ~100). With a topical `where` filter against URL substrings:
+Use `site-explorer-crawled-pages` for URL discovery. **Do not use `pages-by-traffic` or `top-pages` for this purpose.** `pages-by-traffic` returns traffic-bucket distribution counts, not a per-page URL list (this was a long-standing skill bug). `top-pages` returns URLs but filters to pages that rank for at least one organic keyword — crawled-but-unranked pages with strong topical fit are invisible. `crawled-pages` returns Ahrefs's complete crawled URL inventory regardless of ranking status, at 1 unit per row vs 14 for top-pages. Verified on adspyder.io: the article `brand-loyalty-with-video-marketing/` has five verbatim anchor matches in body content but ranks for zero keywords; `top-pages` excludes it, `crawled-pages` returns it.
+
+The Tier 3 query has three required filter layers:
+
+**Layer A — Editorial path scope (`prefix` operator).** Enterprise and mid-size publishers polluted by user-generated content (forums) or marketing tracking links must be scoped to the editorial blog path at the API level. Before the main Tier 3 call, run a probe call to discover the partner's editorial blog path. Try these in order with a small probe (`limit: 5`, `prefix` operator):
+
+1. `https://blog.{domain}/`
+2. `https://www.{domain}/blog/`
+3. `https://{domain}/blog/`
+4. `https://{domain}/articles/`
+5. `https://{domain}/resources/`
+6. `https://{domain}/insights/`
+
+Use the first candidate that returns rows. If none return rows, skip Layer A and fall back to substring-only filtering — and flag the partner for fallback Step 2 (sitemap / blog-index crawl) since the prefix probe failure usually signals a non-standard editorial path.
+
+**Layer B — Topic filter (`isubstring` OR-clause).** Apply the keyword set against URL substrings. Expanded keyword set (added based on real-world false-negative diagnosis):
+
+- community, engagement, mobile-app, social-network, social-feature, retention, in-app, customer-engagement, user-generated, chat-app, messaging, loyalty, ugc, social-commerce
+- brand-loyalty, brand-community, brand-advocate, brand-activation, brand-affinity, brand-collab
+- customer-experience, consumer-engagement, employee-engagement, fan-engagement
+- referral, word-of-mouth, membership, subscription, super-user, testimonial
+- loyalty-program, community-led, content-marketing, video-marketing (the last is counterintuitive but high-yield: video-marketing slugs on ad/marketing blogs routinely contain community/loyalty/UGC body content, verified on adspyder.io)
+
+**Layer C — Tracking-link exclusion (`not isubstring "?"`).** Required on all Tier 3 calls. Verified on hubspot.com to reduce 96 noisy rows (mostly URL-tracking variants where seed keywords appear in query parameters) to 14 clean editorial URLs in one call.
+
+**Combined call shape:**
 
 ```
 target: domain.com
 mode: subdomains
-order_by: sum_traffic:desc
-limit: 500
-select: url,sum_traffic,url_rating,top_keyword,top_keyword_best_position_title
+select: url, url_rating, title
 where: {
-  "or": [
-    {"field": "url", "is": ["isubstring", "community"]},
-    {"field": "url", "is": ["isubstring", "engagement"]},
-    {"field": "url", "is": ["isubstring", "mobile-app"]},
-    {"field": "url", "is": ["isubstring", "social-network"]},
-    {"field": "url", "is": ["isubstring", "social-feature"]},
-    {"field": "url", "is": ["isubstring", "retention"]},
-    {"field": "url", "is": ["isubstring", "in-app"]},
-    {"field": "url", "is": ["isubstring", "customer-engagement"]},
-    {"field": "url", "is": ["isubstring", "user-generated"]},
-    {"field": "url", "is": ["isubstring", "brand-loyalty"]},
-    {"field": "url", "is": ["isubstring", "chat-app"]},
-    {"field": "url", "is": ["isubstring", "messaging"]},
-    {"field": "url", "is": ["isubstring", "loyalty"]},
-    {"field": "url", "is": ["isubstring", "ugc"]},
-    {"field": "url", "is": ["isubstring", "social-commerce"]}
+  "and": [
+    { "field": "url", "is": ["prefix", "<detected_blog_prefix>"] },
+    { "or": [
+      { "field": "url", "is": ["isubstring", "community"] },
+      { "field": "url", "is": ["isubstring", "engagement"] },
+      { "field": "url", "is": ["isubstring", "brand-loyalty"] }
+      ...full expanded keyword set above...
+    ]},
+    { "not": { "field": "url", "is": ["isubstring", "?"] } }
   ]
 }
+limit: 100
+protocol: both
 ```
 
-**False-positive watchlist:** `community-college`, `engagement-ring`, `marketing-messaging`, `app-store-optimization`. Always verify in Step 2.5 before treating these as fits.
+**Verified `crawled-pages` constraints (do not extrapolate):**
+- Hard-capped at 100 rows per call regardless of `limit` parameter. The schema claims default 1000; empirically tested at 200, 1000, 5000 — all return 100. Plan pagination accordingly.
+- Results are alphabetical by URL. There is no `offset` parameter.
+- Paginate via URL cursor: add `{ "field": "url", "is": ["gt", "<last_url_from_previous_response>"] }` to the AND-clause and re-run.
+- Default session pagination cap: 10 calls (1,000 raw rows). Surface to the user when triggered and proceed with what was collected.
 
-**False negatives are the bigger risk.** URL substring filtering misses semantically relevant articles whose slugs don't contain our keywords. For sites that show strong vertical fit in Tier 2 but return < 5 URLs from this filter, escalate to a sitemap crawl (Step 2) for full coverage rather than declaring no fit.
+**Verified Ahrefs where-clause grammar (`doc` tool, May 2026):**
+- Boolean structure: `{ "and": [...] }`, `{ "or": [...] }`, `{ "not": <expr> }`, or bare `<expr>`
+- Condition operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `substring`, `isubstring`, `phrase_match`, `iphrase_match`, `prefix`, `suffix`
+- NOT supported: `notsubstring` as an operator. Use the `not` wrapper instead.
+
+**Light post-processing pipeline (the API filters do the heavy lifting):**
+- Lowercase the host
+- Force `https` when the same path exists under both protocols (the API returns `http` and `https` as separate rows)
+- Strip leading `www.`
+- Strip trailing `/`
+- Drop URLs containing `/feed/` (WordPress RSS endpoints still surface)
+- Dedupe by the normalized canonical key
+
+**False-positive watchlist:** `community-college`, `engagement-ring`, `marketing-messaging`, `app-store-optimization`. Always verify in Step 2.5 before treating these as fits.
 
 2. `site-explorer-linked-anchors-external` — what anchor patterns has the partner already used when linking out to other sites? **Sample size matters: require ≥10 external anchors before treating this as signal.** Below that it's noise. Use the result to tailor our anchor suggestions to what their editor actually accepts.
 
 ---
 
-**Hand-off to Step 1:** Step 0 produces, per partner, (a) a quality verdict, (b) a vertical-fit verdict, (c) a list of candidate URLs (or escalation flag for sitemap crawl), and (d) an anchor-style profile. Pass this directly to Step 2.5 (verify on the actual page). Skip Step 2 (sitemap) entirely for sites where Tier 3 returned a usable candidate set.
+**Hand-off to Step 1:** Step 0 produces, per partner, (a) a quality verdict, (b) a vertical-fit verdict, (c) a list of candidate URLs (or escalation flag for sitemap crawl), and (d) an anchor-style profile. Pass this directly to Step 2.5 (verify on the actual page).
+
+Escalation criteria from Tier 3 to Step 2 (sitemap / blog-index crawl):
+- Canonical count after the post-processing pipeline ≥ 5 → proceed to Step 2.5
+- Canonical count < 5 AND pagination not exhausted → paginate first
+- Canonical count < 5 AND pagination exhausted (or session cap hit) → escalate to Step 2
+- Layer A prefix probe returned no candidates → escalate to Step 2 (non-standard editorial path)
 
 ---
 
@@ -355,7 +396,24 @@ If any of the four files is missing, surface the failure to Stefan immediately �
 
 For each partner article opened in Step 2.5:
 
-1. **Scan for exact anchor matches** — Search the verified page content for approved anchor phrases that already exist in the text. Prioritize short anchors first (2-3 words), then check for longer ones.
+1. **Scan for exact anchor matches first** — Search the verified page content for approved anchor phrases from `references/anchors.md` that already exist in the text. Prioritize short anchors first (2-3 words), then check for longer ones. Verbatim matches always have priority over creative matches in step 1b below.
+
+   **1b. Scan for creative-anchor matches (semantic-equivalent phrases).** After the verbatim pass, also identify phrases in the partner's body text that are NOT literally in `references/anchors.md` but are semantically equivalent to a listed anchor and would function as natural anchor text. Examples that qualify:
+   - "community-driven platform" → maps to "community platform" anchor family
+   - "app retention rate" → maps to "app retention" anchor family
+   - "engaged users" → maps to "user engagement" anchor family
+   - "build customer loyalty" → maps to "build brand loyalty" anchor family
+   - "in-app social interactions" → maps to "social features" anchor family
+
+   A creative anchor candidate is valid only when ALL of the following hold:
+   - The phrase appears verbatim in the partner's body text (no paraphrasing — Phase 1 stays verbatim; sentence-level synthesis is Phase 2 only)
+   - The phrase is 2-6 words, OR is a single word AND the proposed target is a glossary entry AND the word is the focal noun of its sentence AND the word is unambiguous in context (e.g., "communities" in a sentence about user groups is fine; "users" or "apps" are too ambiguous)
+   - The phrase clearly maps to one specific topic family in `references/anchors.md`; the mapping is articulable in plain English ("X maps to Y because they describe the same concept")
+   - The phrase is in a body paragraph, not intro or conclusion
+   - A social.plus target page exists that directly addresses the mapped topic
+   - The phrase does not cannibalize the partner article's primary ranking keywords
+
+   Flag creative-anchor placements in the internal summary table with `[creative-anchor]`. Default fit score caps at ⭐⭐ Strong; ⭐⭐⭐ Perfect requires a verbatim-literal match from `references/anchors.md`.
 
 2. **Check placement position** — The anchor must appear in a body paragraph, not in the introduction or conclusion of the article. Discard matches found in intros/conclusions.
 
@@ -413,7 +471,9 @@ For every article opened in Step 2.5 (including those that had no Phase 1 matche
    **Anchor handling:**
    - Keep the anchor short (2-3 words)
    - The anchor must appear naturally within the suggested sentence — not bolted on
-   - Include one of our approved anchor texts from `references/anchors.md`
+   - Default: use one of our approved anchor texts from `references/anchors.md`
+
+   **Creative anchors in Phase 2 are tightly gated.** Phase 2 creative anchors are allowed ONLY on articles where Phase 1 returned zero matches (both literal AND creative). When triggered, allow ONE Phase 2 creative-anchor placement per such article as a "save the article" option. The creative anchor must still satisfy the same six guardrails listed in Phase 1 step 1b (semantic-equivalent, clearly mapped, etc.) — the only difference is that the surrounding sentence is being drafted by us, not extracted verbatim. Flag in the summary as `[creative-phase2-save]`. Fit score caps at ⭐ Opportunity. Stefan reviews each one in the Step 3.5 decision gate before drafting the email. Do NOT layer Phase 2 creative anchors on articles that already have a Phase 1 placement — that compounds two layers of synthesis and hurts partner relationships over time.
 
 3. **Match to the best social.plus page** — Same logic as Phase 1.
 
@@ -646,12 +706,20 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **Single viable placement**: Skip the decision gate (Step 3.5) and proceed directly to Step 4 with the single-ask format. There's nothing for Stefan to choose between.
 - **More than 5 placements**: Default to recommending option (b) alternatives framing on the top 3 — proposing 6+ placements in one email reads as spam.
 - **Partner site is low quality**: Flag it — "This site looks thin/spammy. Worth considering if the link value justifies the effort."
+- **Enterprise publishers return query-string variants**: Sites like HubSpot, Salesforce, Adobe, Atlassian crawl the same canonical article at dozens of tracking-link URL variants (e.g., `?hubs_content=...`). Always include `{ "not": { "field": "url", "is": ["isubstring", "?"] } }` in the Tier 3 `where` clause to exclude these at the API level. Verified on hubspot.com: dropped 96 raw rows to 14 clean editorial URLs.
+- **Partner sites with user-generated forums**: Some partners host both an editorial blog AND a user-generated community forum (e.g., intercom.com has `community.intercom.com` alongside `blog.intercom.com`). Substring filters pollute the result with forum threads we can't request placements in. The Layer A `prefix` operator scoped to the editorial blog path excludes forum content at the API level.
+- **`crawled-pages` 100-row cap**: The endpoint is hard-capped at 100 rows per call regardless of the `limit` parameter (tested at 200, 1000, 5000). The schema's default-1000 claim is misleading. Plan pagination accordingly.
+- **Ahrefs where-clause supports `not` wrapper but not `notsubstring` operator**: The grammar is `{ "not": { "field": "...", "is": [op, value] } }`. Trying `notsubstring` as an operator returns "bad where: invalid JSON syntax". Verified condition operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `substring`, `isubstring`, `phrase_match`, `iphrase_match`, `prefix`, `suffix`.
+- **Layer A prefix probe returns no candidates**: If none of the standard editorial-blog prefix patterns return rows, escalate immediately to Step 2 (sitemap / blog-index crawl). The partner has a non-standard path that Tier 3 substring-only fallback won't handle cleanly.
+- **Phase 1 creative anchor caps fit score at ⭐⭐**: Verbatim-literal anchor matches from `references/anchors.md` are the only path to ⭐⭐⭐ Perfect. Creative semantic-equivalent matches max out at ⭐⭐ Strong. This protects the relationship channel against AI over-reach in anchor identification.
+- **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
+- **Single-word anchors only for glossary targets**: A single-word anchor (e.g., "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced.
 
 ## What NOT to Do
 
 - Don't suggest placements where the link would feel forced or out of context
 - Don't recommend linking from irrelevant articles just to get a placement
-- Don't use anchors that aren't on the approved list (or very close semantic matches)
+- Don't invent anchor phrases that don't appear verbatim in the partner's body text. Phase 1 creative anchors must be in the text already; Phase 2 creative anchors require all six guardrails from Phase 1 step 1b and are gated to zero-match articles only.
 - Don't suggest more than 5 total placements per partner site — keep it focused
 - Don't fabricate article content — if you can't access an article, say so
 - Don't trust Google search snippets as source material — always verify on the actual page before presenting a placement
