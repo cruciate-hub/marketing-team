@@ -31,27 +31,21 @@ A small dropdown opens with two options. Click **Browse plugins** (the top one).
 
 ---
 
-## Step 4 — Open the marketplace menu
+## Step 4 — Open the "Personal" tab
 
-The **Directory** window opens. Make sure **Plugins** is selected in its left sidebar (it should be by default).
+The **Directory** window opens on the **Anthropic & Partners** tab by default. Click the **Personal** tab so the marketplace row below shows your personal marketplaces (this is where the `marketing-team` marketplace will appear once it's added).
 
-Hover over the **`skills`** pill (or whichever one is selected) until the **`···`** (three dots) appear next to it. Click the **`···`**.
-
-![Click the three-dot menu next to the skills marketplace pill](./install-assets/04-open-menu.png)
+![Click the Personal tab at the top of the Directory window](./install-assets/04-personal-tab.png)
 
 ---
 
-## Step 5 — Click "Add marketplace"
+## Step 5 — Add the marketplace
 
-A small menu opens with two options. Click **Add marketplace**.
+Make sure **Plugins** is selected in the left sidebar (it should be by default). At the end of the marketplace pill row (after `webflow-skills` or whichever pills are already there), click the **+** icon to open the **Add marketplace** dialog.
 
-![Click Add marketplace from the menu](./install-assets/05-add-marketplace.png)
+![Click the plus icon at the end of the marketplace pill row](./install-assets/05-add-marketplace.png)
 
----
-
-## Step 6 — Paste the marketplace address and Sync
-
-The **Add marketplace** dialog opens. In the **URL** field, paste:
+In the **URL** field of the dialog, paste:
 
 ```
 cruciate-hub/marketing-team
@@ -65,7 +59,7 @@ Then click **Sync** in the bottom right. Claude will fetch the marketplace from 
 
 ---
 
-## Step 7 — Install your plugin
+## Step 6 — Install your plugin
 
 You're now back in the Directory and a new **`marketing-team`** pill is selected. You'll see two plugin cards:
 
@@ -88,34 +82,32 @@ Claude installs the plugin and its skills. You're done — close the Directory w
 | **Skills** | 2 — `brand-messaging`, `design-system` | 14 — content, SEO, design, linking, formatting |
 | **Use it when** | You occasionally write copy or build something visual and need to stay on-brand | You produce marketing content end-to-end: blog posts, landing pages, emails, customer stories, press releases, etc. |
 
-Not sure? Pick **Brand kit**. You can swap to the full Marketing team plugin later by reinstalling.
-
 ---
 
 ## Stay up to date (do this once)
 
 The skills load their content live from GitHub every session, so most updates reach you automatically. But the plugin manifest itself — new skills, renamed skills — needs a one-time auto-sync setup. Without it, you stay frozen on the version you installed and miss every future update.
 
-Open the Directory again (the same window from Steps 4–7). Your installed plugin's pill is now selected at the top of the marketplace row. The next three steps all happen in one menu — see the highlighted callouts in the screenshot below.
+Open the Directory again (the same window from Steps 4–6). Your installed plugin's pill is now selected at the top of the marketplace row. The next three steps all happen in one menu — see the highlighted callouts in the screenshot below.
 
 ![Auto-sync setup: click the three dots, toggle Sync automatically, then Check for updates](./install-assets/08-sync-and-update.png)
 
-### Step 8 — Open the plugin's settings menu
+### Step 7 — Open the plugin's settings menu
 
 Click the **`···`** next to your installed plugin's pill (`marketing-team` or `brand-kit`) at the top of the marketplace row. A small menu opens.
 
-### Step 9 — Toggle "Sync automatically" on
+### Step 8 — Toggle "Sync automatically" on
 
 In the menu, find **Sync automatically** and click the toggle so it turns on. This is what makes future updates flow to you without manual intervention.
 
-### Step 10 — Click "Check for updates"
+### Step 9 — Click "Check for updates"
 
 Still in the same menu, click **Check for updates** to pull the latest version right now. You'll see the synced commit hash update at the top of the menu.
 
-### Step 11 — Quit and reopen the Claude desktop app
+### Step 10 — Quit and reopen the Claude desktop app
 
 Close the Claude desktop app completely (<kbd>⌘</kbd>+<kbd>Q</kbd> on Mac, or right-click the dock icon → Quit), then open it again. Plugins load on startup, so this is what makes the new skills actually available in your chats.
 
 ---
 
-That's it — auto-sync is on. New and improved skills will reach you on the next Claude desktop startup whenever an update lands on `main`.
+Now that auto-sync is on; new and improved skills will reach you on the next Claude desktop startup.
