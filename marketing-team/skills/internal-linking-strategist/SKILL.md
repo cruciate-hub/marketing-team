@@ -28,11 +28,11 @@ Every recommendation is grounded in `link-strategy.md` (anchor map, cannibalizat
 
 ## Architecture: two-phase shortlist + live fetch
 
-The `pages-*.json` files are a **lightweight heading index** — full H1-H6 plus metaTitle and metaDescription, no body. Body content lives on the live web.
+The `pages-*.json` files are a **lightweight heading index** — full H1-H6 plus metaTitle and metaDescription, no body. Body content lives on the live web. This keeps snapshots small and the auto-regen cheap.
 
 **Trade-off:** heading-only data isn't enough to pick an insertion point or quote surrounding context. So the optimizer runs in two phases:
 
-1. **Phase 1 — Shortlist (from JSON).** Scan headings + metadata in the relevant `pages-*.json` files to identify candidate link targets.
+1. **Phase 1 — Shortlist (from JSON).** Scan headings + metadata in the relevant `pages-*.json` files to identify candidate link targets. Cheap, fast, no network beyond the GitHub fetches.
 2. **Phase 2 — Verify + extract (live WebFetch).** For the top N shortlisted candidates only, fetch the live page to confirm the topic match, find the insertion sentence, and quote surrounding context.
 
 **Live-fetch budget:**
@@ -577,7 +577,7 @@ If any check fails, fix before delivering.
 
 ## Out of scope (v1)
 
-- **`docs.social.plus`** — developer documentation lives on a separate subdomain not captured in any `pages-*.json` file. When drafts reference docs, surface as "no in-scope link target" rather than guessing a URL.
+- **`docs.social.plus`** — developer documentation lives on a separate subdomain not yet captured in any `pages-*.json` file. When drafts reference docs, surface as "no in-scope link target" rather than guessing a URL.
 - **The forum.** Same reason.
 - **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter`.
 - **Live Ahrefs calls.** Stays static-data-driven for cannibalization/strategy (`link-strategy.md` regenerated quarterly). Live WebFetch is used only for verifying insertion points, not for SEO data.

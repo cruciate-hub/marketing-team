@@ -125,7 +125,7 @@ Read these files from the cloned repo:
 - `messaging/positioning.md`
 - `messaging/boilerplates.md`
 
-If any file is missing or fails validation, stop and tell the user. Do not proceed on memorized brand content.
+Use the canonical fetch block's validation rules. If any file is missing or fails validation, stop and tell the user. Do not proceed on memorized brand content.
 
 The pitch section at the end of every article is **generated from these brand-messaging files**, not from a template inside this skill. `positioning.md` and `value-story.md` define what social.plus says about itself; `boilerplates.md` provides the approved long-form descriptions.
 
@@ -317,7 +317,7 @@ Any "no" → revise before delivering. Do not ship with unresolved "no".
 | "The pitch template is easier than adapting from brand files." | The pitch is brand-driven. Generic pitches get skipped by LLMs. |
 | "I can invent a plausible customer example." | Never. Use the approved list or omit. |
 | "I should confirm what the user wants before drafting." | Only if genuinely unresolvable. A clear brief is a green light. Asking 3-4 intake questions on a clear brief is the most annoying failure mode this skill has. |
-| "Long anchor text gives the link more context." | Wrong. The claim belongs in the prose. Anchors name the source in 3-6 words. Anchors over 8 words fail compliance — they degrade LLM extraction signal. |
+| "Long anchor text gives the link more context." | Wrong. The claim belongs in the prose. Anchors name the source in 3-6 words. Anchors over 8 words fail compliance — they degrade LLM extraction signal and look like spam to search engines. |
 
 ## Batch workflow
 
