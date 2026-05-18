@@ -12,7 +12,8 @@ Most tasks need references from more than one domain. Use this table to determin
 |---|---|
 | Written content (general copy, scripts, captions, taglines, ad-hoc text without a dedicated skill) | `messaging/brain.md` |
 | Visual output (HTML, CSS, components, decks) | `messaging/brain.md` + `design-system/brain.md` |
-| Blog posts for social.plus/blog | `marketing-team/skills/blog-seo-content/SKILL.md` + `messaging/brain.md` |
+| Blog posts about a social.plus product/feature/module/capability | `marketing-team/skills/brand-messaging/SKILL.md` + `messaging/brain.md` |
+| Blog posts on non-product topics (industry trends, opinion, listicles) | `marketing-team/skills/blog-seo-content/SKILL.md` + `messaging/brain.md` |
 | Customer stories / case studies | `marketing-team/skills/case-study/SKILL.md` + `messaging/brain.md` |
 | HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
@@ -31,8 +32,8 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | Skill | Trigger | SKILL.md |
 |---|---|---|
 | **newsletters** | Any email HTML output — product update emails, feature launch announcements, campaign emails, newsletters | `marketing-team/skills/newsletters/SKILL.md` |
-| **brand-messaging** | Marketing copy, website copy, landing pages, pitch materials, taglines, brand voice questions | `marketing-team/skills/brand-messaging/SKILL.md` |
-| **blog-seo-content** | Blog posts for social.plus/blog | `marketing-team/skills/blog-seo-content/SKILL.md` |
+| **brand-messaging** | ALL content about a social.plus product/feature/module/capability (regardless of format) — feature pages, landing pages, product blog posts, feature announcement blogs, release-note CMS items, taglines, pitch materials, brand voice audits | `marketing-team/skills/brand-messaging/SKILL.md` |
+| **blog-seo-content** | Blog posts on **non-product** topics only — industry trends, opinion pieces, listicles, third-party tools, general community/social-engagement subjects | `marketing-team/skills/blog-seo-content/SKILL.md` |
 | **press-release** | Newswire-ready press releases (PR Newswire / Cision), embargoed announcements, product/funding/partnership announcements | `marketing-team/skills/press-release/SKILL.md` |
 | **case-study** | Customer stories, case studies, success stories, testimonial write-ups, Webflow customer story CMS items | `marketing-team/skills/case-study/SKILL.md` |
 | **design-system** | CSS, HTML styling, Webflow components, brand colors, typography, spacing, design tokens, dark mode | `marketing-team/skills/design-system/SKILL.md` |

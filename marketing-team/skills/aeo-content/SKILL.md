@@ -1,6 +1,20 @@
 ---
 name: aeo-content
-description: "Use this skill whenever the user mentions AEO, GEO, answer pages, /answers/, answer engine optimization, generative engine optimization, or AI citation. The skill writes reference-style articles for the social.plus /answers/ collection, engineered to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI Overviews, and Copilot, and delivers a .docx (a downstream automation converts it to Webflow HTML). Trigger on phrases like 'AEO article', 'GEO article', 'answer page', or 'content for /answers/'. Do NOT trigger blog-seo-content for these requests — AEO articles and SEO blog posts are different formats with different delivery pipelines. This skill delivers .docx; blog-seo-content delivers markdown. Do NOT use for regular blog posts (use blog-seo-content), customer stories (use case-study), or website page copy (use brand-messaging)."
+description: >
+  Writes reference-style articles for the social.plus /answers/ collection,
+  engineered to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI
+  Overviews, and Copilot. Delivers .docx (a downstream automation converts
+  it to Webflow HTML). This skill always wins when the destination is
+  /answers/, regardless of subject.
+
+  Do NOT use for: blog posts (use blog-seo-content for non-product topics,
+  or brand-messaging for product/feature blogs); customer stories
+  (use case-study); website page copy (use brand-messaging); press
+  releases (use press-release).
+when_to_use: >
+  Trigger phrases: "AEO article", "GEO article", "answer page", "content
+  for /answers/", "reference article on X", "what is X" reference page,
+  "FAQ for /answers/", "glossary entry".
 ---
 
 # AEO Article Generation

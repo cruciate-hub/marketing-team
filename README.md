@@ -27,8 +27,8 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| **brand-messaging** | Applies brand voice, terminology, tone, and messaging frameworks to any written content. |
-| **blog-seo-content** | SEO-optimized blog posts for social.plus/blog. |
+| **brand-messaging** | Owns ALL content about a social.plus product/feature/module/capability — feature pages, landing pages, product blog posts, feature announcement blogs, release-note CMS items, taglines, pitch materials. Also brand voice audits. |
+| **blog-seo-content** | SEO-optimized blog posts for social.plus/blog on **non-product topics only** — industry trends, opinion, listicles, third-party tools. Product blog posts go to `brand-messaging`. |
 | **aeo-content** | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
 | **newsletters** | Generates MailerLite-compatible HTML emails from monthly product update docs. |
 | **case-study** | Customer stories and success case studies following the social.plus narrative structure. |

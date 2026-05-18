@@ -1,16 +1,25 @@
 ---
 name: blog-seo-content
 description: >
-  Write SEO-optimized blog posts for social.plus/blog, delivered as markdown
-  that maps directly to the Webflow blog CMS collection fields. Use when the
-  user asks to write a blog post, draft an SEO article, or produce content
-  for social.plus/blog. Trigger phrases: "write a blog post", "SEO article",
-  "blog content for social.plus", "draft a post for the blog".
+  Write SEO-optimized blog posts for social.plus/blog on NON-PRODUCT topics
+  only — industry trends, opinion pieces, listicles, third-party tools,
+  general community/social-engagement subjects. Delivers markdown mapped to
+  the Webflow blog CMS fields.
 
-  Do NOT use for: AEO/GEO/answer content destined for /answers/ (use
-  aeo-content — delivers .docx, this skill delivers markdown); website page
-  copy (use brand-messaging); email content (use newsletters); or customer
-  stories (use case-study).
+  Do NOT use for: blog posts about a social.plus product, feature, module,
+  or capability — those belong to brand-messaging, which owns all product
+  content regardless of format (blog, page, CMS item). Do NOT use for:
+  AEO/answer pages for /answers/ (use aeo-content); website page copy
+  (use brand-messaging); email content (use newsletters); customer stories
+  (use case-study); press releases (use press-release).
+when_to_use: >
+  Trigger phrases: "write a blog post about [non-product topic]", "SEO
+  article on [trend/industry]", "listicle", "opinion piece", "how-to guide
+  on [general non-product topic]", "tutorial on [general non-product topic]".
+
+  If the topic is a social.plus feature/product (e.g. "blog post on the
+  Block feature", "article about our AI Copilot"), route to brand-messaging
+  instead — even when the prompt says "blog post".
 ---
 
 # social.plus Blog & SEO Content

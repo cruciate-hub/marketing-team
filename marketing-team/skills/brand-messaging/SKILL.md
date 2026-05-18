@@ -1,19 +1,27 @@
 ---
 name: brand-messaging
 description: >
-  Enforces social.plus brand messaging consistency across all written content.
-  Use this skill for: marketing copy, landing page text, pitch materials,
-  website copy, product descriptions, investor communications, taglines, or
-  any text representing the social.plus brand that doesn't have a dedicated
-  skill. Also trigger when reviewing or auditing existing copy against brand
-  guidelines, or when someone asks about brand voice, tone, approved
-  terminology, messaging frameworks, value propositions, competitive
-  positioning, or boilerplates.
-  Do NOT trigger for: blog posts for social.plus/blog (use blog-seo-content),
-  press releases (use press-release), customer stories or case studies
-  (use case-study), AEO/answer-page content (use aeo-content), HTML emails
-  or email copy including subject lines (use newsletters), or legal documents
-  (use legal-docs-formatter).
+  Owns ALL content about a social.plus product, feature, module, or
+  capability — regardless of format. Use for: feature pages, landing pages,
+  use-case pages, industry pages, homepage copy, product descriptions,
+  feature-announcement blog posts, blog posts about any social.plus product
+  (Chat, Block, UIKit, AI Copilot, Live Stream, etc.), Webflow CMS
+  release-note items, taglines, pitch materials, investor copy, and any
+  general marketing text without a dedicated skill. Also for brand voice
+  audits and questions about tone, terminology, value props, positioning,
+  or boilerplates.
+
+  Do NOT use for: blog posts on NON-product topics like industry trends or
+  listicles (use blog-seo-content); press releases (use press-release);
+  customer stories (use case-study); AEO/answer-page content for /answers/
+  (use aeo-content); HTML emails or email copy including subject lines
+  (use newsletters); legal documents (use legal-docs-formatter).
+when_to_use: >
+  Trigger phrases: "write a feature page", "homepage copy", "landing page
+  for X", "blog post on [our feature]", "article about our [product]",
+  "feature announcement blog", "release note for [feature]", "tagline",
+  "pitch copy", "how-to guide on [our feature]", "tutorial on [our
+  product]", "review this copy for brand voice".
 ---
 
 # social.plus Brand Messaging

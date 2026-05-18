@@ -13,15 +13,27 @@ This is the generic brand-alignment skill — it routes to the appropriate messa
 
 ## When it triggers
 
-For marketing copy, landing page text, pitch materials, website copy, product descriptions, investor communications, taglines, or any text representing the social.plus brand that doesn't have a dedicated skill. Also for reviewing or auditing existing copy against brand guidelines, or when someone asks about brand voice, tone, approved terminology, messaging frameworks, value propositions, competitive positioning, or boilerplates.
+Owns ALL content about a social.plus product, feature, module, or capability — regardless of format. Use for:
 
-The skill is not for:
-- Blog posts — use `blog-seo-content`.
+- Feature pages, landing pages, use-case pages, industry pages, homepage copy.
+- **Blog posts about any social.plus product/feature** (Chat, Block, UIKit, AI Copilot, Live Stream, etc.) — even though the prompt says "blog post", these belong here, not in `blog-seo-content`.
+- Feature announcement blogs.
+- Webflow CMS release-note items.
+- Taglines, pitch materials, investor copy, product descriptions.
+- Any general marketing text without a dedicated skill.
+- Brand voice audits and questions about tone, terminology, value propositions, competitive positioning, or boilerplates.
+
+The skill is **not** for:
+- Blog posts on **non-product** topics (industry trends, opinion pieces, listicles, third-party tools) — use `blog-seo-content`.
 - Press releases — use `press-release`.
 - Customer stories — use `case-study`.
-- AEO articles — use `aeo-content`.
-- HTML emails (including subject lines) — use `newsletters`.
+- AEO/answer-page content for `/answers/` — use `aeo-content`.
+- HTML emails or email copy including subject lines — use `newsletters`.
 - Legal documents — use `legal-docs-formatter`.
+
+### Why product-content lives here (not in `blog-seo-content`)
+
+The product/non-product split keeps brand voice consistent across every surface that describes social.plus's own offering. A blog post about the Block feature, a homepage feature card, and a Webflow CMS release-note item all draw from the same messaging stack (`positioning.md`, `value-story.md`, `terminology.md`) and must read as one voice. `blog-seo-content` is reserved for blogs whose subject is **not** our product — industry trends, opinion, listicles — where SEO structure dominates over brand voice.
 
 ## Workflow
 

@@ -14,9 +14,15 @@ Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so c
 
 ## When it triggers
 
-When the user wants a blog post for social.plus/blog. Trigger phrases include "write a blog post" or "SEO article".
+When the user wants a blog post for social.plus/blog on a **non-product topic** — industry trends, opinion pieces, listicles, third-party tools, general community/social-engagement subjects. Trigger phrases include "write a blog post about [non-product topic]", "SEO article on [trend]", "listicle", "opinion piece", or "how-to / tutorial on a general topic".
 
-The skill is not for website page copy (use `brand-messaging`), email content (use `newsletters`), or customer stories (use `case-study`).
+The skill is **not** for:
+- Blog posts about a social.plus product, feature, module, or capability (e.g. "blog post on the Block feature", "article about our AI Copilot") — use `brand-messaging`, which owns all product content regardless of format (blog, page, CMS item).
+- AEO/answer pages for `/answers/` (use `aeo-content`).
+- Website page copy (use `brand-messaging`).
+- Email content (use `newsletters`).
+- Customer stories (use `case-study`).
+- Press releases (use `press-release`).
 
 ## Workflow
 
