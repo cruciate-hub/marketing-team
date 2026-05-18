@@ -7,9 +7,9 @@ description: >
   skills before delivery). (2) Audit mode runs a site-wide internal linking
   analysis across all 10 pages-*.json data files (646 total pages: marketing,
   use-cases, industry, glossary, blog, customer-stories, answers, product-updates,
-  release-notes, webinars). Use this skill when someone asks to "audit internal
-  linking", "check anchor text", "fix orphan pages", "internal link audit",
-  "linking strategy", or "where should this article link to". Also invoke this
+  release-notes, webinars). Use when someone asks to "audit internal linking",
+  "check anchor text", "fix orphan pages", or "where should this article link
+  to". Also invoke this
   skill from other content-writing skills as a pre-delivery step to attach
   SEO-grounded link suggestions to a draft. Do NOT trigger when the user is just
   writing content without a linking question — let the writing skill invoke this
@@ -19,28 +19,28 @@ description: >
 
 # social.plus Internal Linking Optimizer
 
-This skill produces SEO-grounded internal link recommendations for social.plus content. It runs in two modes:
+This skill produces SEO-grounded internal link recommendations for social.plus content. Two modes:
 
-- **Draft mode** — given a specific draft (blog post, AEO article, or other), returns a ranked list of suggested links (anchor text + target URL + insertion point + reasoning). This is the mode `blog-seo-content` and `aeo-content` invoke as a pre-delivery step.
-- **Audit mode** — given no specific draft, runs a 7-step site-wide audit using the `pages-*.json` data files and `link-strategy.md`, returns a prioritized fix plan.
+- **Draft mode** — given a draft, returns a ranked list of suggested links (anchor + target URL + insertion point + reasoning). `blog-seo-content` and `aeo-content` invoke this as a pre-delivery step.
+- **Audit mode** — with no draft, runs a 7-step site-wide audit using the `pages-*.json` files and `link-strategy.md`, returns a prioritized fix plan.
 
-Every recommendation is grounded in `link-strategy.md` (canonical anchor map, cannibalization warnings, hub pages, anchor variation rules), regenerated quarterly from Ahrefs and GSC data.
+Every recommendation is grounded in `link-strategy.md` (anchor map, cannibalization warnings, hub pages, variation rules), regenerated quarterly from Ahrefs and GSC.
 
 ## Architecture: two-phase shortlist + live fetch
 
-The `pages-*.json` files are intentionally a **lightweight heading index** — full H1-H6 plus metaTitle and metaDescription, no body. Body content lives on the live web. This keeps snapshots small and the auto-regen cheap.
+The `pages-*.json` files are a **lightweight heading index** — full H1-H6 plus metaTitle and metaDescription, no body. Body content lives on the live web.
 
-**Trade-off:** heading-only data isn't enough to confidently pick an insertion point or quote surrounding context. So the optimizer always runs in two phases:
+**Trade-off:** heading-only data isn't enough to pick an insertion point or quote surrounding context. So the optimizer runs in two phases:
 
-1. **Phase 1 — Shortlist (from JSON).** Scan the headings + metadata in the relevant `pages-*.json` files to identify candidate link targets. Cheap, fast, no network beyond the GitHub fetches.
-2. **Phase 2 — Verify + extract (live WebFetch).** For the top N shortlisted candidates only, fetch the live page. Use the fresh body to confirm the topic match, find the specific insertion sentence, and quote the surrounding context.
+1. **Phase 1 — Shortlist (from JSON).** Scan headings + metadata in the relevant `pages-*.json` files to identify candidate link targets.
+2. **Phase 2 — Verify + extract (live WebFetch).** For the top N shortlisted candidates only, fetch the live page to confirm the topic match, find the insertion sentence, and quote surrounding context.
 
 **Live-fetch budget:**
-- Draft mode: at most **one WebFetch per shortlisted candidate**, capped at **8 candidates per draft** (so ≤8 live fetches per invocation). If the shortlist returns more than 8 strong candidates, take the top 8 by score.
-- Audit mode: live fetch is reserved for the **top 5-10 highest-impact gaps** in the implementation plan. The rest of the audit is JSON-only.
-- **If the calling context overrides the cap** (e.g., explicit "use only 4 fetches"), re-shortlist from scratch by score down to that lower N. Do not just slice the top N off an existing 8-item list — the candidate ranking should reflect the actual budget, since a tighter budget changes which candidates are worth verifying.
+- Draft mode: at most **one WebFetch per candidate**, capped at **8 candidates per draft**. If the shortlist returns more than 8 strong candidates, take the top 8 by score.
+- Audit mode: live fetch is reserved for the **top 5-10 highest-impact gaps** in the implementation plan. The rest is JSON-only.
+- **If the calling context overrides the cap** (e.g., "use only 4 fetches"), re-shortlist from scratch by score down to that lower N. Don't slice the top N off an existing 8-item list — a tighter budget changes which candidates are worth verifying.
 
-**Why this works even when the JSON is sparse:** known limitations of the snapshot generator (e.g., the static-page extractor can't reach Webflow Components, so industry pages capture only the headings outside components) are compensated by the Phase 2 live fetch — the live page sees everything.
+**Why this works when the JSON is sparse:** Phase 2's live fetch compensates for known snapshot limitations (e.g., the static-page extractor can't reach Webflow Components, so industry pages capture only headings outside components).
 
 ## How to fetch reference files
 
@@ -99,7 +99,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
 
-If the fetch fails, proceed with the link suggestions but append this notice at the end of your output: "⚠️ brain.md was unreachable — the compliance check (terminology, tone, claims, em-dashes, emojis) was not applied. The calling skill should run its own compliance pass before publishing." Linking decisions don't depend on brain.md, so a missing brain.md is a soft failure, not a stop condition.
+If the fetch fails, proceed with link suggestions and append at the end: "⚠️ brain.md was unreachable — the compliance check (terminology, tone, claims, em-dashes, emojis) was not applied. The calling skill should run its own compliance pass before publishing." Linking doesn't depend on brain.md — soft failure, not a stop condition.
 
 ## Step 1: Determine which data files to fetch
 
@@ -114,18 +114,18 @@ Always fetch `website/link-strategy.md`. Then pick `pages-*.json` files based on
 
 Run all fetches in parallel via the canonical fetch block at the top of this file. Files live under `website/` (e.g. `website/link-strategy.md`, `website/pages-marketing.json`).
 
-If `link-strategy.md` is missing or its `Refresh by:` date is in the past, surface this to the user before continuing. Stale strategy beats no strategy, but the user should know.
+If `link-strategy.md` is missing or its `Refresh by:` date is past, surface to the user before continuing. Stale strategy beats no strategy.
 
 ### File contents
 
-Each `pages-*.json` has shape `{"_meta": {...}, "pages": [{"url", "metaTitle", "metaDescription", "content"}, ...]}`. URLs are full `https://www.social.plus/...`. Because `curl` returns raw JSON, parse directly with `json.loads(content)` — no HTML extraction needed.
+Each `pages-*.json` has shape `{"_meta": {...}, "pages": [{"url", "metaTitle", "metaDescription", "content"}, ...]}`. URLs are full `https://www.social.plus/...`. Parse directly with `json.loads(content)` — no HTML extraction needed.
 
 ## Step 2: Determine mode
 
-- **Draft mode** — A draft (title + body + target keyword) is present in the invocation context. Either passed by a calling skill, or supplied directly by the user with a request like "suggest internal links for this article".
-- **Audit mode** — No specific draft present. The user asked for a site-wide check, an orphan analysis, an anchor text audit, or similar.
+- **Draft mode** — A draft (title + body + target keyword) is in the invocation context, either passed by a calling skill or pasted by the user.
+- **Audit mode** — No draft present; user asked for a site-wide check, orphan analysis, or anchor text audit.
 
-If genuinely ambiguous, ask the user. Do not assume.
+If genuinely ambiguous, ask. Don't assume.
 
 ---
 
@@ -137,32 +137,32 @@ If genuinely ambiguous, ask the user. Do not assume.
 
 **1. Identify the draft's target keyword and topic cluster.**
 
-The calling skill should pass the target keyword. If not, infer from the draft's H1 / page title. Map to one of the clusters defined in `link-strategy.md` (Brand / Chat / Social / Video / Industry / Cross-cluster).
+The calling skill should pass the target keyword. If not, infer from H1 / page title. Map to a cluster from `link-strategy.md` (Brand / Chat / Social / Video / Industry / Cross-cluster).
 
 **2. Cross-reference cannibalization warnings.**
 
-Scan the draft for any phrase that matches a cannibalization-warning anchor in `link-strategy.md`. For each match:
+Scan the draft for any phrase matching a cannibalization-warning anchor in `link-strategy.md`. For each match:
 - Determine intent (definitional vs commercial) from the surrounding sentence.
 - Note the canonical target per the warning's rule.
-- If the draft *itself* targets a cannibalized term as its primary keyword, flag this **before** proposing links — the article may compete with existing pages and the user should know.
+- If the draft *itself* targets a cannibalized term as its primary keyword, flag **before** proposing links — the article may compete with existing pages.
 
 **3a. Phase 1 — Shortlist candidate target pages from JSON.**
 
-For each page in the fetched JSON files, score topic relevance against the draft:
-- Match draft headings, key terms, and target keyword against each page's `metaTitle`, `metaDescription`, and heading hierarchy in `content`.
-- Apply the canonical anchor map: if a draft sentence is reaching for an anchor that has a canonical target in `link-strategy.md`, that target is a strong candidate.
-- Filter by intent fit (definitional anchor → glossary; commercial anchor → product/use-case page).
+For each page in the fetched JSON, score topic relevance against the draft:
+- Match draft headings, key terms, and target keyword against each page's `metaTitle`, `metaDescription`, and headings in `content`.
+- Apply the canonical anchor map: if a draft sentence reaches for an anchor with a canonical target in `link-strategy.md`, that target is a strong candidate.
+- Filter by intent fit (definitional → glossary; commercial → product/use-case page).
 
-Rank candidates and **take the top 8 maximum** (the live-fetch budget). Quality over quantity — if only 3 candidates are clearly relevant, only shortlist 3.
+Rank and **take the top 8 maximum** (the live-fetch budget). Quality over quantity — if only 3 are clearly relevant, shortlist 3.
 
 **3b. Phase 2 — Live-fetch verification and insertion-point extraction.**
 
-For each shortlisted candidate, WebFetch the live page (URL from the JSON's `url` field — already a full `https://www.social.plus/...`). Then for each page, ask the fetched content:
-- Does the topic match still hold? (The live page may have changed since the JSON snapshot.)
-- Where in the *draft* would a link to this page make the most sense? Identify the specific sentence or paragraph.
-- What surrounding context from the live page confirms it's the right destination?
+For each shortlisted candidate, WebFetch the live page (URL from the JSON's `url` field — full `https://www.social.plus/...`). Then ask:
+- Does the topic match still hold? (Live page may have changed since the snapshot.)
+- Where in the *draft* would a link to this page make sense? Identify the sentence or paragraph.
+- What surrounding context from the live page confirms the destination?
 
-If a candidate doesn't pan out on live verification, drop it. If you discover a stronger target during live exploration that wasn't in the original shortlist, you may add it (subject to the 8-fetch budget).
+If a candidate doesn't pan out, drop it. If you discover a stronger target during live exploration, you may add it (subject to the 8-fetch budget).
 
 **3c. Score and rank final suggestions.**
 
@@ -175,40 +175,40 @@ For each surviving candidate:
 
 **4. Apply the link budget for the article's type.**
 
-The draft's article type determines the Min / Target / Max link count. Look up the type in `link-strategy.md` §"Link budgets by article type" (14 types: marketing/product page, pillar landing, use-case page, white-label, industry, blog by length band, AEO, glossary entry, customer story, product update, webinar).
+The draft's article type determines Min / Target / Max link count. Look up the type in `link-strategy.md` §"Link budgets by article type" (14 types covering marketing/product pages, blog by length band, AEO, glossary, customer stories, etc.).
 
-If the count falls below **Min**, add links until it reaches Target. If it exceeds **Max**, drop the weakest candidates until it reaches Target. For AEO, the table also constrains placement (disallowed in FAQs, conclusion, metrics table) — enforce both count and placement rules.
+If count falls below **Min**, add links until it reaches Target. If it exceeds **Max**, drop the weakest until it reaches Target. For AEO, the table also constrains placement (disallowed in FAQs, conclusion, metrics table) — enforce both rules.
 
-Link count excludes header, footer, and nav. Only in-content links count.
+Link count excludes header, footer, nav. Only in-content links count.
 
-Quality over quantity. Better to return 3 strong suggestions at the floor than 7 weak ones at the ceiling.
+Quality over quantity. Better to return 3 strong suggestions than 7 weak ones.
 
 **5. Apply anchor-text distribution targets + per-cluster variation rules.**
 
 Two constraints run simultaneously:
 
-- **Per-article anchor distribution** — match the per-article proportions in `link-strategy.md` §"Anchor text distribution targets": exact-match ≤ 20%, partial 30–50%, branded 10–25%, natural 20–35%, generic ≤ 10% (and at most 1 in short posts). Count proposed anchors across all your suggestions and reject combinations that overweight exact-match or generic.
-- **Per-cluster variation** — if the same anchor would point to the same page more than twice in the draft, use a variant from the cluster's anchor pool in `link-strategy.md` §"Per-cluster anchor variation rules".
+- **Per-article anchor distribution** — match the proportions in `link-strategy.md` §"Anchor text distribution targets": exact-match ≤ 20%, partial 30–50%, branded 10–25%, natural 20–35%, generic ≤ 10% (max 1 in short posts). Count proposed anchors and reject combinations that overweight exact-match or generic.
+- **Per-cluster variation** — if the same anchor would point to the same page more than twice, use a variant from `link-strategy.md` §"Per-cluster anchor variation rules".
 
-Also forbidden: using the same anchor text pointing to two different targets within one draft (cannibalization trap). Reject any suggestion combination that would do this.
+Also forbidden: same anchor text pointing to two different targets within one draft (cannibalization trap). Reject any combination that would do this.
 
 **6. Run the 8 evaluation questions + placement check before finalizing.**
 
-For each proposed link, run through the 8 evaluation questions from `link-strategy.md` §"Evaluation questions — per-link quality gate". If any answer is "no" or "unclear", drop the suggestion.
+For each proposed link, run the 8 evaluation questions from `link-strategy.md` §"Evaluation questions — per-link quality gate". If any answer is "no" or "unclear", drop it.
 
-Then run the placement check from `link-strategy.md` §"Placement & avoidance rules" — reject any suggestion placed in a forbidden location (AEO FAQ/conclusion/metrics table, blog conclusion CTA, image caption, footnote, author bio, or a paragraph already containing 2 other links).
+Then run the placement check from `link-strategy.md` §"Placement & avoidance rules" — reject suggestions in forbidden locations (AEO FAQ/conclusion/metrics table, blog conclusion CTA, image caption, footnote, author bio, or paragraphs with 2 other links).
 
-Finally, check every suggested target against `link-strategy.md` §"Do-not-link list" — if a target URL is on that list, drop it and surface the issue to the writer (e.g., `/use-cases/*` plural URLs).
+Finally, check every target against `link-strategy.md` §"Do-not-link list" — if a URL is on that list, drop it and surface to the writer (e.g., `/use-cases/*` plural URLs).
 
-This is the final quality gate. Only links that pass this step appear in the output.
+Final quality gate. Only passing links appear in output.
 
 ### Draft mode output format
 
-Return a clearly-labeled section the calling skill can embed in its own output. Match the format to the consuming content type:
+Return a labeled section the calling skill can embed. Match format to content type:
 
-- For **blog content** (HTML output from `blog-seo-content`): provide ready-to-paste `<a href="..." target="_blank">anchor</a>` tags.
-- For **AEO content** (markdown output from `aeo-content`): provide markdown links `[anchor](URL)` only.
-- For **generic drafts**: provide both formats.
+- **Blog** (HTML from `blog-seo-content`): ready-to-paste `<a href="..." target="_blank">anchor</a>` tags.
+- **AEO** (markdown from `aeo-content`): markdown links `[anchor](URL)` only.
+- **Generic drafts**: both formats.
 
 ```
 ## Internal link suggestions
@@ -244,7 +244,7 @@ Include only the bullets that apply to the current draft; OMIT any that don't.
 - **Skipped suggestions:** [optional — note candidates you considered but cut, with one-line reason]
 ```
 
-The calling skill is responsible for embedding these into its final output. This skill does not edit the draft directly.
+The calling skill embeds these into its final output. This skill does not edit the draft directly.
 
 ---
 
@@ -254,11 +254,11 @@ The calling skill is responsible for embedding these into its final output. This
 
 ### Workflow
 
-Run all 7 steps in order. Use the fetched `pages-*.json` files as the source of truth for what each page contains; use `link-strategy.md` as ground truth for canonical decisions.
+Run all 7 steps in order. Use fetched `pages-*.json` files as source of truth for page contents; use `link-strategy.md` as ground truth for canonical decisions.
 
 **1. Link structure analysis.**
 
-For each page across all 10 data files, count the internal links present in its `content` field. Build a distribution table per file.
+For each page across the 10 data files, count internal links in its `content` field. Build a distribution table per file.
 
 ```markdown
 ## Link structure overview
@@ -301,11 +301,11 @@ Target: ≥ 8 / 10. Compare to last audit if available.
 
 **2. Orphan and under-linked pages (classified by tier).**
 
-Cross-reference Ahrefs orphan candidates from `link-strategy.md` against the fetched data. Flag pages with no contextual inbound links from other pages in the data set (header/footer nav doesn't count for SEO purposes). Classify each flagged page per `link-strategy.md` §"Orphan priority tiers":
+Cross-reference Ahrefs orphan candidates from `link-strategy.md` against fetched data. Flag pages with no contextual inbound links (header/footer nav doesn't count for SEO). Classify per `link-strategy.md` §"Orphan priority tiers":
 
-- **P1 — critical:** has organic traffic AND 0 inbound contextual links. Fix in week 1.
-- **P2 — important:** has commercial intent but < 2 inbound contextual links. Fix in week 2.
-- **P3 — optional:** no traffic and < 2 inbound. Evaluate for consolidation, noindex, or deletion.
+- **P1 — critical:** has organic traffic AND 0 inbound contextual links. Fix week 1.
+- **P2 — important:** commercial intent but < 2 inbound contextual links. Fix week 2.
+- **P3 — optional:** no traffic, < 2 inbound. Evaluate for consolidation, noindex, or deletion.
 
 ```markdown
 ## Orphans and under-linked pages
@@ -322,11 +322,11 @@ Cross-reference Ahrefs orphan candidates from `link-strategy.md` against the fet
 
 **3. Anchor text distribution + canonical compliance.**
 
-Extract every anchor used across all pages. Cross-reference against the canonical anchor map. Flag:
+Extract every anchor across all pages. Cross-reference against the canonical map. Flag:
 - Generic anchors ("click here", "read more", "learn more")
-- Anchors that violate the canonical map
+- Anchors violating the canonical map
 - Same anchor pointing to multiple targets
-- Definitional vs commercial intent violations (e.g., "social feed" anchor pointing to a product page when it should point to glossary)
+- Definitional vs commercial intent violations (e.g., "social feed" pointing to a product page when it should point to glossary)
 
 ```markdown
 ## Anchor text audit
@@ -366,10 +366,10 @@ Report site-wide percentages for exact-match and generic shares — these are th
 **4. Topic cluster analysis.**
 
 For each cluster (Chat, Social, Video, Industry, Cross), check:
-- Do pillar pages (`/chat`, `/social`, `/video`) link to all their cluster children?
-- Do cluster children link back to the pillar?
+- Do pillars (`/chat`, `/social`, `/video`) link to all cluster children?
+- Do children link back to the pillar?
 - Are siblings cross-linked where contextually relevant?
-- For blog: are blog posts in the same topic cluster cross-linking to each other and to the relevant pillar?
+- For blog: do posts in the same cluster cross-link to each other and the pillar?
 
 ```markdown
 ## Topic cluster analysis
@@ -390,7 +390,7 @@ For each cluster (Chat, Social, Video, Industry, Cross), check:
 
 **4b. Authority-flow redistribution check.**
 
-Apply the rules in `link-strategy.md` §"Link-equity hubs & authority flow" → "Authority-flow rules (external → internal redistribution)". For each high-UR source page (homepage UR 11.0, `/white-label/social-network` UR 7.0, and the UR 4.4+ glossary/blog pages), verify the required downstream links are in place. Flag any missing downstream link as a **Priority 1** fix — these are the highest-leverage wins because they redirect accumulated external link equity toward commercial pages.
+Apply rules in `link-strategy.md` §"Link-equity hubs & authority flow" → "Authority-flow rules (external → internal redistribution)". For each high-UR source page (homepage UR 11.0, `/white-label/social-network` UR 7.0, UR 4.4+ glossary/blog pages), verify required downstream links are in place. Flag any missing downstream link as **Priority 1** — the highest-leverage wins, redirecting external link equity toward commercial pages.
 
 ```markdown
 ## Authority-flow gaps (Priority 1)
@@ -405,11 +405,11 @@ Apply the rules in `link-strategy.md` §"Link-equity hubs & authority flow" → 
 
 **5. Contextual link gaps.**
 
-Find places where one page mentions a concept that has its own dedicated page but doesn't link to it. This is the most actionable kind of internal linking work.
+Find places where one page mentions a concept that has its own page but doesn't link to it. The most actionable kind of internal linking work.
 
-Use the two-phase pattern here too:
-- **Phase 1 (JSON):** scan headings + meta to identify candidate gaps (page A's heading mentions a concept that page B owns canonically).
-- **Phase 2 (live fetch):** for the top 5-10 most-likely gaps, WebFetch both the source page and the target page. Confirm the gap is real (the source's body doesn't already link to the target — JSON only sees headings, so the body might already have the link). Quote the specific sentence where the link should go.
+Use the two-phase pattern:
+- **Phase 1 (JSON):** scan headings + meta to identify candidate gaps (page A's heading mentions a concept page B owns canonically).
+- **Phase 2 (live fetch):** for the top 5-10 most-likely gaps, WebFetch both source and target. Confirm the gap is real (JSON sees only headings; the body might already have the link). Quote the sentence where the link should go.
 
 ```markdown
 ## Contextual link gaps
@@ -450,9 +450,9 @@ Use the two-phase pattern here too:
 
 **7. Prioritized implementation plan.**
 
-Synthesize all findings using the 4-phase template in `link-strategy.md` §"Audit mode — phased implementation plan template". Fill in the actual numbers from steps 1–6: Structure Score and Anchor Score (current vs target), orphan counts by tier, cannibalization violations, pillar → cluster gaps, authority-flow gaps, and over-optimization data.
+Synthesize all findings using the 4-phase template in `link-strategy.md` §"Audit mode — phased implementation plan template". Fill in numbers from steps 1–6: Structure Score and Anchor Score (current vs target), orphan counts by tier, cannibalization violations, pillar → cluster gaps, authority-flow gaps, over-optimization data.
 
-Include the expected-outcomes table from the template (effort hours + typical traffic/ranking impact + time-to-measure) so the user can prioritize by ROI. Pull those numbers from `link-strategy.md` §"Success metrics per fix type".
+Include the expected-outcomes table (effort + typical traffic/ranking impact + time-to-measure) so the user can prioritize by ROI. Pull from `link-strategy.md` §"Success metrics per fix type".
 
 ### Monitoring cadence (include in plan)
 
@@ -467,7 +467,7 @@ Re-score Structure and Anchor monthly after implementation starts. Target ≥ 8 
 
 ### Audit mode "While looking at this..."
 
-After the 7-step audit, always add a "While looking at this..." section with 2-3 observations the user didn't ask for but would want to know. This is the same pattern as `site-intelligence`. Be specific, quotable, actionable.
+After the 7-step audit, add a "While looking at this..." section with 2-3 observations the user didn't ask for but would want. Same pattern as `site-intelligence`. Be specific, quotable, actionable.
 
 ```markdown
 ## While looking at this...
@@ -481,17 +481,17 @@ After the 7-step audit, always add a "While looking at this..." section with 2-3
 
 ## Mode: Reverse
 
-**When:** A new page just shipped in Webflow (detected by a `_meta.itemCount` change in a `pages-*.json` between publishes, or flagged by the user with "what should link to this new page?").
+**When:** A new page just shipped in Webflow (detected by `_meta.itemCount` change in a `pages-*.json`, or user-flagged with "what should link to this new page?").
 
 ### Workflow
 
 **1. Add canonical anchors to `link-strategy.md`.**
 
-Edit the canonical anchor map to include a row for each new page: `anchor term(s) → target URL`. Pick the anchor(s) from the new page's H1, metaTitle, and target keyword. If the anchor conflicts with an existing canonical entry (would create cannibalization), stop and escalate to Stefan per the escalation-triggers list — don't add both.
+Edit the canonical anchor map to add a row per new page: `anchor term(s) → target URL`. Pick anchors from the page's H1, metaTitle, and target keyword. If the anchor conflicts with an existing entry (would create cannibalization), stop and escalate per the escalation-triggers list — don't add both.
 
 **2. Identify inbound-link candidates (prioritized).**
 
-For the new page, grep the 10 `pages-*.json` files and optionally live-fetch to find 3–10 existing pages that should link *to* the new page:
+Grep the 10 `pages-*.json` files (and optionally live-fetch) to find 3–10 existing pages that should link *to* the new page:
 
 - Parent pillar (bidirectional link required).
 - Sibling cluster pages within the same pillar.
@@ -541,17 +541,17 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 ## General principles (all modes)
 
-**Quote, don't paraphrase.** When citing page content, quote it exactly. For headings or metadata, the JSON is the source. For body sentences (e.g., insertion-point context), you must have live-fetched the page first — never quote body content from memory or speculation.
+**Quote, don't paraphrase.** When citing content, quote it exactly. For headings/metadata, the JSON is the source. For body sentences (e.g., insertion-point context), you must have live-fetched the page first — never quote body content from memory or speculation.
 
-**Be specific about locations.** Don't say "link from the chat page". Say "in `https://www.social.plus/chat`, under the `## Real-time messaging` section, after the existing paragraph about typing indicators, anchor 'in-app chat' to..."
+**Be specific about locations.** Not "link from the chat page". Say "in `https://www.social.plus/chat`, under `## Real-time messaging`, after the typing-indicators paragraph, anchor 'in-app chat' to..."
 
-**Anchor text is keyword-only.** The anchor must be the exact natural keyword phrase from `link-strategy.md`'s canonical map (e.g., "chat widget", "in-app chat"), not a surrounding-article variant ("a chat widget", "the in-app chat"). SEO weight flows to the linked phrase; articles dilute it. The "Insert at" field of a suggestion quotes the draft sentence verbatim; if the draft's natural phrasing prevents a clean keyword anchor, use the **Rephrase suggestion** field to propose a rewrite — don't compromise on the anchor.
+**Anchor text is keyword-only.** The anchor must be the keyword phrase from `link-strategy.md`'s canonical map (e.g., "chat widget", "in-app chat"), not a surrounding-article variant ("a chat widget", "the in-app chat"). SEO weight flows to the linked phrase; articles dilute it. The "Insert at" field quotes the draft sentence verbatim; if the draft's phrasing prevents a clean keyword anchor, use **Rephrase suggestion** to propose a rewrite — don't compromise on the anchor.
 
-**Respect the canonical map strictly.** If `link-strategy.md` says anchor X → page Y, that's the rule. If you think it's wrong, surface that as a flag for the user to update `link-strategy.md` — don't silently override.
+**Respect the canonical map strictly.** If `link-strategy.md` says anchor X → page Y, that's the rule. If you think it's wrong, flag it for the user to update — don't silently override.
 
 **Definitional vs commercial intent matters.** A glossary anchor in product-pitch context is wrong. A product anchor in a definition paragraph is wrong. Match intent to target.
 
-**Customer-story anchors use the customer name.** When suggesting a `/customer-story/*` link, the anchor must be the customer name (e.g., "Bitazza", "Noom"), not a proof-point claim or industry framing. Customer stories are case-study citations — name-anchored is the convention readers expect.
+**Customer-story anchors use the customer name.** When suggesting a `/customer-story/*` link, the anchor must be the customer name (e.g., "Bitazza", "Noom"), not a proof-point claim or industry framing. Name-anchored is the convention readers expect.
 
 **Don't over-link.** Targets per content type:
 - Blog: 3-7
@@ -565,23 +565,23 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 ## Compliance check
 
-Before delivering, run the standard compliance check from the main `brain.md`:
+Before delivering, run the standard compliance check from `brain.md`:
 
-1. **Terminology.** No forbidden terms ("social network", "forum platform", "chat tool", growth guarantees). Note: glossary entries like `/glossary/vertical-social-network` exist for definitional content — the term itself is not forbidden, only positioning social.plus as one is.
+1. **Terminology.** No forbidden terms ("social network", "forum platform", "chat tool", growth guarantees). Note: glossary entries like `/glossary/vertical-social-network` exist for definitional content — the term is not forbidden, only positioning social.plus as one is.
 2. **Tone.** Sound like social.plus, not default Claude.
 3. **Claims.** No invented stats, customer names, quotes.
 4. **Em dashes.** None — use parentheses or restructure.
-5. **Emojis.** None in user-facing output. (Internal warning markers like ⚠️ in the output sections above signal a flag, not decoration.)
+5. **Emojis.** None in user-facing output. (Internal warning markers like ⚠️ above signal a flag, not decoration.)
 
-If any check fails, fix the output before delivering.
+If any check fails, fix before delivering.
 
 ## Out of scope (v1)
 
-- **`docs.social.plus`** — developer documentation lives on a separate subdomain not yet captured in any `pages-*.json` file. When draft content references docs, surface this as "no in-scope link target" rather than guessing a URL.
-- **The forum.** Same reason as docs.
-- **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter` for outbound work.
-- **Live Ahrefs runtime calls.** This skill stays static-data-driven for cannibalization/strategy decisions (`link-strategy.md` is regenerated quarterly). Live WebFetch is used only for verifying link insertion points on social.plus pages, not for SEO data.
-- **Auto-publishing changes to Webflow.** This skill recommends; the user implements.
+- **`docs.social.plus`** — developer documentation lives on a separate subdomain not captured in any `pages-*.json` file. When drafts reference docs, surface as "no in-scope link target" rather than guessing a URL.
+- **The forum.** Same reason.
+- **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter`.
+- **Live Ahrefs calls.** Stays static-data-driven for cannibalization/strategy (`link-strategy.md` regenerated quarterly). Live WebFetch is used only for verifying insertion points, not for SEO data.
+- **Auto-publishing to Webflow.** This skill recommends; the user implements.
 
 ## Escalation triggers (stop and ask Stefan)
 
