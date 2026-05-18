@@ -1,16 +1,16 @@
 ---
 name: blog-seo-content
 description: >
-  Do NOT use this skill for AEO articles, GEO articles, answer pages, or any
-  content destined for /answers/ — use aeo-content instead. This skill is for
-  SEO blog posts only. aeo-content delivers .docx for /answers/; this skill
-  delivers markdown for the blog.
+  Write SEO-optimized blog posts for social.plus/blog, delivered as markdown
+  that maps directly to the Webflow blog CMS collection fields. Use when the
+  user asks to write a blog post, draft an SEO article, or produce content
+  for social.plus/blog. Trigger phrases: "write a blog post", "SEO article",
+  "blog content for social.plus", "draft a post for the blog".
 
-  Use this skill for: blog posts that will be published on social.plus/blog.
-  Trigger on phrases like "write a blog post" or "SEO article".
-  Do NOT trigger for AEO/GEO/answer content (use aeo-content), website page copy
-  (use brand-messaging), email content (use newsletters), or customer stories
-  (use case-study).
+  Do NOT use for: AEO/GEO/answer content destined for /answers/ (use
+  aeo-content — delivers .docx, this skill delivers markdown); website page
+  copy (use brand-messaging); email content (use newsletters); or customer
+  stories (use case-study).
 ---
 
 # social.plus Blog & SEO Content
