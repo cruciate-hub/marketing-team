@@ -1,6 +1,23 @@
 ---
 name: product-update-vs-website
-description: Compare new product releases or monthly updates against the current social.plus website content to identify gaps — pages that should mention a new feature but don't yet. Use this skill when someone pastes a release note, monthly product update, or changelog entry and wants to know which website pages need updating. Also trigger when someone asks "what's missing from the site", "does the website reflect this update", "which pages need to change", or references the pages-marketing.json file. Always use this skill for any product-update-to-website comparison task, even if the user doesn't explicitly name the skill.
+description: >
+  Compare new product releases or monthly updates against the current social.plus
+  website content to identify GAPS — pages that should mention a new feature but
+  don't yet. This skill is for GAP ANALYSIS and COMPARISON only, not for writing
+  the resulting copy.
+
+  Do NOT use for: writing the email about a product update (use newsletters);
+  writing the release-note CMS item or the updated page copy (use brand-messaging);
+  writing a blog post announcing the update (use brand-messaging). This skill
+  reports which pages need updating — the actual writing belongs to the format-
+  specific skill.
+when_to_use: >
+  Trigger phrases: "what's missing from the site after this update", "does the
+  website reflect this update", "which pages need to change", "gap analysis on
+  this release note", "compare this product update to the site". Also trigger
+  when someone pastes a release note or changelog entry and asks which website
+  pages need updating, or references the pages-marketing.json file in a
+  comparison context.
 ---
 
 # Product Update vs Website

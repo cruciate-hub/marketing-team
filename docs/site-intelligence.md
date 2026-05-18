@@ -13,11 +13,13 @@ Gives full awareness of what every page says — so you can ask questions, find 
 
 ## When it triggers
 
-Any question that depends on what's currently on the social.plus website. Trigger phrases include "what do we say about", "which pages mention", "does the site cover", "our website", "our pages", "site content", "messaging consistency", or page-specific questions like "what does the pricing page say" or "do we mention AI on the homepage".
+**Read-only** — answers "what does the site say"; does not produce new copy. Any question that depends on what's currently on the social.plus website. Trigger phrases include "what do we say about", "which pages mention", "does the site cover", "our website", "our pages", "site content", "messaging consistency", or page-specific questions like "what does the pricing page say" or "do we mention AI on the homepage".
 
-Also trigger when the user is writing new copy and needs awareness of what already exists, or when auditing for contradictions, stale content, or messaging drift.
+Use this skill **before** writing new copy if site-awareness is needed, then hand off to the appropriate writing skill (`brand-messaging` for product/feature copy, `blog-seo-content` for non-product blogs, etc.).
 
-The skill does **not** cover docs.social.plus, legal pages, the forum, or any page that isn't a published Webflow page in one of the 10 inventories.
+The skill is **not** for:
+- Writing copy itself — site-intelligence is read-only.
+- Pages outside the 10 inventories (docs.social.plus, legal pages, the forum, anything not a published Webflow page).
 
 ## Site content files
 

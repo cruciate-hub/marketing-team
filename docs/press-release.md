@@ -13,9 +13,14 @@ Claude skill for newswire-ready press releases for social.plus, produced as `.do
 
 ## When it triggers
 
-When the user needs a press release, newswire release, embargoed announcement, or formal media announcement. Trigger phrases include "press release", "newswire", "PR Newswire", "Cision", "embargoed announcement", "press announcement", "media release", "draft a release for", "write a release about", or "announcement for the wire".
+When the user signals **newswire / press release format explicitly** — the format is the trigger, not the subject. Trigger phrases include "press release", "newswire", "PR Newswire", "Cision", "embargoed announcement", "press announcement", "media release", "draft a release for", "write a release about", "announcement for the wire", or "for distribution".
 
-The skill is not for blog posts (use `blog-seo-content`), email campaigns (use `newsletters`), or customer case studies (use `case-study`).
+The skill is **not** for:
+- Blog announcements about a product launch (without newswire signal) — use `brand-messaging`, even when the request is "announcement for our new Block feature".
+- Feature announcement blog posts — use `brand-messaging`.
+- Product update emails — use `newsletters`.
+- Customer stories — use `case-study`.
+- General blog posts on non-product topics — use `blog-seo-content`.
 
 ## The brief — three required fields
 

@@ -14,9 +14,14 @@ Given a release note, monthly product update, or changelog entry, this skill sca
 
 ## When it triggers
 
-When the user pastes a release note, monthly product update, or changelog entry and wants to know which website pages need updating. Trigger phrases include "what's missing from the site", "does the website reflect this update", "which pages need to change", or references to `pages-marketing.json`.
+For **gap analysis and comparison only** — not for writing the resulting copy. When the user pastes a release note, monthly product update, or changelog entry and wants to know which website pages need updating. Trigger phrases include "what's missing from the site", "does the website reflect this update", "which pages need to change", "gap analysis on this release note", or references to `pages-marketing.json` in a comparison context.
 
-Always use this skill for any product-update-to-website comparison, even if the user doesn't explicitly name it.
+The skill is **not** for:
+- Writing the email about a product update — use `newsletters`.
+- Writing the release-note CMS item or the updated page copy — use `brand-messaging`.
+- Writing a blog post announcing the update — use `brand-messaging`.
+
+This skill reports which pages need updating; the actual writing belongs to the format-specific skill.
 
 ## Workflow
 

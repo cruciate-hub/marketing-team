@@ -2,16 +2,25 @@
 name: site-intelligence
 description: >
   Query, audit, and analyze the social.plus marketing website using a structured
-  JSON snapshot of all page content. Use this skill whenever someone asks about
-  website content, what pages say, which pages mention a feature or topic, messaging
-  consistency across the site, content gaps, page health, competitive comparisons
-  against the site, or anything related to "our website," "our pages," "what do we
-  say about," "site content," "which pages," or "does the site mention." Also trigger
-  when someone wants to write new copy and needs awareness of what already exists on
-  the site, or when auditing the site for contradictions, stale content, or messaging
-  drift. Trigger even for simple questions like "what does the pricing page say" or
-  "do we mention AI on the homepage." If the answer depends on what's currently on
-  the social.plus website, use this skill.
+  JSON snapshot of all page content — READ-ONLY. Use this skill whenever someone
+  asks about website content, what pages say, which pages mention a feature or
+  topic, messaging consistency across the site, content gaps, page health,
+  competitive comparisons against the site, or anything related to "our website,"
+  "our pages," "what do we say about," "site content," "which pages," or "does
+  the site mention." Trigger even for simple questions like "what does the pricing
+  page say" or "do we mention AI on the homepage."
+
+  Do NOT use for: writing the copy itself — site-intelligence is read-only. Use
+  brand-messaging for product/feature copy, blog-seo-content for non-product
+  blog posts, etc. This skill answers "what does the site say"; it does not
+  produce new copy.
+when_to_use: >
+  Trigger phrases: "what does our [X] page say", "which pages mention [feature]",
+  "audit the site", "find content gaps on the site", "messaging consistency
+  check", "does the homepage mention [topic]", "compare our messaging vs
+  [competitor]", "site content for [topic]". Use this skill BEFORE writing
+  new copy if site-awareness is needed, but hand off to a writing skill for
+  the actual draft.
 ---
 
 # social.plus Site Intelligence

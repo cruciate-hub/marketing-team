@@ -2,15 +2,26 @@
 name: case-study
 description: >
   Write customer stories for social.plus following the exact Webflow CMS structure.
-  Use this skill for: customer stories, case studies, customer success stories,
-  customer spotlights, testimonial write-ups, or any content that tells the story
-  of how a customer uses social.plus. Also trigger when the user wants to create
-  or update a customer story CMS item in Webflow, or when they provide customer
-  data, interview notes, or sales call notes and want them turned into a publishable
-  customer story. Trigger on phrases like "case study", "customer story", "success
-  story", "customer spotlight", "write about how [customer] uses", "write a CS for",
-  or "new customer story."
-  Do NOT trigger for general blog posts without a customer focus (use blog-seo-content).
+  Use this skill ONLY when the content is about a specific named customer using
+  social.plus — customer stories, case studies, customer success stories, customer
+  spotlights, testimonial write-ups. Also trigger when the user wants to create or
+  update a customer story CMS item in Webflow, or when they provide customer data,
+  interview notes, or sales call notes and want them turned into a publishable
+  customer story.
+
+  Do NOT trigger for: product/feature stories without a specific named customer
+  (e.g. "how the Block feature helps brands" — use brand-messaging, which owns
+  all product/feature content regardless of format); general blog posts without
+  a customer focus (use blog-seo-content for non-product topics, or brand-messaging
+  for product topics).
+when_to_use: >
+  Trigger phrases: "case study", "customer story", "success story", "customer
+  spotlight", "write about how [specific customer name] uses", "write a CS for
+  [customer]", "new customer story", "testimonial write-up for [customer]".
+
+  Require a specific named customer (Noom, Harley-Davidson, Smart Fit, Ulta
+  Beauty, Betgames, or any other named account). If the prompt is about a
+  feature/product without naming a customer, route to brand-messaging instead.
 ---
 
 # social.plus Customer Stories

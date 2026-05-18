@@ -1,17 +1,27 @@
 ---
 name: press-release
 description: >
-  Write newswire-ready press releases for social.plus. Use this skill for: press releases,
-  newswire releases, PR Newswire / Cision releases, embargoed announcements, product launch
-  press releases, funding announcement press releases, partnership press releases, customer
-  win press releases, executive hire press releases, milestone press releases, award press
-  releases, acquisition press releases, or any formal media announcement intended for
-  distribution through a newswire. Trigger on phrases like "press release", "newswire",
-  "PR Newswire", "Cision", "embargoed announcement", "press announcement", "media release",
-  "draft a release for", "write a release about", or "announcement for the wire". This skill
-  always outputs a properly formatted Word document (.docx) ready to upload to a newswire
-  portal. Do NOT trigger for blog posts (use blog-seo-content), email campaigns (use
-  newsletters), or customer case studies (use case-study).
+  Write newswire-ready press releases for social.plus — always outputs a
+  properly formatted Word document (.docx) ready to upload to PR Newswire /
+  Cision or any major newswire. Use for: press releases, newswire releases,
+  embargoed announcements, product launch press releases, funding announcement
+  press releases, partnership press releases, customer win press releases,
+  executive hire press releases, milestone press releases, award press releases,
+  acquisition press releases, or any formal media announcement intended for
+  newswire distribution. Requires explicit newswire/press signal — the format
+  is the trigger, not the subject.
+
+  Do NOT use for: blog announcements about a product launch (use brand-messaging
+  — even a "launch announcement" without newswire signal); feature announcement
+  blog posts (use brand-messaging); product update emails (use newsletters);
+  customer stories (use case-study); general blog posts on non-product topics
+  (use blog-seo-content).
+when_to_use: >
+  Trigger phrases: "press release", "newswire", "PR Newswire", "Cision",
+  "embargoed announcement", "press announcement", "media release", "draft a
+  release for", "write a release about", "announcement for the wire", "for
+  distribution". The user must signal newswire format explicitly — without
+  that signal, a "product launch announcement" routes to brand-messaging.
 ---
 
 # social.plus Press Release Generator
