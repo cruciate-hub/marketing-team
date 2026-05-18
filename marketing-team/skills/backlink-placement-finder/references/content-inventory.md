@@ -58,6 +58,16 @@ The target page should not compete with the partner article's primary keyword. E
 
 If Tier 2 of Step 0 flagged that the partner already links to social.plus competitors (Bettermode, Mighty Networks, Discourse, Tribe, Circle, etc.), check whether the candidate partner article already contains a competitor link before inserting ours. If yes, either pick a different article or propose a swap-pitch to Stefan.
 
+### 7. Creative anchor mapping
+
+When the partner article's body text contains a phrase that is NOT literally in `anchors.md` but is semantically equivalent to a listed anchor, the AI can propose it as a "creative anchor" under strict guardrails (see SKILL.md Phase 1 step 1b for the six requirements).
+
+Mapping rule: each creative anchor must map to exactly one topic family in `anchors.md`. The mapping must be articulable in plain English ("'community-driven platform' maps to 'community platform' family because both describe the same concept"). If a creative anchor maps ambiguously to two or more families, reject it.
+
+Target selection for creative anchors: same as direct-match anchors. Glossary for definitional/generic concepts, blog for strategic/how-to. Single-word anchors are valid only when the target is a glossary entry and the word is unambiguous in context (e.g., "communities" → `/glossary/online-community`).
+
+Fit-score cap: creative-anchor placements max out at ⭐⭐ Strong; ⭐⭐⭐ Perfect requires a verbatim-literal match from `anchors.md`.
+
 ## Freshness
 
 Both JSON files are regenerated automatically by the `socialplus-site-json` Cloudflare Worker on every CMS publish of the corresponding collection. If you believe the data is stale, trigger a manual refresh via `/generate/blog?token=...` or `/generate/glossary?token=...`.
