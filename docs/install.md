@@ -41,7 +41,7 @@ The **Directory** window opens on the **Anthropic & Partners** tab by default. C
 
 ## Step 5 — Add the marketplace
 
-Make sure **Plugins** is selected in the left sidebar (it should be by default). At the end of the marketplace pill row (after `webflow-skills` or whichever pills are already there), click the **+** icon to open the **Add marketplace** dialog.
+Click the **+** icon. (Make sure **Plugins** is selected in the left sidebar.)
 
 ![Click the plus icon at the end of the marketplace pill row](./install-assets/05-add-marketplace.png)
 
