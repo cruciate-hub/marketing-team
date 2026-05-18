@@ -2,7 +2,8 @@
 
 A visual, click-by-click walkthrough for installing the `cruciate-hub/marketing-team` marketplace in the Claude desktop app — then picking the right plugin (`marketing-team` or `brand-kit`) for your role.
 
-You need the **Claude desktop app** (Mac or Windows). The web app at claude.ai does not have the plugin marketplace.
+You need the **Claude desktop app** (Mac or Windows) https://claude.com/download
+The web app at claude.ai does not have the plugin marketplace.
 
 ---
 
