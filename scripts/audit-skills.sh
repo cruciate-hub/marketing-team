@@ -86,6 +86,13 @@ done
 
 # ---------------------------------------------------------------------------
 # Check 2 — manifest version coherence
+#
+# Per Anthropic's docs: "Avoid setting version in both plugin.json and the
+# marketplace entry. The plugin.json value always wins silently." Our
+# convention is single-source-of-truth in plugin.json — the marketplace.json
+# entry omits `version` and defers. This check therefore only flags drift
+# when both are set AND differ. An empty marketplace.json version is the
+# intended pattern, not drift.
 # ---------------------------------------------------------------------------
 
 manifest_drift=0
@@ -100,9 +107,12 @@ if [ -f "$MARKETPLACE_JSON" ]; then
       manifest_drift=1
       continue
     fi
-    plugin_local_version=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['version'])" "$plugin_json")
-    if [ "$plugin_market_version" != "$plugin_local_version" ]; then
-      echo "VERSION MISMATCH: $plugin_name — marketplace.json=$plugin_market_version, plugin.json=$plugin_local_version"
+    plugin_local_version=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('version',''))" "$plugin_json")
+    if [ -z "$plugin_local_version" ]; then
+      echo "MISSING VERSION: $plugin_name — plugin.json has no 'version' field; cannot single-source"
+      manifest_drift=1
+    elif [ -n "$plugin_market_version" ] && [ "$plugin_market_version" != "$plugin_local_version" ]; then
+      echo "VERSION MISMATCH: $plugin_name — marketplace.json=$plugin_market_version, plugin.json=$plugin_local_version (set in only one place, not both)"
       manifest_drift=1
     fi
   done < <(python3 -c '
