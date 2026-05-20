@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-07T10:41:55.885Z",
-    "itemCount": 60,
+    "generatedAt": "2026-05-20T09:54:23.907Z",
+    "itemCount": 61,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-the-social-plus-mcp-server-build-with-social-plus-at-the-speed-of-ai",
+      "metaTitle": "Introducing the social.plus MCP server: build with social.plus at the speed of AI",
+      "metaDescription": "Integrate social.plus at the speed of AI. Our new MCP server connects Claude, VS Code, and Cursor directly to your workflow for faster development.",
+      "content": "# Introducing the social.plus MCP server: build with social.plus at the speed of AI\n## Why MCP matters\n## A faster way to work with social.plus\n## social.plus in your AI workflow\n## Try the social.plus MCP server"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-april-2026",
       "metaTitle": "What's new in social.plus | April 2026",
