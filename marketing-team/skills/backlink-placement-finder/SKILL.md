@@ -129,10 +129,9 @@ order_by: first_seen:desc
 ```
 
 **For each partner in the batch:** check whether their root domain (or any of their subdomains) appears in the cached referring-domains list. If yes:
-- Stop processing that partner immediately
-- Report to Stefan: "We already have a backlink from `partner.com` (first seen YYYY-MM-DD via referring page X). Skipping."
-- Do not run Tier 1/2/3 calls for that partner
-- Do not propose any placements
+- Do not run Tier 1/2/3 calls for that partner (no wasted Ahrefs units, no fresh placement asks)
+- Report to Stefan: "We already have a backlink from `partner.com` (first seen YYYY-MM-DD via referring page X). Skipping Tier 1-3."
+- Still include the partner in the email output with the existing-backlink callout: one paragraph noting the existing link — partner URL, social.plus URL, anchor, and first-seen date. In a multi-domain request this goes into the consolidated email (see Step 4, "Consolidated multi-site email"). In a single-domain request, draft a short standalone reply: greeting → existing-backlink paragraph → lighter close ("Happy to keep an eye out on future rounds.") → sign-off
 
 **Edge case:** If the existing backlink is on a marketing/footer/template page rather than an editorial article (e.g., "powered by" links, generic resource lists), it may still be worth pursuing an *editorial* placement on a different page of the same partner. Surface this nuance to Stefan rather than auto-declining when the existing link looks non-editorial.
 
@@ -517,6 +516,57 @@ See Edge Cases for behavior when only one placement is viable, or when more than
 
 Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every line in every placement block sits flush-left so the email renders cleanly in email, LinkedIn, Slack, and any chat box where markdown doesn't render — indented sub-fields wrap weirdly when the surface strips formatting.
 
+**Consolidated multi-site email (DEFAULT when the input contains 2+ partner domains):**
+
+When the user pastes multiple partner domains from one contact, produce ONE consolidated reply — not separate emails per domain. The contact proposed a multi-site exchange and expects a single reply addressing every domain.
+
+Structure: greeting → one framing line → one section per domain (header = domain name, content varies by outcome) → one closing line → sign-off.
+
+Per-domain section content by outcome:
+- **Fresh partner with verified placements** → numbered placement blocks (same Phase 1/Phase 2 format as the single-partner templates below)
+- **Existing-backlink partner** (caught by Step 0.0) → one paragraph: "We already have an editorial backlink from your site — [partner URL] links to our article [social.plus URL] using the anchor '[anchor]' (live since [date])."
+- **No-fit partner** → one diplomatic line: "I couldn't find a strong topical fit on the blog this round." or "Same — no strong fit on our end this round." Never reveal internal analysis (PBN signals, DR concerns, Chrome navigation blocks, etc.) to the partner.
+
+Closing rules:
+- If at least one placement request exists across any domain: standard close "Please let me know which work for you, and what we can do for you in return."
+- If zero placements across all domains (all existing-backlink or no-fit): lighter close, e.g. "Happy to keep an eye out on future rounds." No reciprocal ask.
+
+Within each domain section the format is flush-left, no indentation — exactly like the single-partner format.
+
+**Worked example — consolidated multi-site email:**
+
+
+```
+Hi [Name],
+
+Thanks for sharing the list. Here's where we landed on each site:
+
+paylinedata.com
+We already have an editorial backlink from your site — paylinedata.com/blog/the-role-of-big-data-in-shaping-banking-services-in-2025 links to our article social.plus/blog/how-to-use-social-features-to-enhance-fintech-app-engagement using the anchor "engagement" (live since 13 March 2025).
+
+pepper.inc
+I couldn't find a strong topical fit on the blog this round.
+
+clickpost.ai
+Found two good placements I'd like to request:
+
+1. Article: Customer Loyalty Statistics: Key Trends & Insights for 2025
+URL: https://www.clickpost.ai/blog/customer-loyalty-statistics
+
+Add link from: https://www.clickpost.ai/blog/customer-loyalty-statistics
+Add link to: https://www.social.plus/blog/building-brand-loyalty-the-power-of-digital-communities
+Anchor: brand loyalty
+Placement: "Why Customer Loyalty Is the New Growth Engine for Ecommerce in 2025" section — the bullet that starts "Brand loyalty programs influence 79% of buying decisions". Anchor goes on the words "Brand loyalty".
+
+Please let me know which work for you, and what we can do for you in return.
+
+Cheers,
+Stefan
+```
+
+
+**Single-partner email templates (use when the input is one domain):**
+
 **Canonical Phase 1 email structure (anchor already in body — partner just adds the link):**
 
 
@@ -714,6 +764,9 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **Phase 1 creative anchor caps fit score at ⭐⭐**: Verbatim-literal anchor matches from `references/anchors.md` are the only path to ⭐⭐⭐ Perfect. Creative semantic-equivalent matches max out at ⭐⭐ Strong. This protects the relationship channel against AI over-reach in anchor identification.
 - **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
 - **Single-word anchors only for glossary targets**: A single-word anchor (e.g., "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced.
+- **Multiple partner domains in one request**: Produce a single consolidated email addressing all domains (see Step 4, "Consolidated multi-site email"). Never split into separate per-domain emails — the contact proposed a multi-site exchange and expects one reply.
+- **PBN/content-farm reject**: The partner-facing email gets only a diplomatic "no strong fit this round" line. PBN signals, manipulated DR patterns, pirate-keyword profiles, and Ahrefs unit budgets are user-facing analysis only — never expose these to the partner.
+- **Chrome navigation blocked on a partner domain**: Flag to Stefan as a user-facing note. For partner-facing copy, treat as no-fit ("no strong fit this round") unless Stefan unblocks and re-runs.
 
 ## What NOT to Do
 
@@ -736,3 +789,5 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't auto-draft the email when multiple viable placements exist. Always show the summary table first and let Stefan choose the packaging
 - Don't use `sum_traffic_merged` as an Ahrefs `order_by` value — it's select-only and the call will fail. Use `sum_traffic`
 - Don't skip the existing-backlink check (Step 0.0) on Mode B just because there's no live site to crawl — the domain is still known and the check is cheap
+- Don't expose internal quality analysis to the partner. PBN/content-farm rejections, DR concerns, Ahrefs unit budgets, Chrome access errors, and tier-2 vertical-fit verdicts are user-facing only. The partner-facing line is always a diplomatic "no strong fit this round" or equivalent
+- Don't split a multi-domain request into multiple emails. When the input contains 2+ partner domains from one contact, produce one consolidated reply (see Step 4)
