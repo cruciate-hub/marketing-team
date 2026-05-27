@@ -8,7 +8,7 @@ This marketplace ships **two plugins** — install one, not both.
 
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
-| **`marketing-team`** | The marketing team — full kit | 14 skills (content, design, SEO, linking, formatting) | `/plugin install marketing-team@cruciate-hub` |
+| **`marketing-team`** | The marketing team — full kit | 15 skills (content, design, SEO, linking, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
@@ -21,7 +21,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
   <img alt="Open the install guide" src="https://img.shields.io/badge/%F0%9F%93%96%20Open%20the%20install%20guide-1f6feb?style=for-the-badge">
 </a>
 
-## Available skills (14)
+## Available skills (15)
 
 ### Content creation
 
@@ -56,6 +56,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 |---|---|
 | **legal-docs-formatter** | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. |
 | **svg-icon-transformer** | Transforms SVG input into clean, accessible, inline-embed-ready icon markup with `1em` sizing and correct accessibility defaults. |
+| **video-to-gif-and-webp** | Creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Preset dimensions for webinars, product updates, customer stories, and email newsletters. |
 
 ## Repo structure
 
@@ -67,7 +68,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [`assets/`](./assets) | Official logo SVGs |
 | [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
 | [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
-| [`marketing-team/`](./marketing-team) | `marketing-team` plugin — the 14 skill definitions that fetch from the folders above |
+| [`marketing-team/`](./marketing-team) | `marketing-team` plugin — the 15 skill definitions that fetch from the folders above |
 | [`brand-kit/`](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
 
 ## How updates work

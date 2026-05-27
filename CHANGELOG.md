@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 12.7
+
+Added `video-to-gif-and-webp` skill. **Non-breaking** — new skill only, no changes to existing skills.
+
+- Added [video-to-gif-and-webp](marketing-team/skills/video-to-gif-and-webp/SKILL.md): creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Guided non-technical intake, preset dimensions for webinars (mega menu 502x283 + poster 640x360), product update talking heads (144x144 square), customer story cards (640px wide), email newsletters (750px wide matching MailerLite container). Auto-iterates quality/fps/dimensions to hit file size targets. Handles YouTube cookie fallback, animated webp→GIF intermediate conversion, aspect ratio warnings, and temp file cleanup.
+- Added [docs/video-to-gif-and-webp.md](docs/video-to-gif-and-webp.md) documentation page.
+- Updated [marketing-team/README.md](marketing-team/README.md): 14 → 15 skills, added table row in Formatting & conversion section.
+- Updated [README.md](README.md) (root): 14 → 15 skills in plugin table and available skills section, added table row.
+- Updated [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) and [marketing-team/.claude-plugin/plugin.json](marketing-team/.claude-plugin/plugin.json): "14 skills covering content, design, SEO, and linking" → "15 skills covering content, design, SEO, linking, and media".
+- Bumped [marketing-team/.claude-plugin/plugin.json](marketing-team/.claude-plugin/plugin.json) from 12.6 to 12.7 (semver minor — non-breaking skill addition).
+
 ## marketing-team 12.6 + brand-kit 3.4
 
 Two senior-review findings addressed: (1) `brand-messaging` now produces the full SEO blog format when writing product/feature blog posts, closing the SEO-mechanics regression that 12.4 introduced when it routed product blogs away from `blog-seo-content`. (2) Softened `brand-messaging`'s catch-all "Owns ALL content about..." description to "Primary skill for content...where no format-specific skill applies" so the skill is easier to evolve. Plus: added a project-level CLAUDE.md pinning the commit co-author convention that the auto-mode classifier accepts. **Non-breaking** — same skills, same namespaces, same install commands.
@@ -35,6 +46,7 @@ Routing fix — product/feature content (including blog posts about a social.plu
 - Updated the brand-messaging + blog-seo-content rows in [README.md](README.md) and [marketing-team/README.md](marketing-team/README.md) to surface the product/non-product split at the top-level skill index.
 - brand-kit's `brand-messaging` SKILL.md is a hardlink to the marketing-team copy (same inode), so the description change applies to both plugins automatically. [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) bumped 3.2 → 3.3 to force a manifest refresh for teammates on the brand-kit-only install path.
 - Bumped [marketing-team/.claude-plugin/plugin.json](marketing-team/.claude-plugin/plugin.json) from 12.3 to 12.4 (semver minor — non-breaking routing clarification) and [brand-kit/.claude-plugin/plugin.json](brand-kit/.claude-plugin/plugin.json) from 3.2 to 3.3.
+>>>>>>> 8c7b1f3 (feat(skills): add video-to-gif-and-webp skill (marketing-team 12.4))
 
 ## brand-kit 3.0
 

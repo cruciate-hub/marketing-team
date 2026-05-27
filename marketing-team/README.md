@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (14)
+## Skills (15)
 
 ### Content creation
 
@@ -37,6 +37,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 |---|---:|---:|---|---|
 | [legal-docs-formatter](../docs/legal-docs-formatter.md) | 211 | 7.1 KB | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. | [SKILL.md →](./skills/legal-docs-formatter/SKILL.md) |
 | [svg-icon-transformer](../docs/svg-icon-transformer.md) | 168 | 7.6 KB | Transforms SVG input into clean, accessible, inline-embed-ready icon markup. Strips editor noise, applies accessibility defaults, and uses `1em` sizing that avoids the Safari flex/absolute collapse bug. | [SKILL.md →](./skills/svg-icon-transformer/SKILL.md) |
+| [video-to-gif-and-webp](../docs/video-to-gif-and-webp.md) | 227 | 12.0 KB | Creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Guided intake, auto-iteration to hit file size targets, preset dimensions for webinars, product updates, customer stories, and email newsletters. | [SKILL.md →](./skills/video-to-gif-and-webp/SKILL.md) |
 
 ## How it works
 
