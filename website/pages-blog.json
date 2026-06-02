@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-05-28T06:48:20.999Z",
-    "itemCount": 254,
+    "generatedAt": "2026-06-02T09:50:08.107Z",
+    "itemCount": 255,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-to-build-social-plus-features-faster-a-practical-guide-to-working-with-the-mcp-server-main",
+      "metaTitle": "How to Build social.plus Features Faster: A Practical Guide to Working With the MCP Server Main ",
+      "metaDescription": "Once the MCP server is connected, your AI tool works from current SDK documentation rather than months-old training data. Here is how to get the most from it across a real feature build.",
+      "content": "# How to Build social.plus Features Faster: A Practical Guide to Working With the MCP Server Main \n### What Your AI Tool Can Do Once the MCP Server Is Connected\n### Scaffolding Features in Natural Language\n### Targeting a Specific SDK Behaviour Before You Build\n### Getting More Accurate Debugging Help\n### Starting on Your Next Feature"
+    },
     {
       "url": "https://www.social.plus/blog/what-your-livestream-product-data-is-telling-you",
       "metaTitle": "What Your Livestream Product Data Is Telling You",
