@@ -56,13 +56,19 @@ If any of the four reference files is missing, the skill surfaces the failure im
 
 ## Fit scoring
 
+Phase 1 candidates come in three first-class types, all sharing the same six guardrails. The fit-score ceiling differs by type.
+
+- **Type A: Literal anchor match.** Exact phrase from `references/anchors.md` appears verbatim in the partner's body paragraph.
+- **Type B: Creative anchor match.** 2-6 word phrase verbatim in body, not literally in `anchors.md`, semantically equivalent to a listed anchor.
+- **Type C: Single-word glossary anchor.** Single word verbatim in body, focal noun of its sentence, unambiguous in context, maps to a glossary entry.
+
 | Score | Meaning |
 |---|---|
-| ⭐⭐⭐ | Perfect — exact anchor verbatim in a body paragraph, linking out makes sense |
-| ⭐⭐ | Strong — close semantic match, minor rewording needed, right context |
-| ⭐ | Opportunity — topic is relevant, specific paragraph identified, text modification required (Phase 2) |
+| ⭐⭐⭐ | Perfect — Type A literal anchor verbatim in body paragraph, partner article traffic ≥ 50/month, target UR ≥ 10. Type B and Type C never reach this tier. |
+| ⭐⭐ | Strong — Type A with traffic or UR below the Perfect thresholds; OR any Type B creative match in body; OR any Type C single-word glossary match in body. |
+| ⭐ | Opportunity — Phase 2: topic is relevant, specific paragraph identified, text modification required. |
 
-Phase is determined by **whether the partner needs to edit text**, not by how the placement was discovered.
+Phase is determined by **whether the partner needs to edit text**, not by how the placement was discovered. Type A, B, and C all sit in Phase 1 (the partner just adds the link). The ⭐⭐ cap on B and C protects the relationship channel from AI over-reach on anchor identification; it is not a signal of lower discovery priority.
 
 ## Placement rules (summary)
 

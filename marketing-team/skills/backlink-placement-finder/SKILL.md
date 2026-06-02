@@ -393,26 +393,40 @@ If any of the four files is missing, surface the failure to Stefan immediately �
 
 #### Phase 1 — Find Existing Anchor Matches
 
-For each partner article opened in Step 2.5:
+For each partner article opened in Step 2.5, scan body paragraphs for any of three Phase 1 candidate types. All three are first-class and use the same six guardrails. The only difference is the fit-score ceiling.
 
-1. **Scan for exact anchor matches first** — Search the verified page content for approved anchor phrases from `references/anchors.md` that already exist in the text. Prioritize short anchors first (2-3 words), then check for longer ones. Verbatim matches always have priority over creative matches in step 1b below.
+1. **Identify Phase 1 candidates.** Three candidate types qualify. Treat B and C exactly like A during discovery. Under-flagging B and C is the most common reason this skill leaves strong placements on the table; over-flagging is recoverable in the Step 3.5 decision gate, under-flagging is not.
 
-   **1b. Scan for creative-anchor matches (semantic-equivalent phrases).** After the verbatim pass, also identify phrases in the partner's body text that are NOT literally in `references/anchors.md` but are semantically equivalent to a listed anchor and would function as natural anchor text. Examples that qualify:
+   **Type A: Literal anchor match.** The exact phrase from `references/anchors.md` appears verbatim in the partner's body text.
+
+   **Type B: Creative anchor match.** A 2-6 word phrase appears verbatim in the partner's body text, is NOT literally in `references/anchors.md`, and is semantically equivalent to a listed anchor. Worked patterns:
    - "community-driven platform" → maps to "community platform" anchor family
    - "app retention rate" → maps to "app retention" anchor family
    - "engaged users" → maps to "user engagement" anchor family
    - "build customer loyalty" → maps to "build brand loyalty" anchor family
    - "in-app social interactions" → maps to "social features" anchor family
+   - "customer retention" → maps to user-retention family (real case from an autonomous-marketing article)
+   - "engagement metrics" → maps to user-engagement-metrics / app-engagement-metrics family (same article)
+   - "retaining users" → maps to user-retention family (real case from a PWAs article)
 
-   A creative anchor candidate is valid only when ALL of the following hold:
-   - The phrase appears verbatim in the partner's body text (no paraphrasing — Phase 1 stays verbatim; sentence-level synthesis is Phase 2 only)
-   - The phrase is 2-6 words, OR is a single word AND the proposed target is a glossary entry AND the word is the focal noun of its sentence AND the word is unambiguous in context (e.g., "communities" in a sentence about user groups is fine; "users" or "apps" are too ambiguous)
-   - The phrase clearly maps to one specific topic family in `references/anchors.md`; the mapping is articulable in plain English ("X maps to Y because they describe the same concept")
-   - The phrase is in a body paragraph, not intro or conclusion
-   - A social.plus target page exists that directly addresses the mapped topic
-   - The phrase does not cannibalize the partner article's primary ranking keywords
+   **Type C: Single-word glossary anchor.** A single word appears verbatim in the partner's body text, reads as the focal noun of its sentence, is unambiguous in context, AND maps to a glossary entry. Worked patterns:
+   - "personalization" (focal noun, section "Hyper-Personalization at Scale") → `/glossary/app-personalization`
+   - "communities" (focal noun, sentence about user groups) → `/glossary/online-community`
+   - "users" or "apps" alone do NOT qualify (too ambiguous).
 
-   Flag creative-anchor placements in the internal summary table with `[creative-anchor]`. Default fit score caps at ⭐⭐ Strong; ⭐⭐⭐ Perfect requires a verbatim-literal match from `references/anchors.md`.
+   Search short anchors first (2-3 words), then longer phrases. Long-tail phrases like "how to increase mobile app user engagement" almost never appear verbatim and searching for them first wastes time.
+
+   **The six guardrails (A, B, and C identically).** A candidate is valid only when ALL hold:
+   1. The phrase appears verbatim in the partner's body text. Phase 1 never paraphrases. Sentence-level synthesis is Phase 2 only.
+   2. The phrase maps to one topic family in `references/anchors.md`, OR to two sibling families (e.g., user-engagement-metrics and app-engagement-metrics) where article context resolves which target to pick. The mapping must be articulable in plain English ("'X' maps to 'Y' because they describe the same concept"; for sibling families, also state which one the article's framing selects, e.g., "the article is about app-level metrics, so target the app-engagement-metrics family"). Mappings that span unrelated families disqualify.
+   3. The phrase sits in a body paragraph, not an intro or conclusion.
+   4. A social.plus target page exists that directly addresses the mapped topic.
+   5. The phrase does not cannibalize the partner article's primary ranking keywords.
+   6. Length: Type A and B are 2-6 words. Type C is exactly one word AND the target is a glossary entry AND the word is the focal noun of its sentence AND it is unambiguous in context.
+
+   **Fit-score ceilings.** Type A literal matches can reach ⭐⭐⭐ Perfect. Type B creative matches cap at ⭐⭐ Strong, flagged `[creative-anchor]`. Type C single-word glossary matches cap at ⭐⭐ Strong, flagged `[single-word-glossary]`. The caps protect the relationship channel from AI over-reach. They are not a signal of lower discovery priority.
+
+   **Per-section distribution.** The article-level cap is up to 3 placements. There is no per-section cap. If three viable Phase 1 hits all sit in the same section (real case: a Reddit AMAs article with "online communities", "brand loyalty", and "community engagement" as three Type A matches in one section), ship all three.
 
 2. **Check placement position** — The anchor must appear in a body paragraph, not in the introduction or conclusion of the article. Discard matches found in intros/conclusions.
 
@@ -432,8 +446,8 @@ For each partner article opened in Step 2.5:
    - These numbers are NOT shown to the partner. They appear only in the internal summary table for Stefan's decision.
 
 6. **Score the fit:**
-   - ⭐⭐⭐ **Perfect** — Phase 1 anchor verbatim in body paragraph AND partner article traffic ≥ 50/month AND target UR ≥ 10
-   - ⭐⭐ **Strong** — Phase 1 anchor verbatim OR close semantic match in body paragraph, but either partner traffic < 50 OR target UR < 10. Add a `[low-value]` flag in the summary table when partner traffic = 0 AND target UR < 5, with caveat to Stefan: "low-value link both directions — only ship if relationship maintenance is the goal."
+   - ⭐⭐⭐ **Perfect** — Type A literal anchor verbatim in body paragraph AND partner article traffic ≥ 50/month AND target UR ≥ 10. Type B and Type C never reach this tier, even when traffic and UR clear the thresholds.
+   - ⭐⭐ **Strong** — any of: (a) Type A literal anchor in body paragraph, but either partner traffic < 50 OR target UR < 10; (b) Type B creative anchor in body paragraph (regardless of traffic/UR); (c) Type C single-word glossary anchor in body paragraph (regardless of traffic/UR). Add a `[low-value]` flag in the summary table when partner traffic = 0 AND target UR < 5, with caveat to Stefan: "low-value link both directions, only ship if relationship maintenance is the goal."
 
 The 50, 10, and 5 thresholds are starting heuristics, not absolutes. Adjust based on observed acceptance rates across exchanges.
 
@@ -472,7 +486,7 @@ For every article opened in Step 2.5 (including those that had no Phase 1 matche
    - The anchor must appear naturally within the suggested sentence — not bolted on
    - Default: use one of our approved anchor texts from `references/anchors.md`
 
-   **Creative anchors in Phase 2 are tightly gated.** Phase 2 creative anchors are allowed ONLY on articles where Phase 1 returned zero matches (both literal AND creative). When triggered, allow ONE Phase 2 creative-anchor placement per such article as a "save the article" option. The creative anchor must still satisfy the same six guardrails listed in Phase 1 step 1b (semantic-equivalent, clearly mapped, etc.) — the only difference is that the surrounding sentence is being drafted by us, not extracted verbatim. Flag in the summary as `[creative-phase2-save]`. Fit score caps at ⭐ Opportunity. Stefan reviews each one in the Step 3.5 decision gate before drafting the email. Do NOT layer Phase 2 creative anchors on articles that already have a Phase 1 placement — that compounds two layers of synthesis and hurts partner relationships over time.
+   **Creative anchors in Phase 2 are tightly gated.** Phase 2 creative anchors are allowed ONLY on articles where Phase 1 returned zero matches across Types A, B, and C. When triggered, allow ONE Phase 2 creative-anchor placement per such article as a "save the article" option. The creative anchor must still satisfy the same six guardrails listed in Phase 1 step 1 (semantic-equivalent, clearly mapped, etc.). The only difference is that the surrounding sentence is being drafted by us, not extracted verbatim. Flag in the summary as `[creative-phase2-save]`. Fit score caps at ⭐ Opportunity. Stefan reviews each one in the Step 3.5 decision gate before drafting the email. Do NOT layer Phase 2 creative anchors on articles that already have a Phase 1 placement; that compounds two layers of synthesis and hurts partner relationships over time.
 
 3. **Match to the best social.plus page** — Same logic as Phase 1.
 
@@ -752,7 +766,7 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **Site blocks crawling / WebFetch blocked**: WebFetch is often blocked by the egress proxy. Use Chrome browser tools instead — `navigate` to the URL, then `get_page_text` or JavaScript DOM extraction (see Step 2.5) to read the actual content and verify anchors.
 - **`get_page_text` returns garbage on ad-heavy sites**: Fall back to JavaScript DOM extraction using the text-to-script ratio pattern described in Step 2.5. This works reliably on most ad-heavy sites where `get_page_text` fails.
 - **No relevant content found**: Only declare "no fit" after both Phase 1 and Phase 2 come up empty. Report: "I checked all [X] articles on this site via their sitemap. None have existing anchor matches (Phase 1) or topically relevant sections for suggested placements (Phase 2). The blog covers [brief topic summary]. Skip this one."
-- **Multiple good placements on one article**: Include the best 2, max 3 per article. More than that looks spammy.
+- **Multiple good placements on one article**: Include the best 2, max 3 per article. The cap is article-level only. There is no per-section cap. If three viable Phase 1 hits all sit in one section, ship all three.
 - **Single viable placement**: Skip the decision gate (Step 3.5) and proceed directly to Step 4 with the single-ask format. There's nothing for Stefan to choose between.
 - **More than 5 placements**: Default to recommending option (b) alternatives framing on the top 3 — proposing 6+ placements in one email reads as spam.
 - **Partner site is low quality**: Flag it — "This site looks thin/spammy. Worth considering if the link value justifies the effort."
@@ -761,9 +775,9 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **`crawled-pages` 100-row cap**: The endpoint is hard-capped at 100 rows per call regardless of the `limit` parameter (tested at 200, 1000, 5000). The schema's default-1000 claim is misleading. Plan pagination accordingly.
 - **Ahrefs where-clause supports `not` wrapper but not `notsubstring` operator**: The grammar is `{ "not": { "field": "...", "is": [op, value] } }`. Trying `notsubstring` as an operator returns "bad where: invalid JSON syntax". Verified condition operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `substring`, `isubstring`, `phrase_match`, `iphrase_match`, `prefix`, `suffix`.
 - **Layer A prefix probe returns no candidates**: If none of the standard editorial-blog prefix patterns return rows, escalate immediately to Step 2 (sitemap / blog-index crawl). The partner has a non-standard path that Tier 3 substring-only fallback won't handle cleanly.
-- **Phase 1 creative anchor caps fit score at ⭐⭐**: Verbatim-literal anchor matches from `references/anchors.md` are the only path to ⭐⭐⭐ Perfect. Creative semantic-equivalent matches max out at ⭐⭐ Strong. This protects the relationship channel against AI over-reach in anchor identification.
-- **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
-- **Single-word anchors only for glossary targets**: A single-word anchor (e.g., "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced.
+- **Phase 1 fit-score ceilings**: Only Type A literal matches from `references/anchors.md` reach ⭐⭐⭐ Perfect. Type B creative semantic-equivalent matches cap at ⭐⭐ Strong. Type C single-word glossary matches cap at ⭐⭐ Strong. The caps protect the relationship channel against AI over-reach in anchor identification; they do NOT signal lower discovery priority. Treat B and C as first-class Phase 1 candidates.
+- **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches across Types A, B, and C on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
+- **Type C single-word glossary anchors require glossary targets**: A single-word anchor (e.g., "personalization", "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced. Fit score caps at ⭐⭐ Strong.
 - **Multiple partner domains in one request**: Produce a single consolidated email addressing all domains (see Step 4, "Consolidated multi-site email"). Never split into separate per-domain emails — the contact proposed a multi-site exchange and expects one reply.
 - **PBN/content-farm reject**: The partner-facing email gets only a diplomatic "no strong fit this round" line. PBN signals, manipulated DR patterns, pirate-keyword profiles, and Ahrefs unit budgets are user-facing analysis only — never expose these to the partner.
 - **Chrome navigation blocked on a partner domain**: Flag to Stefan as a user-facing note. For partner-facing copy, treat as no-fit ("no strong fit this round") unless Stefan unblocks and re-runs.
@@ -772,7 +786,8 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 
 - Don't suggest placements where the link would feel forced or out of context
 - Don't recommend linking from irrelevant articles just to get a placement
-- Don't invent anchor phrases that don't appear verbatim in the partner's body text. Phase 1 creative anchors must be in the text already; Phase 2 creative anchors require all six guardrails from Phase 1 step 1b and are gated to zero-match articles only.
+- Don't invent anchor phrases that don't appear verbatim in the partner's body text. Phase 1 Types A, B, and C all require the phrase to be in the text already. Phase 2 creative anchors require all six guardrails from Phase 1 step 1 and are gated to zero-match articles only.
+- Don't under-flag Type B creative or Type C single-word glossary candidates because they "feel like exceptions." They are first-class Phase 1 hits and the most common source of leaked-on-the-table placements. The ⭐⭐ cap handles the relationship risk; discovery should be confident.
 - Don't suggest more than 5 total placements per partner site — keep it focused
 - Don't fabricate article content — if you can't access an article, say so
 - Don't trust Google search snippets as source material — always verify on the actual page before presenting a placement

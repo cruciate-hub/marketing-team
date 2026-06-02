@@ -58,15 +58,29 @@ The target page should not compete with the partner article's primary keyword. E
 
 If Tier 2 of Step 0 flagged that the partner already links to social.plus competitors (Bettermode, Mighty Networks, Discourse, Tribe, Circle, etc.), check whether the candidate partner article already contains a competitor link before inserting ours. If yes, either pick a different article or propose a swap-pitch to Stefan.
 
-### 7. Creative anchor mapping
+### 7. Type B creative anchor and Type C single-word glossary mapping
 
-When the partner article's body text contains a phrase that is NOT literally in `anchors.md` but is semantically equivalent to a listed anchor, the AI can propose it as a "creative anchor" under strict guardrails (see SKILL.md Phase 1 step 1b for the six requirements).
+Phase 1 candidates come in three types (see SKILL.md Phase 1, step 1): Type A literal matches from `anchors.md`, Type B semantic-equivalent matches (2-6 word phrase verbatim in body, not literally in `anchors.md`), and Type C single-word glossary matches. Types B and C are first-class Phase 1 hits, not exceptions, but the matching logic in this file is what makes them work without false positives.
 
-Mapping rule: each creative anchor must map to exactly one topic family in `anchors.md`. The mapping must be articulable in plain English ("'community-driven platform' maps to 'community platform' family because both describe the same concept"). If a creative anchor maps ambiguously to two or more families, reject it.
+Mapping rule: each Type B or Type C candidate must map to exactly one topic family in `anchors.md`. The mapping must be articulable in plain English ("'customer retention' maps to user-retention family because both describe the same concept"). If a candidate maps ambiguously to two or more families, reject it.
 
-Target selection for creative anchors: same as direct-match anchors. Glossary for definitional/generic concepts, blog for strategic/how-to. Single-word anchors are valid only when the target is a glossary entry and the word is unambiguous in context (e.g., "communities" → `/glossary/online-community`).
+Worked mappings (real cases from past partner batches):
 
-Fit-score cap: creative-anchor placements max out at ⭐⭐ Strong; ⭐⭐⭐ Perfect requires a verbatim-literal match from `anchors.md`.
+| Phrase in partner body | Type | Maps to family | Likely target |
+|---|---|---|---|
+| "customer retention" | B | user-retention | `/glossary/user-retention` or strongest retention-strategies blog |
+| "engagement metrics" | B | user-engagement-metrics / app-engagement-metrics | strongest metrics-focused blog post |
+| "retaining users" | B | user-retention | `/glossary/user-retention` or retention-strategies blog |
+| "engaged users" | B | user-engagement | `/glossary/user-engagement` |
+| "community-driven platform" | B | community-platform | community-platform blog or glossary |
+| "build customer loyalty" | B | build-brand-loyalty | brand-loyalty blog |
+| "in-app social interactions" | B | social-features | social-features glossary or blog |
+| "personalization" | C | app-personalization | `/glossary/app-personalization` |
+| "communities" | C | online-community | `/glossary/online-community` |
+
+Target selection: glossary for definitional/generic concepts, blog for strategic/how-to. Type C single-word anchors must target a glossary entry, never a blog post. A one-word link to a blog post reads forced and gets rejected.
+
+Fit-score cap: Type B and Type C placements both cap at ⭐⭐ Strong. Only Type A literal matches from `anchors.md` reach ⭐⭐⭐ Perfect.
 
 ## Freshness
 
