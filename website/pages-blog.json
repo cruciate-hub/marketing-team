@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-02T09:51:12.251Z",
-    "itemCount": 255,
+    "generatedAt": "2026-06-02T09:51:25.475Z",
+    "itemCount": 256,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-to-prompt-the-mcp-server-for-your-industry-use-case",
+      "metaTitle": "How to Prompt the MCP Server for Your Industry Use Case ",
+      "metaDescription": "The MCP server gives your AI agent current SDK context. How you describe the feature, and which industry it is for, shapes everything that comes back.",
+      "content": "# How to Prompt the MCP Server for Your Industry Use Case \n### Fitness and Wellness Platforms\n### Retail and Commerce Platforms\n### Sports and Media Platforms\n### Travel and Hospitality Platforms\n### The Prompt Adjustment That Changes Everything"
+    },
     {
       "url": "https://www.social.plus/blog/how-to-build-social-plus-features-faster-a-practical-guide-to-working-with-the-mcp-server-main",
       "metaTitle": "How to Build social.plus Features Faster: A Practical Guide to Working With the MCP Server Main ",
