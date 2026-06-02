@@ -64,23 +64,11 @@ Phase 1 candidates come in three types (see SKILL.md Phase 1, step 1): Type A li
 
 Mapping rule: each Type B or Type C candidate must map to exactly one topic family in `anchors.md`. The mapping must be articulable in plain English ("'customer retention' maps to user-retention family because both describe the same concept"). If a candidate maps ambiguously to two or more families, reject it.
 
-Worked mappings (real cases from past partner batches):
-
-| Phrase in partner body | Type | Maps to family | Likely target |
-|---|---|---|---|
-| "customer retention" | B | user-retention | `/glossary/user-retention` or strongest retention-strategies blog |
-| "engagement metrics" | B | user-engagement-metrics / app-engagement-metrics | strongest metrics-focused blog post |
-| "retaining users" | B | user-retention | `/glossary/user-retention` or retention-strategies blog |
-| "engaged users" | B | user-engagement | `/glossary/user-engagement` |
-| "community-driven platform" | B | community-platform | community-platform blog or glossary |
-| "build customer loyalty" | B | build-brand-loyalty | brand-loyalty blog |
-| "in-app social interactions" | B | social-features | social-features glossary or blog |
-| "personalization" | C | app-personalization | `/glossary/app-personalization` |
-| "communities" | C | online-community | `/glossary/online-community` |
-
 Target selection: glossary for definitional/generic concepts, blog for strategic/how-to. Type C single-word anchors must target a glossary entry, never a blog post. A one-word link to a blog post reads forced and gets rejected.
 
 Fit-score cap: Type B and Type C placements both cap at ⭐⭐ Strong. Only Type A literal matches from `anchors.md` reach ⭐⭐⭐ Perfect.
+
+Confirmed Type B and Type C phrase-to-family mappings live in `references/creative-anchor-patterns.md`. Consult that file when matching, and append new patterns as you find them.
 
 ## Freshness
 
