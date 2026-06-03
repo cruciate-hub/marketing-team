@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-03T09:58:42.812Z",
+    "generatedAt": "2026-06-03T14:00:00.824Z",
     "itemCount": 61,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
@@ -105,7 +105,7 @@
     {
       "url": "https://www.social.plus/product-update/dynamic-ui",
       "metaTitle": "Introducing Dynamic UI: A New Chapter in UI Development",
-      "metaDescription": "Introducing Dynamic UI: A New Chapter in UI Development",
+      "metaDescription": "Introducing Dynamic UI: a new chapter in UI development with social.plus. Build fully customizable, real-time social experiences without rebuilding your interface from scratch.",
       "content": "# Introducing Dynamic UI: A New Chapter in UI Development\n### The Big Update\n### Modular Components for Maximum Flexibility\n### Built-in Customization Made Effortless\n### Simplified Integration Through Packages\n### Streamlined Maintenance for Seamless Updates\n### The Future of UI Development Starts Now\n### What Will Happen to UIKit 3?"
     },
     {
@@ -201,7 +201,7 @@
     {
       "url": "https://www.social.plus/product-update/mentions-in-posts",
       "metaTitle": "New Social Feature: @Mentions in Posts",
-      "metaDescription": "Learn more about the new social feature in Social+ that enables users to tag people on their posts.",
+      "metaDescription": "Learn about the Mentions capability in social.plus that lets users tag people in posts, boosting community engagement, notifications, and social interaction inside your app.",
       "content": "# New Social Feature: @Mentions in Posts"
     },
     {
