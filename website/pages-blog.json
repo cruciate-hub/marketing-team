@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-02T18:19:47.212Z",
+    "generatedAt": "2026-06-03T05:30:22.559Z",
     "itemCount": 256,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -508,7 +508,7 @@
       "url": "https://www.social.plus/blog/understanding-user-sentiment",
       "metaTitle": "Understanding User Sentiment: The Key to Building Better Products",
       "metaDescription": "Uncover the key to building better products: user sentiment! Learn how to measure and leverage user emotions to improve user experience, drive innovation, and foster customer loyalty.",
-      "content": "# Understanding User Sentiment: The Key to Building Better Products\n## What is User Sentiment?\n## Why is Understanding User Sentiment Important?\n## Methods to Measure User Sentiment\n### 1. Surveys and Feedback Forms\n### 2. Social Media Monitoring\n### 3. In-App Feedback\n### 4. Reviews and Ratings\n### 5. Sentiment Analysis Tools\n## Leveraging User Sentiment to Build Better Products\n### 1. Prioritize User Feedback\n### 2. Enhance Existing Features\n### 3. Drive Product Innovation\n### 4. Improve User Support\n### 5. Communicate Changes\n## Understand your users to build better products"
+      "content": "# Understanding User Sentiment: The Key to Building Better Products\n## What is user sentiment?\n## Why user sentiment matters\n## How to measure user sentiment\n### App store reviews and ratings\n### In-app surveys and feedback forms\n### Social listening\n### Customer support interactions\n### Behavioral analytics\n## Using community features to gather sentiment\n## Turning sentiment insights into action\n## Building products users love"
     },
     {
       "url": "https://www.social.plus/blog/first-party-data-and-personalization",
@@ -934,7 +934,7 @@
       "url": "https://www.social.plus/blog/building-the-dream-team-community-roles-every-company-should-hire",
       "metaTitle": "Building the dream team: community roles every company should hire",
       "metaDescription": "Discover the key roles and strategies for building a thriving community team. Unleash the power of connections, engagement, and business growth.",
-      "content": "# Building the dream team: community roles every company should hire\n## The community advantage: Driving customer engagement, loyalty, and growth\n## Community heroes: the value of dedicated teams in driving success\n## Building Bridges: the key players in community management\n### 1. Associate Community Manager\n### 2. Community Manager\n### 3. Director of Community\n### 4. VP of Community\n### 5. Chief Community Officer\n### 6. Other community roles to consider\n## Assembling your dream team: strategies for success\n## From vision to reality: the transformative power of dedicated community teams"
+      "content": "# Building the dream team: community roles every company should hire\n## Why does your company need a community team?\n## Community Manager\n### Skill set\n### Key Responsibilities\n## Community Strategist\n### Skill set\n### Key Responsibilities\n## Community Moderator\n### Skill set\n### Key Responsibilities\n## Community Content Creator\n### Skill set\n### Key Responsibilities\n## Community Data Analyst\n### Skill set\n### Key Responsibilities\n## Community Developer\n### Skill set\n### Key Responsibilities\n## Making community accessible with social.plus"
     },
     {
       "url": "https://www.social.plus/blog/the-magic-of-sephoras-community-led-path-to-success",
@@ -1030,7 +1030,7 @@
       "url": "https://www.social.plus/blog/selecting-the-best-social-sdk-for-your-app",
       "metaTitle": "Selecting the best social SDK for your app",
       "metaDescription": "SDKs enable developers to deliver new app features like messaging with speed and efficiency. Here is a comparison of the best social SDKs to help you decide.",
-      "content": "# Selecting the best social SDK for your app\n## Why use social SDKs?\n### Ease of use\n### Privacy\n## 3 of the best SDKs to power your app's social features\n### 1 - social.plus\n#### Key features of social.plus\n#### Pricing\n#### Overall impressions\n### 2 - Stream\n#### Key features of Stream SDK\n#### Pricing\n#### Overall impressions\n## Simplifying app development with social SDKs"
+      "content": "# Selecting the best social SDK for your app\n## The fundamentals: what to look for in a social SDK\n### Ease of integration\n### Feature set and customizability\n### Scalability\n### Reliability and performance\n### Security and compliance\n### Content moderation\n### Analytics and insights\n### Support and documentation\n### Pricing and total cost of ownership\n## Questions to ask SDK providers\n## Why social.plus stands out"
     },
     {
       "url": "https://www.social.plus/blog/exceptional-brand-communities",
@@ -1042,7 +1042,7 @@
       "url": "https://www.social.plus/blog/debunking-10-mobile-app-development-myths",
       "metaTitle": "Debunking 10 Mobile App Development Myths",
       "metaDescription": "Mobile app development is a fast-expanding market but it's still surrounded by myths and misconceptions. Let's debunk the most common ones.",
-      "content": "# Debunking 10 Mobile App Development Myths\n## Developing an app is cheap and easy\n## You don't need a clear plan or strategy before starting development\n## You only need to build for iOS or Android\n## You can make money from your app as soon as you launch it\n## Building a Community is not important for my app\n## The design of an app is not as important as its functionality\n## You can publish an app on app stores without any issues\n## You don't need a marketing strategy for your app\n## You don't need to worry about security when developing an app\n## Once you launch your app, you can just sit back with no need to continue updating it"
+      "content": "# Debunking 10 Mobile App Development Myths\n## Developing an app is cheap and easy\n## You need to be on all platforms\n## Having the best product means instant success\n## Popularity doesn't require updates\n## The app store will find users for you\n## Apps can make money just by going live\n## You don't need to worry about security\n## User feedback is optional\n## Social features are only for social apps\n## More features = better app"
     },
     {
       "url": "https://www.social.plus/blog/how-to-build-a-successful-mobile-app-marketing-plan",
@@ -1162,7 +1162,7 @@
       "url": "https://www.social.plus/blog/7-benefits-of-user-generated-content-for-your-mobile-app",
       "metaTitle": "The top 7 benefits of user generated content for your mobile app",
       "metaDescription": "Incorporating UGC on your app can have many benefits, including greater user engagement, retention, and meaningful online relationships. ",
-      "content": "# The top 7 benefits of user generated content for your mobile app\n## What is UGC and why does it matter?\n## How UGC adds value to your brand\n### 1 - It increases user-user and customer-brand engagement\n### 2 - It involves users in your brand journey\n### 3 - It creates opportunities for qualitative data collection\n### 4 - It improves conversion &amp; retention rates\n### 5 - It creates market trends\n### 6 - It encourages the creation &amp; use of social proof\n### 7 - It builds authority\n## Create a culture of conversation using UGC"
+      "content": "# The top 7 benefits of user generated content for your mobile app\n## What is user-generated content?\n### Types of user-generated content\n## The 7 benefits of user generated content for apps\n### 1. Boost social proof\n### 2. Increase brand trust\n### 3. Increase engagement\n### 4. Reduce cost of content creation\n### 5. Valuable customer insights\n### 6. Better search ranking\n### 7. Strengthen brand community\n## How to encourage user-generated content on mobile apps\n### 1. Gamification\n### 2. Challenges and prompts\n### 3. Social features\n### 4. Rewards and recognition\n### 5. Easy sharing tools\n## UGC + social features: a winning combination"
     },
     {
       "url": "https://www.social.plus/blog/duolingo-figma-notion-and-hubspot-leveraging-community-led-growth",
@@ -1216,7 +1216,7 @@
       "url": "https://www.social.plus/blog/40-statistics-you-should-know-about-online-communities",
       "metaTitle": "40 Statistics You Should Know About Online Communities",
       "metaDescription": "In this article, we summarize the main statistics on online communities, user engagement, and customer experience. ",
-      "content": "# 40 Statistics You Should Know About Online Communities\n## Chapter 1: Online communities have stolen the spotlight\n## Chapter 2: Users are at the center of change\n## Chapter 3: Engagement is the name of the game\n## Chapter 4: How do online communities benefit users?\n## Chapter 5: Post-pandemic, online communities grow stronger\n## Chapter 6: A promising outlook for the next years\n## The future is social and community-driven"
+      "content": "# 40 Statistics You Should Know About Online Communities\n## Online community statistics: usage\n## Online community statistics: business &amp; impact\n## Online community statistics: member behavior\n## Online community statistics: education &amp; E-Learning\n## Online community statistics: non-profit &amp; social good\n## The opportunities of online communities"
     },
     {
       "url": "https://www.social.plus/blog/how-to-engage-users-on-your-community-app",
@@ -1270,13 +1270,13 @@
       "url": "https://www.social.plus/blog/using-social-features-to-create-an-engaging-news-and-media-app",
       "metaTitle": "Using social features to create an engaging news and media app",
       "metaDescription": "With social features, news apps can create spaces for people of all backgrounds and interests to discuss the stories they care about. ",
-      "content": "# Using social features to create an engaging news and media app\n## So is there a demand for news apps?\n## What sets exceptional news apps apart?\n## Why news and media apps need social features\n### It gives them a competitive advantage\n#### Improved retention rate\n#### A better understanding of users\n#### First-hand user feedback\n### It gives like-minded readers a place to connect\n### It can become a space for discussion\n## How to engage readers on your news app\n### 1 - Personalize the experience\n### 2 - Be receptive to feedback\n### 3 - Enable user-to-user connection features\n### 4 - Diversify your content types\n### 5 - Give readers space to speak\n#### How real publications pass the mic to their readers\n### 6 - Moderate closely\n### 7 - Use push notifications to keep readers updated on what matters to them\n## Turn media consumption into a social experience"
+      "content": "# Using social features to create an engaging news and media app\n## So is there a demand for news apps?\n## Why engagement is the new battleground for news apps\n## Social features for news and media apps\n### Commenting and reactions\n### Community groups\n### Newsletters and push notifications\n### Live coverage and real-time updates\n### User profiles and personalization\n### Social sharing\n## Building community without compromising editorial integrity\n## The business case for social features in news apps\n## Getting started with social features in your news app"
     },
     {
       "url": "https://www.social.plus/blog/how-to-use-social-features-to-enhance-fintech-app-engagement",
       "metaTitle": "How to use social features to enhance fintech app engagement",
       "metaDescription": "Social capabilities in finance apps have been shown to drive greater retention, improved engagement and community-driven growth. ",
-      "content": "# How to use social features to enhance fintech app engagement\n## Social+: The top trend in the financial and banking app market\n## Why do fintech apps need social features?\n### Customers want to be recognized as individuals\n### Customers enjoy knowledge-sharing\n### Customers love the convenience of personalized tools\n### Customers are taking charge of their personal finances\n## Set the stage for financial app growth with social features\n### Make every user’s experience their own\n### Deliver stellar customer support\n### Enable peer-to-peer connection\n### Facilitate financial learning\n## SDKs: Your quick and cost-effective solution to going social+\n## Immerse your users in a social mobile finance experience"
+      "content": "# How to use social features to enhance fintech app engagement\n## Social+: The top trend in the financial and banking app market\n## Why do fintech apps need social features?\n### Customers want to be recognized as individuals\n### Customers enjoy knowledge-sharing\n### Customers love the convenience of personalized tools\n### Customers are taking charge of their personal finances\n## Set the stage for financial app growth with social features\n### Make every user's experience their own\n### Deliver stellar customer support\n### Enable peer-to-peer connection\n### Facilitate financial learning\n## SDKs: Your quick and cost-effective solution to going social+\n## Immerse your users in a social mobile finance experience"
     },
     {
       "url": "https://www.social.plus/blog/creating-a-dynamic-sports-experience-with-in-app-fan-engagement",
@@ -1426,7 +1426,7 @@
       "url": "https://www.social.plus/blog/heres-how-social-features-can-create-brand-advocates",
       "metaTitle": "Here’s how social features can create brand advocates ",
       "metaDescription": "Learn how Brand advocates contribute to your growth and how adding social features can turn users into loyal fans. ",
-      "content": "# Here’s how social features can create brand advocates \n### Use social features to build brand advocates"
+      "content": "# Here’s how social features can create brand advocates \n## The challenge: Acquiring organic brand advocates\n## How social features help create brand advocates\n### Communities and groups\n### Social feed\n### User profiles\n### In-app messaging\n### Gamification\n### Live streaming and short-form video\n## Turning social features into advocacy machines\n## Build a community of advocates with social.plus"
     },
     {
       "url": "https://www.social.plus/blog/can-human-relationships-impact-your-apps-success",
