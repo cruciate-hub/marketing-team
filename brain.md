@@ -44,6 +44,7 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **aeo-content** | AEO answer articles for /answers/ collection, AI-optimized reference content for AI search engines | `marketing-team/skills/aeo-content/SKILL.md` |
 | **internal-linking-strategist** | Suggest SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content` as a pre-delivery step) or run a site-wide internal-linking audit | `marketing-team/skills/internal-linking-strategist/SKILL.md` |
 | **legal-docs-formatter** | Format legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item | `marketing-team/skills/legal-docs-formatter/SKILL.md` |
+| **blog-publisher** | Publish a completed blog article from Google Docs to Webflow live — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 image sizes, uploads assets, and publishes the CMS item immediately. Requires `WEBFLOW_API_TOKEN`. | `marketing-team/skills/blog-publisher/SKILL.md` |
 | **svg-icon-transformer** | Transform raw SVG input into clean, accessible, inline-embed-ready icon markup; strips editor noise and applies accessibility defaults | `marketing-team/skills/svg-icon-transformer/SKILL.md` |
 
 Load skill files via the canonical fetch block, same as every other reference file.
