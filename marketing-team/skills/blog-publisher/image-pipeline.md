@@ -1,64 +1,94 @@
-# Image Pipeline — Resize + Upload
+# Image Pipeline — Resize, Convert to WebP, Upload
 
-## Resize with sips (macOS built-in)
+## Format: WebP only
 
-`sips` is available on every Mac without installing anything.
-Syntax: `sips -z <height> <width> <input> --out <output>`
+All production blog images on social.plus use **WebP** (`.webp`).
+The input from the designer is PNG. The pipeline resizes and converts to WebP in one step.
 
-Given a master PNG at `$PNG` and article slug at `$SLUG`:
+CDN URL pattern observed in production:
+`https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/{assetId}_{filename}.webp`
+
+## File naming convention (must match production)
+
+| Variant | Filename |
+|---|---|
+| Page header (1578×888) | `{Article Title}_page-header.webp` |
+| Grid thumbnail (724×408) | `{Article Title}_thumbnail.webp` |
+| Mega menu (502×283) | `{Article Title}_mega-menu.webp` |
+
+Use the article title as-is (not the slug). Spaces are fine — `sips` handles them.
+Example for "6 Best In-App Community Platforms for Consumer Apps (2026)":
+- `6 Best In-App Community Platforms for Consumer Apps (2026)_page-header.webp`
+- `6 Best In-App Community Platforms for Consumer Apps (2026)_thumbnail.webp`
+- `6 Best In-App Community Platforms for Consumer Apps (2026)_mega-menu.webp`
+
+## Resize + convert with sips (macOS built-in)
+
+`sips` handles resize AND WebP conversion in a single command.
+Syntax: `sips -z <height> <width> -s format webp <input> --out <output>`
 
 ```bash
-# Validate the input first
-WIDTH=$(sips -g pixelWidth "$PNG" | awk '/pixelWidth/ {print $2}')
-HEIGHT=$(sips -g pixelHeight "$PNG" | awk '/pixelHeight/ {print $2}')
-echo "Input: ${WIDTH}×${HEIGHT}"
-
-# Must be at least 1578 px wide. If not, stop and ask for a higher-res PNG.
-
-# Resize to 3 sizes
+PNG="{absolute path to master PNG from user}"
+TITLE="{article title, e.g. 6 Best In-App Community Platforms for Consumer Apps (2026)}"
 TMPDIR=$(mktemp -d)
-sips -z 888 1578 "$PNG" --out "$TMPDIR/${SLUG}-header.png"   # 1578×888  Page Header
-sips -z 408  724 "$PNG" --out "$TMPDIR/${SLUG}-grid.png"     #  724×408  Grid Thumbnail
-sips -z 283  502 "$PNG" --out "$TMPDIR/${SLUG}-menu.png"     #  502×283  Mega Menu
 
-echo "Header:  $TMPDIR/${SLUG}-header.png"
-echo "Grid:    $TMPDIR/${SLUG}-grid.png"
-echo "Menu:    $TMPDIR/${SLUG}-menu.png"
-```
+# Validate input
+WIDTH=$(sips -g pixelWidth "$PNG" | awk '/pixelWidth/ {print $2}')
+if [ "$WIDTH" -lt 1578 ]; then
+  echo "ERROR: PNG is ${WIDTH}px wide — minimum required is 1578px. Ask for a higher-res export."
+  exit 1
+fi
 
-Note: `sips -z` scales and crops to the exact dimensions. If the input PNG is not
-16:9 (1.775 ratio), the result will be letterboxed or cropped. All images provided
-by the designer should already be 16:9 — verify with:
+# Resize to 3 sizes and convert to WebP in one step
+sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_page-header.webp"
+sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_thumbnail.webp"
+sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_mega-menu.webp"
 
-```bash
-python3 -c "w,h=$WIDTH,$HEIGHT; print('16:9' if abs(w/h - 16/9) < 0.01 else f'NOT 16:9 — ratio is {w/h:.3f}')"
+echo "Header:  $TMPDIR/${TITLE}_page-header.webp"
+echo "Grid:    $TMPDIR/${TITLE}_thumbnail.webp"
+echo "Menu:    $TMPDIR/${TITLE}_mega-menu.webp"
 ```
 
 ## Upload to Webflow (via blog-publisher.py)
 
-The Python script at `scripts/blog-publisher.py` handles the full 3-step upload:
+The Python script handles the 3-step upload automatically:
 1. MD5 hash of file binary
 2. `POST /v2/sites/{siteId}/assets` → S3 pre-signed URL
-3. POST file to S3 → asset goes live
+3. POST WebP file to S3 as `image/webp`
 4. `GET /v2/sites/{siteId}/assets/{id}` → retrieve `hostedUrl`
 
-The script takes all 3 image paths as positional arguments alongside the fielddata JSON.
-See `scripts/blog-publisher.py --help` (usage printed to stderr on wrong arg count).
+The script uses `Path(file).name` as the upload filename, so name your WebP files
+correctly before passing them (the sips commands above do this automatically).
+
+The resulting CMS image objects match production format:
+```json
+{
+  "fileId": "<webflow-asset-id>",
+  "url": "https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/..._page-header.webp",
+  "alt": null
+}
+```
+
+Note: `alt` is always `null` inside image objects. The `image-alt-text` PlainText field
+on the CMS item is the separate accessible description — set that field in fielddata.json.
+
+## Linux fallback (ImageMagick + cwebp)
+
+If `sips` is unavailable:
+```bash
+# Resize with ImageMagick, then convert to WebP
+convert "$PNG" -resize 1578x888^ -gravity Center -extent 1578x888 \
+        -quality 90 "${TITLE}_page-header.webp"
+convert "$PNG" -resize 724x408^  -gravity Center -extent 724x408  \
+        -quality 90 "${TITLE}_thumbnail.webp"
+convert "$PNG" -resize 502x283^  -gravity Center -extent 502x283  \
+        -quality 90 "${TITLE}_mega-menu.webp"
+```
 
 ## Troubleshooting
 
-**"Input PNG too small"** — The master PNG must be ≥ 1578 px wide. Ask the designer
-for the full-resolution export (not a screenshot or preview export).
+**"PNG too small"** — needs ≥ 1578 px wide. Ask for full-res Figma export (not a preview).
 
-**S3 upload 403** — The pre-signed URL has expired (they expire within minutes).
-Re-run the full pipeline from the beginning to get a fresh URL.
+**S3 upload 403 / expired URL** — pre-signed URLs expire quickly. Re-run the full pipeline.
 
-**S3 upload 400 "InvalidArgument"** — The MD5 hash mismatch or the file was modified
-after hashing. Re-run from the beginning.
-
-**sips not found** — Only on macOS. If running on Linux, use ImageMagick instead:
-```bash
-convert "$PNG" -resize 1578x888^ -gravity Center -extent 1578x888 "${SLUG}-header.png"
-convert "$PNG" -resize 724x408^  -gravity Center -extent 724x408  "${SLUG}-grid.png"
-convert "$PNG" -resize 502x283^  -gravity Center -extent 502x283  "${SLUG}-menu.png"
-```
+**WebP not supported by sips** — macOS 10.14+. If on older macOS, use ImageMagick fallback above.

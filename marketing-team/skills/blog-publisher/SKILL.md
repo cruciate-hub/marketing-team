@@ -157,25 +157,25 @@ Fix all violations before continuing. Do not flag and proceed.
 
 ## Phase 5 — Resize images
 
-Follow `image-pipeline.md`. Run these bash commands:
+Follow `image-pipeline.md`. All production blog images use **WebP** — `sips` resizes
+and converts in one step. Use the article title (not the slug) in filenames to match
+production naming convention.
 
 ```bash
 PNG="{absolute path from user input}"
-SLUG="{derived slug}"
+TITLE="{extracted article title, e.g. 6 Best In-App Community Platforms for Consumer Apps (2026)}"
 TMPDIR=$(mktemp -d)
 
-# Validate input
+# Validate
 WIDTH=$(sips -g pixelWidth "$PNG" | awk '/pixelWidth/ {print $2}')
 if [ "$WIDTH" -lt 1578 ]; then
-  echo "ERROR: PNG is ${WIDTH}px wide — minimum required is 1578px"
-  exit 1
+  echo "ERROR: PNG is ${WIDTH}px wide — need ≥ 1578px"; exit 1
 fi
 
-# Resize
-sips -z 888 1578 "$PNG" --out "$TMPDIR/${SLUG}-header.png"
-sips -z 408  724 "$PNG" --out "$TMPDIR/${SLUG}-grid.png"
-sips -z 283  502 "$PNG" --out "$TMPDIR/${SLUG}-menu.png"
-echo "$TMPDIR"
+# Resize + convert to WebP in one step
+sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_page-header.webp"
+sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_thumbnail.webp"
+sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_mega-menu.webp"
 ```
 
 If sips is not available (Linux), use the ImageMagick fallback in `image-pipeline.md`.
@@ -207,16 +207,19 @@ If sips is not available (Linux), use the ImageMagick fallback in `image-pipelin
 Use today's date for `date-published` (ISO 8601 UTC).
 For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
 
-3. Run the publish script:
+3. Run the publish script — pass the WebP files by their exact title-based names:
 
 ```bash
 cd "$REPO"
 python3 scripts/blog-publisher.py \
   "$TMPDIR/fielddata.json" \
-  "$TMPDIR/${SLUG}-header.png" \
-  "$TMPDIR/${SLUG}-grid.png" \
-  "$TMPDIR/${SLUG}-menu.png"
+  "$TMPDIR/${TITLE}_page-header.webp" \
+  "$TMPDIR/${TITLE}_thumbnail.webp" \
+  "$TMPDIR/${TITLE}_mega-menu.webp"
 ```
+
+The script uses the filename as-is when registering with Webflow (matching the production
+naming pattern `{Article Title}_page-header.webp` seen on the live CDN).
 
 The script prints the live URL to stdout on success. Surface it to the user:
 

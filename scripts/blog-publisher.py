@@ -3,7 +3,12 @@
 blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
 
 Usage:
-    python3 scripts/blog-publisher.py <fielddata.json> <header.png> <grid.png> <menu.png>
+    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp>
+
+    Images must already be resized and converted to WebP by the caller (see image-pipeline.md).
+    Expected sizes: header=1578×888, grid=724×408, menu=502×283.
+    Expected naming: "{Article Title}_page-header.webp", "{Article Title}_thumbnail.webp",
+                     "{Article Title}_mega-menu.webp"
 
 Environment:
     WEBFLOW_API_TOKEN  —  Webflow API token with CMS read/write access
@@ -66,14 +71,14 @@ def _check(r: requests.Response, label: str) -> None:
 
 # ── Asset upload ───────────────────────────────────────────────────────────────
 
-def upload_asset(token: str, file_path: str, file_name: str) -> str:
+def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     """
     Three-step Webflow asset upload.
     1. Compute MD5 hash.
     2. POST /v2/sites/{siteId}/assets  →  S3 pre-signed URL + signing headers.
-    3. POST file to S3.
+    3. POST file to S3 as image/webp.
     4. GET asset to retrieve hostedUrl.
-    Returns the public CDN URL.
+    Returns (asset_id, hosted_url) — both are stored in the CMS image object.
     """
     headers = api_headers(token)
     file_hash = md5_file(file_path)
@@ -92,24 +97,24 @@ def upload_asset(token: str, file_path: str, file_name: str) -> str:
     d = meta["uploadDetails"]
     asset_id = meta["id"]
 
-    # Step 2: upload to S3
+    # Step 2: upload to S3 as WebP
     with open(file_path, "rb") as f:
         s3 = requests.post(
             upload_url,
             data={
-                "acl":                  d["acl"],
-                "bucket":               d["bucket"],
-                "X-Amz-Algorithm":      d["X-Amz-Algorithm"],
-                "X-Amz-Credential":     d["X-Amz-Credential"],
-                "X-Amz-Date":           d["X-Amz-Date"],
-                "key":                  d["key"],
-                "Policy":               d["Policy"],
-                "X-Amz-Signature":      d["X-Amz-Signature"],
+                "acl":                   d["acl"],
+                "bucket":                d["bucket"],
+                "X-Amz-Algorithm":       d["X-Amz-Algorithm"],
+                "X-Amz-Credential":      d["X-Amz-Credential"],
+                "X-Amz-Date":            d["X-Amz-Date"],
+                "key":                   d["key"],
+                "Policy":                d["Policy"],
+                "X-Amz-Signature":       d["X-Amz-Signature"],
                 "success_action_status": d["success_action_status"],
-                "Content-Type":         d["content-type"],
-                "Cache-Control":        d["Cache-Control"],
+                "Content-Type":          d["content-type"],
+                "Cache-Control":         d["Cache-Control"],
             },
-            files={"file": (file_name, f, "image/png")},
+            files={"file": (file_name, f, "image/webp")},
         )
 
     if s3.status_code not in (200, 201, 204):
@@ -132,7 +137,7 @@ def upload_asset(token: str, file_path: str, file_name: str) -> str:
         sys.exit(1)
 
     print(f"     ✓ {hosted_url}", file=sys.stderr)
-    return hosted_url
+    return asset_id, hosted_url
 
 
 # ── Publish ────────────────────────────────────────────────────────────────────
@@ -153,14 +158,14 @@ def publish_live(token: str, field_data: dict) -> dict:
 def main() -> None:
     if len(sys.argv) != 5:
         print(
-            "Usage: python3 blog-publisher.py <fielddata.json> <header.png> <grid.png> <menu.png>",
+            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp>",
             file=sys.stderr,
         )
         sys.exit(1)
 
-    fielddata_path, header_png, grid_png, menu_png = sys.argv[1:]
+    fielddata_path, header_webp, grid_webp, menu_webp = sys.argv[1:]
 
-    for path in [fielddata_path, header_png, grid_png, menu_png]:
+    for path in [fielddata_path, header_webp, grid_webp, menu_webp]:
         if not Path(path).exists():
             print(f"ERROR: File not found: {path}", file=sys.stderr)
             sys.exit(1)
@@ -169,19 +174,21 @@ def main() -> None:
         field_data = json.load(f)
 
     token = get_token()
-    slug = field_data.get("slug", "blog-post")
-    alt_text = field_data.get("image-alt-text", "")
 
-    # Upload all three images
+    # Upload all three images — returns (asset_id, hosted_url) each
+    # File names follow production convention: "{Article Title}_page-header.webp" etc.
+    # The caller (SKILL.md) names the files correctly before passing them here.
     print("Uploading images…", file=sys.stderr)
-    header_url = upload_asset(token, header_png, f"{slug}-header.png")
-    grid_url   = upload_asset(token, grid_png,   f"{slug}-grid.png")
-    menu_url   = upload_asset(token, menu_png,   f"{slug}-menu.png")
+    header_id, header_url = upload_asset(token, header_webp, Path(header_webp).name)
+    grid_id,   grid_url   = upload_asset(token, grid_webp,   Path(grid_webp).name)
+    menu_id,   menu_url   = upload_asset(token, menu_webp,   Path(menu_webp).name)
 
-    # Inject image objects (alt text duplicated per Webflow image field spec)
-    field_data["image-page-header"]   = {"url": header_url, "alt": alt_text}
-    field_data["grid-thumbnail"]      = {"url": grid_url,   "alt": alt_text}
-    field_data["thumbnail-mega-menu"] = {"url": menu_url,   "alt": alt_text}
+    # Inject image objects matching production format:
+    # { "fileId": "<webflow-asset-id>", "url": "<cdn-url>", "alt": null }
+    # Note: alt is null in production; image-alt-text is the standalone PlainText field.
+    field_data["image-page-header"]   = {"fileId": header_id, "url": header_url, "alt": None}
+    field_data["grid-thumbnail"]      = {"fileId": grid_id,   "url": grid_url,   "alt": None}
+    field_data["thumbnail-mega-menu"] = {"fileId": menu_id,   "url": menu_url,   "alt": None}
 
     # Publish live
     print("Publishing to Webflow…", file=sys.stderr)
