@@ -1,6 +1,6 @@
 {
   "name": "cruciate-hub",
-  "description": "Shared brand and marketing resources for social.plus. Two plugins: marketing-team (15 skills, full kit) and brand-kit (2 skills, for non-marketing colleagues).",
+  "description": "Shared brand and marketing resources for social.plus. Two plugins: marketing-team (16 skills, full kit) and brand-kit (2 skills, for non-marketing colleagues).",
   "owner": {
     "name": "The Cruciate Hub"
   },
@@ -8,7 +8,7 @@
     {
       "name": "marketing-team",
       "source": "./marketing-team",
-      "description": "The complete marketing kit for social.plus — 15 skills covering content, design, SEO, linking, and media. For the marketing team."
+      "description": "The complete marketing kit for social.plus — 16 skills covering content, design, SEO, linking, publishing, and media. For the marketing team."
     },
     {
       "name": "brand-kit",

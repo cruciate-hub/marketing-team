@@ -1,5 +1,21 @@
 # Changelog
 
+## marketing-team 13.0
+
+Added `blog-publisher` skill — end-to-end pipeline from Google Doc to live Webflow blog post. **Non-breaking** — new skill, new category, no changes to existing skills.
+
+- Added [`marketing-team/skills/blog-publisher/SKILL.md`](marketing-team/skills/blog-publisher/SKILL.md): orchestrates 7 phases — read Google Doc via Drive MCP, convert to Webflow Rich Text HTML, add 3–7 internal links via `internal-linking-strategist`, run compliance check, resize master PNG to 3 WebP sizes with `sips`, upload assets to Webflow via Data API v2, publish immediately with `POST /v2/collections/{id}/items/live`. Never creates a draft. Requires `WEBFLOW_API_TOKEN` env var with `cms:write` + `assets:write` scopes.
+- Added [`marketing-team/skills/blog-publisher/webflow-config.md`](marketing-team/skills/blog-publisher/webflow-config.md): site ID, blog collection ID, all 22 CMS field slugs, and all 16 category IDs with names (sourced directly from the live Webflow CMS).
+- Added [`marketing-team/skills/blog-publisher/html-conversion.md`](marketing-team/skills/blog-publisher/html-conversion.md): conversion rules for the Google Doc format → Webflow Rich Text HTML, covering headings, lists, tables, platform entry structure for listicles, and a list of tags Webflow strips or breaks.
+- Added [`marketing-team/skills/blog-publisher/image-pipeline.md`](marketing-team/skills/blog-publisher/image-pipeline.md): `sips` resize + WebP conversion commands, file naming convention (`{slug}_{variant}_{WxH}.webp`), the 3-step Webflow asset upload flow, and ImageMagick Linux fallback.
+- Added [`scripts/blog-publisher.py`](scripts/blog-publisher.py): Python helper that handles the full asset upload pipeline (MD5 hash → `POST /v2/sites/{siteId}/assets` → S3 multipart POST → `GET` asset for `hostedUrl`) and the CMS publish (`POST /items/live`). Produces `{fileId, url, alt: null}` image objects matching the production CMS format confirmed by inspecting 5 live blog posts.
+- Added [`docs/blog-publisher.md`](docs/blog-publisher.md): human-readable documentation — what it does, when it triggers, prerequisites, inputs, 7-phase pipeline table, what it does NOT do, image naming convention, and files tree.
+- Updated [`brain.md`](brain.md): added `blog-publisher` routing row to the Available skills table.
+- Updated [`README.md`](README.md): 15 → 16 skills in plugin table and available skills header; added new "Publishing & CMS" section with blog-publisher row; updated `marketing-team/` repo structure description.
+- Updated [`marketing-team/README.md`](marketing-team/README.md): 15 → 16 skills; added "Publishing & CMS" section with blog-publisher row (249 lines, 12 KB).
+- Updated [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json): "15 skills" → "16 skills" in both top-level description and marketing-team plugin entry.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 12.9 to 13.0 (semver major — new publishing category; prior versions had no CMS-write capability).
+
 ## marketing-team 12.9
 
 File reorganization in `backlink-placement-finder`. The ~8 worked phrase-to-family mappings embedded in SKILL.md Phase 1 Types B/C and the matching 9-row table in `content-inventory.md` section 7 are the same data in two places. Every new confirmed mapping requires two edits, and drift had already started: "app retention rate" existed in SKILL.md but was missing from the content-inventory table. This change extracts all mappings into a dedicated `references/creative-anchor-patterns.md` file and trims each embedding site to one inline example per type as a pattern cue. Zero behavior change. **Non-breaking**: same skill, same namespace, same install command, same email output contract. File reorganization only.

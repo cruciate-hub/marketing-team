@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (15)
+## Skills (16)
 
 ### Content creation
 
@@ -38,6 +38,12 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | [legal-docs-formatter](../docs/legal-docs-formatter.md) | 211 | 7.1 KB | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. | [SKILL.md →](./skills/legal-docs-formatter/SKILL.md) |
 | [svg-icon-transformer](../docs/svg-icon-transformer.md) | 168 | 7.6 KB | Transforms SVG input into clean, accessible, inline-embed-ready icon markup. Strips editor noise, applies accessibility defaults, and uses `1em` sizing that avoids the Safari flex/absolute collapse bug. | [SKILL.md →](./skills/svg-icon-transformer/SKILL.md) |
 | [video-to-gif-and-webp](../docs/video-to-gif-and-webp.md) | 227 | 12.0 KB | Creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Guided intake, auto-iteration to hit file size targets, preset dimensions for webinars, product updates, customer stories, and email newsletters. | [SKILL.md →](./skills/video-to-gif-and-webp/SKILL.md) |
+
+### Publishing & CMS
+
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [blog-publisher](../docs/blog-publisher.md) | 249 | 12 KB | Publishes a completed blog article from Google Docs to Webflow live — reads the doc, converts to HTML, adds internal links via `internal-linking-strategist`, resizes master PNG to 3 WebP sizes (`{slug}_{variant}_{WxH}.webp`), uploads assets via Data API v2, and publishes with `POST /items/live`. Requires `WEBFLOW_API_TOKEN` with cms:write + assets:write. | [SKILL.md →](./skills/blog-publisher/SKILL.md) |
 
 ## How it works
 
