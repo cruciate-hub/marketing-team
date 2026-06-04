@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T10:32:00.419Z",
+    "generatedAt": "2026-06-04T11:38:20.690Z",
     "itemCount": 61,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
@@ -21,13 +21,13 @@
     {
       "url": "https://www.social.plus/product-update/introducing-commerce-make-your-community-the-storefront",
       "metaTitle": "Introducing Commerce: Make Your Community The Storefront",
-      "metaDescription": "social.plus Commerce bridges the gap between community intent and action. Enable product tagging in posts, shoppable livestreams, and a centralized product catalogue to turn social conversations into conversions without leaving the app.",
+      "metaDescription": "social.plus Commerce bridges the gap between community intent and action. Enable product tagging in posts, shoppable livestreams",
       "content": "# Introducing Commerce: Make Your Community The Storefront\n## What is social.plus Commerce\n## Product Catalogue: the foundation of discoverable assortment\n## Product Tagging in Posts: close the discovery-to-action gap\n## Tag and Pin Products in Livestream: interactive moments without the disruption\n## Commerce is not only about commerce"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-march-2026",
       "metaTitle": "What's new in social.plus | March 2026",
-      "metaDescription": "We're making it easier to bring products into your community experience. This month, we're introducing product catalogues, in-post and live stream product tagging, and an upgraded live stream management page to help you drive discovery and keep things running smoothly. Read on to see what's new in social.plus!",
+      "metaDescription": "We're making it easier to bring products into your community experience. This month, we're introducing product catalogues",
       "content": "# What's new in social.plus | March 2026\n## Product Catalogue &amp; Tagging in Post\n## Product Tagging and Pinning in Live Streams\n## Upgraded Live Stream Room Management\n## We also added"
     },
     {
@@ -39,49 +39,49 @@
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-february-2026",
       "metaTitle": "What's new in social.plus | February 2026",
-      "metaDescription": "We're rolling into February with updates that put more power directly into your Console. Whether you're hosting events or organizing your members, these new features are designed to help you manage your community more efficiently. Read on to see what's new in social.plus!",
+      "metaDescription": "We're rolling into February with updates that put more power directly into your Console. Whether you're hosting events or organizing your members",
       "content": "# What's new in social.plus | February 2026\n## Event Creation and Management on Console\n## Create and Manage User Tags from the Console"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-january-2026",
       "metaTitle": "What's new in social.plus | January 2026",
-      "metaDescription": "We're kicking off 2026 with some exciting updates designed to give you better visibility into your content and streamline how you manage your live streams. Whether you're tracking performance, monitoring your dashboard, or staying on top of notifications, these new features will help you work smarter and faster.",
+      "metaDescription": "We're kicking off 2026 with some exciting updates designed to give you better visibility into your content and streamline how you manage your live streams.",
       "content": "# What's new in social.plus | January 2026\n## Enhanced Live Stream Analytics with Real-Time Insights\n## Content Performance Widgets and Reports on Dashboard\n## Network-Level Livestream Notification Control"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-2025-year-end-wrap",
       "metaTitle": "What's new in social.plus | 2025 Year-End Wrap",
-      "metaDescription": "As 2025 draws to a close, we're incredibly proud of what we built together this year. From smarter discovery to richer content formats, real-time interactions to enterprise-grade safety tools, 2025 was about giving you everything you need to build thriving communities. Thank you for being part of this journey. ",
+      "metaDescription": "As 2025 draws to a close, we're incredibly proud of what we built together this year. From smarter discovery to richer content formats",
       "content": "# What's new in social.plus | 2025 Year-End Wrap\n## Power Live Engagement With Livestreams and Events\n## Mixed Media Posts in a Single Post\n## Flexible Link Formatting for Posts and Comments"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-october-2025",
       "metaTitle": "What's new in social.plus | October 2025",
-      "metaDescription": "From visitor mode to livestream control, this month’s updates help you manage visibility, track contributions, and take action with greater clarity across your community.",
+      "metaDescription": "From visitor mode to livestream control, this month’s updates help you manage visibility, track contributions, and take action",
       "content": "# What's new in social.plus | October 2025\n## Enable Controlled Public Browsing with Visitor Mode\n## Track Content Quality and Contribution Level Across Your Community\n## New Chat Features Now Available in Flutter UI Kit\n## Manage Multi-Stream Livestream Posts in the Console\n## Identify Inactive Users and Take Action Faster"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-september-2025",
       "metaTitle": "What's new in social.plus | September 2025",
-      "metaDescription": "From richer posts to smarter polls, this month’s updates help you build more expressive content, drive deeper engagement, and stay in control of how your community shows up.",
+      "metaDescription": "From richer posts to smarter polls, this month’s updates help you build more expressive content, drive deeper engagement",
       "content": "# What's new in social.plus | September 2025\n## Polls are Now More Visual and Flexible\n## Deliver Tailored Livestreams Across Devices with Multi-Stream Posts\n## Edit User Content in Console with Full Change History\n## Boost Post Quality and Discoverability Across Your App\n## More updates"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-august-2025",
       "metaTitle": "What's New in social.plus | August 2025",
-      "metaDescription": "The latest updates bring a blend of interactivity and control. New capabilities expand how content can be shared and discovered while also strengthening privacy and moderation across communities.",
+      "metaDescription": "The latest updates bring a blend of interactivity and control. New capabilities expand how content can be shared",
       "content": "# What's New in social.plus | August 2025\n## Explore Search Trends Across Your Community\n## DSA Moderation Reports Now Available\n## Granular Access Controls Now in Console, Portal, and Dashboard\n## Stories Now Available in React Native\n## More updates"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-july-2025",
       "metaTitle": "What's New in social.plus | July 2025",
-      "metaDescription": "This month’s updates bring you smarter ways to understand your community. From tracking what members care about most to making private spaces available within your community, there's plenty to explore this month.",
+      "metaDescription": "This month’s updates bring you smarter ways to understand your community. From tracking what members care about most to making private spaces available",
       "content": "# What's New in social.plus | July 2025\n## Introducing Clips: Create, Share, and Connect with Vertical Video\n## New Option to Make Private Communities Discoverable\n## Real-Time Reactions and Chat for Livestreams\n## Group Messaging Features Now on Flutter\n## Community Feed Now on React Native\n## Poll Posts Available on React Native"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-june-2025",
       "metaTitle": "What's New in social.plus | June 2025",
-      "metaDescription": "This month’s updates are all about making moderation easier and more effective. From message translation to improved reporting flows, we’ve added features that help teams work faster, see more context, and stay in control across every conversation.",
+      "metaDescription": "This month’s updates are all about making moderation easier and more effective. From message translation to improved reporting flows",
       "content": "# What's New in social.plus | June 2025\n## Here is what’s new this month 🎉\n## Introducing Moderation Feed: A Centralized Hub Built Around Your Workflow\n## New Way to Add Context When Reporting Community Content\n## Report Reasons Now Available for All Message Types\n## Translate Messages to English Directly from the Console"
     },
     {
@@ -93,13 +93,13 @@
     {
       "url": "https://www.social.plus/product-update/whats-new-in-may-2025",
       "metaTitle": "What's New in social.plus | May 2025",
-      "metaDescription": "From major UI upgrades to smart community insights and enhanced accessibility, May has been all about giving you more control, flexibility, and performance across your app experience.",
+      "metaDescription": "From major UI upgrades to smart community insights and enhanced accessibility, May has been all about giving you more control, flexibility",
       "content": "# What's New in social.plus | May 2025\n## Here is what’s new this month 🎉\n## Introducing Dynamic UI: A Faster, Smarter Way to Build Seamless Interfaces\n## Edit Media Posts with New Image and Video Support\n## New Accessibility Feature: Add Alt Text for Inclusive Image Sharing\n## Stay Connected with the New In-App Notification Tray\n## Community-Level Analytics and Social Insights Filtering Now Available\n## React&nbsp;Native Support for Premium Ads in Comment Sections\n## Explore Page in the React Native UI Kit"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-april-2025",
       "metaTitle": "What's New in social.plus | April 2025",
-      "metaDescription": "Spring is in full swing, and so are we! This month’s highlight is the launch of User History on Console, giving admins deeper insights into user activity across communities. Alongside that, we’ve continued improving the platform with key enhancements across our analytics and UI Kit capabilities. ",
+      "metaDescription": "Spring is in full swing, and so are we! This month’s highlight is the launch of User History on Console, giving admins deeper insights into user activity",
       "content": "# What's New in social.plus | April 2025\n## Here is what’s new this month 🎉\n## View and Manage User Moderation History\n## Track Key User Metrics for Behavior Insights on Console\n## Track Community Engagement at a Glance\n## Export Raw Data for Deeper Community Insights\n## We also added"
     },
     {
@@ -111,25 +111,25 @@
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-march-2025",
       "metaTitle": "What's New in social.plus | March 2025",
-      "metaDescription": "Can't believe we're already a quarter into 2025, and we've got a lot of exciting updates this month. We've made improvements to chat functionality and livestreams, along with several updates to the console.",
+      "metaDescription": "Can't believe we're already a quarter into 2025, and we've got a lot of exciting updates this month. We've made improvements",
       "content": "# What's New in social.plus | March 2025\n## Here is what's new this month 🎉\n## Chat Upgrade: Experience Enhanced 1:1 Messaging and Archiving Functionality\n## Watch, Interact, and Engage with Enhanced Livestream Experiences Across Mobile &amp; Web\n## Social UIKit 4.0 for Desktop is Live\n## Post and Comment as Brand on Flutter\n## Flutter UIKit Mention Post and Comments\n## We also added"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-february-2025",
       "metaTitle": "What's new in social.plus | February 2025",
-      "metaDescription": "February flew by, and we've been busy rolling out updates to enhance your experience. Here's a look at what's new this month to enhance your experience and streamline community management.",
+      "metaDescription": "February flew by, and we've been busy rolling out updates to enhance your experience. Here's a look at what's new this month",
       "content": "# What's new in social.plus | February 2025\n## Here is what's new this month 🎉\n## View and Sort User Reaction Directly on Console\n## We also added"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-january-2025",
       "metaTitle": "What's New in social.plus | January 2025",
-      "metaDescription": "Welcome to the January edition of our monthly product updates! We’re kicking off the year with a range of exciting new features that will enhance your user experience and streamline community manager’s workflow. ",
+      "metaDescription": "Welcome to the January edition of our monthly product updates! We’re kicking off the year with a range of exciting new features",
       "content": "# What's New in social.plus | January 2025\n## Here is what’s new this month 🎉\n## Meet Intelligent Search: Discover Posts and Communities More Effectively with Intelligent Search&nbsp;\n## Create and View Poll Posts on Console Now Available"
     },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-2024-year-end-wrap",
       "metaTitle": "What's new in social.plus | 2024 Year-End Wrap",
-      "metaDescription": "As 2024 comes to a close, we’re reflecting on an exciting year of growth and innovation. From launching new features to major enhancements, we’ve been busy delivering updates designed to help you get the most out of Social+. Let’s take a look at what we’ve accomplished over the past couple of months and how we’re ending the year!",
+      "metaDescription": "As 2024 comes to a close, we’re reflecting on an exciting year of growth and innovation. From launching new features to major enhancements",
       "content": "# What's new in social.plus | 2024 Year-End Wrap\n## Flutter UIKit 4.0 1-1 Chat Features\n## View User Social History for Community Managers\n## Token-Based Authentication for Apple Push Notification\n## We also added"
     },
     {
