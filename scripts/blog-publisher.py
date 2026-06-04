@@ -187,21 +187,40 @@ def publish_live(token: str, field_data: dict) -> dict:
     return r.json()
 
 
+def publish_staged(token: str, field_data: dict) -> dict:
+    """POST to /items/bulk — creates a staged item (goes live on next Webflow site publish)."""
+    r = requests.post(
+        f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/bulk",
+        headers={**api_headers(token), "Content-Type": "application/json"},
+        json={"fieldData": field_data, "isDraft": False},
+    )
+    _check(r, "webflow-stage")
+    # Bulk endpoint returns a list; take the first item
+    data = r.json()
+    if isinstance(data, list):
+        return data[0] if data else {}
+    return data
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
     if len(sys.argv) < 5:
         print(
-            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...]",
+            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]",
             file=sys.stderr,
         )
         sys.exit(1)
 
-    fielddata_path = sys.argv[1]
-    header_webp    = sys.argv[2]
-    grid_webp      = sys.argv[3]
-    menu_webp      = sys.argv[4]
-    inline_paths   = sys.argv[5:]  # optional, zero or more
+    all_args     = sys.argv[1:]
+    staged_mode  = "--staged" in all_args
+    all_args     = [a for a in all_args if a != "--staged"]
+
+    fielddata_path = all_args[0]
+    header_webp    = all_args[1]
+    grid_webp      = all_args[2]
+    menu_webp      = all_args[3]
+    inline_paths   = all_args[4:]  # optional, zero or more
 
     for path in [fielddata_path, header_webp, grid_webp, menu_webp] + inline_paths:
         if not Path(path).exists():
@@ -239,9 +258,13 @@ def main() -> None:
                 field_data["post-content"], inline_urls
             )
 
-    # ── Publish live ──────────────────────────────────────────────────────────
-    print("Publishing to Webflow…", file=sys.stderr)
-    result = publish_live(token, field_data)
+    # ── Publish (live or staged) ──────────────────────────────────────────────
+    if staged_mode:
+        print("Staging for next site publish…", file=sys.stderr)
+        result = publish_staged(token, field_data)
+    else:
+        print("Publishing to Webflow…", file=sys.stderr)
+        result = publish_live(token, field_data)
 
     item_id   = result.get("id", "")
     live_slug = (result.get("fieldData") or {}).get("slug", slug)
