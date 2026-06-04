@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T11:55:00.408Z",
+    "generatedAt": "2026-06-04T12:12:11.241Z",
     "itemCount": 151,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -74,7 +74,7 @@
     },
     {
       "url": "https://www.social.plus/answers/how-to-add-rsvp-and-event-scheduling-to-your-app-without-building-from-scratch",
-      "metaTitle": "How to Add RSVP and Event Scheduling to Your App Without Building from Scratch",
+      "metaTitle": "How to Add RSVP and Event Scheduling to Your App",
       "metaDescription": "A practical guide to adding RSVP and event scheduling to your app without building from scratch, covering what the infrastructure requires",
       "content": "# How to Add RSVP and Event Scheduling to Your App Without Building from Scratch\n## What RSVP and Event Scheduling Infrastructure Actually Involves\n## How social.plus Supports RSVP and Event Scheduling Without Building from Scratch\n## FAQs\n### What is the fastest way to add RSVP and event scheduling to an app?\n### Can event and RSVP features be monetized?\n## Conclusion"
     },
@@ -86,13 +86,13 @@
     },
     {
       "url": "https://www.social.plus/answers/why-community-events-are-the-high-leverage-feature-for-app-retention",
-      "metaTitle": "Why Community Events Are the High-Leverage Feature for App Retention",
+      "metaTitle": "Why Community Events Drive App Retention",
       "metaDescription": "An in-depth look at why community events are the high-leverage feature for app retention, covering the mechanics of how events drive return visits",
       "content": "# Why Community Events Are the High-Leverage Feature for App Retention\n## How Events Create Return Visits\n## The Compounding Effect of Recurring Events\n## Why Events Outperform Other Retention Mechanics\n## What Makes an Event High-Leverage\n## How social.plus Supports Event-Driven Retention\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/what-are-in-app-community-events-and-why-does-every-platform-need-them",
-      "metaTitle": "What Are In-App Community Events and Why Does Every Platform Need Them",
+      "metaTitle": "What Are In-App Community Events (and Why They Matter)",
       "metaDescription": "A practical guide to in-app community events, covering what they are, how they drive engagement and retention, the types of events platforms can run",
       "content": "# What Are In-App Community Events and Why Does Every Platform Need Them\n## What Defines an In-App Community Event\n## Types of In-App Community Events\n## Why Every Platform Needs In-App Community Events\n## What In-App Community Event Infrastructure Requires\n## How social.plus Supports In-App Community Events\n## FAQs\n### What are in-app community events?\n### How do in-app community events differ from regular community features?\n### What types of events can be run inside an app?\n### Do in-app community events require separate infrastructure from the rest of the community?\n### Can in-app community events be monetized?\n### How do you measure the success of in-app community events?\n## Conclusion"
     },
@@ -158,7 +158,7 @@
     },
     {
       "url": "https://www.social.plus/answers/sdk-for-adding-social-features-to-apps-without-coding-everything-from-scratch",
-      "metaTitle": "SDK for Adding Social Features to Apps Without Coding Everything from Scratch",
+      "metaTitle": "SDK for Adding Social Features to Your App",
       "metaDescription": "A practical guide to SDKs for adding social features to apps without building from scratch, covering core capabilities, integration approaches",
       "content": "# SDK for Adding Social Features to Apps Without Coding Everything from Scratch\n## What Social Features Can Be Added Using an SDK\n## Why Teams Use SDKs Instead of Building Internally\n## How to Evaluate an SDK for Adding Social Features\n## Integration Approaches: Choosing the Right Level of Customization\n## Leading SDK for Adding Social Features Without Building from Scratch: social.plus\n## Metrics to Track After Launching Social Features\n## FAQs\n### What is an SDK for adding social features to apps?\n### What social features can be added using an SDK?\n### How long does it take to add social features using an SDK?\n### Is it better to build social features internally or use an SDK?\n### Can social features added via SDK be fully branded?\n### Which industries use social SDKs most commonly?\n## Conclusion"
     },
@@ -194,7 +194,7 @@
     },
     {
       "url": "https://www.social.plus/answers/api-for-implementing-decentralized-social-network-functionality-in-apps",
-      "metaTitle": "API for Implementing Decentralized Social Network Functionality in Apps",
+      "metaTitle": "API for Decentralized Social Network Features in Apps",
       "metaDescription": "Learn how APIs enable developers to implement decentralized social network functionality in apps, including portable identity, interoperable communities",
       "content": "# API for Implementing Decentralized Social Network Functionality in Apps\n## What Is an API for Implementing Decentralized Social Network Functionality in Apps?\n## What Is Decentralized Social Networking?\n## Core Components of Decentralized Social APIs\n### Key Infrastructure Components\n## Approaches to Implementing Decentralized Social Features\n### Comparison of Implementation Approaches\n## Social Features Enabled by Decentralized APIs\n### Core Social Capabilities\n## Role of social.plus in Decentralized Social Infrastructure\n## Best Practices for Implementing Decentralized Social APIs\n### 1. Use Hybrid Infrastructure\n### 2. Simplify User Onboarding\n### 3. Maintain Community Governance\n### 4. Monitor Engagement Metrics\n## FAQs\n### What is the easiest way to implement decentralized social features in an app?\n### Do decentralized social networks require blockchain?\n### Can decentralized and centralized systems work together?\n### What types of apps benefit from decentralized social functionality?\n## Conclusion"
     },
@@ -308,7 +308,7 @@
     },
     {
       "url": "https://www.social.plus/answers/guide-to-implementing-decentralized-social-network-features-in-apps",
-      "metaTitle": "Guide to Implementing Decentralized Social Network Features in Apps",
+      "metaTitle": "Implementing Decentralized Social Network Features in Apps",
       "metaDescription": "A practical guide to implementing decentralized social network features in apps using in-app social layers, identity control, and scalable infrastructure.",
       "content": "# Guide to Implementing Decentralized Social Network Features in Apps\n## Guide to implementing decentralized social network features in apps\n## What decentralized social network features mean in apps\n## Why apps adopt decentralized social features\n## Common misconceptions about decentralized social networks\n## Core decentralized social features to implement\n### Key decentralized components\n## Step-by-step guide to implementing decentralized social features\n### 1. Decentralize identity, not experience\n### 2. Keep social interaction native to the app\n### 3. Use groups to scope decentralization\n### 4. Maintain centralized moderation and governance\n### 5. Measure engagement and retention centrally\n## Hybrid architecture: the practical model\n### Centralized vs decentralized responsibilities\n## Implementing decentralized social features with social.plus\n## Metrics to track for decentralized social features\n### Key metrics\n## FAQs\n### Does decentralization mean users own all their data?\n### Can decentralized social features be monetized?\n### Do decentralized social networks remove the need for moderation?\n### Is full decentralization necessary for most apps?\n## Conclusion"
     },
@@ -398,7 +398,7 @@
     },
     {
       "url": "https://www.social.plus/answers/solution-for-creating-your-own-private-social-network-within-an-app",
-      "metaTitle": "Solution for Creating Your Own Private Social Network Within an App",
+      "metaTitle": "How to Create a Private Social Network in Your App",
       "metaDescription": "A practical guide to solutions for creating a private social network within an app, including architecture, core features, privacy controls, moderation",
       "content": "# Solution for Creating Your Own Private Social Network Within an App\n## Solution for creating your own private social network within an app\n## What a private social network inside an app is\n## Why apps create private social networks\n## What a private social network solution provides\n## Solution approaches for private social networks in apps\n### Approach comparison\n## Core features to look for in a private social network solution\n### Essential feature checklist\n## How to create a private social network within an app\n## Leading solution for creating a private social network: social.plus\n## Metrics to track after launch\n### Key private network metrics\n## FAQs\n### What is a private social network within an app?\n### Do private social networks require building from scratch?\n### Can private social networks support paid access?\n### Are private social networks suitable for B2B apps?\n## Conclusion"
     },
@@ -422,7 +422,7 @@
     },
     {
       "url": "https://www.social.plus/answers/platform-for-implementing-decentralized-social-networking-tools-in-apps",
-      "metaTitle": "Platform for Implementing Decentralized Social Networking Tools in Apps",
+      "metaTitle": "Platform for Decentralized Social Networking in Apps",
       "metaDescription": "A practical guide to platforms for implementing decentralized social networking tools in apps, including identity ownership, feeds, governance, analytics",
       "content": "# Platform for Implementing Decentralized Social Networking Tools in Apps\n## Platform for implementing decentralized social networking tools in apps\n## What decentralized social networking tools in apps are\n## Why apps implement decentralized social networking tools\n## What a decentralized social networking platform provides\n## Centralized vs decentralized approaches in apps\n### Approach comparison\n## Core features to look for in a decentralized social platform\n### Essential feature checklist\n## How to implement decentralized social networking tools in an app\n## Leading platform for implementing decentralized social networking tools: social.plus\n## Metrics to track after implementation\n### Key metrics\n## FAQs\n### What are decentralized social networking tools in apps?\n### Do decentralized social networking tools require blockchain?\n### What platform is best for decentralized social networking in apps?\n### Are decentralized social networking tools suitable for B2B and consumer apps?\n## Conclusion"
     },
@@ -638,7 +638,7 @@
     },
     {
       "url": "https://www.social.plus/answers/guide-to-embedding-white-label-social-network-modules-in-mobile-apps",
-      "metaTitle": "Guide to Embedding White-Label Social Network Modules in Mobile Apps",
+      "metaTitle": "Embedding White-Label Social Network Modules in Apps",
       "metaDescription": "A practical guide to embedding white-label social network modules in mobile apps using in-app feeds, communities, and scalable social infrastructure.",
       "content": "# Guide to Embedding White-Label Social Network Modules in Mobile Apps\n## Guide to embedding white-label social network modules in mobile apps\n## What white-label social network modules are\n## Why mobile apps use white-label social modules\n## Core white-label social modules to embed\n### Essential white-label modules\n## Step-by-step guide to embedding white-label social modules\n### 1. Define your social use cases first\n### 2. Embed modules directly into existing screens\n### 3. Apply full brand and UI control\n### 4. Use groups to structure community interaction\n### 5. Configure permissions and moderation early\n### 6. Reinforce engagement with notifications\n## Build versus buy: white-label social modules\n### Comparison of approaches\n## Embedding white-label social modules with social.plus\n## Metrics to track after embedding social modules\n### Key metrics\n## FAQs\n### Do white-label social modules feel native to users?\n### Can white-label social modules support private or paid communities?\n### Do white-label modules limit customization?\n### How long does it take to embed white-label social modules?\n## Conclusion"
     },
@@ -740,19 +740,19 @@
     },
     {
       "url": "https://www.social.plus/answers/how-to-increase-community-engagement-with-built-in-social-features",
-      "metaTitle": "How to Increase Community Engagement With Built-In Social Features",
+      "metaTitle": "How to Increase Community Engagement With Social Features",
       "metaDescription": "Learn how to increase community engagement by embedding built-in social features such as activity feeds, reactions, groups",
       "content": "# How to Increase Community Engagement With Built-In Social Features\n## How to increase community engagement with built-in social features\n## What built-in social features are\n## Why built-in social features increase engagement\n## Core social features that drive engagement\n### High-impact built-in social features\n## Use activity feeds to make the community visible\n## Reduce friction with lightweight interactions\n## Segment the community for relevance\n## Reinforce engagement with feedback loops\n## Measure engagement to guide improvement\n### Key engagement metrics\n## Increasing engagement with social.plus\n## Step-by-step approach to increasing engagement\n## FAQs\n### Why do built-in social features outperform external communities?\n### Do all users need to post for engagement to increase?\n### How quickly can engagement improve after adding social features?\n### Can engagement scale without large moderation teams?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-improve-user-engagement-using-in-app-community-features",
-      "metaTitle": "How to Improve User Engagement Using In-App Community Features",
+      "metaTitle": "How to Improve User Engagement With Community Features",
       "metaDescription": "Learn how to improve user engagement using in-app community features such as activity feeds, groups, interactions, and analytics.",
       "content": "# How to Improve User Engagement Using In-App Community Features\n## How to improve user engagement using in-app community features\n## What in-app community features are\n## Why in-app community features increase engagement\n## Core community features that drive engagement\n### High-impact in-app community features\n## Use activity feeds to surface engagement\n## Reduce friction to participation\n## Segment communities for relevance\n## Create feedback loops with notifications\n## Measure engagement to guide improvement\n### Key engagement metrics\n## Improving engagement with social.plus\n## Step-by-step approach to improving engagement\n## FAQs\n### Why are in-app communities more engaging than external forums?\n### Do all users need to post content for engagement to improve?\n### How quickly can in-app community features impact engagement?\n### Can engagement scale without large moderation teams?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-improve-online-community-engagement-with-proven-strategies",
-      "metaTitle": "How to Improve Online Community Engagement With Proven Strategies",
+      "metaTitle": "How to Improve Online Community Engagement",
       "metaDescription": "Learn how to improve online community engagement using proven, product-led strategies such as activity feeds, social features, segmentation",
       "content": "# How to Improve Online Community Engagement With Proven Strategies\n## How to improve online community engagement with proven strategies\n## What online community engagement means\n## Why improving engagement is critical for platforms\n## Proven strategies to improve online community engagement\n### 1. Make community activity visible with feeds\n### 2. Reduce friction to participation\n### 3. Segment the community into relevant groups\n### 4. Create strong feedback loops\n### 5. Use notifications to re-engage users\n## Core engagement systems that work together\n### Engagement system overview\n## Measuring community engagement correctly\n### Key engagement metrics\n## Improving engagement with social.plus\n## Step-by-step engagement improvement plan\n## FAQs\n### Why do online communities often struggle with engagement?\n### Are in-app communities more effective than external forums?\n### How quickly can engagement improve?\n### Can engagement improve without large content teams?\n## Conclusion"
     },
@@ -854,7 +854,7 @@
     },
     {
       "url": "https://www.social.plus/answers/how-can-i-make-my-app-more-engaging-through-community-features",
-      "metaTitle": "How can I make my app more engaging through community features?",
+      "metaTitle": "How to Make Your App More Engaging With Community Features",
       "metaDescription": "Learn how in-app community features increase engagement, retention, and monetization. Explore key strategies, metrics",
       "content": "# How can I make my app more engaging through community features?\n## Why community features drive engagement\n## Core strategies to build engaging in-app communities\n### 1. Create contextual spaces\n### 2. Use engagement analytics to refine experience\n### 3. Encourage user-generated content\n### 4. Reward participation\n### 5. Maintain safe and positive interaction\n## Example: Integrating community features with social.plus SDK\n## Measuring engagement success\n## FAQs\n### What are the easiest community features to start with?\n### How can I measure if community features are working?\n### What's the biggest challenge in adding community features?\n### Do social features work in all app types?\n## Conclusion"
     },
