@@ -163,7 +163,7 @@ production naming convention.
 
 ```bash
 PNG="{absolute path from user input}"
-TITLE="{extracted article title, e.g. 6 Best In-App Community Platforms for Consumer Apps (2026)}"
+SLUG="{derived cms slug, e.g. 6-best-in-app-community-platforms-for-consumer-apps}"
 TMPDIR=$(mktemp -d)
 
 # Validate
@@ -172,10 +172,10 @@ if [ "$WIDTH" -lt 1578 ]; then
   echo "ERROR: PNG is ${WIDTH}px wide — need ≥ 1578px"; exit 1
 fi
 
-# Resize + convert to WebP in one step
-sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_page-header.webp"
-sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_thumbnail.webp"
-sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${TITLE}_mega-menu.webp"
+# Resize + convert to WebP — naming: {slug}_{variant}_{width}x{height}.webp
+sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_page-header_1578x888.webp"
+sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_thumbnail_724x408.webp"
+sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
 ```
 
 If sips is not available (Linux), use the ImageMagick fallback in `image-pipeline.md`.
@@ -207,19 +207,19 @@ If sips is not available (Linux), use the ImageMagick fallback in `image-pipelin
 Use today's date for `date-published` (ISO 8601 UTC).
 For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
 
-3. Run the publish script — pass the WebP files by their exact title-based names:
+3. Run the publish script — pass the WebP files by their slug-based names:
 
 ```bash
 cd "$REPO"
 python3 scripts/blog-publisher.py \
   "$TMPDIR/fielddata.json" \
-  "$TMPDIR/${TITLE}_page-header.webp" \
-  "$TMPDIR/${TITLE}_thumbnail.webp" \
-  "$TMPDIR/${TITLE}_mega-menu.webp"
+  "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
+  "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
+  "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
 ```
 
-The script uses the filename as-is when registering with Webflow (matching the production
-naming pattern `{Article Title}_page-header.webp` seen on the live CDN).
+The script passes the filename as-is to Webflow. Files land in the asset library as
+`{slug}_page-header_1578x888.webp` etc. — self-documenting, sortable by slug.
 
 The script prints the live URL to stdout on success. Surface it to the user:
 
