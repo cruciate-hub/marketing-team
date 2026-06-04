@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T09:21:32.845Z",
+    "generatedAt": "2026-06-04T09:23:23.335Z",
     "itemCount": 256,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -1024,7 +1024,7 @@
       "url": "https://www.social.plus/blog/best-chat-apis-messaging-sdks",
       "metaTitle": "Selecting the best Chat API & Messaging SDK for your app",
       "metaDescription": "Use Chat API & Messaging SDK to build instant messaging in your app without deploying and maintaining them yourself. Find the best solutions on the market.",
-      "content": "# Selecting the best Chat API & Messaging SDK for your app\n## Why use a chat API or SDK for messaging features?\n## The benefits of in-app chat features\n## What to look for in a messaging SDK\n### Scalability&nbsp;\n### Detailed documentation\n### Privacy&nbsp;\n### Additional features to consider\n## 8 SDKs to power your app messaging features\n### social.plus\n#### Key Features of social.plus\n#### Pricing\n#### Overall Impressions\n### Stream\n#### Key Features of Stream\n#### Pricing\n#### Overall Impressions\n### MirrorFly\n#### Key features of MirrorFly\n#### MirrorFly APIs and SDKs are available for\n#### Pricing\n#### Overall Impressions\n### Sendbird\n#### Key Features of Sendbird\n#### Pricing\n#### Overall Impressions\n### PubNub\n#### Key Features of PubNub\n#### Pricing\n#### Overall Impressions\n### Rocket.chat\n#### Key Features of Rocket.chat\n#### Pricing\n#### Overall Impressions\n### CometChat\n#### Key Features of CometChat\n#### Pricing\n#### Overall Impressions\n### Twilio\n#### Key Features of Twilio\n#### Pricing\n#### Overall Impressions\n### HelpCrunch\n#### Key Features of HelpCrunch\n#### Pricing\n#### Overall Impressions\n## Driving your app’s socials with devkits"
+      "content": "# Selecting the best Chat API & Messaging SDK for your app\n## Why use a chat API or SDK for messaging features?\n## The benefits of in-app chat features\n## What to look for in a messaging SDK\n### Scalability&nbsp;\n### Detailed documentation\n### Privacy&nbsp;\n### Additional features to consider\n## 8 SDKs to power your app messaging features\n### social.plus\n#### Key Features of social.plus\n#### Pricing\n#### Overall Impressions\n### Stream\n#### Key Features of Stream\n#### Pricing\n#### Overall Impressions\n### MirrorFly\n#### Key features of MirrorFly\n#### MirrorFly APIs and SDKs are available for\n#### Pricing\n#### Overall Impressions\n### Sendbird\n#### Key Features of Sendbird\n#### Pricing\n#### Overall Impressions\n### PubNub\n#### Key Features of PubNub\n#### Pricing\n#### Overall Impressions\n### Rocket.chat\n#### Key Features of Rocket.chat\n#### Pricing\n#### Overall Impressions\n### CometChat\n#### Key Features of CometChat\n#### Pricing\n#### Overall Impressions\n### Twilio\n#### Key Features of Twilio\n#### Pricing\n#### Overall Impressions\n### HelpCrunch\n#### Key Features of HelpCrunch\n#### Pricing\n#### Overall Impressions\n## Driving your app's socials with devkits"
     },
     {
       "url": "https://www.social.plus/blog/selecting-the-best-social-sdk-for-your-app",
