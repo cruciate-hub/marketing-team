@@ -31,6 +31,7 @@ import hashlib
 import json
 import os
 import sys
+import urllib.parse
 from pathlib import Path
 
 try:
@@ -44,6 +45,11 @@ except ImportError:
 SITE_ID            = "66e2765d540e1939a89db4bb"
 BLOG_COLLECTION_ID = "66e2765d540e1939a89db6a4"
 API_BASE           = "https://api.webflow.com/v2"
+
+# CDN base confirmed from production CMS asset URLs.
+# Pattern: https://cdn.prod.website-files.com/{SITE_ASSETS_CDN_ID}/{assetId}_{filename}
+SITE_ASSETS_CDN_ID = "66e2765d540e1939a89db4e3"
+CDN_BASE           = f"https://cdn.prod.website-files.com/{SITE_ASSETS_CDN_ID}"
 
 # Webflow Rich Text figure template for inline images.
 # max-width matches inline image width (1578px); alt is Webflow's standard placeholder.
@@ -140,20 +146,10 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
         print(s3.text[:500], file=sys.stderr)
         sys.exit(1)
 
-    # Retrieve hosted URL
-    asset_r = requests.get(
-        f"{API_BASE}/sites/{SITE_ID}/assets/{asset_id}",
-        headers=headers,
-    )
-    _check(asset_r, f"asset-get {asset_id}")
-    data = asset_r.json()
-    hosted_url = data.get("hostedUrl") or data.get("url") or ""
-
-    if not hosted_url:
-        print(f"ERROR: No hostedUrl in asset response for {file_name}", file=sys.stderr)
-        print(json.dumps(data, indent=2)[:500], file=sys.stderr)
-        sys.exit(1)
-
+    # Construct CDN URL directly from the confirmed production pattern:
+    # https://cdn.prod.website-files.com/{SITE_ASSETS_CDN_ID}/{assetId}_{encoded_filename}
+    # (GET /v2/sites/{siteId}/assets/{assetId} does not exist in Webflow API v2)
+    hosted_url = f"{CDN_BASE}/{asset_id}_{urllib.parse.quote(file_name, safe='')}"
     print(f"     ✓ {hosted_url}", file=sys.stderr)
     return asset_id, hosted_url
 
