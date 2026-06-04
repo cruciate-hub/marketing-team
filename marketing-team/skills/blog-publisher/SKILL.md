@@ -87,10 +87,11 @@ cat "$REPO/messaging/terminology.md"
 
 ## Inputs
 
-Confirm you have both before proceeding. If either is missing, ask:
+Confirm you have these before proceeding. If any are missing, ask:
 
 1. **Google Doc ID** — from the URL: `docs.google.com/document/d/{DOC_ID}/edit`
-2. **PNG file path** — absolute path to the master image (must be ≥ 1578 px wide)
+2. **Master PNG** — absolute path to the hero image (must be ≥ 1578 px wide)
+3. **Inline PNGs** (optional) — paths to body images, in section order (img-1 = first platform, img-2 = second, etc.)
 
 ## Phase 1 — Read the Google Doc
 
@@ -131,6 +132,23 @@ Follow `html-conversion.md` exactly. Key rules:
 - Strip escaped asterisks (`\*\*`) left by Google Doc export
 - Strip bold from inside table cells (plain text only in `<td>/<th>`)
 
+**Inline image placeholders:** If inline images were provided, insert
+`__INLINE_IMG_N__` immediately after each platform `<h2>` closing tag — one
+placeholder per image, in order. Platform headings are those containing a
+colon (e.g. `<h2>social.plus: Best for...</h2>`). Section headings like
+"What Is...", "How to Choose", "At-a-Glance" do NOT get a placeholder.
+
+Example (listicle with 6 platforms):
+```
+<h2>social.plus: Best for apps building a complete in-app community ecosystem</h2>__INLINE_IMG_1__
+<p>social.plus is an in-app community infrastructure platform...</p>
+...
+<h2>Stream: Best for engineering teams that want composable building blocks</h2>__INLINE_IMG_2__
+```
+
+The script replaces each `__INLINE_IMG_N__` with a full Webflow `<figure>` tag
+containing the real CDN URL just before publish.
+
 ## Phase 3 — Internal linking
 
 Invoke the `internal-linking-strategist` skill in **draft mode**. Pass:
@@ -166,16 +184,24 @@ PNG="{absolute path from user input}"
 SLUG="{derived cms slug, e.g. 6-best-in-app-community-platforms-for-consumer-apps}"
 TMPDIR=$(mktemp -d)
 
-# Validate
+# Validate hero image
 WIDTH=$(sips -g pixelWidth "$PNG" | awk '/pixelWidth/ {print $2}')
 if [ "$WIDTH" -lt 1578 ]; then
   echo "ERROR: PNG is ${WIDTH}px wide — need ≥ 1578px"; exit 1
 fi
 
-# Resize + convert to WebP — naming: {slug}_{variant}_{width}x{height}.webp
+# Hero: resize + convert to WebP — naming: {slug}_{variant}_{width}x{height}.webp
 sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_page-header_1578x888.webp"
 sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_thumbnail_724x408.webp"
 sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
+
+# Inline images: downscale from source resolution to 1578×888, convert to WebP
+# Naming: keep existing slug-based name, replace .png with .webp
+# Example for 6 inline images:
+for i in 1 2 3 4 5 6; do
+  SRC="{absolute path to img-${i}.png}"
+  sips -z 888 1578 -s format webp "$SRC" --out "$TMPDIR/${SLUG}_img-${i}_1578x888.webp"
+done
 ```
 
 If sips is not available (Linux), use the ImageMagick fallback in `image-pipeline.md`.
@@ -207,7 +233,7 @@ If sips is not available (Linux), use the ImageMagick fallback in `image-pipelin
 Use today's date for `date-published` (ISO 8601 UTC).
 For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
 
-3. Run the publish script — pass the WebP files by their slug-based names:
+3. Run the publish script — hero images first, then inline images in order:
 
 ```bash
 cd "$REPO"
@@ -215,11 +241,20 @@ python3 scripts/blog-publisher.py \
   "$TMPDIR/fielddata.json" \
   "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
   "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
-  "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
+  "$TMPDIR/${SLUG}_mega-menu_502x283.webp" \
+  "$TMPDIR/${SLUG}_img-1_1578x888.webp" \
+  "$TMPDIR/${SLUG}_img-2_1578x888.webp" \
+  "$TMPDIR/${SLUG}_img-3_1578x888.webp" \
+  "$TMPDIR/${SLUG}_img-4_1578x888.webp" \
+  "$TMPDIR/${SLUG}_img-5_1578x888.webp" \
+  "$TMPDIR/${SLUG}_img-6_1578x888.webp"
 ```
 
-The script passes the filename as-is to Webflow. Files land in the asset library as
-`{slug}_page-header_1578x888.webp` etc. — self-documenting, sortable by slug.
+Inline images are passed as additional positional args after the 3 hero images.
+The script uploads them and replaces `__INLINE_IMG_1__` … `__INLINE_IMG_6__`
+placeholders in `post-content` with real Webflow CDN URLs before publish.
+
+Omit inline image args if the article has no body images.
 
 The script prints the live URL to stdout on success. Surface it to the user:
 

@@ -3,15 +3,23 @@
 blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
 
 Usage:
-    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp>
+    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp img-2.webp ...]
 
-    Images must already be resized and converted to WebP by the caller (see image-pipeline.md).
-    Expected sizes: header=1578×888, grid=724×408, menu=502×283.
-    Expected naming: "{Article Title}_page-header.webp", "{Article Title}_thumbnail.webp",
-                     "{Article Title}_mega-menu.webp"
+    Required args:
+        fielddata.json  — CMS field data; post-content may contain __INLINE_IMG_1__ … __INLINE_IMG_N__
+                          placeholders that will be replaced with real CDN URLs before publish.
+        header.webp     — Page header image (1578×888)
+        grid.webp       — Grid thumbnail (724×408)
+        menu.webp       — Mega menu thumbnail (502×283)
+
+    Optional additional args (inline body images, in order):
+        img-1.webp …    — Inline images for the post body, already converted to WebP.
+                          Each replaces the corresponding __INLINE_IMG_N__ placeholder
+                          in post-content. Pass them in the same order they appear in
+                          the article (img-1 = first platform section, etc.).
 
 Environment:
-    WEBFLOW_API_TOKEN  —  Webflow API token with CMS read/write access
+    WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
 
 Outputs (stdout):
     JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
@@ -36,6 +44,16 @@ except ImportError:
 SITE_ID            = "66e2765d540e1939a89db4bb"
 BLOG_COLLECTION_ID = "66e2765d540e1939a89db6a4"
 API_BASE           = "https://api.webflow.com/v2"
+
+# Webflow Rich Text figure template for inline images.
+# max-width matches inline image width (1578px); alt is Webflow's standard placeholder.
+FIGURE_TEMPLATE = (
+    '<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" '
+    'style="max-width:1578px" data-rt-type="image" data-rt-align="fullwidth" '
+    'data-rt-max-width="1578px">'
+    '<div><img alt="__wf_reserved_inherit" src="{url}" loading="lazy"></div>'
+    '</figure>'
+)
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -74,17 +92,17 @@ def _check(r: requests.Response, label: str) -> None:
 def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     """
     Three-step Webflow asset upload.
-    1. Compute MD5 hash.
+    1. MD5 hash.
     2. POST /v2/sites/{siteId}/assets  →  S3 pre-signed URL + signing headers.
     3. POST file to S3 as image/webp.
     4. GET asset to retrieve hostedUrl.
-    Returns (asset_id, hosted_url) — both are stored in the CMS image object.
+    Returns (asset_id, hosted_url).
     """
     headers = api_headers(token)
     file_hash = md5_file(file_path)
     print(f"  → {file_name}  (MD5 {file_hash[:8]}…)", file=sys.stderr)
 
-    # Step 1: register with Webflow
+    # Register asset with Webflow
     r = requests.post(
         f"{API_BASE}/sites/{SITE_ID}/assets",
         headers={**headers, "Content-Type": "application/json"},
@@ -97,7 +115,7 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     d = meta["uploadDetails"]
     asset_id = meta["id"]
 
-    # Step 2: upload to S3 as WebP
+    # Upload to S3
     with open(file_path, "rb") as f:
         s3 = requests.post(
             upload_url,
@@ -122,7 +140,7 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
         print(s3.text[:500], file=sys.stderr)
         sys.exit(1)
 
-    # Step 3: fetch the hosted URL from Webflow
+    # Retrieve hosted URL
     asset_r = requests.get(
         f"{API_BASE}/sites/{SITE_ID}/assets/{asset_id}",
         headers=headers,
@@ -138,6 +156,26 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
 
     print(f"     ✓ {hosted_url}", file=sys.stderr)
     return asset_id, hosted_url
+
+
+# ── Inline image injection ─────────────────────────────────────────────────────
+
+def inject_inline_images(post_content: str, inline_urls: list) -> str:
+    """
+    Replace __INLINE_IMG_1__ … __INLINE_IMG_N__ placeholders in post_content
+    with Webflow <figure> tags containing the real CDN URLs.
+    Placeholders must be placed verbatim in post-content by the SKILL before
+    this script runs (one per platform section, after the opening <h2> tag).
+    """
+    for i, url in enumerate(inline_urls, start=1):
+        placeholder = f"__INLINE_IMG_{i}__"
+        figure = FIGURE_TEMPLATE.format(url=url)
+        if placeholder in post_content:
+            post_content = post_content.replace(placeholder, figure)
+            print(f"  ✓ Injected inline image {i}", file=sys.stderr)
+        else:
+            print(f"  ⚠ Placeholder {placeholder} not found in post-content — skipped", file=sys.stderr)
+    return post_content
 
 
 # ── Publish ────────────────────────────────────────────────────────────────────
@@ -156,16 +194,20 @@ def publish_live(token: str, field_data: dict) -> dict:
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    if len(sys.argv) != 5:
+    if len(sys.argv) < 5:
         print(
-            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp>",
+            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...]",
             file=sys.stderr,
         )
         sys.exit(1)
 
-    fielddata_path, header_webp, grid_webp, menu_webp = sys.argv[1:]
+    fielddata_path = sys.argv[1]
+    header_webp    = sys.argv[2]
+    grid_webp      = sys.argv[3]
+    menu_webp      = sys.argv[4]
+    inline_paths   = sys.argv[5:]  # optional, zero or more
 
-    for path in [fielddata_path, header_webp, grid_webp, menu_webp]:
+    for path in [fielddata_path, header_webp, grid_webp, menu_webp] + inline_paths:
         if not Path(path).exists():
             print(f"ERROR: File not found: {path}", file=sys.stderr)
             sys.exit(1)
@@ -173,24 +215,35 @@ def main() -> None:
     with open(fielddata_path) as f:
         field_data = json.load(f)
 
+    slug  = field_data.get("slug", "blog-post")
     token = get_token()
 
-    # Upload all three images — returns (asset_id, hosted_url) each
-    # File names follow production convention: "{Article Title}_page-header.webp" etc.
-    # The caller (SKILL.md) names the files correctly before passing them here.
-    print("Uploading images…", file=sys.stderr)
+    # ── Upload hero images ────────────────────────────────────────────────────
+    print("Uploading hero images…", file=sys.stderr)
     header_id, header_url = upload_asset(token, header_webp, Path(header_webp).name)
     grid_id,   grid_url   = upload_asset(token, grid_webp,   Path(grid_webp).name)
     menu_id,   menu_url   = upload_asset(token, menu_webp,   Path(menu_webp).name)
 
-    # Inject image objects matching production format:
-    # { "fileId": "<webflow-asset-id>", "url": "<cdn-url>", "alt": null }
-    # Note: alt is null in production; image-alt-text is the standalone PlainText field.
+    # Production format: { fileId, url, alt: null }
     field_data["image-page-header"]   = {"fileId": header_id, "url": header_url, "alt": None}
     field_data["grid-thumbnail"]      = {"fileId": grid_id,   "url": grid_url,   "alt": None}
     field_data["thumbnail-mega-menu"] = {"fileId": menu_id,   "url": menu_url,   "alt": None}
 
-    # Publish live
+    # ── Upload inline body images & inject into post-content ──────────────────
+    if inline_paths:
+        print(f"Uploading {len(inline_paths)} inline image(s)…", file=sys.stderr)
+        inline_urls = []
+        for path in inline_paths:
+            _, url = upload_asset(token, path, Path(path).name)
+            inline_urls.append(url)
+
+        if "post-content" in field_data and inline_urls:
+            print("Injecting inline images into post-content…", file=sys.stderr)
+            field_data["post-content"] = inject_inline_images(
+                field_data["post-content"], inline_urls
+            )
+
+    # ── Publish live ──────────────────────────────────────────────────────────
     print("Publishing to Webflow…", file=sys.stderr)
     result = publish_live(token, field_data)
 
