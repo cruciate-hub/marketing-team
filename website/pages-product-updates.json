@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T11:38:20.690Z",
+    "generatedAt": "2026-06-04T15:49:59.092Z",
     "itemCount": 61,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
@@ -261,7 +261,7 @@
     {
       "url": "https://www.social.plus/product-update/react-native-and-typescript-support",
       "metaTitle": "Announcing React Native and TypeScript support for Social+ SDK",
-      "metaDescription": "We are very excited to announce that Social+ SDK now fully supports React Native and TypeScript.",
+      "metaDescription": "We are excited to announce that the social.plus SDK now fully supports React Native and TypeScript for faster app development.",
       "content": "# Announcing React Native and TypeScript support for Social+ SDK"
     },
     {
