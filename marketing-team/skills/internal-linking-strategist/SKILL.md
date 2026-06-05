@@ -565,7 +565,9 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 **Audit existing internal links before adding new ones.** When processing a page that already contains internal links (links to `social.plus` pages), evaluate each one before proposing additions: does the anchor text match the canonical map? Does the target URL still reflect the correct intent (definitional vs commercial)? Has the destination been moved, consolidated, or added to the do-not-link list? Fix or flag anything misrouted — don't just stack new links on top of broken existing ones.
 
-**Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope. Do not evaluate, comment on, or suggest changes to them regardless of context. If external links are all that exist in a page, treat it as having zero existing internal links and proceed accordingly.
+**Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope.
+
+**Repoint product-update / release-note links that use canonical anchors.** If an existing link uses an anchor that matches a canonical entry in `link-strategy.md` (e.g. "Events", "live chat", "activity feed") but points to a `/product-update/*` or `/release-note/*` URL instead of the canonical use-case or product page, repoint it to the canonical target. Product-update and release-note pages are dated announcements; the evergreen use-case/product pages are the correct authority targets. If repointing would create a 3rd link to the same target (violating the max-2-same-anchor rule), strip the link tag and keep the anchor as plain text instead. Do not evaluate, comment on, or suggest changes to them regardless of context. If external links are all that exist in a page, treat it as having zero existing internal links and proceed accordingly.
 
 ## Compliance check
 
