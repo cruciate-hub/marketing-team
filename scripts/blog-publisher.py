@@ -285,6 +285,12 @@ def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_pat
     chk("content:no-outreach-leak", "OUTREACH VERSION" not in pc and "INTERNAL USE" not in pc)
     chk("content:no-disclosure-leak", "OPTIONAL DISCLOSURE" not in pc)
     chk("content:no-h1", "<h1>" not in pc)
+    # Internal links should be present — zero almost always means Phase 3 (internal
+    # linking) was skipped. Internal = relative href or a social.plus URL.
+    n_internal = len(re.findall(r'href="(?:/|https?://(?:www\.)?social\.plus)', pc))
+    chk("content:has-internal-links", n_internal >= 1,
+        "no internal links found — did Phase 3 (internal-linking-strategist) run?" if not n_internal
+        else f"{n_internal} internal links")
     n_placeholders = len(re.findall(r"__INLINE_IMG_\d+__", pc))
     chk("content:placeholders-match-inline", n_placeholders == len(inline_paths),
         f"{n_placeholders} placeholders vs {len(inline_paths)} inline images")

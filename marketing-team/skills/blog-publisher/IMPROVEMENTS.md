@@ -91,11 +91,15 @@ Ordered by impact. Items marked ✅ are done; the rest are open.
    then. The skill should never delete-then-recreate; prefer staging a new item
    or updating in place.
 
-7. **Robust internal-link insertion.**
-   The strategist returns "Insert at: <verbatim sentence>" but 2 of 7 anchors
-   for Listicle 2 didn't match the converted HTML verbatim (punctuation/spacing
-   drift), so they were skipped on the first pass. Either have the strategist
-   return the full edited post-content, or insert against a normalized copy.
+7. ✅ **Robust internal-link insertion** (done).
+   `scripts/apply_internal_links.py` places the strategist's suggestions
+   deterministically: it locates each `insert_at` sentence with WHITESPACE-FLEXIBLE
+   matching (the exact-match drift that dropped 2 of 7 before), then wraps the anchor
+   there or swaps in the rephrase. Never links inside headings or the comparison-table
+   embed; reports any genuinely unplaceable link instead of forcing a bad edit. SKILL
+   Phase 3 now builds a `links.json` and calls it; the `--dry-run` gate
+   `content:has-internal-links` catches a skipped Phase 3. Verified 6/7 on a real L2
+   set (the 7th was a deliberately impossible anchor) with zero links in protected regions.
 
 ## Open — low impact / polish
 

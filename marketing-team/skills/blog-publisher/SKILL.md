@@ -162,13 +162,38 @@ placeholder with a Webflow `<figure>` tag at publish time.
 
 Invoke the `internal-linking-strategist` skill in **draft mode**. Pass:
 
-- The converted HTML (post-content)
+- The converted HTML (post-content) — the `fielddata.json` from Phase 2
 - Target keyword (from the article title)
 - Category names
 - Content type: `blog`
 
-Embed the returned 3–7 `<a href="..." target="_blank">` tags into the HTML at the
-suggested insertion points. Resolve any cannibalization warnings before proceeding.
+**Do not hand-embed the links** — that drifts (a long "Insert at" sentence fails to match
+on punctuation/spacing). Instead, turn the strategist's suggestions into a `links.json`
+and let the helper place them deterministically. For each suggestion the strategist
+returns, capture:
+
+```json
+[
+  {"anchor": "community SDK", "url": "https://www.social.plus/social/sdk",
+   "insert_at": "<the strategist's verbatim 'Insert at' sentence>"},
+  {"anchor": "content moderation", "url": "https://www.social.plus/moderation",
+   "insert_at": "<original sentence>", "rephrase": "<the strategist's 'Rephrase suggestion'>"}
+]
+```
+
+Include `insert_at` from every suggestion (it tells the helper *where*). Include `rephrase`
+only when the strategist provided one (anchor isn't already in that sentence). Then:
+
+```bash
+python3 "$REPO/scripts/apply_internal_links.py" "$TMPDIR/fielddata.json" "$TMPDIR/links.json"
+```
+
+The helper locates each `insert_at` sentence (whitespace-flexible), wraps the anchor there
+or swaps in the rephrase, never links inside headings or the comparison-table embed, and
+prints a JSON summary `{applied, unplaced}`. For any `unplaced` entry (rare — neither the
+anchor nor the sentence was found), apply that one by hand using its `rephrase`, or drop it.
+
+Resolve any cannibalization warnings from the strategist before proceeding.
 
 ## Phase 4 — Compliance check
 
