@@ -114,13 +114,16 @@ def convert_body(raw: str) -> tuple:
                 tbl.append(lines[i].rstrip()); i += 1
             html.append(convert_table(tbl)); continue
 
-        m = PLATFORM_RE.match(line)                         # platform heading
+        m = PLATFORM_RE.match(line)                         # platform entry → H3 (sub-heading)
         if m:
+            # Platform entries are sub-sections under the "N Best …" H2 section, so they
+            # are H3. Section headings (What Is, What to Look for, At-a-Glance, How to
+            # Choose, and the "N Best …" list heading) stay H2.
             img_n += 1
-            html.append(f"<h2>{clean_inline(m.group(1))}</h2>__INLINE_IMG_{img_n}__")
+            html.append(f"<h3>{clean_inline(m.group(1))}</h3>__INLINE_IMG_{img_n}__")
             i += 1; continue
 
-        m = SECTION_RE.match(line)                          # section heading
+        m = SECTION_RE.match(line)                          # section heading → H2
         if m:
             html.append(f"<h2>{clean_inline(m.group(1))}</h2>")
             i += 1; continue
