@@ -263,6 +263,18 @@ The script prints the live URL to stdout on success. Surface it to the user:
   Item ID: {itemId}
 ```
 
+## Slug rules
+
+- Slugs are lowercase, hyphen-separated, no special characters.
+- **Never include the year in a slug** — even if the article title contains a year.
+  - ✅ `6-best-in-app-community-platforms-for-consumer-apps`
+  - ❌ `6-best-in-app-community-platforms-for-consumer-apps-2026`
+- If Webflow returns 400 "slug already exists", **stop immediately** and surface the
+  conflict to the user. Do not append any suffix (not `-2`, not `-draft`, not the year).
+  Ask the user whether to update the existing post or choose a different slug.
+  Webflow holds slugs permanently after item deletion — the user must either resolve
+  the conflict in the Designer or choose a genuinely new slug.
+
 ## Error handling
 
 | Error | Action |
@@ -272,7 +284,7 @@ The script prints the live URL to stdout on success. Surface it to the user:
 | PNG width < 1578 px | Stop. Ask for the full-resolution export (min 1578×888 px). |
 | S3 upload fails | Retry once. If still failing, report the HTTP status and stop. |
 | Webflow 401 | Token invalid or expired. Ask user to refresh `WEBFLOW_API_TOKEN`. |
-| Webflow 400 "slug already exists" | Suggest appending `-2026` to the slug and ask user to confirm. |
+| Webflow 400 "slug already exists" | Stop. Surface the conflict — do not append any suffix. See Slug rules above. |
 | Webflow 429 (rate limited) | Wait 10 s, retry once. |
 | `requests` not installed | Stop. Tell user: `pip install requests` |
 
