@@ -29,7 +29,7 @@ If the user asks to write AND publish, run `blog-seo-content` first, then this s
 | Requirement | How to set it up |
 |---|---|
 | `WEBFLOW_API_TOKEN` env var | Webflow → Site Settings → Integrations → API Access. Token must have **cms:write** AND **assets:write** scopes. |
-| Python + requests | `pip install requests` (one-time) |
+| Python 3 | Standard library only — no `pip install`, no virtualenv. (Image resizing uses Pillow, which ships with most Python installs; `--dry-run` skips the dimension check gracefully if it's absent.) |
 | macOS 10.14+ | For `sips` WebP conversion. Linux: use ImageMagick fallback in `image-pipeline.md`. |
 | Google Drive MCP connected | Needed to read the Google Doc. The doc must be shared with the account the MCP is authenticated as. |
 

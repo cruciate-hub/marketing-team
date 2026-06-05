@@ -326,7 +326,7 @@ The script prints the live URL to stdout on success. Surface it to the user:
 | Webflow 401 | Token invalid or expired. Ask user to refresh `WEBFLOW_API_TOKEN`. |
 | Webflow 400 "slug already exists" | Stop. Surface the conflict — do not append any suffix. See Slug rules above. |
 | Webflow 429 (rate limited) | Wait 10 s, retry once. |
-| `requests` not installed | Stop. Tell user: `pip install requests` |
+| `python3` not found | Stop. The scripts need Python 3 (standard library only — no pip, no venv). |
 
 ## What NOT to publish
 

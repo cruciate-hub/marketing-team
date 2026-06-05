@@ -72,10 +72,13 @@ Ordered by impact. Items marked ✅ are done; the rest are open.
    Handles both `Image alt text:` and `**Image alt text:**`, skips OUTREACH/INTERNAL
    blocks, and warns on empty meta/summary/alt fields. SKILL Phase 2 now calls it.
 
-4. **Drop the `requests` dependency.**
-   `requests` isn't installed by default and the externally-managed Python on
-   macOS blocks `pip install`, forcing a venv. Rewriting the script on stdlib
-   `urllib.request` removes that whole friction class — no venv, no install.
+4. ✅ **Dropped the `requests` dependency** (done).
+   `blog-publisher.py` now uses stdlib `urllib` only — no `pip install`, no venv, runs
+   anywhere with Python 3. The S3 upload's multipart/form-data body is hand-built (file
+   part last, as S3's POST policy requires). Verified end-to-end on the *system* python3
+   (which has no `requests`): dry-run 36/36, and a real staged upload+create attached the
+   image and embedded the figure correctly (test item then deleted). Matters because this
+   is a skill other people run — zero setup.
 
 ## Open — medium impact
 

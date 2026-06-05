@@ -7,14 +7,17 @@ Usage:
 
     --staged    Create a staged item (goes live on next Webflow site publish) rather
                 than publishing immediately.
-    --dry-run   Validate everything (required fields, slug-has-no-year, styled table
-                not flattened, placeholder/inline-image count match, exact image
-                dimensions) and write dry-run-report.json. Makes NO API calls and
-                needs no token. Exits non-zero on any failed check. Use in tests/CI.
+    --dry-run   Validate everything (required fields, slug rules, table not flattened /
+                in embed / no style block, internal links present, placeholder-to-image
+                match, exact image dimensions) and write dry-run-report.json. Makes NO API
+                calls and needs no token. Exits non-zero on any failed check. Use in tests/CI.
 
 Environment:
     WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
                           Not required for --dry-run.
+
+Dependencies: Python 3 standard library only — no pip install, no virtualenv. (Image
+dimension checks in --dry-run use Pillow if present, and are skipped gracefully if not.)
 
 Outputs (stdout):
     JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
@@ -25,19 +28,11 @@ import json
 import os
 import re
 import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+import uuid
 from pathlib import Path
-
-# requests is only needed for the actual upload/publish — dry-run runs without it.
-try:
-    import requests
-except ImportError:
-    requests = None
-
-
-def _require_requests() -> None:
-    if requests is None:
-        print("ERROR: requests not installed. Run: pip install requests", file=sys.stderr)
-        sys.exit(1)
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 
@@ -53,7 +48,7 @@ FIGURE_TEMPLATE = (
     '</figure>'
 )
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
+# ── HTTP (stdlib only) ───────────────────────────────────────────────────────────
 
 def get_token() -> str:
     token = os.environ.get("WEBFLOW_API_TOKEN", "").strip()
@@ -64,7 +59,7 @@ def get_token() -> str:
 
 
 def api_headers(token: str) -> dict:
-    return {"Authorization": f"Bearer {token}", "accept": "application/json"}
+    return {"Authorization": f"Bearer {token}", "Accept": "application/json"}
 
 
 def md5_file(path: str) -> str:
@@ -72,69 +67,110 @@ def md5_file(path: str) -> str:
         return hashlib.md5(f.read()).hexdigest()
 
 
-def _check(r: requests.Response, label: str) -> None:
-    if not r.ok:
-        print(f"ERROR: {label} — HTTP {r.status_code}", file=sys.stderr)
-        try:
-            print(json.dumps(r.json(), indent=2)[:800], file=sys.stderr)
-        except Exception:
-            print(r.text[:800], file=sys.stderr)
+def http(method: str, url: str, headers=None, json_body=None, raw_body=None):
+    """
+    Minimal HTTP via urllib. Returns (status, text). Never raises on an HTTP error
+    status — returns the error body so callers can report it. json_body is JSON-encoded
+    and sets Content-Type; raw_body is sent verbatim (used for the S3 multipart upload).
+    """
+    headers = dict(headers or {})
+    data = None
+    if json_body is not None:
+        data = json.dumps(json_body).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+    elif raw_body is not None:
+        data = raw_body
+    req = urllib.request.Request(url, data=data, method=method, headers=headers)
+    try:
+        with urllib.request.urlopen(req) as resp:
+            return resp.status, resp.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        return e.code, e.read().decode("utf-8", "replace")
+    except urllib.error.URLError as e:
+        return 0, f"network error: {e}"
+
+
+def _json(text: str) -> dict:
+    try:
+        return json.loads(text)
+    except Exception:
+        return {}
+
+
+def _check(status: int, text: str, label: str) -> None:
+    if not (200 <= status < 300):
+        print(f"ERROR: {label} — HTTP {status}", file=sys.stderr)
+        parsed = _json(text)
+        print(json.dumps(parsed, indent=2)[:800] if parsed else text[:800], file=sys.stderr)
         sys.exit(1)
+
+
+def _multipart_body(fields: dict, file_field: str, filename: str,
+                    file_bytes: bytes, file_content_type: str):
+    """
+    Build a multipart/form-data body for an AWS S3 POST-policy upload. The file part MUST
+    come last (S3 ignores any field after `file`), so emit all form fields first.
+    Returns (body_bytes, content_type_header).
+    """
+    boundary = "----webflowblog" + uuid.uuid4().hex
+    crlf = "\r\n"
+    head = "".join(
+        f"--{boundary}{crlf}"
+        f'Content-Disposition: form-data; name="{k}"{crlf}{crlf}{v}{crlf}'
+        for k, v in fields.items()
+    )
+    file_head = (
+        f"--{boundary}{crlf}"
+        f'Content-Disposition: form-data; name="{file_field}"; filename="{filename}"{crlf}'
+        f"Content-Type: {file_content_type}{crlf}{crlf}"
+    )
+    body = head.encode("utf-8") + file_head.encode("utf-8") + file_bytes + f"{crlf}--{boundary}--{crlf}".encode("utf-8")
+    return body, f"multipart/form-data; boundary={boundary}"
 
 
 # ── Asset upload ───────────────────────────────────────────────────────────────
 
 def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     """
-    Upload an image to Webflow via 3-step process.
-    Returns (asset_id, hosted_url).
-
-    The hosted S3 URL is constructed directly from uploadDetails.bucket + uploadDetails.key —
-    no extra GET /assets call needed. When this URL is passed to a CMS Image field,
-    Webflow accepts it and re-hosts it on CDN.
+    Upload an image to Webflow (3-step). Returns (asset_id, hosted_url).
+    The hosted S3 URL is built directly from uploadDetails.bucket + key — no extra GET.
+    Passing that URL to a CMS Image field makes Webflow accept it and re-host it on CDN.
     """
-    headers   = api_headers(token)
     file_hash = md5_file(file_path)
     print(f"  → {file_name}  (MD5 {file_hash[:8]}…)", file=sys.stderr)
 
-    r = requests.post(
-        f"{API_BASE}/sites/{SITE_ID}/assets",
-        headers={**headers, "Content-Type": "application/json"},
-        json={"fileName": file_name, "fileHash": file_hash},
-    )
-    _check(r, f"asset-register {file_name}")
-    meta = r.json()
-
+    status, text = http("POST", f"{API_BASE}/sites/{SITE_ID}/assets",
+                        headers=api_headers(token),
+                        json_body={"fileName": file_name, "fileHash": file_hash})
+    _check(status, text, f"asset-register {file_name}")
+    meta = _json(text)
     upload_url = meta["uploadUrl"]
     d          = meta["uploadDetails"]
     asset_id   = meta["id"]
 
-    # S3 upload
+    # S3 POST-policy upload (form fields then the file, file last)
+    fields = {
+        "acl":                   d["acl"],
+        "bucket":                d["bucket"],
+        "X-Amz-Algorithm":       d["X-Amz-Algorithm"],
+        "X-Amz-Credential":      d["X-Amz-Credential"],
+        "X-Amz-Date":            d["X-Amz-Date"],
+        "key":                   d["key"],
+        "Policy":                d["Policy"],
+        "X-Amz-Signature":       d["X-Amz-Signature"],
+        "success_action_status": d["success_action_status"],
+        "Content-Type":          d["content-type"],
+        "Cache-Control":         d["Cache-Control"],
+    }
     with open(file_path, "rb") as f:
-        s3 = requests.post(
-            upload_url,
-            data={
-                "acl":                   d["acl"],
-                "bucket":                d["bucket"],
-                "X-Amz-Algorithm":       d["X-Amz-Algorithm"],
-                "X-Amz-Credential":      d["X-Amz-Credential"],
-                "X-Amz-Date":            d["X-Amz-Date"],
-                "key":                   d["key"],
-                "Policy":                d["Policy"],
-                "X-Amz-Signature":       d["X-Amz-Signature"],
-                "success_action_status": d["success_action_status"],
-                "Content-Type":          d["content-type"],
-                "Cache-Control":         d["Cache-Control"],
-            },
-            files={"file": (file_name, f, "image/webp")},
-        )
-
-    if s3.status_code not in (200, 201, 204):
-        print(f"ERROR: S3 upload failed — HTTP {s3.status_code}", file=sys.stderr)
-        print(s3.text[:500], file=sys.stderr)
+        file_bytes = f.read()
+    body, ctype = _multipart_body(fields, "file", file_name, file_bytes, "image/webp")
+    status, text = http("POST", upload_url, headers={"Content-Type": ctype}, raw_body=body)
+    if status not in (200, 201, 204):
+        print(f"ERROR: S3 upload failed — HTTP {status}", file=sys.stderr)
+        print(text[:500], file=sys.stderr)
         sys.exit(1)
 
-    # Construct S3 hosted URL directly from upload details (no extra API call)
     hosted_url = f"https://s3.amazonaws.com/{d['bucket']}/{d['key']}"
     print(f"     ✓ {hosted_url}", file=sys.stderr)
     return asset_id, hosted_url
@@ -156,13 +192,10 @@ def inject_inline_images(post_content: str, inline_urls: list) -> str:
 # ── Publish ────────────────────────────────────────────────────────────────────
 
 def publish_live(token: str, field_data: dict) -> dict:
-    r = requests.post(
-        f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/live",
-        headers={**api_headers(token), "Content-Type": "application/json"},
-        json={"fieldData": field_data},
-    )
-    _check(r, "webflow-publish")
-    return r.json()
+    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/live",
+                        headers=api_headers(token), json_body={"fieldData": field_data})
+    _check(status, text, "webflow-publish")
+    return _json(text)
 
 
 def _extract_item(data) -> dict:
@@ -179,18 +212,16 @@ def publish_staged(token: str, field_data: dict) -> dict:
     """
     Create a staged item via POST /items/bulk.
 
-    Image fields persist directly in the bulk call AS LONG AS each image url is a
-    valid S3 hostedUrl (https://s3.amazonaws.com/{bucket}/{key}). Webflow re-hosts
-    it on CDN. A 403-returning cdn.prod.website-files.com URL is silently dropped —
-    that was the earlier failure mode, not a bulk-endpoint limitation.
+    Image fields persist directly in the bulk call AS LONG AS each image url is a valid S3
+    hostedUrl (https://s3.amazonaws.com/{bucket}/{key}); Webflow re-hosts it on CDN. A
+    403-returning cdn.prod.website-files.com URL is silently dropped — that was the earlier
+    failure mode, not a bulk-endpoint limitation.
     """
-    r = requests.post(
-        f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/bulk",
-        headers={**api_headers(token), "Content-Type": "application/json"},
-        json={"fieldData": field_data, "isDraft": False},
-    )
-    _check(r, "webflow-stage")
-    return _extract_item(r.json())
+    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/bulk",
+                        headers=api_headers(token),
+                        json_body={"fieldData": field_data, "isDraft": False})
+    _check(status, text, "webflow-stage")
+    return _extract_item(_json(text))
 
 
 # ── Pre-flight checks ───────────────────────────────────────────────────────────
@@ -201,24 +232,20 @@ def preflight(token: str, slug: str) -> None:
       1. Token works and has site access (one cheap GET /sites/{id}).
       2. Slug is not already taken (avoids 9 wasted uploads then a 400).
     """
-    # 1. Token + site access
-    r = requests.get(f"{API_BASE}/sites/{SITE_ID}", headers=api_headers(token))
-    if r.status_code == 401:
+    status, text = http("GET", f"{API_BASE}/sites/{SITE_ID}", headers=api_headers(token))
+    if status == 401:
         print("ERROR: Token rejected (401). Check WEBFLOW_API_TOKEN.", file=sys.stderr)
         sys.exit(1)
-    if r.status_code == 403:
+    if status == 403:
         print("ERROR: Token missing scopes. Needs sites:read, cms:write, assets:write.", file=sys.stderr)
         sys.exit(1)
-    _check(r, "preflight-site")
+    _check(status, text, "preflight-site")
 
-    # 2. Slug availability
-    r = requests.get(
-        f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items",
-        headers=api_headers(token),
-        params={"slug": slug},
-    )
-    _check(r, "preflight-slug")
-    existing = r.json().get("items", [])
+    qs = urllib.parse.urlencode({"slug": slug})
+    status, text = http("GET", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items?{qs}",
+                        headers=api_headers(token))
+    _check(status, text, "preflight-slug")
+    existing = _json(text).get("items", [])
     if existing:
         print(f"ERROR: Slug '{slug}' already exists (item {existing[0]['id']}).", file=sys.stderr)
         print("       Stopping before upload. Choose a new slug or update the existing item.", file=sys.stderr)
@@ -378,7 +405,7 @@ def main() -> None:
     with open(fielddata_path) as f:
         field_data = json.load(f)
 
-    slug  = field_data.get("slug", "blog-post")
+    slug = field_data.get("slug", "blog-post")
 
     # ── Dry-run: validate everything, touch no API. Repeatable + side-effect-free.
     if dry_run:
@@ -386,7 +413,6 @@ def main() -> None:
                          fielddata_path)
         return
 
-    _require_requests()
     token = get_token()
 
     # ── Pre-flight: fail before any upload if token or slug is bad ─────────────
