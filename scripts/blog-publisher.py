@@ -5,26 +5,11 @@ blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
 Usage:
     python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]
 
-    Required args:
-        fielddata.json  — CMS field data; post-content may contain __INLINE_IMG_1__ … __INLINE_IMG_N__
-                          placeholders that will be replaced with real hosted URLs before publish.
-        header.webp     — Page header image (1578×888)
-        grid.webp       — Grid thumbnail (724×408)
-        menu.webp       — Mega menu thumbnail (502×283)
-
-    Optional additional args:
-        img-1.webp …    — Inline body images in section order. Each replaces the
-                          corresponding __INLINE_IMG_N__ placeholder in post-content.
-        --staged        — Create as staged item (goes live on next Webflow site publish)
-                          instead of publishing immediately.
-
 Environment:
     WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
 
 Outputs (stdout):
     JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
-
-Errors go to stderr; exits with code 1 on any failure.
 """
 
 import hashlib
@@ -45,7 +30,6 @@ SITE_ID            = "66e2765d540e1939a89db4bb"
 BLOG_COLLECTION_ID = "66e2765d540e1939a89db6a4"
 API_BASE           = "https://api.webflow.com/v2"
 
-# Webflow Rich Text figure template for inline images.
 FIGURE_TEMPLATE = (
     '<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" '
     'style="max-width:1578px" data-rt-type="image" data-rt-align="fullwidth" '
@@ -54,14 +38,12 @@ FIGURE_TEMPLATE = (
     '</figure>'
 )
 
-
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
 def get_token() -> str:
     token = os.environ.get("WEBFLOW_API_TOKEN", "").strip()
     if not token:
-        print("ERROR: WEBFLOW_API_TOKEN is not set.", file=sys.stderr)
-        print("  export WEBFLOW_API_TOKEN=your_token", file=sys.stderr)
+        print("ERROR: WEBFLOW_API_TOKEN is not set.\n  export WEBFLOW_API_TOKEN=your_token", file=sys.stderr)
         sys.exit(1)
     return token
 
@@ -79,8 +61,7 @@ def _check(r: requests.Response, label: str) -> None:
     if not r.ok:
         print(f"ERROR: {label} — HTTP {r.status_code}", file=sys.stderr)
         try:
-            detail = r.json()
-            print(json.dumps(detail, indent=2)[:800], file=sys.stderr)
+            print(json.dumps(r.json(), indent=2)[:800], file=sys.stderr)
         except Exception:
             print(r.text[:800], file=sys.stderr)
         sys.exit(1)
@@ -88,48 +69,19 @@ def _check(r: requests.Response, label: str) -> None:
 
 # ── Asset upload ───────────────────────────────────────────────────────────────
 
-def get_asset_hosted_url(token: str, asset_id: str) -> str:
-    """
-    Retrieve the real hostedUrl for an asset via GET /v2/sites/{siteId}/assets.
-    The single-asset GET endpoint does not exist in Webflow API v2.
-    Paginates if needed.
-    """
-    headers = api_headers(token)
-    offset  = 0
-    limit   = 100
-    while True:
-        r = requests.get(
-            f"{API_BASE}/sites/{SITE_ID}/assets",
-            headers=headers,
-            params={"limit": limit, "offset": offset},
-        )
-        _check(r, f"assets-list (offset={offset})")
-        data   = r.json()
-        assets = data.get("assets", [])
-        for a in assets:
-            if a["id"] == asset_id:
-                return a.get("hostedUrl") or a.get("url") or ""
-        # If we got fewer than limit items, we've exhausted the list
-        if len(assets) < limit:
-            break
-        offset += limit
-    return ""
-
-
 def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     """
-    Three-step Webflow asset upload.
-    1. MD5 hash.
-    2. POST /v2/sites/{siteId}/assets  →  S3 pre-signed URL + signing headers.
-    3. POST file to S3 as image/webp.
-    4. GET hostedUrl via asset listing (single-asset GET does not exist in v2).
+    Upload an image to Webflow via 3-step process.
     Returns (asset_id, hosted_url).
+
+    The hosted S3 URL is constructed directly from uploadDetails.bucket + uploadDetails.key —
+    no extra GET /assets call needed. When this URL is passed to a CMS Image field,
+    Webflow accepts it and re-hosts it on CDN.
     """
     headers   = api_headers(token)
     file_hash = md5_file(file_path)
     print(f"  → {file_name}  (MD5 {file_hash[:8]}…)", file=sys.stderr)
 
-    # Register asset with Webflow
     r = requests.post(
         f"{API_BASE}/sites/{SITE_ID}/assets",
         headers={**headers, "Content-Type": "application/json"},
@@ -142,7 +94,7 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     d          = meta["uploadDetails"]
     asset_id   = meta["id"]
 
-    # Upload to S3
+    # S3 upload
     with open(file_path, "rb") as f:
         s3 = requests.post(
             upload_url,
@@ -167,12 +119,8 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
         print(s3.text[:500], file=sys.stderr)
         sys.exit(1)
 
-    # Retrieve the real hostedUrl (S3 URL, not a manually-constructed CDN path)
-    hosted_url = get_asset_hosted_url(token, asset_id)
-    if not hosted_url:
-        print(f"ERROR: Could not find hostedUrl for asset {asset_id}", file=sys.stderr)
-        sys.exit(1)
-
+    # Construct S3 hosted URL directly from upload details (no extra API call)
+    hosted_url = f"https://s3.amazonaws.com/{d['bucket']}/{d['key']}"
     print(f"     ✓ {hosted_url}", file=sys.stderr)
     return asset_id, hosted_url
 
@@ -180,12 +128,10 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
 # ── Inline image injection ─────────────────────────────────────────────────────
 
 def inject_inline_images(post_content: str, inline_urls: list) -> str:
-    """Replace __INLINE_IMG_N__ placeholders with Webflow <figure> tags."""
     for i, url in enumerate(inline_urls, start=1):
         placeholder = f"__INLINE_IMG_{i}__"
-        figure      = FIGURE_TEMPLATE.format(url=url)
         if placeholder in post_content:
-            post_content = post_content.replace(placeholder, figure)
+            post_content = post_content.replace(placeholder, FIGURE_TEMPLATE.format(url=url))
             print(f"  ✓ Injected inline image {i}", file=sys.stderr)
         else:
             print(f"  ⚠ Placeholder {placeholder} not found — skipped", file=sys.stderr)
@@ -195,7 +141,6 @@ def inject_inline_images(post_content: str, inline_urls: list) -> str:
 # ── Publish ────────────────────────────────────────────────────────────────────
 
 def publish_live(token: str, field_data: dict) -> dict:
-    """POST to /items/live — creates and immediately publishes the blog post."""
     r = requests.post(
         f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/live",
         headers={**api_headers(token), "Content-Type": "application/json"},
@@ -205,28 +150,74 @@ def publish_live(token: str, field_data: dict) -> dict:
     return r.json()
 
 
+def _extract_item(data) -> dict:
+    """Bulk endpoint may return a bare list or {"items":[...]}. Normalize to one item dict."""
+    if isinstance(data, dict) and "items" in data:
+        items = data["items"]
+        return items[0] if items else {}
+    if isinstance(data, list):
+        return data[0] if data else {}
+    return data if isinstance(data, dict) else {}
+
+
 def publish_staged(token: str, field_data: dict) -> dict:
-    """POST to /items/bulk — creates a staged item (goes live on next Webflow site publish)."""
+    """
+    Create a staged item via POST /items/bulk.
+
+    Image fields persist directly in the bulk call AS LONG AS each image url is a
+    valid S3 hostedUrl (https://s3.amazonaws.com/{bucket}/{key}). Webflow re-hosts
+    it on CDN. A 403-returning cdn.prod.website-files.com URL is silently dropped —
+    that was the earlier failure mode, not a bulk-endpoint limitation.
+    """
     r = requests.post(
         f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/bulk",
         headers={**api_headers(token), "Content-Type": "application/json"},
         json={"fieldData": field_data, "isDraft": False},
     )
     _check(r, "webflow-stage")
-    data = r.json()
-    if isinstance(data, list):
-        return data[0] if data else {}
-    return data
+    return _extract_item(r.json())
+
+
+# ── Pre-flight checks ───────────────────────────────────────────────────────────
+
+def preflight(token: str, slug: str) -> None:
+    """
+    Fail fast BEFORE uploading any images:
+      1. Token works and has site access (one cheap GET /sites/{id}).
+      2. Slug is not already taken (avoids 9 wasted uploads then a 400).
+    """
+    # 1. Token + site access
+    r = requests.get(f"{API_BASE}/sites/{SITE_ID}", headers=api_headers(token))
+    if r.status_code == 401:
+        print("ERROR: Token rejected (401). Check WEBFLOW_API_TOKEN.", file=sys.stderr)
+        sys.exit(1)
+    if r.status_code == 403:
+        print("ERROR: Token missing scopes. Needs sites:read, cms:write, assets:write.", file=sys.stderr)
+        sys.exit(1)
+    _check(r, "preflight-site")
+
+    # 2. Slug availability
+    r = requests.get(
+        f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items",
+        headers=api_headers(token),
+        params={"slug": slug},
+    )
+    _check(r, "preflight-slug")
+    existing = r.json().get("items", [])
+    if existing:
+        print(f"ERROR: Slug '{slug}' already exists (item {existing[0]['id']}).", file=sys.stderr)
+        print("       Stopping before upload. Choose a new slug or update the existing item.", file=sys.stderr)
+        print("       Do NOT append a year or numeric suffix — pick a genuinely distinct slug.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"✓ Pre-flight OK — token valid, slug '{slug}' available", file=sys.stderr)
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
     if len(sys.argv) < 5:
-        print(
-            "Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]",
-            file=sys.stderr,
-        )
+        print("Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]", file=sys.stderr)
         sys.exit(1)
 
     all_args    = sys.argv[1:]
@@ -250,13 +241,15 @@ def main() -> None:
     slug  = field_data.get("slug", "blog-post")
     token = get_token()
 
+    # ── Pre-flight: fail before any upload if token or slug is bad ─────────────
+    preflight(token, slug)
+
     # ── Upload hero images ────────────────────────────────────────────────────
     print("Uploading hero images…", file=sys.stderr)
     header_id, header_url = upload_asset(token, header_webp, Path(header_webp).name)
     grid_id,   grid_url   = upload_asset(token, grid_webp,   Path(grid_webp).name)
     menu_id,   menu_url   = upload_asset(token, menu_webp,   Path(menu_webp).name)
 
-    # Production CMS image field format: { fileId, url, alt: null }
     field_data["image-page-header"]   = {"fileId": header_id, "url": header_url, "alt": None}
     field_data["grid-thumbnail"]      = {"fileId": grid_id,   "url": grid_url,   "alt": None}
     field_data["thumbnail-mega-menu"] = {"fileId": menu_id,   "url": menu_url,   "alt": None}
@@ -269,11 +262,9 @@ def main() -> None:
             _, url = upload_asset(token, path, Path(path).name)
             inline_urls.append(url)
 
-        if "post-content" in field_data and inline_urls:
-            print("Injecting inline images into post-content…", file=sys.stderr)
-            field_data["post-content"] = inject_inline_images(
-                field_data["post-content"], inline_urls
-            )
+        if inline_urls and "post-content" in field_data:
+            print("Injecting inline images…", file=sys.stderr)
+            field_data["post-content"] = inject_inline_images(field_data["post-content"], inline_urls)
 
     # ── Publish ───────────────────────────────────────────────────────────────
     if staged_mode:
@@ -286,11 +277,7 @@ def main() -> None:
     item_id   = result.get("id", "")
     live_slug = (result.get("fieldData") or {}).get("slug", slug)
 
-    output = {
-        "itemId":  item_id,
-        "slug":    live_slug,
-        "liveUrl": f"https://www.social.plus/blog/{live_slug}",
-    }
+    output = {"itemId": item_id, "slug": live_slug, "liveUrl": f"https://www.social.plus/blog/{live_slug}"}
     print(json.dumps(output, indent=2))
     print(f"\n✓ Done: https://www.social.plus/blog/{live_slug}", file=sys.stderr)
 
