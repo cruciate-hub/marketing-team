@@ -68,14 +68,14 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Path | Purpose |
 |---|---|
-| [`brain.md`](./brain.md) | Main brain — cross-domain routing, precedence rules, compliance check |
-| [`messaging/`](./messaging) | Brand messaging files — tone, terminology, positioning, narrative, boilerplates, UI micro-copy |
-| [`design-system/`](./design-system) | Full visual design system — colors, typography, spacing, buttons, shadows, layout, accessibility, and more. [View brand guidelines live](https://cruciate-hub.github.io/marketing-team/design-system/brand-guidelines.html) |
-| [`assets/`](./assets) | Official logo SVGs |
-| [`emails/`](./emails) | Email template reference, strategy guide, and HTML examples |
-| [`website/`](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
-| [`marketing-team/`](./marketing-team) | `marketing-team` plugin — the 16 skill definitions that fetch from the folders above |
-| [`brand-kit/`](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
+| [**brain.md**](./brain.md) | Main brain — cross-domain routing, precedence rules, compliance check |
+| [**messaging/**](./messaging) | Brand messaging files — tone, terminology, positioning, narrative, boilerplates, UI micro-copy |
+| [**design-system/**](./design-system) | Full visual design system — colors, typography, spacing, buttons, shadows, layout, accessibility, and more. [View brand guidelines live](https://cruciate-hub.github.io/marketing-team/design-system/brand-guidelines.html) |
+| [**assets/**](./assets) | Official logo SVGs |
+| [**emails/**](./emails) | Email template reference, strategy guide, and HTML examples |
+| [**website/**](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
+| [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 16 skill definitions that fetch from the folders above |
+| [**brand-kit/**](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
 
 ## How updates work
 
