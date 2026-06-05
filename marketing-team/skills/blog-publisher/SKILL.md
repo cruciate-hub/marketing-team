@@ -237,7 +237,11 @@ If sips is not available (Linux), use the ImageMagick fallback in `image-pipelin
 Use today's date for `date-published` (ISO 8601 UTC).
 For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
 
-3. Run the publish script — hero images first, then inline images in order:
+3. **Always dry-run first.** Append `--dry-run` to validate the entire payload
+   (required fields, slug-has-no-year, styled table not flattened, placeholder/inline
+   count match, exact image dimensions) without touching the API. It writes
+   `dry-run-report.json` and exits non-zero on any failure. Fix anything it flags
+   before the real run. This is cheap insurance against a broken publish:
 
 ```bash
 cd "$REPO"
@@ -246,12 +250,23 @@ python3 scripts/blog-publisher.py \
   "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
   "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
   "$TMPDIR/${SLUG}_mega-menu_502x283.webp" \
+  "$TMPDIR/${SLUG}_img-1_1578x888.webp" ... \
+  --dry-run
+```
+
+4. Run the real publish — same command, swap `--dry-run` for `--staged` (review
+   before going live) or no flag (publish immediately). Hero images first, inline after:
+
+```bash
+python3 scripts/blog-publisher.py \
+  "$TMPDIR/fielddata.json" \
+  "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
+  "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
+  "$TMPDIR/${SLUG}_mega-menu_502x283.webp" \
   "$TMPDIR/${SLUG}_img-1_1578x888.webp" \
   "$TMPDIR/${SLUG}_img-2_1578x888.webp" \
-  "$TMPDIR/${SLUG}_img-3_1578x888.webp" \
-  "$TMPDIR/${SLUG}_img-4_1578x888.webp" \
-  "$TMPDIR/${SLUG}_img-5_1578x888.webp" \
-  "$TMPDIR/${SLUG}_img-6_1578x888.webp"
+  ... \
+  --staged
 ```
 
 Inline images are passed as additional positional args after the 3 hero images.

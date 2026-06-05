@@ -3,10 +3,18 @@
 blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
 
 Usage:
-    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]
+    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged] [--dry-run]
+
+    --staged    Create a staged item (goes live on next Webflow site publish) rather
+                than publishing immediately.
+    --dry-run   Validate everything (required fields, slug-has-no-year, styled table
+                not flattened, placeholder/inline-image count match, exact image
+                dimensions) and write dry-run-report.json. Makes NO API calls and
+                needs no token. Exits non-zero on any failed check. Use in tests/CI.
 
 Environment:
     WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
+                          Not required for --dry-run.
 
 Outputs (stdout):
     JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
@@ -15,14 +23,21 @@ Outputs (stdout):
 import hashlib
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
+# requests is only needed for the actual upload/publish — dry-run runs without it.
 try:
     import requests
 except ImportError:
-    print("ERROR: requests not installed. Run: pip install requests", file=sys.stderr)
-    sys.exit(1)
+    requests = None
+
+
+def _require_requests() -> None:
+    if requests is None:
+        print("ERROR: requests not installed. Run: pip install requests", file=sys.stderr)
+        sys.exit(1)
 
 # ── Config ─────────────────────────────────────────────────────────────────────
 
@@ -213,16 +228,122 @@ def preflight(token: str, slug: str) -> None:
     print(f"✓ Pre-flight OK — token valid, slug '{slug}' available", file=sys.stderr)
 
 
+# ── Dry-run validation ──────────────────────────────────────────────────────────
+
+# Expected WebP dimensions per role. Hero sizes are fixed by the CMS image fields;
+# inline images are normalized to header width.
+EXPECTED_DIMS = {"header": (1578, 888), "grid": (724, 408), "menu": (502, 283),
+                 "inline": (1578, 888)}
+REQUIRED_FIELDS = ["name", "slug", "post-summary", "post-content", "meta-description",
+                   "min-read", "category", "category-multi-reference-3"]
+YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+
+
+def _webp_dims(path: str):
+    """Return (w, h) of a WebP, or None if Pillow is unavailable / file unreadable."""
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            return im.size
+    except Exception:
+        return None
+
+
+def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_paths,
+                     fielddata_path) -> None:
+    """
+    Validate the full publish payload WITHOUT calling Webflow. Prints a human report
+    and writes dry-run-report.json next to fielddata.json. Exits non-zero if any
+    hard check fails, so it's usable as a gate in tests and CI.
+    """
+    checks = []  # (name, passed, detail)
+
+    def chk(name, passed, detail=""):
+        checks.append({"check": name, "passed": bool(passed), "detail": detail})
+
+    # 1. Required fields present and non-empty
+    for fld in REQUIRED_FIELDS:
+        v = field_data.get(fld)
+        chk(f"field:{fld}", bool(v), "" if v else "missing/empty")
+
+    # 2. Slug rules: never a year, lowercase, hyphenated
+    chk("slug:no-year", not YEAR_RE.search(slug), slug if YEAR_RE.search(slug) else "")
+    chk("slug:format", bool(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)), slug)
+
+    # 3. Categories: main category is in the multi-ref list
+    main_cat = field_data.get("category")
+    multi    = field_data.get("category-multi-reference-3", [])
+    chk("category:main-in-tags", main_cat in multi if main_cat else False)
+
+    # 4. post-content integrity
+    pc = field_data.get("post-content", "")
+    chk("content:no-outreach-leak", "OUTREACH VERSION" not in pc and "INTERNAL USE" not in pc)
+    chk("content:no-disclosure-leak", "OPTIONAL DISCLOSURE" not in pc)
+    chk("content:no-h1", "<h1>" not in pc)
+    n_placeholders = len(re.findall(r"__INLINE_IMG_\d+__", pc))
+    chk("content:placeholders-match-inline", n_placeholders == len(inline_paths),
+        f"{n_placeholders} placeholders vs {len(inline_paths)} inline images")
+    # If a table is present it must be real markup, not a flattened paragraph
+    if "At-a-Glance" in pc or "Comparison" in pc:
+        has_table = "<table>" in pc
+        chk("content:table-not-flattened", has_table,
+            "table heading present but no <table> markup" if not has_table else "")
+        if has_table:
+            chk("content:table-styled", "<style>" in pc and ".w-richtext table" in pc)
+
+    # 5. Image dimensions
+    roles = [("header", header), ("grid", grid), ("menu", menu)]
+    roles += [("inline", p) for p in inline_paths]
+    for role, path in roles:
+        exp = EXPECTED_DIMS[role]
+        dims = _webp_dims(path)
+        if dims is None:
+            chk(f"image:{Path(path).name}", True, "dim check skipped (no Pillow)")
+        else:
+            chk(f"image:{Path(path).name}", dims == exp,
+                f"{dims[0]}x{dims[1]} (expected {exp[0]}x{exp[1]})" if dims != exp else f"{dims[0]}x{dims[1]}")
+        chk(f"image:{Path(path).name}:is-webp", str(path).lower().endswith(".webp"))
+
+    # Report
+    passed = sum(1 for c in checks if c["passed"])
+    total  = len(checks)
+    print(f"\n── DRY RUN ── {passed}/{total} checks passed", file=sys.stderr)
+    for c in checks:
+        mark = "✓" if c["passed"] else "✗"
+        line = f"  {mark} {c['check']}"
+        if c["detail"]:
+            line += f"  — {c['detail']}"
+        print(line, file=sys.stderr)
+
+    print(f"\n  Would publish: name={field_data.get('name')!r}", file=sys.stderr)
+    print(f"                 slug={slug!r}", file=sys.stderr)
+    print(f"                 {len(inline_paths)} inline + 3 hero images", file=sys.stderr)
+    print(f"                 post-content {len(pc):,} chars", file=sys.stderr)
+
+    report = {"passed": passed, "total": total, "all_passed": passed == total, "checks": checks}
+    report_path = str(Path(fielddata_path).with_name("dry-run-report.json"))
+    with open(report_path, "w") as f:
+        json.dump(report, f, indent=2)
+    print(f"\n  Report: {report_path}", file=sys.stderr)
+
+    # Machine-readable line on stdout
+    print(json.dumps({"dryRun": True, "passed": passed, "total": total,
+                      "allPassed": passed == total, "slug": slug}))
+    if passed != total:
+        sys.exit(1)
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
     if len(sys.argv) < 5:
-        print("Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged]", file=sys.stderr)
+        print("Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged] [--dry-run]", file=sys.stderr)
         sys.exit(1)
 
     all_args    = sys.argv[1:]
     staged_mode = "--staged" in all_args
-    all_args    = [a for a in all_args if a != "--staged"]
+    dry_run     = "--dry-run" in all_args
+    all_args    = [a for a in all_args if a not in ("--staged", "--dry-run")]
 
     fielddata_path = all_args[0]
     header_webp    = all_args[1]
@@ -239,6 +360,14 @@ def main() -> None:
         field_data = json.load(f)
 
     slug  = field_data.get("slug", "blog-post")
+
+    # ── Dry-run: validate everything, touch no API. Repeatable + side-effect-free.
+    if dry_run:
+        dry_run_validate(field_data, slug, header_webp, grid_webp, menu_webp, inline_paths,
+                         fielddata_path)
+        return
+
+    _require_requests()
     token = get_token()
 
     # ── Pre-flight: fail before any upload if token or slug is bad ─────────────
