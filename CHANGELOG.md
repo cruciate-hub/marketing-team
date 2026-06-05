@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.1
+
+Hardening pass on `blog-publisher` driven by real publishes (Listicle 1 + 2 went live) and a skill-creator eval pass. **Non-breaking** — same skill, same namespace, same install command. New helper scripts and a safety-net dry-run; behaviour is stricter and more deterministic, not different in contract.
+
+- [`scripts/gdoc_to_fielddata.py`](scripts/gdoc_to_fielddata.py) — the Google-Doc-to-fielddata conversion, previously hand-written inline on every run, is now a committed deterministic helper: metadata extraction, markdown→Webflow HTML, category-name→ID mapping, slug derivation, `__INLINE_IMG_N__` placeholders. Hardened over the pass: **slug never contains a year OR the leading listicle count** ("6 Best … (2026)" → `best-…`), platform entries render as **H3** under the "N Best …" H2, the comparison table is wrapped in a **Webflow Embed** (`data-rt-embed-type`) so the post stays editable in the Designer, and **no `<style>` block** is emitted (Webflow renders it as literal text — table CSS lives in site custom code). Fixed an alt-text over-capture on single-line image trailers.
+- [`scripts/apply_internal_links.py`](scripts/apply_internal_links.py) — new: places `internal-linking-strategist` suggestions deterministically (locates the `insert_at` sentence with whitespace-flexible matching, wraps the anchor or swaps in the rephrase, never links inside headings or the table embed). Replaces fragile hand-embedding that dropped 2 of 7 links once.
+- [`scripts/blog-publisher.py`](scripts/blog-publisher.py) — added a side-effect-free **`--dry-run`** that validates the whole payload (slug rules, table-not-flattened + in-embed + no-style-block, internal-links-present, placeholder/inline match, exact image dimensions) and a **`--staged`** mode (review before going live). Pre-flight token-scope + slug-availability checks fail before any upload. **Dropped the `requests` dependency** — stdlib `urllib` only, so the script runs with no `pip install` and no virtualenv (the S3 upload's multipart body is hand-built). Verified on the system python3: dry-run 36/36 and a real staged upload+create attaches the image and embeds the figure.
+- Image format corrected to **WebP** with production-accurate `{slug}_{variant}_{WxH}.webp` naming and `{fileId, url, alt:null}` CMS image objects; the hosted URL is the S3 `hostedUrl` (a hand-built `cdn.prod.website-files.com` URL 403s and is silently dropped).
+- Reference files updated to match: [`html-conversion.md`](marketing-team/skills/blog-publisher/html-conversion.md) (embed + style rules), [`image-pipeline.md`](marketing-team/skills/blog-publisher/image-pipeline.md), [`webflow-config.md`](marketing-team/skills/blog-publisher/webflow-config.md); [`IMPROVEMENTS.md`](marketing-team/skills/blog-publisher/IMPROVEMENTS.md) tracks the resolved/open backlog; [`docs/blog-publisher.md`](docs/blog-publisher.md) prerequisites refreshed (Python 3 stdlib, no `requests`).
+- Refreshed the blog-publisher row in [`marketing-team/README.md`](marketing-team/README.md) (line count + capabilities) and [`README.md`](README.md) (Publishing & CMS).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.0 to 13.1 (semver minor — non-breaking hardening).
+
 ## marketing-team 13.0
 
 Added `blog-publisher` skill — end-to-end pipeline from Google Doc to live Webflow blog post. **Non-breaking** — new skill, new category, no changes to existing skills.

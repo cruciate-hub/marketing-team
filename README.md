@@ -62,7 +62,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| **blog-publisher** | Publishes a completed blog article from Google Docs to Webflow live — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes immediately via the Webflow Data API. Requires `WEBFLOW_API_TOKEN`. |
+| **blog-publisher** | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes (or `--staged` to review first). Includes a side-effect-free `--dry-run` validation pass. Stdlib only (no install/venv). Requires `WEBFLOW_API_TOKEN`. |
 
 ## Repo structure
 

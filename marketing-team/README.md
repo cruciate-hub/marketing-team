@@ -43,7 +43,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 
 | Skill | Lines | Size | What it does | SKILL.md |
 |---|---:|---:|---|---|
-| [blog-publisher](../docs/blog-publisher.md) | 249 | 12 KB | Publishes a completed blog article from Google Docs to Webflow live — reads the doc, converts to HTML, adds internal links via `internal-linking-strategist`, resizes master PNG to 3 WebP sizes (`{slug}_{variant}_{WxH}.webp`), uploads assets via Data API v2, and publishes with `POST /items/live`. Requires `WEBFLOW_API_TOKEN` with cms:write + assets:write. | [SKILL.md →](./skills/blog-publisher/SKILL.md) |
+| [blog-publisher](../docs/blog-publisher.md) | 336 | 16 KB | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML (year/count-free slug, H3 platform entries, comparison table in a Webflow Embed), adds internal links via `internal-linking-strategist` (deterministic `apply_internal_links.py`), resizes the master PNG to 3 WebP sizes, uploads via Data API v2, and publishes (`--staged` to review first). Side-effect-free `--dry-run` validates the whole payload. Stdlib only — no `pip install`, no venv. Requires `WEBFLOW_API_TOKEN` with cms:write + assets:write. Helper scripts at repo-root `scripts/`. | [SKILL.md →](./skills/blog-publisher/SKILL.md) |
 
 ## How it works
 
