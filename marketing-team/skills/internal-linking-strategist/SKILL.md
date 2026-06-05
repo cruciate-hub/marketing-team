@@ -563,6 +563,10 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 **Use full https URLs.** All `pages-*.json` URLs are full `https://www.social.plus/...`. Match this format in suggestions.
 
+**Audit existing internal links before adding new ones.** When processing a page that already contains internal links (links to `social.plus` pages), evaluate each one before proposing additions: does the anchor text match the canonical map? Does the target URL still reflect the correct intent (definitional vs commercial)? Has the destination been moved, consolidated, or added to the do-not-link list? Fix or flag anything misrouted — don't just stack new links on top of broken existing ones.
+
+**Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope. Do not evaluate, comment on, or suggest changes to them regardless of context. If external links are all that exist in a page, treat it as having zero existing internal links and proceed accordingly.
+
 ## Compliance check
 
 Before delivering, run the standard compliance check from `brain.md`:
@@ -579,7 +583,7 @@ If any check fails, fix before delivering.
 
 - **`docs.social.plus`** — developer documentation lives on a separate subdomain not yet captured in any `pages-*.json` file. When drafts reference docs, surface as "no in-scope link target" rather than guessing a URL.
 - **The forum.** Same reason.
-- **External links / backlinks.** Use `backlink-placement-finder` or `link-building-vetter`.
+- **External links / backlinks.** Links to any domain outside `social.plus` are always out of scope — do not evaluate, flag, or suggest changes to them. Use `backlink-placement-finder` or `link-building-vetter` for outbound/backlink work.
 - **Live Ahrefs calls.** Stays static-data-driven for cannibalization/strategy (`link-strategy.md` regenerated quarterly). Live WebFetch is used only for verifying insertion points, not for SEO data.
 - **Auto-publishing to Webflow.** This skill recommends; the user implements.
 
