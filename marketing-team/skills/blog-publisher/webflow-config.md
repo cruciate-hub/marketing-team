@@ -32,10 +32,14 @@
 
 | Display name | Slug | Dimensions | Notes |
 |---|---|---|---|
-| Image \| Page Header | `image-page-header` | 1578 × 888 px | Set as `{url, alt}` object. |
-| Image \| Thumbnail grid | `grid-thumbnail` | 724 × 408 px | Set as `{url, alt}` object. |
-| Image \| Mega Menu | `thumbnail-mega-menu` | 502 × 283 px | Set as `{url, alt}` object. |
-| Image alt text | `image-alt-text` | PlainText | Same text used as `alt` in all 3 image objects. |
+| Image \| Page Header | `image-page-header` | 1578 × 888 px | Set as `{fileId, url, alt: null}` (matches production). |
+| Image \| Thumbnail grid | `grid-thumbnail` | 724 × 408 px | Set as `{fileId, url, alt: null}`. |
+| Image \| Mega Menu | `thumbnail-mega-menu` | 502 × 283 px | Set as `{fileId, url, alt: null}`. |
+| Image alt text | `image-alt-text` | PlainText | The accessible description. `alt` inside each image object stays `null`; this standalone field holds the real alt text. |
+
+Note: the skill targets these fields by **slug**, never by display name — so renaming a
+field's label in the Designer (e.g. "Image | Mega Menu small thumbnail" → "Image | Mega Menu")
+has no effect on publishing.
 
 ### Taxonomy
 
