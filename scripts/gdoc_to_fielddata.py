@@ -67,6 +67,16 @@ def clean_cell(text: str) -> str:
     return text.strip()
 
 
+# Webflow's marker for an Embed block inside a RichText field. Wrapping the table in this
+# makes it an opaque embed in the Designer: editors can change all the surrounding prose
+# (intros, H3 platform sections, headings) and save without the rich-text editor mangling
+# the table — it has no native table tool, so a bare <table> is at risk on a Designer save.
+# The table is still `.w-richtext table` in the DOM, so the site's table CSS still applies.
+# Confirmed against the live legal pages, which embed their fragile HTML the same way.
+RT_EMBED_OPEN  = "<div data-rt-embed-type='true'>"
+RT_EMBED_CLOSE = "</div>"
+
+
 def convert_table(table_lines: list) -> str:
     rows = []
     for line in table_lines:
@@ -82,7 +92,8 @@ def convert_table(table_lines: list) -> str:
     tbody = "<tbody>" + "".join(
         "<tr>" + "".join(f"<td>{clean_cell(c)}</td>" for c in r) + "</tr>" for r in rows[1:]
     ) + "</tbody>"
-    return f"<table>{thead}{tbody}</table>"
+    # Wrap in a Webflow Embed so the rest of the post stays safely editable in the Designer.
+    return f"{RT_EMBED_OPEN}<table>{thead}{tbody}</table>{RT_EMBED_CLOSE}"
 
 
 # NOTE: do NOT inject a <style> block into post-content. Although the Data API preserves

@@ -293,6 +293,12 @@ def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_pat
         has_table = "<table>" in pc
         chk("content:table-not-flattened", has_table,
             "table heading present but no <table> markup" if not has_table else "")
+        # The table must sit inside a Webflow Embed (data-rt-embed-type) so the rest of
+        # the post stays editable in the Designer without the rich-text editor breaking it.
+        if has_table:
+            embedded = "data-rt-embed-type" in pc
+            chk("content:table-in-embed", embedded,
+                "" if embedded else "table is raw <table> — wrap it in a <div data-rt-embed-type='true'> embed")
     # post-content must NOT carry a <style> block — Webflow renders it as literal text.
     # Table CSS belongs in the site's custom code, not the CMS field.
     chk("content:no-style-block", "<style>" not in pc,
