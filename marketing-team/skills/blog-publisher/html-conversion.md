@@ -125,8 +125,25 @@ Convert to:
 
 ## Comparison table ("At-a-Glance")
 
-The doc has a comparison table. Convert it as a standard HTML `<table>`.
+The doc has a comparison table. Convert it as a standard HTML
+`<table><thead><tbody>` with `<th>` for the header row and `<td>` for data cells.
 Strip all `\*\*` from cell content — plain text only inside cells.
+
+**Style block (adapted from legal-docs-formatter).** When the article contains a
+table, prepend this scoped `<style>` block to the very top of post-content. Webflow's
+Data API **preserves** `<style>` blocks and inline `style` attributes in a RichText
+field (the stripping only happens in the Designer paste flow). Scoped to `.w-richtext`
+so it only affects CMS tables, never the rest of the page:
+
+```html
+<style>.w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}.w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;text-align:left;vertical-align:top;}.w-richtext thead th{background-color:#f5f5f5;font-weight:600;}.w-richtext tbody tr:nth-child(even){background-color:#fafafa;}</style>
+```
+
+`gdoc_to_fielddata.py` adds this automatically when a `<table>` is present — you
+don't add it by hand. Result: full-width table, 1px borders, padded cells, gray
+bold header row, zebra striping on even rows. A bare `<table>` with no style block
+renders as an unstyled grid (and earlier got flattened into a paragraph during manual
+edits — always keep the `<table><thead><tbody>` structure intact).
 
 ## "How to Choose" section
 
@@ -138,14 +155,23 @@ Convert to `<p><strong>What you're building.</strong> [rest of paragraph]</p>`.
 Blank lines in the doc → separate `<p>` tags. Do not use `<br>` for paragraph
 breaks — always `<p>`.
 
-## Things Webflow strips or breaks
+## What the Webflow Data API keeps vs. drops
 
-- `class` attributes on any tag — Webflow ignores them
-- `style` attributes — stripped by Webflow
-- `<div>` wrappers — use `<p>` instead
-- `<h1>` — never use; the page title is already the H1
-- `<script>` or `<iframe>` — not allowed in RichText
-- `target="_blank"` on `<a>` — Webflow keeps this; always include it for external links
+These behaviors are for the **Data API** RichText path (what this skill uses) —
+they differ from the Designer paste flow.
+
+Kept:
+- `<style>` blocks — preserved (verified). Used for table styling above.
+- inline `style` attributes (e.g. `style="text-align:center;"`) — preserved.
+- `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, `rowspan` — preserved.
+- `<figure>` with `w-richtext-figure-type-image` class — preserved (inline images).
+- `target="_blank"` on `<a>` — preserved; always include it for external links.
+
+Avoid:
+- `<h1>` — never use; the page title is already the H1.
+- `<div>` wrappers — use `<p>` instead.
+- `<script>` or `<iframe>` — not allowed in RichText.
+- arbitrary `class` attributes — ignored (except the Webflow figure classes above).
 
 ## Compliance reminder
 

@@ -85,6 +85,21 @@ def convert_table(table_lines: list) -> str:
     return f"<table>{thead}{tbody}</table>"
 
 
+# Scoped table styling, adapted from the legal-docs-formatter skill. Webflow's Data API
+# preserves <style> blocks and inline style attrs in a RichText field (unlike the Designer
+# paste flow, which strips them). Scoped to .w-richtext so it only affects CMS tables.
+# Prepended to post-content only when a <table> is present. Minified to keep size down.
+TABLE_STYLE = (
+    "<style>"
+    ".w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}"
+    ".w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;"
+    "text-align:left;vertical-align:top;}"
+    ".w-richtext thead th{background-color:#f5f5f5;font-weight:600;}"
+    ".w-richtext tbody tr:nth-child(even){background-color:#fafafa;}"
+    "</style>"
+)
+
+
 # ── Body → HTML ─────────────────────────────────────────────────────────────────
 
 PLATFORM_RE = re.compile(r"^### \*\*(.+?:.+?)\*\*\s*$")   # "### **Name: tagline**" → h2 + inline img
@@ -258,6 +273,12 @@ def main() -> None:
     body_raw = block[body_start:body_end].strip()
     post_content, n_imgs = convert_body(body_raw)
 
+    # Prepend scoped table styling only when the article contains a table
+    # (legal-docs-formatter pattern; <style> survives the Data API RichText path).
+    has_table = "<table>" in post_content
+    if has_table:
+        post_content = TABLE_STYLE + post_content
+
     fielddata = {
         "name":                        name,
         "slug":                        slug,
@@ -283,6 +304,7 @@ def main() -> None:
     print(f"  categories:  {len(all_cats)} ({tag_line})", file=sys.stderr)
     print(f"  post-content: {len(post_content):,} chars | platform images: {n_imgs}", file=sys.stderr)
     print(f"  inline placeholders: {post_content.count('__INLINE_IMG_')}", file=sys.stderr)
+    print(f"  table style block: {'added' if has_table else 'n/a (no table)'}", file=sys.stderr)
     if not meta_desc: print("  ⚠ meta-description empty", file=sys.stderr)
     if not summary:   print("  ⚠ post-summary empty", file=sys.stderr)
     if not alt_text:  print("  ⚠ image-alt-text empty", file=sys.stderr)
