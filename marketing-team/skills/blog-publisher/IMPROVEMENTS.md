@@ -35,11 +35,13 @@ Ordered by impact. Items marked ✅ are done; the rest are open.
    One cheap `GET /sites/{id}` up front confirms the token works before
    the pipeline starts.
 
-3. **Move HTML conversion into a committed helper script.**
-   The Google-Doc-to-fielddata conversion was hand-written as ~150 lines of
-   inline Python on every run — expensive in tokens and non-reproducible.
-   Ship `scripts/gdoc_to_fielddata.py` that takes a doc ID + listicle number
-   and emits `fielddata.json`. The SKILL then calls it instead of regenerating it.
+3. ✅ **HTML conversion moved into a committed helper script.**
+   `scripts/gdoc_to_fielddata.py` takes the raw doc text + listicle number and
+   emits `fielddata.json` — metadata extraction, HTML conversion, category
+   mapping, year-stripped slug, and `__INLINE_IMG_N__` insertion. Validated to
+   byte-match the hand-written output for Listicle 1 and 2 (17,618 / 16,380 chars).
+   Handles both `Image alt text:` and `**Image alt text:**`, skips OUTREACH/INTERNAL
+   blocks, and warns on empty meta/summary/alt fields. SKILL Phase 2 now calls it.
 
 4. **Drop the `requests` dependency.**
    `requests` isn't installed by default and the externally-managed Python on

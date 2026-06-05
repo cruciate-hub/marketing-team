@@ -95,59 +95,44 @@ Confirm you have these before proceeding. If any are missing, ask:
 
 ## Phase 1 — Read the Google Doc
 
-Use the Google Drive MCP tool with `fileId: {DOC_ID}`.
+Use the Google Drive MCP tool with `fileId: {DOC_ID}` and save the raw response to a
+file (a standalone helper script cannot reach the MCP):
+
+```bash
+# Save the Drive MCP output verbatim to a temp file
+echo "$DRIVE_MCP_RAW_RESPONSE" > "$TMPDIR/raw-doc.txt"
+```
 
 The doc may contain multiple articles separated by `# Listicle N` headings.
 
 - If multiple articles are present, list them with title + listicle number and ask which to publish.
-- If the user already specified one (by number or partial title), find it.
+- If the user already specified one (by number or partial title), use it.
 - If only one article exists, proceed without asking.
 
-From the selected article, extract these fields:
+## Phase 2 — Convert to fielddata.json
 
-| Field | Location in doc |
-|---|---|
-| `name` | `**Page title:**` line |
-| `slug` | Derive from name: lowercase, replace spaces with hyphens, strip special chars. Max 60 chars. |
-| `post-summary` | `**Introduction text**` section (the paragraph after it, before the first `###`) |
-| `meta-description` | `**Meta description**` line |
-| `min-read` | `**Minutes to read:**` line (extract the number as a string) |
-| `category` (name) | `**Main Category Tag:**` line |
-| `image-alt-text` | `Image alt text:` line |
-| Post content | Everything from the first `###` heading through the "How to Choose" section |
+Run the helper — it does all metadata extraction, HTML conversion, category
+mapping, slug derivation (year-stripped), and `__INLINE_IMG_N__` placeholder
+insertion in one deterministic step. Do NOT hand-write conversion logic.
 
-Do NOT include in post-content: metadata block, `Image alt text:` and subsequent lines,
-`Display recommendations:` block, `OUTREACH VERSION` section, `INTERNAL USE ONLY` section,
-or `[OPTIONAL DISCLOSURE: ...]` line.
-
-## Phase 2 — Convert to HTML
-
-Follow `html-conversion.md` exactly. Key rules:
-
-- `### Heading` → `<h2>`, `#### Sub-heading` → `<h3>`
-- `**bold**` → `<strong>`, `*italic*` → `<em>`
-- Lists → `<ul><li>`, tables → `<table><thead><tbody>`
-- All links → `<a href="..." target="_blank">`
-- No `<h1>`, no `<div>`, no `style` attributes
-- Strip escaped asterisks (`\*\*`) left by Google Doc export
-- Strip bold from inside table cells (plain text only in `<td>/<th>`)
-
-**Inline image placeholders:** If inline images were provided, insert
-`__INLINE_IMG_N__` immediately after each platform `<h2>` closing tag — one
-placeholder per image, in order. Platform headings are those containing a
-colon (e.g. `<h2>social.plus: Best for...</h2>`). Section headings like
-"What Is...", "How to Choose", "At-a-Glance" do NOT get a placeholder.
-
-Example (listicle with 6 platforms):
-```
-<h2>social.plus: Best for apps building a complete in-app community ecosystem</h2>__INLINE_IMG_1__
-<p>social.plus is an in-app community infrastructure platform...</p>
-...
-<h2>Stream: Best for engineering teams that want composable building blocks</h2>__INLINE_IMG_2__
+```bash
+python3 "$REPO/scripts/gdoc_to_fielddata.py" \
+  "$TMPDIR/raw-doc.txt" <listicle_number> \
+  --out "$TMPDIR/fielddata.json"
+# --slug <slug>   optional override; default strips a trailing "(YEAR)"
+# --date <iso>    optional; defaults to a fixed date — set today's date
 ```
 
-The script replaces each `__INLINE_IMG_N__` with a full Webflow `<figure>` tag
-containing the real CDN URL just before publish.
+The helper prints a summary (name, slug, category count, char count, inline
+placeholder count) and warns if `meta-description`, `post-summary`, or
+`image-alt-text` came back empty. **If it warns about a missing field, ask the
+user to supply it** — don't invent one. The conversion rules it applies are
+documented in `html-conversion.md` for reference; the helper is the source of truth.
+
+Inline placeholders (`__INLINE_IMG_1__` …) are inserted after each platform `<h2>`
+(headings containing a colon, e.g. `social.plus: Best for…`). Section headings like
+"What Is…", "How to Choose", "At-a-Glance" get none. `blog-publisher.py` replaces each
+placeholder with a Webflow `<figure>` tag at publish time.
 
 ## Phase 3 — Internal linking
 
