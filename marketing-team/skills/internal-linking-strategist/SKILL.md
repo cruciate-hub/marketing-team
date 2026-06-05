@@ -206,7 +206,7 @@ Final quality gate. Only passing links appear in output.
 
 Return a labeled section the calling skill can embed. Match format to content type:
 
-- **Blog** (HTML from `blog-seo-content`): ready-to-paste `<a href="..." target="_blank">anchor</a>` tags.
+- **Blog** (HTML from `blog-seo-content`): ready-to-paste `<a href="...">anchor</a>` tags. Internal links open in the same tab — do **not** add `target="_blank"` (that is for external links only).
 - **AEO** (markdown from `aeo-content`): markdown links `[anchor](URL)` only.
 - **Generic drafts**: both formats.
 
@@ -227,7 +227,7 @@ Use exactly one of these three states:
    **Target:** [full URL]
    **Insert at:** "[exact verbatim quote of the draft sentence where the link goes]"
    **Rephrase suggestion:** "[rewritten sentence with anchor inline — OMIT THIS FIELD ENTIRELY if the original sentence accommodates the anchor cleanly without rewording]"
-   **Format:** `<a href="[URL]" target="_blank">[anchor text]</a>` OR `[[anchor text]]([URL])`
+   **Format:** `<a href="[URL]">[anchor text]</a>` OR `[[anchor text]]([URL])`
    **Reasoning:** [why this link, in 1 sentence — cite link-strategy.md row if a canonical match]
 
 2. ...
@@ -564,6 +564,8 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 **Use full https URLs.** All `pages-*.json` URLs are full `https://www.social.plus/...`. Match this format in suggestions.
 
 **Audit existing internal links before adding new ones.** When processing a page that already contains internal links (links to `social.plus` pages), evaluate each one before proposing additions: does the anchor text match the canonical map? Does the target URL still reflect the correct intent (definitional vs commercial)? Has the destination been moved, consolidated, or added to the do-not-link list? Fix or flag anything misrouted — don't just stack new links on top of broken existing ones.
+
+**Internal links open in the same tab — never `target="_blank"`.** New tabs are an external-link convention; internal navigation should stay in the same tab. When adding a link, emit `<a href="...">anchor</a>` with no `target`. When auditing existing internal links, strip any `target="_blank"` (and the matching `rel="noopener"` if present) you find — this is a safe, always-correct fix that does not change which page the link points to.
 
 **Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope.
 
