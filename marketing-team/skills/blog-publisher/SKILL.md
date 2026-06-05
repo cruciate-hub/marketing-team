@@ -238,14 +238,14 @@ Use today's date for `date-published` (ISO 8601 UTC).
 For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
 
 3. **Always dry-run first.** Append `--dry-run` to validate the entire payload
-   (required fields, slug-has-no-year, styled table not flattened, placeholder/inline
-   count match, exact image dimensions) without touching the API. It writes
-   `dry-run-report.json` and exits non-zero on any failure. Fix anything it flags
-   before the real run. This is cheap insurance against a broken publish:
+   (required fields, slug-has-no-year, table not flattened, no `<style>` block,
+   placeholder/inline count match, exact image dimensions) without touching the API.
+   It writes `dry-run-report.json` and exits non-zero on any failure. Fix anything it
+   flags before the real run. This is cheap insurance against a broken publish.
+   Use the absolute `$REPO/scripts/...` path so it works from any working directory:
 
 ```bash
-cd "$REPO"
-python3 scripts/blog-publisher.py \
+python3 "$REPO/scripts/blog-publisher.py" \
   "$TMPDIR/fielddata.json" \
   "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
   "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
@@ -258,7 +258,7 @@ python3 scripts/blog-publisher.py \
    before going live) or no flag (publish immediately). Hero images first, inline after:
 
 ```bash
-python3 scripts/blog-publisher.py \
+python3 "$REPO/scripts/blog-publisher.py" \
   "$TMPDIR/fielddata.json" \
   "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
   "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
@@ -268,6 +268,9 @@ python3 scripts/blog-publisher.py \
   ... \
   --staged
 ```
+
+Note: the helper scripts live at the repo root (`$REPO/scripts/`), not inside the
+skill folder. Always invoke them with the `$REPO/scripts/...` absolute path.
 
 Inline images are passed as additional positional args after the 3 hero images.
 The script uploads them and replaces `__INLINE_IMG_1__` … `__INLINE_IMG_6__`

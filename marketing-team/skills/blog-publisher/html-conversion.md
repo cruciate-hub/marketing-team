@@ -129,21 +129,22 @@ The doc has a comparison table. Convert it as a standard HTML
 `<table><thead><tbody>` with `<th>` for the header row and `<td>` for data cells.
 Strip all `\*\*` from cell content — plain text only inside cells.
 
-**Style block (adapted from legal-docs-formatter).** When the article contains a
-table, prepend this scoped `<style>` block to the very top of post-content. Webflow's
-Data API **preserves** `<style>` blocks and inline `style` attributes in a RichText
-field (the stripping only happens in the Designer paste flow). Scoped to `.w-richtext`
-so it only affects CMS tables, never the rest of the page:
+**Table CSS does NOT go in post-content.** This was tried and reverted: although the
+Data API preserves a `<style>` block, Webflow's RichText renderer shows the CSS as
+**literal text** at the top of the published post (and in the editor). So the helper
+emits clean `<table><thead><tbody>` markup only — never a `<style>` block. The
+`--dry-run` check `content:no-style-block` enforces this.
+
+Table styling is owned by the **site**, not the CMS field. The reference CSS below
+lives in a Webflow custom code field (page embed or site-wide `<head>` code),
+maintained outside this skill. Scoped to `.w-richtext` so it only affects CMS tables:
 
 ```html
 <style>.w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}.w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;text-align:left;vertical-align:top;}.w-richtext thead th{background-color:#f5f5f5;font-weight:600;}.w-richtext tbody tr:nth-child(even){background-color:#fafafa;}</style>
 ```
 
-`gdoc_to_fielddata.py` adds this automatically when a `<table>` is present — you
-don't add it by hand. Result: full-width table, 1px borders, padded cells, gray
-bold header row, zebra striping on even rows. A bare `<table>` with no style block
-renders as an unstyled grid (and earlier got flattened into a paragraph during manual
-edits — always keep the `<table><thead><tbody>` structure intact).
+Always keep the `<table><thead><tbody>` structure intact — it must never collapse
+into a paragraph (the `content:table-not-flattened` dry-run check guards this).
 
 ## "How to Choose" section
 
@@ -160,15 +161,16 @@ breaks — always `<p>`.
 These behaviors are for the **Data API** RichText path (what this skill uses) —
 they differ from the Designer paste flow.
 
-Kept:
-- `<style>` blocks — preserved (verified). Used for table styling above.
-- inline `style` attributes (e.g. `style="text-align:center;"`) — preserved.
+Kept by the API:
 - `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, `rowspan` — preserved.
 - `<figure>` with `w-richtext-figure-type-image` class — preserved (inline images).
 - `target="_blank"` on `<a>` — preserved; always include it for external links.
+- The API technically preserves `<style>` blocks too — but DON'T use them (see below).
 
-Avoid:
-- `<h1>` — never use; the page title is already the H1.
+Never put in post-content:
+- `<style>` blocks — the API keeps them, but the RichText renderer shows the CSS as
+  literal text in the published post. Table CSS goes in the site's custom code instead.
+- `<h1>` — the page title is already the H1.
 - `<div>` wrappers — use `<p>` instead.
 - `<script>` or `<iframe>` — not allowed in RichText.
 - arbitrary `class` attributes — ignored (except the Webflow figure classes above).

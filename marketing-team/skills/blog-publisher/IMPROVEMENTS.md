@@ -3,6 +3,29 @@
 Captured from live test runs publishing Listicle 1 and Listicle 2 (June 2026).
 Ordered by impact. Items marked ✅ are done; the rest are open.
 
+## Resolved via the skill-creator eval pass (iteration 1 → 2)
+
+- ✅ **No `<style>` block in post-content.** Reverted the earlier "table style block"
+  idea. The Data API preserves `<style>`, but Webflow's RichText renderer shows the CSS
+  as literal text at the top of the published post. Table CSS now lives in the site's
+  custom code (reference CSS kept in `html-conversion.md`); the helper emits clean
+  `<table>` markup only. New dry-run gate `content:no-style-block` enforces it.
+  (Caught by the user reviewing the live post.)
+
+- ✅ **alt-text over-capture fixed.** Two independent eval subagents found that when the
+  doc puts `Image alt text:` / `Image concept:` / `Image sizes needed:` on one physical
+  line (L1 and L3 do), the helper grabbed all three into `image-alt-text`. Now cut at the
+  next label. Validated: L1/L3 clean, L2 correctly empty (no fabrication).
+
+- ✅ **Script paths made explicit.** SKILL.md now always invokes `$REPO/scripts/...`
+  (the scripts live at repo root, not in the skill folder). An eval agent flagged the
+  ambiguity.
+
+- ✅ **`--dry-run` validation gate added.** Side-effect-free check of the whole payload
+  (fields, slug-no-year, table-not-flattened, no-style-block, placeholder/inline match,
+  exact image dims). Exits non-zero on failure; writes dry-run-report.json. This is what
+  caught the flattened-table regression in testing.
+
 ## Resolved during testing
 
 - ✅ **Image URL must be the S3 hostedUrl, not a constructed CDN URL.**

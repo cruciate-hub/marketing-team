@@ -288,8 +288,10 @@ def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_pat
         has_table = "<table>" in pc
         chk("content:table-not-flattened", has_table,
             "table heading present but no <table> markup" if not has_table else "")
-        if has_table:
-            chk("content:table-styled", "<style>" in pc and ".w-richtext table" in pc)
+    # post-content must NOT carry a <style> block — Webflow renders it as literal text.
+    # Table CSS belongs in the site's custom code, not the CMS field.
+    chk("content:no-style-block", "<style>" not in pc,
+        "post-content contains a <style> block — move table CSS to site custom code" if "<style>" in pc else "")
 
     # 5. Image dimensions
     roles = [("header", header), ("grid", grid), ("menu", menu)]

@@ -85,19 +85,12 @@ def convert_table(table_lines: list) -> str:
     return f"<table>{thead}{tbody}</table>"
 
 
-# Scoped table styling, adapted from the legal-docs-formatter skill. Webflow's Data API
-# preserves <style> blocks and inline style attrs in a RichText field (unlike the Designer
-# paste flow, which strips them). Scoped to .w-richtext so it only affects CMS tables.
-# Prepended to post-content only when a <table> is present. Minified to keep size down.
-TABLE_STYLE = (
-    "<style>"
-    ".w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}"
-    ".w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;"
-    "text-align:left;vertical-align:top;}"
-    ".w-richtext thead th{background-color:#f5f5f5;font-weight:600;}"
-    ".w-richtext tbody tr:nth-child(even){background-color:#fafafa;}"
-    "</style>"
-)
+# NOTE: do NOT inject a <style> block into post-content. Although the Data API preserves
+# <style>, Webflow's RichText renderer shows the CSS as literal text at the top of the post
+# (and in the editor) instead of applying it. Table CSS is owned by the site, not the CMS
+# field — it lives in a Webflow custom code field / page embed, maintained outside this skill.
+# The reference CSS to put there is kept in html-conversion.md ("Table styling"). The helper
+# emits clean <table><thead><tbody> markup only and lets the site stylesheet do the styling.
 
 
 # ── Body → HTML ─────────────────────────────────────────────────────────────────
@@ -244,8 +237,18 @@ def main() -> None:
     meta_desc = first_match(r"\*\*Meta description\*\*\s*\n+\s*(.+)", block)
     min_read  = first_match(r"\*\*Minutes to read:\*\*\s*(\d+)", block)
     tag_line  = first_match(r"\*{0,2}Main Category Tag:\*{0,2}\s*(.+)", block)
-    alt_text  = first_match(r"\*{0,2}Image alt text:\*{0,2}\s*(.+)", block)
     summary   = first_match(r"\*\*Introduction text\*\*\s*\n+\s*(.+?)\n\s*\n", block, dotall=True)
+
+    # Image alt text. Some docs put "Image alt text: … Image concept: … Image sizes needed: …"
+    # all on ONE physical line, so a to-end-of-line capture over-grabs the concept + pixel
+    # notes into the alt text (they'd become the image alt attribute). Cut at the next label.
+    alt_text = first_match(r"\*{0,2}Image alt text:\*{0,2}\s*(.+)", block)
+    for label in ("Image concept:", "**Image concept", "Image sizes needed:", "**Image sizes",
+                  "Display recommendations:", "**Display"):
+        cut = alt_text.find(label)
+        if cut != -1:
+            alt_text = alt_text[:cut]
+    alt_text = alt_text.strip()
 
     # Slug: derive from name (auto strips years), or use --slug override.
     # HARD RULE: a slug must NEVER contain a year. If an override sneaks one in,
@@ -272,12 +275,8 @@ def main() -> None:
             body_end = min(body_end, idx)
     body_raw = block[body_start:body_end].strip()
     post_content, n_imgs = convert_body(body_raw)
-
-    # Prepend scoped table styling only when the article contains a table
-    # (legal-docs-formatter pattern; <style> survives the Data API RichText path).
     has_table = "<table>" in post_content
-    if has_table:
-        post_content = TABLE_STYLE + post_content
+    # No <style> injection — table CSS lives in the site's custom code, not the CMS field.
 
     fielddata = {
         "name":                        name,
@@ -304,7 +303,7 @@ def main() -> None:
     print(f"  categories:  {len(all_cats)} ({tag_line})", file=sys.stderr)
     print(f"  post-content: {len(post_content):,} chars | platform images: {n_imgs}", file=sys.stderr)
     print(f"  inline placeholders: {post_content.count('__INLINE_IMG_')}", file=sys.stderr)
-    print(f"  table style block: {'added' if has_table else 'n/a (no table)'}", file=sys.stderr)
+    print(f"  comparison table: {'present (styled via site custom code)' if has_table else 'none'}", file=sys.stderr)
     if not meta_desc: print("  ⚠ meta-description empty", file=sys.stderr)
     if not summary:   print("  ⚠ post-summary empty", file=sys.stderr)
     if not alt_text:  print("  ⚠ image-alt-text empty", file=sys.stderr)
