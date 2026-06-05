@@ -22,6 +22,25 @@ when_to_use: >
 Reads a Google Doc, converts content to Webflow HTML, adds internal links,
 resizes the master PNG to 3 sizes, uploads all assets, and publishes live.
 
+## NON-NEGOTIABLE RULES
+
+These override convenience, recovery shortcuts, and every other instruction below.
+
+1. **A slug must NEVER contain a year.** Not in the title-derived slug, not in a
+   user override, and — critically — **never as a way to resolve a slug collision.**
+   - ✅ `6-best-in-app-community-platforms-for-consumer-apps`
+   - ❌ `6-best-in-app-community-platforms-for-consumer-apps-2026`
+   - The article title routinely ends in `(2026)`. Strip the year when deriving the slug.
+   - `gdoc_to_fielddata.py` strips year tokens automatically. If you ever build a slug
+     by hand, strip every `19xx`/`20xx` token yourself.
+
+2. **On a slug collision (Webflow 400 "slug already exists"), STOP and ask the user.**
+   Do NOT append anything to make it unique — not the year, not `-2`, not `-new`,
+   not `-draft`. Webflow holds a slug permanently after an item is deleted (until the
+   next full site publish clears the tombstone). Resolving a clash by appending a
+   suffix is forbidden. Surface the conflict and let the user decide: update the
+   existing item, pick a genuinely different slug, or publish the site to free the old one.
+
 ## How to fetch reference files
 
 <!-- FETCH-BLOCK:START v2 -->
@@ -247,18 +266,6 @@ The script prints the live URL to stdout on success. Surface it to the user:
 ✓ Published: https://www.social.plus/blog/{slug}
   Item ID: {itemId}
 ```
-
-## Slug rules
-
-- Slugs are lowercase, hyphen-separated, no special characters.
-- **Never include the year in a slug** — even if the article title contains a year.
-  - ✅ `6-best-in-app-community-platforms-for-consumer-apps`
-  - ❌ `6-best-in-app-community-platforms-for-consumer-apps-2026`
-- If Webflow returns 400 "slug already exists", **stop immediately** and surface the
-  conflict to the user. Do not append any suffix (not `-2`, not `-draft`, not the year).
-  Ask the user whether to update the existing post or choose a different slug.
-  Webflow holds slugs permanently after item deletion — the user must either resolve
-  the conflict in the Designer or choose a genuinely new slug.
 
 ## Error handling
 

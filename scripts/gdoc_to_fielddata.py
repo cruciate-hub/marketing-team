@@ -150,14 +150,25 @@ def first_match(pattern: str, text: str, default: str = "", dotall: bool = False
     return m.group(1).strip() if m else default
 
 
+# A year token is a 4-digit number starting 19 or 20 (1900–2099). This is what we
+# strip from slugs and reject in overrides. It will not match other 4-digit numbers
+# like "top-1000-apps" or "4000-users".
+YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+
+
+def strip_years(text: str) -> str:
+    """Remove every year token (e.g. 2026) from a string. Slugs must never contain a year."""
+    return YEAR_RE.sub("", text)
+
+
 def derive_slug(name: str) -> str:
-    """Lowercase, hyphenate, strip a trailing (YEAR), drop special chars. Never includes a year."""
-    s = re.sub(r"\s*\(\d{4}\)\s*$", "", name)              # strip trailing "(2026)"
+    """Lowercase, hyphenate, drop special chars, and remove ANY year token. Never includes a year."""
+    s = strip_years(name)                                  # remove "2026" anywhere, not just trailing parens
     s = s.lower()
     s = re.sub(r"[^a-z0-9\s-]", "", s)                     # drop punctuation
     s = re.sub(r"\s+", "-", s).strip("-")
-    s = re.sub(r"-+", "-", s)
-    return s
+    s = re.sub(r"-+", "-", s)                              # collapse repeats left by removed years
+    return s.strip("-")
 
 
 def map_categories(tag_line: str) -> tuple:
@@ -221,10 +232,15 @@ def main() -> None:
     alt_text  = first_match(r"\*{0,2}Image alt text:\*{0,2}\s*(.+)", block)
     summary   = first_match(r"\*\*Introduction text\*\*\s*\n+\s*(.+?)\n\s*\n", block, dotall=True)
 
-    slug = args.slug or derive_slug(name)
-    if re.search(r"\d{4}", slug):
-        print(f"ERROR: slug '{slug}' contains a year — slugs must never include a year.", file=sys.stderr)
-        sys.exit(1)
+    # Slug: derive from name (auto strips years), or use --slug override.
+    # HARD RULE: a slug must NEVER contain a year. If an override sneaks one in,
+    # strip it and warn — never publish a year in the slug, and never resolve a
+    # collision by appending one.
+    slug = args.slug if args.slug else derive_slug(name)
+    if YEAR_RE.search(slug):
+        cleaned = re.sub(r"-+", "-", strip_years(slug)).strip("-")
+        print(f"  ⚠ slug '{slug}' contained a year — stripped to '{cleaned}'", file=sys.stderr)
+        slug = cleaned
 
     main_cat, all_cats = map_categories(tag_line)
 

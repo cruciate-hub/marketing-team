@@ -20,7 +20,13 @@ Ordered by impact. Items marked ✅ are done; the rest are open.
   `Image.open(p).convert("RGB").resize((w,h), Image.LANCZOS).save(out, "WEBP", quality=90)`.
   Pillow is the primary path; sips is a fallback only on older macOS.
 
-- ✅ **Never put the year in a slug.** `...-consumer-apps`, not `...-consumer-apps-2026`.
+- ✅ **Never put the year in a slug** — HARD RULE, promoted to a NON-NEGOTIABLE
+  section at the top of SKILL.md. Applies to title-derived slugs, `--slug` overrides,
+  AND collision resolution (never append a year to dodge a "slug exists" 400).
+  `gdoc_to_fielddata.py` strips `19xx`/`20xx` tokens automatically (validated against
+  edge cases — `top-1000-apps` and `4000-users` survive; only real years are removed).
+  Regression: the first Listicle 1 publish appended `-2026` to resolve a collision —
+  exactly the forbidden move. The rule is now loud enough that it can't be missed.
 
 ## Open — high impact
 
