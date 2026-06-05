@@ -266,8 +266,13 @@ def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_pat
         v = field_data.get(fld)
         chk(f"field:{fld}", bool(v), "" if v else "missing/empty")
 
-    # 2. Slug rules: never a year, lowercase, hyphenated
+    # 2. Slug rules: never a year, never a leading listicle count, lowercase-hyphenated
     chk("slug:no-year", not YEAR_RE.search(slug), slug if YEAR_RE.search(slug) else "")
+    lead_count = re.match(r"^(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|"
+                          r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|"
+                          r"eighteen|nineteen|twenty)-", slug)
+    chk("slug:no-leading-count", not lead_count,
+        f"slug starts with a count: {slug}" if lead_count else "")
     chk("slug:format", bool(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)), slug)
 
     # 3. Categories: main category is in the multi-ref list

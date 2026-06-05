@@ -26,13 +26,18 @@ resizes the master PNG to 3 sizes, uploads all assets, and publishes live.
 
 These override convenience, recovery shortcuts, and every other instruction below.
 
-1. **A slug must NEVER contain a year.** Not in the title-derived slug, not in a
-   user override, and — critically — **never as a way to resolve a slug collision.**
-   - ✅ `6-best-in-app-community-platforms-for-consumer-apps`
-   - ❌ `6-best-in-app-community-platforms-for-consumer-apps-2026`
-   - The article title routinely ends in `(2026)`. Strip the year when deriving the slug.
-   - `gdoc_to_fielddata.py` strips year tokens automatically. If you ever build a slug
-     by hand, strip every `19xx`/`20xx` token yourself.
+1. **A slug must NEVER contain a year OR the leading listicle count.** Strip both, so
+   the slug survives a re-titled edition ("5 Best Chat SDKs" and a later "7 Best Chat
+   SDKs (2027)" both map to the same URL — you can change the count or year without
+   breaking links or creating a duplicate).
+   - Title: `6 Best In-App Community Platforms for Consumer Apps (2026)`
+   - ✅ slug: `best-in-app-community-platforms-for-consumer-apps`
+   - ❌ `6-best-in-app-community-platforms-for-consumer-apps` (has the count)
+   - ❌ `best-in-app-community-platforms-for-consumer-apps-2026` (has the year)
+   - This applies to the title-derived slug, a user `--slug` override, AND — critically —
+     **never resolve a slug collision by appending a year/number/suffix.**
+   - `gdoc_to_fielddata.py` strips the leading count and every `19xx`/`20xx` token
+     automatically. If you build a slug by hand, strip both yourself.
 
 2. **On a slug collision (Webflow 400 "slug already exists"), STOP and ask the user.**
    Do NOT append anything to make it unique — not the year, not `-2`, not `-new`,

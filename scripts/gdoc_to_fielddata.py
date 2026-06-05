@@ -163,6 +163,15 @@ def first_match(pattern: str, text: str, default: str = "", dotall: bool = False
 # like "top-1000-apps" or "4000-users".
 YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 
+# A leading listicle count at the START of the slug — digits or a spelled cardinal up to
+# twenty — followed by a hyphen. "6-best-…" → "best-…", "five-best-…" → "best-…".
+# Stripped so the slug stays stable when the count or the year changes (e.g. "5 Best Chat
+# SDKs" and a later "7 Best Chat SDKs (2027)" both map to "best-chat-sdks").
+LEAD_COUNT_RE = re.compile(
+    r"^(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|"
+    r"fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)-"
+)
+
 
 def strip_years(text: str) -> str:
     """Remove every year token (e.g. 2026) from a string. Slugs must never contain a year."""
@@ -170,12 +179,19 @@ def strip_years(text: str) -> str:
 
 
 def derive_slug(name: str) -> str:
-    """Lowercase, hyphenate, drop special chars, and remove ANY year token. Never includes a year."""
-    s = strip_years(name)                                  # remove "2026" anywhere, not just trailing parens
+    """
+    Title → slug. Never includes a year, and never the leading listicle count.
+    "6 Best In-App Community Platforms for Consumer Apps (2026)"
+        → "best-in-app-community-platforms-for-consumer-apps"
+    Both the count and the year are dropped so the slug survives a re-titled "7 Best …
+    (2027)" edition without breaking the URL.
+    """
+    s = strip_years(name)                                  # remove "2026" anywhere
     s = s.lower()
     s = re.sub(r"[^a-z0-9\s-]", "", s)                     # drop punctuation
     s = re.sub(r"\s+", "-", s).strip("-")
     s = re.sub(r"-+", "-", s)                              # collapse repeats left by removed years
+    s = LEAD_COUNT_RE.sub("", s)                           # drop leading count: "6-best-…" → "best-…"
     return s.strip("-")
 
 
@@ -250,14 +266,19 @@ def main() -> None:
             alt_text = alt_text[:cut]
     alt_text = alt_text.strip()
 
-    # Slug: derive from name (auto strips years), or use --slug override.
-    # HARD RULE: a slug must NEVER contain a year. If an override sneaks one in,
-    # strip it and warn — never publish a year in the slug, and never resolve a
-    # collision by appending one.
+    # Slug: derive from name (auto strips year + leading count), or use --slug override.
+    # HARD RULES: a slug must NEVER contain a year, and never the leading listicle count.
+    # Both make the slug stable across re-titled editions ("5 Best …" → "7 Best … (2027)"
+    # both map to the same slug). If an override sneaks either in, strip it and warn —
+    # and never resolve a collision by appending a year/number.
     slug = args.slug if args.slug else derive_slug(name)
     if YEAR_RE.search(slug):
         cleaned = re.sub(r"-+", "-", strip_years(slug)).strip("-")
         print(f"  ⚠ slug '{slug}' contained a year — stripped to '{cleaned}'", file=sys.stderr)
+        slug = cleaned
+    if LEAD_COUNT_RE.match(slug):
+        cleaned = LEAD_COUNT_RE.sub("", slug).strip("-")
+        print(f"  ⚠ slug '{slug}' began with a count — stripped to '{cleaned}'", file=sys.stderr)
         slug = cleaned
 
     main_cat, all_cats = map_categories(tag_line)
