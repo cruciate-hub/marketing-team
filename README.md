@@ -27,42 +27,42 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| **brand-messaging** | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies — feature pages, landing pages, product blog posts (also applies SEO blog format), feature announcement blogs, release-note CMS items, taglines, pitch materials. Also brand voice audits. |
-| **blog-seo-content** | SEO-optimized blog posts for social.plus/blog on **non-product topics only** — industry trends, opinion, listicles, third-party tools. Product blog posts go to `brand-messaging`. |
-| **aeo-content** | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
-| **newsletters** | Generates MailerLite-compatible HTML emails from monthly product update docs. |
-| **case-study** | Customer stories and success case studies following the social.plus narrative structure. |
-| **press-release** | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. |
+| [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies — feature pages, landing pages, product blog posts (also applies SEO blog format), feature announcement blogs, release-note CMS items, taglines, pitch materials. Also brand voice audits. |
+| [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog on **non-product topics only** — industry trends, opinion, listicles, third-party tools. Product blog posts go to `brand-messaging`. |
+| [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
+| [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails from monthly product update docs. |
+| [**case-study**](./marketing-team/skills/case-study/SKILL.md) | Customer stories and success case studies following the social.plus narrative structure. |
+| [**press-release**](./marketing-team/skills/press-release/SKILL.md) | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. |
 
 ### Design & analysis
 
 | Skill | What it does |
 |---|---|
-| **design-system** | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
-| **site-intelligence** | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
-| **product-update-vs-website** | Compares product release notes against live website content to find pages that need updating. |
+| [**design-system**](./marketing-team/skills/design-system/SKILL.md) | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
+| [**site-intelligence**](./marketing-team/skills/site-intelligence/SKILL.md) | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
+| [**product-update-vs-website**](./marketing-team/skills/product-update-vs-website/SKILL.md) | Compares product release notes against live website content to find pages that need updating. |
 
 ### SEO & linking
 
 | Skill | What it does |
 |---|---|
-| **internal-linking-strategist** | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`) and runs site-wide link audits. Uses a canonical anchor map and cannibalization warnings from `link-strategy.md`, with live page-fetch to verify insertion points. |
-| **link-building-vetter** | Vets incoming ABC link exchange requests against social.plus guidelines, scores them 1-10, and drafts response emails. |
-| **backlink-placement-finder** | Finds contextually relevant backlink placement opportunities on partner websites and drafts request emails. |
+| [**internal-linking-strategist**](./marketing-team/skills/internal-linking-strategist/SKILL.md) | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`) and runs site-wide link audits. Uses a canonical anchor map and cannibalization warnings from `link-strategy.md`, with live page-fetch to verify insertion points. |
+| [**link-building-vetter**](./marketing-team/skills/link-building-vetter/SKILL.md) | Vets incoming ABC link exchange requests against social.plus guidelines, scores them 1-10, and drafts response emails. |
+| [**backlink-placement-finder**](./marketing-team/skills/backlink-placement-finder/SKILL.md) | Finds contextually relevant backlink placement opportunities on partner websites and drafts request emails. |
 
 ### Formatting & conversion
 
 | Skill | What it does |
 |---|---|
-| **legal-docs-formatter** | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. |
-| **svg-icon-transformer** | Transforms SVG input into clean, accessible, inline-embed-ready icon markup with `1em` sizing and correct accessibility defaults. |
-| **video-to-gif-and-webp** | Creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Preset dimensions for webinars, product updates, customer stories, and email newsletters. |
+| [**legal-docs-formatter**](./marketing-team/skills/legal-docs-formatter/SKILL.md) | Converts legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item. |
+| [**svg-icon-transformer**](./marketing-team/skills/svg-icon-transformer/SKILL.md) | Transforms SVG input into clean, accessible, inline-embed-ready icon markup with `1em` sizing and correct accessibility defaults. |
+| [**video-to-gif-and-webp**](./marketing-team/skills/video-to-gif-and-webp/SKILL.md) | Creates or optimizes animated .webp and .gif files from YouTube videos, local video files, or existing animated images. Preset dimensions for webinars, product updates, customer stories, and email newsletters. |
 
 ### Publishing & CMS
 
 | Skill | What it does |
 |---|---|
-| **blog-publisher** | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes (or `--staged` to review first). Includes a side-effect-free `--dry-run` validation pass. Stdlib only (no install/venv). Requires `WEBFLOW_API_TOKEN`. |
+| [**blog-publisher**](./marketing-team/skills/blog-publisher/SKILL.md) | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes (or `--staged` to review first). Includes a side-effect-free `--dry-run` validation pass. Stdlib only (no install/venv). Requires `WEBFLOW_API_TOKEN`. |
 
 ## Repo structure
 
