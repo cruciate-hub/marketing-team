@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T15:49:59.092Z",
-    "itemCount": 61,
+    "generatedAt": "2026-06-08T09:10:34.237Z",
+    "itemCount": 62,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-may-2026",
+      "metaTitle": "What's new in social.plus | May 2026",
+      "metaDescription": "May product updates is all about analytics and sentiment, giving teams more control over how insights are configured and applied.",
+      "content": "# What's new in social.plus | May 2026\n## Custom Sentiment Keywords and Categories Configuration\n## Keyword-Level Sentiment Override for Individual Posts\n## Full Comment Coverage for Sentiment Analysis\n## Filter Social Insights by User Tags\n## We also added"
+    },
     {
       "url": "https://www.social.plus/product-update/introducing-the-social-plus-mcp-server-build-with-social-plus-at-the-speed-of-ai",
       "metaTitle": "Introducing the social.plus MCP server: build with social.plus at the speed of AI",
