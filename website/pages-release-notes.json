@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-08T08:06:43.135Z",
-    "itemCount": 40,
+    "generatedAt": "2026-06-08T08:07:24.900Z",
+    "itemCount": 41,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/ai-moderation-deletion-reason-via-webhook",
+      "metaTitle": "AI Moderation Deletion Reason via Webhook",
+      "metaDescription": "You can now receive deletion reason details in moderation via webhooks ",
+      "content": "# AI Moderation Deletion Reason via Webhook"
+    },
     {
       "url": "https://www.social.plus/release-note/uikit-localization-support-for-social-features",
       "metaTitle": "UIKit Localization Support for Social Features",
