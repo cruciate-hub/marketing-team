@@ -194,6 +194,31 @@ All intents: every numeric claim needs a source (internal approved list or exter
 
 Full guidance: `references/citation-playbook.md`.
 
+## Ecosystem hyperlinks
+
+Ecosystem hyperlinks are contextual links to authoritative, non-competing reference sites woven into the body prose. They differ from external citations: citations support a specific factual claim; ecosystem links let a reader go deeper on a concept, standard, protocol, or tool.
+
+**Why they improve AEO:** AI retrieval systems score pages higher when they link to well-established reference nodes. GEO research (Aggarwal et al., arxiv 2311.09735) identifies linking to authoritative adjacent resources as a strong content-level signal for AI visibility — the same signal that makes Wikipedia-citing pages more likely to be extracted than self-contained ones.
+
+### Density
+
+Every article includes **3-5 ecosystem hyperlinks**. Fewer than 3 is a missed AEO opportunity; more than 5 dilutes the signal. Zero is a self-check failure (item 8 below) and triggers a compliance warning.
+
+### Approved targets
+
+Good targets: web standards (developer.mozilla.org, w3.org, IETF RFCs), platform docs (developer.apple.com, developer.android.com), UX research (nngroup.com, baymard.com), academic papers (arxiv.org, dl.acm.org), industry data (pew.org, statista.com), privacy and compliance bodies (iapp.org, owasp.org, gdpr.eu), community research (cmxhub.com, feverbee.com/blog). Full list in `references/citation-playbook.md` (§ Ecosystem hyperlinks).
+
+Never link to direct or partial competitors: in-app messaging/feed platforms (getstream.io, sendbird.com, pubnub.com, pusher.com, ably.com), community platform vendors (circle.so, mighty.social, tribe.so), or social apps competing on engagement (discord.com, slack.com for community use cases). When uncertain, ask: would a reader see this as social.plus endorsing an alternative to their own product?
+
+### Placement rules
+
+- Embed in body sections where the concept is introduced: definition chunk, architecture/features, best-practices sections.
+- Do not place in: FAQs, conclusion, pitch — keep these link-clean for AI extraction.
+- Anchor text names the concept, standard, or resource. 2-5 words. The claim stays in the prose; the anchor names the source.
+  - Good: `relies on the [WebSocket protocol (RFC 6455)](https://www.rfc-editor.org/rfc/rfc6455)`
+  - Good: `per [Nielsen Norman Group's notification UX research](https://www.nngroup.com/articles/push-notifications/)`
+  - Bad: `[research shows notifications increase 30-day retention by 25%](https://...)` — the claim is in the anchor, not the prose
+
 ## Approved data and customer names
 
 Use only these. Never fabricate.
@@ -291,6 +316,7 @@ Checks:
 - External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
 - Approved-customer whitelist — no mentions of unapproved customer names
 - Internal-link presence — at least one `https://social.plus/...` link in the body (WARN only — a zero usually means `internal-linking-strategist` was skipped). Binary presence check, **not a topical-link-floor check**: the optimizer enforces its own per-length floor (2 for short, up to 6 for long). Compliance just catches "optimizer never ran." Legitimate zero only when no related page exists AND no approved customer was named.
+- Ecosystem hyperlink count — 3-5 links to approved non-competing external domains (WARN only, manual check — the compliance script does not yet count these automatically; item 8 in the self-check handles enforcement).
 - Word count inside the intent-specific typical range (warning only)
 
 Fix every failure before delivering. Warnings are informational — address if it strengthens the article, skip if not.
@@ -306,6 +332,7 @@ After the compliance script passes, answer each of these yes/no before returning
 5. Are the FAQ questions phrased from real-user research (not invented patterns)?
 6. Did I check the deferred-tool list for Ahrefs MCP tools before defaulting to WebSearch?
 7. Did the compliance script exit 0?
+8. Does the article include 3-5 ecosystem hyperlinks to non-competing authoritative resources drawn from the approved categories in "## Ecosystem hyperlinks"?
 
 Any "no" → revise before delivering. Do not ship with unresolved "no".
 

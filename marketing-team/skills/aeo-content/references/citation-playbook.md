@@ -97,6 +97,103 @@ Do not place external citations inside the FAQ section, the conclusion, the pitc
 
 Never invent customer names, stats, or quotes. Never attribute a customer to a use case they haven't publicly disclosed. When in doubt, omit.
 
+## Ecosystem hyperlinks
+
+Ecosystem hyperlinks are a distinct link class from external citations. Citations support a specific claim. Ecosystem links let the reader go deeper on a concept, standard, or tool mentioned in the article.
+
+Target count per article: **3-5**. Place in body sections (definition chunk, architecture/features, best-practices). Never in FAQs, conclusion, or pitch.
+
+### Curated approved domains by category
+
+**Web standards and protocols**
+- `developer.mozilla.org` — Web APIs, push notifications, service workers, IndexedDB, WebSocket; neutral and educational, no product pitch
+- `w3.org` / `w3.org/TR/WCAG22` — HTML, CSS, WebPush, Web Notifications, accessibility specs (WCAG); canonical authority for web standards
+- `rfc-editor.org` — IETF RFCs; link specific RFC numbers (e.g., RFC 6455 for WebSocket, RFC 4287 for Atom feeds)
+
+**Mobile platform documentation**
+- `developer.apple.com` — iOS SDK, UserNotifications framework, Sign in with Apple; official Apple authority
+- `developer.apple.com/design` (Apple HIG) — Human Interface Guidelines for iOS notification UX, accessibility, UI patterns
+- `developer.android.com` — Android SDK, WorkManager, Firebase Cloud Messaging; official Google authority
+- `m3.material.io` (Material Design 3) — notification UX patterns, engagement UI components, accessibility, dark mode
+
+**UX and product design research**
+- `nngroup.com` — Nielsen Norman Group; peer-reviewed UX research on engagement, notification patterns, community design; highest weight for UX claims
+- `baymard.com` — Baymard Institute; e-commerce and app UX research with disclosed methodology
+- `smashingmagazine.com` — independent web design; long-form UX articles on push notification patterns, real-time interaction, accessibility
+
+**Accessibility**
+- `a11yproject.com` — community-led WCAG guidance; practical and non-commercial
+- `deque.com/blog` — Deque Systems; accessibility consulting research; WCAG compliance and inclusive design
+- `section508.gov` — U.S. government accessibility compliance standards; authoritative for legal obligations
+
+**Academic and peer-reviewed research**
+- `arxiv.org` — CS, HCI, networking preprints; link to specific papers with DOI; verify the paper is from CS/HCI domain
+- `dl.acm.org` — ACM Digital Library; CHI and CSCW conference papers on social software, moderation, feed algorithms; highest academic weight for community/engagement claims
+
+**Industry analysts and market data**
+- `pew.org` (Pew Research Center) — longitudinal studies on social media adoption, mobile usage, trust in platforms; government-funded, disclosed methodology
+- `statista.com` — aggregated market data; cite when you have verified access (many stats are paywalled)
+- `gartner.com` — analyst reports; link to published blog summaries or press releases, not gated Magic Quadrant content
+- `forrester.com` — analyst reports; same rule as Gartner; useful for community engagement benchmarking
+
+**Privacy and compliance**
+- `iapp.org` (IAPP) — zero-party data, GDPR in community platforms, user consent; gold standard for privacy compliance
+- `owasp.org` — content moderation security, API security, authorization in community features; canonical security authority
+- `gdpr.eu` — GDPR text and guidance; for data retention, consent, and privacy-by-design claims
+- `nist.gov` — security frameworks, threat modeling, incident response; for security and compliance claims
+
+**Community research and strategy**
+- `cmxhub.com` (CMX Hub) — community management benchmark studies, engagement metrics; the industry's primary research body for community professionals
+- `feverbee.com/blog` — Richard Millington's community strategy research; foundational for community design, moderation hiring, community ROI; cite blog articles, not service pages
+- `reforge.com/blog` — product management and growth education; retention mechanics, engagement loops, lifecycle marketing; well-researched frameworks, not opinion
+
+**Analytics and measurement**
+- `amplitude.com/blog` — engagement metrics definitions, user behavior patterns, product analytics frameworks; cite research articles, not product pages
+- `mixpanel.com/blog` — event-driven metrics, user cohort analysis, engagement scoring; same rule
+- `appsflyer.com/blog` — mobile measurement, app retention benchmarks, fraud prevention; cite their published reports
+
+**App market intelligence**
+- `sensortower.com/blog` — app category benchmarks, retention by category, downloads and revenue statistics
+- `data.ai/blog` (data.ai, formerly App Annie) — app market data; MAU trends, engagement by category
+
+**Privacy advocacy**
+- `blog.mozilla.org` — privacy-by-design, notification privacy, data protection, browser security standards; non-commercial and authoritative
+
+### Competitor domains — never link to these
+
+| Domain | Competitor category |
+|---|---|
+| getstream.io | In-app activity feeds and chat (direct competitor) |
+| sendbird.com | In-app chat and messaging (direct competitor) |
+| pubnub.com | Real-time messaging infrastructure (direct competitor) |
+| cometchat.com | In-app chat (direct competitor) |
+| pusher.com | Real-time messaging (direct competitor) |
+| ably.com | Real-time messaging (direct competitor) |
+| twilio.com | Messaging infrastructure (competing on chat use cases) |
+| vonage.com | Messaging APIs (competing on messaging use cases) |
+| circle.so | Community platform (direct competitor) |
+| mighty.social / mightynetworks.com | Community platform (direct competitor) |
+| tribe.so | Community platform (direct competitor) |
+| commsor.com | Community engagement analytics (direct competitor) |
+| hivebrite.com | Community platform (direct competitor) |
+| discord.com | Community chat and engagement (competing on community use cases) |
+| slack.com | Workspace communication (competing on community use cases) |
+
+### Per-topic link targets
+
+| Article topic | Best ecosystem targets |
+|---|---|
+| In-app activity feeds (definition) | developer.mozilla.org, nngroup.com, arxiv.org |
+| In-app chat / messaging | developer.mozilla.org (WebSocket), rfc-editor.org (RFC 6455), iapp.org |
+| Push notifications | developer.apple.com, developer.android.com, nngroup.com |
+| Community engagement and retention | cmxhub.com, feverbee.com/blog, pew.org |
+| Content moderation | owasp.org, iapp.org, dl.acm.org |
+| Zero-party data | iapp.org, gdpr.eu, pew.org |
+| User engagement metrics | amplitude.com/blog, mixpanel.com/blog, nngroup.com |
+| Notification UX best practices | nngroup.com, m3.material.io, developer.apple.com/design |
+| Accessible community features | a11yproject.com, w3.org/TR/WCAG22, deque.com/blog |
+| Mobile community SDKs | developer.apple.com, developer.android.com, w3.org |
+
 ## Pre-flight
 
 Before running compliance, eyeball the article against this list (intent-aware):
@@ -107,3 +204,5 @@ Before running compliance, eyeball the article against this list (intent-aware):
 - [ ] FAQ, conclusion, pitch, and metrics table are citation-free
 - [ ] No anonymous, content-farm, or competitor-marketing citations
 - [ ] Every approved-customer mention matches the approved-stat list exactly
+- [ ] 3-5 ecosystem hyperlinks placed in body sections (not FAQs, conclusion, or pitch)
+- [ ] No ecosystem link points to a domain in the competitor exclusion list
