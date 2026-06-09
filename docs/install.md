@@ -64,7 +64,7 @@ Then click **Sync** in the bottom right. Claude will fetch the marketplace from 
 You're now back in the Directory and a new **`marketing-team`** pill is selected. You'll see two plugin cards:
 
 - **Brand kit** — 2 skills: `brand-messaging` and `design-system`.
-- **Marketing team** — 14 skills covering content, design, SEO, linking, and more.
+- **Marketing team** — 17 skills covering content, design, SEO, linking, publishing, and Webflow prototype migration.
 
 **Install one, not both.** Click the **+** on the card that matches your role (see "Which one should I install?" below).
 
