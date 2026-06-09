@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.2
+
+Added `claude-design-to-webflow` skill — playbook for migrating Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP. **Non-breaking** — new skill, no changes to existing ones. Captures the lessons from the social.plus MCP Server page rebuild session and merges in framework-agnostic patterns from public Webflow-conversion skills (skipping the moden.club paste-tool path — this skill targets the official `mcp.webflow.com` Connector that the team already runs).
+
+- Added [`marketing-team/skills/claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md) (501 lines, 32.6 KB) — decision rule for native-vs-code on each CSS rule, anti-pattern catalog (9 entries A1–A9 covering section-root mega-rules, `all: unset`, hardcoded brand hex, custom @media breakpoints, JS-injected static content, `:nth-child(N)`, `color-mix()` Designer corruption, class-fixer IIFEs, mobile horizontal overflow), pitfalls catalogue (14 entries with symptom/cause/fix triples — adds `Webflow.push()` runtime timing and `inDesigner` canvas-vs-published render differences on top of the original 12), pre-flight checklist, 6-step migration playbook, worked before/after examples from the social.plus session, Webflow MCP cheatsheet, and an appendix mapping all 31 brand colors + 1 font + 7 size variables to their Webflow variable IDs so `style_tool update_style` can use `variable_as_value` without a prior `query_variables` round-trip.
+- Added [`docs/claude-design-to-webflow.md`](docs/claude-design-to-webflow.md) — companion overview explaining what the skill does, when it triggers, when it does NOT trigger, and how it relates to `design-system`, `site-intelligence`, and the official `webflow-skills:*` plugin.
+- Updated [`marketing-team/README.md`](marketing-team/README.md): 16 → 17 skills; added new row under "Design & analysis" alongside `design-system`, `site-intelligence`, `product-update-vs-website`.
+- Updated [`README.md`](README.md): 16 → 17 skills in the plugin table and the "Available skills" header.
+- Updated [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json): "16 skills" → "17 skills" in both the top-level description and the marketing-team plugin entry.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.1 to 13.2 (semver minor — non-breaking, adds a skill).
+
 ## marketing-team 13.1
 
 Hardening pass on `blog-publisher` driven by real publishes (Listicle 1 + 2 went live) and a skill-creator eval pass. **Non-breaking** — same skill, same namespace, same install command. New helper scripts and a safety-net dry-run; behaviour is stricter and more deterministic, not different in contract.
