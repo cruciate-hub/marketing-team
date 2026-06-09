@@ -87,7 +87,7 @@ This marketplace has **two plugins**. Pick one, not both.
 
 | If you're… | Install | Why |
 |---|---|---|
-| On the marketing team | `marketing-team` | Full kit — 14 skills covering content (blog, AEO, newsletters, case studies, press releases, brand voice), design system, SEO & internal linking, backlink work, site intelligence, and formatting utilities (legal docs, SVG icons). |
+| On the marketing team | `marketing-team` | Full kit — 17 skills covering content (blog, AEO, newsletters, case studies, press releases, brand voice), design system, SEO & internal linking, backlink work, site intelligence, formatting utilities (legal docs, SVG icons), publishing (Google Docs → Webflow), and Webflow prototype migration. |
 | Anyone outside the marketing team — execs, sales, engineers, founders, designers — anyone who needs to stay on-brand | `brand-kit` | Minimum on-brand kit — 2 skills covering voice and visual design. No press-release, SEO, or marketing clutter. |
 
 The `brand-kit` plugin's two skills are **the same files** as the equivalents in `marketing-team` (symlinks under the hood). So brand voice, terminology, and design tokens stay consistent across the company.
