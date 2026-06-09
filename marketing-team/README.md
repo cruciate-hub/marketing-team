@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (16)
+## Skills (17)
 
 ### Content creation
 
@@ -22,6 +22,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | [design-system](../docs/design-system.md) | 43 | 1.9 KB | Fetches the full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. | [SKILL.md →](./skills/design-system/SKILL.md) |
 | [site-intelligence](../docs/site-intelligence.md) | 308 | 17.0 KB | Queries, audits, and analyzes the 10 website inventory files — marketing pages, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, and webinars. | [SKILL.md →](./skills/site-intelligence/SKILL.md) |
 | [product-update-vs-website](../docs/product-update-vs-website.md) | 190 | 11.0 KB | Compares product updates against website content to find gaps. | [SKILL.md →](./skills/product-update-vs-website/SKILL.md) |
+| [claude-design-to-webflow](../docs/claude-design-to-webflow.md) | 501 | 32.6 KB | Migrates a Claude-generated HTML/CSS/JS prototype into native Webflow elements via the Webflow MCP. Decision rule for native-vs-code, anti-pattern catalog (9), pitfalls (14), worked before/after examples, plus a pre-mapped social.plus variable-ID catalog so property bindings skip a `query_variables` round-trip. | [SKILL.md →](./skills/claude-design-to-webflow/SKILL.md) |
 
 ### SEO & linking
 

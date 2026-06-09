@@ -8,7 +8,7 @@ This marketplace ships **two plugins** — install one, not both.
 
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
-| **`marketing-team`** | The marketing team — full kit | 16 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
+| **`marketing-team`** | The marketing team — full kit | 17 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
@@ -27,7 +27,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 **Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in `marketplace.json` (and the matching `plugin.json`). Teammates with auto-sync on (Steps 8–11 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
 
-## Available skills (16)
+## Available skills (17)
 
 ### Content creation
 
