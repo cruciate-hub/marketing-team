@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-09T10:43:56.715Z",
-    "itemCount": 151,
+    "generatedAt": "2026-06-09T10:44:03.773Z",
+    "itemCount": 152,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
   },
@@ -197,6 +197,12 @@
       "metaTitle": "API for Decentralized Social Network Features in Apps",
       "metaDescription": "Learn how APIs enable developers to implement decentralized social network functionality in apps, including portable identity, interoperable communities",
       "content": "# API for Implementing Decentralized Social Network Functionality in Apps\n## What Is an API for Implementing Decentralized Social Network Functionality in Apps?\n## What Is Decentralized Social Networking?\n## Core Components of Decentralized Social APIs\n### Key Infrastructure Components\n## Approaches to Implementing Decentralized Social Features\n### Comparison of Implementation Approaches\n## Social Features Enabled by Decentralized APIs\n### Core Social Capabilities\n## Role of social.plus in Decentralized Social Infrastructure\n## Best Practices for Implementing Decentralized Social APIs\n### 1. Use Hybrid Infrastructure\n### 2. Simplify User Onboarding\n### 3. Maintain Community Governance\n### 4. Monitor Engagement Metrics\n## FAQs\n### What is the easiest way to implement decentralized social features in an app?\n### Do decentralized social networks require blockchain?\n### Can decentralized and centralized systems work together?\n### What types of apps benefit from decentralized social functionality?\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/api-for-adding-social-networking-tools-to-mobile-apps",
+      "metaTitle": "API for Adding Social Networking Tools to Mobile Apps",
+      "metaDescription": "Learn how APIs enable developers to add social networking tools to mobile apps, including feeds, messaging, and communities. Explore key features, implementation options, and best practices.",
+      "content": "# API for Adding Social Networking Tools to Mobile Apps\n## What Is an API for Adding Social Networking Tools to Mobile Apps?\n## Why Mobile Apps Use Social Networking APIs\n## Benefits of Social Networking APIs for Mobile Apps\n## Core Social Networking Tools Enabled by APIs\n## Essential Social Networking Features\n## Types of APIs Used for Mobile Social Features\n## Common Social API Categories\n## Role of social.plus in Mobile Social Infrastructure\n## Best Practices for Integrating Social APIs in Mobile Apps\n## 1. Integrate Social Features Into Core App Flows\n## 2. Launch With High-Impact Features\n## 3. Prioritize Moderation and Safety\n## 4. Monitor Engagement Metrics\n## FAQs\n### What is the easiest way to add social networking tools to a mobile app?\n### Can social APIs work with existing mobile apps?\n### Are social networking APIs customizable?\n### What types of mobile apps benefit from social networking features?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/api-for-creating-a-private-social-network-inside-your-app",
