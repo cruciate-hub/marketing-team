@@ -14,3 +14,8 @@ Confirmed Type B (2-6 word semantic-equivalent phrase) and Type C (single-word g
 | "app retention rate" | B | app-retention | `/glossary/app-retention` or strongest app-retention blog | 12.8 baseline |
 | "personalization" | C | app-personalization | `/glossary/app-personalization` | 12.8 baseline |
 | "communities" | C | online-community | `/glossary/online-community` | 12.8 baseline |
+| "customer loyalty" | B | brand-loyalty | loyalty-focused blog (e.g. `/blog/over-80-of-sephoras-sales-come-from-loyal-customers---why-emotional-loyalty-drives-growth` or `/blog/how-to-measure-brand-loyalty-our-top-insights`) | 2026-06-10 batch |
+| "building customer loyalty" | B | build-brand-loyalty | `/blog/building-brand-loyalty-the-power-of-digital-communities` | 2026-06-10 batch |
+| "community platform" (singular) | B | community-platforms | `/glossary/community-platform` | 2026-06-10 batch |
+| "engagement rates" / "higher engagement rates" | B | engagement-rate | `/glossary/engagement-rate` | 2026-06-10 batch |
+| "community" | C | online-community | `/glossary/online-community` — focal-noun rule applies (e.g. "convert your audience into a close community") | 2026-06-10 batch |

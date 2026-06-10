@@ -99,6 +99,7 @@ Surface borderline cases to Stefan with the metrics — never auto-decline based
 - Do not use anchors with competitive keywords
 - Never place links in introductions or conclusions — only in body paragraphs
 - The backlink must provide additional value to the reader by linking to credible, directly related content. Links that appear promotional will be rejected by partners.
+- **Vary anchors.** Never propose the same anchor text twice in one batch/email, and check every proposed anchor against the live social.plus anchor profile before finalizing (see "Anchor Diversity Check" in Step 3). Repeated anchors read as a link-building footprint on both sides of the exchange.
 
 ### Target URL Rules
 
@@ -390,6 +391,21 @@ If any of the five files is missing, surface the failure to Stefan immediately �
 5. `website/pages-glossary.json` — glossary inventory data
 
 **Important: prioritize anchor searches by likelihood of appearing in natural text.** Search for short, common anchors first (2-3 words like "user engagement", "community app", "social features"), then check for longer phrases only on articles that already matched a short anchor. Long-tail anchors like "how to increase mobile app user engagement" almost never appear verbatim in someone else's content — searching for them first wastes time.
+
+---
+
+#### Anchor Diversity Check (run once per session, before finalizing any anchor)
+
+Added 2026-06-10 after Stefan flagged that batches were reusing the same few anchors. Anchor repetition is a double problem: over-optimization risk on the social.plus side and template-smell on the partner side. Discovery (Phase 1/2 scanning) is unaffected — this check governs which anchor you *finalize* when a sentence offers more than one option.
+
+1. **Pull the live anchor profile once per session:** `site-explorer-anchors` with `target: social.plus`, `mode: subdomains`, `history: live`, `select: anchor,refdomains,links_to_target,dofollow_links`, `order_by: refdomains:desc`, `limit: 150`. Costs ~8 units/row (~1,200 units) — cache the result for the whole session. Ignore spam rows (Telegram/SEO-service anchors, all nofollow) and brand/URL/bare anchors; classify only editorial phrase anchors.
+2. **Classify by refdomains:** ≥10 = saturated (avoid), 5–9 = caution (use only when the placement is clearly the best option), 1–4 = fine, 0 = preferred.
+3. **Reference snapshot (2026-06-10 — re-pull, don't trust this list blindly):** saturated were "greater user engagement and loyalty" (26 refdomains — old campaign footprint), "customer engagement" (20), "community features" (11), "social media app development" (11), "community based marketing" (~11 across casing variants), "social features" (10), "User-generated content" (7). Fresh (zero presence) included the whole retention family, the app-engagement family, app stickiness, activity/news feed, app/community monetization, in-app chat/messaging, real-time messaging, social commerce, live streaming, community platform, in-app community, brand advocate.
+4. **De-dupe within the batch:** never the same anchor twice in one email. If two articles host the same head term, vary the phrasing per article ("customer loyalty" on one, "building customer loyalty" on the other) — each variant must still appear verbatim on its page.
+5. **Prefer verbatim on-page variants over saturated head terms.** The same sentence often contains a fresher 2-4 word variant: "building customer loyalty" instead of "customer loyalty", "higher engagement rates" instead of "engagement rates", "community platform" instead of "community engagement". The variant must still pass all six Phase 1 guardrails (it usually lands as Type B, capped ⭐⭐).
+6. **Placement quality still wins.** If the only fresh-anchor alternative is a worse placement (forced context, table cell, intro position), keep the better placement with the lightly-used anchor and note the tradeoff.
+7. **Flag reuse in the Step 5 summary table:** append `[anchor-reuse: N refdomains]` to any proposed anchor with ≥5 refdomains in the live profile so Stefan sees it at a glance.
+8. **Most natural pattern in the live profile: stat-citation anchors** ("84% of consumers", "5% rise in retention", "Approximately 70% of apps doubled user engagement") pointing at the stat-blog series — writers cite numbers without being pushed. For Phase 2 suggested sentences, citing a social.plus statistic with the stat phrase as the anchor is the most editorial-feeling ask available.
 
 ---
 
@@ -769,6 +785,7 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **Phase 1 fit-score ceilings**: Only Type A literal matches from `references/anchors.md` reach ⭐⭐⭐ Perfect. Type B creative semantic-equivalent matches cap at ⭐⭐ Strong. Type C single-word glossary matches cap at ⭐⭐ Strong. The caps protect the relationship channel against AI over-reach in anchor identification; they do NOT signal lower discovery priority. Treat B and C as first-class Phase 1 candidates.
 - **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches across Types A, B, and C on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
 - **Type C single-word glossary anchors require glossary targets**: A single-word anchor (e.g., "personalization", "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced. Fit score caps at ⭐⭐ Strong.
+- **Proposed anchor is saturated in our live profile or duplicated in the batch**: Look for a verbatim variant in the same sentence first (see Anchor Diversity Check, Step 3), then consider a different anchor family on the same article. If no clean alternative exists and the placement is strong, keep it but flag `[anchor-reuse: N refdomains]` in the summary table — Stefan decides. Never silently ship two identical anchors in one email.
 - **Multiple partner domains in one request**: Produce a single consolidated email addressing all domains (see Step 4, "Consolidated multi-site email"). Never split into separate per-domain emails — the contact proposed a multi-site exchange and expects one reply.
 - **PBN/content-farm reject**: The partner-facing email gets only a diplomatic "no strong fit this round" line. PBN signals, manipulated DR patterns, pirate-keyword profiles, and Ahrefs unit budgets are user-facing analysis only — never expose these to the partner.
 - **Chrome navigation blocked on a partner domain**: Flag to Stefan as a user-facing note. For partner-facing copy, treat as no-fit ("no strong fit this round") unless Stefan unblocks and re-runs.
@@ -779,6 +796,7 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't recommend linking from irrelevant articles just to get a placement
 - Don't invent anchor phrases that don't appear verbatim in the partner's body text. Phase 1 Types A, B, and C all require the phrase to be in the text already. Phase 2 creative anchors require all six guardrails from Phase 1 step 1 and are gated to zero-match articles only.
 - Don't under-flag Type B creative or Type C single-word glossary candidates because they "feel like exceptions." They are first-class Phase 1 hits and the most common source of leaked-on-the-table placements. The ⭐⭐ cap handles the relationship risk; discovery should be confident.
+- Don't reuse the same anchor text across two placements in one batch, and don't default to saturated head terms ("customer engagement", "social features", "user-generated content") when a fresh verbatim variant exists in the same sentence — run the Anchor Diversity Check in Step 3 and skip neither the profile pull nor the batch de-dupe
 - Don't suggest more than 5 total placements per partner site — keep it focused
 - Don't fabricate article content — if you can't access an article, say so
 - Don't trust Google search snippets as source material — always verify on the actual page before presenting a placement
