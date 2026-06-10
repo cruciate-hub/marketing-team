@@ -209,36 +209,29 @@ Fix all violations before continuing. Do not flag and proceed.
 
 ## Phase 5 — Resize images
 
-Follow `image-pipeline.md`. All production blog images use **WebP** — `sips` resizes
-and converts in one step. Use the article title (not the slug) in filenames to match
-production naming convention.
+All production blog images are **WebP** at exact dimensions — the collection's image
+fields enforce them (min=max validation), so the API rejects anything off-size. One
+command does master + inline:
 
 ```bash
-PNG="{absolute path from user input}"
-SLUG="{derived cms slug, e.g. 6-best-in-app-community-platforms-for-consumer-apps}"
-TMPDIR=$(mktemp -d)
-
-# Validate hero image
-WIDTH=$(sips -g pixelWidth "$PNG" | awk '/pixelWidth/ {print $2}')
-if [ "$WIDTH" -lt 1578 ]; then
-  echo "ERROR: PNG is ${WIDTH}px wide — need ≥ 1578px"; exit 1
-fi
-
-# Hero: resize + convert to WebP — naming: {slug}_{variant}_{width}x{height}.webp
-sips -z 888 1578 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_page-header_1578x888.webp"
-sips -z 408  724 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_thumbnail_724x408.webp"
-sips -z 283  502 -s format webp "$PNG" --out "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
-
-# Inline images: downscale from source resolution to 1578×888, convert to WebP
-# Naming: keep existing slug-based name, replace .png with .webp
-# Example for 6 inline images:
-for i in 1 2 3 4 5 6; do
-  SRC="{absolute path to img-${i}.png}"
-  sips -z 888 1578 -s format webp "$SRC" --out "$TMPDIR/${SLUG}_img-${i}_1578x888.webp"
-done
+python3 "$REPO/scripts/resize_blog_images.py" "$PNG" "$SLUG" "$TMPDIR" \
+  --inline "img-1.png" "img-2.png" ...    # omit --inline if no body images
 ```
 
-If sips is not available (Linux), use the ImageMagick fallback in `image-pipeline.md`.
+It validates the master (≥ 1578 px wide, ~16:9), then writes
+`{slug}_page-header_1578x888.webp`, `{slug}_thumbnail_724x408.webp`,
+`{slug}_mega-menu_502x283.webp`, and `{slug}_img-N_1578x888.webp` per inline image.
+
+Do NOT use `sips` or `ffmpeg` for the WebP step — macOS `sips` cannot write WebP
+("Can't write format: org.webmproject.webp") and ffmpeg is often built without libwebp.
+The helper uses Pillow, which works everywhere Python does; if Pillow is missing it
+prints the install command and exits. PNG or WebP input both work (some designers ship
+only a `*_page-header.webp` master — deriving the smaller sizes from it is fine; an
+`*_open-graph.webp` variant has no CMS field and is unused).
+
+Note on working files: `$TMPDIR` (and `/tmp` generally) does not survive between
+sessions. Fine for a single publish run; anything you want to reuse later (downloaded
+images, fielddata you may re-publish) belongs in a stable path instead.
 
 ## Phase 6 — Build and publish
 
@@ -315,18 +308,69 @@ The script prints the live URL to stdout on success. Surface it to the user:
   Item ID: {itemId}
 ```
 
+## Updating images on an EXISTING post (refresh mode)
+
+When a designer delivers new hero images for an already-published post (e.g. a periodic
+image refresh), do NOT re-create the post — refresh it in place:
+
+```bash
+# 1. Resize the new master to the 3 exact sizes
+python3 "$REPO/scripts/resize_blog_images.py" "$NEW_PNG" "$SLUG" "$TMPDIR"
+
+# 2. Re-upload + patch + publish in one command
+python3 "$REPO/scripts/blog-publisher.py" --update <item_id> \
+  "$TMPDIR/${SLUG}_page-header_1578x888.webp" \
+  "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
+  "$TMPDIR/${SLUG}_mega-menu_502x283.webp"
+```
+
+Find the `<item_id>` by slug: `GET /v2/collections/{collection}/items?slug={slug}`.
+The update PATCHes **only** the 3 image fields — a partial update preserves every other
+field, so the post's content, links, and metadata are untouched.
+
+Expect the response image URLs to DIFFER from what was sent: Webflow re-ingests the
+file under a new fileId on update (your filename survives as the URL suffix). That is
+normal — the script verifies via the filename, not URL equality.
+
+If image sources come from Google Drive: `download_file_content` returns large files as
+a sidecar `.txt` (JSON with a base64 `content` field) under the project's
+`tool-results/` directory — decode it and confirm the bytes start with `RIFF…WEBP`.
+A direct `drive.google.com/uc?export=download` curl fails for non-link-shared files
+(returns the login page); the Drive MCP is the only reliable path. Designer folders are
+usually named by blog TITLE, not slug — match them to CMS items via a slug lookup.
+
+## No-token fallback: the Webflow MCP
+
+If `WEBFLOW_API_TOKEN` is not set, the same flow works through the Webflow MCP's own
+OAuth — no token needed:
+
+1. `data_assets_tool > create_asset` — registers the asset; returns the presigned S3
+   upload details and the final hostedUrl.
+2. Upload the file to S3 yourself (curl with `--max-time 60`, or the multipart pattern
+   in `blog-publisher.py`). **Gotcha:** the MCP returns `uploadDetails` keys in
+   camelCase, but S3 wants the exact form-field names — map them:
+   `xAmzAlgorithm→X-Amz-Algorithm`, `xAmzCredential→X-Amz-Credential`,
+   `xAmzDate→X-Amz-Date`, `policy→Policy`, `xAmzSignature→X-Amz-Signature`,
+   `successActionStatus→success_action_status`, `contentType→Content-Type`,
+   `cacheControl→Cache-Control`, plus `key`, `acl`, `bucket` as-is. The file part must
+   be the LAST form field, named `file`. Success is HTTP **201**.
+3. `data_cms_tool > update_collection_items` (or `create_collection_items`), then
+   `publish_collection_items`.
+
 ## Error handling
 
 | Error | Action |
 |---|---|
-| `WEBFLOW_API_TOKEN` not set | Stop. Tell user: `export WEBFLOW_API_TOKEN=your_token` |
+| `WEBFLOW_API_TOKEN` not set | Use the Webflow MCP fallback above, or ask the user to `export WEBFLOW_API_TOKEN=…` |
 | Google Doc unreadable (401) | Stop. Tell user to check file sharing permissions. |
 | PNG width < 1578 px | Stop. Ask for the full-resolution export (min 1578×888 px). |
+| Wrong image dimensions | The collection enforces exact sizes (min=max) — the API rejects off-size images. Re-run the resize helper. |
 | S3 upload fails | Retry once. If still failing, report the HTTP status and stop. |
+| Network call hangs | Script calls time out by themselves (30s API / 60s S3) and exit with an error. Any hand-written curl must carry `--max-time`. |
 | Webflow 401 | Token invalid or expired. Ask user to refresh `WEBFLOW_API_TOKEN`. |
 | Webflow 400 "slug already exists" | Stop. Surface the conflict — do not append any suffix. See Slug rules above. |
 | Webflow 429 (rate limited) | Wait 10 s, retry once. |
-| `python3` not found | Stop. The scripts need Python 3 (standard library only — no pip, no venv). |
+| `python3` not found | Stop. The publish script needs Python 3 (stdlib only); the resize helper additionally needs Pillow. |
 
 ## What NOT to publish
 

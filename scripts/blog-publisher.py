@@ -3,7 +3,11 @@
 blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
 
 Usage:
+    # Create + publish a new post:
     python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged] [--dry-run]
+
+    # Refresh the 3 hero images on an EXISTING post (re-upload, patch, publish):
+    python3 scripts/blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>
 
     --staged    Create a staged item (goes live on next Webflow site publish) rather
                 than publishing immediately.
@@ -11,13 +15,18 @@ Usage:
                 in embed / no style block, internal links present, placeholder-to-image
                 match, exact image dimensions) and write dry-run-report.json. Makes NO API
                 calls and needs no token. Exits non-zero on any failed check. Use in tests/CI.
+                With --update, validates the 3 image dimensions only.
+    --update    Image-refresh mode for an existing item. Uploads the 3 hero images,
+                PATCHes only the image fields (everything else is preserved), publishes.
 
 Environment:
     WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
                           Not required for --dry-run.
 
 Dependencies: Python 3 standard library only — no pip install, no virtualenv. (Image
-dimension checks in --dry-run use Pillow if present, and are skipped gracefully if not.)
+dimension checks use Pillow if present, and are skipped gracefully if not.)
+All network calls carry timeouts (30s API / 60s S3) — a hung connection exits with an
+error instead of blocking forever.
 
 Outputs (stdout):
     JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
@@ -67,11 +76,14 @@ def md5_file(path: str) -> str:
         return hashlib.md5(f.read()).hexdigest()
 
 
-def http(method: str, url: str, headers=None, json_body=None, raw_body=None):
+def http(method: str, url: str, headers=None, json_body=None, raw_body=None, timeout=30):
     """
     Minimal HTTP via urllib. Returns (status, text). Never raises on an HTTP error
     status — returns the error body so callers can report it. json_body is JSON-encoded
     and sets Content-Type; raw_body is sent verbatim (used for the S3 multipart upload).
+
+    ALWAYS pass a timeout — a hung connection with no timeout has blocked a scripted run
+    for 45 minutes. Default 30s for API calls; the S3 upload passes a longer one.
     """
     headers = dict(headers or {})
     data = None
@@ -82,12 +94,13 @@ def http(method: str, url: str, headers=None, json_body=None, raw_body=None):
         data = raw_body
     req = urllib.request.Request(url, data=data, method=method, headers=headers)
     try:
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
             return resp.status, resp.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
         return e.code, e.read().decode("utf-8", "replace")
-    except urllib.error.URLError as e:
-        return 0, f"network error: {e}"
+    except (urllib.error.URLError, TimeoutError) as e:
+        reason = getattr(e, "reason", e)
+        return 0, f"network error / timeout after {timeout}s: {reason}"
 
 
 def _json(text: str) -> dict:
@@ -165,7 +178,10 @@ def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
     with open(file_path, "rb") as f:
         file_bytes = f.read()
     body, ctype = _multipart_body(fields, "file", file_name, file_bytes, "image/webp")
-    status, text = http("POST", upload_url, headers={"Content-Type": ctype}, raw_body=body)
+    # 60s timeout: file transfer, slower than a JSON call. Expected success is 201
+    # (the success_action_status Webflow sets); 200/204 accepted defensively.
+    status, text = http("POST", upload_url, headers={"Content-Type": ctype}, raw_body=body,
+                        timeout=60)
     if status not in (200, 201, 204):
         print(f"ERROR: S3 upload failed — HTTP {status}", file=sys.stderr)
         print(text[:500], file=sys.stderr)
@@ -222,6 +238,77 @@ def publish_staged(token: str, field_data: dict) -> dict:
                         json_body={"fieldData": field_data, "isDraft": False})
     _check(status, text, "webflow-stage")
     return _extract_item(_json(text))
+
+
+# ── Update mode: refresh hero images on an EXISTING post ─────────────────────────
+
+def update_hero_images(token: str, item_id: str, header, grid, menu) -> None:
+    """
+    --update <item_id>: re-upload the 3 hero images and patch them onto an existing
+    item, then publish it. The refresh path that previously had to be hand-rolled.
+
+    Field notes (verified in production):
+    - A partial PATCH with ONLY the 3 image fields preserves every other field — no
+      need to round-trip the whole item.
+    - {"url": <hostedUrl>} is sufficient for an Image field.
+    - Webflow RE-INGESTS the image under a new fileId on update, so the response URL
+      differs from what was sent. That is normal, not a failure — verify by checking
+      the uploaded filename survives as the URL suffix.
+    """
+    item_url = f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/{item_id}"
+
+    # The item must exist; grab its name/slug for reporting.
+    status, text = http("GET", item_url, headers=api_headers(token))
+    if status == 404:
+        print(f"ERROR: item {item_id} not found in the Blog collection.", file=sys.stderr)
+        sys.exit(1)
+    _check(status, text, "update-get-item")
+    fd   = _json(text).get("fieldData", {})
+    slug = fd.get("slug", "?")
+    print(f"Updating images on: {fd.get('name', '?')!r}  (slug: {slug})", file=sys.stderr)
+
+    # Validate dimensions BEFORE uploading — the collection enforces exact sizes
+    # (min=max validation); a wrong-size image is rejected by the API.
+    for path, exp in [(header, (1578, 888)), (grid, (724, 408)), (menu, (502, 283))]:
+        dims = _webp_dims(path)
+        if dims is not None and dims != exp:
+            print(f"ERROR: {Path(path).name} is {dims[0]}x{dims[1]} — must be exactly "
+                  f"{exp[0]}x{exp[1]} (the CMS field rejects anything else).", file=sys.stderr)
+            sys.exit(1)
+
+    print("Uploading replacement images…", file=sys.stderr)
+    _, header_url = upload_asset(token, header, Path(header).name)
+    _, grid_url   = upload_asset(token, grid,   Path(grid).name)
+    _, menu_url   = upload_asset(token, menu,   Path(menu).name)
+
+    # Partial PATCH: only the 3 image fields.
+    print("Patching image fields…", file=sys.stderr)
+    status, text = http("PATCH", item_url, headers=api_headers(token),
+                        json_body={"fieldData": {
+                            "image-page-header":   {"url": header_url},
+                            "grid-thumbnail":      {"url": grid_url},
+                            "thumbnail-mega-menu": {"url": menu_url},
+                        }})
+    _check(status, text, "update-patch")
+
+    # Verify via filename suffix (the URL itself is rewritten by Webflow's re-ingest).
+    resp = _json(text).get("fieldData", {})
+    for field, src in [("image-page-header", header), ("grid-thumbnail", grid),
+                       ("thumbnail-mega-menu", menu)]:
+        url = (resp.get(field) or {}).get("url", "") if isinstance(resp.get(field), dict) else ""
+        ok  = Path(src).name in url
+        print(f"  {'✓' if ok else '⚠'} {field}" + ("" if ok else " — filename not in response URL; check the live page"),
+              file=sys.stderr)
+
+    # Publish the updated item.
+    print("Publishing…", file=sys.stderr)
+    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/publish",
+                        headers=api_headers(token), json_body={"itemIds": [item_id]})
+    _check(status, text, "update-publish")
+
+    print(json.dumps({"itemId": item_id, "slug": slug,
+                      "liveUrl": f"https://www.social.plus/blog/{slug}", "updated": True}))
+    print(f"\n✓ Images refreshed: https://www.social.plus/blog/{slug}", file=sys.stderr)
 
 
 # ── Pre-flight checks ───────────────────────────────────────────────────────────
@@ -383,13 +470,48 @@ def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_pat
 
 def main() -> None:
     if len(sys.argv) < 5:
-        print("Usage: python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged] [--dry-run]", file=sys.stderr)
+        print("Usage:\n"
+              "  create:  python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-N.webp ...] [--staged] [--dry-run]\n"
+              "  update:  python3 blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>",
+              file=sys.stderr)
         sys.exit(1)
 
     all_args    = sys.argv[1:]
     staged_mode = "--staged" in all_args
     dry_run     = "--dry-run" in all_args
-    all_args    = [a for a in all_args if a not in ("--staged", "--dry-run")]
+    update_mode = "--update" in all_args
+    all_args    = [a for a in all_args if a not in ("--staged", "--dry-run", "--update")]
+
+    # ── Update mode: --update <item_id> <header> <grid> <menu> ──────────────────
+    if update_mode:
+        if staged_mode:
+            print("ERROR: --update cannot be combined with --staged (it patches an existing item).",
+                  file=sys.stderr)
+            sys.exit(1)
+        if len(all_args) != 4:
+            print("Usage: python3 blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>",
+                  file=sys.stderr)
+            sys.exit(1)
+        item_id, header_webp, grid_webp, menu_webp = all_args
+        for path in (header_webp, grid_webp, menu_webp):
+            if not Path(path).exists():
+                print(f"ERROR: File not found: {path}", file=sys.stderr)
+                sys.exit(1)
+        if dry_run:
+            # Dimension-only validation for an image refresh.
+            ok = True
+            for path, exp in [(header_webp, (1578, 888)), (grid_webp, (724, 408)),
+                              (menu_webp, (502, 283))]:
+                dims = _webp_dims(path)
+                good = dims is None or dims == exp
+                ok = ok and good
+                detail = "dim check skipped (no Pillow)" if dims is None else f"{dims[0]}x{dims[1]}"
+                print(f"  {'✓' if good else '✗'} {Path(path).name} — {detail}"
+                      + ("" if good else f" (expected {exp[0]}x{exp[1]})"), file=sys.stderr)
+            print(json.dumps({"dryRun": True, "update": True, "allPassed": ok}))
+            sys.exit(0 if ok else 1)
+        update_hero_images(get_token(), item_id, header_webp, grid_webp, menu_webp)
+        return
 
     fielddata_path = all_args[0]
     header_webp    = all_args[1]

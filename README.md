@@ -69,7 +69,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| [**blog-publisher**](./marketing-team/skills/blog-publisher/SKILL.md) | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes (or `--staged` to review first). Includes a side-effect-free `--dry-run` validation pass. Stdlib only (no install/venv). Requires `WEBFLOW_API_TOKEN`. |
+| [**blog-publisher**](./marketing-team/skills/blog-publisher/SKILL.md) | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 WebP sizes, uploads assets, and publishes (`--staged` to review first, `--update` to refresh images on an existing post). Includes a side-effect-free `--dry-run` validation pass. Requires `WEBFLOW_API_TOKEN`. |
 
 ## Repo structure
 

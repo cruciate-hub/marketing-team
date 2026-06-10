@@ -3,6 +3,33 @@
 Captured from live test runs publishing Listicle 1 and Listicle 2 (June 2026).
 Ordered by impact. Items marked ✅ are done; the rest are open.
 
+## Resolved from field feedback (hero-image refresh run, June 2026)
+
+A separate session used the skill for an image-refresh job on 5 live posts and filed
+11 findings. All folded in (v13.2):
+
+- ✅ **`--update <item_id>` mode** — the refresh path (re-upload 3 heroes → partial
+  PATCH of only the image fields → publish) is now one command instead of hand-rolled.
+  Verifies via filename suffix, not URL equality (Webflow re-ingests under a new fileId
+  on update — expected, not a failure).
+- ✅ **Timeouts everywhere** — a run without timeouts once hung 45 minutes. `http()`
+  now defaults to 30s (60s for the S3 upload) and exits with an error on timeout.
+- ✅ **Pillow is the resize path, never sips/ffmpeg** — `scripts/resize_blog_images.py`
+  (validates ≥1578px + ~16:9, emits all exact sizes). sips can't write WebP on macOS;
+  ffmpeg often lacks libwebp. The "stdlib only" claim now applies to blog-publisher.py;
+  the resize helper declares Pillow and fails with install instructions if absent.
+- ✅ **Webflow MCP documented as the no-token fallback** — create_asset → S3 (camelCase
+  key mapping gotcha: xAmzAlgorithm→X-Amz-Algorithm etc., file part last, success=201)
+  → update/publish_collection_items. In SKILL.md + image-pipeline.md.
+- ✅ **Drive sourcing notes** — large files arrive as base64 sidecar .txt (verify
+  RIFF…WEBP magic); direct drive.google.com/uc curl fails for non-shared files;
+  designer folders are titled by blog TITLE not slug (match via slug lookup);
+  `*_open-graph.webp` has no CMS field.
+- ✅ **Exact-dimension enforcement documented** (min=max validation; API rejects
+  off-size) and gated in --update before any upload.
+- ✅ **/tmp non-persistence noted** — single-run files in $TMPDIR are fine; anything
+  reusable goes in a stable path.
+
 ## Resolved via the skill-creator eval pass (iteration 1 → 2)
 
 - ✅ **No `<style>` block in post-content.** Reverted the earlier "table style block"
