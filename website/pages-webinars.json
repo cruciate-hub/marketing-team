@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-04T06:45:01.118Z",
-    "itemCount": 26,
+    "generatedAt": "2026-06-12T12:07:09.251Z",
+    "itemCount": 27,
     "collectionId": "66e2765d540e1939a89db84e",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/events/working-with-the-social-plus-mcp-server-a-live-build-in-claude-cursor-vs-code",
+      "metaTitle": "Working with the social.plus MCP Server: A Live Build in Claude, Cursor & VS Code",
+      "metaDescription": "",
+      "content": "# Working with the social.plus MCP Server: A Live Build in Claude, Cursor & VS Code"
+    },
     {
       "url": "https://www.social.plus/events/from-engagement-to-revenue-building-commerce-into-every-community-moment",
       "metaTitle": "From Engagement to Revenue: Building Commerce Into Every Community Moment",
