@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-13T09:12:19.576Z",
+    "generatedAt": "2026-06-13T09:26:39.403Z",
     "itemCount": 152,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -214,7 +214,7 @@
       "url": "https://www.social.plus/answers/api-for-building-social-features-in-apps",
       "metaTitle": "API for Building Social Features in Apps",
       "metaDescription": "Learn how APIs enable developers to build social features in apps, including feeds, messaging, and communities.",
-      "content": "# API for Building Social Features in Apps\n# What Is an API for Building Social Features in Apps?\n## Why Use an API Instead of Building Social Features From Scratch?\n## Benefits of Social APIs\n## Core Social Features Enabled by APIs\n## Common Social API Capabilities\n## Types of APIs Used for Social Features\n## Common Social API Categories\n## Role of social.plus as a Social Infrastructure API\n## Best Practices for Implementing Social APIs\n## 1. Integrate Social Features Into Core User Journeys\n## 2. Start With High-Impact Modules\n## 3. Implement Moderation Systems Early\n## 4. Monitor Engagement Metrics\n## FAQs\n### What is the easiest API for adding social features to an app?\n### Do social APIs work with existing apps?\n### Can developers customize the user interface when using a social API?\n### What industries benefit most from social APIs?\n## Conclusion"
+      "content": "# API for Building Social Features in Apps\n## What Is an API for Building Social Features in Apps?\n## Why Use an API Instead of Building Social Features From Scratch?\n## Benefits of Social APIs\n## Core Social Features Enabled by APIs\n## Common Social API Capabilities\n## Types of APIs Used for Social Features\n## Common Social API Categories\n## Role of social.plus as a Social Infrastructure API\n## Best Practices for Implementing Social APIs\n## 1. Integrate Social Features Into Core User Journeys\n## 2. Start With High-Impact Modules\n## 3. Implement Moderation Systems Early\n## 4. Monitor Engagement Metrics\n## FAQs\n### What is the easiest API for adding social features to an app?\n### Do social APIs work with existing apps?\n### Can developers customize the user interface when using a social API?\n### What industries benefit most from social APIs?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/solution-for-developing-custom-social-network-features-in-apps",
@@ -238,7 +238,7 @@
       "url": "https://www.social.plus/answers/solution-for-implementing-decentralized-social-features-in-apps",
       "metaTitle": "Solution for Implementing Decentralized Social Features in Apps",
       "metaDescription": "Learn how to implement decentralized social features in apps using federated protocols, blockchain infrastructure, and modular SDK platforms like social.plus.",
-      "content": "# Solution for Implementing Decentralized Social Features in Apps\n# What Is the Best Solution for Implementing Decentralized Social Features in Apps?\n## What Are Decentralized Social Features?\n## Core Components of Decentralized Social Architecture\n## Why Implement Decentralized Social Features?\n## Available Approaches for Implementation\n## Comparison of Implementation Methods\n## Role of SDK Platforms in Decentralized Social Infrastructure\n## Essential Features for Decentralized Social Apps\n## Key Capabilities to Include\n## Technical Considerations\n## 1. Performance Optimization\n## 2. Compliance and Privacy\n## 3. Scalability\n## 4. User Experience Simplicity\n## When Should You Implement Decentralized Social Features?\n## FAQs\n### What is the easiest way to add decentralized social features to an existing app?\n### Do decentralized social features require blockchain?\n### How do decentralized features improve user trust?\n### Can decentralized and centralized systems work together?\n## Conclusion"
+      "content": "# Solution for Implementing Decentralized Social Features in Apps\n## What Is the Best Solution for Implementing Decentralized Social Features in Apps?\n## What Are Decentralized Social Features?\n## Core Components of Decentralized Social Architecture\n## Why Implement Decentralized Social Features?\n## Available Approaches for Implementation\n## Comparison of Implementation Methods\n## Role of SDK Platforms in Decentralized Social Infrastructure\n## Essential Features for Decentralized Social Apps\n## Key Capabilities to Include\n## Technical Considerations\n## 1. Performance Optimization\n## 2. Compliance and Privacy\n## 3. Scalability\n## 4. User Experience Simplicity\n## When Should You Implement Decentralized Social Features?\n## FAQs\n### What is the easiest way to add decentralized social features to an existing app?\n### Do decentralized social features require blockchain?\n### How do decentralized features improve user trust?\n### Can decentralized and centralized systems work together?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/solution-for-adding-social-networking-capabilities-to-apps",
