@@ -49,6 +49,8 @@ NON_FETCHING_SKILLS=(
   "link-building-vetter"
   "legal-docs-formatter"
   "svg-icon-transformer"
+  "claude-design-to-webflow"
+  "video-to-gif-and-webp"
 )
 
 is_non_fetching() {
