@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.5 + brand-kit 3.5
+
+Reliability hardening of the **canonical fetch block** that every content skill runs to load its reference files. The block ignored the exit code of `git pull --ff-only --quiet` and never checked that the working tree was complete, so a broken, partial, or stale local clone silently served missing or out-of-date brand files. In practice this produced confidently wrong conclusions: a session reported that `messaging/terminology.md` and `messaging/tone.md` "don't exist" and that the brand-wide em-dash ban "isn't real", when both files were present on the remote the whole time. **Non-breaking** — same skills, same namespaces, same install commands; the only behavior change is that a bad fetch now fails loud instead of silent.
+
+- [`scripts/canonical-fetch-block-v2.md`](scripts/canonical-fetch-block-v2.md): rewrote the clone/refresh logic. (1) **Never deletes an existing `$REPO`** — the default path doubles as a working checkout that can hold un-pushed local commits, so the old clone-or-pull path is now guarded against destroying local work. (2) **A failed `pull` is surfaced**, not swallowed. (3) New **mechanical integrity gate** probes core files across `brain.md`, `messaging/`, and `design-system/`; if any are missing or empty (or `git rev-parse HEAD` fails), the block prints `Fetch failed: …` with recovery guidance and `exit 1`s, so the skill stops instead of writing copy off incomplete brand rules. The "validate every file" rule was previously prose the model could skip; it is now enforced in shell.
+- Synced the updated block verbatim into all 12 fetch-using SKILL.md files via [`scripts/sync-fetch-blocks.py`](scripts/sync-fetch-blocks.py): aeo-content, backlink-placement-finder, blog-publisher, blog-seo-content, brand-messaging, case-study, design-system, internal-linking-strategist, newsletters, press-release, product-update-vs-website, site-intelligence. [`scripts/audit-skills.sh`](scripts/audit-skills.sh) reports 0 fetch-block drift across the 12.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.4 to 13.5 (semver minor — non-breaking hardening).
+- Bumped [`brand-kit/.claude-plugin/plugin.json`](brand-kit/.claude-plugin/plugin.json) from 3.4 to 3.5 — `brand-messaging` and `design-system` are symlinked into brand-kit, so the fetch-block fix ships in both plugins (same precedent as marketing-team 12.6 + brand-kit 3.4).
+
 ## marketing-team 13.3
 
 `blog-publisher`: folded in field feedback from a real hero-image refresh run (5 live posts, images sourced from Google Drive) that had to hand-roll the update path. **Non-breaking** — same skill, same namespace; adds an update mode, a resize helper, and timeout hardening.
