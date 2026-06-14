@@ -2,7 +2,7 @@
 
 Claude skill for writing SEO-optimized blog posts for social.plus/blog.
 
-Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so content can be pasted in without reformatting — page title, slug, meta description, introduction, post content HTML, taxonomy, author, reading time, image specs.
+Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so content can be pasted in without reformatting — page title, slug, meta description, introduction, post content HTML, taxonomy, reading time, image specs.
 
 ## What it does
 
@@ -10,6 +10,7 @@ Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so c
 - Checks `website/pages-blog.json` for duplicate topics; suggests updating an existing post when a close match exists.
 - Delegates internal links to the `internal-linking-strategist` skill before delivery — the optimizer returns 3–7 SEO-grounded `<a href>` tags via the canonical anchor map in `link-strategy.md`.
 - Produces clean HTML body copy (5,000–12,000 characters) following the Context → Tension → Infrastructure → Impact → Advantage narrative structure.
+- Runs a **two-stage production flow**: drafts a markdown intermediate, checks it with a deterministic script (`scripts/compliance.py` — em dashes, emojis, brand casing, forbidden terminology, length, slug, heading hierarchy), then converts the body to HTML. The script is an additional gate on top of the brain.md terminology/tone review, not a replacement.
 - Labels every CMS field so the user can copy-paste into Webflow field-by-field.
 
 ## When it triggers
@@ -30,9 +31,11 @@ The skill is **not** for:
 2. For comparison or competitive content, lean on `value-story.md`'s differentiation framework.
 3. If the article needs site-awareness (to avoid contradicting existing pages or to find adjacent topics to reference), fetch any of `website/pages-marketing.json`, `pages-industry.json`, `pages-blog.json`, `pages-glossary.json`.
 4. Scan `pages-blog.json` `metaTitle` + `content` for topic overlap before drafting.
-5. Produce every CMS field labeled clearly for copy-paste into Webflow.
-6. Invoke `internal-linking-strategist` in **draft mode** before final output — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Embed them in the `post-content` HTML.
-7. Run the compliance check from `brain.md` before delivering.
+5. Draft the **markdown intermediate** at `outputs/[slug].draft.md` — H1 title, labeled-paragraph metadata, markdown body.
+6. Run `python3 scripts/compliance.py outputs/[slug].draft.md` and fix every failure (exit 1) before continuing. This is the mechanical gate; the brain.md terminology + tone review still applies in full.
+7. Convert the markdown body to HTML (wrap images in `<figure>`, add `target="_blank"` to links, disable smart punctuation so it can't reintroduce em dashes).
+8. Invoke `internal-linking-strategist` in **draft mode** on the HTML — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Embed them in `post-content`.
+9. Deliver every CMS field labeled clearly for copy-paste into Webflow.
 
 ## Webflow CMS fields
 
@@ -77,7 +80,7 @@ Plus `image-alt-text` (real description, not "decorative") and a suggested image
 
 ## Content rules
 
-- **Length:** 5,000–12,000 characters (matches existing blog posts on the live site).
+- **Length:** 5,000–12,000 characters (matches existing blog posts on the live site). The compliance script flags posts under 900 or over 2,200 words as an advisory `WARN`.
 - **Keyword placement:** target keyword in H1 (page title), first paragraph of post-content, and at least one H2.
 - **Internal links:** delegated to `internal-linking-strategist` — it returns 3–7 anchor + URL + insertion-point suggestions using the canonical map in `link-strategy.md`. Never improvise.
 - **No `<sprscript-green>` tags** — those are for customer stories only.
