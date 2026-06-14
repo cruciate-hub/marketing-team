@@ -127,6 +127,45 @@ These fetches serve **content awareness** (not linking — internal linking is h
 
 Each item has `url`, `metaTitle`, `metaDescription`, and `content` (heading hierarchy). Scan `metaTitle` and `content` for topic overlap.
 
+## Two-stage production
+
+Blog posts are produced in two stages: a markdown intermediate that `scripts/compliance.py` checks deterministically, and a final field-by-field map (with HTML in `post-content`) that pastes into Webflow.
+
+1. **Draft the markdown intermediate** at `outputs/[slug].draft.md`. Metadata sits in labeled paragraphs directly under the H1; the body uses standard markdown.
+2. **Run `python3 scripts/compliance.py outputs/[slug].draft.md`**. Fix every failure (exit 1) before moving on. Paste the full stdout into your response.
+3. **Convert the markdown body to HTML** for the Webflow `post-content` field. This is not a naive render — it must wrap images in `<figure>` and add `target="_blank"` to links (see "HTML formatting rules"). If the converter applies smart punctuation, disable it — it can reintroduce em dashes the compliance check already cleared.
+4. **Invoke `internal-linking-strategist`** on the HTML to add internal `<a href>` anchors (see "Internal links" below).
+5. **Deliver the field-by-field map** using the markdown metadata + converted HTML body.
+
+Keep the `.draft.md` alongside the delivery so edits can be re-run through compliance.
+
+### Markdown intermediate structure
+
+```
+# [Page title]
+
+Meta description: [≤160 chars including spaces]
+Slug: [lowercase-with-hyphens; preserve the keyword phrase intact]
+Alt text: [descriptive alt text for the header image]
+Category: [one of the approved categories — see "Main Category Tag" below]
+Tags: [main category plus 1-2 secondary categories, comma-separated]
+Minutes to read: [number, based on ~250 wpm]
+
+[Intro paragraph — 1-3 sentences. This becomes `post-summary` (Introduction text).]
+
+## [First H2 section]
+
+...
+```
+
+Rules for the intermediate:
+- `# Title` is the only H1.
+- The labeled-paragraph metadata block sits between the H1 and the intro paragraph. Compliance parses these; delivery maps each to its Webflow CMS field.
+- **The first paragraph after the metadata block is the intro** that maps to `post-summary`. Compliance checks the target keyword appears in this paragraph.
+- Markdown tables, lists, `**bold**`, and inline links `[anchor](URL)` are supported by the markdown→HTML conversion.
+- Images use markdown syntax `![alt text](URL)` with non-empty alt text (use `[IMAGE_URL]` as a placeholder). The HTML conversion wraps each image in `<figure>` — see "HTML formatting rules".
+- No HTML in the intermediate. Internal `<a href>` anchors are added after conversion by `internal-linking-strategist`.
+
 ## Webflow CMS field mapping
 
 Every blog post is a CMS item in the `📖 Blog Posts` collection. When writing a blog post, produce content for each of these fields. Present each field clearly labeled so the user can paste directly into Webflow.
@@ -167,6 +206,8 @@ Follow the narrative structure from `narrative.md`: Context → Tension → Infr
 
 #### HTML formatting rules
 
+These describe the **converted** `post-content` HTML (stage 3 output), not the markdown intermediate — the markdown→HTML step is responsible for producing them.
+
 - Use `<h2>` and `<h3>` for subheadings. Place an H2 or H3 every 200-300 words.
 - Use `<strong>` for emphasis within paragraphs. Don't overuse.
 - Use `<a href="..." target="_blank">` for all links (external links open in new tab).
@@ -176,7 +217,7 @@ Follow the narrative structure from `narrative.md`: Context → Tension → Infr
 
 #### Content guidelines
 
-- Target length: 5,000–12,000 characters (matching the typical range on the live blog).
+- Target length: 5,000–12,000 characters (matching the typical range on the live blog). The compliance script flags posts under 900 or over 2,200 words as an advisory `WARN`, not a hard failure.
 - Include the target keyword in the H1 (page title), first paragraph of post-content, and at least one H2.
 - Internal links: do NOT improvise. Internal links are inserted by the `internal-linking-strategist` skill in a dedicated step before delivery (see "Internal links" section below). Write the draft without internal links; the optimizer adds 3-7 SEO-grounded `<a href>` tags using the canonical anchor map and cannibalization warnings in `link-strategy.md`.
 - Never fabricate statistics, customer names, quotes, or performance claims.
@@ -287,12 +328,12 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 - Never position social.plus as a "social network" or "forum platform" (see terminology.md).
 - Never use competitor names in a disparaging way — compare on facts and positioning only.
 - Never use emojis in blog content.
-- Never skip the taxonomy fields. Every post needs a category, tags, and author.
+- Never skip the taxonomy fields. Every post needs a Main Category Tag and Tags (see "Taxonomy"). There is no author field in this collection — don't invent one.
 - Never use `<sprscript-green>` tags — those are for customer stories only.
 
 ## Internal links
 
-After writing the draft and before the compliance check, invoke the `internal-linking-strategist` skill in **draft mode**. Pass it:
+After compliance passes and the markdown body is converted to HTML, invoke the `internal-linking-strategist` skill in **draft mode**. Pass it:
 
 - The full draft article (title + post-content HTML + post-summary)
 - The target keyword
@@ -309,7 +350,14 @@ Resolve cannibalization warnings before final output:
 
 Never improvise internal links — the optimizer is the source of truth. The 3-7 link target is a guideline, not a quota: if the optimizer returns 4 strong suggestions, use 4.
 
-## Before delivering
+## Compliance is non-negotiable
 
-Run the compliance check from `brain.md`. Blog posts are high-visibility, long-lived content — terminology violations and tone drift compound over time.
+**Before delivering any draft, run `python3 scripts/compliance.py outputs/[slug].draft.md` and paste the full stdout into your response.**
+
+- Manual / eyeball review is **not** a substitute. Field testing shows eyeball review consistently misses meta-description length, em dashes (Unicode `—` mixed with hyphens), filler openers, brand-casing slips, and forbidden terminology.
+- The script is an **additional** deterministic gate, **not** a replacement for the brain.md compliance check. Run both. The script covers a mechanical *subset* — em dashes, emojis, brand casing, length, slug, and a fixed forbidden-term list. It does **not** catch every terminology or tone issue, so the `terminology.md` + `tone.md` review from brain.md still applies in full. A green script run is necessary, not sufficient.
+- LLM judgment still owns terminology nuance, tone, factuality, and citation quality. The forbidden-term list is not exhaustive: re-read `terminology.md` and check the items the script can't — context-dependent "plug and play" (script only WARNs), narrow self-referential "social network" phrasings, and end-user term discipline.
+- If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary — the literal output. The parent re-runs the script and treats any disagreement as a failure.
+
+The script reads the markdown intermediate (`outputs/[slug].draft.md`) before the markdown→HTML conversion. Re-run it after any edit until exit code 0.
 

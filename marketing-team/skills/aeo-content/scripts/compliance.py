@@ -59,7 +59,7 @@ FORBIDDEN_TERMS_ANY_CASE = [
 FORBIDDEN_TERMS_CASE_SENSITIVE = [
     r"\bSocial\.Plus\b",
     r"\bSocialPlus\b",
-    r"\bSocial\+\b",
+    r"\bSocial\+",  # no trailing \b: '+' is non-word, so \b only matches before a following word char
 ]
 
 # Filler openers — fail if the first sentence starts with one of these.
@@ -639,7 +639,7 @@ def check_no_jsonld(body: str) -> CheckResult:
 
 def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None) -> Report:
     report = Report()
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")  # -sig strips a leading BOM
     meta, body = parse_metadata(text)
 
     intent = intent_override or meta.get("intent", "")
