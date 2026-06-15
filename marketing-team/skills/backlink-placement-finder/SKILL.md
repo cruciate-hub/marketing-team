@@ -88,7 +88,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
   `Fetch failed: <path>. Please check your network connection and rerun.`
 <!-- FETCH-BLOCK:END v2 -->
 
-(Note: the block above governs fetches from the `cruciate-hub/marketing-team` repo only — for example `website/pages-blog.json`, `website/pages-glossary.json`. Fetches FROM partner websites use Chrome browser tools or WebFetch as described in Step 2.5; that is a separate concern.)
+**Scope of the fetch block above — read before cloning.** That block is generic boilerplate shared verbatim across many skills (kept in sync by `scripts/sync-fetch-blocks.py`), so its opening line — "Reference files live in the public repo" — is true for THIS skill only of the two remote JSON inventories: `website/pages-blog.json` and `website/pages-glossary.json`. The three `references/*.md` files this skill uses (`anchors.md`, `content-inventory.md`, `creative-anchor-patterns.md`) are LOCAL to this skill folder — read them directly with `Read`/`cat` from `skills/backlink-placement-finder/references/`. There is no `$REPO/references/` directory; do not clone or look there for them. (Fetches FROM partner websites are a separate concern — use Chrome browser tools or WebFetch as described in Step 2.5.)
 
 ## The Core Task
 
@@ -183,6 +183,8 @@ Skip this step ONLY in Mode B (Google Doc drafts — no live site to evaluate). 
 
 `site-explorer-metrics` per domain → returns DR, organic traffic, refdomains in one call. Try `batch-analysis` first if the partner list is ≥5 domains; fall back to parallel `metrics` calls if `batch-analysis` schema doesn't fit our needs.
 
+Valid `batch-analysis` select fields include: `domain_rating`, `org_traffic`, `org_keywords`, `refdomains`, `refdomains_dofollow`, `backlinks`, `linked_domains`, `linked_domains_dofollow`, `url_rating`, `ahrefs_rank`. There is no `linked_root_domains` field — use `linked_domains`.
+
 **Tier 1 quality gate — flag, don't auto-decline:**
 - DR < 20 → low-value, surface to Stefan with "skip recommended"
 - DR ≥ 60 + traffic < 3K/month + niche category unclear → possible PBN, surface to Stefan
@@ -273,6 +275,7 @@ protocol: both
 - NOT supported: `notsubstring` as an operator. Use the `not` wrapper instead.
 
 **Light post-processing pipeline (the API filters do the heavy lifting):**
+- Unwrap Google/Gmail redirect wrappers: if the URL host is a `google.<tld>` and the path is `/url`, replace the URL with the decoded value of its `q` (or `url`) query parameter. Then continue with the steps below (this is what upgrades the unwrapped `http://` target to `https` and canonicalizes it).
 - Lowercase the host
 - Force `https` when the same path exists under both protocols (the API returns `http` and `https` as separate rows)
 - Strip leading `www.`
@@ -280,7 +283,24 @@ protocol: both
 - Drop URLs containing `/feed/` (WordPress RSS endpoints still surface)
 - Dedupe by the normalized canonical key
 
+Reference implementation for the unwrap step (use when URLs are extracted via Chrome JS rather than returned by the Ahrefs API):
+
+```js
+function unwrapGoogleRedirect(u) {
+  try {
+    const url = new URL(u);
+    if (/(^|\.)google\.[a-z.]+$/.test(url.hostname) && url.pathname === "/url") {
+      const real = url.searchParams.get("q") || url.searchParams.get("url");
+      if (real) return decodeURIComponent(real);
+    }
+  } catch (e) {}
+  return u;
+}
+```
+
 **False-positive watchlist:** `community-college`, `engagement-ring`, `marketing-messaging`, `app-store-optimization`. Always verify in Step 2.5 before treating these as fits.
+
+**Publisher/magazine sites — bypass the substring filter.** For known publisher/magazine sites (descriptive title slugs, a `/magazine`, `/blog`, or `/news` index), the URL-substring topic filter under-recalls badly: article slugs are descriptive titles that contain none of the topic keywords, so `crawled-pages` returns zero rows even when the editorial fit is strong. Go straight to a Chrome index scan of the editorial section and read the article titles, rather than trusting `crawled-pages`. Never declare "no fit" off an empty `crawled-pages` result — this is the same rule as Step 0's "never declare no-fit from Ahrefs alone."
 
 2. `site-explorer-linked-anchors-external` — what anchor patterns has the partner already used when linking out to other sites? **Sample size matters: require ≥10 external anchors before treating this as signal.** Below that it's noise. Use the result to tailor our anchor suggestions to what their editor actually accepts.
 
@@ -300,9 +320,9 @@ Escalation criteria from Tier 3 to Step 2 (sitemap / blog-index crawl):
 
 Stefan will either share **live partner URLs** (Mode A) or **partner draft articles via Google Docs** (Mode B). The matching logic is identical, but the discovery step differs.
 
-**Mode A — Live partner URLs.** The user pastes one or more website URLs. These could be a homepage (find their blog), a blog index (crawl for articles), or direct article URLs (evaluate directly). **Run Step 0 first** (Ahrefs DR/quality/topical pre-screen), then proceed to Step 2.5 directly using the candidate URLs Ahrefs returned. Only fall back to Step 2 (sitemap crawl) if Ahrefs has no data on the domain.
+**Mode A — Live partner URLs.** The user pastes one or more website URLs. Before using any partner URL, unwrap Google/Gmail redirect wrappers (`google.<tld>/url?q=REAL_URL&source=gmail...`) back to the real destination, then canonicalize. This applies whether URLs were pasted from a Gmail message or read via the Gmail API. These could be a homepage (find their blog), a blog index (crawl for articles), or direct article URLs (evaluate directly). **Run Step 0 first** (Ahrefs DR/quality/topical pre-screen), then proceed to Step 2.5 directly using the candidate URLs Ahrefs returned. Only fall back to Step 2 (sitemap crawl) if Ahrefs has no data on the domain.
 
-**Mode B — Google Doc drafts.** The partner has sent Stefan unpublished article drafts in Google Docs (often titled `[For Link Partners] ...`). Each doc IS the partner article — there is no site to crawl. Skip Step 2 (sitemap crawl) and proceed to Step 3 (matching) — but Step 0.0 (existing backlink check) still applies and must run first. Use `mcp__c1fc4002-...__google_drive_fetch` to read each doc by ID. **Be careful with doc-ID-to-title mapping when fetching multiple docs in one batch** — when reporting back, double-check that each placement is attributed to the correct doc URL. Mixing them up has happened before and destroys credibility with the partner.
+**Mode B — Google Doc drafts.** The partner has sent Stefan unpublished article drafts in Google Docs (often titled `[For Link Partners] ...`). Before using any partner URL (the publication-target domain, or any link pasted alongside the docs), unwrap Google/Gmail redirect wrappers (`google.<tld>/url?q=REAL_URL&source=gmail...`) back to the real destination, then canonicalize. This applies whether URLs were pasted from a Gmail message or read via the Gmail API. Each doc IS the partner article — there is no site to crawl. Skip Step 2 (sitemap crawl) and proceed to Step 3 (matching) — but Step 0.0 (existing backlink check) still applies and must run first. Use `mcp__c1fc4002-...__google_drive_fetch` to read each doc by ID. **Be careful with doc-ID-to-title mapping when fetching multiple docs in one batch** — when reporting back, double-check that each placement is attributed to the correct doc URL. Mixing them up has happened before and destroys credibility with the partner.
 
 **Before proceeding (both modes):** Check the partner site/domain against the Partner Site Restrictions above. If the partner falls into a restricted category, stop immediately and tell Stefan: "This site falls under [category] — not eligible per our guidelines."
 
@@ -361,7 +381,7 @@ If no sitemap is found at any of the standard locations:
 
 For every candidate article identified in Step 2:
 
-1. **Open the article** using Chrome browser tools (`navigate` to the URL, then `get_page_text` to extract the full article content).
+1. **Open the article.** **Tool priority for live page reads:** use the Vercel agent-browser if connected (primary); fall back to Claude in Chrome. If the primary is unavailable, note that to the user rather than silently falling through. Navigate to the URL, then `get_page_text` to extract the full article content. After navigating, if `get_page_text` returns empty or a stub, retry once after the page settles, then fall back to the JS DOM-extraction snippet in step 2 below.
 
 2. **If `get_page_text` fails or returns garbage** (common on ad-heavy sites that inject massive JS/CSS payloads), fall back to **JavaScript DOM extraction**. Use `javascript_tool` to extract the article body:
    ```
@@ -537,6 +557,8 @@ If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never
 
 ### 3.5. Decision Gate (Before Drafting the Email)
 
+**Gating precondition — run this gate ONLY when 2 or more viable placements exist across the batch.** If viable placements ≤ 1, skip the gate and proceed directly to Step 4 with the single-ask format. Never ask the user anything about existing-backlink partners: the action there is always "acknowledge the existing link, make no new ask." Default to deciding and proceeding; reserve questions for genuine 2+ way packaging choices.
+
 Before writing any email, show Stefan the full internal summary table from Step 5 — every viable placement with its traffic, UR, phase, and fit score. Then stop and ask which packaging he wants. Auto-drafting strips Stefan's control over how the request lands with the partner; the gate keeps him in the loop on relationship-side decisions that scoring alone can't make.
 
 **The prompt to Stefan:**
@@ -699,6 +721,7 @@ Stefan
 
 **Format rules:**
 - Every line in every placement block is flush-left — no indentation under the numbered/Option line. Indented sub-fields wrap weirdly in LinkedIn, Slack, and most chat boxes where markdown doesn't render
+- Email bodies use PLAIN URLs only, never markdown links. Markdown does not render in email/LinkedIn/Slack, and wrapping a redirect URL in markdown produces a malformed anchor. Print the full canonical `https://` URL as plain text
 - One blank line between each numbered placement block
 - Phase 1 placements use `Placement:` (section name + verbatim sentence from the partner's article). Phase 2 placements use `Suggested text:` (the sentence the partner adds or modifies)
 - Mix Phase 1 and Phase 2 blocks in the same numbered list when both exist — the `Placement:` vs `Suggested text:` line is the only marker between them
