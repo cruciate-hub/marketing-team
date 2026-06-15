@@ -53,7 +53,7 @@ Pick the files relevant to the context — don't load all 10 unless the question
 1. Identify target keyword and topic cluster (Brand / Chat / Social / Video / Industry / Cross-cluster).
 2. Cross-reference cannibalization warnings in `link-strategy.md`.
 3. Phase 1 — shortlist up to 8 candidate pages from JSON by topic relevance + canonical anchor match.
-4. Phase 2 — live-fetch each candidate; drop ones that don't pan out.
+4. Phase 2 — live-fetch each candidate via the escalation ladder (WebFetch → Vercel web agent in a Vercel Sandbox microVM → Claude-in-Chrome); drop ones that don't pan out.
 5. Score + rank by contextual relevance, canonical compliance, link-equity benefit, anchor variety, intent fit.
 6. Apply the link budget for the article type (14 types in `link-strategy.md`): e.g. blog 3-7, AEO 1-3, glossary 2-4.
 7. Apply anchor distribution targets + per-cluster variation rules.

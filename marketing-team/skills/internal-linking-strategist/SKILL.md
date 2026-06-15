@@ -33,14 +33,26 @@ The `pages-*.json` files are a **lightweight heading index** — full H1-H6 plus
 **Trade-off:** heading-only data isn't enough to pick an insertion point or quote surrounding context. So the optimizer runs in two phases:
 
 1. **Phase 1 — Shortlist (from JSON).** Scan headings + metadata in the relevant `pages-*.json` files to identify candidate link targets. Cheap, fast, no network beyond the GitHub fetches.
-2. **Phase 2 — Verify + extract (live WebFetch).** For the top N shortlisted candidates only, fetch the live page to confirm the topic match, find the insertion sentence, and quote surrounding context.
+2. **Phase 2 — Verify + extract (live fetch).** For the top N shortlisted candidates only, fetch the live page (via the escalation ladder below) to confirm the topic match, find the insertion sentence, and quote surrounding context.
 
 **Live-fetch budget:**
-- Draft mode: at most **one WebFetch per candidate**, capped at **8 candidates per draft**. If the shortlist returns more than 8 strong candidates, take the top 8 by score.
+- Draft mode: at most **one live fetch per candidate** (any tier of the ladder below), capped at **8 candidates per draft**. If the shortlist returns more than 8 strong candidates, take the top 8 by score.
 - Audit mode: live fetch is reserved for the **top 5-10 highest-impact gaps** in the implementation plan. The rest is JSON-only.
 - **If the calling context overrides the cap** (e.g., "use only 4 fetches"), re-shortlist from scratch by score down to that lower N. Don't slice the top N off an existing 8-item list — a tighter budget changes which candidates are worth verifying.
 
 **Why this works when the JSON is sparse:** Phase 2's live fetch compensates for known snapshot limitations (e.g., the static-page extractor can't reach Webflow Components, so industry pages capture only headings outside components).
+
+### Live-fetch escalation ladder
+
+Every live fetch (Phase 2, all modes) climbs this ladder. Start at tier 1 and escalate **only** when the current tier fails — never preemptively; tiers 2–3 are far slower and costlier than tier 1.
+
+1. **`WebFetch` — default, try first.** Fast, cheap, no browser. Most social.plus pages render server-side (blog, glossary, use-case, marketing bodies), so this resolves the large majority of candidates.
+2. **Vercel web agent — escalate when tier 1 fails.** Invoke the `agent-browser` skill in its Vercel Sandbox microVM mode (a real headless browser that executes JS). Use it when `WebFetch` errors, is blocked, returns empty, or returns only headings with no body — the signature of JS- or Component-rendered content `WebFetch` can't see (the same Webflow Components the static snapshot misses on industry pages).
+3. **Claude-in-Chrome — final backup if tier 2 is unavailable or fails.** Drive the local browser via the `mcp__Claude_in_Chrome__*` tools (`navigate` → `get_page_text` / `read_page`). Select the **Social+ Chrome profile** first (`list_connected_browsers` → `select_browser`) per team convention. Needs the Chrome extension connected; if it isn't, this tier is unavailable.
+
+**All three fail →** drop the candidate and record it (Draft mode: "Skipped suggestions"; Audit mode: the relevant table). Never quote or invent body content you couldn't fetch — "quote, don't paraphrase" is absolute.
+
+**Budget:** the per-mode caps (≤8 per draft, top 5–10 per audit) count each candidate **once**, regardless of how many tiers it climbs. Escalating spends that candidate's slot; it never buys extra candidates.
 
 ## How to fetch reference files
 
@@ -178,7 +190,7 @@ Rank and **take the top 8 maximum** (the live-fetch budget). Quality over quanti
 
 **3b. Phase 2 — Live-fetch verification and insertion-point extraction.**
 
-For each shortlisted candidate, WebFetch the live page (URL from the JSON's `url` field — full `https://www.social.plus/...`). Then ask:
+For each shortlisted candidate, live-fetch the page (URL from the JSON's `url` field — full `https://www.social.plus/...`) via the escalation ladder. Then ask:
 - Does the topic match still hold? (Live page may have changed since the snapshot.)
 - Where in the *draft* would a link to this page make sense? Identify the sentence or paragraph.
 - What surrounding context from the live page confirms the destination?
@@ -430,7 +442,7 @@ Find places where one page mentions a concept that has its own page but doesn't 
 
 Use the two-phase pattern:
 - **Phase 1 (JSON):** scan headings + meta to identify candidate gaps (page A's heading mentions a concept page B owns canonically).
-- **Phase 2 (live fetch):** for the top 5-10 most-likely gaps, WebFetch both source and target. Confirm the gap is real (JSON sees only headings; the body might already have the link). Quote the sentence where the link should go.
+- **Phase 2 (live fetch):** for the top 5-10 most-likely gaps, live-fetch both source and target via the escalation ladder. Confirm the gap is real (JSON sees only headings; the body might already have the link). Quote the sentence where the link should go.
 
 ```markdown
 ## Contextual link gaps
@@ -613,7 +625,7 @@ If any check fails, fix before delivering.
 - **`docs.social.plus`** — developer documentation lives on a separate subdomain not yet captured in any `pages-*.json` file. When drafts reference docs, surface as "no in-scope link target" rather than guessing a URL.
 - **The forum.** Same reason.
 - **External links / backlinks.** Links to any domain outside `social.plus` are always out of scope — do not evaluate, flag, or suggest changes to them. Use `backlink-placement-finder` or `link-building-vetter` for outbound/backlink work.
-- **Live Ahrefs calls.** Stays static-data-driven for cannibalization/strategy (`link-strategy.md` regenerated quarterly). Live WebFetch is used only for verifying insertion points, not for SEO data.
+- **Live Ahrefs calls.** Stays static-data-driven for cannibalization/strategy (`link-strategy.md` regenerated quarterly). Live fetching (the escalation ladder) is used only for verifying insertion points, not for SEO data.
 - **Auto-publishing to Webflow.** This skill recommends; the user implements.
 
 ## Escalation triggers (stop and ask Stefan)
