@@ -65,7 +65,7 @@ Phase 1 candidates come in three first-class types, all sharing the same six gua
 
 | Score | Meaning |
 |---|---|
-| ⭐⭐⭐ | Perfect — Type A literal anchor verbatim in body paragraph, partner article traffic ≥ 50/month, target UR ≥ 10, AND the anchor is not a saturated commercial head term (≥10 refdomains in the live profile — those cap at ⭐⭐ and yield to a fresher co-located variant). Type B and Type C never reach this tier. |
+| ⭐⭐⭐ | Perfect — Type A literal anchor verbatim in body paragraph, partner article traffic ≥ 50/month, target UR ≥ 10, AND the anchor is not a saturated commercial head term (≥10 non-spam refdomains in the live profile — those cap at ⭐⭐ and yield to a fresher co-located variant). Type B and Type C never reach this tier. |
 | ⭐⭐ | Strong — Type A with traffic or UR below the Perfect thresholds; OR any Type B creative match in body; OR any Type C single-word glossary match in body. |
 | ⭐ | Opportunity — Phase 2: topic is relevant, specific paragraph identified, text modification required. |
 

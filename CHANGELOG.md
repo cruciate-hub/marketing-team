@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.13
+
+Anchor Diversity Check data-accuracy fix for `backlink-placement-finder`. A fresh `site-explorer-anchors` pull (2026-06-15) revealed that "Customer engagement" (21 refdomains, all dofollow) is now flagged `is_spam` by Ahrefs — the linking domains are spammy, not editorial placements from this skill. The prior snapshot (13.11) listed it as the top genuinely-editorial saturated commercial anchor. With the spam flag, the genuinely-editorial saturated anchors at ≥10 refdomains narrow to just "social media app development" (11) and "Community features" (11). An independent review of all seven proposals from the prior anchor-strategy-redesign conversation concluded the skill already implements the substance of those proposals via the 13.4 Anchor Diversity Check — no structural redesign warranted; a profile-budget step and competitor benchmarking were evaluated and re-confirmed as correctly rejected (Bettermode top 25 = UGC member URLs + gambling spam; Circle.so top 25 = widget links + Telegram spam). **Non-breaking** — same skill, same namespace, same scoring logic; only the `is_spam` filter, the reference snapshot, and the saturated-anchor examples change.
+
+- [`SKILL.md`](marketing-team/skills/backlink-placement-finder/SKILL.md): **Anchor Diversity Check step 1** — added `is_spam` to the `select` fields and rewrote the spam-filter clause to clarify that `is_spam` is the gate (not the parenthetical pattern description), covering legitimate-looking anchors syndicated across spam networks. **Step 3** — corrected the reference snapshot: "Customer engagement" moved from non-spam to spam-flagged; updated the saturated-anchor list; added branded and stat-citation refdomain counts. **Phase 1 carve-out + ⭐⭐⭐ scoring + Edge Cases** — saturation threshold qualified as "≥10 non-spam refdomains" (three locations); examples updated from "customer engagement" to "social media app development" and "Community features". **What NOT to Do** — updated saturated head term examples.
+- [`docs/backlink-placement-finder.md`](docs/backlink-placement-finder.md): synced the ⭐⭐⭐ row in the Fit-scoring table with the "non-spam refdomains" qualifier.
+- Refreshed the `backlink-placement-finder` row in [`marketing-team/README.md`](marketing-team/README.md) (872 → 871 lines / 81.0 → 81.7 KB).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.12 to 13.13. The skill is not symlinked into brand-kit, so brand-kit stays at 3.5; no `references/*.md` or remote JSON inventory was touched.
+
 ## marketing-team 13.12
 
 Auto-update verification release. Added a "What NOT to Do" bullet reinforcing the Anchor Diversity Check step 9 default (don't default to exact-match commercial anchors). No behavioral change — the rule already existed in step 9; this surfaces it in the high-visibility checklist.
