@@ -8,10 +8,10 @@ Given one or more partner URLs (or Google Doc drafts), this skill vets the site 
 
 - Pre-screens partner sites via Ahrefs (DR, traffic, vertical fit, PBN/content-farm signals) before spending time on crawling.
 - Checks whether social.plus already has a backlink from the partner domain — skips duplicates automatically.
-- Discovers candidate articles via Ahrefs `pages-by-traffic`, falling back to sitemap crawling when needed.
+- Discovers candidate articles via Ahrefs `crawled-pages` (the complete crawled inventory at ~1 unit/row; `pages-by-traffic` and `top-pages` are deliberately avoided), falling back to sitemap or Chrome index crawling when needed.
 - Verifies every proposed anchor on the actual page (no hallucinated snippets).
 - Matches anchors to the best social.plus target (blog post or glossary entry) — never homepage, product, or landing pages.
-- Drafts a casual-but-professional reply email in the plain-text "Add link from / Add link to / Anchor" format that works on LinkedIn and email alike.
+- Drafts a casual-but-professional reply email in the plain-text "Add link from / Add link to / Anchor" format that works on LinkedIn and email alike — plain URLs only, never markdown links (they don't render in email/LinkedIn/Slack).
 
 ## When it triggers
 
@@ -29,7 +29,7 @@ The skill is for outbound link prospecting only (see `link-building-vetter` for 
 1. **Existing backlink check** — Pull social.plus referring domains once per session; skip any partner we already have a link from.
 2. **Ahrefs pre-screen (Mode A)** — Tiered calls, cheapest first. Tier 1: DR/traffic/refdomains batch screen. Tier 2: vertical fit via organic keywords, competitors, linked domains, DR history. Tier 3: candidate URL discovery with topical `where` filters.
 3. **Sitemap fallback** — Only when Ahrefs has no usable data. Try `sitemap.xml` → `sitemap_index.xml` → `robots.txt`. Filter to blog/article slugs. Triage by keyword match before opening.
-4. **Verify on the actual page (MANDATORY)** — Never propose a placement without confirming the anchor text exists on the real page. Chrome `get_page_text` first; fall back to JavaScript DOM extraction via text-to-script ratio on ad-heavy sites.
+4. **Verify on the actual page (MANDATORY)** — Never propose a placement without confirming the anchor text exists on the real page. Tool priority for live page reads: Vercel agent-browser if connected (primary), else Claude in Chrome. Read with `get_page_text`; if it returns empty or a stub, retry once after the page settles, then fall back to JavaScript DOM extraction via text-to-script ratio on ad-heavy sites.
 5. **Match against anchors & inventory** — Two-phase approach:
    - **Phase 1** — Exact anchor already exists in a body paragraph. Partner just adds the link, zero text changes.
    - **Phase 2** — Topically relevant paragraph; partner needs to add or modify a sentence to accommodate the link.
