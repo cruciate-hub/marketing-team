@@ -65,11 +65,13 @@ Phase 1 candidates come in three first-class types, all sharing the same six gua
 
 | Score | Meaning |
 |---|---|
-| ⭐⭐⭐ | Perfect — Type A literal anchor verbatim in body paragraph, partner article traffic ≥ 50/month, target UR ≥ 10. Type B and Type C never reach this tier. |
+| ⭐⭐⭐ | Perfect — Type A literal anchor verbatim in body paragraph, partner article traffic ≥ 50/month, target UR ≥ 10, AND the anchor is not a saturated commercial head term (≥10 refdomains in the live profile — those cap at ⭐⭐ and yield to a fresher co-located variant). Type B and Type C never reach this tier. |
 | ⭐⭐ | Strong — Type A with traffic or UR below the Perfect thresholds; OR any Type B creative match in body; OR any Type C single-word glossary match in body. |
 | ⭐ | Opportunity — Phase 2: topic is relevant, specific paragraph identified, text modification required. |
 
 Phase is determined by **whether the partner needs to edit text**, not by how the placement was discovered. Type A, B, and C all sit in Phase 1 (the partner just adds the link). The ⭐⭐ cap on B and C protects the relationship channel from AI over-reach on anchor identification; it is not a signal of lower discovery priority.
+
+**Anchor type, not just anchor text.** Anchors are classified by over-optimization risk (branded · naked-URL · generic/navigational · partial-match · exact-match commercial · stat-citation), and the skill prefers the lowest-risk type that fits — stat-citation and contextual anchors over exact-match commercial keywords, with at most one exact-match commercial anchor per batch. Variety comes from each partner's own sentences and from varying type per placement, never from synthetic rotation. The skill does not benchmark its anchor mix against competitors (their profiles are dominated by spam, UGC member-URLs, and "powered-by" widget links, so there is no valid target to drift toward).
 
 ## Placement rules (summary)
 
