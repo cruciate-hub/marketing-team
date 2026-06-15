@@ -41,6 +41,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -50,7 +51,10 @@ FORBIDDEN_TERMS_ANY_CASE = [
     r"\brevolutioni[sz]e\b",
     r"\bgame[- ]chang(ing|er)\b",
     r"\bunlock the power\b",
-    r"\bleverag(e|ing)\b",
+    # (?<![-\w]) excludes the hyphenated-compound case ("high-leverage" /
+    # "higher-leverage" — legitimate strategy English). Expanded to all four
+    # inflections so "leveraged" and "leverages" no longer slip through.
+    r"(?<![-\w])leverag(e|es|ed|ing)\b",
     r"\bcutting[- ]edge\b",
     r"\bnext[- ]generation\b",
     r"\bbest[- ]in[- ]class\b",
@@ -156,6 +160,11 @@ EMOJI_PATTERN = re.compile(
     "\U0001FA70-\U0001FAFF"
     "\U0001F1E6-\U0001F1FF"
     "\U00002B00-\U00002BFF"
+    "\U00002300-\U000023FF"  # ⏰ ⌚ ⏳ ⌨ etc.
+    "\U000025A0-\U000025FF"  # ▶ ◀ ■ etc.
+    "\U00002139"             # ℹ
+    "\U00002049"             # ⁉
+    "\U0000203C"             # ‼
     "☀-⛿"
     "✀-➿"
     "]"
@@ -253,6 +262,29 @@ def parse_metadata(text: str) -> tuple[dict[str, str], str]:
     return meta, body
 
 
+_QUOTE_FOLD = {
+    0x2018: 0x27, 0x2019: 0x27,  # ‘ ’ → '
+    0x201C: 0x22, 0x201D: 0x22,  # “ ” → "
+    0x2032: 0x27, 0x2033: 0x22,  # ′ ″ → ' "
+}
+
+
+def normalize_quotes(s: str) -> str:
+    """NFKC + fold curly quotes/apostrophes to straight. Used by the keyword
+    checks so a curly apostrophe in the title vs. a straight one in the intro
+    (or vice versa) doesn't false-fail an obviously-present keyword.
+    """
+    return unicodedata.normalize("NFKC", s).translate(_QUOTE_FOLD)
+
+
+def strip_fenced_code(text: str) -> str:
+    """Drop fenced code blocks only. Lighter than strip_code_and_link_urls —
+    used by the heading checks (which only need to ignore code-block `#` lines)
+    and by check_html_tags (which already does this inline).
+    """
+    return re.sub(r"```.*?```", "", text, flags=re.DOTALL)
+
+
 def strip_code_and_link_urls(text: str) -> str:
     """Remove syntax that's part of markdown infrastructure but not displayed
     prose: fenced code blocks, inline code, HTML comments, and URL targets
@@ -291,7 +323,10 @@ def first_paragraph(body: str) -> str:
 
 def first_sentence(body: str) -> str:
     para = first_paragraph(body)
-    return re.split(r"(?<=[.!?])\s+", para)[0].strip()
+    s = re.split(r"(?<=[.!?])\s+", para)[0].strip()
+    # Strip leading markdown emphasis/blockquote/list markers so a filler
+    # opener wrapped in `**` or prefixed by `>` still matches.
+    return re.sub(r"^(?:[*_>\s]|[-*+]\s+)+", "", s)
 
 
 def extract_keyword_phrase(title: str) -> str:
@@ -399,8 +434,8 @@ def check_keyword_in_first_paragraph(meta: dict[str, str], body: str) -> CheckRe
     title = meta.get("title", "")
     if not title:
         return CheckResult("keyword_in_first_paragraph", "FAIL", "no title (no H1 found)")
-    phrase = extract_keyword_phrase(title).lower()
-    para = first_paragraph(body).lower()
+    phrase = normalize_quotes(extract_keyword_phrase(title)).lower()
+    para = normalize_quotes(first_paragraph(body)).lower()
     if not para:
         return CheckResult("keyword_in_first_paragraph", "FAIL", "no first paragraph found")
     if phrase in para:
@@ -444,11 +479,12 @@ def check_keyword_in_h2(meta: dict[str, str], body: str) -> CheckResult:
     title = meta.get("title", "")
     if not title:
         return CheckResult("keyword_in_h2", "WARN", "no title to compare against")
-    phrase = extract_keyword_phrase(title).lower()
+    phrase = normalize_quotes(extract_keyword_phrase(title)).lower()
     words = [w for w in phrase.split() if len(w) > 2]
     if not words:
         return CheckResult("keyword_in_h2", "WARN", "keyword too short to check")
-    h2s = [m.group(2).lower() for m in HEADING_PATTERN.finditer(body) if len(m.group(1)) == 2]
+    h2_body = strip_fenced_code(body)
+    h2s = [normalize_quotes(m.group(2)).lower() for m in HEADING_PATTERN.finditer(h2_body) if len(m.group(1)) == 2]
     if not h2s:
         return CheckResult("keyword_in_h2", "WARN", "no H2 headings found")
     for h2 in h2s:
@@ -539,6 +575,10 @@ def check_html_tags(body: str) -> CheckResult:
     """
     prose = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
     prose = re.sub(r"`[^`]+`", "", prose)
+    # CommonMark autolinks (<https://…>, <mailto:…>, <user@host>) are legitimate
+    # markdown, not raw HTML — strip them before the tag scan.
+    prose = re.sub(r"<(?:https?://|mailto:)[^>\s]+>", "", prose)
+    prose = re.sub(r"<\S+@\S+>", "", prose)
     tag_hits = HTML_TAG_PATTERN.findall(prose)
     comment_hits = re.findall(r"<!--.*?-->", prose, flags=re.DOTALL)
     total = len(tag_hits) + len(comment_hits)
@@ -554,7 +594,11 @@ def check_html_tags(body: str) -> CheckResult:
 
 
 def check_headings(body: str) -> list[CheckResult]:
-    headings = HEADING_PATTERN.findall(body)
+    # Strip fenced code blocks first — a `# Install the CLI` comment inside a
+    # shell snippet is not a real H1 (this matches what check_html_tags and
+    # the prose-sensitive checks already do).
+    clean = strip_fenced_code(body)
+    headings = HEADING_PATTERN.findall(clean)
     levels = [len(h[0]) for h in headings]
     results: list[CheckResult] = []
     h1_count = levels.count(1)
@@ -565,12 +609,15 @@ def check_headings(body: str) -> list[CheckResult]:
             f"found {h1_count} H1 heading(s)",
         )
     )
+    # WARN, not FAIL — measured against pages-blog.json, 19% of live posts skip
+    # a level (44 of those go H1→H3, using H3 as the top-level section header).
+    # Hard-FAILing the house style would block ~17% of valid drafts.
     skipped = any(b > a + 1 for a, b in zip(levels, levels[1:]))
     results.append(
         CheckResult(
             "no_skipped_heading_levels",
-            "PASS" if not skipped else "FAIL",
-            "well-formed" if not skipped else "a heading level was skipped",
+            "PASS" if not skipped else "WARN",
+            "well-formed" if not skipped else "a heading level was skipped (informational — house style allows H1→H3)",
         )
     )
     return results
@@ -601,6 +648,28 @@ def check_approved_customers(body: str) -> CheckResult:
     )
 
 
+def check_reading_time(meta: dict[str, str], body: str) -> CheckResult:
+    """Sanity-check the claimed `Minutes to read` against the actual word count
+    at ~250 wpm. LLMs often paste a stale or made-up reading time; WARN when
+    the claimed value drifts by more than 1 minute from the computed value.
+    """
+    claimed_raw = meta.get("minutesToRead", "")
+    if not claimed_raw:
+        return CheckResult("reading_time", "PASS", "no claim to verify")
+    m = re.search(r"\d+", claimed_raw)
+    if not m:
+        return CheckResult("reading_time", "WARN", f"unparseable: {claimed_raw!r}")
+    claimed = int(m.group(0))
+    actual = max(1, round(word_count(body) / 250))
+    if abs(claimed - actual) <= 1:
+        return CheckResult("reading_time", "PASS", f"claimed {claimed}, computed ~{actual}")
+    return CheckResult(
+        "reading_time",
+        "WARN",
+        f"claimed {claimed} min, ~{actual} min by word count (delta {abs(claimed - actual)})",
+    )
+
+
 def check_no_jsonld(body: str) -> CheckResult:
     """Webflow handles schema at the template level; the body should not
     emit JSON-LD.
@@ -623,19 +692,36 @@ def check_no_jsonld(body: str) -> CheckResult:
 # ---------- runner ----------
 
 
+def _read_draft(path: Path) -> str:
+    """Try UTF-8 (with BOM strip) first; fall back to cp1252 — common when
+    prose was pasted from Word, which emits 0x97 for the em dash. Falling back
+    to cp1252 preserves the em dash so the no_em_dashes check still fires;
+    decoding with errors='replace' would silently drop it.
+    """
+    try:
+        return path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        try:
+            return path.read_text(encoding="cp1252")
+        except UnicodeDecodeError as e:
+            raise SystemExit(f"error: could not decode {path} as utf-8 or cp1252: {e}")
+
+
 def run(path: Path, lo: int | None, hi: int | None) -> Report:
     report = Report()
-    text = path.read_text(encoding="utf-8-sig")  # -sig strips a leading BOM
+    text = _read_draft(path)
     meta, body = parse_metadata(text)
 
     lo = lo if lo is not None else DEFAULT_WORD_RANGE[0]
     hi = hi if hi is not None else DEFAULT_WORD_RANGE[1]
 
     body_with_h1 = f"# {meta.get('title', '')}\n\n{body}" if meta.get("title") else body
-    # The meta description is reader-facing prose (the Google snippet) and must
-    # obey the same em-dash / emoji / terminology rules as the body, so fold it
-    # into the text those checks scan.
-    prose = f"{body_with_h1}\n\n{meta['metaDescription']}" if meta.get("metaDescription") else body_with_h1
+    # Reader-facing prose the checks should scan: body + title + meta
+    # description (Google snippet) + alt text (screen-reader text, ships in the
+    # `image-alt-text` Webflow field). All four obey the same em-dash / emoji /
+    # terminology rules.
+    extras = [v for v in (meta.get("metaDescription"), meta.get("altText")) if v]
+    prose = "\n\n".join([body_with_h1, *extras])
 
     report.results.extend(check_metadata(meta))
     report.results.extend(check_title_length(meta))
@@ -643,6 +729,7 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     report.results.append(check_slug(meta))
     report.results.append(check_category(meta))
     report.results.append(check_word_count(body, lo, hi))
+    report.results.append(check_reading_time(meta, body))
     report.results.append(check_keyword_in_first_paragraph(meta, body))
     report.results.append(check_keyword_in_h2(meta, body))
     report.results.append(check_filler_opener(body))
@@ -659,24 +746,50 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     return report
 
 
+def scan_text(text: str) -> Report:
+    """Scan an arbitrary string for em-dashes, emojis, and forbidden terms.
+    Used by `--scan-text` to vet linker-supplied anchor text after the main
+    compliance pass — the linker injects anchors into the HTML *after* the
+    draft.md is checked, so its output otherwise bypasses the gate.
+    """
+    report = Report()
+    report.results.append(check_em_dashes(text))
+    report.results.append(check_emojis(text))
+    report.results.append(check_forbidden_terms(text))
+    report.results.append(check_risky_terms(text))
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Blog post compliance checker")
-    parser.add_argument("path", type=Path, help="Path to the article markdown file")
+    parser.add_argument("path", nargs="?", type=Path, help="Path to the article markdown file")
     parser.add_argument("--min", type=int, help="Override minimum word count")
     parser.add_argument("--max", type=int, help="Override maximum word count")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
+    parser.add_argument(
+        "--scan-text",
+        help="Scan a single string (e.g. a linker-supplied anchor) for em-dashes / "
+             "emojis / forbidden terms instead of a draft file. Use this after the "
+             "main compliance pass to vet each anchor returned by "
+             "internal-linking-strategist before embedding.",
+    )
     args = parser.parse_args()
 
-    if not args.path.exists():
-        print(f"file not found: {args.path}", file=sys.stderr)
-        return 2
-
-    report = run(args.path, args.min, args.max)
+    if args.scan_text is not None:
+        report = scan_text(args.scan_text)
+    else:
+        if args.path is None:
+            parser.error("either a draft path or --scan-text is required")
+        if not args.path.exists():
+            print(f"file not found: {args.path}", file=sys.stderr)
+            return 2
+        report = run(args.path, args.min, args.max)
 
     if args.json:
         print(report.as_json())
     else:
-        print(f"Blog compliance report for {args.path}\n")
+        label = args.scan_text if args.scan_text is not None else args.path
+        print(f"Blog compliance report for {label}\n")
         for r in report.results:
             line = f"  [{r.status:4}] {r.name}"
             if r.detail:
