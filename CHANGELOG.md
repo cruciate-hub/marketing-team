@@ -1,5 +1,12 @@
 # Changelog
 
+## marketing-team 13.12
+
+Auto-update verification release. Added a "What NOT to Do" bullet reinforcing the Anchor Diversity Check step 9 default (don't default to exact-match commercial anchors). No behavioral change — the rule already existed in step 9; this surfaces it in the high-visibility checklist.
+
+- [`SKILL.md`](marketing-team/skills/backlink-placement-finder/SKILL.md): added "don't default to exact-match commercial anchors" to the What NOT to Do list (line 871), cross-referencing Anchor Diversity Check step 9. 872 lines / ~81 KB.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.11 to 13.12.
+
 ## marketing-team 13.11
 
 Anchor-strategy refinement for `backlink-placement-finder`, prompted by an over-optimization review of the live social.plus anchor profile. A fresh `site-explorer-anchors` pull (2026-06-15) confirmed the *editorial* profile is already branded/stat-dominant with thin exact-match — the one saturated editorial commercial anchor is "customer engagement" (21 refdomains), already caught by the 13.4 Anchor Diversity Check — while the genuine footprint risk (PBN/Telegram link-service spam; a syndicated "greater user engagement and loyalty" anchor now flagged `is_spam` across 24 domains) lives **outside** this skill in a disavow/backlink-audit track. So this change tightens the machinery already shipped rather than rebuilding it: it resolves a contradiction between the fit-score (which rewarded a literal commercial exact-match with ⭐⭐⭐) and the Anchor Diversity Check (which says prefer a fresher co-located variant), makes the lowest-risk anchor type the default, and standardizes the live-page-read tool priority across the whole skill. A competitor-benchmarked "profile budget" was evaluated and **rejected** — direct Ahrefs pulls of Bettermode and Mighty Networks show competitor anchor profiles are dominated by spam, UGC member-URLs, and "powered-by" widget links, yielding no valid target to benchmark against. **Non-breaking** — same skill, same namespace, same Phase 1/Phase 2 flow and Type A/B/C system; only anchor *preference* and one scoring carve-out change, plus a wording pass that unifies browser-tool priority.

@@ -868,3 +868,4 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't skip the existing-backlink check (Step 0.0) on Mode B just because there's no live site to crawl — the domain is still known and the check is cheap
 - Don't expose internal quality analysis to the partner. PBN/content-farm rejections, DR concerns, Ahrefs unit budgets, Chrome access errors, and tier-2 vertical-fit verdicts are user-facing only. The partner-facing line is always a diplomatic "no strong fit this round" or equivalent
 - Don't split a multi-domain request into multiple emails. When the input contains 2+ partner domains from one contact, produce one consolidated reply (see Step 4)
+- Don't default to exact-match commercial anchors when a lower-risk type fits the context (see Anchor Diversity Check step 9)
