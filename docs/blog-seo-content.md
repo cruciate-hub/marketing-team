@@ -34,8 +34,8 @@ The skill is **not** for:
 5. Draft the **markdown intermediate** at `outputs/[slug].draft.md` — H1 title, labeled-paragraph metadata, markdown body.
 6. Run `python3 scripts/compliance.py outputs/[slug].draft.md` and fix every failure (exit 1) before continuing. This is the mechanical gate; the brain.md terminology + tone review still applies in full.
 7. Convert the markdown body to HTML (wrap images in `<figure>`, add `target="_blank"` to links, disable smart punctuation so it can't reintroduce em dashes).
-8. Invoke `internal-linking-strategist` in **draft mode** on the HTML — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Embed them in `post-content`.
-9. Deliver every CMS field labeled clearly for copy-paste into Webflow.
+8. Invoke `internal-linking-strategist` in **draft mode** on the HTML — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Before embedding each anchor, vet its visible text with `python3 scripts/compliance.py --scan-text 'anchor text'`; reject and request a replacement on any FAIL (the linker runs after the draft.md compliance pass, so its output otherwise bypasses the gate).
+9. Embed cleared anchors in `post-content` and deliver every CMS field labeled clearly for copy-paste into Webflow.
 
 ## Webflow CMS fields
 

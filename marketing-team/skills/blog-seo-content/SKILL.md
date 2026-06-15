@@ -176,7 +176,7 @@ Every blog post is a CMS item in the `📖 Blog Posts` collection. When writing 
 This is the CMS item name AND the title tag (the blue link in Google search results). Keep under 60 characters for SEO. Front-load the target keyword.
 
 **Slug** (`slug`, PlainText, max 256 chars)
-URL-safe slug. Lowercase, hyphens, no spaces. Keep it short. Example: `best-chat-apis-messaging-sdks`, `building-your-in-app-community-why-it-matters`.
+URL-safe slug. Lowercase, hyphens, no spaces. Keep it short. Example: `best-chat-apis-messaging-sdks`, `building-your-in-app-community-why-it-matters`. If the title contains an em dash, remove it before deriving the slug — an em dash collapses to `---` in the slug, which the compliance check rejects as consecutive hyphens.
 
 ### Meta
 
@@ -342,7 +342,9 @@ After compliance passes and the markdown body is converted to HTML, invoke the `
 
 The optimizer fetches `link-strategy.md` plus `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json`, `pages-blog.json`, and `pages-customer-stories.json`. It returns 3-7 link suggestions (anchor + URL + insertion point + reasoning) plus any cannibalization warnings.
 
-Embed each suggestion into the `post-content` HTML as `<a href="..." target="_blank">anchor</a>` at the suggested insertion point.
+Before embedding, **vet each anchor's visible text** with `python3 scripts/compliance.py --scan-text 'anchor text here'`. The linker runs after the draft.md compliance pass, so anchor text otherwise bypasses the gate — an em dash, emoji, or forbidden term in anchor text would ship without being caught. If `--scan-text` returns exit 1 on any anchor, reject it and ask the linker for an alternative.
+
+Embed each cleared suggestion into the `post-content` HTML as `<a href="..." target="_blank">anchor</a>` at the suggested insertion point.
 
 Resolve cannibalization warnings before final output:
 - If the optimizer flags a competing anchor → page mapping, follow its recommendation.
