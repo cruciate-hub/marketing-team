@@ -1,5 +1,12 @@
 # Changelog
 
+## marketing-team 13.14
+
+SessionStart hook for automatic plugin sync. Third-party marketplace auto-update is broken in Claude Code (`autoUpdate: true` sets the flag but the git pull never runs — issue #26744), so every teammate has been stuck on whatever version they last manually updated to. This release bundles a `SessionStart` hook that runs `claude plugin marketplace update` + `claude plugin update` at the start of every session, making the auto-sync that the README promises actually work. **Non-breaking** — no skill changes; adds `hooks/hooks.json` only. One final manual update is needed to get this version; after that, updates are automatic.
+
+- Added [`marketing-team/hooks/hooks.json`](marketing-team/hooks/hooks.json): SessionStart hook that pulls the cruciate-hub marketplace and updates the marketing-team plugin cache on every session start (30s timeout).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.13 to 13.14. No skill changes, no brand-kit changes.
+
 ## marketing-team 13.13
 
 Anchor Diversity Check data-accuracy fix for `backlink-placement-finder`. A fresh `site-explorer-anchors` pull (2026-06-15) revealed that "Customer engagement" (21 refdomains, all dofollow) is now flagged `is_spam` by Ahrefs — the linking domains are spammy, not editorial placements from this skill. The prior snapshot (13.11) listed it as the top genuinely-editorial saturated commercial anchor. With the spam flag, the genuinely-editorial saturated anchors at ≥10 refdomains narrow to just "social media app development" (11) and "Community features" (11). An independent review of all seven proposals from the prior anchor-strategy-redesign conversation concluded the skill already implements the substance of those proposals via the 13.4 Anchor Diversity Check — no structural redesign warranted; a profile-budget step and competitor benchmarking were evaluated and re-confirmed as correctly rejected (Bettermode top 25 = UGC member URLs + gambling spam; Circle.so top 25 = widget links + Telegram spam). **Non-breaking** — same skill, same namespace, same scoring logic; only the `is_spam` filter, the reference snapshot, and the saturated-anchor examples change.

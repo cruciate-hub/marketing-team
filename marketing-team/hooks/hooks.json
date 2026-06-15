@@ -1,0 +1,17 @@
+{
+  "description": "Auto-sync the cruciate-hub marketplace on session start",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude plugin marketplace update cruciate-hub && claude plugin update marketing-team@cruciate-hub",
+            "timeout": 30,
+            "statusMessage": "Syncing marketing-team plugin…"
+          }
+        ]
+      }
+    ]
+  }
+}
