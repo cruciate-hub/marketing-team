@@ -28,6 +28,8 @@ Usage:
 Behaviour per suggestion:
   - Case 1 (no rephrase): wrap the FIRST clean occurrence of the anchor in plain prose —
     NOT inside an <a>, a heading, the comparison-table embed, or any tag. Casing preserved.
+    A singular anchor extends over a regular plural in the prose ("community platform" wraps
+    "community platforms"), so the link always spans the whole word, never `…platform</a>s`.
   - Case 2 (rephrase given): find `insert_at` with WHITESPACE-FLEXIBLE matching (the drift
     that broke exact matching before), replace it with `rephrase`, and wrap the anchor inside
     the rephrase. Deterministic, so it doesn't depend on the agent eyeballing the sentence.
@@ -42,6 +44,21 @@ import re
 import sys
 
 LINK_TMPL = '<a href="{url}" target="_blank">{text}</a>'
+
+# Let a singular canonical anchor ("community platform") wrap the plural word that is
+# actually in the prose ("community platforms"), so the link spans the WHOLE word —
+# never `<a>community platform</a>s` with a dangling "s". Only regular inflections
+# (-s, -es) are absorbed, and the trailing (?!\w) is kept, so the pattern can only ever
+# EXTEND a match out to a word boundary, never cut one: "tool" still won't swallow
+# "toolkit". Irregular plurals (community→communities) can't be suffix-derived from the
+# singular, so the strategist must supply those already inflected (see SKILL.md
+# "Inflect the anchor to the prose").
+INFLECTION = r"(?:es|s)?"
+
+
+def anchor_regex(anchor: str) -> str:
+    """Word-bounded anchor pattern that also covers a regular plural inflection."""
+    return r"(?<!\w)" + re.escape(anchor) + INFLECTION + r"(?!\w)"
 
 
 def protected_intervals(html: str):
@@ -67,7 +84,7 @@ def in_protected(pos_start, pos_end, spans):
 
 def wrap_anchor_in_text(text: str, anchor: str, url: str) -> str:
     """Wrap the first occurrence of `anchor` inside a plain string (used on a rephrase)."""
-    m = re.search(r"(?<!\w)" + re.escape(anchor) + r"(?!\w)", text)
+    m = re.search(anchor_regex(anchor), text)
     if not m:
         return text  # anchor missing from rephrase — leave as-is (reported upstream)
     return text[:m.start()] + LINK_TMPL.format(url=url, text=m.group(0)) + text[m.end():]
@@ -77,7 +94,7 @@ def wrap_first(html: str, anchor: str, url: str):
     """Case 1: wrap the first clean prose occurrence of `anchor`. Returns (html, applied)."""
     spans = protected_intervals(html)
     for flags in (0, re.IGNORECASE):                       # exact case first, then any case
-        for m in re.finditer(r"(?<!\w)" + re.escape(anchor) + r"(?!\w)", html, flags):
+        for m in re.finditer(anchor_regex(anchor), html, flags):
             if not in_protected(m.start(), m.end(), spans):
                 link = LINK_TMPL.format(url=url, text=m.group(0))  # preserve casing
                 return html[:m.start()] + link + html[m.end():], True
