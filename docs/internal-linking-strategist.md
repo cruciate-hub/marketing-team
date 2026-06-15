@@ -73,7 +73,7 @@ Pick the files relevant to the context — don't load all 10 unless the question
 ## General principles
 
 - **Quote, don't paraphrase.** For headings or metadata, the JSON is the source. For body sentences, live-fetch first — never quote from memory.
-- **Anchor text is keyword-only.** "chat widget", not "a chat widget". If the draft's phrasing blocks a clean anchor, propose a rewrite via the `Rephrase suggestion` field.
+- **Anchor text is keyword-only, but spans whole words.** "chat widget", not "a chat widget" — yet when the draft uses the plural, the anchor takes the plural too ("community platforms", never "community platform" with a dangling "s"). If the draft's phrasing blocks a clean anchor, propose a rewrite via the `Rephrase suggestion` field.
 - **Respect the canonical map strictly.** If `link-strategy.md` says anchor X → page Y, that's the rule. Surface disagreements as flags, don't silently override.
 - **Definitional vs commercial intent matters.** Glossary for definitions, product/use-case for commercial. Route per `link-strategy.md`.
 - **Customer-story anchors use the customer name.** "Bitazza", "Noom" — not a proof-point claim.

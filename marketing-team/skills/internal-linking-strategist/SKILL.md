@@ -244,7 +244,7 @@ Use exactly one of these three states:
 
 ### Suggested links
 
-1. **Anchor:** "[keyword-only anchor text — no surrounding articles like 'a' or 'the']"
+1. **Anchor:** "[anchor text — the canonical keyword inflected to match the prose so the link spans whole words (plural "community platforms", not "community platform" with a dangling 's'); no surrounding articles like 'a' or 'the']"
    **Target:** [full URL]
    **Insert at:** "[exact verbatim quote of the draft sentence where the link goes]"
    **Rephrase suggestion:** "[rewritten sentence with anchor inline — OMIT THIS FIELD ENTIRELY if the original sentence accommodates the anchor cleanly without rewording]"
@@ -567,6 +567,10 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 **Be specific about locations.** Not "link from the chat page". Say "in `https://www.social.plus/chat`, under `## Real-time messaging`, after the typing-indicators paragraph, anchor 'in-app chat' to..."
 
 **Anchor text is keyword-only.** The anchor must be the keyword phrase from `link-strategy.md`'s canonical map (e.g., "chat widget", "in-app chat"), not a surrounding-article variant ("a chat widget", "the in-app chat"). SEO weight flows to the linked phrase; articles dilute it. The "Insert at" field quotes the draft sentence verbatim; if the draft's phrasing prevents a clean keyword anchor, use **Rephrase suggestion** to propose a rewrite — don't compromise on the anchor.
+
+**Anchors must span whole words — never cut one mid-word.** A link's start and end must land on word boundaries (whitespace or punctuation), never inside a word. The recurring failure is the plural: the canonical map stores singular headwords ("community platform", "social listening tool", "activity feed"), the draft uses the plural ("community platforms"), and the link wraps only the singular substring, leaving a dangling unlinked `s` (`<a …>community platform</a>s`). That reads as broken and orphans the inflection. It should never happen.
+
+**Inflect the anchor to the prose — the one sanctioned deviation from keyword-only.** When the canonical headword appears in the draft in an inflected form, the anchor *is* that inflected form, so the whole word sits inside the link: prose says "platforms" → anchor "community platforms"; "feeds" → "activity feeds"; irregular plurals ("communities", "queries", "categories") and other word-forms match exactly what is on the page. This does not contradict keyword-only — surrounding articles ("a", "the") still stay outside; only the keyword's own inflection is absorbed. A trailing inflection does not dilute SEO; a mid-word cut dilutes reader trust. When singular and plural both read naturally, use whatever the sentence already has rather than rewording it down to the headword; reach for **Rephrase suggestion** only when no inflected form fits cleanly.
 
 **Respect the canonical map strictly.** If `link-strategy.md` says anchor X → page Y, that's the rule. If you think it's wrong, flag it for the user to update — don't silently override.
 
