@@ -1,5 +1,12 @@
 # Changelog
 
+## brand-kit 3.6
+
+SessionStart hook for automatic plugin sync — mirrors marketing-team 13.14. Brand-kit users (Trust, Rianna) were silently missing every SKILL.md update because `autoUpdate: true` doesn't actually pull (same Claude Code bug, issue #26744). This adds the same SessionStart hook that marketing-team got in 13.14, targeting `brand-kit@cruciate-hub`. One final manual update is needed to get this version; after that, updates are automatic. **Non-breaking** — no skill changes; adds `hooks/hooks.json` only.
+
+- Added [`brand-kit/hooks/hooks.json`](brand-kit/hooks/hooks.json): SessionStart hook that pulls the cruciate-hub marketplace and updates the brand-kit plugin cache on every session start (30s timeout).
+- Bumped [`brand-kit/.claude-plugin/plugin.json`](brand-kit/.claude-plugin/plugin.json) from 3.5 to 3.6. No skill changes, no marketing-team changes.
+
 ## marketing-team 13.14
 
 SessionStart hook for automatic plugin sync. Third-party marketplace auto-update is broken in Claude Code (`autoUpdate: true` sets the flag but the git pull never runs — issue #26744), so every teammate has been stuck on whatever version they last manually updated to. This release bundles a `SessionStart` hook that runs `claude plugin marketplace update` + `claude plugin update` at the start of every session, making the auto-sync that the README promises actually work. **Non-breaking** — no skill changes; adds `hooks/hooks.json` only. One final manual update is needed to get this version; after that, updates are automatic.
