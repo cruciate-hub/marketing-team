@@ -33,7 +33,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies — feature pages, landing pages, release-note CMS items, taglines, pitch materials. Not for blog posts. Also brand voice audits. |
+| [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Non-blog marketing content: feature pages, landing pages, homepage copy, product descriptions, release-note CMS items, taglines, pitch materials, investor copy, and brand voice audits. NOT for blog posts (use blog-seo-content for any topic). |
 | [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Loads the full messaging stack for brand voice. |
 | [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
 | [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails from monthly product update docs. |

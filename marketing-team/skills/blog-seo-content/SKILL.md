@@ -1,21 +1,25 @@
 ---
 name: blog-seo-content
 description: >
-  Write SEO-optimized blog posts for social.plus/blog — any topic, whether
-  about a social.plus product/feature or an industry/general subject.
-  Delivers markdown mapped to the Webflow blog CMS fields. Loads the full
-  brand messaging stack (terminology, tone, positioning, value-story,
-  narrative) so product blog posts are brand-correct.
+  The ONLY skill for blog posts on social.plus/blog. Owns every blog
+  topic — product features (Chat SDK, Block, UIKit, AI Copilot, Live
+  Stream), industry trends, opinion pieces, how-to guides, tutorials,
+  and listicles. brand-messaging does NOT handle blog posts.
 
-  Do NOT use for: AEO/answer pages for /answers/ (use aeo-content);
-  website page copy (use brand-messaging); email content
-  (use newsletters); customer stories (use case-study); press releases
-  (use press-release).
+  Loads the full brand messaging stack (terminology, tone, positioning,
+  value-story, narrative) so product blog posts are brand-correct.
+  Delivers markdown mapped to Webflow blog CMS fields. Drafts run through
+  a deterministic compliance gate (scripts/compliance.py).
+
+  Not for: AEO /answers/ pages (aeo-content); website page copy
+  (brand-messaging); emails (newsletters); customer stories (case-study);
+  press releases (press-release).
 when_to_use: >
-  Trigger phrases: "write a blog post", "blog post about [topic]", "SEO
-  article", "listicle", "opinion piece", "how-to guide", "tutorial",
-  "blog post on [our feature]", "article about our [product]", "feature
-  announcement blog".
+  Use for ANY blog post regardless of topic. Trigger phrases: "blog post
+  about Chat SDK", "blog post about Block", "article about AI Copilot for
+  the blog", "feature announcement blog", "blog post on [our feature]",
+  "article about our [product]", "write a blog post", "SEO article",
+  "listicle", "opinion piece", "how-to guide", "tutorial".
 ---
 
 # social.plus Blog & SEO Content

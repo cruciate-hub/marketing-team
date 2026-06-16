@@ -8,7 +8,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 
 | Skill | Lines | Size | What it does | SKILL.md |
 |---|---:|---:|---|---|
-| [brand-messaging](../docs/brand-messaging.md) | 43 | 1.9 KB | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies (feature pages, release-note CMS items, taglines, pitch materials). Not for blog posts. | [SKILL.md →](./skills/brand-messaging/SKILL.md) |
+| [brand-messaging](../docs/brand-messaging.md) | 43 | 1.9 KB | Non-blog marketing content: feature pages, landing pages, homepage copy, product descriptions, release-note CMS items, taglines, pitch materials, investor copy, and brand voice audits. NOT for blog posts (use blog-seo-content for any topic). | [SKILL.md →](./skills/brand-messaging/SKILL.md) |
 | [blog-seo-content](../docs/blog-seo-content.md) | 365 | 22.0 KB | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Loads the full messaging stack for brand voice. Drafts run through a deterministic compliance gate (`scripts/compliance.py`) before delivery; `--scan-text` mode vets linker-supplied anchors. Regression suite under `tests/`. | [SKILL.md →](./skills/blog-seo-content/SKILL.md) |
 | [newsletters](../docs/newsletters.md) | 172 | 9.9 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. | [SKILL.md →](./skills/newsletters/SKILL.md) |
 | [case-study](../docs/case-study.md) | 286 | 14.3 KB | Customer stories and success case studies. | [SKILL.md →](./skills/case-study/SKILL.md) |

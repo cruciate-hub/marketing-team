@@ -1,24 +1,21 @@
 ---
 name: brand-messaging
 description: >
-  Primary skill for content about a social.plus product, feature, module,
-  or capability where no format-specific skill applies. Use for: feature/
-  landing/use-case/industry pages, homepage copy, product descriptions,
-  Webflow CMS release-note items, taglines, pitch materials, investor copy,
-  and any general marketing text without a dedicated skill. Also for brand
-  voice audits and questions about tone, terminology, value props,
-  positioning, or boilerplates.
+  NOT for blog posts — blog-seo-content is the only skill for
+  social.plus/blog posts, regardless of topic (product or general).
 
-  Do NOT use for: blog posts for social.plus/blog (use blog-seo-content —
-  it handles both product and non-product topics); press releases
-  (use press-release); customer stories (use case-study); AEO/answer-page
-  content for /answers/ (use aeo-content); HTML emails or email copy
-  including subject lines (use newsletters); legal documents
-  (use legal-docs-formatter).
+  This skill writes non-blog marketing content: feature pages, landing
+  pages, homepage copy, product descriptions, Webflow CMS release-note
+  items, taglines, pitch materials, investor copy, and brand voice audits.
+
+  Also not for: press releases (press-release); customer stories
+  (case-study); AEO /answers/ content (aeo-content); emails (newsletters);
+  legal documents (legal-docs-formatter).
 when_to_use: >
-  Trigger phrases: "write a feature page", "homepage copy", "landing page
-  for X", "release note for [feature]", "tagline", "pitch copy", "review
-  this copy for brand voice".
+  NOT for: "blog post", "article for the blog", "blog about [feature]",
+  "write a blog". Trigger phrases: "write a feature page", "homepage copy",
+  "landing page for X", "release note for [feature]", "tagline",
+  "pitch copy", "review this copy for brand voice".
 ---
 
 # social.plus Brand Messaging

@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.17 + brand-kit 3.8
+
+Frontmatter signal-weight fix for blog routing. The 13.16 routing reversal put the correct descriptions in place, but Cowork sessions still routed product blog posts (e.g., "blog post about Chat SDK") to `brand-messaging` — the model pattern-matched on brand-messaging's opening line ("Primary skill for content about a social.plus product") and ignored the "Do NOT use for: blog posts" exclusion that followed. Confirmed by verifying the Cowork session loaded the correct 13.16 frontmatter (literal quotes matched) yet still hallucinated old description text in its routing analysis.
+
+**Fix:** Restructured both descriptions so the routing signal is unambiguous:
+- `brand-messaging/SKILL.md`: leads with "NOT for blog posts" instead of burying it after a broad product-content opener. Negative triggers ("blog post", "article for the blog", "blog about [feature]") added to `when_to_use`. Budget: 55% of 1,536-char cap.
+- `blog-seo-content/SKILL.md`: asserts exclusive blog ownership — "The ONLY skill for blog posts on social.plus/blog." Names specific products in description (Chat SDK, Block, UIKit, AI Copilot, Live Stream) and in `when_to_use` triggers. Budget: 72% of cap.
+- Updated skill description rows in both READMEs.
+- `brand-kit` bumped to 3.8 (brand-messaging flows through the symlink).
+
 ## marketing-team 13.16 + brand-kit 3.7
 
 Routing reversal — `blog-seo-content` is now the single owner of all blog posts for social.plus/blog, regardless of topic (product features, industry trends, opinion, listicles). Reverses the product/non-product blog split introduced in 12.4 + 12.6.
