@@ -16,11 +16,10 @@ Claude skill for newswire-ready press releases for social.plus, produced as `.do
 When the user signals **newswire / press release format explicitly** — the format is the trigger, not the subject. Trigger phrases include "press release", "newswire", "PR Newswire", "Cision", "embargoed announcement", "press announcement", "media release", "draft a release for", "write a release about", "announcement for the wire", or "for distribution".
 
 The skill is **not** for:
-- Blog announcements about a product launch (without newswire signal) — use `brand-messaging`, even when the request is "announcement for our new Block feature".
-- Feature announcement blog posts — use `brand-messaging`.
+- Blog announcements about a product launch (without newswire signal) — use `blog-seo-content`.
+- Feature announcement blog posts — use `blog-seo-content`.
 - Product update emails — use `newsletters`.
 - Customer stories — use `case-study`.
-- General blog posts on non-product topics — use `blog-seo-content`.
 
 ## The brief — three required fields
 

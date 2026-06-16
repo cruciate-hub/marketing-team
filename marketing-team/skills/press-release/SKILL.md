@@ -11,11 +11,10 @@ description: >
   newswire distribution. Requires explicit newswire/press signal — the format
   is the trigger, not the subject.
 
-  Do NOT use for: blog announcements about a product launch (use brand-messaging
-  — even a "launch announcement" without newswire signal); feature announcement
-  blog posts (use brand-messaging); product update emails (use newsletters);
-  customer stories (use case-study); general blog posts on non-product topics
-  (use blog-seo-content).
+  Do NOT use for: blog announcements about a product launch without newswire
+  signal (use blog-seo-content); feature announcement blog posts
+  (use blog-seo-content); product update emails (use newsletters);
+  customer stories (use case-study).
 when_to_use: >
   Trigger phrases: "press release", "newswire", "PR Newswire", "Cision",
   "embargoed announcement", "press announcement", "media release", "draft a

@@ -8,7 +8,7 @@ description: >
 
   Do NOT use for: writing the email about a product update (use newsletters);
   writing the release-note CMS item or the updated page copy (use brand-messaging);
-  writing a blog post announcing the update (use brand-messaging). This skill
+  writing a blog post announcing the update (use blog-seo-content). This skill
   reports which pages need updating — the actual writing belongs to the format-
   specific skill.
 when_to_use: >

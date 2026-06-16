@@ -196,8 +196,7 @@ This skill is only for AEO answer articles. For other content types, switch skil
 
 | You want to write | Use |
 |---|---|
-| Blog post for social.plus/blog on a **non-product topic** (industry trends, opinion, listicles) | `blog-seo-content` |
-| Blog post about a **social.plus product/feature** (Block, Chat, UIKit, etc.) | `brand-messaging` |
+| Blog post for social.plus/blog (any topic) | `blog-seo-content` |
 | Customer story / case study | `case-study` |
 | Website page copy (feature page, landing page, homepage) | `brand-messaging` |
 | Webflow CMS release-note item | `brand-messaging` |
@@ -253,8 +252,7 @@ Free-form chat also works — the skill falls back to natural-language understan
 **Use when:** the colleague asks for an AEO article, GEO article, answer article, AI-search-optimized content, batch of answer ideas, or content for `/answers/`. This skill always wins when the destination is `/answers/`, regardless of subject.
 
 **Do not use for:**
-- Blog posts on non-product topics → `blog-seo-content`
-- Blog posts about a social.plus product/feature → `brand-messaging`
+- Blog posts → `blog-seo-content`
 - Customer stories → `case-study`
 - Website page copy, feature pages, release-note CMS items → `brand-messaging`
 - Press releases → `press-release`

@@ -7,8 +7,7 @@ description: >
   it to Webflow HTML). This skill always wins when the destination is
   /answers/, regardless of subject.
 
-  Do NOT use for: blog posts (use blog-seo-content for non-product topics,
-  or brand-messaging for product/feature blogs); customer stories
+  Do NOT use for: blog posts (use blog-seo-content); customer stories
   (use case-study); website page copy (use brand-messaging); press
   releases (use press-release).
 when_to_use: >

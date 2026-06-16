@@ -33,8 +33,8 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies — feature pages, landing pages, product blog posts (also applies SEO blog format), feature announcement blogs, release-note CMS items, taglines, pitch materials. Also brand voice audits. |
-| [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog on **non-product topics only** — industry trends, opinion, listicles, third-party tools. Product blog posts go to `brand-messaging`. |
+| [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Primary skill for content about a social.plus product/feature/module/capability where no format-specific skill applies — feature pages, landing pages, release-note CMS items, taglines, pitch materials. Not for blog posts. Also brand voice audits. |
+| [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Loads the full messaging stack for brand voice. |
 | [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
 | [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails from monthly product update docs. |
 | [**case-study**](./marketing-team/skills/case-study/SKILL.md) | Customer stories and success case studies following the social.plus narrative structure. |

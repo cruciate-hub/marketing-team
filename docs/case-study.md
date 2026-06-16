@@ -18,7 +18,7 @@ ONLY when the content is about a **specific named customer** using social.plus. 
 
 The skill is **not** for:
 - Product/feature stories without a specific named customer (e.g. "how the Block feature helps brands") — use `brand-messaging`, which owns all product/feature content regardless of format.
-- General blog posts without a customer focus — use `blog-seo-content` (non-product topics) or `brand-messaging` (product topics).
+- General blog posts without a customer focus — use `blog-seo-content`.
 
 ## Workflow
 

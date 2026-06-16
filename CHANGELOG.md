@@ -1,5 +1,20 @@
 # Changelog
 
+## marketing-team 13.16 + brand-kit 3.7
+
+Routing reversal — `blog-seo-content` is now the single owner of all blog posts for social.plus/blog, regardless of topic (product features, industry trends, opinion, listicles). Reverses the product/non-product blog split introduced in 12.4 + 12.6.
+
+**Why:** `blog-seo-content` already loads the full brand messaging stack (terminology, tone, positioning, value-story, narrative) and runs a deterministic compliance gate (`scripts/compliance.py`) + regression suite. Product blog posts routed through `brand-messaging` (the 12.4 path) skipped all mechanical checking and relied solely on LLM judgment. The sanity check on live product-focused blog posts confirmed they were already brand-correct through the `blog-seo-content` path. Additionally, `brand-messaging` was at 94% of the 1,536-character frontmatter cap — one sentence away from silent truncation.
+
+**Changes:**
+- `brand-messaging/SKILL.md`: removed blog post claims from description/when_to_use; removed "Blog post mode" (step 5) from skill body. Frees ~400 characters of frontmatter budget.
+- `blog-seo-content/SKILL.md`: restored full scope — removed "NON-PRODUCT topics only" restriction; added product trigger phrases to when_to_use.
+- `brain.md`: collapsed two blog-post rows in Cross-domain routing table into one (any topic → blog-seo-content); updated Available skills table to match.
+- Updated exclusion/routing cross-references in 6 other SKILL.md files: `aeo-content`, `press-release`, `case-study`, `site-intelligence`, `product-update-vs-website`, `blog-publisher`.
+- Updated 6 docs: `docs/brand-messaging.md` (removed "Why product-content lives here" section and Blog post mode), `docs/blog-seo-content.md`, `docs/aeo-content.md`, `docs/case-study.md`, `docs/press-release.md`, `docs/site-intelligence.md`.
+- Updated both `README.md` and `marketing-team/README.md` skill description rows.
+- `brand-kit` bumped to 3.7 because `brand-messaging/SKILL.md` changed (flows through the symlink).
+
 ## marketing-team 13.15
 
 Gmail draft outbound-URL fix for `backlink-placement-finder` (bk 3.7). The bk 3.6 unwrap fix handled URLs arriving from Gmail redirects and banned markdown links, but did not cover URLs leaving via the Gmail MCP draft tool (`create_draft`). When only a plain-text `body` is passed, Gmail auto-generates HTML and substitutes its `google.com/url?q=...&source=gmail&ust=...&sa=E` outbound redirect as both the href and the visible text, so recipients see the wrapped tracking URL instead of the canonical one. **Non-breaking**: same skill, same namespace; adds one Step 4 format rule requiring an explicit `htmlBody` when emitting via the Gmail draft tool.

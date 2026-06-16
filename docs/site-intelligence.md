@@ -15,7 +15,7 @@ Gives full awareness of what every page says — so you can ask questions, find 
 
 **Read-only** — answers "what does the site say"; does not produce new copy. Any question that depends on what's currently on the social.plus website. Trigger phrases include "what do we say about", "which pages mention", "does the site cover", "our website", "our pages", "site content", "messaging consistency", or page-specific questions like "what does the pricing page say" or "do we mention AI on the homepage".
 
-Use this skill **before** writing new copy if site-awareness is needed, then hand off to the appropriate writing skill (`brand-messaging` for product/feature copy, `blog-seo-content` for non-product blogs, etc.).
+Use this skill **before** writing new copy if site-awareness is needed, then hand off to the appropriate writing skill (`brand-messaging` for pages/feature copy, `blog-seo-content` for blog posts, etc.).
 
 The skill is **not** for:
 - Writing copy itself — site-intelligence is read-only.

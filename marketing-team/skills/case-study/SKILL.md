@@ -10,10 +10,9 @@ description: >
   customer story.
 
   Do NOT trigger for: product/feature stories without a specific named customer
-  (e.g. "how the Block feature helps brands" — use brand-messaging, which owns
-  all product/feature content regardless of format); general blog posts without
-  a customer focus (use blog-seo-content for non-product topics, or brand-messaging
-  for product topics).
+  (e.g. "how the Block feature helps brands" — use brand-messaging for pages,
+  or blog-seo-content for blog posts); general blog posts without a customer
+  focus (use blog-seo-content).
 when_to_use: >
   Trigger phrases: "case study", "customer story", "success story", "customer
   spotlight", "write about how [specific customer name] uses", "write a CS for

@@ -11,9 +11,9 @@ description: >
   page say" or "do we mention AI on the homepage."
 
   Do NOT use for: writing the copy itself — site-intelligence is read-only. Use
-  brand-messaging for product/feature copy, blog-seo-content for non-product
-  blog posts, etc. This skill answers "what does the site say"; it does not
-  produce new copy.
+  brand-messaging for pages/feature copy, blog-seo-content for blog posts,
+  etc. This skill answers "what does the site say"; it does not produce
+  new copy.
 when_to_use: >
   Trigger phrases: "what does our [X] page say", "which pages mention [feature]",
   "audit the site", "find content gaps on the site", "messaging consistency

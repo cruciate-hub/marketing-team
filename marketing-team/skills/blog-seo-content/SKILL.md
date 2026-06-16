@@ -1,25 +1,21 @@
 ---
 name: blog-seo-content
 description: >
-  Write SEO-optimized blog posts for social.plus/blog on NON-PRODUCT topics
-  only — industry trends, opinion pieces, listicles, third-party tools,
-  general community/social-engagement subjects. Delivers markdown mapped to
-  the Webflow blog CMS fields.
+  Write SEO-optimized blog posts for social.plus/blog — any topic, whether
+  about a social.plus product/feature or an industry/general subject.
+  Delivers markdown mapped to the Webflow blog CMS fields. Loads the full
+  brand messaging stack (terminology, tone, positioning, value-story,
+  narrative) so product blog posts are brand-correct.
 
-  Do NOT use for: blog posts about a social.plus product, feature, module,
-  or capability — those belong to brand-messaging, which owns all product
-  content regardless of format (blog, page, CMS item). Do NOT use for:
-  AEO/answer pages for /answers/ (use aeo-content); website page copy
-  (use brand-messaging); email content (use newsletters); customer stories
-  (use case-study); press releases (use press-release).
+  Do NOT use for: AEO/answer pages for /answers/ (use aeo-content);
+  website page copy (use brand-messaging); email content
+  (use newsletters); customer stories (use case-study); press releases
+  (use press-release).
 when_to_use: >
-  Trigger phrases: "write a blog post about [non-product topic]", "SEO
-  article on [trend/industry]", "listicle", "opinion piece", "how-to guide
-  on [general non-product topic]", "tutorial on [general non-product topic]".
-
-  If the topic is a social.plus feature/product (e.g. "blog post on the
-  Block feature", "article about our AI Copilot"), route to brand-messaging
-  instead — even when the prompt says "blog post".
+  Trigger phrases: "write a blog post", "blog post about [topic]", "SEO
+  article", "listicle", "opinion piece", "how-to guide", "tutorial",
+  "blog post on [our feature]", "article about our [product]", "feature
+  announcement blog".
 ---
 
 # social.plus Blog & SEO Content
