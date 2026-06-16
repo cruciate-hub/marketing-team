@@ -33,7 +33,7 @@ The skill is for outbound link prospecting only (see `link-building-vetter` for 
 5. **Match against anchors & inventory** — Two-phase approach:
    - **Phase 1** — Exact anchor already exists in a body paragraph. Partner just adds the link, zero text changes.
    - **Phase 2** — Topically relevant paragraph; partner needs to add or modify a sentence to accommodate the link.
-6. **Draft the reply email** — Plain-text placement format, Phase 1 first, then Phase 2 with suggested text.
+6. **Draft the reply email** — Plain-text placement format, Phase 1 first, then Phase 2 with suggested text. When emitting via the Gmail draft tool (`create_draft`), an explicit `htmlBody` is also passed so visible anchor text stays clean (Gmail otherwise substitutes its outbound redirect as the visible link text).
 7. **Summary table** — Every evaluation ends with a table of partner article → anchor → target → phase → fit score.
 
 ## Files

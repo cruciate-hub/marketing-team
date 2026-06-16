@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.15
+
+Gmail draft outbound-URL fix for `backlink-placement-finder` (bk 3.7). The bk 3.6 unwrap fix handled URLs arriving from Gmail redirects and banned markdown links, but did not cover URLs leaving via the Gmail MCP draft tool (`create_draft`). When only a plain-text `body` is passed, Gmail auto-generates HTML and substitutes its `google.com/url?q=...&source=gmail&ust=...&sa=E` outbound redirect as both the href and the visible text, so recipients see the wrapped tracking URL instead of the canonical one. **Non-breaking**: same skill, same namespace; adds one Step 4 format rule requiring an explicit `htmlBody` when emitting via the Gmail draft tool.
+
+- [`SKILL.md`](marketing-team/skills/backlink-placement-finder/SKILL.md): **(P1) Gmail draft emission must supply htmlBody.** The bk 3.6 unwrap fix handled URLs arriving from Gmail and banned markdown, but did not cover URLs leaving via the Gmail draft tool. With a plain-text-only `body`, create_draft makes Gmail auto-generate HTML and substitute its `google.com/url?q=...&source=gmail&ust=...&sa=E` outbound redirect as both href and visible text, so recipients saw the wrapped tracking URL. Added a Step 4 format rule: when emitting via the Gmail draft tool, pass an explicit `htmlBody` rendering each URL as `<a href="CANONICAL_URL">CANONICAL_URL</a>` (clean visible text) and section headers as bold plain text. Gmail still rewraps the href (normal, invisible); the rule guarantees clean reader-facing URLs.
+- [`docs/backlink-placement-finder.md`](docs/backlink-placement-finder.md): synced workflow step 6 with the Gmail draft `htmlBody` rule.
+- Refreshed the `backlink-placement-finder` row in [`marketing-team/README.md`](marketing-team/README.md) (871 → 872 lines / 81.7 → 82.6 KB).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.14 to 13.15. `backlink-placement-finder` is not symlinked into brand-kit, so brand-kit stays at 3.6; no `references/*.md` or remote JSON inventory was touched.
+
 ## brand-kit 3.6
 
 SessionStart hook for automatic plugin sync — mirrors marketing-team 13.14. Brand-kit users (Trust, Rianna) were silently missing every SKILL.md update because `autoUpdate: true` doesn't actually pull (same Claude Code bug, issue #26744). This adds the same SessionStart hook that marketing-team got in 13.14, targeting `brand-kit@cruciate-hub`. One final manual update is needed to get this version; after that, updates are automatic. **Non-breaking** — no skill changes; adds `hooks/hooks.json` only.
