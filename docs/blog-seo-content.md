@@ -2,16 +2,16 @@
 
 Claude skill for writing SEO-optimized blog posts for social.plus/blog.
 
-Output maps directly to the Webflow CMS `📖 Blog Posts` collection fields so content can be pasted in without reformatting — page title, slug, meta description, introduction, post content HTML, taxonomy, reading time, image specs.
+By default the output is a styled, editable document (Google Doc or .docx) for team review and editing. HTML field-by-field output for direct Webflow CMS paste is available on request ("push directly to Webflow", "give me the HTML", "publish this to CMS").
 
 ## What it does
 
 - Fetches the full messaging stack via the brain + router — terminology, tone, narrative, value-story, positioning.
 - Checks `website/pages-blog.json` for duplicate topics; suggests updating an existing post when a close match exists.
-- Delegates internal links to the `internal-linking-strategist` skill before delivery — the optimizer returns 3–7 SEO-grounded `<a href>` tags via the canonical anchor map in `link-strategy.md`.
-- Produces clean HTML body copy (5,000–12,000 characters) following the Context → Tension → Infrastructure → Impact → Advantage narrative structure.
-- Runs a **two-stage production flow**: drafts a markdown intermediate, checks it with a deterministic script (`scripts/compliance.py` — em dashes, emojis, brand casing, forbidden terminology, length, slug, heading hierarchy), then converts the body to HTML. The script is an additional gate on top of the brain.md terminology/tone review, not a replacement.
-- Labels every CMS field so the user can copy-paste into Webflow field-by-field.
+- Delegates internal links to the `internal-linking-strategist` skill before delivery — the optimizer returns 3–7 SEO-grounded link suggestions via the canonical anchor map in `link-strategy.md`.
+- Produces content (5,000–12,000 characters) following the Context → Tension → Infrastructure → Impact → Advantage narrative structure.
+- Runs a **two-stage production flow**: drafts a markdown intermediate, checks it with a deterministic script (`scripts/compliance.py` — em dashes, emojis, brand casing, forbidden terminology, length, slug, heading hierarchy), then converts to a styled document (default) or HTML (opt-in). The script is an additional gate on top of the brain.md terminology/tone review, not a replacement.
+- Default delivery: styled Google Doc or .docx via cascade (Google Drive MCP → suggest connection → .docx fallback using `anthropic-skills:docx`). Opt-in HTML: field-by-field CMS mapping for direct Webflow paste.
 
 ## When it triggers
 
@@ -34,9 +34,9 @@ The skill is **not** for:
 4. Scan `pages-blog.json` `metaTitle` + `content` for topic overlap before drafting.
 5. Draft the **markdown intermediate** at `outputs/[slug].draft.md` — H1 title, labeled-paragraph metadata, markdown body.
 6. Run `python3 scripts/compliance.py outputs/[slug].draft.md` and fix every failure (exit 1) before continuing. This is the mechanical gate; the brain.md terminology + tone review still applies in full.
-7. Convert the markdown body to HTML (wrap images in `<figure>`, add `target="_blank"` to links, disable smart punctuation so it can't reintroduce em dashes).
-8. Invoke `internal-linking-strategist` in **draft mode** on the HTML — it returns 3–7 SEO-grounded `<a href>` tags (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Before embedding each anchor, vet its visible text with `python3 scripts/compliance.py --scan-text 'anchor text'`; reject and request a replacement on any FAIL (the linker runs after the draft.md compliance pass, so its output otherwise bypasses the gate).
-9. Embed cleared anchors in `post-content` and deliver every CMS field labeled clearly for copy-paste into Webflow.
+7. **Default mode:** convert the markdown body to a styled document — H2/H3 become heading styles, bold becomes actual bold, links become embedded hyperlinks (no HTML). **Opt-in HTML mode:** convert to HTML (wrap images in `<figure>`, add `target="_blank"` to external links only, disable smart punctuation so it can't reintroduce em dashes).
+8. Invoke `internal-linking-strategist` in **draft mode** — it returns 3–7 SEO-grounded link suggestions (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Before embedding each anchor, vet its visible text with `python3 scripts/compliance.py --scan-text 'anchor text'`; reject and request a replacement on any FAIL (the linker runs after the draft.md compliance pass, so its output otherwise bypasses the gate).
+9. **Default:** embed links as hyperlinks (clickable text, URL behind it) and deliver via cascade (Google Drive MCP → suggest → .docx fallback). **HTML mode:** embed as `<a href="...">` (no `target="_blank"` on internal links) and deliver field-by-field for Webflow.
 
 ## Webflow CMS fields
 
@@ -51,7 +51,7 @@ Every blog post is a CMS item in `📖 Blog Posts`. The skill produces each fiel
 
 ### Content
 - **Introduction text** (`post-summary`, 1–3 sentence narrative hook shown at the top of the page)
-- **Post Content** (`post-content`, RichText HTML — `<h2>`/`<h3>` every 200–300 words, `<strong>` sparingly, `<a target="_blank">` on links, `<figure>`/`<img>` for inline images with `[IMAGE_URL]` placeholders)
+- **Post Content** (`post-content`, RichText — styled headings, bold, hyperlinks in default doc mode; HTML with `<h2>`/`<h3>`, `<strong>`, `<a target="_blank">` on external links only, `<figure>`/`<img>` in opt-in HTML mode)
 
 ### Taxonomy
 - **Main Category Tag** (single primary category — Community, App Growth, Insights, Engagement, Retention, Acquisition, News, Product, Social+, Vertical Social Networks, Community Stories, Monetization, Education, Hospitality, Events, People)
@@ -91,7 +91,13 @@ Plus `image-alt-text` (real description, not "decorative") and a suggested image
 
 ## Output format
 
-A clearly labeled field-by-field mapping. Example:
+### Default (styled document)
+
+A styled, editable document delivered via Google Drive (preferred) or as a downloadable .docx. Contains a metadata block at the top (page title, slug, meta description, category, tags, reading time, image specs, display recommendations) followed by the article body with H1 title, styled H2/H3 subheadings, bold text, internal links as clickable hyperlinks, and `[IMAGE_URL]` placeholders.
+
+### Opt-in HTML (field-by-field)
+
+Triggered by "push directly to Webflow", "give me the HTML", or "publish this to CMS". A clearly labeled field-by-field mapping:
 
 ```
 ## [Article Title] — Blog Post

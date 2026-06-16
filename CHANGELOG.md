@@ -1,5 +1,26 @@
 # Changelog
 
+## marketing-team 13.19
+
+Default output format change for `blog-seo-content`. The skill now produces a styled, editable document (Google Doc / .docx) by default instead of HTML field-by-field output. HTML remains available as an opt-in mode triggered by explicit requests ("push directly to Webflow", "give me the HTML", "publish this to CMS").
+
+**Why:** The team's actual workflow is: skill produces draft → team reviews and edits in Google Docs → manual copy to Webflow. The HTML output was not editable by non-technical team members and skipped the review step.
+
+**Changes:**
+- `blog-seo-content/SKILL.md`: rewrote "Two-stage production" into default (styled document) and opt-in HTML modes. Added "Delivery format" section with cascade: Google Drive MCP → suggest connection → .docx fallback via `anthropic-skills:docx`. Rewrote "Output format" with default (styled document) and opt-in HTML templates. Rewrote "Internal links" with separate embedding instructions for each mode — default uses hyperlinks, HTML mode uses `<a href>` tags. Fixed `target="_blank"` to apply to external links only in both modes (internal links open in same tab per link-strategy.md).
+- `docs/blog-seo-content.md`: synced output format, workflow steps, and `target="_blank"` fix.
+- Updated `marketing-team/README.md` skill table row for `blog-seo-content`.
+- Bumped `marketing-team/.claude-plugin/plugin.json` from 13.17 to 13.19. No brand-kit changes (blog-seo-content is not symlinked into brand-kit).
+
+## marketing-team 13.18
+
+Routing fix for `brand-messaging` — added product-update trigger phrases to `when_to_use`. The skill name `product-update-vs-website` was a near-perfect keyword match for "write a product update for the website," causing the routing model to select the gap-analysis skill instead of the content-creation skill.
+
+**Changes:**
+- `brand-messaging/SKILL.md`: added explicit gap-analysis exclusion pointing to `product-update-vs-website`, plus trigger phrases: "product update", "write a product update", "monthly product update", "what's new page", "what's new in social.plus", "new feature announcement", "feature announcement", "put this update on the website", "write this up for the site", "turn this changelog into website copy".
+- `docs/brand-messaging.md`: added product update triggers to "When it triggers" section.
+- No brand-kit bump needed (brand-messaging `when_to_use` is not in the truncation danger zone).
+
 ## marketing-team 13.17 + brand-kit 3.8
 
 Frontmatter signal-weight fix for blog routing. The 13.16 routing reversal put the correct descriptions in place, but Cowork sessions still routed product blog posts (e.g., "blog post about Chat SDK") to `brand-messaging` — the model pattern-matched on brand-messaging's opening line ("Primary skill for content about a social.plus product") and ignored the "Do NOT use for: blog posts" exclusion that followed. Confirmed by verifying the Cowork session loaded the correct 13.16 frontmatter (literal quotes matched) yet still hallucinated old description text in its routing analysis.

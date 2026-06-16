@@ -18,8 +18,11 @@ Primary skill for content about a social.plus product, feature, module, or capab
 - Feature pages, landing pages, use-case pages, industry pages, homepage copy.
 - Webflow CMS release-note items.
 - Taglines, pitch materials, investor copy, product descriptions.
+- Product updates, monthly product updates, "what's new" pages, feature announcements.
 - Any general marketing text without a dedicated skill.
 - Brand voice audits and questions about tone, terminology, value propositions, competitive positioning, or boilerplates.
+
+The skill is **not** for gap analysis ("does the website reflect this update", "what's missing from the site") — use `product-update-vs-website` for that.
 
 The skill is **not** for:
 - Blog posts for social.plus/blog (any topic) — use `blog-seo-content`.
