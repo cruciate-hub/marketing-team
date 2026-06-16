@@ -24,7 +24,7 @@ when_to_use: >
 
 # social.plus Blog & SEO Content
 
-This skill produces brand-aligned blog posts for the social.plus blog. The output maps directly to the Webflow CMS collection fields so content can be pasted into the CMS without reformatting.
+This skill produces brand-aligned blog posts for the social.plus blog. By default the output is a styled, editable document (Google Doc or .docx) for team review and editing. HTML field-by-field output for direct Webflow CMS paste is available on request.
 
 ## How to fetch reference files
 
@@ -129,11 +129,24 @@ Each item has `url`, `metaTitle`, `metaDescription`, and `content` (heading hier
 
 ## Two-stage production
 
-Blog posts are produced in two stages: a markdown intermediate that `scripts/compliance.py` checks deterministically, and a final field-by-field map (with HTML in `post-content`) that pastes into Webflow.
+Blog posts are produced in two stages: a markdown intermediate that `scripts/compliance.py` checks deterministically, and a final deliverable — by default a styled document (Google Doc / .docx) for team review, or opt-in HTML mapped to Webflow CMS fields.
+
+### Default mode (styled document)
 
 1. **Draft the markdown intermediate** at `outputs/[slug].draft.md`. Metadata sits in labeled paragraphs directly under the H1; the body uses standard markdown.
 2. **Run `python3 scripts/compliance.py outputs/[slug].draft.md`**. Fix every failure (exit 1) before moving on. Paste the full stdout into your response.
-3. **Convert the markdown body to HTML** for the Webflow `post-content` field. This is not a naive render — it must wrap images in `<figure>` and add `target="_blank"` to links (see "HTML formatting rules"). If the converter applies smart punctuation, disable it — it can reintroduce em dashes the compliance check already cleared.
+3. **Convert the markdown body to a styled document.** H2/H3 headings become actual heading styles, bold text becomes actual bold, and links become embedded hyperlinks (clickable text with the URL behind it). No HTML tags in the document.
+4. **Invoke `internal-linking-strategist`** on the draft to add internal links (see "Internal links" below).
+5. **Embed each link suggestion as a hyperlink** in the document body — the anchor text becomes clickable text with the URL as the hyperlink destination.
+6. **Deliver via the cascade** (see "Delivery format" below).
+
+### Opt-in HTML mode
+
+Trigger ONLY when the user explicitly says "push directly to Webflow", "publish this to CMS", "give me the HTML", or "push it from chat".
+
+1. **Draft the markdown intermediate** at `outputs/[slug].draft.md` (same as default).
+2. **Run `python3 scripts/compliance.py outputs/[slug].draft.md`** (same as default).
+3. **Convert the markdown body to HTML** for the Webflow `post-content` field. This is not a naive render — it must wrap images in `<figure>` and add `target="_blank"` to external links only (see "HTML formatting rules"). If the converter applies smart punctuation, disable it — it can reintroduce em dashes the compliance check already cleared.
 4. **Invoke `internal-linking-strategist`** on the HTML to add internal `<a href>` anchors (see "Internal links" below).
 5. **Deliver the field-by-field map** using the markdown metadata + converted HTML body.
 
@@ -210,7 +223,7 @@ These describe the **converted** `post-content` HTML (stage 3 output), not the m
 
 - Use `<h2>` and `<h3>` for subheadings. Place an H2 or H3 every 200-300 words.
 - Use `<strong>` for emphasis within paragraphs. Don't overuse.
-- Use `<a href="..." target="_blank">` for all links (external links open in new tab).
+- Use `<a href="..." target="_blank">` for external links only. Internal links (to social.plus pages) use `<a href="...">` without `target="_blank"` — per link-strategy.md, internal links open in the same tab.
 - Use `<ul>` and `<li>` for lists where appropriate.
 - Inline images: use `<figure>` and `<img>` tags. Add alt text to every image. Leave image URLs as `[IMAGE_URL]` placeholders for the user to upload.
 - No custom HTML tags. No `<sprscript-green>` (that's for customer stories only).
@@ -289,9 +302,45 @@ Only needed if the blog must appear in a specific location on the site. Leave bl
 
 Only populate these if the post is about company culture, hiring, or team content.
 
+## Delivery format
+
+Follow this cascade to deliver the finished document:
+
+1. **Google Drive MCP** — if Google Drive MCP tools are available (tools matching `google_drive`, `create_file`, or similar file-creation tools in the MCP tool list), create the .docx directly in Google Drive. Use the `anthropic-skills:docx` skill to generate the .docx file, then upload via Drive MCP.
+2. **Suggest connection** — if Google Drive MCP is not available, tell the user: "I can create this directly in your Google Drive if you connect the Google Drive MCP. Want me to help set that up?" Then continue with the fallback.
+3. **Fallback: .docx download** — create the .docx file locally using the `anthropic-skills:docx` skill and present it for download.
+
+For opt-in HTML mode, skip the cascade and deliver the field-by-field map inline (see below).
+
 ## Output format
 
-Present the output as a clearly labeled field-by-field mapping. The user copies each value into the corresponding Webflow CMS field.
+### Default (styled document)
+
+The output is a styled, editable document delivered via Google Drive (preferred) or as a downloadable .docx file. The document contains:
+
+**Top section — CMS metadata (editable):**
+
+- Page title (under 60 chars for SEO)
+- Slug
+- Meta description (under 160 chars)
+- Main Category Tag + Tags
+- Minutes to read
+- Date Published (today's date or user-specified)
+- Image alt text + Image concept + Image sizes needed (1578×888 header, 724×408 grid, 502×283 mega menu)
+- Display recommendations (Featured, Blog without images, Blog ID)
+
+**Body — the article with:**
+
+- H1 title
+- Introduction paragraph (maps to `post-summary`)
+- Styled H2/H3 subheadings
+- Bold text where appropriate
+- Internal links as clickable hyperlinks (anchor text is clickable, URL is the hyperlink target — no HTML tags)
+- `[IMAGE_URL]` placeholders where images go
+
+### Opt-in HTML (field-by-field for direct Webflow delivery)
+
+Present the output as a clearly labeled field-by-field mapping. The user copies each value into the corresponding Webflow CMS field. Trigger ONLY when the user explicitly requests HTML or direct Webflow delivery.
 
 ```
 ## [Article Title] — Blog Post
@@ -333,18 +382,26 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 
 ## Internal links
 
-After compliance passes and the markdown body is converted to HTML, invoke the `internal-linking-strategist` skill in **draft mode**. Pass it:
+After compliance passes, invoke the `internal-linking-strategist` skill in **draft mode**. Pass it:
 
-- The full draft article (title + post-content HTML + post-summary)
+- The full draft article (title + body content + post-summary)
 - The target keyword
 - The category (so it can map to the correct topic cluster)
-- Content type: blog (so it returns HTML `<a href>` tags, not markdown)
+- Content type: blog
 
 The optimizer fetches `link-strategy.md` plus `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, `pages-glossary.json`, `pages-blog.json`, and `pages-customer-stories.json`. It returns 3-7 link suggestions (anchor + URL + insertion point + reasoning) plus any cannibalization warnings.
 
 Before embedding, **vet each anchor's visible text** with `python3 scripts/compliance.py --scan-text 'anchor text here'`. The linker runs after the draft.md compliance pass, so anchor text otherwise bypasses the gate — an em dash, emoji, or forbidden term in anchor text would ship without being caught. If `--scan-text` returns exit 1 on any anchor, reject it and ask the linker for an alternative.
 
-Embed each cleared suggestion into the `post-content` HTML as `<a href="..." target="_blank">anchor</a>` at the suggested insertion point.
+### Embedding links — default mode (styled document)
+
+Embed each cleared suggestion as a hyperlink in the document body — the anchor text becomes clickable text with the URL as the hyperlink destination. No `target="_blank"` (that is an HTML concept, not applicable to documents). No HTML tags anywhere in the document.
+
+### Embedding links — opt-in HTML mode
+
+Embed each cleared suggestion into the `post-content` HTML as `<a href="...">anchor</a>` at the suggested insertion point. Internal links (to social.plus pages) do NOT use `target="_blank"` — per link-strategy.md, internal links open in the same tab. External links use `<a href="..." target="_blank">`.
+
+### Cannibalization warnings
 
 Resolve cannibalization warnings before final output:
 - If the optimizer flags a competing anchor → page mapping, follow its recommendation.
