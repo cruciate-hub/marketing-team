@@ -9,12 +9,12 @@ Also read: `colors-palette.md`, `colors-usage.md`, `typography.md`, `tone.md`
 
 ## Email Design Principles
 
-**Dark-first, but email is the exception.** Most email clients do not reliably support
-dark mode CSS. For broad compatibility, social.plus marketing emails use a **dark background**
-by default (consistent with brand identity), but include light-mode fallbacks.
+**Light-first with dark mode support.** Most email clients do not reliably support
+dark mode CSS. For broad compatibility, social.plus marketing emails use a **light background**
+(`#f5f5f5` page, `#ffffff` content) with dark text — then provide full dark mode overrides
+via `@media (prefers-color-scheme: dark)`, `[data-ogsc]`, and `[data-ogsb]` selectors.
 
-The simplest approach: use `#111111` as the email background with white text, which
-renders consistently across all major clients.
+See `product-update-newsletter-structure.md` for the base template shell and dark mode classes.
 
 ---
 
