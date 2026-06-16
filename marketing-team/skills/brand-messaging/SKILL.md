@@ -13,9 +13,15 @@ description: >
   legal documents (legal-docs-formatter).
 when_to_use: >
   NOT for: "blog post", "article for the blog", "blog about [feature]",
-  "write a blog". Trigger phrases: "write a feature page", "homepage copy",
+  "write a blog". NOT for gap analysis — "does the website reflect this
+  update" or "what's missing from the site" belong to product-update-vs-
+  website. Trigger phrases: "write a feature page", "homepage copy",
   "landing page for X", "release note for [feature]", "tagline",
-  "pitch copy", "review this copy for brand voice".
+  "pitch copy", "review this copy for brand voice", "product update",
+  "write a product update", "monthly product update", "what's new page",
+  "what's new in social.plus", "new feature announcement", "feature
+  announcement", "put this update on the website", "write this up for the
+  site", "turn this changelog into website copy".
 ---
 
 # social.plus Brand Messaging
