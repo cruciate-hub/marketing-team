@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-16T15:45:08.587Z",
-    "itemCount": 62,
+    "generatedAt": "2026-06-18T10:11:17.336Z",
+    "itemCount": 63,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/meet-social-plus-redesigned-sentiment-analysis-dashboard",
+      "metaTitle": "Meet social.plus Redesigned Sentiment Analysis Dashboard",
+      "metaDescription": "social.plus Sentiment Analysis has been redesigned and expanded. The dashboard is faster and cleaner, and five new capabilities give teams real control over how sentiment is analyzed, refined, and applied to their specific business context.",
+      "content": "# Meet social.plus Redesigned Sentiment Analysis Dashboard\n### What's new in Sentiment Analysis\n### Full Comment Coverage for Sentiment Analysis\n### Custom Sentiment Keywords and Categories Configuration\n### Keyword-Level Sentiment Override for Individual Posts\n### Filter Social Insights by User Tags\n### Multi-language Support\n### Your community, your categories, your insight"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-may-2026",
       "metaTitle": "What's new in social.plus | May 2026",
