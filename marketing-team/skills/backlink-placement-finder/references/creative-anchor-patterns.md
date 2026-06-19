@@ -1,21 +1,24 @@
 # Creative Anchor Patterns
 
-Confirmed Type B (2-6 word semantic-equivalent phrase) and Type C (single-word glossary anchor) mappings observed in real partner batches. Not a closed list; append new patterns as you discover them. Agents use this as pattern-match cues when scanning partner body text.
+**This file is a CACHE of confirmed Type B / Type C mappings, NOT the primary discovery mechanism.** The primary mechanism is the Phase 1 step 0 semantic-territory scan in `SKILL.md` (read partner paragraphs end-to-end and surface phrases that map to ANY anchor family in `anchors.md` OR ANY topic in the live blog/glossary inventory). This cache exists to make repeated mappings consistent across sessions and to skip re-judging patterns we have already seen. **Absence from this cache is not evidence against a valid mapping** — the territory scan can and should surface fresh patterns that never make it here, and any agent treating this list as the closed universe of valid Type B/C anchors is using it wrong.
 
-| Phrase | Type | Maps to anchor family | Likely target | Source |
-|---|---|---|---|---|
-| "customer retention" | B | user-retention | `/glossary/user-retention` or strongest retention-strategies blog | 12.8 baseline |
-| "engagement metrics" | B | user-engagement-metrics / app-engagement-metrics | strongest metrics-focused blog post | 12.8 baseline |
-| "retaining users" | B | user-retention | `/glossary/user-retention` or retention-strategies blog | 12.8 baseline |
-| "engaged users" | B | user-engagement | `/glossary/user-engagement` | 12.8 baseline |
-| "community-driven platform" | B | community-platform | community-platform blog or glossary | 12.8 baseline |
-| "build customer loyalty" | B | build-brand-loyalty | brand-loyalty blog | 12.8 baseline |
-| "in-app social interactions" | B | social-features | social-features glossary or blog | 12.8 baseline |
-| "app retention rate" | B | app-retention | `/glossary/app-retention` or strongest app-retention blog | 12.8 baseline |
-| "personalization" | C | app-personalization | `/glossary/app-personalization` | 12.8 baseline |
-| "communities" | C | online-community | `/glossary/online-community` | 12.8 baseline |
-| "customer loyalty" | B | brand-loyalty | loyalty-focused blog (e.g. `/blog/over-80-of-sephoras-sales-come-from-loyal-customers---why-emotional-loyalty-drives-growth` or `/blog/how-to-measure-brand-loyalty-our-top-insights`) | 2026-06-10 batch |
-| "building customer loyalty" | B | build-brand-loyalty | `/blog/building-brand-loyalty-the-power-of-digital-communities` | 2026-06-10 batch |
-| "community platform" (singular) | B | community-platforms | `/glossary/community-platform` | 2026-06-10 batch |
-| "engagement rates" / "higher engagement rates" | B | engagement-rate | `/glossary/engagement-rate` | 2026-06-10 batch |
-| "community" | C | online-community | `/glossary/online-community` — focal-noun rule applies (e.g. "convert your audience into a close community") | 2026-06-10 batch |
+Append new confirmed patterns as you discover them. The "Maps to" column captures either an anchor family (route a) or a specific inventory topic / URL (route b) — both are valid per SKILL.md guardrail 2.
+
+| Phrase | Type | Route | Maps to | Likely target | Source |
+|---|---|---|---|---|---|
+| "customer retention" | B | a | user-retention family | `/glossary/user-retention` or strongest retention-strategies blog | 12.8 baseline |
+| "engagement metrics" | B | a | user-engagement-metrics / app-engagement-metrics families | strongest metrics-focused blog post | 12.8 baseline |
+| "retaining users" | B | a | user-retention family | `/glossary/user-retention` or retention-strategies blog | 12.8 baseline |
+| "engaged users" | B | a | user-engagement family | `/glossary/user-engagement` | 12.8 baseline |
+| "community-driven platform" | B | a | community-platform family | community-platform blog or glossary | 12.8 baseline |
+| "build customer loyalty" | B | a | build-brand-loyalty family | brand-loyalty blog | 12.8 baseline |
+| "in-app social interactions" | B | a | social-features family | social-features glossary or blog | 12.8 baseline |
+| "app retention rate" | B | a | app-retention family | `/glossary/app-retention` or strongest app-retention blog | 12.8 baseline |
+| "personalization" | C | a | app-personalization family | `/glossary/app-personalization` | 12.8 baseline |
+| "communities" | C | a | online-community family | `/glossary/online-community` | 12.8 baseline |
+| "customer loyalty" | B | a | brand-loyalty family | loyalty-focused blog (e.g. `/blog/over-80-of-sephoras-sales-come-from-loyal-customers---why-emotional-loyalty-drives-growth` or `/blog/how-to-measure-brand-loyalty-our-top-insights`) | 2026-06-10 batch |
+| "building customer loyalty" | B | a | build-brand-loyalty family | `/blog/building-brand-loyalty-the-power-of-digital-communities` | 2026-06-10 batch |
+| "community platform" (singular) | B | a | community-platforms family | `/glossary/community-platform` | 2026-06-10 batch |
+| "engagement rates" / "higher engagement rates" | B | a | engagement-rate family | `/glossary/engagement-rate` | 2026-06-10 batch |
+| "community" | C | a | online-community family | `/glossary/online-community` — focal-noun rule applies (e.g. "convert your audience into a close community") | 2026-06-10 batch |
+| "social sellers" | B | b | live commerce / social commerce topic (no matching anchor family in `anchors.md`) | `/blog/from-viewers-to-belonging-why-community-is-the-engine-of-live-commerce` | 2026-06-19 Pineable (worked-example for route b in SKILL.md) |

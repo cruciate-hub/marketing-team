@@ -62,13 +62,17 @@ If Tier 2 of Step 0 flagged that the partner already links to social.plus compet
 
 Phase 1 candidates come in three types (see SKILL.md Phase 1, step 1): Type A literal matches from `anchors.md`, Type B semantic-equivalent matches (2-6 word phrase verbatim in body, not literally in `anchors.md`), and Type C single-word glossary matches. Types B and C are first-class Phase 1 hits, not exceptions, but the matching logic in this file is what makes them work without false positives.
 
-Mapping rule: each Type B or Type C candidate must map to exactly one topic family in `anchors.md`. The mapping must be articulable in plain English ("'customer retention' maps to user-retention family because both describe the same concept"). If a candidate maps ambiguously to two or more families, reject it.
+Mapping rule: each Type B or Type C candidate must map to EITHER (a) exactly one topic family in `anchors.md`, OR (b) exactly one topic represented in the blog/glossary inventory (`website/pages-blog.json` / `website/pages-glossary.json` — `metaTitle`, `metaDescription`, or `content` heading hierarchy). Either route is valid. The mapping must be articulable in plain English:
+- Route (a): "'customer retention' maps to the user-retention family because both describe the same concept."
+- Route (b): "'social sellers' maps to `/blog/from-viewers-to-belonging-why-community-is-the-engine-of-live-commerce` because that article frames live commerce as community-driven selling."
+
+If a candidate maps ambiguously to two or more families or topics, reject it. Route (b) exists because `anchors.md` is curated and lags new social.plus content — when no anchor-family fits but the phrase clearly lands in a real blog/glossary topic, that's a valid Type B candidate. The matched inventory page becomes the link target directly (no separate target-selection step needed).
 
 Target selection: glossary for definitional/generic concepts, blog for strategic/how-to. Type C single-word anchors must target a glossary entry, never a blog post. A one-word link to a blog post reads forced and gets rejected.
 
 Fit-score cap: Type B and Type C placements both cap at ⭐⭐ Strong. Only Type A literal matches from `anchors.md` reach ⭐⭐⭐ Perfect.
 
-Confirmed Type B and Type C phrase-to-family mappings live in `references/creative-anchor-patterns.md`. Consult that file when matching, and append new patterns as you find them.
+Confirmed Type B and Type C phrase-to-mapping patterns live in `references/creative-anchor-patterns.md`. That file is a CACHE of patterns we have already verified, NOT the primary discovery mechanism — the SKILL.md Phase 1 step 0 semantic-territory scan is the primary mechanism. Consult the cache when matching to speed re-encounters, and append new patterns as you find them. Absence from the cache is not evidence against a valid mapping.
 
 ## Freshness
 
