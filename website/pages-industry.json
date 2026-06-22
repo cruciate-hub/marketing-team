@@ -1,9 +1,11 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-22T12:31:36.649Z",
-    "itemCount": 2,
+    "generatedAt": "2026-06-22T12:31:38.435Z",
+    "itemCount": 0,
     "method": "webflow-data-api",
     "errors": [
+      "/industry/retail",
+      "/industry/fitness",
       "/industry/travel",
       "/industry/sports",
       "/industry/health-and-wellness",
@@ -14,18 +16,5 @@
       "/industry/betting"
     ]
   },
-  "pages": [
-    {
-      "url": "https://www.social.plus/industry/retail",
-      "metaTitle": "Retail - social.plus for the Retail industry",
-      "metaDescription": "Transform browsing into shared discovery with shoppable content, real customer stories, and an in-app community that returns.",
-      "content": "# Turn your retail app into a community customers return to\nTransform browsing into shared discovery with shoppable content, real customer stories, and in-app community.\n## The retail problem isn’t traffic. It’s retention.\n### Acquisition costs keep rising while customer loyalty keeps falling. Your users browse, buy once, and disappear.\nAcquisition is expensive\nCPMs and CPCs climb every quarter – but customers still churn after the first purchase.\nEngagement happens everywhere except your app\nShoppers scroll inspiration on TikTok and Instagram, not with you.\nZero-party data is disappearing\nWithout community interactions, it's harder to learn what customers actually like.\nContent and commerce are disconnected\nYou showcase products – but not the stories, creators, or community that influence purchases.\n## From inspiration to purchase, all in one flow\n## Build a vibrant in-app shopping community\nTurn static product browsing into a dynamic experience with UGC, product tagging, live updates, and creator content.\n## Unlock zero-party insights that no pixel can give you\nLearn what shoppers want directly from their behavior.\n## Your own white-label retail media channel\nDrive incremental revenue with branded content that lives directly inside your customer journey.\n## Use cases that turn browsing into buying\n## Shoppable Feed\nLet users explore real outfits, product drops, and reviews created by other shoppers.\n## Product Discovery Groups\nCreate hubs for beauty, fashion, home décor, skincare, streetwear, and more.\n## Influencer Profiles\nGive influencers a home inside your app that turn followers into fans.\n## Livestream Shopping\nHost product demos, Q&As, and flash sales with chat-powered interaction.\n## Product Showcase Clips\nLet customers share outfit inspiration, unboxings, and tips through short-form video.\n## Customer Reviews\nBring authenticity into every product page with UGC pulled from your community.\n## Build quickly with modern, developer-friendly SDKs\n## Activity Feed\nUGC, reactions, comments, and rich media.\n## Groups & Forums\nTopic-driven discovery.\n## Messaging & Chat\nCustomer-to-customer or customer-to-brand.\n## Livestreams\nInteractive video with real-time reactions.\n## User Profiles\nRich shopper identities.\n## Shoppable UGC\nProduct tagging that links directly to PDPs.\n## Moderation Tools\nFor safe, brand-friendly conversations.\n## Analytics & Insights\nEngagement tracking and sentiment analysis.\n## Trusted by leading retail brands\nEverything to engage. Nothing to rebuild.\n### Start with one component or roll out the full suite — all features are modular, embeddable, and battle-tested."
-    },
-    {
-      "url": "https://www.social.plus/industry/fitness",
-      "metaTitle": "Fitness - social.plus for the Fitness industry",
-      "metaDescription": "Boost motivation, retention, and lifetime value through in-app social features that inspire progress and connection.",
-      "content": "# Turn your app into an active community\nBoost motivation, retention, and lifetime value through in-app social features that inspire progress and connection.\n## The challenge isn’t sign-ups. It’s consistency.\n### Your users start strong, but without connection, most drop off after a few weeks.\nMotivation fades fast\nOnce users stop seeing results, churn follows.\nCommunities live elsewhere\nYour users discuss progress on Reddit or Facebook instead of your app.\nLimited personalization\nWithout social data, workouts and content stay generic.\nRetention drops post-goal\nWhen challenges end, users leave — instead of discovering new goals or peers.\n## The fitness engagement playbook\n## Build a motivational community\nTurn isolated workouts into shared achievements.\n## Analyze user intent and progress\nCollect behavioral and emotional insights that predict churn and identify advocates.\n## Turn engagement into new revenue\nEmpower creators, coaches, and wellness brands to reach engaged users authentically.\n## Key in-app use cases for fitness & wellness\n## Progress Feed\nLet users share workouts, photos, and milestones – fueling motivation across the community.\n## Nutrition & Wellness Groups\nBring together people with shared goals – plant-based diets, sleep tracking, mindfulness.\n## Coach Profiles\nConnect members directly with verified coaches through posts, chat, and livestreams.\n## Workout Livestreams\nHost interactive training sessions with real-time reactions and shout-outs.\n## Workout Clips\nShare workout highlights, daily check-ins, or transformation moments in short-form video.\n## Goal Journals & Streaks\nEncourage consistency through daily check-ins and progress badges.\n## Build quickly with modern, developer-friendly SDKs\n## Activity Feed\nShare posts, media, reactions, and progress logs.\n## Groups & Forums\nThemed fitness communities and goal-based rooms.\n## Messaging & Chat\nConnect coaches and members through chat.\n## Livestreams\nReal-time classes and motivation sessions.\n## User Profiles\nCustom avatars, bios, and achievements.\n## Stories & Clips\nShare bite-sized workout stories and clips.\n## Moderation Tools\nSafe and supportive environment.\n## Analytics & Insights\nTrack engagement, progress, and intent.\n## Trusted by leading fitness brands\nEverything to engage. Nothing to rebuild.\n### Start with one component or roll out the full suite — all features are modular, embeddable, and battle-tested."
-    }
-  ]
+  "pages": []
 }
