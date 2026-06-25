@@ -1,77 +1,123 @@
-# social.plus Shadow & Elevation System
+# social.plus Elevation & Shadows
 
-On dark backgrounds, shadows are less visible than on light ones. The social.plus elevation
-system therefore combines two signals: a **drop shadow** (deeper opacity as elevation rises)
-and a **surface colour shift** (higher surfaces use a slightly lighter grey). Both signals
-work together to communicate depth.
+Shadows create depth and visual hierarchy. In light mode, depth comes from soft neutral shadows that intensify as the layer rises. In dark mode, depth is communicated through progressively lighter background surfaces, not heavier shadows.
 
----
-
-## Elevation Scale
-
-| Token | Shadow | Surface colour | Primitive | Typical use |
-|-------|--------|----------------|-----------|-------------|
-| `elevation-0` | none | `#111111` | `slate-950` | Page background — base canvas |
-| `elevation-1` | `0 1px 4px rgba(0,0,0,0.5)` | `#1A1A1A` | `slate-900` | Cards, inputs, table rows |
-| `elevation-2` | `0 4px 16px rgba(0,0,0,0.6)` | `#272727` | `slate-800` | Dropdowns, popovers, tooltips |
-| `elevation-3` | `0 8px 32px rgba(0,0,0,0.7)` | `#404040` | `slate-700` | Modals, drawers, bottom sheets |
-| `elevation-4` | `0 16px 48px rgba(0,0,0,0.8)` | `#404040` | `slate-700` | Sticky nav (scrolled), floating bars |
+Source: canonical design system HTML
 
 ---
 
-## Brand Glow Variants
+## Shadow Scale
 
-Glows are used sparingly on interactive or highlighted elements where brand energy needs
-to surface — hover states, active selections, feature callouts. Each accent colour has
-its own glow token, keyed to a primitive in the palette.
+Five named shadow tokens plus a brand glow, defined as CSS custom properties. Light and dark mode each have their own values.
 
-| Token | Value | Based on |
-|-------|-------|----------|
-| `glow-ultramarine` | `0 4px 20px rgba(59, 65, 236, 0.45)` | `ultramarine-600` `#3B41EC` |
-| `glow-ultramarine-mid` | `0 4px 20px rgba(92, 110, 248, 0.40)` | `ultramarine-500` `#5C6EF8` |
-| `glow-sky` | `0 4px 20px rgba(69, 165, 237, 0.40)` | `picton-blue-400` `#45A5ED` |
-| `glow-pink` | `0 4px 20px rgba(245, 104, 240, 0.40)` | `pink-flamingo-400` `#F568F0` |
-| `glow-orange` | `0 4px 20px rgba(246, 96, 5, 0.40)` | `blaze-orange-600` `#F66005` |
-| `glow-yellow` | `0 4px 20px rgba(247, 197, 6, 0.35)` | `supernova-500` `#F7C506` |
-| `glow-navy` | `0 4px 20px rgba(25, 27, 77, 0.60)` | `ultramarine-950` `#191B4D` |
+### Light mode shadows
 
-### Glow usage rules
+| Token | CSS value | Use |
+|-------|-----------|-----|
+| `--shadow-sm` | `0 1px 3px rgba(17,17,17,0.08), 0 1px 2px rgba(17,17,17,0.06)` | Chips, input fields, subtle cards on light background |
+| `--shadow-md` | `0 4px 12px rgba(17,17,17,0.10), 0 2px 4px rgba(17,17,17,0.06)` | Cards, dropdowns, context menus |
+| `--shadow-lg` | `0 12px 32px rgba(17,17,17,0.12), 0 4px 8px rgba(17,17,17,0.08)` | Floating action buttons, sticky headers, toasts |
+| `--shadow-xl` | `0 24px 48px rgba(17,17,17,0.14), 0 8px 16px rgba(17,17,17,0.08)` | Modals, bottom sheets, popovers |
+| `--shadow-glow` | `0 0 40px rgba(59,65,236,0.18)` | Primary CTA buttons on hover/focus, featured items |
 
-- **`glow-ultramarine`** — primary button hover, focus rings, active UI states
-- **`glow-ultramarine-mid` / `glow-sky`** — gradient button hover (paired), card accent highlights
-- **`glow-pink`** — campaign/marketing callouts, feature spotlights
-- **`glow-orange`** — notification badges, alert states, energy moments
-- **`glow-yellow`** — achievement states, success highlights, celebratory moments
-- **`glow-navy`** — deep background panels, decorative layering only
-- **Never stack two glows** on the same element
-- **Never use glow as a default state** — always tied to hover, active, or deliberate accent
+### Dark mode shadows
+
+| Token | CSS value | Use |
+|-------|-----------|-----|
+| `--shadow-sm` | `0 1px 4px rgba(0,0,0,0.3)` | Same use cases; heavier opacity compensates for dark surfaces |
+| `--shadow-md` | `0 4px 14px rgba(0,0,0,0.4)` | Cards, dropdowns, context menus |
+| `--shadow-lg` | `0 12px 36px rgba(0,0,0,0.5)` | Floating action buttons, sticky headers, toasts |
+| `--shadow-xl` | `0 28px 70px rgba(0,0,0,0.6), 0 4px 14px rgba(0,0,0,0.4)` | Modals, bottom sheets, popovers |
+| `--shadow-glow` | `0 0 60px rgba(59,65,236,0.25)` | Primary CTA buttons on hover/focus, featured items |
+
+### Elevation levels
+
+| Level | Token | Typical use |
+|-------|-------|-------------|
+| Flat | none | Inline elements, selected states with border, tab items |
+| Level 1 | `--shadow-sm` | Chips, input fields, subtle cards |
+| Level 2 | `--shadow-md` | Cards, dropdowns, context menus |
+| Level 3 | `--shadow-lg` | FABs, sticky headers, toasts |
+| Level 4 | `--shadow-xl` | Modals, bottom sheets, popovers |
+| Glow | `--shadow-glow` | Primary CTA hover/focus, featured items |
 
 ---
 
-## CSS Custom Properties
+## Background Layering
+
+Depth is also expressed through background surface tokens. Each layer has a named token that differs between light and dark modes.
+
+### Light mode surfaces
+
+Depth moves from sunken inputs up to pure-white elevated surfaces.
+
+| Token | Hex | Role |
+|-------|-----|------|
+| `bg-sunken` | `#E6E6E6` | Inputs, recessed areas |
+| `bg-base` | `#FAFAFA` | App base background (cream) |
+| `bg-card` | `#F5F5F5` | Cards, feed rows |
+| `bg-elevated` | `#FFFFFF` | Nav bar, modals |
+
+### Dark mode surfaces
+
+Surfaces get progressively lighter as they rise. No heavy drop shadows needed.
+
+| Token | Hex | Role |
+|-------|-----|------|
+| `bg-sunken` | `#000000` | Inputs, recessed areas |
+| `bg-deep` | `#000000` | Deepest background |
+| `bg-base` | `#111111` | App base background |
+| `bg-elevated` | `#1A1A1A` | Nav bar, sidebars |
+| `bg-card` | `#272727` | Cards, panels |
+| `bg-card-2` | `#404040` | Nested cards, chips |
+
+---
+
+## Z-Index Scale
+
+Eight named layers prevent z-index collisions. Always use the tokens, never magic numbers.
+
+| Token | Value | Layer |
+|-------|-------|-------|
+| `--z-base` | 0 | Page content |
+| `--z-raised` | 10 | Sticky cards, inline floats |
+| `--z-dropdown` | 100 | Dropdowns, context menus |
+| `--z-sticky` | 200 | Sticky headers, bottom nav |
+| `--z-toast` | 400 | Toasts, snackbars |
+| `--z-overlay` | 500 | Modal backdrop |
+| `--z-modal` | 600 | Modals, bottom sheets |
+| `--z-top` | 900 | System alerts, debug panels |
+
+---
+
+## CSS Reference
 
 ```css
 :root {
-  /* Elevation shadows */
-  --shadow-1: 0 1px 4px rgba(0,0,0,0.5);
-  --shadow-2: 0 4px 16px rgba(0,0,0,0.6);
-  --shadow-3: 0 8px 32px rgba(0,0,0,0.7);
-  --shadow-4: 0 16px 48px rgba(0,0,0,0.8);
+  /* Light mode shadows */
+  --shadow-sm:  0 1px 3px rgba(17,17,17,0.08), 0 1px 2px rgba(17,17,17,0.06);
+  --shadow-md:  0 4px 12px rgba(17,17,17,0.10), 0 2px 4px rgba(17,17,17,0.06);
+  --shadow-lg:  0 12px 32px rgba(17,17,17,0.12), 0 4px 8px rgba(17,17,17,0.08);
+  --shadow-xl:  0 24px 48px rgba(17,17,17,0.14), 0 8px 16px rgba(17,17,17,0.08);
+  --shadow-glow:0 0 40px rgba(59,65,236,0.18);
 
-  /* Elevation surfaces (map to Slate primitives) */
-  --surface-0: #111111; /* slate-950 */
-  --surface-1: #1A1A1A; /* slate-900 */
-  --surface-2: #272727; /* slate-800 */
-  --surface-3: #404040; /* slate-700 */
+  /* Z-index scale */
+  --z-base:     0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-toast:    400;
+  --z-overlay:  500;
+  --z-modal:    600;
+  --z-top:      900;
+}
 
-  /* Brand glows */
-  --glow-ultramarine:     0 4px 20px rgba(59, 65, 236, 0.45);
-  --glow-ultramarine-mid: 0 4px 20px rgba(92, 110, 248, 0.40);
-  --glow-sky:             0 4px 20px rgba(69, 165, 237, 0.40);
-  --glow-pink:            0 4px 20px rgba(245, 104, 240, 0.40);
-  --glow-orange:          0 4px 20px rgba(246, 96, 5, 0.40);
-  --glow-yellow:          0 4px 20px rgba(247, 197, 6, 0.35);
-  --glow-navy:            0 4px 20px rgba(25, 27, 77, 0.60);
+[data-theme="dark"] {
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 14px rgba(0,0,0,0.4);
+  --shadow-lg:  0 12px 36px rgba(0,0,0,0.5);
+  --shadow-xl:  0 28px 70px rgba(0,0,0,0.6), 0 4px 14px rgba(0,0,0,0.4);
+  --shadow-glow:0 0 60px rgba(59, 65, 236, 0.25);
 }
 ```
 
@@ -79,12 +125,10 @@ its own glow token, keyed to a primitive in the palette.
 
 ## Principles
 
-**Shadow alone is not enough on dark backgrounds.** Always pair elevation shadow with the
-corresponding surface colour — `elevation-1` cards sit on `slate-900` (`#1A1A1A`), not `slate-950`.
+**Shadow alone is not enough on dark backgrounds.** Always pair elevation shadow with the corresponding surface token. A `--shadow-md` card in dark mode sits on `bg-card` (`#272727`), not `bg-base`.
 
-**Glows communicate brand energy, not depth.** Do not use glow tokens to imply elevation —
-they exist purely for interactive feedback and accent moments.
+**Background layering replaces heavy shadows in dark mode.** Progressively lighter surfaces communicate depth without the visual noise of dark-on-dark shadows.
 
-**Subtlety over drama.** Yellow and navy glows use a slightly reduced opacity because their
-luminance is higher (yellow) or their hue is less saturated (navy) — matching the visual
-weight of the other glows without overpowering them.
+**Glow communicates brand energy, not depth.** The `--shadow-glow` token exists for interactive feedback on primary CTAs, not to imply elevation. Never use it as a resting state.
+
+**Use z-index tokens, never raw numbers.** Raw z-index values create stacking conflicts. The eight named layers cover every standard UI pattern.

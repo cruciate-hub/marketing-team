@@ -1,80 +1,113 @@
-# Buttons
+# social.plus Buttons
+
+Source: canonical design system HTML
+
+Every button maps to a clear intent hierarchy. Primary drives conversion. Secondary offers alternatives. Ghost keeps things quiet. Destructive signals consequence. All hit 44px minimum touch targets.
+
+---
+
+## Component Tokens
+
+Each button owns a set of tokens that reference semantic tokens. Overriding a component token in a specific context never pollutes the rest of the system.
+
+| Token | References |
+|-------|-----------|
+| `--btn-bg` | action-primary |
+| `--btn-bg-hover` | action-primary-hover |
+| `--btn-bg-press` | action-primary-press |
+| `--btn-text` | text-inverse |
+| `--btn-radius` | radius-md (12px) |
+| `--btn-height` | 44px |
+| `--btn-shadow` | shadow-glow |
+
+---
 
 ## Variants
 
-### Primary
+### 1. Primary
+
 The main call-to-action. Use once per section maximum.
 
-- **Background:** Brand Blue Gradient — `linear-gradient(135deg, #45A5ED 0%, #5C6EF8 50%, #3B41EC 100%)` (`picton-blue-400` → `ultramarine-500` → `ultramarine-600`)
-- **Text:** `#FFFFFF`
+- **Background:** action-primary
+- **Text:** white
 - **Border:** none
-- **Hover:** background becomes solid `ultramarine-700` `#3133D1` + `box-shadow: 0 4px 16px rgba(59, 65, 236, 0.4)`
-- **Pressed:** background becomes solid `ultramarine-800` `#2B2FA8`, `transform: scale(0.97)`
-- **Disabled:** `opacity: 0.4`, `cursor: not-allowed`, gradient preserved
+- **Radius:** 12px
 
-### Secondary
+### 2. Secondary
+
 Paired alongside primary when a second action is needed.
 
-- **Background:** transparent
-- **Text:** `rgba(255, 255, 255, 0.85)`
-- **Border:** `1px solid rgba(255, 255, 255, 0.3)`
-- **Hover:** border becomes `rgba(255, 255, 255, 0.6)`, text becomes `#FFFFFF`
-- **Active:** `transform: scale(0.97)`
-- **Disabled:** `opacity: 0.4`, `cursor: not-allowed`
+- **Background:** bg-elevated
+- **Border:** border-default
+- **Text:** text-primary
 
-### Ghost
-Low-emphasis actions. No border, no background.
+### 3. Ghost
+
+Low-emphasis actions. No background, no border.
 
 - **Background:** transparent
-- **Text:** `rgba(255, 255, 255, 0.6)`
+- **Text:** action-primary
 - **Border:** none
-- **Hover:** text becomes `#FFFFFF`, background `rgba(255, 255, 255, 0.06)`
-- **Active:** `transform: scale(0.97)`
-- **Disabled:** `opacity: 0.4`, `cursor: not-allowed`
 
-### Destructive
-Dangerous or irreversible actions only. Use sparingly. Destructive uses a system-only red (not part of the primitive palette).
+### 4. Tinted
 
-- **Background:** `#FF5252`
-- **Text:** `#FFFFFF`
-- **Border:** none
-- **Hover:** `filter: brightness(1.08)` + `box-shadow: 0 4px 16px rgba(255, 82, 82, 0.35)`
-- **Active:** `transform: scale(0.97)`
-- **Disabled:** `opacity: 0.4`, `cursor: not-allowed`
+Soft emphasis that stays in the primary color family without full saturation.
+
+- **Background:** action-primary-subtle
+- **Text:** action-primary
+
+### 5. Destructive
+
+Dangerous or irreversible actions only. Use sparingly.
+
+- **Background:** status-error
+- **Text:** white
+
+### 6. Pill
+
+Compact rounded shape for inline actions like follow buttons.
+
+- **Radius:** radius-pill
+- **Padding:** compact horizontal padding
+- Inherits color from the variant it is applied to
 
 ---
 
 ## Sizes
 
-| Size   | Height | H. Padding | Font Size | Font Weight | Letter Spacing |
-|--------|--------|------------|-----------|-------------|----------------|
-| Small  | 32px   | 12px       | 13px      | 500         | 0.01em         |
-| Medium | 44px   | 20px       | 15px      | 500         | 0.01em         |
-| Large  | 56px   | 28px       | 17px      | 600         | 0.02em         |
-
-All sizes use `font-family: 'Figtree', sans-serif` and `text-transform: none`.
-
----
-
-## Shape
-
-- **Default:** `border-radius: var(--radius-2)` (8px) for all standard buttons
-- **Pill modifier:** `border-radius: var(--radius-full)` (9999px) — reserved for tags and chips only, not page-level buttons
+| Size | Height | Font Size |
+|------|--------|-----------|
+| xs | 32px | text-xs (12px) |
+| sm | 36px | text-sm (13px) |
+| md (default) | 44px | text-sm (13px) |
+| lg | 52px | text-base (15px) |
+| xl | 60px | text-md (17px) |
 
 ---
 
 ## States
 
-Primary button hover and pressed follow a clean step ladder up the Ultramarine scale: default `ultramarine-600` → hover `ultramarine-700` → pressed `ultramarine-800`.
+### Primary States
 
-| State    | Behaviour |
-|----------|-----------|
-| Default  | As defined per variant above |
-| Hover    | As defined per variant above |
-| Focus    | `outline: 2px solid #3B41EC; outline-offset: 3px` — always visible for accessibility |
-| Active / Pressed | Primary: solid `ultramarine-800` `#2B2FA8`. All variants: `transform: scale(0.97)` |
-| Disabled | `opacity: 0.4; cursor: not-allowed; pointer-events: none` — all variants |
-| Loading  | Label replaced with spinner SVG; button width locked to prevent layout shift; `cursor: wait` |
+| State | Visual |
+|-------|--------|
+| Default | action-primary background |
+| Hover | action-primary-hover (`#3133D1`) + shadow-glow |
+| Pressed | action-primary-press (`#2B2FA8`) + scale(0.97) |
+| Loading | Spinner replaces label, button disabled, width locked to prevent layout shift, cursor: wait |
+| Disabled | Reduced opacity, cursor: not-allowed |
+| Success | status-success background with checkmark icon |
+
+Primary hover and pressed follow a clean step ladder up the Ultramarine scale: default action-primary, hover action-primary-hover, pressed action-primary-press.
+
+### Secondary States
+
+| State | Visual |
+|-------|--------|
+| Default | bg-elevated background, border-default border |
+| Hover | bg-card background, border-strong border |
+| Pressed | bg-sunken background |
+| Disabled | Reduced opacity, cursor: not-allowed |
 
 ---
 
@@ -82,52 +115,29 @@ Primary button hover and pressed follow a clean step ladder up the Ultramarine s
 
 When a button contains only an icon (no label):
 
-- Width equals height (square)
-- Use Medium size by default (44×44px)
-- Icon size: 20px for medium, 16px for small, 24px for large
-- Same variant rules apply
-- Always include an `aria-label`
+- Width equals height (square), same height as the corresponding text button size
+- Available in Primary, Secondary, Ghost, and Destructive variants
+- Same state rules apply (hover, pressed, disabled)
+- Always include an `aria-label` for accessibility
+- Icon size should be proportional to button size
 
 ---
 
-## CSS Custom Properties Reference
+## Full Width
 
-```css
-/* Sizes */
---btn-height-sm: 32px;
---btn-height-md: 44px;
---btn-height-lg: 56px;
---btn-px-sm: 12px;
---btn-px-md: 20px;
---btn-px-lg: 28px;
+Common on mobile screens. The button stretches to the full width of its container.
 
-/* Primary gradient + state ladder */
---btn-primary-bg: linear-gradient(135deg, #45A5ED 0%, #5C6EF8 50%, #3B41EC 100%);
---btn-primary-bg-hover: #3133D1;    /* ultramarine-700 */
---btn-primary-bg-pressed: #2B2FA8;  /* ultramarine-800 */
---btn-primary-shadow-hover: 0 4px 16px rgba(59, 65, 236, 0.4);
-
-/* Secondary */
---btn-secondary-border: rgba(255, 255, 255, 0.3);
---btn-secondary-border-hover: rgba(255, 255, 255, 0.6);
-
-/* Destructive */
---btn-destructive-bg: #FF5252;
---btn-destructive-shadow-hover: 0 4px 16px rgba(255, 82, 82, 0.35);
-
-/* Shared */
---btn-focus-ring: 2px solid #3B41EC;
---btn-transition: all 0.15s ease;
---btn-radius: var(--radius-2);
-```
+- Used in mobile layouts, form flows, or narrow containers
+- Both Primary and Secondary variants support full-width mode
+- Avoid full-width outside of constrained containers (keep to mobile-width or narrower)
 
 ---
 
 ## Rules
 
-- **Never** use more than one primary button in a single section or card.
-- **Never** place a primary button next to a destructive button without a clear visual separator.
-- **Do not** stretch buttons to full width unless inside a mobile-width container (≤ 400px) or a form flow.
-- **Do not** use gradient text inside buttons — button labels are always solid `#FFFFFF` or `rgba(255,255,255,0.85)`.
-- Icon + label buttons: icon always leads (left side), 8px gap between icon and label.
-- Minimum touch target: 44×44px — never use the small size for mobile-primary interactions.
+- **Never** use more than one primary button in a single section or card
+- **Never** place a primary button next to a destructive button without a clear visual separator
+- **Do not** stretch buttons to full width unless inside a mobile-width container or a form flow
+- Icon + label buttons: icon always leads (left side), 8px gap between icon and label
+- Minimum touch target: 44x44px. Never use the xs size for mobile-primary interactions
+- **Never remove the focus ring.** It is critical for keyboard accessibility

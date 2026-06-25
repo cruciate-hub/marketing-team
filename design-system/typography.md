@@ -1,87 +1,116 @@
-# social.plus Typography System
+# social.plus Typography
 
-Source of truth: Figma file node `131:3822`
-https://www.figma.com/design/nDIDa7goXwKlqGWdKKlbIX/2026-Website-Visuals?node-id=131-3822
+Source: canonical design system HTML + Webflow heading scale
 
----
+## Typeface
 
-## Typefaces
+social.plus uses a single typeface for all surfaces: **Figtree**, a geometric, warm, confident sans-serif available from Google Fonts with variable weight support (300-900).
 
-### Primary: Figtree
-**All social.plus communications use Figtree as the primary typeface.**
+**Font stack:**
+```
+'Figtree', 'Inter', sans-serif
+```
 
-- Type: Geometric sans-serif
-- Available: Free on Google Fonts (https://fonts.google.com/specimen/Figtree)
-- Download link is included in the Figma brand site under Typography > Download > Font Family
-- Weights available: Light (300), Regular (400), Medium (500), SemiBold (600), Bold (700), ExtraBold (800), Black (900)
-
-Figtree is warm, readable, and confident — a perfect match for social.plus's direct
-yet human brand personality.
-
-### Safe fallback (email / system contexts)
-Where custom fonts cannot be loaded (plain HTML email, Office documents):
-`font-family: 'Figtree', 'Inter', sans-serif;`
+Both `--font-display` and `--font-body` resolve to the same stack. Figtree Bold carries display moments (headlines, CTAs, quotes, hero copy). Regular and Medium keep body copy clear and human.
 
 ---
 
-## Type Scale
+## Heading scale (fluid clamp)
 
-The following scale is derived from the Figma brand site:
+All headings use Figtree Bold (700) and scale fluidly with viewport width via `clamp()`. The `svw` unit ensures consistent scaling across all viewport types.
 
-| Style name | Size | Weight | Line height | Use |
-|------------|------|--------|-------------|-----|
-| H1 / Display | 48px | Bold (700) | 1.4 | Page titles, hero headlines |
-| H2 | 32px | Bold (700) | 1.4 | Section headings |
-| H3 | 24px | Bold (700) | 1.4 | Sub-section headings, card titles |
-| H4 / H6 | 20px | Bold (700) | 1.4 | Small headings, nav labels |
-| Body Large | 16px | Regular (400) | 1.5 | Body text, descriptions |
-| Body Medium | 16px | Medium (500) | 1.5 | Emphasis within body, labels |
-| Body Small | 14px | Medium (500) | 1.25 | Captions, secondary info |
-| Label / Eyebrow | 12px | Bold (700) | 1 | All-caps section labels, UI eyebrows, table headers, token labels — 0.1em letter-spacing |
-| Caption | 12px | Regular (400) | 1.5 | Fine print, timestamps |
-
-**Minimum font size: 12px.** Never use 11px, 10px, or smaller in any UI context. The 12px step satisfies the 4pt grid and remains legible at standard screen densities.
+| Level | CSS value | Range | Line height |
+|-------|-----------|-------|-------------|
+| H1 Display | `clamp(2.75rem, 1.5rem + 2svw, 5rem)` | 44px - 80px | 1.1 |
+| H2 Section | `clamp(2.25rem, 1.5rem + 2svw, 3.25rem)` | 36px - 52px | 1.25 |
+| H3 Sub-section | `clamp(1.75rem, 1rem + 2svw, 2.25rem)` | 28px - 36px | 1.25 |
+| H4 Small heading | `clamp(1.5rem, 0.875rem + 2svw, 1.75rem)` | 24px - 28px | 1.25 |
+| H5 Compact heading | `1.25rem` | 20px | 1.25 |
+| H6 Smallest heading | `1.125rem` | 18px | 1.25 |
 
 ---
 
-## Typesetting Principles
+## Body text scale
 
-**Leading (line height):** Headings use 1.4× line height. Body text uses 1.5×.
-Tight line heights (1.2–1.3) should be reserved for very large display type only.
+Interface and body text sizes. These are fixed (no clamp).
 
-**Tracking (letter spacing):** Use 0 tracking for body text. All-caps labels and
-nav items use slight tracking (0.05–0.1em) to aid readability. Never use wide
-tracking on lowercase body copy.
+| Token | Size (rem) | Size (px) | Line height | Weight | Usage |
+|-------|-----------|-----------|-------------|--------|-------|
+| `text-lg` | 1.25rem | 20px | 1.3 | 500 | Section headings within UI |
+| `text-md` | 1.0625rem | 17px | 1.35 | 500 / 400 | Card titles, strong body text |
+| `text-base` | 0.9375rem | 15px | 1.45 | 400 | Default body text |
+| `text-sm` | 0.8125rem | 13px | 1.4 | 400 / 500 | Secondary labels, metadata |
+| `text-xs` | 0.75rem | 12px | 1.4 | 500 / 600 | Captions, overlines, badges (uppercase, letter-spacing 0.06em) |
 
-**Kerning:** Use optical kerning on headlines and large display text. Metric kerning
-is fine for body copy.
-
-**Hierarchy:** On any given screen or page, limit yourself to 3 type sizes maximum.
-The hierarchy should be immediately legible — the most important information should
-be the largest and boldest.
-
-**Uppercase:** Navigation labels and badges use UPPERCASE with Figtree Bold or Medium.
-Body copy is never all-caps. Headlines are sentence case or title case.
+**Minimum font size:** 0.75rem (12px). Nothing in the system goes smaller.
 
 ---
 
-## Colour on Text
+## Font weights
 
-Colour tokens below reference primitives from `colors-palette.md`.
+Five named weight tokens spanning the variable font range actually used.
 
-- **Primary text on dark:** White (`neutral-white` / `#FFFFFF`)
-- **Secondary text on dark:** `slate-300` (`#D3D3D3`) for subtle, `slate-400` (`#A3A3A3`) for muted
-- **On light backgrounds:** Use `slate-950` (`#111111`) for primary text
-- **Body text on light:** `slate-700` (`#404040`)
-- **Secondary text on light:** `slate-500` (`#727272`)
-- **Muted text on light:** `slate-400` (`#A3A3A3`)
-- **Links and CTAs:** `ultramarine-600` (`#3B41EC`) on light backgrounds; white with underline on dark
+| Token | Value | Name |
+|-------|-------|------|
+| `--weight-light` | 300 | Light |
+| `--weight-regular` | 400 | Regular |
+| `--weight-medium` | 500 | Medium |
+| `--weight-semibold` | 600 | Semibold |
+| `--weight-bold` | 700 | Bold |
+
+**Display usage:** weights 400 (italic), 600, and 700. Headlines, CTAs, quotes, hero copy.
+
+**Body usage:** weights 300, 400, 500, 600, 700. Body text, UI labels, inputs, captions.
 
 ---
 
-## Typography in Email
+## Line heights
 
-Because email clients have inconsistent font rendering:
-- Specify `font-family: 'Figtree', 'Inter', Arial, sans-serif;` in all email CSS
-- Use web-safe fallbacks (Arial or Helvetica) as tertiary fallbacks
-- Bold text should use `font-weight: 700` not just `font-weight: bold` for consistency
+Four named line-height tokens.
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--leading-tight` | 1.1 | Display headlines, hero text |
+| `--leading-snug` | 1.25 | Sub-headings, card titles, H2-H6 |
+| `--leading-normal` | 1.45 | Default body text |
+| `--leading-relaxed` | 1.6 | Long-form body, metadata |
+
+---
+
+## Type pairings
+
+Recommended heading + body combinations drawn from the design system.
+
+### Feed post header
+- **Title:** 22px / Bold 700 / line-height 1.1
+- **Meta:** 13px / Regular 400 / line-height 1.5 / secondary color
+
+### CTA / Onboarding
+- **Headline:** 26px / Bold 700 / line-height 1.05 (white on dark)
+- **Accent word:** italic, brand accent color
+- **Supporting text:** 13px / Regular 400 / line-height 1.5 / 60% white
+
+### Section title + body
+- **Overline:** 12px / Semibold 600 / uppercase / letter-spacing 0.10em / accent color
+- **Title:** 17px / Semibold 600
+- **Description:** 14px / Regular 400 / line-height 1.5 / secondary color
+
+### Profile name + handle
+- **Name:** 20px / Bold 700
+- **Handle:** 13px / Regular 400 / tertiary color
+
+---
+
+## Typesetting principles
+
+1. **Heading line height stays tight.** Display text uses line heights between 1.1 and 1.25. Tighter leading keeps headlines punchy and compact.
+
+2. **Body line height opens up.** Body text at `text-base` and below uses 1.4 to 1.45 for comfortable reading. Long-form content can stretch to 1.6.
+
+3. **Letter spacing for caps.** Any uppercase text (`text-xs` captions, overlines, badges) must include letter-spacing of at least 0.06em. Section overlines use 0.10em.
+
+4. **Uppercase is reserved.** Only use uppercase for captions, overlines, and small badges at `text-xs`. Never set body text, headings, or button labels in all caps.
+
+5. **One typeface everywhere.** Figtree is the only typeface. Do not introduce secondary faces. Weight and size alone create hierarchy.
+
+6. **Weight creates hierarchy, not size alone.** Pair weight shifts with size shifts. A card title at 17px / Semibold 600 sits above body text at 15px / Regular 400.

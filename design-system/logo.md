@@ -1,7 +1,6 @@
 # social.plus Logo Guidelines
 
-Source of truth: Figma file node `131:3643`
-https://www.figma.com/design/nDIDa7goXwKlqGWdKKlbIX/2026-Website-Visuals?node-id=131-3643
+Source: canonical design system HTML
 
 ---
 
@@ -10,9 +9,9 @@ https://www.figma.com/design/nDIDa7goXwKlqGWdKKlbIX/2026-Website-Visuals?node-id
 When generating HTML, emails, or any output that needs to embed the logo as inline SVG,
 use the following verified vector data directly.
 
-### Full Name Logo (icon + wordmark) — colour on dark
+### Full Name Logo (icon + wordmark) - colour on dark
 
-The wordmark paths use `fill: #111` which renders as black — swap to `fill: #ffffff` for
+The wordmark paths use `fill: #111` which renders as black - swap to `fill: #ffffff` for
 use on dark backgrounds (e.g. brand emails).
 
 ```svg
@@ -48,7 +47,7 @@ use on dark backgrounds (e.g. brand emails).
 </svg>
 ```
 
-### Icon Mark Only — colour
+### Icon Mark Only - colour
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 390">
@@ -75,7 +74,7 @@ use on dark backgrounds (e.g. brand emails).
 ## The Logo Concept
 
 The social.plus logo embodies **limitless connection**. By intersecting fluid shapes,
-the mark reveals a central plus sign integrated with a subtle chat bubble — symbolising
+the mark reveals a central plus sign integrated with a subtle chat bubble - symbolising
 the core of the communication platform. The vibrant, multi-coloured palette reflects
 the diverse range of opportunities and creative possibilities within the community.
 
@@ -164,11 +163,11 @@ Never:
 - Rotate the logo
 - Apply drop shadows or glows to the logo
 - Place the logo on a background colour that reduces legibility
-- Redraw or recreate the logo from scratch — always use official files
+- Redraw or recreate the logo from scratch - always use official files
 - Change the logo's internal colour arrangement
 - Add text or elements inside the clearspace zone
 - Use a low-resolution version of the logo
-- **Place the icon mark on an Ultramarine (#3B41EC) background** — the blue gradient arm becomes invisible against Ultramarine, and the dark navy centre shape (#27265E) loses all definition. The icon mark is approved for use on: Brand Black (#111111), dark surfaces (Surface 1–3), and light/white backgrounds only.
+- **Place the icon mark on an Ultramarine (#3B41EC) background** - the blue gradient arm becomes invisible against Ultramarine, and the dark navy centre shape (#27265E) loses all definition. The icon mark is approved for use on: Brand Black (#111111), dark surfaces (Surface 1–3), and light/white backgrounds only.
 
 ---
 
