@@ -1,75 +1,99 @@
-# social.plus Design System — Router
+# social.plus Design System Router
+
+Source: canonical design system HTML
 
 This file is the entry point for all social.plus visual design tasks. It tells you which files to load based on what you're creating.
 
-Reference files live in the public `cruciate-hub/marketing-team` repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`). Paths in this file are relative to the design-system folder — for example `colors-palette.md` is at `$MT_REPO/design-system/colors-palette.md`.
+Reference files live in the public `cruciate-hub/marketing-team` repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`). Paths in this file are relative to the design-system folder.
 
 ## How to use this file
 
 1. You loaded this file first. Good.
-2. Also load the main brain if you haven't already: `cat "$MT_REPO/brain.md"` — it has cross-domain routing, precedence rules, and the compliance check you must run before delivering.
+2. Also load the main brain if you haven't already: `cat "$MT_REPO/brain.md"` for cross-domain routing, precedence rules, and the compliance check.
 3. Read the user's request.
 4. Match it against the routing table below.
 5. Read the listed files with `cat "$MT_REPO/design-system/<file>"`.
 6. Apply everything you load. Design tokens are non-negotiable.
-7. **If the output includes any text content** (headings, labels, descriptions, CTAs), you also need the messaging router: `cat "$MT_REPO/messaging/brain.md"` — follow its instructions to load terminology and tone files. Visual output without correct brand language is incomplete.
+7. **If the output includes any text content** (headings, labels, descriptions, CTAs), you also need the messaging router: `cat "$MT_REPO/messaging/brain.md"`.
 
 ## Routing table
 
 ### Any visual task (always load these)
-- `colors-palette.md` — Brand colours, supporting colours, neutrals, state colours, text colours, borders.
-- `colors-usage.md` — Gradients, flat gradient pairs, usage principles, Webflow CSS variables. Load both — together they are the full colour system. This is law.
-- `typography.md` — Figtree type scale, weights, minimum sizes, line heights.
+- `colors-palette.md` - Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status.
+- `colors-usage.md` - Semantic tokens (light + dark mode), 11 named gradients, usage principles.
+- `typography.md` - Figtree typeface, 9-step type scale, 5 weights, heading scale, line heights.
 
-### Visual output with layout (HTML pages, decks, documents, multi-section designs)
-- `spacing.md` — 12-token spacing scale (4pt/8pt hybrid grid).
-- `border-radius.md` — 7-token radius scale with component defaults.
-- `shadows.md` — 5 elevation levels + 7 per-colour brand glows.
-- `layout.md` — Breakpoints, containers, 12-column grid, vertical rhythm.
+### Visual output with layout
+- `spacing.md` - 11-token 4px-base spacing scale with usage annotations.
+- `border-radius.md` - 9-token radius scale with component context.
+- `shadows.md` - Shadow scale, background layering (light + dark), z-index (8 layers).
+- `layout.md` - Motion system (durations, easing curves), z-index cross-reference.
 
-### Interactive or web output (HTML, components, forms, Webflow elements)
-- `buttons.md` — 4 variants × 3 sizes, all states, CSS tokens.
-- `inputs.md` — 6 form component types, all states, focus rings.
-- `accessibility.md` — WCAG 2.1 AA, contrast ratios, focus states, ARIA patterns, motion.
+### Interactive or web output
+- `buttons.md` - 6 variants, 5 sizes, all states, icon buttons, component tokens.
+- `inputs.md` - Text inputs, textarea, search bar, toggles, checkboxes, radios, chips.
+- `accessibility.md` - WCAG AA contrast, action-accent auto-switch, touch targets, reduced motion, focus rings.
+
+### Components
+- `avatars.md` - 5 sizes, 6 states/decorators, avatar stacks, community avatars.
+- `badges-tags.md` - Notification badges, status badges, tags (filled, outlined, with icon, dismissible).
+- `cards.md` - Community cards, post/feed cards, compact/list view, card states.
+- `list-items.md` - List item anatomy, 8 variants, grouped section lists.
+- `navigation.md` - App bar variants, bottom tab bar, tab states.
+- `overlays.md` - Bottom sheets, modals, context menus, tooltips.
+- `feedback.md` - Toasts, progress indicators, skeleton loaders.
+
+### Patterns
+- `states.md` - Component x state matrix (6 components, 8 states), screen-level states.
+- `empty-states.md` - Full-page empty states (6 screens), inline empty state variant.
 
 ### Output containing icons
-- `iconography.md` — Material Symbols Outlined, sizes, weights, colour rules.
+- `iconography.md` - Material Symbols Outlined, variable axes, sizes, colour rules.
 
 ### Output containing images or illustrations
-- `imagery.md` — Illustration style, photography treatment, decorative rules.
+- `imagery.md` - Illustration style, photography treatment, decorative rules.
 
 ### Output containing or referencing the logo
-- `logo.md` — SVG data, variants, clearspace, background rules, do/don'ts.
+- `logo.md` - SVG data, variants, clearspace, background rules, do/don'ts.
 
-### Design review or audit (checking existing designs against the system)
+### Design review or audit
 - Load ALL files. Compare the design under review against every guideline.
 
 ## Rules
 
 - **Design tokens are law.** Use the exact values from these files. Never approximate colours, spacing, or border-radius.
 - **Dark-first.** `#111111` is the default background. Design on dark unless a specific light context is needed.
-- **Ultramarine leads.** When you need one brand colour, reach for `#3B41EC`.
+- **Ultramarine leads.** When you need one brand colour, reach for `#3B41EC` (as background fill). For text/icons on dark, use `#7B94FE` (action-accent).
 - **No gradient text.** `background-clip: text` is forbidden. Text is always a solid colour.
-- **One primary button per section.** Never stack two gradient CTAs.
+- **One primary button per section.** Never stack two primary CTAs.
 - **12px minimum.** No UI text below 12px. Ever.
-- **Use `var()` for CSS.** When writing CSS for the website, always use Webflow CSS variables. Hex codes for non-CSS contexts only.
-- **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule — do not proceed with stale or memorized tokens.
+- **44px touch targets.** All interactive elements hit 44px minimum.
+- **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule. Do not proceed with stale or memorized tokens.
 - **Run the compliance check** from `brain.md` (the main brain) before delivering your output.
 
 ## Available files
 
 | File | Contains |
 |---|---|
-| `colors-palette.md` | Brand colours, supporting colours, neutrals, state colours, text colours, borders |
-| `colors-usage.md` | Gradients, flat gradient pairs, usage principles, Webflow CSS variables |
-| `typography.md` | Figtree type scale, weights, line heights, email/social typography |
-| `spacing.md` | 12-token spacing scale, component/section/page spacing guide |
-| `border-radius.md` | 7-token radius scale, component defaults |
-| `buttons.md` | 4 variants, 3 sizes, all states, icon buttons, CSS tokens |
-| `shadows.md` | 5 elevation levels, 7 brand glow variants, CSS custom properties |
-| `layout.md` | Breakpoints, containers, 12-col grid, vertical rhythm |
-| `iconography.md` | Material Symbols Outlined, sizes, weights, variable axes |
-| `inputs.md` | 6 form types, all states, focus rings, accessibility |
+| `colors-palette.md` | Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status |
+| `colors-usage.md` | Semantic tokens (light + dark), gradients, usage principles |
+| `typography.md` | Figtree type scale, weights, heading scale, line heights |
+| `spacing.md` | 11-token 4px-base spacing scale |
+| `border-radius.md` | 9-token radius scale with component context |
+| `shadows.md` | Shadow scale, background layering, z-index |
+| `layout.md` | Motion system, durations, easing curves |
+| `buttons.md` | 6 variants, 5 sizes, all states, icon buttons |
+| `inputs.md` | Text inputs, textarea, search, toggles, checkboxes, radios, chips |
+| `avatars.md` | 5 sizes, states, stacks, community avatars |
+| `badges-tags.md` | Notification badges, status badges, tags |
+| `cards.md` | Community cards, post cards, card states |
+| `list-items.md` | List item anatomy, variants, grouped sections |
+| `navigation.md` | App bar, bottom tab bar, tab states |
+| `overlays.md` | Bottom sheets, modals, context menus, tooltips |
+| `feedback.md` | Toasts, progress indicators, skeleton loaders |
+| `states.md` | Component x state matrix, screen-level states |
+| `empty-states.md` | Full-page and inline empty states |
+| `accessibility.md` | WCAG AA, contrast, touch targets, reduced motion, focus, ARIA |
+| `iconography.md` | Material Symbols Outlined, sizes, weights, colour rules |
 | `imagery.md` | Illustration style, photography, decorative rules |
-| `accessibility.md` | WCAG 2.1 AA, contrast, focus, ARIA, motion, checklist |
-| `logo.md` | SVG paths, variants, clearspace, usage rules, do/don'ts |
+| `logo.md` | SVG paths, variants, clearspace, usage rules |

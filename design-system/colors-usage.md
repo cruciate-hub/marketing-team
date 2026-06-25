@@ -1,121 +1,154 @@
-# social.plus Colour System — Gradients, Usage & Variables
+# social.plus Color Usage
 
-Fetch alongside `colors-palette.md` for the full colour palette (primitives + semantic tokens).
+Source: canonical design system HTML
 
----
-
-## Brand Gradients
-
-### Brand Blue Gradient
-
-Direction: 135° (top-left to bottom-right)
-`picton-blue-400` → `ultramarine-500` → `ultramarine-600`
-
-```css
-background: linear-gradient(
-  135deg,
-  var(--gradient--light-blue),
-  var(--gradient--medium-blue),
-  var(--gradient--dark-blue)
-);
-```
-
-| Step | Token | HEX | Webflow variable |
-|------|-------|-----|------------------|
-| Start (light) | `picton-blue-400` | `#45A5ED` | `var(--gradient--light-blue)` |
-| Middle | `ultramarine-500` | `#5C6EF8` | `var(--gradient--medium-blue)` |
-| End (brand blue) | `ultramarine-600` | `#3B41EC` | `var(--gradient--dark-blue)` |
-
-### Brand Pink Gradient
-
-Direction: left → right
-`pink-flamingo-400` → `blaze-orange-600` (~51%) → `supernova-500`
-
-```css
-background: linear-gradient(to right, #F568F0, #F66005 51.5%, #F7C506);
-```
-
-Use these gradients for hero sections, feature cards, and key visual moments.
-Never tile or repeat them — they should feel intentional and impactful.
+Semantic tokens, named gradients, and usage principles. For the full primitive palette, see `colors-palette.md`.
 
 ---
 
-## Flat Gradient Pairs (for components and cards)
+## 1. Semantic Tokens
 
-Two-stop gradients for smaller UI elements:
+Semantic tokens map primitives to functional roles. Always use semantic tokens in component CSS; reach for primitives only when no semantic token fits.
 
-| From | To | Tokens | Feel |
-|------|----|--------|------|
-| `#3B41EC` | `#5C6EF8` | `ultramarine-600 → ultramarine-500` | Cool authority |
-| `#5C6EF8` | `#45A5ED` | `ultramarine-500 → picton-blue-400` | Airy, digital |
-| `#FF305A` | `#F568F0` | Red → `pink-flamingo-400` | Urgent energy |
-| `#F568F0` | `#F66005` | `pink-flamingo-400 → blaze-orange-600` | Warm vibrancy |
-| `#F66005` | `#F7C506` | `blaze-orange-600 → supernova-500` | Optimism |
-| `#111111` | `#272727` | `slate-950 → slate-800` | Depth |
-| `#1A1A1A` | `#191B4D` | `slate-900 → ultramarine-950` | Prestige |
+### Background
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--bg-base` | `#FAFAFA` (slate-50) | `#111111` |
+| `--bg-elevated` | `#FFFFFF` | `#1A1A1A` |
+| `--bg-card` | `#F5F5F5` (slate-100) | `#272727` |
+| `--bg-card-alt` | `#FFFFFF` | `#404040` |
+| `--bg-sunken` | `#E6E6E6` | `#000000` |
+| `--bg-overlay` | `rgba(17, 17, 17, 0.48)` | `rgba(0, 0, 0, 0.72)` |
+
+### Text
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--text-primary` | `#111111` (slate-950) | `#FFFFFF` |
+| `--text-secondary` | `#535353` (slate-600) | `rgba(255, 255, 255, 0.66)` |
+| `--text-tertiary` | `#A3A3A3` (slate-400) | `rgba(255, 255, 255, 0.36)` |
+| `--text-inverse` | `#FFFFFF` | `#111111` (slate-950) |
+| `--text-on-primary` | `#FFFFFF` | `#FFFFFF` |
+
+### Border
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--border-faint` | `rgba(17, 17, 17, 0.06)` | `rgba(255, 255, 255, 0.05)` |
+| `--border-subtle` | `rgba(17, 17, 17, 0.10)` | `rgba(255, 255, 255, 0.08)` |
+| `--border-default` | `rgba(17, 17, 17, 0.16)` | `rgba(255, 255, 255, 0.14)` |
+| `--border-strong` | `rgba(17, 17, 17, 0.28)` | `rgba(255, 255, 255, 0.22)` |
+
+### Action (primary, secondary, tertiary)
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--action-primary` | `#3B41EC` (ultra-600) | `#3B41EC` |
+| `--action-primary-hover` | `#3133D1` | `#3133D1` |
+| `--action-primary-press` | `#2B2FA8` (ultra-800) | `#2B2FA8` |
+| `--action-primary-subtle` | `#EDF4FF` (ultra-50) | `rgba(59, 65, 236, 0.14)` |
+| `--action-accent` | `#3B41EC` (6.66:1 on white) | `#7B94FE` (6.75:1 on #111) |
+| `--action-primary-text` | `#FFFFFF` | `#FFFFFF` |
+| `--action-secondary` | `#727272` (slate-500) | `#A3A3A3` |
+| `--action-secondary-subtle` | `#F5F5F5` (slate-100) | `rgba(163, 163, 163, 0.14)` |
+| `--action-tertiary` | `#1B89DC` (picton-500) | `#45A5ED` |
+| `--action-tertiary-subtle` | `#F1F7FE` (picton-50) | `rgba(69, 165, 237, 0.14)` |
+
+### Status
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--status-success` | `#1DC497` | `#1DC497` |
+| `--status-success-subtle` | `rgba(29, 196, 151, 0.12)` | `rgba(29, 196, 151, 0.14)` |
+| `--status-warning` | `#CC9202` | `#F7C506` |
+| `--status-warning-subtle` | `#FEFDE8` | `rgba(247, 197, 6, 0.14)` |
+| `--status-error` | `#FF305A` | `#FF305A` |
+| `--status-error-subtle` | `rgba(255, 48, 90, 0.08)` | `rgba(255, 48, 90, 0.14)` |
+| `--status-info` | `#1B89DC` | `#45A5ED` |
+| `--status-info-subtle` | `#F1F7FE` | `rgba(69, 165, 237, 0.14)` |
+
+### Shadows
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--shadow-sm` | `0 1px 3px rgba(17,17,17,0.08), 0 1px 2px rgba(17,17,17,0.06)` | `0 1px 4px rgba(0,0,0,0.3)` |
+| `--shadow-md` | `0 4px 12px rgba(17,17,17,0.10), 0 2px 4px rgba(17,17,17,0.06)` | `0 4px 14px rgba(0,0,0,0.4)` |
+| `--shadow-lg` | `0 12px 32px rgba(17,17,17,0.12), 0 4px 8px rgba(17,17,17,0.08)` | `0 12px 36px rgba(0,0,0,0.5)` |
+| `--shadow-xl` | `0 24px 48px rgba(17,17,17,0.14), 0 8px 16px rgba(17,17,17,0.08)` | `0 28px 70px rgba(0,0,0,0.6), 0 4px 14px rgba(0,0,0,0.4)` |
+| `--shadow-glow` | `0 0 40px rgba(59,65,236,0.18)` | `0 0 60px rgba(59,65,236,0.25)` |
+
+### Glass
+
+| Token | Light mode | Dark mode |
+|-------|-----------|-----------|
+| `--glass` | `rgba(250, 250, 250, 0.72)` | `rgba(17, 17, 17, 0.55)` |
+| `--glass-strong` | `rgba(250, 250, 250, 0.90)` | `rgba(17, 17, 17, 0.72)` |
 
 ---
 
-## Colour Usage Principles
+## 2. Named Gradients
 
-**Dark-first:** The brand lives on dark backgrounds. `slate-950` (`#111`) is the default canvas. Text is white or light grey on this background.
+All gradients are theme-independent (same in both light and dark modes). Each has a CSS custom property and a descriptive display name used in the design system UI.
 
-**Ultramarine leads:** When you need one brand colour to anchor a design, reach for `ultramarine-600` (`#3B41EC`). It is the most recognisable social.plus colour.
-
-**social.plus Blue is the only CTA colour.** Accents are for decoration and status, never for primary buttons or calls to action.
-
-**Buttons always need three states.** Default, hover, and pressed. The default → hover → pressed ladder steps up the Ultramarine scale: `ultramarine-600` → `ultramarine-700` → `ultramarine-800`.
-
-**Gradients for moments:** Use the Brand Blue and Brand Pink gradients for hero sections and key visual backgrounds. Never apply gradients to text — this includes CSS `background-clip: text` effects. Text should always be a solid colour (white, black, or a single brand colour).
-
-**Cards and content boxes are greyscale by default:** When displaying a group of cards, tiles, or content boxes, use consistent neutral background colours from the Slate scale (`slate-900` `#1A1A1A` or `slate-800` `#272727`) with a subtle border (`rgba(255,255,255,0.12)`). Do not use different brand colours or gradients across cards in the same set — reserve colour and gradients for intentional singular highlights (e.g. a featured card, a hero CTA block).
-
-**Respect the text hierarchy.** Headings are darkest, body text is medium, supporting text is lighter. Don't skip levels.
-
-**Accessibility:** When placing text on coloured backgrounds, ensure sufficient contrast. White text works on Ultramarine 600+ shades, Picton Blue 600+, Slate 700+, and all dark surfaces. Dark text should be used on Supernova (yellows) and Picton Blue 400 and lighter. Pink Flamingo 400 requires care — test before use.
-
-**Only use colours from this palette.** If a colour isn't listed in `colors-palette.md`, don't use it. If a design requires a new colour, flag it to the marketing team first so it can be added to the Figma source of truth.
+| Token | Display name | CSS value |
+|-------|-------------|-----------|
+| `--grad-warm` | Brand Blue | `linear-gradient(135deg, #45A5ED 0%, #5C6EF8 50%, #3B41EC 100%)` |
+| `--grad-gold` | Solar | `linear-gradient(135deg, #F66005 0%, #F7C506 100%)` |
+| `--grad-dusk` | Brand Pink | `linear-gradient(to right, #F568F0 0%, #F66005 51.5%, #F7C506 100%)` |
+| `--grad-forest` | Airy | `linear-gradient(135deg, #5C6EF8 0%, #45A5ED 100%)` |
+| `--grad-clay` | Depth | `linear-gradient(135deg, #111111 0%, #272727 100%)` |
+| `--grad-river` | Authority | `linear-gradient(135deg, #3B41EC 0%, #5C6EF8 100%)` |
+| `--grad-cinema` | Vibrant | `linear-gradient(135deg, #F568F0 0%, #F66005 100%)` |
+| `--grad-ember` | Ember | `linear-gradient(135deg, #FF305A 0%, #F568F0 100%)` |
+| `--grad-night` | Prestige | `linear-gradient(135deg, #1A1A1A 0%, #191B4D 100%)` |
+| `--grad-amber` | Gold | `linear-gradient(135deg, #FCD513 0%, #CC9202 100%)` |
+| `--grad-sunset` | Energy | `linear-gradient(160deg, #F568F0 0%, #FF305A 100%)` |
 
 ---
 
-## For Developers: Webflow CSS Variables
+## 3. Usage Principles
 
-All colours above are available as Webflow CSS variables. When writing CSS for the
-social.plus website, always use the variable syntax instead of hardcoding hex values.
+### Dark-first design
 
-**Pattern:** `var(--{category}--{variable-name})`
+The brand lives on dark backgrounds. `#111111` (slate-950) is the default canvas. Design for dark surfaces first, then adapt to light.
 
-| Role | Resolves to | CSS Variable |
-|------|-------------|-------------|
-| social.plus Blue | `ultramarine-600` `#3B41EC` | `var(--social--main-blue)` |
-| Button Hover | `ultramarine-700` `#3133D1` | `var(--social--button-hover)` |
-| Button Pressed | `ultramarine-800` `#2B2FA8` | `var(--social--button-pressed)` |
-| Dark | `slate-950` `#111111` | `var(--social--dark)` |
-| Grey | `slate-800` `#272727` | `var(--social--grey)` |
-| Light Grey | `slate-700` `#404040` | `var(--social--light-grey)` |
-| Grey Background | `slate-50` `#FAFAFA` | `var(--social--grey-background)` |
-| Dark Gray Background | `slate-900` `#1A1A1A` | `var(--social--dark-gray-background)` |
-| Blue Transparent | `rgba(59, 65, 236, 0.10)` | `var(--social--blue-transparent)` |
-| White | `neutral-white` `#FFFFFF` | `var(--main--white)` |
-| Whitesmoke | `slate-100` `#F5F5F5` | `var(--main--whitesmoke)` |
-| Transparent | — | `var(--main--transparant)` |
-| Border Med Grey | `slate-300` `#D3D3D3` | `var(--border--border-med-grey)` |
-| Border Light Grey | `slate-200` `#E6E6E6` | `var(--border--border-light-grey)` |
-| Border Dark Grey | `slate-500` `#727272` | `var(--border--border-dark-grey)` |
-| Border Dark | `slate-800` `#272727` | `var(--border--border-dark)` |
-| Border Hover | `slate-700` `#404040` | `var(--border--border-hover)` |
-| Green | `#1DC497` (system) | `var(--secondary--green)` |
-| Yellow | `supernova-500` `#F7C506` | `var(--secondary--yellow)` |
-| Red | `#FF305A` (system) | `var(--secondary--red)` |
-| Orange | `blaze-orange-600` `#F66005` | `var(--secondary--orange)` |
-| Pink | `pink-flamingo-400` `#F568F0` | `var(--secondary--pink)` |
-| Menu BG | `slate-900` `#1A1A1A` | `var(--secondary--menu-bg)` |
-| Text Grey Light | `slate-400` `#A3A3A3` | `var(--text--text-color-grey-light)` |
-| Text Grey Medium | `slate-500` `#727272` | `var(--text--text-color-grey-medium)` |
-| Text Grey Dark | `slate-700` `#404040` | `var(--text--text-color-grey-dark)` |
-| Text Dark | `slate-950` `#111111` | `var(--text--text-color-dark)` |
-| Gradient Light Blue | `picton-blue-400` `#45A5ED` | `var(--gradient--light-blue)` |
-| Gradient Medium Blue | `ultramarine-500` `#5C6EF8` | `var(--gradient--medium-blue)` |
-| Gradient Dark Blue | `ultramarine-600` `#3B41EC` | `var(--gradient--dark-blue)` |
+### Ultramarine leads
 
-**Note on retired variables:** `--secondary--purple` is retired (no Purple scale in the new palette). Any existing usages should be flagged for replacement or removed.
+When you need one brand color to anchor a design, reach for `#3B41EC` (ultra-600). It is the most recognizable social.plus color.
+
+### CTA color rules
+
+social.plus Blue is the only CTA color. Accents are for decoration and status, never for primary buttons or calls to action. Buttons always need three states following the Ultramarine ladder: default (ultra-600) to hover (#3133D1) to pressed (ultra-800).
+
+On dark surfaces, ultra-600 fills are paired with white labels. For text-level and icon-level ultramarine, step up to ultra-400 (`--action-accent`) to hold WCAG AA contrast (6.75:1 on #111).
+
+### Gradient usage
+
+Use gradients for hero sections, feature cards, and key visual moments. Never tile or repeat them. Never apply gradients to text (no `background-clip: text` effects). Text should always be a solid color.
+
+### Card styling
+
+Cards and content boxes are greyscale by default. Use consistent neutral backgrounds from the Slate scale with subtle borders. Do not use different brand colors or gradients across cards in the same set. Reserve color and gradients for intentional singular highlights such as a featured card or a hero CTA block.
+
+### Text hierarchy
+
+Respect the three-level text hierarchy in both modes:
+
+- **Primary**: full contrast (`--text-primary`)
+- **Secondary**: reduced weight (`--text-secondary`)
+- **Tertiary**: muted, supporting content (`--text-tertiary`)
+
+Do not skip levels. Headings are darkest, body text is medium, supporting text is lighter.
+
+### Accessibility
+
+White text works on ultra-600 and darker, picton-500 and darker, and all dark surfaces. Dark text should be used on yellows and light blues. Always verify contrast ratios when placing text on colored backgrounds.
+
+### No gradient on text
+
+Never apply gradients to text. This includes CSS `background-clip: text` effects. Text should always be a solid color (white, black, or a single brand color).
+
+### Only use palette colors
+
+If a color is not listed in `colors-palette.md`, do not use it. If a design requires a new color, flag it to the marketing team first so it can be added to the canonical source.

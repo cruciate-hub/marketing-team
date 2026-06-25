@@ -1,62 +1,82 @@
-# social.plus Spacing System
+# social.plus Spacing
 
-All spacing in social.plus outputs uses this scale. Do not use arbitrary values —
-always pick the closest token from the scale below.
+Source: canonical design system HTML
+
+## Base unit
+
+All spacing uses a **4px base grid**. Every layout decision (padding, gap, margin) maps to a named step. This keeps rhythm consistent across every screen in the app.
 
 ---
 
-## The Scale
+## Spacing scale
 
-| Token | Value | Typical use |
-|-------|-------|-------------|
-| `space-1` | 4px | Tight gaps — icon-to-label, badge padding |
-| `space-2` | 8px | Small gaps between related items |
-| `space-3` | 12px | Compact component padding |
-| `space-4` | 16px | Default inner padding — inputs, small cards |
-| `space-5` | 24px | Standard gap between components |
-| `space-6` | 32px | Comfortable gap between larger elements |
-| `space-7` | 40px | Card padding, mid-level section spacing |
-| `space-8` | 48px | Section breathing room within a page |
-| `space-9` | 64px | Large section breaks |
-| `space-10` | 80px | Major layout separation |
-| `space-11` | 96px | Hero sections, top-level page padding |
-| `space-12` | 128px | Maximum section separation |
+11 tokens. Always use a token from this scale. Do not use arbitrary pixel values.
+
+| Token | Value | Multiplier | Common usage |
+|-------|-------|------------|--------------|
+| `--space-1` | 4px | 1x | Icon gap, badge padding, micro nudges |
+| `--space-2` | 8px | 2x | Chip inner padding, tight icon + label |
+| `--space-3` | 12px | 3x | Button padding (vertical), input inner padding |
+| `--space-4` | 16px | 4x | Button padding (horizontal), card inner gap, nav item |
+| `--space-5` | 20px | 5x | Card padding, section inner gap |
+| `--space-6` | 24px | 6x | Card padding (large), modal padding |
+| `--space-8` | 32px | 8x | Section gap, screen horizontal padding |
+| `--space-10` | 40px | 10x | Between major sections on screen |
+| `--space-12` | 48px | 12x | Hero padding, large screen breathing room |
+| `--space-16` | 64px | 16x | Page-level vertical rhythm |
+| `--space-20` | 80px | 20x | Bottom nav safe area clearance |
+
+---
+
+## Usage guidance
+
+### Micro spacing (4-8px)
+
+- `space-1` (4px): the smallest intentional gap. Use between an icon and its label when they need to sit tight, or for badge internal padding.
+- `space-2` (8px): standard chip padding, the gap between an avatar and adjacent text inside list items, or tight vertical stacking.
+
+### Component spacing (12-24px)
+
+- `space-3` (12px): vertical padding inside buttons, inner padding of input fields, and the gap between stacked cards.
+- `space-4` (16px): horizontal button padding, inner gap of card content, nav item padding, and the standard horizontal screen padding on mobile.
+- `space-5` (20px): standard card padding, inner gap within a section.
+- `space-6` (24px): large card padding, modal inner padding.
+
+### Layout spacing (32-80px)
+
+- `space-8` (32px): gap between major sections within a screen, horizontal page padding on larger viewports.
+- `space-10` (40px): separation between major content sections.
+- `space-12` (48px): hero section padding, generous breathing room on large screens.
+- `space-16` (64px): page-level vertical rhythm between top-level content blocks.
+- `space-20` (80px): reserved for bottom content padding that clears the bottom navigation bar on mobile.
+
+---
+
+## Mobile screen anatomy
+
+A typical mobile screen applies these tokens in layers:
+
+- **Screen horizontal padding:** `space-4` (16px) on both sides
+- **App bar height rhythm:** `space-4` (16px) vertical padding
+- **Gap between stacked cards:** `space-3` (12px)
+- **Card inner padding:** `space-4` (16px)
+- **Avatar-to-text gap in list items:** `space-2` (8px)
+- **Bottom content clearance:** `space-20` (80px) to clear the navigation bar
+
+---
+
+## Touch targets
+
+All interactive elements must meet a **44px minimum** touch target size per iOS and Android guidelines. This is independent of the spacing scale but interacts with it: a button using `space-3` vertical padding on `text-base` text naturally reaches the 44px minimum.
 
 ---
 
 ## Principles
 
-**8pt grid with 4pt small steps.** Values below 16px use 4pt increments (4, 8, 12, 16)
-for fine-grained control in tight UI. From 16px upwards the scale uses 8pt steps, then
-grows in larger increments for layout-level spacing.
+1. **Always use a token.** Never hard-code a pixel value for spacing. If no token fits, round to the nearest one.
 
-**Use the closest token — don't invent values.** If something needs more space than
-space-6 (32px) but less than space-7 (40px), use space-7 and adjust surrounding
-elements before reaching for an arbitrary value.
+2. **Consistent insets.** When a container uses `space-4` for horizontal padding, use `space-4` vertically too, unless a deliberate asymmetry is needed (e.g., buttons use `space-3` vertical and `space-4` horizontal).
 
-**Component spacing vs layout spacing.** As a rough guide:
-- space-1 to space-4 (4–16px): inside components — padding, icon gaps, label spacing
-- space-5 to space-7 (24–40px): between components — card gaps, list item spacing, form fields
-- space-8 to space-9 (48–64px): section-level — breathing room between content blocks
-- space-10 to space-12 (80–128px): page-level — hero padding, major section separation
+3. **Spacing grows with hierarchy.** Small elements (chips, badges) use `space-1` to `space-2`. Components (cards, inputs) use `space-3` to `space-6`. Layout-level gaps use `space-8` and above.
 
----
-
-## CSS Custom Properties
-
-```css
-:root {
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  24px;
-  --space-6:  32px;
-  --space-7:  40px;
-  --space-8:  48px;
-  --space-9:  64px;
-  --space-10: 80px;
-  --space-11: 96px;
-  --space-12: 128px;
-}
-```
+4. **Breathing room scales up.** The jump from `space-6` to `space-8` (24px to 32px) marks the transition from component-level to section-level spacing. Use this boundary intentionally.
