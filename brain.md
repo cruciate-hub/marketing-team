@@ -45,6 +45,7 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **legal-docs-formatter** | Format legal documents (MSA, DPA, SLA, Terms, Privacy, etc.) into clean HTML ready to paste into a Webflow Rich Text Embed block on a 📜 Legals CMS item | `marketing-team/skills/legal-docs-formatter/SKILL.md` |
 | **blog-publisher** | Publish a completed blog article from Google Docs to Webflow live — reads the doc, converts to HTML, adds internal links, resizes the master PNG to 3 image sizes, uploads assets, and publishes the CMS item immediately. Requires `WEBFLOW_API_TOKEN`. | `marketing-team/skills/blog-publisher/SKILL.md` |
 | **svg-icon-transformer** | Transform raw SVG input into clean, accessible, inline-embed-ready icon markup; strips editor noise and applies accessibility defaults | `marketing-team/skills/svg-icon-transformer/SKILL.md` |
+| **video-to-gif-and-webp** | Create or optimize animated .webp and .gif files from video | `marketing-team/skills/video-to-gif-and-webp/SKILL.md` |
 | **claude-design-to-webflow** | Migrate a Claude-generated HTML/CSS/JS prototype to a native Webflow section via the Webflow MCP — decision rule for native-vs-code, anti-patterns, pitfalls, cascade-conflict resolution, worked before/after examples, and a pre-mapped social.plus variable-ID catalog | `marketing-team/skills/claude-design-to-webflow/SKILL.md` |
 
 Load skill files via the canonical fetch block, same as every other reference file.
