@@ -1,6 +1,6 @@
 # social.plus Typography
 
-Source: canonical design system HTML + Webflow heading scale
+Source: canonical design system HTML
 
 ## Typeface
 
