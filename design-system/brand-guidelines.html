@@ -995,6 +995,9 @@ body {
 }
 
 .type-scale-row:last-child { border-bottom: none; }
+.type-scale-row.heading-scale-row {
+  grid-template-columns: 60px minmax(220px, 1fr) 60px 60px 1fr;
+}
 
 .scale-header-row {
   background: var(--bg-sunken);
@@ -4033,42 +4036,42 @@ body {
           <!-- Heading scale (fluid clamp from Webflow) -->
           <div class="type-scale-divider">Heading Scale — Fluid Clamp</div>
 
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H1</code></span>
             <span class="scale-col-size">2.75rem - 5rem (44-80px)<br><code style="font-size:10px;color:var(--text-tertiary)">clamp(2.75rem, 1.5rem + 2svw, 5rem)</code></span>
             <span class="scale-col-lh">1.1</span>
             <span class="scale-col-weight">700</span>
             <span class="scale-col-preview" style="font-family:var(--font-display);font-size:clamp(2.75rem, 1.5rem + 2svw, 5rem);font-weight:700;line-height:1.1;color:var(--text-primary)">Display</span>
           </div>
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H2</code></span>
             <span class="scale-col-size">2.25rem - 3.25rem (36-52px)<br><code style="font-size:10px;color:var(--text-tertiary)">clamp(2.25rem, 1.5rem + 2svw, 3.25rem)</code></span>
             <span class="scale-col-lh">1.25</span>
             <span class="scale-col-weight">700</span>
             <span class="scale-col-preview" style="font-family:var(--font-display);font-size:clamp(2.25rem, 1.5rem + 2svw, 3.25rem);font-weight:700;line-height:1.25;color:var(--text-primary)">Section</span>
           </div>
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H3</code></span>
             <span class="scale-col-size">1.75rem - 2.25rem (28-36px)<br><code style="font-size:10px;color:var(--text-tertiary)">clamp(1.75rem, 1rem + 2svw, 2.25rem)</code></span>
             <span class="scale-col-lh">1.25</span>
             <span class="scale-col-weight">700</span>
             <span class="scale-col-preview" style="font-family:var(--font-display);font-size:clamp(1.75rem, 1rem + 2svw, 2.25rem);font-weight:700;line-height:1.25;color:var(--text-primary)">Sub-section</span>
           </div>
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H4</code></span>
             <span class="scale-col-size">1.5rem - 1.75rem (24-28px)<br><code style="font-size:10px;color:var(--text-tertiary)">clamp(1.5rem, 0.875rem + 2svw, 1.75rem)</code></span>
             <span class="scale-col-lh">1.25</span>
             <span class="scale-col-weight">700</span>
             <span class="scale-col-preview" style="font-family:var(--font-display);font-size:clamp(1.5rem, 0.875rem + 2svw, 1.75rem);font-weight:700;line-height:1.25;color:var(--text-primary)">Small heading</span>
           </div>
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H5</code></span>
             <span class="scale-col-size">1.25rem (20px)</span>
             <span class="scale-col-lh">1.25</span>
             <span class="scale-col-weight">700</span>
             <span class="scale-col-preview" style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;line-height:1.25;color:var(--text-primary)">Compact heading</span>
           </div>
-          <div class="type-scale-row">
+          <div class="type-scale-row heading-scale-row">
             <span class="scale-col-token"><code>H6</code></span>
             <span class="scale-col-size">1.125rem (18px)</span>
             <span class="scale-col-lh">1.25</span>
