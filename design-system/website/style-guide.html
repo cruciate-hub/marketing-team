@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>social.plus Style Guide</title>
+  <style>
+    @font-face {
+      font-family: 'Figtree';
+      src: url('figtree.woff2') format('woff2');
+      font-weight: 300 900;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    section a, section [class] { pointer-events: none; cursor: default !important; }
+
+    body {
+      background: #111;
+      color: #fff;
+      font-family: 'Figtree', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 48px 40px 96px;
+      max-width: 80rem;
+      margin: 0 auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1.page-title {
+      font-size: clamp(2.25rem, 1.5rem + 2svw, 3.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      color: #b3b3b3;
+      font-size: 15px;
+      margin-bottom: 64px;
+    }
+
+    section { margin-bottom: 72px; padding-top: 48px; border-top: 1px solid #232324; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7B94FE;
+      margin-bottom: 24px;
+    }
+    .section-note {
+      color: #b3b3b3;
+      font-size: 13px;
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #232324;
+      margin: 0 0 24px;
+    }
+
+    /* Typography */
+    .type-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #b3b3b3;
+    }
+    .type-meta {
+      font-size: 11px;
+      color: #717275;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* Color grid */
+    .color-group { margin-bottom: 32px; }
+    .color-group-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #b3b3b3;
+      margin-bottom: 12px;
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .color-card {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #232324;
+      background: #1a1a1a;
+    }
+    .color-swatch {
+      height: 56px;
+      width: 100%;
+    }
+    .color-info {
+      padding: 10px 12px;
+      background: #1a1a1a;
+    }
+    .color-var {
+      font-size: 12px;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      color: #b3b3b3;
+      margin-bottom: 2px;
+    }
+    .color-hex {
+      font-size: 11px;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      color: #717275;
+    }
+
+    /* Gradient grid */
+    .grad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .grad-card {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #232324;
+    }
+    .grad-swatch {
+      height: 64px;
+      width: 100%;
+    }
+    .grad-info {
+      padding: 10px 12px;
+      background: #1a1a1a;
+    }
+    .grad-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: #b3b3b3;
+      margin-bottom: 4px;
+    }
+    .grad-css {
+      font-size: 11px;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      color: #717275;
+      line-height: 1.5;
+    }
+
+    /* Token rows */
+    .token-row {
+      display: grid;
+      grid-template-columns: 260px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .token-row:last-child { border-bottom: none; }
+    .token-name {
+      font-size: 12px;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      color: #b3b3b3;
+    }
+    .token-value {
+      font-size: 11px;
+      font-family: 'SF Mono', ui-monospace, monospace;
+      color: #717275;
+    }
+    .border-sample {
+      width: 48px;
+      height: 32px;
+      border-radius: 6px;
+      background: #1a1a1a;
+    }
+    .text-sample {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    /* ─── Nav / Webflow classes ─── */
+    .nav_mega-menu { position: relative; width: 100%; max-width: 100%; }
+    .announcement-bar { position: relative; overflow: hidden; width: 100%; max-width: 100%; padding: 0 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; }
+    .announcement-bar_gradient { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; background: linear-gradient(135deg, #45a5ed 0%, #3769ec 50%, #3b41ec 100%); }
+    .announcement-bar_desktop { position: relative; z-index: 2; }
+    .announcement-bar_content { display: flex; align-items: center; justify-content: center; height: 100%; opacity: 1; }
+    .announcement-bar_rich-text { font-size: 0.875rem; color: #fff; }
+    .announcement-bar_rich-text a { color: #fff; text-decoration: none; }
+
+    .nav_mega-menu_wrapper { width: 100%; height: 5.25rem; max-width: 100%; padding: 0 2rem; border: 0.0625rem solid #232324; border-radius: 0.5rem; background-color: #111; }
+    .nav_mega-menu_content { display: flex; width: 100%; height: 100%; max-width: 80rem; margin: 0 auto; justify-content: flex-start; }
+    .nav_mega-menu_parent { display: flex; width: 100%; justify-content: space-between; }
+    .nav-logo_wrapper { display: inline-flex; height: 100%; margin-right: 3.5rem; align-items: center; flex-shrink: 0; }
+    .nav-logo_content { display: flex; height: 100%; align-items: center; }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo_img { height: 1.75rem; width: auto; }
+    .nav_menu { position: static; display: flex; height: 100%; align-items: center; flex: 1 1 0%; }
+    .nav_dropdown { position: relative; height: 100%; }
+    .nav_link { position: static; display: flex; height: 100%; margin: 0 1rem; padding: 0; flex-direction: column; justify-content: space-between; border-bottom: 0.125rem solid transparent; transition: color 150ms ease; color: #fff; text-decoration: none; cursor: pointer; }
+    .nav_link-content { display: flex; height: 100%; align-items: center; gap: 0.25rem; }
+    .nav_link-text { font-size: 1rem; line-height: 1.1; font-weight: 500; white-space: nowrap; }
+    .nav_dropdown-icon { display: flex; align-items: center; color: inherit; opacity: 0.5; }
+    .nav_dropdown-icon svg { width: 1rem; height: 1rem; }
+    .nav_line-wrapper { width: 100%; }
+    .nav_line { height: 0.125rem; background: transparent; border-radius: 1px; }
+    .nav_button-wrapper { display: flex; height: 100%; align-items: center; }
+
+    .cta-button { position: relative; display: inline-flex; overflow: hidden; padding: 0.125rem; flex-direction: column; justify-content: center; align-items: center; flex-shrink: 0; border-radius: 10em; background-color: #3b41ec; color: #fff; }
+    .cta-button_bg { z-index: 1; display: flex; width: 100%; height: 100%; max-height: 100%; max-width: 100%; min-height: 2.8rem; padding: 0.5rem 1.5rem; justify-content: center; align-items: center; border-radius: 25em; background-image: linear-gradient(90deg, #3b41ec, #272b9d); white-space: nowrap; }
+    .button-content { display: flex; justify-content: flex-start; align-items: center; gap: 0.75rem; }
+    .button-text { font-size: 1rem; font-weight: 500; color: #fff; }
+    .button-icon_wrapper { display: flex; margin-right: -1rem; justify-content: center; align-items: center; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-radius: 100%; background-color: #3b41ec; }
+    .arrow-social { width: 1.75rem; height: 1.75rem; padding: 0.25rem; flex-grow: 0; flex-shrink: 0; flex-basis: auto; fill: currentColor; }
+    .cta-button.c-grey { background-color: #666; }
+    .cta-button.c-grey .cta-button_bg { background-image: none; background-color: #1a1a1a; }
+    .cta-button.c-grey .button-icon_wrapper { background-color: #666; }
+
+    /* ─── CTA / Webflow classes ─── */
+    .footer-cta { border-top: 0.0625rem solid #232324; border-bottom: 0.0625rem solid #232324; color: #fff; flex-flow: row; justify-content: space-between; align-items: stretch; padding: 3.5rem 0; display: flex; }
+    .footer-wrap { z-index: 2; justify-content: space-between; align-items: center; width: 100%; max-width: 100%; display: flex; }
+    .footer-cta-content { flex: 1; }
+    .footer-cta-text { font-size: clamp(2.75rem, 1.5rem + 2svw, 5rem); margin-bottom: 1rem; font-weight: 700; line-height: 1.15; }
+    .footer-cta_button-wrapper { transform: scale(1.2); }
+
+    /* ─── Footer / Webflow classes ─── */
+    .footer-wrapper { position: relative; z-index: 5; overflow: hidden; padding: 4rem 0 2rem; background-color: #111; color: #fff; }
+    .footer-content { position: relative; z-index: 2; }
+    .container-large { width: 100%; max-width: 80rem; margin: 0 auto; }
+    .footer-parent { display: flex; width: 100%; padding-bottom: 2rem; justify-content: space-between; flex-wrap: wrap; }
+    .footer-row-1_left { display: flex; margin-top: -0.5rem; padding-right: 4rem; flex-direction: column; align-items: flex-start; flex: 1 1 0%; }
+    .footer-row-1_right { display: flex; width: 66.66%; padding-bottom: 4rem; justify-content: space-between; flex-wrap: wrap; }
+    .footer-logo { margin-bottom: 2rem; flex-shrink: 0; display: inline-flex; }
+    .footer-logo_img { height: 1.75rem; width: auto; }
+    .newsletter-footer-wrapper { margin-bottom: 1rem; }
+    .newsletter-footer-wrapper .footer-text { font-size: 1rem; color: #b3b3b3; margin-bottom: 0.75rem; }
+    .footer-newsletter-form { display: flex; gap: 0.5rem; }
+    .footer-newsletter-form input { flex: 1; background: transparent; border: 0.0625rem solid #232324; border-radius: 10em; padding: 0.6rem 1.25rem; color: #b3b3b3; font-size: 0.875rem; font-family: 'Figtree', sans-serif; outline: none; }
+    .footer-newsletter-form input::placeholder { color: #717275; }
+    .footer-newsletter-form .cta-button { font-size: 0.875rem; }
+    .footer-privacy-text { font-size: 0.8125rem; color: #717275; margin-top: 0.75rem; line-height: 1.5; }
+    .footer-privacy-text a { color: #717275; text-decoration: underline; }
+    .footer-child-wrapper { display: flex; flex-direction: column; flex-shrink: 1; }
+    .footer-heading { margin-bottom: 1.25rem; font-size: 1.125rem; line-height: 1.25; font-weight: 600; color: #fff; }
+    a.footer-link-block { display: flex; margin-bottom: 1rem; transition: color 150ms ease; color: #b3b3b3; font-size: 1rem; text-decoration: none; align-items: center; gap: 0.25rem; }
+    a.footer-link-block:hover { color: #fff; }
+    .icon-small { width: 0.875rem; height: 0.875rem; display: inline-flex; color: inherit; }
+    .icon-small svg { width: 100%; height: 100%; }
+    .footer-row-2 { display: flex; width: 100%; max-width: 80rem; margin: 0 auto; padding: 1.5rem 0; justify-content: space-between; align-items: center; border-top: 0.0625rem solid #232324; border-bottom: 0.0625rem solid #232324; }
+    .footer-horizontal-links { display: flex; align-items: center; flex: 1 1 0%; gap: 1.5rem; }
+    a.footer-link-block.is--horizontal { margin-bottom: 0; font-size: 0.875rem; }
+    .footer-social-icons { display: flex; align-items: center; }
+    .footer-social-link { width: 1.5rem; height: 1.5rem; margin-left: 1.25rem; flex-shrink: 0; color: #d0d0d1; display: inline-flex; align-items: center; justify-content: center; }
+    .footer-social-link svg { width: 100%; height: 100%; fill: currentColor; }
+    .footer-row-3 { display: flex; width: 100%; max-width: 80rem; margin: 0 auto; padding-top: 2rem; justify-content: space-between; align-items: center; font-size: 0.875rem; color: #717275; }
+    .footer-row-3_middle { display: flex; gap: 2.5rem; }
+    .footer-bottom_link { color: #717275; text-decoration: none; display: flex; align-items: center; gap: 0.35rem; font-size: 0.875rem; }
+    .footer-bottom_link:hover { color: #b3b3b3; }
+    .gdpr-icon { width: 1.25rem; height: 1.25rem; margin-right: 0.25rem; }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">social.plus</h1>
+  <p class="page-subtitle">Style guide. All values from the live Webflow site.</p>
+
+  <!-- ─── TYPOGRAPHY ─── -->
+  <section>
+    <div class="section-label">Headings</div>
+    <p class="section-note">Figtree variable font (300-900), loaded from figtree.woff2. All heading sizes use fluid clamp() and are defined as Webflow variables in the Typography collection.</p>
+    <hr>
+
+    <div class="type-row">
+      <span class="type-label">H1 Heading</span>
+      <div>
+        <div style="font-size:clamp(2.75rem, 1.5rem + 2svw, 5rem); font-weight:700; line-height:1.1">H1 Heading</div>
+        <div class="type-meta">
+          --h1-font-size<br>
+          clamp(2.75rem, 1.5rem + 2svw, 5rem) · 44-80px
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <span class="type-label">H2 Heading</span>
+      <div>
+        <div style="font-size:clamp(2.25rem, 1.5rem + 2svw, 3.25rem); font-weight:700; line-height:1.25">H2 Heading</div>
+        <div class="type-meta">
+          --h2-font-size<br>
+          clamp(2.25rem, 1.5rem + 2svw, 3.25rem) · 36-52px
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <span class="type-label">H3 Heading</span>
+      <div>
+        <div style="font-size:clamp(1.75rem, 1rem + 2svw, 2.25rem); font-weight:700; line-height:1.25">H3 Heading</div>
+        <div class="type-meta">
+          --h3-font-size<br>
+          clamp(1.75rem, 1rem + 2svw, 2.25rem) · 28-36px
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <span class="type-label">H4 Heading</span>
+      <div>
+        <div style="font-size:clamp(1.5rem, 0.875rem + 2svw, 1.75rem); font-weight:700; line-height:1.25">H4 Heading</div>
+        <div class="type-meta">
+          --h4-font-size<br>
+          clamp(1.5rem, 0.875rem + 2svw, 1.75rem) · 24-28px
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <span class="type-label">H5 Heading</span>
+      <div>
+        <div style="font-size:1.25rem; font-weight:700; line-height:1.25">H5 Heading</div>
+        <div class="type-meta">
+          --h5-font-size<br>
+          1.25rem · 20px
+        </div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <span class="type-label">H6 Heading</span>
+      <div>
+        <div style="font-size:1.125rem; font-weight:700; line-height:1.25">H6 Heading</div>
+        <div class="type-meta">
+          --h6-font-size<br>
+          1.125rem · 18px
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BRAND COLORS ─── -->
+  <section>
+    <div class="section-label">Brand Colors</div>
+    <p class="section-note">Webflow variable names (General collection) with hex values.</p>
+    <hr>
+
+    <div class="color-group">
+      <div class="color-group-title">Core</div>
+      <div class="color-grid">
+        <div class="color-card"><div class="color-swatch" style="background:#111"></div><div class="color-info"><div class="color-var">--social--dark</div><div class="color-hex">#111111</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#222"></div><div class="color-info"><div class="color-var">--social--grey</div><div class="color-hex">#222222</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#444"></div><div class="color-info"><div class="color-var">--social--light-grey</div><div class="color-hex">#444444</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#1a1a1a"></div><div class="color-info"><div class="color-var">--social--dark-gray-background</div><div class="color-hex">#1a1a1a</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#181818"></div><div class="color-info"><div class="color-var">--secondary--menu-bg</div><div class="color-hex">#181818</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#f9f9f9"></div><div class="color-info"><div class="color-var">--social--grey-background</div><div class="color-hex">#f9f9f9</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:whitesmoke; border-bottom:1px solid #232324"></div><div class="color-info"><div class="color-var">--main--whitesmoke</div><div class="color-hex">#f5f5f5</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#fff; border-bottom:1px solid #232324"></div><div class="color-info"><div class="color-var">--main--white</div><div class="color-hex">#ffffff</div></div></div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-title">Blue (primary brand)</div>
+      <div class="color-grid">
+        <div class="color-card"><div class="color-swatch" style="background:#3b41ec"></div><div class="color-info"><div class="color-var">--social--main-blue</div><div class="color-hex">#3b41ec</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#272b9d"></div><div class="color-info"><div class="color-var">--social--button-hover</div><div class="color-hex">#272b9d</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#27265e"></div><div class="color-info"><div class="color-var">--social--button-pressed</div><div class="color-hex">#27265e</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:rgba(42, 49, 233, 0.1)"></div><div class="color-info"><div class="color-var">--social--blue-transparent</div><div class="color-hex">rgba(42, 49, 233, 0.1)</div></div></div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="color-group-title">Secondary</div>
+      <div class="color-grid">
+        <div class="color-card"><div class="color-swatch" style="background:#1dc497"></div><div class="color-info"><div class="color-var">--secondary--green</div><div class="color-hex">#1dc497</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#f7c506"></div><div class="color-info"><div class="color-var">--secondary--yellow</div><div class="color-hex">#f7c506</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#ff305a"></div><div class="color-info"><div class="color-var">--secondary--red</div><div class="color-hex">#ff305a</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#ff6937"></div><div class="color-info"><div class="color-var">--secondary--orange</div><div class="color-hex">#ff6937</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#9f72ff"></div><div class="color-info"><div class="color-var">--secondary--purple</div><div class="color-hex">#9f72ff</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#f568f0"></div><div class="color-info"><div class="color-var">--secondary--pink</div><div class="color-hex">#f568f0</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TEXT COLORS ─── -->
+  <section>
+    <div class="section-label">Text Colors</div>
+    <hr>
+
+    <div class="token-row">
+      <span class="token-name">--main--white</span>
+      <span class="token-value">#ffffff</span>
+      <span class="text-sample" style="color:#fff">White text on dark</span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--text--text-color-grey-light</span>
+      <span class="token-value">#b3b3b3</span>
+      <span class="text-sample" style="color:#b3b3b3">Light grey text</span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--text--text-color-grey-medium</span>
+      <span class="token-value">#717275</span>
+      <span class="text-sample" style="color:#717275">Medium grey text</span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--text--text-color-grey-dark</span>
+      <span class="token-value">#414347</span>
+      <span class="text-sample" style="color:#414347">Dark grey text</span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--text--text-color-dark</span>
+      <span class="token-value">#111111</span>
+      <span class="text-sample" style="color:#111; background:#f9f9f9; padding:2px 8px; border-radius:4px">Dark text on light</span>
+    </div>
+  </section>
+
+  <!-- ─── BORDERS ─── -->
+  <section>
+    <div class="section-label">Borders</div>
+    <hr>
+
+    <div class="token-row">
+      <span class="token-name">--border--border-light-grey</span>
+      <span class="token-value">#e7e7e7</span>
+      <span><span class="border-sample" style="border:2px solid #e7e7e7; display:inline-block"></span></span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--border--border-med-grey</span>
+      <span class="token-value">#d0d0d1</span>
+      <span><span class="border-sample" style="border:2px solid #d0d0d1; display:inline-block"></span></span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--border--border-dark-grey</span>
+      <span class="token-value">#666666</span>
+      <span><span class="border-sample" style="border:2px solid #666; display:inline-block"></span></span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--border--border-dark</span>
+      <span class="token-value">#232324</span>
+      <span><span class="border-sample" style="border:2px solid #232324; display:inline-block"></span></span>
+    </div>
+    <div class="token-row">
+      <span class="token-name">--border--border-hover</span>
+      <span class="token-value">#39393a</span>
+      <span><span class="border-sample" style="border:2px solid #39393a; display:inline-block"></span></span>
+    </div>
+  </section>
+
+  <!-- ─── GRADIENTS ─── -->
+  <section>
+    <div class="section-label">Gradients</div>
+    <p class="section-note">Webflow gradient color stops. Used on the announcement banner and hero sections.</p>
+    <hr>
+
+    <div class="color-group" style="margin-bottom:24px">
+      <div class="color-group-title">Gradient color stops (Webflow variables)</div>
+      <div class="color-grid">
+        <div class="color-card"><div class="color-swatch" style="background:#45a5ed"></div><div class="color-info"><div class="color-var">--gradient--light-blue</div><div class="color-hex">#45a5ed</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#3769ec"></div><div class="color-info"><div class="color-var">--gradient--medium-blue</div><div class="color-hex">#3769ec</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#3b41ec"></div><div class="color-info"><div class="color-var">--gradient--dark-blue</div><div class="color-hex">#3b41ec (= --social--main-blue)</div></div></div>
+      </div>
+    </div>
+
+    <div class="color-group-title">Common gradients on the site</div>
+    <div class="grad-grid">
+      <div class="grad-card">
+        <div class="grad-swatch" style="background:linear-gradient(135deg, #45a5ed 0%, #3769ec 50%, #3b41ec 100%)"></div>
+        <div class="grad-info">
+          <div class="grad-name">Blue gradient (announcement banner)</div>
+          <div class="grad-css">light-blue &rarr; medium-blue &rarr; dark-blue</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-swatch" style="background:linear-gradient(to right, #f568f0 0%, #ff6937 50%, #f7c506 100%)"></div>
+        <div class="grad-info">
+          <div class="grad-name">Warm gradient (pink to yellow)</div>
+          <div class="grad-css">pink &rarr; orange &rarr; yellow</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-swatch" style="background:linear-gradient(135deg, #ff6937 0%, #f7c506 100%)"></div>
+        <div class="grad-info">
+          <div class="grad-name">Orange to yellow</div>
+          <div class="grad-css">orange &rarr; yellow</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-swatch" style="background:linear-gradient(135deg, #f568f0 0%, #ff6937 100%)"></div>
+        <div class="grad-info">
+          <div class="grad-name">Pink to orange</div>
+          <div class="grad-css">pink &rarr; orange</div>
+        </div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-swatch" style="background:linear-gradient(135deg, #ff305a 0%, #f568f0 100%)"></div>
+        <div class="grad-info">
+          <div class="grad-name">Red to pink</div>
+          <div class="grad-css">red &rarr; pink</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTAINERS ─── -->
+  <section>
+    <div class="section-label">Containers</div>
+    <p class="section-note">Layout containers used across the live Webflow site. All content is constrained to a maximum width and horizontally centered.</p>
+    <hr>
+
+    <div style="display:flex; flex-direction:column; gap:1.5rem; margin-bottom:24px">
+      <div>
+        <div style="width:100%; max-width:80rem; margin:0 auto; height:3rem; border:0.0625rem solid #232324; border-radius:0.5rem; background:#1a1a1a; display:flex; align-items:center; justify-content:space-between; padding:0 1rem">
+          <span style="font-size:0.8125rem; font-family:'SF Mono',ui-monospace,monospace; color:#b3b3b3">.container-large</span>
+          <span style="font-size:0.75rem; font-family:'SF Mono',ui-monospace,monospace; color:#717275">max-width: 80rem (1280px)</span>
+        </div>
+      </div>
+      <div>
+        <div style="width:100%; max-width:65rem; margin:0 auto; height:3rem; border:0.0625rem solid #232324; border-radius:0.5rem; background:#1a1a1a; display:flex; align-items:center; justify-content:space-between; padding:0 1rem">
+          <span style="font-size:0.8125rem; font-family:'SF Mono',ui-monospace,monospace; color:#b3b3b3">.container-medium-large</span>
+          <span style="font-size:0.75rem; font-family:'SF Mono',ui-monospace,monospace; color:#717275">max-width: 65rem (1040px)</span>
+        </div>
+      </div>
+      <div>
+        <div style="width:100%; max-width:50rem; margin:0 auto; height:3rem; border:0.0625rem solid #232324; border-radius:0.5rem; background:#1a1a1a; display:flex; align-items:center; justify-content:space-between; padding:0 1rem">
+          <span style="font-size:0.8125rem; font-family:'SF Mono',ui-monospace,monospace; color:#b3b3b3">.container-heading</span>
+          <span style="font-size:0.75rem; font-family:'SF Mono',ui-monospace,monospace; color:#717275">max-width: 50rem (800px)</span>
+        </div>
+      </div>
+      <div>
+        <div style="width:100%; max-width:47.5rem; margin:0 auto; height:3rem; border:0.0625rem solid #232324; border-radius:0.5rem; background:#1a1a1a; display:flex; align-items:center; justify-content:space-between; padding:0 1rem">
+          <span style="font-size:0.8125rem; font-family:'SF Mono',ui-monospace,monospace; color:#b3b3b3">.container-medium</span>
+          <span style="font-size:0.75rem; font-family:'SF Mono',ui-monospace,monospace; color:#717275">max-width: 47.5rem (760px)</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── BUTTONS ─── -->
+  <section>
+    <div class="section-label">Buttons</div>
+    <p class="section-note">Primary (--social--main-blue gradient) and secondary (--border--border-dark-grey) CTA button variants. Pill shape with 10em/25em border-radius, arrow icon at 1.75rem.</p>
+
+    <div style="display:flex; gap:2rem; align-items:center; margin-bottom:24px">
+      <div class="cta-button">
+        <div class="cta-button_bg">
+          <div class="button-content">
+            <div class="button-text">Contact Sales</div>
+            <div class="button-icon_wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true" class="arrow-social"><path d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-button c-grey">
+        <div class="cta-button_bg">
+          <div class="button-content">
+            <div class="button-text">Documentation</div>
+            <div class="button-icon_wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true" class="arrow-social"><path d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-button c-grey">
+        <div class="cta-button_bg">
+          <div class="button-content">
+            <div class="button-text">Learn more</div>
+            <div class="button-icon_wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true" class="arrow-social"><path d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── NAVIGATION ─── -->
+  <section>
+    <div class="section-label">Navigation</div>
+    <p class="section-note">Component: "Nav / Main" (group: Navigation). Webflow NavbarWrapper with announcement bar, mega-menu dropdowns, and CTA. Nav bar height: 5.25rem (84px).</p>
+    <hr>
+
+    <div class="nav_mega-menu" style="margin-bottom:24px">
+      <div class="nav_mega-menu_wrapper" style="outline:1px solid #232324">
+        <div class="nav_mega-menu_content">
+          <div class="nav_mega-menu_parent">
+            <div class="nav-logo_wrapper">
+              <div class="nav-logo_content">
+                <a href="/" class="nav-logo" aria-label="home">
+                  <svg class="nav-logo_img" viewBox="0 0 2255.26 389.98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nav-lg1" x1="125.8" y1="60.75" x2="307.71" y2="270.34" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f568f0"/><stop offset=".516" stop-color="#f66005"/><stop offset="1" stop-color="#f7c506"/></linearGradient><linearGradient id="nav-lg2" x1="62.83" y1="116.6" x2="247.38" y2="334.1" gradientUnits="userSpaceOnUse"><stop offset=".097" stop-color="#3769ec"/><stop offset=".469" stop-color="#3b41ec"/><stop offset=".91" stop-color="#45a5ed"/></linearGradient></defs><path fill="url(#nav-lg1)" d="M324.98 129.99h-65V65C259.99 29.1 230.89 0 194.99 0s-65 29.1-65 65v194.99h194.99c35.9 0 65-29.1 65-65s-29.1-65-65-65Z"/><path fill="url(#nav-lg2)" d="M129.99 129.99H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h65v65c0 35.9 29.1 65 65 65s65-29.1 65-65v-65-62.59c0-37.23-30.18-67.41-67.4-67.41h-62.6Z"/><path fill="#27265e" d="M194.99 129.99c35.87 0 65 29.12 65 65s-29.12 65-65 65h-65v-65c0-35.87 29.12-65 65-65Z"/><path fill="#fff" d="M496.73 254.17c-5.41-10.83.36-18.77 11.55-21.65l11.19-2.53c9.74-2.53 14.07 2.17 21.65 9.74 6.5 7.22 16.24 10.83 27.79 10.83 14.07 0 23.82-6.5 23.82-16.24 0-7.94-5.41-11.91-17.32-16.24l-22.74-7.94c-19.13-6.14-52.33-20.21-52.33-53.77 0-34.65 28.87-58.46 68.93-58.46 23.82 0 45.47 7.58 59.19 28.15 7.22 10.47 1.8 19.85-10.1 22.74l-10.1 2.53c-9.38 2.53-14.44-.72-20.93-6.86-5.05-5.05-11.55-6.86-18.04-6.86-11.55 0-18.77 7.22-18.77 15.88 0 7.94 7.22 11.91 16.96 15.16l23.1 8.66c38.25 12.63 51.97 33.2 52.69 55.94 0 38.98-34.65 58.1-74.7 58.1-32.84 0-59.55-12.27-71.82-37.17ZM664.18 194.63c0-53.41 44.03-96.72 102.85-96.72s102.85 43.31 102.85 96.72-44.03 96.72-102.85 96.72-102.85-42.95-102.85-96.72Zm152.65.36c0-29.23-22.01-51.61-49.8-51.61s-49.8 22.37-49.8 51.61 21.65 51.25 49.8 51.25 49.8-22.37 49.8-51.25ZM891.17 195.71c0-54.13 41.5-97.8 106.82-97.8 17.68 0 38.98 3.97 58.82 15.52 9.74 6.13 10.1 15.52 3.25 24.54l-5.77 7.22c-6.86 8.66-14.07 9.02-24.54 4.33-11.91-5.77-23.46-6.5-28.51-6.5-31.4 0-54.13 21.29-54.13 51.61s22.74 51.61 54.13 51.61c5.05 0 16.6-.72 28.51-6.5 10.47-4.69 18.04-4.33 24.54 4.33l5.77 7.22c6.86 9.02 5.41 19.49-6.5 25.98-18.4 10.47-38.61 14.07-55.58 14.07-64.6 0-106.82-42.58-106.82-95.63ZM1095.07 51c0-16.6 11.91-29.23 33.56-29.23s33.56 12.63 33.56 29.23-12.99 28.87-33.56 28.87-33.56-12.63-33.56-28.87Zm5.77 219.05V119.2c0-11.19 6.14-17.32 17.32-17.32h20.93c11.19 0 17.68 6.13 17.68 17.32v150.85c0 11.19-6.5 17.32-17.68 17.32h-20.93c-11.19 0-17.32-6.13-17.32-17.32ZM1190.71 194.63c0-54.49 37.17-96.72 89.14-96.72 24.54 0 46.19 9.38 59.55 30.31v-9.02c0-11.19 6.13-17.32 17.32-17.32h21.29c11.19 0 17.32 6.13 17.32 17.32v150.85c0 11.19-6.13 17.32-17.32 17.32h-21.29c-11.19 0-17.32-6.13-17.32-17.32v-8.66c-13.35 20.57-35.01 29.95-59.55 29.95-51.97 0-89.14-41.86-89.14-96.72Zm149.4 0c0-29.59-18.77-51.97-47.28-51.97-29.23 0-46.19 23.46-46.19 51.97s16.96 51.97 46.19 51.97 47.28-22.37 47.28-51.97ZM1440.8 270.05V43.78c0-11.19 6.13-17.32 17.32-17.32h20.93c11.19 0 17.68 6.13 17.68 17.32v226.28c0 11.19-6.5 17.32-17.68 17.32h-20.93c-11.19 0-17.32-6.13-17.32-17.32ZM1531.48 269.69c0-11.91 9.38-21.65 21.65-21.65s21.65 9.74 21.65 21.65-9.38 21.65-21.65 21.65-21.65-9.38-21.65-21.65ZM1606.03 358.47V117.04c0-6.14 3.61-9.74 9.38-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v25.62c16.24-27.07 41.86-39.34 70.37-39.34 54.85 0 90.22 42.22 90.22 94.19 0 51.25-34.65 93.83-89.86 93.83-29.23 0-54.85-12.63-70.73-39.34v106.46c0 6.14-3.61 9.74-9.74 9.74h-8.3c-5.77 0-9.38-3.61-9.38-9.74Zm160.23-160.95c0-38.25-24.18-69.65-65.32-69.65-39.7 0-67.85 29.23-68.21 69.65.36 39.7 27.79 69.29 68.21 69.29 41.86 0 65.32-31.76 65.32-69.29ZM1839.88 277.63V36.2c0-6.14 3.61-9.74 9.74-9.74h8.3c5.77 0 9.38 3.61 9.38 9.74v241.43c0 6.14-3.61 9.74-9.38 9.74h-8.3c-6.14 0-9.74-3.61-9.74-9.74ZM1923.6 209.79v-92.75c0-5.77 3.61-9.74 9.74-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v92.75c0 43.31 22.74 57.02 45.47 57.02 19.85 0 60.63-14.07 60.99-72.18v-77.59c0-6.14 3.61-9.74 9.74-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v160.59c0 6.14-3.61 9.74-9.74 9.74h-8.3c-6.14 0-9.74-3.61-9.74-9.74v-28.51c-9.38 28.51-36.09 42.22-62.79 42.22-38.25 0-71.46-22.37-71.46-81.56ZM2130.39 257.78c-3.61-6.13-.36-10.47 5.77-12.27l6.5-1.8c5.41-1.44 8.66.72 12.27 5.41 7.22 11.19 21.65 18.41 38.25 18.41 20.21 0 35.73-11.91 35.73-28.87 0-13.71-10.1-22.01-25.26-27.07l-25.62-8.3c-25.98-7.94-42.95-22.37-42.95-47.64 0-28.51 22.37-52.33 57.74-52.33 20.57 0 41.14 8.3 52.33 29.59 3.25 6.14 0 10.83-6.5 12.27l-5.77 1.44c-5.41 1.44-8.66-.72-12.27-5.77-6.5-9.38-16.96-13.71-27.07-13.71-19.85 0-31.76 13.35-31.76 27.79 0 14.8 12.63 22.01 24.9 25.98l26.71 8.66c32.12 9.74 41.86 29.59 41.86 49.44 0 32.84-28.87 52.33-62.43 52.33-27.07 0-51.25-11.91-62.43-33.56Z"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <nav class="nav_menu">
+              <div class="nav_dropdown">
+                <div class="nav_link">
+                  <div class="nav_link-content">
+                    <div class="nav_link-text">Product</div>
+                    <div class="nav_dropdown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"></path></svg></div>
+                  </div>
+                  <div class="nav_line-wrapper"><div class="nav_line"></div></div>
+                </div>
+              </div>
+
+              <div class="nav_dropdown">
+                <div class="nav_link">
+                  <div class="nav_link-content">
+                    <div class="nav_link-text">Use Cases</div>
+                    <div class="nav_dropdown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"></path></svg></div>
+                  </div>
+                  <div class="nav_line-wrapper"><div class="nav_line"></div></div>
+                </div>
+              </div>
+
+              <a href="/pricing" class="nav_link">
+                <div class="nav_link-content">
+                  <div class="nav_link-text">Pricing</div>
+                </div>
+                <div class="nav_line-wrapper"><div class="nav_line"></div></div>
+              </a>
+
+              <div class="nav_dropdown">
+                <div class="nav_link">
+                  <div class="nav_link-content">
+                    <div class="nav_link-text">Resources</div>
+                    <div class="nav_dropdown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"></path></svg></div>
+                  </div>
+                  <div class="nav_line-wrapper"><div class="nav_line"></div></div>
+                </div>
+              </div>
+
+              <div class="nav_dropdown">
+                <div class="nav_link">
+                  <div class="nav_link-content">
+                    <div class="nav_link-text">Company</div>
+                    <div class="nav_dropdown-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"></path></svg></div>
+                  </div>
+                  <div class="nav_line-wrapper"><div class="nav_line"></div></div>
+                </div>
+              </div>
+            </nav>
+
+            <div class="nav_button-wrapper">
+              <div class="cta-button">
+                <div class="cta-button_bg">
+                  <div class="button-content">
+                    <div class="button-text">Contact Sales</div>
+                    <div class="button-icon_wrapper">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true" class="arrow-social"><path d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"></path></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── CALL TO ACTION ─── -->
+  <section>
+    <div class="section-label">Call to Action</div>
+    <p class="section-note">Component: "Section / Footer / Contact Forms" (group: Footer). Full-width CTA bar with heading, subtext, and Contact Sales button scaled to 1.2x.</p>
+    <hr>
+
+    <div class="footer-cta" style="margin-bottom:24px">
+      <div class="footer-wrap">
+        <div class="footer-cta-content">
+          <div class="footer-cta-text">Make your app social+</div>
+          <div style="color:#b3b3b3; max-width:55ch">Book a call with our sales team and let us help you get started with social.plus</div>
+        </div>
+        <div class="footer-cta_button-wrapper">
+          <div class="cta-button">
+            <div class="cta-button_bg">
+              <div class="button-content">
+                <div class="button-text">Contact Sales</div>
+                <div class="button-icon_wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true" class="arrow-social"><path d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"></path></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <section>
+    <div class="section-label">Footer</div>
+    <p class="section-note">Component: "Section / Footer / Contact Forms" (group: Footer). Semantic &lt;footer&gt; tag, 3 content rows.</p>
+    <hr>
+
+    <footer class="footer-wrapper" style="margin-bottom:24px">
+      <div class="footer-content">
+        <div class="container-large">
+          <div class="footer-parent">
+            <div class="footer-row-1_left">
+              <a href="/" class="footer-logo">
+                <svg class="footer-logo_img" viewBox="0 0 2255.26 389.98" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ftr-lg1" x1="125.8" y1="60.75" x2="307.71" y2="270.34" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f568f0"/><stop offset=".516" stop-color="#f66005"/><stop offset="1" stop-color="#f7c506"/></linearGradient><linearGradient id="ftr-lg2" x1="62.83" y1="116.6" x2="247.38" y2="334.1" gradientUnits="userSpaceOnUse"><stop offset=".097" stop-color="#3769ec"/><stop offset=".469" stop-color="#3b41ec"/><stop offset=".91" stop-color="#45a5ed"/></linearGradient></defs><path fill="url(#ftr-lg1)" d="M324.98 129.99h-65V65C259.99 29.1 230.89 0 194.99 0s-65 29.1-65 65v194.99h194.99c35.9 0 65-29.1 65-65s-29.1-65-65-65Z"/><path fill="url(#ftr-lg2)" d="M129.99 129.99H65c-35.9 0-65 29.1-65 65s29.1 65 65 65h65v65c0 35.9 29.1 65 65 65s65-29.1 65-65v-65-62.59c0-37.23-30.18-67.41-67.4-67.41h-62.6Z"/><path fill="#27265e" d="M194.99 129.99c35.87 0 65 29.12 65 65s-29.12 65-65 65h-65v-65c0-35.87 29.12-65 65-65Z"/><path fill="#fff" d="M496.73 254.17c-5.41-10.83.36-18.77 11.55-21.65l11.19-2.53c9.74-2.53 14.07 2.17 21.65 9.74 6.5 7.22 16.24 10.83 27.79 10.83 14.07 0 23.82-6.5 23.82-16.24 0-7.94-5.41-11.91-17.32-16.24l-22.74-7.94c-19.13-6.14-52.33-20.21-52.33-53.77 0-34.65 28.87-58.46 68.93-58.46 23.82 0 45.47 7.58 59.19 28.15 7.22 10.47 1.8 19.85-10.1 22.74l-10.1 2.53c-9.38 2.53-14.44-.72-20.93-6.86-5.05-5.05-11.55-6.86-18.04-6.86-11.55 0-18.77 7.22-18.77 15.88 0 7.94 7.22 11.91 16.96 15.16l23.1 8.66c38.25 12.63 51.97 33.2 52.69 55.94 0 38.98-34.65 58.1-74.7 58.1-32.84 0-59.55-12.27-71.82-37.17ZM664.18 194.63c0-53.41 44.03-96.72 102.85-96.72s102.85 43.31 102.85 96.72-44.03 96.72-102.85 96.72-102.85-42.95-102.85-96.72Zm152.65.36c0-29.23-22.01-51.61-49.8-51.61s-49.8 22.37-49.8 51.61 21.65 51.25 49.8 51.25 49.8-22.37 49.8-51.25ZM891.17 195.71c0-54.13 41.5-97.8 106.82-97.8 17.68 0 38.98 3.97 58.82 15.52 9.74 6.13 10.1 15.52 3.25 24.54l-5.77 7.22c-6.86 8.66-14.07 9.02-24.54 4.33-11.91-5.77-23.46-6.5-28.51-6.5-31.4 0-54.13 21.29-54.13 51.61s22.74 51.61 54.13 51.61c5.05 0 16.6-.72 28.51-6.5 10.47-4.69 18.04-4.33 24.54 4.33l5.77 7.22c6.86 9.02 5.41 19.49-6.5 25.98-18.4 10.47-38.61 14.07-55.58 14.07-64.6 0-106.82-42.58-106.82-95.63ZM1095.07 51c0-16.6 11.91-29.23 33.56-29.23s33.56 12.63 33.56 29.23-12.99 28.87-33.56 28.87-33.56-12.63-33.56-28.87Zm5.77 219.05V119.2c0-11.19 6.14-17.32 17.32-17.32h20.93c11.19 0 17.68 6.13 17.68 17.32v150.85c0 11.19-6.5 17.32-17.68 17.32h-20.93c-11.19 0-17.32-6.13-17.32-17.32ZM1190.71 194.63c0-54.49 37.17-96.72 89.14-96.72 24.54 0 46.19 9.38 59.55 30.31v-9.02c0-11.19 6.13-17.32 17.32-17.32h21.29c11.19 0 17.32 6.13 17.32 17.32v150.85c0 11.19-6.13 17.32-17.32 17.32h-21.29c-11.19 0-17.32-6.13-17.32-17.32v-8.66c-13.35 20.57-35.01 29.95-59.55 29.95-51.97 0-89.14-41.86-89.14-96.72Zm149.4 0c0-29.59-18.77-51.97-47.28-51.97-29.23 0-46.19 23.46-46.19 51.97s16.96 51.97 46.19 51.97 47.28-22.37 47.28-51.97ZM1440.8 270.05V43.78c0-11.19 6.13-17.32 17.32-17.32h20.93c11.19 0 17.68 6.13 17.68 17.32v226.28c0 11.19-6.5 17.32-17.68 17.32h-20.93c-11.19 0-17.32-6.13-17.32-17.32ZM1531.48 269.69c0-11.91 9.38-21.65 21.65-21.65s21.65 9.74 21.65 21.65-9.38 21.65-21.65 21.65-21.65-9.38-21.65-21.65ZM1606.03 358.47V117.04c0-6.14 3.61-9.74 9.38-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v25.62c16.24-27.07 41.86-39.34 70.37-39.34 54.85 0 90.22 42.22 90.22 94.19 0 51.25-34.65 93.83-89.86 93.83-29.23 0-54.85-12.63-70.73-39.34v106.46c0 6.14-3.61 9.74-9.74 9.74h-8.3c-5.77 0-9.38-3.61-9.38-9.74Zm160.23-160.95c0-38.25-24.18-69.65-65.32-69.65-39.7 0-67.85 29.23-68.21 69.65.36 39.7 27.79 69.29 68.21 69.29 41.86 0 65.32-31.76 65.32-69.29ZM1839.88 277.63V36.2c0-6.14 3.61-9.74 9.74-9.74h8.3c5.77 0 9.38 3.61 9.38 9.74v241.43c0 6.14-3.61 9.74-9.38 9.74h-8.3c-6.14 0-9.74-3.61-9.74-9.74ZM1923.6 209.79v-92.75c0-5.77 3.61-9.74 9.74-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v92.75c0 43.31 22.74 57.02 45.47 57.02 19.85 0 60.63-14.07 60.99-72.18v-77.59c0-6.14 3.61-9.74 9.74-9.74h8.3c6.14 0 9.74 3.61 9.74 9.74v160.59c0 6.14-3.61 9.74-9.74 9.74h-8.3c-6.14 0-9.74-3.61-9.74-9.74v-28.51c-9.38 28.51-36.09 42.22-62.79 42.22-38.25 0-71.46-22.37-71.46-81.56ZM2130.39 257.78c-3.61-6.13-.36-10.47 5.77-12.27l6.5-1.8c5.41-1.44 8.66.72 12.27 5.41 7.22 11.19 21.65 18.41 38.25 18.41 20.21 0 35.73-11.91 35.73-28.87 0-13.71-10.1-22.01-25.26-27.07l-25.62-8.3c-25.98-7.94-42.95-22.37-42.95-47.64 0-28.51 22.37-52.33 57.74-52.33 20.57 0 41.14 8.3 52.33 29.59 3.25 6.14 0 10.83-6.5 12.27l-5.77 1.44c-5.41 1.44-8.66-.72-12.27-5.77-6.5-9.38-16.96-13.71-27.07-13.71-19.85 0-31.76 13.35-31.76 27.79 0 14.8 12.63 22.01 24.9 25.98l26.71 8.66c32.12 9.74 41.86 29.59 41.86 49.44 0 32.84-28.87 52.33-62.43 52.33-27.07 0-51.25-11.91-62.43-33.56Z"/></svg>
+              </a>
+              <div class="newsletter-footer-wrapper">
+                <div class="footer-text">Subscribe to our newsletter:</div>
+                <div class="footer-newsletter-form">
+                  <input type="email" placeholder="Enter your email address" disabled>
+                  <a class="cta-button" style="font-size:0.875rem">
+                    <div class="cta-button_bg" style="min-height:2.25rem; padding:0.375rem 1.25rem">
+                      <div class="button-content"><div class="button-text" style="font-size:0.875rem">Join</div></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="footer-privacy-text">By clicking Join, I acknowledge receipt of the social.plus <a href="/legal/privacy-policy">Privacy Policy</a>.</div>
+              </div>
+            </div>
+
+            <div class="footer-row-1_right">
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Product</div>
+                <a href="/product" class="footer-link-block">Product Overview</a>
+                <a href="/analytics" class="footer-link-block">Analytics &amp; Insights</a>
+                <a href="/monetization" class="footer-link-block">Monetization</a>
+                <a href="/moderation" class="footer-link-block">Moderation</a>
+                <a href="/product/mcp-server" class="footer-link-block">MCP Server</a>
+                <a href="/pricing" class="footer-link-block">Pricing</a>
+              </div>
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Company</div>
+                <a href="/about" class="footer-link-block">About</a>
+                <a href="/careers" class="footer-link-block">Careers</a>
+                <a href="/press/news" class="footer-link-block">News</a>
+                <a href="/webinars" class="footer-link-block">Events</a>
+              </div>
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Resources</div>
+                <a href="/customer-stories" class="footer-link-block">Customer Stories</a>
+                <a href="/community-corner" class="footer-link-block">Community Corner</a>
+                <a href="/blog" class="footer-link-block">Blog</a>
+                <a href="/library" class="footer-link-block">Ebooks</a>
+                <a href="/glossary" class="footer-link-block">Glossary</a>
+              </div>
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Support</div>
+                <a href="https://learn.social.plus/" target="_blank" class="footer-link-block">Documentation <span class="icon-small"><svg viewBox="0 0 24 24" fill="none"><path d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z" fill="currentColor"></path></svg></span></a>
+                <a href="https://forum.social.plus/" target="_blank" class="footer-link-block">Developer Forum <span class="icon-small"><svg viewBox="0 0 24 24" fill="none"><path d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z" fill="currentColor"></path></svg></span></a>
+                <a href="https://status.social.plus/" target="_blank" class="footer-link-block">Service Status <span class="icon-small"><svg viewBox="0 0 24 24" fill="none"><path d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z" fill="currentColor"></path></svg></span></a>
+                <a href="/developer-portal" class="footer-link-block">Developer Portal</a>
+                <a href="/contact/contact-sales" class="footer-link-block">Contact Sales</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-row-2">
+            <div class="footer-horizontal-links">
+              <a href="/legal/gdpr-commitment" class="footer-link-block is--horizontal" style="gap:0.35rem">
+                <svg class="gdpr-icon" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="4" fill="#232324"/><path d="M6 10l3 3 5-5" stroke="#717275" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                GDPR</a>
+              <a href="/legal/privacy-policy" class="footer-link-block is--horizontal">Privacy Policy</a>
+              <a href="/legal/terms-and-conditions" class="footer-link-block is--horizontal">Terms and Conditions</a>
+              <a href="/legal" class="footer-link-block is--horizontal">Legal</a>
+              <a href="/trust" class="footer-link-block is--horizontal">Trust</a>
+            </div>
+            <div class="footer-social-icons">
+              <a href="https://www.linkedin.com/company/socialpluscorp/" target="_blank" class="footer-social-link"><svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+              <a href="https://www.instagram.com/wearesocial.plus" target="_blank" class="footer-social-link"><svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+              <a href="https://www.youtube.com/@wearesocialplus" target="_blank" class="footer-social-link"><svg viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg></a>
+              <a href="https://www.figma.com/@socialplus" target="_blank" class="footer-social-link"><svg viewBox="0 0 256 256"><path d="M198.15 96A44 44 0 0 0 168 20H96a44 44 0 0 0-30.15 76a43.9 43.9 0 0 0 1.23 65.12A48 48 0 1 0 148 196v-28.83A44 44 0 0 0 198.15 96M188 64a20 20 0 0 1-20 20h-20V44h20a20 20 0 0 1 20 20M76 64a20 20 0 0 1 20-20h28v40H96a20 20 0 0 1-20-20m20 84a20 20 0 0 1 0-40h28v40zm28 48a24 24 0 1 1-24-24h24Zm44-48a20 20 0 1 1 20-20a20 20 0 0 1-20 20"/></svg></a>
+              <a href="https://github.com/Amityco" target="_blank" class="footer-social-link"><svg viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
+            </div>
+          </div>
+
+          <div class="footer-row-3">
+            <div>&copy; 2026 Social Plus Holdings Ltd. All rights reserved.</div>
+            <div class="footer-row-3_middle">
+              <a href="/search" class="footer-bottom_link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z"/></svg>
+                Search
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+</body>
+</html>
