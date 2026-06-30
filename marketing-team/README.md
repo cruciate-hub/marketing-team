@@ -30,7 +30,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 |---|---:|---:|---|---|
 | [internal-linking-strategist](../docs/internal-linking-strategist.md) | 647 | 41.1 KB | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`), runs site-wide link audits with Structure Score + Anchor Score, and proposes inbound edits when a new page ships (Reverse mode). Uses a canonical anchor map, cannibalization warnings, link budgets for 14 article types, and authority-flow rules from `link-strategy.md`, with live page-fetch to verify insertion points. | [SKILL.md →](./skills/internal-linking-strategist/SKILL.md) |
 | [link-building-vetter](../docs/link-building-vetter.md) | 111 | 4.6 KB | Vets incoming ABC link exchange requests, scores them 1-10, and drafts response emails. | [SKILL.md →](./skills/link-building-vetter/SKILL.md) |
-| [backlink-placement-finder](../docs/backlink-placement-finder.md) | 892 | 88.6 KB | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. | [SKILL.md →](./skills/backlink-placement-finder/SKILL.md) |
+| [backlink-placement-finder](../docs/backlink-placement-finder.md) | 911 | 91.5 KB | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. | [SKILL.md →](./skills/backlink-placement-finder/SKILL.md) |
 
 ### Formatting & conversion
 

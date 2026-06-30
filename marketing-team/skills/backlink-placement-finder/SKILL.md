@@ -7,7 +7,9 @@ description: >
   "check this site for link opportunities", "where can we place links on this site", "find anchors on
   this website", "backlink opportunities", or when the user pastes one or more partner website URLs
   and asks for link placement suggestions. Also trigger when the user mentions partner websites,
-  link exchanges, or outbound link prospecting for social.plus.
+  link exchanges, or outbound link prospecting for social.plus. Defaults to editorial reading mode
+  for ≤5 candidate articles per partner — read articles end-to-end, generate angles editorially,
+  then validate against lists as constraints rather than lookups.
 ---
 
 # Backlink Placement Finder for social.plus
@@ -464,6 +466,23 @@ For each partner article opened in Step 2.5, scan body paragraphs for any of thr
    - For each article, ask the editorial question: *"If I were the editor of this piece and a reader hit this paragraph, where would a link to social.plus genuinely improve the reading experience? What concept is the reader reaching toward that social.plus has content on?"*
    - Surface 5-10 candidate angles per article. Be deliberately wider than feels necessary; the point of editorial mode is to generate options the mechanical scan would never propose. The "social sellers" placement on Pineable (2026-06-19) was found this way — by reading the AI-photo-tools article end-to-end and noticing that the phrase landed squarely in social.plus's live-commerce / social-commerce territory, despite appearing nowhere in `anchors.md` or the pattern cache. A list-scan, no matter how big the list, would not have surfaced it.
    - **Lists are FENCES applied AFTER editorial thinking, not LOOKUPS consulted BEFORE.** `references/anchors.md`, `references/creative-anchor-patterns.md`, and the blog/glossary inventory exist to *validate* candidates, not to *generate* them. Generate from the article; validate against the lists.
+   - **Procedural enforcement — write candidates BEFORE consulting any list.** Write down all 5-10 candidate angles per article BEFORE opening `references/anchors.md`, `references/creative-anchor-patterns.md`, or the blog/glossary inventory. Consulting any list during the read contaminates editorial mode and reintroduces the lookup reflex. Open the lists ONLY during the validation pass in step 1 below.
+   - **Stop-check before listing candidates — resist saturated-head defaults.** If your top angles include "brand loyalty", "customer engagement", "online community", "community features", "social features", or "user-generated content" as the standalone head (with no fresher co-occurring angle alongside), you skipped editorial mode. Redo the read. These six are the most saturated commercial heads in the live anchor profile (per the Anchor Diversity Check below), and reaching for them first is the lookup-reflex this mode is built to prevent. Fresh families live in `references/anchors.md` and the worked-example library below.
+
+   **Worked-example library — fresh angles editorial mode surfaces (and lookup mode misses):**
+
+   | Phrase found in partner body | Type | Maps to |
+   |---|---|---|
+   | "social sellers" | B | live commerce / social commerce — `/blog/from-viewers-to-belonging-why-community-is-the-engine-of-live-commerce` (2026-06-19 Pineable find) |
+   | "brand voice" | B | brand-voice / brand-community topic (route b) |
+   | "fan engagement" | B | fan-engagement / community-led growth topic (route b) |
+   | "super-fans" | B | brand-advocate family (route a; fresh — zero-presence head) |
+   | "audience interaction" | B | community-engagement family (fresher route-a substitute for the saturated "community engagement" head) |
+   | "creator commerce" | B | live-commerce / social-commerce topic (route b) |
+   | "in-app social" | B | social-features family OR in-app community content (multi-family — article context resolves) |
+   | "community-led selling" | B | live-commerce / community-driven commerce topic (route b) |
+
+   Each row is a phrase that appeared (or could appear) verbatim in a partner paragraph and maps to social.plus content via route (a) [an anchor family in `anchors.md`] or route (b) [an inventory topic in `pages-blog.json` / `pages-glossary.json`]. This library lives inline so agents see priming examples without a separate fetch; the full confirmed-pattern cache is in `references/creative-anchor-patterns.md` and should be appended when new finds land. **Treat this library as priming, not as a closed list — the whole point of editorial mode is that genuinely fresh angles arise from each individual read.** If you find yourself only proposing phrases from this table or from `creative-anchor-patterns.md`, you reverted to lookup mode.
 
    **What editorial mode does NOT relax — the plot.** Editorial mode changes how candidates are *generated*, not what makes them *valid*. Every candidate must still pass the six guardrails in step 1 (verbatim on page, articulable mapping to an anchor family OR an inventory topic, body paragraph not intro/conclusion, real target exists, no cannibalization, length rules). The Anchor Diversity Check (step 3 below) still applies — saturated head terms still cap at ⭐⭐ and yield to fresher co-located variants. The fit-score ceilings still hold (Type A ⭐⭐⭐, Type B/C ⭐⭐). The per-article cap is still 2-3 placements; the per-partner cap is still ≤5. The lists were never the problem — using them as discovery sources was. They remain authoritative as constraints.
 

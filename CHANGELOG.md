@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.22
+
+Editorial-mode reinforcement for `backlink-placement-finder`. The 13.21 shift to editorial reading was structurally correct, but in practice the agent still reached for saturated head terms first because nothing inside the skill named the lazy defaults to resist. 13.22 adds three behavior-shapers plus a description front-load to actively prevent the lookup-reflex Stefan flagged ("I keep coming back too easily with Brand Loyalty").
+
+**Why:** 13.21 said "lists are FENCES, not LOOKUPS" but didn't enforce sequential discipline. Agents could read the article and still flip to `anchors.md` mentally first — the failure mode the editorial mode was built to prevent. 13.22 closes the gap with three procedural enforcements (anti-list-leak, anti-default stop-check, inline worked-example library) and a description-layer mention so editorial mode is visible to the routing layer before the agent reads the full skill body.
+
+**Changes:**
+- [`backlink-placement-finder/SKILL.md`](marketing-team/skills/backlink-placement-finder/SKILL.md): **(P0) Three additions to Phase 1 step 0.** **(a) Procedural enforcement against list-leak** — write all 5-10 candidate angles BEFORE opening `anchors.md`, the pattern cache, or the inventory; consulting any list during the read contaminates editorial mode. **(b) Anti-default stop-check** — explicit list of the six most-saturated commercial heads (brand loyalty, customer engagement, online community, community features, social features, user-generated content); if those dominate the candidate list without a fresher co-occurring angle, redo the read. **(c) Inline worked-example library** — eight confirmed editorial-mode finds (social sellers, brand voice, fan engagement, super-fans, audience interaction, creator commerce, in-app social, community-led selling) presented as priming examples with type and target-family columns. Worked examples live inline (not just in `creative-anchor-patterns.md`) so the agent sees them without an extra fetch. Library explicitly framed as priming, not as a closed list — "if you only propose phrases from this table, you reverted to lookup mode." **(d) Description front-load** — the routing-layer `description` now mentions editorial reading mode so agents see the mental model before they read the full skill body.
+- [`docs/backlink-placement-finder.md`](docs/backlink-placement-finder.md): synced workflow step 5 with the two procedural rules (anti-list-leak + anti-default stop-check) and the worked-example library reference.
+- Refreshed the `backlink-placement-finder` row in [`marketing-team/README.md`](marketing-team/README.md) (892 → 911 lines / 88.6 → 91.5 KB).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.21 to 13.22. `backlink-placement-finder` is not symlinked into brand-kit, so brand-kit stays at 3.8; no `references/*.md` or remote JSON inventory was touched in brand-kit scope.
+
 ## marketing-team 13.21
 
 Architectural mode-switch for `backlink-placement-finder` Phase 1. The 13.20 territory-scan was a half-step: it broadened the lookup target (`anchors.md` + inventory + pattern cache) but kept the same "scan against lists" mental model. 13.21 completes the shift — at the tier-funnel boundary, the skill switches into editorial reading mode and treats lists as constraints applied *after* editorial thinking, not as generators consulted *before*.
