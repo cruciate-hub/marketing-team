@@ -82,6 +82,36 @@ Strip `**` bold markers from inside table cells — Webflow renders them as lite
 
 Strip `\*\*` escaped asterisks (Google Doc export artifact) — convert to the actual text without asterisks.
 
+## Inline images (full-width figures)
+
+Every inline image in `post-content` **must** use Webflow's full-width figure structure.
+A bare `<figure><img></figure>` renders at its intrinsic size (not full width) and is
+not recognized as a Webflow image block. The correct format:
+
+```html
+<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth"
+  style="max-width:1578px"
+  data-rt-type="image"
+  data-rt-align="fullwidth"
+  data-rt-max-width="1578px">
+  <div><img src="{url}" alt="{alt text}" loading="lazy"></div>
+</figure>
+```
+
+All five attributes on `<figure>` are required:
+- `class="w-richtext-figure-type-image w-richtext-align-fullwidth"` tells the
+  RichText renderer this is a full-width image block.
+- `style="max-width:1578px"` caps the rendered width at the content column.
+- `data-rt-type="image"`, `data-rt-align="fullwidth"`, `data-rt-max-width="1578px"`
+  are Webflow's internal markers that the Designer reads when an editor opens the post.
+
+The `<img>` **must** be wrapped in a `<div>` inside the `<figure>`. Without that `<div>`,
+Webflow silently strips the image on save in the Designer.
+
+When using `blog-publisher.py`, the script replaces `__INLINE_IMG_N__` placeholders with
+this format automatically. When building `post-content` by hand or via the Webflow MCP
+directly, use this exact structure for every inline image.
+
 ## Platform entry structure in listicles
 
 Each platform entry follows this pattern in the doc:
@@ -109,13 +139,20 @@ Best fit: [text]
 Convert to:
 
 ```html
-<h2>Platform Name: tagline</h2>
+<h3>Platform Name: tagline</h3>
+<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth"
+  style="max-width:1578px"
+  data-rt-type="image"
+  data-rt-align="fullwidth"
+  data-rt-max-width="1578px">
+  <div><img src="{cdn-url}" alt="{alt text}" loading="lazy"></div>
+</figure>
 <p>[intro paragraph]</p>
-<p><strong>Key strengths:</strong></p>
+<p>Key strengths:</p>
 <ul>
   <li>bullet</li>
 </ul>
-<p><strong>Considerations:</strong></p>
+<p>Considerations:</p>
 <ul>
   <li>bullet</li>
 </ul>
@@ -177,7 +214,10 @@ they differ from the Designer paste flow.
 
 Kept by the API:
 - `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, `rowspan` — preserved.
-- `<figure>` with `w-richtext-figure-type-image` class — preserved (inline images).
+- `<figure>` with the full Webflow figure class set (`w-richtext-figure-type-image
+  w-richtext-align-fullwidth`) plus `data-rt-*` attributes — preserved as a full-width
+  image block. A bare `<figure><img>` without these classes renders at intrinsic size
+  (not full width). See the "Inline images" section above for the required format.
 - `target="_blank"` on `<a>` — preserved; always include it for external links.
 - The API technically preserves `<style>` blocks too — but DON'T use them (see below).
 
