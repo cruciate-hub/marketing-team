@@ -254,7 +254,103 @@ Note on working files: `$TMPDIR` (and `/tmp` generally) does not survive between
 sessions. Fine for a single publish run; anything you want to reuse later (downloaded
 images, fielddata you may re-publish) belongs in a stable path instead.
 
-## Phase 6 — Build and publish
+## Phase 6 — Webinar matching
+
+Every published blog post should have a related webinar set via the
+`related-webinar-to-show-on-page` Reference field (points to the Webinars
+collection `66e2765d540e1939a89db84e`). This phase picks the best match.
+
+### Allowed webinar pool
+
+Only webinars created **after** 2024-09-19 are eligible. The 24 older webinars
+are excluded as outdated. The cutoff is the webinar "Understanding Zero-Party
+Data (Part 3)" and everything before it.
+
+The 22 allowed webinars with Webflow item IDs:
+
+| ID | Slug |
+|---|---|
+| `670ce177f9a5437c8f42ab70` | `leveraging-gamification-and-in-app-interactions` |
+| `670fd09afede82bbdd2681f9` | `why-social-features-are-essential-for-growth` |
+| `673b3a2919c9b6b906a7f4e7` | `in-app-social-data-driven-innovation-and-digital-transformation` |
+| `6744466b83a74e561a48b9c2` | `digitizing-the-football-fandom-experience` |
+| `67508264108fc18c4aaf8526` | `from-acquisition-to-engagement-tuning-in-to-consumer-voices` |
+| `67592d1ba11bc2120121e4fc` | `moderation-monetization-and-feedback` |
+| `6788c3dbfb89b5cfbd1b195d` | `integrating-ai-and-manual-moderation-for-enhanced-community-engagement` |
+| `679361ab4de547d8f18cf963` | `enhancing-ux-to-keep-players-coming-back` |
+| `67aa2fc67637a3630ac104ea` | `driving-user-engagement-headspaces-approach` |
+| `67b434e1013c296932839481` | `from-bookings-to-belonging-why-travel-apps-need-a-community-layer` |
+| `67c173581ea64b42a6a222ad` | `building-engaging-health-tech` |
+| `67c804913759af1f5564a120` | `revolutionizing-retail-master-social-driven-shopping-and-boost-customer-engagement` |
+| `67f8cfdbea4aef476e15ed0c` | `mastering-app-stickiness-how-gamified-profiles-drive-user-retention` |
+| `680b648f197b3f75226eb1c0` | `how-cnbc-builds-trust-through-engagement-and-education` |
+| `6819e4850c9747df05432d8d` | `launch-in-app-communities-faster-with-the-new-ui-kit-4` |
+| `6846c6b79dfc413c0061a8c1` | `doing-moderation-right-how-to-build-trust-in-your-in-app-community` |
+| `686e2ff8d323fe2a62ff0b29` | `how-to-build-sticky-social-features-without-slowing-your-team` |
+| `689c75839fa59f8a6eddc65e` | `why-brands-are-bringing-short-form-video-inside-their-apps` |
+| `69379ec4b4a7543f891fdfbf` | `integrating-webhooks-and-real-time-events-with-your-tech-stack-from-dashboards-to-engagement` |
+| `69ca544a27e94726c5bfc898` | `how-to-build-a-community-that-shows-up-events-and-livestream-in-practice` |
+| `6a0d84b6e70d843b95c1de9a` | `from-engagement-to-revenue-building-commerce-into-every-community-moment` |
+| `6a2a96c52e68776c0cc1230a` | `working-with-the-social-plus-mcp-server-a-live-build-in-claude-cursor-vs-code` |
+
+When new webinars are added to the collection, add them to this table.
+When the pool grows stale, move the cutoff date forward and remove old entries.
+
+### Priority matching by vertical
+
+Match the blog's topic to the closest webinar. Use this table as a starting
+point, then fall back to topical judgment for articles that span multiple
+verticals.
+
+| Blog vertical / topic | First-choice webinar slug |
+|---|---|
+| Retail / e-commerce | `revolutionizing-retail-master-social-driven-shopping-and-boost-customer-engagement` |
+| Gaming / betting / esports | `enhancing-ux-to-keep-players-coming-back` |
+| Fitness / wellness / health | `building-engaging-health-tech` |
+| Travel / hospitality | `from-bookings-to-belonging-why-travel-apps-need-a-community-layer` |
+| Sports / fandom | `digitizing-the-football-fandom-experience` |
+| Media / news / publishing | `how-cnbc-builds-trust-through-engagement-and-education` |
+| Moderation / trust & safety | `doing-moderation-right-how-to-build-trust-in-your-in-app-community` |
+| AI + moderation | `integrating-ai-and-manual-moderation-for-enhanced-community-engagement` |
+| SDK / build-vs-buy / developer tooling | `how-to-build-sticky-social-features-without-slowing-your-team` |
+| UIKit / implementation / quick start | `launch-in-app-communities-faster-with-the-new-ui-kit-4` |
+| Gamification / profiles / retention | `mastering-app-stickiness-how-gamified-profiles-drive-user-retention` |
+| Video / short-form / livestream content | `why-brands-are-bringing-short-form-video-inside-their-apps` |
+| Events / livestream / community building | `how-to-build-a-community-that-shows-up-events-and-livestream-in-practice` |
+| Monetization / commerce / revenue | `from-engagement-to-revenue-building-commerce-into-every-community-moment` |
+| Webhooks / integration / tech stack | `integrating-webhooks-and-real-time-events-with-your-tech-stack-from-dashboards-to-engagement` |
+| Engagement / social features (general) | `why-social-features-are-essential-for-growth` |
+| Mindfulness / meditation / mental health | `driving-user-engagement-headspaces-approach` |
+| Product growth / data / innovation | `in-app-social-data-driven-innovation-and-digital-transformation` |
+| Gamification / activation / onboarding | `leveraging-gamification-and-in-app-interactions` |
+| MCP / developer tools / Claude integration | `working-with-the-social-plus-mcp-server-a-live-build-in-claude-cursor-vs-code` |
+
+**Fallback:** When no vertical-specific match fits, use
+`moderation-monetization-and-feedback` (`67592d1ba11bc2120121e4fc`). It covers
+community trends broadly and works as a catch-all.
+
+### How to apply
+
+**During a new publish (this skill):**
+
+1. After Phase 5, look up the best webinar from the priority table above.
+2. Add `"related-webinar-to-show-on-page": "<item-id>"` to the fielddata.
+3. If the match is ambiguous, pick the webinar whose title a reader would
+   find most relevant after finishing the blog post.
+
+**Bulk backfill (all blogs with null webinar):**
+
+1. `data_cms_tool > list_collection_items` on the Blog Posts collection
+   (paginate with offset; max 100 per call).
+2. Filter for items where `related-webinar-to-show-on-page` is null.
+3. Match each to the best webinar using the priority table.
+4. `data_cms_tool > update_collection_items` with the webinar ID.
+5. `data_cms_tool > publish_collection_items` to push live.
+
+If `related-webinar-to-show-on-page` is already set, skip unless the user
+explicitly asks to re-evaluate.
+
+## Phase 7 — Build and publish
 
 1. Look up the category ID(s) from `webflow-config.md` using the extracted category name(s).
 
