@@ -1,1 +1,16 @@
 .claude/
+
+# --- Private marketing-ops working files ---
+# This repo (cruciate-hub/marketing-team) is PUBLIC — it publishes the plugin.
+# The files below are internal and must NEVER be committed/pushed here.
+# Back them up somewhere private instead (private repo / Time Machine / Drive).
+scenario-*.json
+prompt-*.txt
+MAU-AB-Test-Implementation-Options.docx
+design-system-update-audit-prompt.md
+emails/lead-scoring-prompt.txt
+emails/lead-score-email-section.html
+emails/scenario-6213998-lead-score-instructions.md
+emails/marops-email-with-priority-badges.html
+# Cloudflare Wrangler local cache (contains account id / state)
+**/.wrangler/
