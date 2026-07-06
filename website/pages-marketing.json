@@ -1,10 +1,11 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-06T15:37:03.398Z",
-    "itemCount": 21,
+    "generatedAt": "2026-07-06T15:37:05.592Z",
+    "itemCount": 20,
     "method": "webflow-data-api",
     "errors": [
-      "/pricing"
+      "/pricing",
+      "/white-label/social-network"
     ]
   },
   "pages": [
@@ -127,12 +128,6 @@
       "metaTitle": "White-label in-app Community | social.plus",
       "metaDescription": "Save time with a pre-built in-app community features that you can easily customize to meet your app's unique requirements.",
       "content": "# Build your white-label in-app community with social.plus\nSave time with a pre-built community app features that you can easily customize to meet your app's unique requirements.\n## Customizable UI Kit for seamless integration\nUse social.plus's white label social UI Kit to easily customize colors, fonts, icons, and layouts, ensuring that the UI seamlessly integrates with your community app's look and feel.\nUI Kit\n## Bring the most popular features from social media to your own app\nAll the essential social features you need to build an engaging community app.\nAll Social Features\nNo items found.\nAll Social Features\n## FAQ"
-    },
-    {
-      "url": "https://www.social.plus/white-label/social-network",
-      "metaTitle": "White-label Social Network | social.plus",
-      "metaDescription": "Bring the most popular social media features to your own app. Save time with pre-built social network features that you can easily customize.",
-      "content": "# Build your white-label social network with social.plus\nSave time with pre-built social network features that you can easily customize to meet your app's unique requirements.\n## Add social features to your app in days\n## Customizable UI Kit for seamless integration\nUse social.plus's white label social UI Kit to easily customize colors, fonts, icons, and layouts, ensuring that the UI seamlessly integrates with your app's look and feel.\nUI Kit\n## Bring the most popular features from social networks to your own app\nAll the essential social features you need to build an engaging social network.\nAll Social Features\nNo items found.\nAll Social Features\n## Bring the most popular features from social networks to your own app\nAll the essential social features you need to build an engaging social network.\nAll Use Cases\nAll Use Cases\n## FAQ"
     }
   ]
 }
