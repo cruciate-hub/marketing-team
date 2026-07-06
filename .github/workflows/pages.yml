@@ -26,10 +26,20 @@ jobs:
         with:
           path: .
       - name: Wait for rapid-fire pushes to settle
-        run: sleep 10
-      - id: deployment
+        run: sleep 30
+      - id: attempt1
         uses: actions/deploy-pages@v5
         continue-on-error: true
-      - name: Retry deploy if first attempt failed
-        if: steps.deployment.outcome == 'failure'
+      - name: Wait before retry
+        if: steps.attempt1.outcome == 'failure'
+        run: sleep 15
+      - id: attempt2
+        if: steps.attempt1.outcome == 'failure'
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+      - name: Wait before final retry
+        if: steps.attempt1.outcome == 'failure' && steps.attempt2.outcome == 'failure'
+        run: sleep 30
+      - name: Final retry
+        if: steps.attempt1.outcome == 'failure' && steps.attempt2.outcome == 'failure'
         uses: actions/deploy-pages@v5
