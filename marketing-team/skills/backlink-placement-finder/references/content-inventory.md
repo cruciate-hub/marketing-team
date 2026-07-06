@@ -33,14 +33,18 @@ Search both blog and glossary `pages[].metaTitle` and `pages[].content` (heading
 
 ### 2. Glossary vs. blog choice
 
-Use anchor type to decide which inventory to prefer:
+**Default: prefer blog over glossary, even for short/definitional anchors.** Stefan's correction (2026-07-06): don't route a short anchor straight to glossary just because it's 1-2 words — search `website/pages-blog.json` first for a blog post that plausibly covers the anchor's topic (even a looser topical match, e.g. a stats/benchmarks post or a strategy post that discusses the concept) and use that. Only fall back to a glossary entry when no blog post exists that covers the topic at all. This overrides the anchor-length table below for the purposes of target *selection* — the table still matters for understanding how definitional vs. strategic an anchor reads, but it no longer decides glossary-vs-blog on its own.
 
-| Anchor type | Prefer | Example |
+**Exception — Type C single-word anchors still require a glossary target.** This blog-preference default does NOT apply to Type C (single-word) anchors from `SKILL.md` Phase 1 — those must still target a glossary entry, never a blog post, because a one-word link into a strategic/long-form blog post reads forced. The blog-preference default governs Type A/B (2+ word) anchor target selection only.
+
+The table below is kept as background context (it explains why an anchor reads as "definitional" vs. "strategic"), not as the routing rule:
+
+| Anchor type | Historical routing (pre-2026-07-06, no longer used to pick blog vs. glossary) | Example |
 |---|---|---|
-| Short, definitional (1-2 words, generic concept) | **Glossary** | "user engagement", "activity feed", "chat SDK" → `/glossary/{slug}` |
-| Specific, strategic, "how-to" (3+ words or action-oriented) | **Blog** | "app engagement strategies", "building brand loyalty" → `/blog/{slug}` |
-| Technical SDK/API references | **Either** — whichever has a stronger content match | "chat API", "social SDK" → glossary for definition, blog for comparison/how-to |
-| Industry-specific ("retail social features", "fintech community") | **Blog** | Industry content lives in blog posts |
+| Short, definitional (1-2 words, generic concept) | Glossary | "user engagement", "activity feed", "chat SDK" → `/glossary/{slug}` |
+| Specific, strategic, "how-to" (3+ words or action-oriented) | Blog | "app engagement strategies", "building brand loyalty" → `/blog/{slug}` |
+| Technical SDK/API references | Either — whichever has a stronger content match | "chat API", "social SDK" → glossary for definition, blog for comparison/how-to |
+| Industry-specific ("retail social features", "fintech community") | Blog | Industry content lives in blog posts |
 
 ### 3. Depth match
 

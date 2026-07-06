@@ -517,7 +517,7 @@ For each partner article opened in Step 2.5, scan body paragraphs for any of thr
 3. **Extract the exact sentence** — For every match, capture the verbatim original sentence from the partner's article. Without a verified original sentence, the placement is incomplete and can't be used.
 
 4. **Match to the best social.plus page** — For each anchor found, determine which social.plus URL is the most relevant target.
-   - For definitional/generic anchors → prefer glossary pages (e.g., "user engagement" → `social.plus/glossary/user-engagement`)
+   - **Default: prefer a blog post over a glossary entry** (Stefan's correction, 2026-07-06), even for short/definitional anchors like "user engagement" — search `website/pages-blog.json` first for a post that plausibly covers the topic (a stats/benchmarks or strategy post counts) before falling back to glossary. See `references/content-inventory.md` section 2 for the full rule. Exception: Type C single-word anchors still must target glossary (see Phase 1 step 1 length rule) — a one-word link into a blog post reads forced.
    - For strategic/how-to anchors → prefer blog posts (e.g., "app engagement strategies" → `social.plus/blog/app-engagement-strategies`)
    - For SDK/API anchors → prefer technical blog posts or glossary entries
    - The target page should not compete with the partner article's keywords
@@ -631,6 +631,8 @@ Write a casual-but-professional reply. The tone is direct, friendly, no corporat
 
 When the user pastes multiple partner domains from one contact, produce ONE consolidated reply — not separate emails per domain. The contact proposed a multi-site exchange and expects a single reply addressing every domain.
 
+**Default assumption (Stefan's correction, 2026-07-06):** a flat pasted list of domains, with no other framing, IS one contact — treat it as one exchange conversation by default. This holds even when each domain's research was parallelized (e.g., separate research passes per domain) — parallelizing the *discovery* work doesn't change that the *output* is one email. Only split into separate per-domain emails when Stefan explicitly says the domains belong to different contacts.
+
 Structure: greeting → one framing line → one section per domain (header = domain name, content varies by outcome) → one closing line → sign-off.
 
 Per-domain section content by outcome:
@@ -662,8 +664,6 @@ clickpost.ai
 Found two good placements I'd like to request:
 
 1. Article: Customer Loyalty Statistics: Key Trends & Insights for 2025
-URL: https://www.clickpost.ai/blog/customer-loyalty-statistics
-
 Add link from: https://www.clickpost.ai/blog/customer-loyalty-statistics
 Add link to: https://www.social.plus/blog/building-brand-loyalty-the-power-of-digital-communities
 Anchor: brand loyalty
@@ -687,8 +687,6 @@ Hi [Name],
 Thanks for sharing. I reviewed [the blog / the docs / your articles] and found [N] good placement[s], which I'd like to request with you:
 
 1. Article: [Article Title]
-URL: [article URL]
-
 Add link from: [article URL]
 Add link to: [social.plus target URL]
 Anchor: [anchor text]
@@ -713,8 +711,6 @@ Hi [Name],
 Thanks for sharing. I reviewed [the blog / the docs / your articles] and found [N] good placement[s], which I'd like to request with you:
 
 1. Article: [Article Title]
-URL: [article URL]
-
 Add link from: [article URL]
 Add link to: [social.plus target URL]
 Anchor: [anchor text]
@@ -742,8 +738,6 @@ Thanks for sharing these. I went through [the content / your articles] and found
 
 Option 1
 Article: [Article Title]
-URL: [article URL]
-
 Add link from: [article URL]
 Add link to: [social.plus target URL]
 Anchor: [anchor text]
@@ -751,8 +745,6 @@ Placement: [section name + verbatim sentence]
 
 Option 2
 Article: [Article Title]
-URL: [article URL]
-
 Add link from: [article URL]
 Add link to: [social.plus target URL]
 Anchor: [anchor text]
@@ -767,6 +759,7 @@ Stefan
 
 
 **Format rules:**
+- **Never show the partner article's URL twice.** Don't print a standalone `URL:` line above `Add link from:` — `Add link from:` already states the article URL unambiguously, so a separate `URL:` line is pure repetition (Stefan's correction, 2026-07-06). Each placement block starts with `Article: [title]` and goes straight to `Add link from:` / `Add link to:` — see the templates below.
 - Every line in every placement block is flush-left — no indentation under the numbered/Option line. Indented sub-fields wrap weirdly in LinkedIn, Slack, and most chat boxes where markdown doesn't render
 - Email bodies use PLAIN URLs only, never markdown links. Markdown does not render in email/LinkedIn/Slack, and wrapping a redirect URL in markdown produces a malformed anchor. Print the full canonical `https://` URL as plain text
 - When the reply is delivered by creating a Gmail draft (the Gmail MCP draft tool, e.g. create_draft), pass an explicit `htmlBody` in addition to the plain-text `body`. In the `htmlBody`, render every URL as `<a href="CANONICAL_URL">CANONICAL_URL</a>` so the visible anchor text is the clean canonical URL, render each per-domain section header as bold plain text (`<b>domain.com</b>`, not a link), and use `<br>` for line breaks with every line flush-left. Why: if only a plain-text `body` is passed, Gmail builds the HTML itself and substitutes its outbound redirect (`https://www.google.com/url?q=REAL&source=gmail&ust=...&sa=E`) as both the link target and the visible text, so the recipient sees the wrapped tracking URL. Supplying your own `htmlBody` keeps the visible text clean. Gmail will still rewrite the underlying href to its google.com/url redirect; that is normal, invisible to the reader, and must not be worked around
@@ -786,8 +779,6 @@ Hi Muhammad,
 Thanks for sharing. I reviewed the blog and found one good placement, which I'd like to request with you:
 
 1. Article: The Role of Customer Engagement in Digital Growth
-URL: https://example.com/blog/customer-engagement-digital-growth
-
 Add link from: https://example.com/blog/customer-engagement-digital-growth
 Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
 Anchor: customer engagement
@@ -810,8 +801,6 @@ Hi Alex,
 Thanks for sharing. I reviewed the articles and found one good placement, which I'd like to request with you:
 
 1. Article: AI in Ecommerce: A Complete Guide
-URL: https://example.com/blog/ai-in-ecommerce-a-complete-guide
-
 Add link from: https://example.com/blog/ai-in-ecommerce-a-complete-guide
 Add link to: https://www.social.plus/blog/effective-customer-engagement-strategies-with-case-studies
 Anchor: customer engagement strategies
