@@ -25,5 +25,11 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .
+      - name: Wait for rapid-fire pushes to settle
+        run: sleep 10
       - id: deployment
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+      - name: Retry deploy if first attempt failed
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v5
