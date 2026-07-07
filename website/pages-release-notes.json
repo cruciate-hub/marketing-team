@@ -1,11 +1,53 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-16T16:47:25.324Z",
-    "itemCount": 41,
+    "generatedAt": "2026-07-07T07:31:04.273Z",
+    "itemCount": 48,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/community-tags-for-ios-and-android-sdk",
+      "metaTitle": "Community Tags for iOS and Android SDK",
+      "metaDescription": "Communities can now be tagged to describe their topic or purpose on iOS and Android SDK, enabling tag-based filtering and search on community queries. ",
+      "content": "# Community Tags for iOS and Android SDK"
+    },
+    {
+      "url": "https://www.social.plus/release-note/react-native-uikit-updates",
+      "metaTitle": "React Native UIKit Updates",
+      "metaDescription": "This release focuses on stability and performance improvements across the React Native UIKit, with a range of enhancements that make this the most stable build to date. ",
+      "content": "# React Native UIKit Updates"
+    },
+    {
+      "url": "https://www.social.plus/release-note/post-search-by-keyword-and-hashtag-on-console",
+      "metaTitle": "Post Search by Keyword and Hashtag on Console",
+      "metaDescription": "Admins and moderators can now search for posts by keyword or hashtag directly from the Console",
+      "content": "# Post Search by Keyword and Hashtag on Console"
+    },
+    {
+      "url": "https://www.social.plus/release-note/post-and-comment-visibility-controls",
+      "metaTitle": "Post and Comment Visibility Controls",
+      "metaDescription": "Moderators can now hide posts and comments from public view without permanently deleting them, keeping content accessible internally for review. ",
+      "content": "# Post and Comment Visibility Controls"
+    },
+    {
+      "url": "https://www.social.plus/release-note/advanced-visitor-usage-limits-and-quotas",
+      "metaTitle": "Advanced Visitor Usage Limits and Quotas",
+      "metaDescription": "Admins can now monitor public traffic and identify visitors who exceed monthly API volume thresholds, automatically classifying them as Overused Visitor MAUs. ",
+      "content": "# Advanced Visitor Usage Limits and Quotas"
+    },
+    {
+      "url": "https://www.social.plus/release-note/ai-moderation-usage-limits-and-budget-guard",
+      "metaTitle": "AI Moderation Usage Limits and Budget Guard",
+      "metaDescription": "Flat-rate AI Moderation packages now include monthly allowances per feature with an automatic Budget Guard to prevent overage charges. ",
+      "content": "# AI Moderation Usage Limits and Budget Guard"
+    },
+    {
+      "url": "https://www.social.plus/release-note/livestream-chat-enabled-by-default-on-console",
+      "metaTitle": "Livestream Chat Enabled by Default on Console",
+      "metaDescription": "Livestreams created from the Console now have chat enabled by default, so admins no longer need additional SDK or API steps to activate it. ",
+      "content": "# Livestream Chat Enabled by Default on Console"
+    },
     {
       "url": "https://www.social.plus/release-note/ai-moderation-deletion-reason-via-webhook",
       "metaTitle": "AI Moderation Deletion Reason via Webhook",
