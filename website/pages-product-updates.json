@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-18T10:12:10.571Z",
-    "itemCount": 63,
+    "generatedAt": "2026-07-07T07:39:58.408Z",
+    "itemCount": 64,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-june-2026",
+      "metaTitle": "What's new in social.plus | June 2026",
+      "metaDescription": "June updates is all about giving teams control across moderation, content management, and platform visibility. ",
+      "content": "# What's new in social.plus | June 2026\n## AI Moderation Usage Limits and Budget Guard\n## Advanced Visitor Usage Limits and Quotas\n## Post Search by Keyword and Hashtag on Console\n## Livestream Chat Enabled by Default on Console\n## Post and Comment Visibility Controls\n## We also added"
+    },
     {
       "url": "https://www.social.plus/product-update/meet-social-plus-redesigned-sentiment-analysis-dashboard",
       "metaTitle": "Meet social.plus Redesigned Sentiment Analysis Dashboard",
