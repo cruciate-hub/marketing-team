@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-08T04:41:51.404Z",
+    "generatedAt": "2026-07-08T04:42:30.412Z",
     "itemCount": 22,
     "collectionId": "66e2765d540e1939a89db84e",
     "method": "webflow-data-api"
@@ -28,7 +28,7 @@
       "url": "https://www.social.plus/events/integrating-webhooks-and-real-time-events-with-your-tech-stack-from-dashboards-to-engagement",
       "metaTitle": "Integrating Webhooks and Real-Time Events with Your Tech Stack:  From Dashboards to Engagement",
       "metaDescription": "Schedule a time to chat with our team.",
-      "content": "# Integrating Webhooks and Real-Time Events with Your Tech Stack:  From Dashboards to Engagement"
+      "content": "# Integrating Webhooks and Real-Time Events with Your Tech Stack:  From Dashboards to Engagement\n## Webhooks are quietly becoming the connective tissue of modern product experiences."
     },
     {
       "url": "https://www.social.plus/events/why-brands-are-bringing-short-form-video-inside-their-apps",
