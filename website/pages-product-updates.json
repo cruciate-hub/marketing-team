@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-07T07:39:58.812Z",
-    "itemCount": 64,
+    "generatedAt": "2026-07-13T09:57:02.880Z",
+    "itemCount": 65,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-vise-the-proof-layer-for-social-plus-ai-assisted-sdk-integration",
+      "metaTitle": "Introducing Vise: the proof layer for social.plus AI-assisted SDK integration",
+      "metaDescription": "Vise is agentic workflow governance for AI coding agents building on social.plus. It gives the agent a repeatable path from a broad request to a checked, evidence-backed integration, with deterministic findings from its check layer and a reviewer-ready sp-vise/ contract. ",
+      "content": "# Introducing Vise: the proof layer for social.plus AI-assisted SDK integration\n## From AI-ready to AI-ready for build\n## How Vise works\n## Before and after Vise\n## MCP + Vise: the AI-native social.plus stack\n## A contract your reviewer can gate on\n## In your product, in your workflow\n## How to install\n## Try Vise"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-june-2026",
       "metaTitle": "What's new in social.plus | June 2026",
