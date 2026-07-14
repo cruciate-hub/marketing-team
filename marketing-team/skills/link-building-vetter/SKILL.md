@@ -82,6 +82,17 @@ If Webflow MCP is connected:
 - **Write operations**: NEVER execute without explicit user confirmation.
 - Always state: "I can make this change in Webflow, but I need your green light first. Confirm?"
 
+## Gmail Draft Safety
+
+**Never write a bare domain (e.g. `fatjoe.com`) as plain text in a draft body.** Gmail auto-linkifies bare domain-like strings, and the resulting link gets wrapped in a `google.com/url?q=...` redirect whose visible anchor text is often the full wrapped URL instead of the domain — producing garbled, unprofessional text like `https://www.google.com/url?q=http://fatjoe.com&source=gmail&ust=...` in the sent email.
+
+When a draft needs to reference a competitor/partner domain:
+- Prefer not naming the raw domain at all — describe it instead ("the existing outbound link in that sentence", "their current backlink guide").
+- If the domain must appear, de-linkify it: `fatjoe[.]com` or `fatjoe dot com`.
+- Never paste a domain immediately followed by `.com`/`.io`/etc. with no separator into a `create_draft` body — that pattern is what triggers the autolink.
+
+Before calling `create_draft`, scan the composed body for bare domain patterns and fix them.
+
 ## Communication Rules
 
 - **Never speak unprompted** — Only respond when the user asks something.
