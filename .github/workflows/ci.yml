@@ -1,0 +1,80 @@
+name: Quality gate
+
+# Runs the repo's own drift tooling plus structural checks on every code push
+# and PR. Skips pure data commits from the site-JSON worker (website/**) so
+# bot pushes don't burn CI minutes re-checking unchanged skills.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "website/pages-*.json"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Fetch-block / manifest / symlink drift audit
+        run: ./scripts/audit-skills.sh
+
+      - name: Python syntax check (all tracked .py)
+        run: |
+          set -e
+          git ls-files '*.py' | while read -r f; do
+            python3 -c "import ast, sys; ast.parse(open(sys.argv[1]).read())" "$f" \
+              || { echo "SYNTAX ERROR: $f"; exit 1; }
+          done
+          echo "All Python files parse."
+
+      - name: Shell syntax check (all tracked .sh)
+        run: git ls-files '*.sh' | xargs -r -n1 bash -n
+
+      - name: blog-seo-content compliance test suite
+        run: python3 run_tests.py
+        working-directory: marketing-team/skills/blog-seo-content/tests
+
+      - name: Website inventory sanity
+        run: |
+          # Live inventories are committed to the site-data branch by the
+          # Cloudflare Worker; main only holds a snapshot. Overlay before checking.
+          git fetch --depth 1 origin site-data 2>/dev/null \
+            && git checkout FETCH_HEAD -- 'website/pages-*.json' \
+            || echo "WARN: site-data branch unavailable; checking main's snapshot."
+          python3 - << 'EOF'
+          import glob, json, sys
+          bad = []
+          for f in sorted(glob.glob("website/pages-*.json")):
+              d = json.load(open(f))            # raises on invalid JSON
+              pages = d.get("pages", [])
+              errs = (d.get("_meta") or {}).get("errors") or []
+              status = f"{f}: {len(pages)} pages, {len(errs)} extraction errors"
+              print(status)
+              if len(pages) == 0:
+                  bad.append(status)
+          if bad:
+              print("\nDEGRADED INVENTORIES (worker committed empty data):")
+              print("\n".join(bad))
+              # Warn-only until the worker shrink-guard deploy settles;
+              # flip to `sys.exit(1)` after pages-industry.json recovers.
+          EOF
+
+      - name: Private-file guard (public repo)
+        run: |
+          set -e
+          # Patterns that must NEVER be tracked in this public repo — mirrors
+          # the policy block in .gitignore. Guards against `git add -f` slips.
+          violations=$(git ls-files \
+            'scenario-*.json' 'prompt-*.txt' 'workers/**' \
+            'emails/email-module-*' 'emails/lead-*' 'emails/marops-*' \
+            'emails/scenario-*' '**/.DS_Store' || true)
+          if [ -n "$violations" ]; then
+            echo "PRIVATE FILES TRACKED IN PUBLIC REPO:"
+            echo "$violations"
+            exit 1
+          fi
+          echo "No private files tracked."
