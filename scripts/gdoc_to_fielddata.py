@@ -244,9 +244,12 @@ def main() -> None:
     ap.add_argument("listicle_number", type=int)
     ap.add_argument("--out", required=True)
     ap.add_argument("--slug", default=None)
-    ap.add_argument("--date", default="2026-06-04T00:00:00.000Z",
-                    help="ISO 8601 date-published (no Date.now in the harness).")
+    ap.add_argument("--date", default=None,
+                    help="ISO 8601 date-published (default: now, UTC).")
     args = ap.parse_args()
+    if args.date is None:
+        from datetime import datetime, timezone
+        args.date = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
     with open(args.raw_doc) as f:
         raw = f.read()
@@ -301,6 +304,9 @@ def main() -> None:
     # The trailer marker varies: "Image alt text:" or "**Image alt text:**",
     # and some listicles have an "OUTREACH VERSION" / "INTERNAL USE ONLY" block first.
     body_start = block.find("###")
+    if body_start == -1:
+        print("ERROR: no '###' body heading found in listicle block.", file=sys.stderr)
+        sys.exit(1)
     body_end = len(block)
     for marker in ("OUTREACH VERSION", "INTERNAL USE ONLY",
                    "Image alt text:", "**Image alt text:**",

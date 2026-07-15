@@ -415,12 +415,6 @@ User had set `.sp-nd-active { transform: translate(-50%,-50%) scale(1.04) }` nat
 | Read footer/head code | NOT EXPOSED — paste-by-hand |
 | Publish | `data_sites_tool publish_site` with `publishToWebflowSubdomain: true` (custom domain only with explicit go-ahead) |
 
-## Related memory files
-- `feedback_webflow_publish_io_only.md` — production custom-domain rule
-- `workflow_claude_to_webflow.md` — earlier workflow notes
-- `project_socialplus_mcp_orb.md` — orb visual spec
-- `project_webflow_multi_workspace_setup.md` — MCP workspace mapping
-
 ## When NOT to use this skill
 
 - Pure Webflow-only work (no Claude prototype as input) — use generic Webflow skills instead

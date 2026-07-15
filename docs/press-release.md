@@ -6,7 +6,7 @@ Claude skill for newswire-ready press releases for social.plus, produced as `.do
 
 - Fetches the full messaging stack (terminology, tone, narrative, value-story, positioning, boilerplates) plus press-release-specific references (structure template, release-type playbooks, brief template, quote engineering, anti-patterns, best-in-class corpus, gold-standard example).
 - Determines release type from the brief (product launch / funding / partnership / customer win / exec hire / milestone / award / acquisition) and applies the matching lede formula.
-- Drafts the release through a 12-block skeleton: FOR IMMEDIATE RELEASE → headline → subhead → dateline lede → narrative body → exec quote → product/proof detail → customer or partner quote → industry framing → availability → boilerplate → media contact → end marker.
+- Drafts the release through a 17-block skeleton: FOR IMMEDIATE RELEASE → headline → subhead → dateline lede → narrative body → exec quote → product/proof detail → customer or partner quote → industry framing → availability → boilerplate → media contact → end marker.
 - Runs the anti-patterns self-review (banned phrases, buried lede, quote-as-summary, passive voice in lede, AP-style compliance, word-count band per release type).
 - Generates the `.docx` via the bundled `python-docx` script with proper formatting (18pt bold headline, italic grey subhead, bold dateline + plain lede in one paragraph, lead-phrase-bolded detail paragraphs, indented italic-attributed quote blocks, centered `###` end marker).
 - Runs the brand compliance check before delivery.
@@ -37,7 +37,7 @@ The skill provides the rest. **Executive quote**: drafted in the named speaker's
 2. Load press-release-specific references from the skill folder: `structure-template.md`, `release-type-playbooks.md`, `brief-template.md`, `quote-engineering.md`, `anti-patterns.md`, `best-in-class-corpus.md`, plus `examples/commerce-launch.md` (the gold-standard).
 3. Intake and validate the brief. Fill missing required fields via `AskUserQuestion`.
 4. Determine release type and apply the matching lede formula (Who / What / When / Where in 30 words or fewer, Why in the next sentence).
-5. Draft the release following the 12-block skeleton.
+5. Draft the release following the 17-block skeleton.
 6. Self-review against `anti-patterns.md` — banned phrases, buried lede, quote-as-summary, passive voice, AP-style compliance, word-count band (400–800 for product/partnership/milestone, 300–500 for hires and awards, up to 900 for funding).
 7. Run `scripts/generate_press_release.py` with the structured release as a JSON payload to produce the `.docx`.
 8. Run the compliance check from `brain.md` and deliver.
@@ -75,7 +75,7 @@ The delivery message includes the `.docx` link, a one-line summary of the releas
 press-release/
 ├── SKILL.md                              Entry point — workflow, brief intake, structure, anti-patterns
 ├── references/
-│   ├── structure-template.md             12-block skeleton, block-by-block spec
+│   ├── structure-template.md             17-block skeleton, block-by-block spec
 │   ├── release-type-playbooks.md         Lede formulas per release type
 │   ├── brief-template.md                 Canonical brief shape + worked examples
 │   ├── quote-engineering.md              4-rule quote test + drafting patterns

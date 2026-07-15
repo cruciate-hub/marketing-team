@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude plugin marketplace update cruciate-hub && claude plugin update marketing-team@cruciate-hub",
+            "command": "command -v claude >/dev/null 2>&1 || exit 0; claude plugin marketplace update cruciate-hub && claude plugin update marketing-team@cruciate-hub",
             "timeout": 30,
             "statusMessage": "Syncing marketing-team plugin…"
           }

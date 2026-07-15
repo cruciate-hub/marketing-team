@@ -41,18 +41,45 @@ from pathlib import Path
 
 
 # Case-insensitive patterns — marketing fluff and category mislabels.
+# Kept in sync with blog-seo-content/scripts/compliance.py (shared brand law).
 FORBIDDEN_TERMS_ANY_CASE = [
     r"\brevolutioni[sz]e\b",
     r"\bgame[- ]chang(ing|er)\b",
     r"\bunlock the power\b",
-    r"\bleverag(e|ing)\b",
+    # (?<![-\w]) excludes the hyphenated-compound case ("high-leverage" /
+    # "higher-leverage" — legitimate strategy English). Expanded to all four
+    # inflections so "leveraged" and "leverages" no longer slip through.
+    r"(?<![-\w])leverag(e|es|ed|ing)\b",
     r"\bcutting[- ]edge\b",
     r"\bnext[- ]generation\b",
     r"\bbest[- ]in[- ]class\b",
     r"\bstate[- ]of[- ]the[- ]art\b",
-    r"\bsocial[- ]network\b",
     r"\bforum platform\b",
     r"\bchat tool\b",
+    # terminology.md "Forbidden and Risky Terminology" — brand law, not style.
+    r"\bad[- ]network\b",
+    r"\bguarantee[ds]?\s+(?:growth|retention|revenue|results?|outcomes?|success|engagement)\b",
+]
+
+# The "social network" rule is self-referential only — social.plus must not
+# call itself a social network. External references ("social networks such as
+# Facebook") are legitimate and essential in AEO comparative articles — they
+# must not fire. Scope tightly.
+SELF_REFERENTIAL_SOCIAL_NETWORK = [
+    r"\bsocial\.plus\s+is\s+(?:a|an|the)?\s*social[- ]network\b",
+    r"\bwe(?:'re|\s+are)\s+(?:a|an|the)?\s*social[- ]network\b",
+]
+
+# Risky terms — surfaced as WARN, not FAIL. terminology.md allows them in
+# narrow contexts; WARN lets a human make the contextual call instead of
+# hard-blocking a legitimate use.
+RISKY_TERMS_WARN = [
+    r"\bplug[- ]and[- ]play\b",
+    # Self-referential "social network" via apposition: "social.plus, the social
+    # network for apps". The FAIL patterns above catch the "is a/the" form; this
+    # WARNs on the comma-descriptor form, where a hard FAIL would false-fire on
+    # contrasts like "more than a social network".
+    r"\bsocial\.plus\s*,\s*(?:a|an|the)\s+social[- ]network\b",
 ]
 
 # Case-sensitive — brand-name casing (correct form: `social.plus`).
@@ -289,6 +316,22 @@ def extract_keyword_phrase(title: str) -> str:
     return t.rstrip("?.! ").strip()
 
 
+def strip_code_and_link_urls(text: str) -> str:
+    """Remove syntax that's part of markdown infrastructure but not displayed
+    prose: fenced code blocks, inline code, HTML comments, and URL targets
+    inside markdown links/images. Anchor text and image alt text are kept.
+
+    Used for the terminology checks so a forbidden term mentioned in a code
+    example or appearing inside a link URL doesn't false-fire.
+    """
+    t = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
+    t = re.sub(r"<!--.*?-->", "", t, flags=re.DOTALL)
+    t = re.sub(r"`[^`]+`", "", t)
+    t = re.sub(r"!\[([^\]]*)\]\([^)]+\)", r"\1", t)
+    t = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", t)
+    return t
+
+
 # ---------- individual checks ----------
 
 
@@ -478,17 +521,35 @@ def check_emojis(text: str) -> CheckResult:
 
 
 def check_forbidden_terms(text: str) -> CheckResult:
+    prose = strip_code_and_link_urls(text)
     hits: list[str] = []
     for pattern in FORBIDDEN_TERMS_ANY_CASE:
-        for m in re.finditer(pattern, text, re.IGNORECASE):
+        for m in re.finditer(pattern, prose, re.IGNORECASE):
+            hits.append(m.group(0))
+    for pattern in SELF_REFERENTIAL_SOCIAL_NETWORK:
+        for m in re.finditer(pattern, prose, re.IGNORECASE):
             hits.append(m.group(0))
     for pattern in FORBIDDEN_TERMS_CASE_SENSITIVE:
-        for m in re.finditer(pattern, text):
+        for m in re.finditer(pattern, prose):
             hits.append(m.group(0))
     return CheckResult(
         "no_forbidden_terms",
         "PASS" if not hits else "FAIL",
         "found: " + ", ".join(sorted(set(hits))) if hits else "0",
+    )
+
+
+def check_risky_terms(text: str) -> CheckResult:
+    """Context-dependent terminology — WARN, not FAIL (see RISKY_TERMS_WARN)."""
+    prose = strip_code_and_link_urls(text)
+    hits: list[str] = []
+    for pattern in RISKY_TERMS_WARN:
+        for m in re.finditer(pattern, prose, re.IGNORECASE):
+            hits.append(m.group(0))
+    return CheckResult(
+        "no_risky_terms",
+        "PASS" if not hits else "WARN",
+        "review (terminology.md context rules): " + ", ".join(sorted(set(hits))) if hits else "0",
     )
 
 
@@ -666,6 +727,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.append(check_em_dashes(body))
     report.results.append(check_emojis(body))
     report.results.append(check_forbidden_terms(body))
+    report.results.append(check_risky_terms(body))
     report.results.append(check_html_tags(body))
     report.results.append(check_no_jsonld(body))
     report.results.extend(check_headings(body_with_h1))

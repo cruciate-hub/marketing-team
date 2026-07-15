@@ -10,10 +10,12 @@ Workflow
 3. The canonical content is copied into the section between
        <!-- FETCH-BLOCK:START v2 -->
        <!-- FETCH-BLOCK:END v2 -->
-   in every SKILL.md that has those markers (currently 11 fetch-using
+   in every SKILL.md that has those markers (currently 12 fetch-using
    skills). SKILL.md files without the markers (legal-docs-formatter,
-   link-building-vetter, svg-icon-transformer) are skipped — they
-   don't fetch from GitHub.
+   link-building-vetter, svg-icon-transformer, claude-design-to-webflow,
+   video-to-gif-and-webp — the NON_FETCHING_SKILLS list in
+   audit-skills.sh is authoritative) are skipped — they don't fetch
+   from GitHub.
 4. Commit the canonical + the updated SKILL.md files together.
 
 Companion to scripts/audit-skills.sh:

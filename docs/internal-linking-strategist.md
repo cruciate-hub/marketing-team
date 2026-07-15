@@ -1,6 +1,6 @@
 # Internal Linking Optimizer
 
-Claude skill for producing SEO-grounded internal link recommendations for social.plus content — either inline link suggestions for a specific draft, or a site-wide linking audit across all 646 pages.
+Claude skill for producing SEO-grounded internal link recommendations for social.plus content — either inline link suggestions for a specific draft, or a site-wide linking audit across all ~700 pages in the 10 website inventories (count from _meta.itemCount at runtime).
 
 Every recommendation is grounded in `link-strategy.md` (canonical anchor map, cannibalization warnings, hub pages, anchor variation rules), regenerated quarterly from Ahrefs and GSC data.
 
@@ -55,7 +55,7 @@ Pick the files relevant to the context — don't load all 10 unless the question
 3. Phase 1 — shortlist up to 8 candidate pages from JSON by topic relevance + canonical anchor match.
 4. Phase 2 — live-fetch each candidate via the escalation ladder (WebFetch → Vercel web agent in a Vercel Sandbox microVM → Claude-in-Chrome); drop ones that don't pan out.
 5. Score + rank by contextual relevance, canonical compliance, link-equity benefit, anchor variety, intent fit.
-6. Apply the link budget for the article type (14 types in `link-strategy.md`): e.g. blog 3-7, AEO 1-3, glossary 2-4.
+6. Apply the link budget for the article type (14 types in `link-strategy.md`): e.g. blog 3-7 by length, AEO ~1 per 300 words (floor 2, ceiling 6), glossary 2-4.
 7. Apply anchor distribution targets + per-cluster variation rules.
 8. Run the 8 evaluation questions + placement check + do-not-link check before finalizing.
 
@@ -77,7 +77,7 @@ Pick the files relevant to the context — don't load all 10 unless the question
 - **Respect the canonical map strictly.** If `link-strategy.md` says anchor X → page Y, that's the rule. Surface disagreements as flags, don't silently override.
 - **Definitional vs commercial intent matters.** Glossary for definitions, product/use-case for commercial. Route per `link-strategy.md`.
 - **Customer-story anchors use the customer name.** "Bitazza", "Noom" — not a proof-point claim.
-- **Don't over-link.** Blog 3-7, AEO 1-3, generic 3-5.
+- **Don't over-link.** Blog 3-7, AEO floor 2 / ceiling 6 (length-scaled), generic 3-5.
 - **No same-anchor-twice-to-same-target in one piece.** Use cluster anchor variants.
 
 ## Files

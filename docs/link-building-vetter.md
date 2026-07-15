@@ -89,3 +89,7 @@ Every evaluation returns, in this order:
 3. A draft response email in a code block, ready to paste.
 
 No unsolicited next steps, no fluff, no additional analysis unless asked.
+
+## Gmail draft safety
+
+Never write a bare domain (e.g. `example.com`) as plain text in a draft body — Gmail auto-linkifies it and wraps it in a garbled `google.com/url?q=...` redirect in the sent email. Describe the domain instead, or de-linkify it (`example[.]com`). The skill scans composed drafts for bare-domain patterns before creating them.

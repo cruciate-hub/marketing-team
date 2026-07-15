@@ -5,9 +5,10 @@ description: >
   suggests inline link targets and anchor text for a specific piece of new
   content (typically invoked by blog-seo-content, aeo-content, or other writing
   skills before delivery). (2) Audit mode runs a site-wide internal linking
-  analysis across all 10 pages-*.json data files (646 total pages: marketing,
-  use-cases, industry, glossary, blog, customer-stories, answers, product-updates,
-  release-notes, webinars). Use when someone asks to "audit internal linking",
+  analysis across all 10 pages-*.json data files (~700 total pages — count at
+  runtime from each file's _meta.itemCount: marketing, use-cases, industry,
+  glossary, blog, customer-stories, answers, product-updates, release-notes,
+  webinars). Use when someone asks to "audit internal linking",
   "check anchor text", "fix orphan pages", or "where should this article link
   to". Also invoke this
   skill from other content-writing skills as a pre-delivery step to attach
@@ -48,7 +49,7 @@ Every live fetch (Phase 2, all modes) climbs this ladder. Start at tier 1 and es
 
 1. **`WebFetch` — default, try first.** Fast, cheap, no browser. Most social.plus pages render server-side (blog, glossary, use-case, marketing bodies), so this resolves the large majority of candidates.
 2. **Vercel web agent — escalate when tier 1 fails.** Invoke the `agent-browser` skill in its Vercel Sandbox microVM mode (a real headless browser that executes JS). Use it when `WebFetch` errors, is blocked, returns empty, or returns only headings with no body — the signature of JS- or Component-rendered content `WebFetch` can't see (the same Webflow Components the static snapshot misses on industry pages).
-3. **Claude-in-Chrome — final backup if tier 2 is unavailable or fails.** Drive the local browser via the `mcp__Claude_in_Chrome__*` tools (`navigate` → `get_page_text` / `read_page`). Select the **Social+ Chrome profile** first (`list_connected_browsers` → `select_browser`) per team convention. Needs the Chrome extension connected; if it isn't, this tier is unavailable.
+3. **Claude-in-Chrome — final backup if tier 2 is unavailable or fails.** Drive the local browser via the `mcp__claude-in-chrome__*` tools (`navigate` → `get_page_text` / `read_page`). Select the **Social+ Chrome profile** first (`list_connected_browsers` → `select_browser`) per team convention. Needs the Chrome extension connected; if it isn't, this tier is unavailable.
 
 **All three fail →** drop the candidate and record it (Draft mode: "Skipped suggestions"; Audit mode: the relevant table). Never quote or invent body content you couldn't fetch — "quote, don't paraphrase" is absolute.
 
@@ -85,6 +86,17 @@ Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fe
       exit 1
     fi
 
+    # Overlay the live website inventories. The auto-generated pages-*.json
+    # are committed to the `site-data` branch (bot commits stay off main);
+    # main only carries a point-in-time snapshot. Restricting the overlay to
+    # pages-*.json keeps the clone fast-forwardable on the next session's pull.
+    if git -C "$REPO" fetch --depth 1 --quiet origin site-data 2>/dev/null; then
+      git -C "$REPO" checkout --quiet FETCH_HEAD -- 'website/pages-*.json' 2>/dev/null \
+        || echo "Note: site-data overlay failed; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    else
+      echo "Note: could not fetch site-data; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    fi
+
 After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
 
 The integrity gate above fails loud rather than serving partial content, and it never deletes `$REPO` (it can hold un-pushed local work). To make skills read your own local edits, point `MT_REPO` at your working checkout before running them.
@@ -110,7 +122,16 @@ In either case, the rest of the file is invisible to you in-call. Most files in 
       python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
       jq '.pages[].url' "$REPO/website/pages-blog.json"
 
-  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+  Some skills ship helper scripts that already follow this pattern (e.g. `marketing-team/skills/aeo-content/scripts/duplicate_check.py`).
+
+  **Degraded-inventory guard.** The pages-*.json files are auto-generated; a generation failure can leave a file syntactically valid but empty or missing pages. After loading any of them, check `_meta.errors` and `len(pages)`:
+
+      python3 -c "
+      import json; d=json.load(open('$REPO/website/pages-industry.json'))
+      errs = d.get('_meta',{}).get('errors') or []
+      print(len(d.get('pages',[])), 'pages;', len(errs), 'extraction errors', errs)"
+
+  If `pages` is empty, or `_meta.errors` is non-empty, the inventory is degraded: name the affected file and the missing paths in your output, scope any 'site-wide' claims accordingly, and never treat an empty inventory as 'this section has no pages'.
 
 Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
 
@@ -296,7 +317,7 @@ For each page across the 10 data files, count internal links in its `content` fi
 ```markdown
 ## Link structure overview
 
-**Pages analyzed:** 646 (across 10 pages-*.json files)
+**Pages analyzed:** [sum of _meta.itemCount across the 10 pages-*.json files — compute at runtime, never hardcode]
 **Total internal links:** [count]
 **Average outbound links per page:** [count]
 
@@ -456,7 +477,7 @@ Use the two-phase pattern:
 
 **6. Cluster-specific reviews.**
 
-- **AEO articles:** are they over-linked (more than 3 internal links)? Are links in disallowed sections (FAQs, conclusion)?
+- **AEO articles:** are they over-linked (above the ceiling of their length-scaled budget — ~1 per 300 words, floor 2, ceiling 6, per `link-strategy.md` §"Link budgets by article type")? Are links in disallowed sections (FAQs, conclusion, metrics table)?
 - **Customer stories:** are they linked from the matching `/industry/*` page?
 - **Glossary entries:** are they cited from blog/AEO content where the term is used definitionally?
 - **Blog posts:** are pillar/hub posts receiving inbound links from cluster posts?
@@ -604,9 +625,9 @@ Typical output: 3–10 inbound edits for a new product/use-case page, 2–4 for 
 
 **Internal links open in the same tab — never `target="_blank"`.** New tabs are an external-link convention; internal navigation should stay in the same tab. When adding a link, emit `<a href="...">anchor</a>` with no `target`. When auditing existing internal links, strip any `target="_blank"` (and the matching `rel="noopener"` if present) you find — this is a safe, always-correct fix that does not change which page the link points to.
 
-**Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope.
+**Never touch external links.** Links pointing to any domain other than `social.plus` are completely out of scope. Do not evaluate, comment on, or suggest changes to them regardless of context. If external links are all that exist in a page, treat it as having zero existing internal links and proceed accordingly.
 
-**Repoint product-update / release-note links that use canonical anchors.** If an existing link uses an anchor that matches a canonical entry in `link-strategy.md` (e.g. "Events", "live chat", "activity feed") but points to a `/product-update/*` or `/release-note/*` URL instead of the canonical use-case or product page, repoint it to the canonical target. Product-update and release-note pages are dated announcements; the evergreen use-case/product pages are the correct authority targets. If repointing would create a 3rd link to the same target (violating the max-2-same-anchor rule), strip the link tag and keep the anchor as plain text instead. Do not evaluate, comment on, or suggest changes to them regardless of context. If external links are all that exist in a page, treat it as having zero existing internal links and proceed accordingly.
+**Repoint product-update / release-note links that use canonical anchors.** If an existing link uses an anchor that matches a canonical entry in `link-strategy.md` (e.g. "Events", "live chat", "activity feed") but points to a `/product-update/*` or `/release-note/*` URL instead of the canonical use-case or product page, repoint it to the canonical target. Product-update and release-note pages are dated announcements; the evergreen use-case/product pages are the correct authority targets. If repointing would create a 3rd link to the same target (violating the max-2-same-anchor rule), strip the link tag and keep the anchor as plain text instead.
 
 ## Compliance check
 

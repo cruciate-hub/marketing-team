@@ -28,7 +28,14 @@ if [ ! -f "$CANONICAL" ]; then
   exit 2
 fi
 
-EXPECTED_HASH=$(sha256sum "$CANONICAL" | awk '{print $1}')
+# sha256sum is GNU coreutils; stock macOS ships shasum (Perl) instead.
+if command -v sha256sum >/dev/null 2>&1; then
+  sha256() { sha256sum "$@"; }
+else
+  sha256() { shasum -a 256 "$@"; }
+fi
+
+EXPECTED_HASH=$(sha256 "$CANONICAL" | awk '{print $1}')
 
 drift=0
 checked=0
@@ -78,7 +85,7 @@ for skill in "$REPO_ROOT"/marketing-team/skills/*/SKILL.md; do
     continue
   fi
 
-  hash=$(printf '%s\n' "$block" | sha256sum | awk '{print $1}')
+  hash=$(printf '%s\n' "$block" | sha256 | awk '{print $1}')
   if [ "$hash" != "$EXPECTED_HASH" ]; then
     echo "DRIFT:   $rel"
     drift=1

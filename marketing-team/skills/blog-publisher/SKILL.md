@@ -77,6 +77,17 @@ Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fe
       exit 1
     fi
 
+    # Overlay the live website inventories. The auto-generated pages-*.json
+    # are committed to the `site-data` branch (bot commits stay off main);
+    # main only carries a point-in-time snapshot. Restricting the overlay to
+    # pages-*.json keeps the clone fast-forwardable on the next session's pull.
+    if git -C "$REPO" fetch --depth 1 --quiet origin site-data 2>/dev/null; then
+      git -C "$REPO" checkout --quiet FETCH_HEAD -- 'website/pages-*.json' 2>/dev/null \
+        || echo "Note: site-data overlay failed; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    else
+      echo "Note: could not fetch site-data; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    fi
+
 After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
 
 The integrity gate above fails loud rather than serving partial content, and it never deletes `$REPO` (it can hold un-pushed local work). To make skills read your own local edits, point `MT_REPO` at your working checkout before running them.
@@ -102,7 +113,16 @@ In either case, the rest of the file is invisible to you in-call. Most files in 
       python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
       jq '.pages[].url' "$REPO/website/pages-blog.json"
 
-  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+  Some skills ship helper scripts that already follow this pattern (e.g. `marketing-team/skills/aeo-content/scripts/duplicate_check.py`).
+
+  **Degraded-inventory guard.** The pages-*.json files are auto-generated; a generation failure can leave a file syntactically valid but empty or missing pages. After loading any of them, check `_meta.errors` and `len(pages)`:
+
+      python3 -c "
+      import json; d=json.load(open('$REPO/website/pages-industry.json'))
+      errs = d.get('_meta',{}).get('errors') or []
+      print(len(d.get('pages',[])), 'pages;', len(errs), 'extraction errors', errs)"
+
+  If `pages` is empty, or `_meta.errors` is non-empty, the inventory is degraded: name the affected file and the missing paths in your output, scope any 'site-wide' claims accordingly, and never treat an empty inventory as 'this section has no pages'.
 
 Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
 

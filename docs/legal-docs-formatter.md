@@ -60,6 +60,5 @@ After pasting into the Embed block:
 
 ```
 legal-docs-formatter/
-├── SKILL.md     Skill entry point — context, formatting rules, style block, output
-└── README.md    This file
+└── SKILL.md     Skill entry point — context, formatting rules, style block, output
 ```

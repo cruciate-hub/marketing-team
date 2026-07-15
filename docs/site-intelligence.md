@@ -97,8 +97,7 @@ Bad observations: generic advice, restating the obvious, guesses that require da
 
 ```
 site-intelligence/
-├── SKILL.md                          Skill entry point — mode router, quoting rules, "while looking at this"
-└── README.md                         This file
+└── SKILL.md                          Skill entry point — mode router, quoting rules, "while looking at this"
 ```
 
 ## URL format

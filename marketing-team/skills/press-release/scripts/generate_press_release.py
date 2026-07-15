@@ -198,12 +198,17 @@ def _add_body_paragraph(doc, item):
         run_body = p.add_run(body_text)
         _set_font(run_body, bold=False)
         return
-    # Unknown shape — skip silently rather than corrupt the doc
+    if isinstance(item, dict) and "quote" in item:
+        _add_quote_block(doc, item["quote"])
+        return
+    # Unknown shape — don't corrupt the doc, but never drop content silently
+    print(f"WARNING: skipping paragraph with unknown shape: {item!r}", file=sys.stderr)
     return
 
 
 def _add_quote_block(doc, quote):
-    """Indented italic quote paragraph followed by attribution on its own line."""
+    """Indented quote paragraph (plain, curly-quoted) followed by an italic
+    attribution line."""
     if not quote or not quote.get("text"):
         return
 
@@ -215,8 +220,9 @@ def _add_quote_block(doc, quote):
     p.paragraph_format.space_before = Pt(8)
     p.paragraph_format.space_after = Pt(4)
 
-    quote_text = quote["text"]
-    # Wrap with curly quotes if not already
+    quote_text = quote["text"].strip()
+    # Normalize straight quotes at the edges, then wrap with curly quotes
+    quote_text = quote_text.strip('"')
     if not quote_text.startswith("“"):
         quote_text = "“" + quote_text
     if not quote_text.endswith("”"):

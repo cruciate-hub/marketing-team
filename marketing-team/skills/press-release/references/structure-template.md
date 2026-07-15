@@ -2,7 +2,7 @@
 
 This is the canonical skeleton. Every social.plus press release follows it. Block-by-block specifications below.
 
-## The 12-block skeleton
+## The 17-block skeleton
 
 ```
 [1]  FOR IMMEDIATE RELEASE

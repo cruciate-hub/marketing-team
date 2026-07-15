@@ -1,5 +1,30 @@
 # Changelog
 
+## marketing-team 13.24 / brand-kit 3.9
+
+Repo-wide professionalization pass driven by a full multi-agent audit (8 dimensions, adversarially verified findings).
+
+**Skill changes:**
+- **Canonical fetch block:** added a degraded-inventory guard for `website/pages-*.json` — skills must check `_meta.errors` and `len(pages)` after loading, and never treat an empty inventory as "this section has no pages" (motivated by `pages-industry.json` being auto-committed with 0 items). Also fixed the misleading `scripts/duplicate_check.py` example path. Synced to all 12 fetch-using skills (which is why brand-kit bumps too).
+- **aeo-content:** ported the refined brand-law rules from blog-seo-content's compliance gate — the "social network" rule is now self-referential-only (external references like "social networks such as Facebook" no longer fail, which comparative AEO articles need), the leverage regex catches all four inflections without false-firing on "high-leverage", added ad-network/guarantee patterns, added `check_risky_terms` (WARN tier), and terminology checks now ignore code blocks and link URLs.
+- **internal-linking-strategist:** replaced hardcoded "646 pages" with runtime `_meta.itemCount` counting; fixed the audit step that flagged AEO articles as over-linked at >3 links (now uses the length-scaled budget: floor 2, ceiling 6); un-merged two external-link sentences that had corrupted the "Repoint product-update / release-note links" principle; fixed the Chrome MCP tool prefix (`mcp__claude-in-chrome__*`).
+- **site-intelligence + product-update-vs-website:** dropped stale hardcoded item counts in favor of `_meta.itemCount`; updated the use-case page lists (added `/use-case/events`, `/use-case/live-commerce`, `/use-case/social-commerce`); added `/social/stories` and the vs-stream/white-label positioning pages to "Pages covered"; added the auto-include caveat to site-intelligence.
+- **press-release:** Step 6 word-count bands now defer to `references/structure-template.md` §"Length targets by release type" (single source of truth); "12-block skeleton" heading corrected to 17 blocks; `generate_press_release.py` now handles the documented `{"quote": ...}` paragraph shape instead of silently dropping it, warns on unknown shapes, strips straight quotes before curly-wrapping, and its quote-block docstring matches the code (plain quote text, italic attribution).
+- **claude-design-to-webflow:** removed the "Related memory files" section — none of the four referenced files exist.
+- **video-to-gif-and-webp:** removed the unrecognized `version` frontmatter field.
+
+Also ships two skill changes that landed in git without a version bump and therefore never reached installed users: blog-publisher Phase 6 (Webinar matching, 2026-07-01) and link-building-vetter Gmail Draft Safety (2026-07-15).
+
+**Data pipeline:** auto-generated `website/pages-*.json` commits moved from `main` to the dedicated `site-data` branch — bot commits no longer pollute main's history (83% of it at migration time) or trigger GitHub Pages deploys. The canonical fetch block overlays `site-data` at fetch time so skills always read live inventories; main keeps a point-in-time snapshot. The Cloudflare Worker gained a shrink/empty-commit guard (`/generate/<target>?force=1` to override), Webflow 429 retry with request pacing, `_meta`-insensitive change detection, and non-fatal /pricing enrichment.
+
+**Tooling:** `audit-skills.sh` works on stock macOS (shasum fallback); `sync-fetch-blocks.py` docstring matches the real 12-fetching/5-non-fetching split; `gdoc_to_fielddata.py` defaults `--date` to now instead of a hardcoded June 4 and exits 1 on a missing body heading.
+
+**Docs:** fixed the stale install.md skill count (14 → 17); corrected blog-post routing in docs/product-update-vs-website.md and docs/case-study.md (blog posts → blog-seo-content, per the 13.16 reversal); synced docs/blog-publisher.md (Phase 6) and docs/link-building-vetter.md (Gmail draft safety); removed phantom `README.md` entries from five docs file trees; corrected AEO link budgets in docs/internal-linking-strategist.md; regenerated all Lines/Size table stats; documented the emails/ reference files; fixed the root README's version-bump instructions (version lives in plugin.json only), install-guide step numbers (7–10), newsletters description, and added docs//scripts/ to the repo-structure table.
+
+## marketing-team 13.23
+
+Backfilled entry (shipped 2026-07-06 in commit 4bcda7c without a changelog entry): `backlink-placement-finder` defaults — blog-over-glossary link target preference, single-partner batch default for flat pasted domain lists, and removal of the duplicate "URL:" line from placement request emails.
+
 ## marketing-team 13.22
 
 Editorial-mode reinforcement for `backlink-placement-finder`. The 13.21 shift to editorial reading was structurally correct, but in practice the agent still reached for saturated head terms first because nothing inside the skill named the lazy defaults to resist. 13.22 adds three behavior-shapers plus a description front-load to actively prevent the lookup-reflex Stefan flagged ("I keep coming back too easily with Brand Loyalty").

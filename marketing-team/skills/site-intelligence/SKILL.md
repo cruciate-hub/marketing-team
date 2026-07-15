@@ -58,6 +58,17 @@ Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fe
       exit 1
     fi
 
+    # Overlay the live website inventories. The auto-generated pages-*.json
+    # are committed to the `site-data` branch (bot commits stay off main);
+    # main only carries a point-in-time snapshot. Restricting the overlay to
+    # pages-*.json keeps the clone fast-forwardable on the next session's pull.
+    if git -C "$REPO" fetch --depth 1 --quiet origin site-data 2>/dev/null; then
+      git -C "$REPO" checkout --quiet FETCH_HEAD -- 'website/pages-*.json' 2>/dev/null \
+        || echo "Note: site-data overlay failed; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    else
+      echo "Note: could not fetch site-data; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
+    fi
+
 After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
 
 The integrity gate above fails loud rather than serving partial content, and it never deletes `$REPO` (it can hold un-pushed local work). To make skills read your own local edits, point `MT_REPO` at your working checkout before running them.
@@ -83,7 +94,16 @@ In either case, the rest of the file is invisible to you in-call. Most files in 
       python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
       jq '.pages[].url' "$REPO/website/pages-blog.json"
 
-  Skill helper scripts (e.g. `scripts/duplicate_check.py`) already follow this pattern.
+  Some skills ship helper scripts that already follow this pattern (e.g. `marketing-team/skills/aeo-content/scripts/duplicate_check.py`).
+
+  **Degraded-inventory guard.** The pages-*.json files are auto-generated; a generation failure can leave a file syntactically valid but empty or missing pages. After loading any of them, check `_meta.errors` and `len(pages)`:
+
+      python3 -c "
+      import json; d=json.load(open('$REPO/website/pages-industry.json'))
+      errs = d.get('_meta',{}).get('errors') or []
+      print(len(d.get('pages',[])), 'pages;', len(errs), 'extraction errors', errs)"
+
+  If `pages` is empty, or `_meta.errors` is non-empty, the inventory is degraded: name the affected file and the missing paths in your output, scope any 'site-wide' claims accordingly, and never treat an empty inventory as 'this section has no pages'.
 
 Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
 
@@ -111,18 +131,20 @@ The site is split across 10 auto-generated JSON files in `website/`. All share t
 
 Pick the files relevant to the user's question — don't load all 10 unless the query genuinely spans the whole site.
 
-| File | Covers | Items (approx) |
-|---|---|---|
-| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, feature/SDK/UIKit, white-label, vs-stream | ~22 |
-| `website/pages-industry.json` | Static `/industry/*` pages | ~10 |
-| `website/pages-use-cases.json` | `/use-case/*` | ~11 |
-| `website/pages-blog.json` | `/blog/*` | ~250 |
-| `website/pages-glossary.json` | `/glossary/*` | ~75 |
-| `website/pages-answers.json` | `/answers/*` (AEO articles) | ~120 |
-| `website/pages-customer-stories.json` | `/customer-story/*` | ~42 |
-| `website/pages-release-notes.json` | `/release-note/*` | ~30 |
-| `website/pages-product-updates.json` | `/product-update/*` (monthly) | ~58 |
-| `website/pages-webinars.json` | `/webinars/*` | ~25 |
+| File | Covers |
+|---|---|
+| `website/pages-marketing.json` | Static marketing pages: homepage, product, pricing, feature/SDK/UIKit, white-label, vs-stream |
+| `website/pages-industry.json` | Static `/industry/*` pages |
+| `website/pages-use-cases.json` | `/use-case/*` |
+| `website/pages-blog.json` | `/blog/*` |
+| `website/pages-glossary.json` | `/glossary/*` |
+| `website/pages-answers.json` | `/answers/*` (AEO articles) |
+| `website/pages-customer-stories.json` | `/customer-story/*` |
+| `website/pages-release-notes.json` | `/release-note/*` |
+| `website/pages-product-updates.json` | `/product-update/*` (monthly) |
+| `website/pages-webinars.json` | `/webinars/*` |
+
+Item counts drift as content ships, so never assume them — read each file's `_meta.itemCount` at load time, and apply the degraded-inventory guard from the fetch block above (`_meta.errors` non-empty or zero pages means the file is degraded, not that the section is empty).
 
 Fetch each as `website/<file>.json` per the canonical fetch block at the top of this file (e.g. `website/pages-marketing.json`).
 
@@ -373,9 +395,12 @@ Keep it to 2-3 observations. Make each one specific, quotable, and actionable. T
 - `/video` — video product landing
 - `/social/sdk`, `/chat/sdk`, `/video/sdk` — SDK pages
 - `/social/uikit`, `/chat/uikit` — UIKit pages
+- `/social/stories` — stories feature page
+- `/vs-stream`, `/white-label/chat-software`, `/white-label/in-app-community`, `/white-label/social-network` — competitive / white-label positioning pages
 
 ### Use case pages
-- `/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/livestream`, `/use-case/polls`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
+- `/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/events`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/live-commerce`, `/use-case/livestream`, `/use-case/polls`, `/use-case/social-commerce`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
+- New use cases are auto-included when published — the JSON reflects whatever currently exists in the Webflow Use Cases CMS collection.
 
 ### Industry pages (in `pages-industry.json`)
 - `/industry/retail`, `/industry/fitness`, `/industry/travel`, `/industry/sports`, `/industry/health-and-wellness`, `/industry/fintech`, `/industry/media-and-news`, `/industry/edtech`, `/industry/gaming`, `/industry/betting`

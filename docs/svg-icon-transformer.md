@@ -52,4 +52,4 @@ Never combine `aria-hidden="true"` with `role="img"`, `<title>`, or `aria-label`
 ## Files
 
 - `SKILL.md` — full transformation rules, strip/keep lists, color handling, edge cases
-- `README.md` — this file
+- `docs/svg-icon-transformer.md` (this file) — human-facing description; lives in the repo's `docs/` folder, not inside the skill

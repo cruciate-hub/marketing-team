@@ -19,7 +19,7 @@ For **gap analysis and comparison only** — not for writing the resulting copy.
 The skill is **not** for:
 - Writing the email about a product update — use `newsletters`.
 - Writing the release-note CMS item or the updated page copy — use `brand-messaging`.
-- Writing a blog post announcing the update — use `brand-messaging`.
+- Writing a blog post announcing the update — use `blog-seo-content`.
 
 This skill reports which pages need updating; the actual writing belongs to the format-specific skill.
 
@@ -45,7 +45,7 @@ This skill reports which pages need updating; the actual writing belongs to the 
 `/product`, `/social`, `/chat`, `/video`, `/social/sdk`, `/chat/sdk`, `/video/sdk`, `/social/uikit`, `/chat/uikit`
 
 ### Use case pages
-`/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/livestream`, `/use-case/polls`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
+`/use-case/1-1-chat`, `/use-case/activity-feed`, `/use-case/custom-posts`, `/use-case/events`, `/use-case/group-chat`, `/use-case/groups`, `/use-case/live-chat`, `/use-case/live-commerce`, `/use-case/livestream`, `/use-case/polls`, `/use-case/social-commerce`, `/use-case/stories-and-clips`, `/use-case/user-profiles`
 
 ### Industry pages
 `/industry/retail`, `/industry/fitness`, `/industry/travel`, `/industry/sports`, `/industry/health-and-wellness`, `/industry/fintech`, `/industry/media-and-news`, `/industry/edtech`, `/industry/gaming`, `/industry/betting`
@@ -129,8 +129,7 @@ Always end the report listing which messaging guideline files were actually load
 
 ```
 product-update-vs-website/
-├── SKILL.md                          Skill entry point — workflow, gap logic, output format
-└── README.md                         This file
+└── SKILL.md                          Skill entry point — workflow, gap logic, output format
 ```
 
 ## URL format

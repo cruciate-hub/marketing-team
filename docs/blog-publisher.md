@@ -47,8 +47,9 @@ If the user asks to write AND publish, run `blog-seo-content` first, then this s
 | 3. Internal linking | `internal-linking-strategist` adds 3–7 `<a href>` tags grounded in `link-strategy.md`. |
 | 4. Compliance check | Terminology, tone, claims, em dashes, emojis — all fixed before proceeding. |
 | 5. Resize images | `resize_blog_images.py` validates the master and emits all exact WebP sizes (Pillow). |
-| 6. Upload assets | 3-step Webflow upload (MD5 → asset API → S3) × 3 images. |
-| 7. Publish live | `POST /items/live` with all 22 CMS fields populated. Prints live URL + item ID. |
+| 6. Webinar matching | Picks the best related webinar for the `related-webinar-to-show-on-page` Reference field from the allowed pool (falls back gracefully if none fits). |
+| 7. Upload assets | 3-step Webflow upload (MD5 → asset API → S3) × 3 images. |
+| 8. Publish live | `POST /items/live` with all 22 CMS fields populated. Prints live URL + item ID. |
 
 ## What it does NOT do
 

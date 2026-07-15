@@ -3,7 +3,7 @@
 This file is the single source of truth for **site architecture**, **canonical anchor → page** decisions, **cannibalization warnings**, **link budgets**, **anchor distribution targets**, **placement rules**, and **scoring** across the social.plus content ecosystem. The `internal-linking-strategist` skill consumes this file at runtime. Other content skills (`blog-seo-content`, `aeo-content`, `case-study`, `brand-messaging`) defer to the optimizer and, by extension, to this file.
 
 **Generated:** 2026-04-17
-**Refresh by:** 2026-07-16 (90 days)
+**Refresh by:** 2026-07-16 (90 days) — **⚠ REFRESH DUE.** Page counts in this file (e.g. "646 pages") describe the inventory at generation time; the live inventories have since grown to ~710 pages, and `pages-industry.json` is currently degraded (0 items — worker extraction bug, fix pending deploy). Canonical anchor decisions remain valid; treat all counts and per-file numbers as of 2026-04-17 until the refresh audit runs.
 **Data sources:**
 - Ahrefs site-explorer (organic-keywords, top-pages, pages-by-internal-links, domain-rating) for `social.plus` (subdomains, both protocols)
 - Ahrefs GSC integration (gsc-keywords, gsc-pages) for project `7031381` — last 90 days of real Google Search Console data

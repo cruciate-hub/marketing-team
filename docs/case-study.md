@@ -17,7 +17,7 @@ Output maps directly to the Webflow CMS `💼 Customer Stories` collection field
 ONLY when the content is about a **specific named customer** using social.plus. Trigger phrases include "case study", "customer story", "success story", "customer spotlight", "write about how [specific customer name] uses", "write a CS for [customer]", or "new customer story". Requires a named account (e.g. Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames, or any other named customer).
 
 The skill is **not** for:
-- Product/feature stories without a specific named customer (e.g. "how the Block feature helps brands") — use `brand-messaging`, which owns all product/feature content regardless of format.
+- Product/feature stories without a specific named customer (e.g. "how the Block feature helps brands") — use `brand-messaging` for pages/landing copy, or `blog-seo-content` if it's a blog post.
 - General blog posts without a customer focus — use `blog-seo-content`.
 
 ## Workflow

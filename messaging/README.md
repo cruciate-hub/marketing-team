@@ -8,11 +8,11 @@ Brand messaging source of truth for social.plus. These files are fetched live fr
 
 | File | Lines | Size | Description |
 |---|---:|---:|---|
-| [brain.md](./brain.md) | 75 | 4.8 KB | Router — entry point for brand-messaging tasks; maps requests to the files below. |
+| [brain.md](./brain.md) | 62 | 4.2 KB | Router — entry point for brand-messaging tasks; maps requests to the files below. |
 | [positioning.md](./positioning.md) | 235 | 11.0 KB | Company overview, category, positioning statements, audience, and differentiators. |
 | [narrative.md](./narrative.md) | 108 | 3.4 KB | Messaging hierarchy and narrative frameworks — how to order emphasis in any piece. |
 | [value-story.md](./value-story.md) | 129 | 5.8 KB | Core problems social.plus solves and the value pillars that address them. |
-| [boilerplates.md](./boilerplates.md) | 49 | 3.5 KB | Standardized elevator pitches — 25-word, 50-word, and longer variants. |
+| [boilerplates.md](./boilerplates.md) | 59 | 5.1 KB | Standardized elevator pitches — 25-word, 50-word, and longer variants. |
 | [tone.md](./tone.md) | 106 | 3.2 KB | Tone of voice and writing style for marketing and external content. |
 | [terminology.md](./terminology.md) | 124 | 2.9 KB | Approved terminology — brand name, product names, capitalization, phrasing to avoid. |
 | [ui-micro-copy.md](./ui-micro-copy.md) | 134 | 5.9 KB | Product UI copy conventions — labels, errors, buttons, tooltips, placeholders. |

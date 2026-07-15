@@ -12,5 +12,16 @@ emails/lead-scoring-prompt.txt
 emails/lead-score-email-section.html
 emails/scenario-6213998-lead-score-instructions.md
 emails/marops-email-with-priority-badges.html
+# Internal Make-scenario email modules (MarOps — same policy as above)
+emails/email-module-*.html
+emails/email-module-*.txt
+# Cloudflare Worker source + Webflow custom-code snippets — internal infra.
+# The worker exposes webhook routes; its code stays out of the public repo.
+workers/
 # Cloudflare Wrangler local cache (contains account id / state)
 **/.wrangler/
+
+# --- OS / tooling noise ---
+.DS_Store
+__pycache__/
+*.pyc

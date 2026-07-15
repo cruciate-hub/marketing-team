@@ -1,6 +1,5 @@
 ---
 name: video-to-gif-and-webp
-version: 2.0.0
 description: Create or optimize animated .webp and .gif files from video or existing animated images. Trigger when the user wants to convert a video clip into an animated image, optimize an existing gif or webp, resize an animated image for a specific use case, or convert between gif and webp. Mentions like "make a webp from this video", "gif from YouTube", "animated thumbnail", "video loop", "convert this clip", "webp from video", "gif for email", "optimize this gif", "resize this webp", "convert gif to webp", or drags/references a video or animated image file. Also trigger when the user mentions webinar thumbnails, mega menu images, product update talking heads, customer story loops, or newsletter gifs.
 ---
 

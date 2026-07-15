@@ -86,8 +86,7 @@ Subject line rules (mandatory):
 
 ```
 newsletters/
-├── SKILL.md                          Skill entry point — workflow, type detection, HTML requirements
-└── README.md                         This file
+└── SKILL.md                          Skill entry point — workflow, type detection, HTML requirements
 ```
 
 All email templates, specs, and guidelines live in the repo root's `emails/` folder and are fetched at runtime.

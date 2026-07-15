@@ -25,7 +25,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 **Reference content** (markdown files in `messaging/`, `design-system/`, `emails/`): Edit on GitHub, changes are live for all team members on their next session — no version bump needed, no reinstall needed.
 
-**Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in `marketplace.json` (and the matching `plugin.json`). Teammates with auto-sync on (Steps 8–11 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
+**Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in the plugin's `.claude-plugin/plugin.json` (versions are single-sourced there; `marketplace.json` entries deliberately carry no version field). Teammates with auto-sync on (Steps 7–10 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
 
 ## Available skills (17)
 
@@ -36,7 +36,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Non-blog marketing content: feature pages, landing pages, homepage copy, product descriptions, release-note CMS items, taglines, pitch materials, investor copy, and brand voice audits. NOT for blog posts (use blog-seo-content for any topic). |
 | [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Loads the full messaging stack for brand voice. |
 | [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
-| [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails from monthly product update docs. |
+| [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. |
 | [**case-study**](./marketing-team/skills/case-study/SKILL.md) | Customer stories and success case studies following the social.plus narrative structure. |
 | [**press-release**](./marketing-team/skills/press-release/SKILL.md) | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. |
 
@@ -80,6 +80,8 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**design-system/**](./design-system) | Full visual design system — colors, typography, spacing, buttons, shadows, layout, accessibility, and more. [View brand guidelines live](https://cruciate-hub.github.io/marketing-team/design-system/brand-guidelines.html) |
 | [**assets/**](./assets) | Official logo SVGs |
 | [**emails/**](./emails) | Email template reference, strategy guide, and HTML examples |
-| [**website/**](./website) | Live website content JSON (auto-updated on every Webflow publish via a Cloudflare Worker) |
+| [**website/**](./website) | Website content JSON + the internal-linking strategy. Live inventories are auto-committed by a Cloudflare Worker to the [`site-data`](https://github.com/cruciate-hub/marketing-team/tree/site-data) branch on every Webflow publish (skills overlay that branch at fetch time); the copies on `main` are a point-in-time snapshot |
 | [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 17 skill definitions that fetch from the folders above |
 | [**brand-kit/**](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
+| [**docs/**](./docs) | Per-skill companion docs + the click-by-click [install guide](./docs/install.md) |
+| [**scripts/**](./scripts) | Fetch-block source of truth (`canonical-fetch-block-v2.md`), sync/drift tooling (`sync-fetch-blocks.py`, `audit-skills.sh`), and blog-publisher helpers |

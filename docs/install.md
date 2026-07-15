@@ -79,7 +79,7 @@ Claude installs the plugin and its skills. You're done — close the Directory w
 | | Brand kit | Marketing team |
 |---|---|---|
 | **For** | Everyone outside the marketing team | The marketing team |
-| **Skills** | 2 — `brand-messaging`, `design-system` | 14 — content, SEO, design, linking, formatting |
+| **Skills** | 2 — `brand-messaging`, `design-system` | 17 — content, design, SEO, linking, publishing, media, formatting |
 | **Use it when** | You occasionally write copy or build something visual and need to stay on-brand | You produce marketing content end-to-end: blog posts, landing pages, emails, customer stories, press releases, etc. |
 
 ---
