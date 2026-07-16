@@ -1,38 +1,45 @@
-# Claude-design → Webflow
+# Claude design/code → Webflow
 
-Claude skill for migrating a Claude-generated HTML/CSS/JS prototype to a native Webflow section via the Webflow MCP.
+Claude skill for turning a Claude-generated design or prototype (claude.ai/design HTML/CSS/JS, a Claude Code artifact, or pasted markup) into a live Webflow build via the Webflow MCP — and for iterating on Claude-built Webflow sections.
 
-This is the engineering-side counterpart to `design-system` and `site-intelligence`: where those describe *what* the brand and site look like, this skill prescribes *how* to translate a Claude-drafted UI into Webflow's Designer + Style Records without leaving cascade conflicts behind.
+This is the engineering-side counterpart to `design-system` and `site-intelligence`: where those describe *what* the brand and site look like, this skill prescribes *how* to translate a Claude-drafted UI into Webflow's Style records, components, embeds, and custom code without leaving cascade conflicts behind.
+
+## Structure (token-efficient, progressive disclosure)
+
+The skill loads a lean `SKILL.md` on invocation and pulls depth from `references/` only when needed:
+
+- **`SKILL.md`** — core: native-vs-code decision rule, the headless-vs-Designer tool stack, `data_whtml_builder` as the fast build path, breakpoints, responsive/component patterns, custom-code-via-API, a one-line gotcha index, a token-efficiency section, the staging verification loop, and the build/publish playbook.
+- **`references/pitfalls.md`** — the full catalog: 9 input anti-patterns (A1–A9) + 21 migration pitfalls with symptom / cause / fix.
+- **`references/worked-examples.md`** — real before/after diffs (section split, descendant trim, JS-injection strip, transform-cascade fix, plus the 2026-07 responsive-nav: making one component work on mobile and connecting a bar to the navbar as one card).
+- **`references/variable-ids.md`** — social.plus site identity + pre-mapped brand variable IDs, so `data_style_tool` calls can pass `variable_as_value` without a `query_variables` round-trip.
 
 ## What it does
 
-Captures the lessons from the social.plus MCP Server page rebuild (2026-05) plus community patterns adapted from public Webflow-conversion skills (sans the moden.club paste-tool path — this skill targets the official `mcp.webflow.com` Connector). Specifically:
-
-- **Decision rule** for whether a CSS rule belongs natively (Webflow Style record) or stays in custom Site/Page head code — the wrong choice silently overwrites Style-panel edits because Site Settings → Head loads *after* Webflow's compiled CSS.
-- **Anti-pattern catalog** (9 entries, A1–A9): section-root mega-rules, `all: unset`, hardcoded brand-color hex, custom @media breakpoints (1200/720/520), JS-injected static content, `:nth-child(N)`, `color-mix()` Designer corruption, class-fixer IIFEs, mobile horizontal overflow.
-- **Pitfalls** (14 entries) with symptom / cause / fix triples, including: cascade-order conflicts, orphan native records (no element uses the class), invisible JS-injected elements, `color-mix()` `pxpxpxpx black` corruption, custom-breakpoint mismatch, brittle combo-class cascades, `Webflow.push()` runtime timing, and `inDesigner` canvas-vs-published render differences.
-- **Pre-flight checklist** — 6 steps to run before touching anything (backup head/footer locally, inventory variables, inventory native styles, verify class usage, map breakpoint strategy, identify JS-injected static content).
-- **Migration playbook** — 6-step process from categorising rules through publishing to `.webflow.io`.
-- **Worked examples** — 4 real before/after diffs from the social.plus session (section split, descendant trim, JS-injection strip, transform-cascade fix).
-- **Webflow MCP cheatsheet** — one-line API calls for the common operations.
-- **Pre-mapped variable IDs** — 31 brand colors + 1 font + 7 size variables with their Webflow IDs and site identity fields, so calls to `style_tool update_style` can use `variable_as_value` without a prior `query_variables` round-trip.
+- **Decision rule** for whether a CSS rule belongs natively (a Webflow Style record) or in custom code — the wrong choice silently overwrites Style-panel edits because custom code loads *after* Webflow's compiled CSS.
+- **Fast build path:** `data_whtml_builder` imports a whole section from `html` + `css` in one call (auto-mapped to classes + breakpoints), instead of a token-heavy element-by-element rebuild.
+- **Corrected architecture:** the Data API tools (`data_*`) are **headless** — no active Designer tab needed for style/element/embed/code/publish work; only Designer-bridge tools require the focused tab.
+- **Custom code is now API read/write** (this reverses the skill's old paste-by-hand advice): Site/Page freeform head+footer via `data_scripts_tool`, and `<style>`/`<script>` HTML embeds via `data_element_settings_tool` (`code` setting).
+- **Responsive & components:** native breakpoint styles (main/medium/small/tiny), making one component responsive instead of shipping mobile-duplicates, shared-class blast radius, component variants, and the reality that bulk component-instance deletion only exists as the Designer's "Delete Component".
+- **Anti-pattern catalog + pitfalls** (A1–A9 + 21) including cascade-order conflicts, orphan style records, invisible JS-injected DOM, `color-mix()` corruption (and the variable-`custom_value` workaround), breakpoint mismatch, brittle combo cascades, containing-block traps, `body{overflow-x:hidden}` breaking sticky, Chromium-vs-Safari blind spots, and publish propagation lag.
+- **Token-efficiency workflow** — one `data_whtml_builder` per section, page ID from the live DOM, jq/grep on persisted large tool results, narrow `query_styles`, verify via computed styles / `element_snapshot_tool` instead of screenshots, batched writes.
+- **Staging verification loop** — publish to `.webflow.io`, wait out CDN propagation, assert computed styles + console-clean across real scenarios, screenshot last; production only on explicit go-ahead.
 
 ## When it triggers
 
-- Migrating a Claude-generated HTML/CSS/JS prototype to a native Webflow section.
-- Iterating on a previously-Claude-built Webflow section and the user mentions code-vs-native cleanup, JS-injection removal, or cascade conflicts.
-- The user pastes Webflow head or footer code and asks what should move to native.
-- The user asks why a Style-panel change isn't taking effect (almost always a cascade-order issue).
-- The user is choosing between Webflow's standard breakpoints (992/768/480) and custom `@media` values from the prototype.
-- The user hits the `color-mix()` `pxpxpx black` Designer corruption.
-- The user runs into Webflow MCP query timeouts and the Designer Bridge tab being idle.
+- Migrating a Claude-generated HTML/CSS/JS prototype to a native Webflow section, or iterating on one.
+- Making a section or component responsive across Webflow breakpoints.
+- Editing CSS/JS embeds or Site/Page head/footer code through the API.
+- Working with shared classes, component instances, or variants; deleting redundant components.
+- The user asks why a Style-panel change isn't taking effect (almost always a cascade-order or embed-vs-native issue).
+- Choosing between Webflow's breakpoints (992/768/480) and a prototype's custom `@media` values.
+- Hitting a Webflow gotcha: `color-mix()` corruption, containing-block traps, sticky/overflow conflicts, publish propagation lag, Chromium-vs-Safari differences.
 
 ## When it does NOT trigger
 
-- Pure Webflow-only work with no Claude prototype as input — use the appropriate `webflow-skills:*` skill instead.
-- Pure Claude artifact iteration without a Webflow target — the skill assumes a Webflow MCP destination.
+- Pure Webflow-only work with no Claude prototype as input — use the appropriate `webflow-skills:*` skill.
+- Pure Claude-artifact iteration with no Webflow target.
 - Content writing (blog, brand, AEO, case study) — those go to the content-creation skills.
-- Routine CMS edits or publish operations — those go to `webflow-skills:safe-publish`, `webflow-skills:bulk-cms-update`, etc.
+- Routine CMS edits or publish operations — `webflow-skills:safe-publish`, `webflow-skills:bulk-cms-update`, etc.
 
 ## Skill location
 
@@ -40,7 +47,7 @@ Captures the lessons from the social.plus MCP Server page rebuild (2026-05) plus
 
 ## Related skills
 
-- `design-system` — visual design tokens (colors, typography, spacing). Used as the source-of-truth reference for which variables to bind to.
-- `site-intelligence` — what content lives on the site. Useful when the migration target is an existing page.
-- `webflow-skills:custom-code-management` (official Webflow plugin) — managing site-level Head/Footer scripts.
-- `webflow-skills:safe-publish` (official Webflow plugin) — the publish step at the end of the playbook.
+- `design-system` — visual design tokens (colors, typography, spacing); the source of truth for which variables to bind.
+- `site-intelligence` — what content lives on the site; useful when the migration target is an existing page.
+- `webflow-skills:custom-code-management` — site-level Head/Footer scripts.
+- `webflow-skills:safe-publish` — the publish step at the end of the playbook.
