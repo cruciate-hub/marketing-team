@@ -19,6 +19,7 @@ What Claude's HTML/CSS prototypes emit constantly. Spot them as you read the pro
 | A7 | **`color-mix(in srgb, currentColor X%, transparent)`** | The Designer serializer mangles it to `pxpxpx black` on save. Keep in code only. → Pitfall 4 |
 | A8 | **Class-fixer IIFE** that `classList.add()` by DOM index | Designer shows those classes as orphan/unused though they work at runtime. Prefer classes in HTML directly; drop the fixer. → Pitfall 12 |
 | A9 | **Mobile horizontal overflow** from an unconstrained child (wide table/embed, `width:100vw` in a padded box, absolute element) | Fix the actual child (`max-width:100%; overflow-x:auto` on the wide element) via a site-head rule. Do NOT reach for `body{overflow-x:hidden}` — it silently kills `position:sticky`. Set preemptively; don't wait for QA on the `.io` URL. → Pitfall 17 |
+| A10 | **Claude Design canvas export** (`.dc.html`) — all 7-ish page frames sit side-by-side, near-100% **inline-styled**; the shared `<style>` block is negligible | The "categorize the stylesheet's rules" plan assumes a stylesheet; here the work is **inline styles → class system**. Read frame-by-frame via the `<!-- PAGINA … -->` banners / `data-screen-label`; lock a shared class contract (shared names + per-page prefixes) BEFORE building so parallel section-builds don't collide. Ignore prototype-only mechanics (pan/zoom `support.js`, `data-comment-anchor`, Tweaks props, the grey frame caption). |
 
 ---
 
@@ -111,7 +112,7 @@ if (inDesigner) { setActive(0); return; }
 
 ### 19. Chromium-only testing = an iOS-Safari blind spot
 **Reality:** the in-app browser is Chromium; it will NOT reproduce Safari-only bugs. The frequent ones: `position:fixed` inside a `transform`ed+`overflow` ancestor mispositions or doesn't paint; opacity/`[data-animate]` reveal animations can fail to fire in a fixed/transform sheet, leaving content invisible.
-**Fixes to apply preemptively:** prefer `position:absolute` anchored to a positioned ancestor over `fixed`-inside-transform; scope reveal-animations' initial `opacity:0` to `@media (min-width:48em)` so mobile content is never hidden behind an animation that might not run. Then flag it for a real-device retest — you can't self-verify Safari.
+**Fixes to apply preemptively:** prefer `position:absolute` anchored to a positioned ancestor over `fixed`-inside-transform; scope reveal-animations' initial `opacity:0` to `@media (min-width:48em)` so mobile content is never hidden behind an animation that might not run. Then flag it for a real-device retest. **Partial self-check:** a **headless WebKit engine** (e.g. Playwright's WebKit — browsers cache locally) reproduces many of these render quirks that the in-app Chromium browser cannot, and needs no physical device. Not identical to iOS Safari, but strong for containing-block / paint / lazy-load quirks; still flag the residual risk for a real device.
 
 ### 20. No bulk component-instance delete
 **Symptom:** you want to remove a redundant component that has many instances.
@@ -122,3 +123,43 @@ if (inDesigner) { setActive(0); return; }
 **Symptom:** right after `publish_site`, the live page still shows the OLD styles even with a cache-busting query param.
 **Cause:** the compiled CSS/HTML takes ~1 navigation cycle (seconds to ~1 min) to propagate to the edge; the page-CSS file is content-hashed (`site.webflow.<pageId>.<hash>.opt.min.css`) so a stale HTML still points at the old hash.
 **Fix:** after publishing, re-navigate the page once or twice; confirm propagation by checking the CSS filename hash changed, or by fetching the CSS and grepping for your new rule, or by asserting a computed style/marker in the DOM. Don't screenshot-verify until you've confirmed the new bundle is live.
+
+---
+
+## Part 3 — `data_whtml_builder` & headless-build gotchas (the fastest path has sharp edges)
+
+### 22. whtml combo-class CSS silently splits into an orphan global + an empty combo
+**Symptom:** a fragment with `class="bb-section bb-home-hero"` and CSS `.bb-home-hero{…}` renders fine, but the Designer shows TWO records — an unattached global `.bb-home-hero` holding the properties, and an *empty* combo `.bb-section.bb-home-hero` on the element. The datamodel is polluted; a Style-panel edit on the combo does nothing.
+**Cause:** a single-class selector doesn't match the combo the element actually carries; whtml creates the global for the CSS and an empty combo for the class pairing.
+**Fix:** write the selector as the **full chained selector** — `.bb-section.bb-home-hero{…}` — so the properties land directly on the combo record. Validated to depth 3 (`.bb-section.is-dark.bb-home-reviews`). Same rule for any combo you build via whtml.
+
+### 23. whtml drops `target="_blank"`; `href`/`rel` survive only as raw attributes
+**Symptom:** external links open in the same tab; `set_link` on a DropdownLink errors; `query_elements` shows the link as `linkType:"none"`.
+**Cause:** whtml doesn't translate `target`/`rel` into the element's link *setting*; it leaves `href`/`rel` behind as plain HTML attributes (which don't drive Webflow's link behavior).
+**Fix:** set the real link via `data_element_settings_tool set_settings` key **`link`** (mode `url` + `open_in_new_tab:true` + `rel`), then `data_element_tool remove_attribute ["href","rel"]` to clear the leftover attributes. `set_link` (element tool) works on Link/Button/TextLink but NOT on DropdownLink — use the settings key there.
+
+### 24. whtml won't bind `<img src>` to the asset library
+**Symptom:** an `<img>` in the fragment shows a "does not exist in asset library" warning and renders blank/broken, even when `src` is the canonical `cdn.prod.website-files.com/...` URL from `create_asset`.
+**Cause:** whtml matches images by asset-library membership, not by URL; a raw CDN URL isn't recognized as an asset reference.
+**Fix:** upload first (`data_assets_tool create_asset` → presigned-S3 POST), then `set_image_asset` on the Image element by **asset ID** after the fragment lands. The `alt` from the `<img>` tag is preserved.
+
+### 25. Writing a DOM `#id` can fail on whtml-built / component-nested elements
+**Symptom:** `data_element_settings_tool set_dom_id` (or a `domId` setting write) errors with a "component map" conflict; a poisoned source element then fails EVERY subsequent write.
+**Cause:** the id-write path conflicts on certain element provenances (whtml-built, or nested in a component tree). Not universal — it works on many elements — but it recurs on exactly the elements you'd anchor to.
+**Fix:** if it errors, delete + rebuild the element clean and retry once; if it still fails, hand the user a one-time Designer step (select the section → set the ID) so the in-page/anchor link resolves. Surface this as a manual to-do rather than silently shipping a dead anchor.
+
+### 26. No Navbar element type, and the DropdownToggle subtree refuses `set_text`
+**Symptom:** `data_element_builder` has no `Navbar` type; `set_text` on a block inside a `DropdownToggle` returns "this element doesn't support text" — and when you create such a block via `element_builder`, it silently keeps the placeholder ("This is some text inside of a div block.").
+**Fix (nav):** build the mobile menu JS-free — a checkbox-hack (`input[type=checkbox]` + `label`, both via `BY_CUSTOM_TAG`) with toggle CSS (`:checked ~ .menu{…}`) in an HtmlEmbed (those selectors can't be native Style records), or use the native **Dropdown** element (tap works via webflow.js). **Fix (toggle label):** set the toggle's text by inserting a `<div>Label</div>` **whtml child** (whtml writes text at creation, bypassing `set_text`), then remove the placeholder block. Always re-read `textContent` to confirm.
+
+### 27. Dropdown hover-to-open is not an element setting
+**Symptom:** `get_settings` on a DropdownWrapper exposes only `domId`/`tag`/`visibility`/`attributes` — no "open on hover" toggle.
+**Fix:** add `data-hover="true"` + `data-delay="300"` as custom **attributes** (webflow.js reads them off the DOM on the published site) and add a CSS `:hover` fallback (with a small `::before` gap-bridge) in an embed for desktop. Tap-to-open still works natively; no custom JS needed.
+
+### 28. The Body element accepts no class
+**Symptom:** `set_style` on the page's Body errors "this element doesn't support styles" (Body exposes only `domId`).
+**Fix:** to restyle the body, edit the **`body` tag Style record** itself — `data_style_tool update_style style_name:"body"` (global, all pages; also where you neutralize a template's `padding-top` etc.). For a **per-page** body background (e.g. one dark page in a light site), add a page-scoped `<style>` embed (`body{background:var(--token)}`) since you can't scope the global tag style to one page; note it so the user can later move it onto Body in the Designer.
+
+### 29. `update_page_settings` and link read-backs mislead
+**Symptom (a):** setting SEO title via `update_page_settings` also renames the page's Navigator/display name. **Symptom (b):** `query_elements` reports a correctly page-bound link as `linkType:"none"`. **Symptom (c):** form-input `placeholder` won't set through the API.
+**Fixes:** (a) pass `title` (the display name) in the **same** `update_page_settings` call as `seo.title`, so it isn't overwritten. (b) trust `data_element_settings_tool get_settings` `all_raw_settings` — it shows the real `source_type:page` binding; `query_elements`' `linkType` is unreliable for page/prop links. (c) placeholders are a Designer-only field right now → leave a manual to-do.
