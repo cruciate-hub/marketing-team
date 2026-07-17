@@ -103,7 +103,7 @@ if (inDesigner) { setActive(0); return; }
 ### 17. `body{overflow-x:hidden}` silently breaks sticky
 **Symptom:** you add `overflow-x:hidden` to html/body to kill sideways scroll and the sticky nav stops sticking.
 **Cause:** `overflow` on the document root turns the body into the scroll container, so `position:sticky`/`fixed` lose their viewport reference.
-**Fix:** never scroll-lock via `overflow:hidden` on html/body. Fix the overflowing CHILD instead (Anti-pattern A9). For scroll-lock while a menu is open, use `touch-action:none` + a `passive:false` wheel listener that `preventDefault`s outside the menu — the document keeps its scroll position and sticky keeps working.
+**Fix:** never scroll-lock via `overflow:hidden` on html/body. Fix the overflowing CHILD instead (Anti-pattern A9). **When you DO want a horizontal-overflow guard on body AND a sticky nav, use `overflow-x: clip` (not `hidden`)** — `clip` prevents sideways scroll WITHOUT establishing a scroll container, so `position:sticky` keeps working. That's the clean coexistence fix (→ Pitfall 30). For scroll-lock while a menu is open, use `touch-action:none` + a `passive:false` wheel listener that `preventDefault`s outside the menu (or a scoped `body:has(#menu-toggle:checked){overflow:hidden}`) — the document keeps its scroll position and sticky keeps working.
 
 ### 18. Shared-class / shared-embed blast radius
 **Symptom:** you edited one page's nav and every product page changed.
@@ -147,6 +147,7 @@ if (inDesigner) { setActive(0); return; }
 **Symptom:** `data_element_settings_tool set_dom_id` (or a `domId` setting write) errors with a "component map" conflict; a poisoned source element then fails EVERY subsequent write.
 **Cause:** the id-write path conflicts on certain element provenances (whtml-built, or nested in a component tree). Not universal — it works on many elements — but it recurs on exactly the elements you'd anchor to.
 **Fix:** if it errors, delete + rebuild the element clean and retry once; if it still fails, hand the user a one-time Designer step (select the section → set the ID) so the in-page/anchor link resolves. Surface this as a manual to-do rather than silently shipping a dead anchor.
+**Same conflict hits `set_attributes`** (e.g. tagging a container with `data-gsap-transition`), especially right after building the element or after **parallel writes on the same page**. So: **serialize mutations on one page** — don't run element builds and attribute writes concurrently. If an element stays unwritable even sequentially, the map is poisoned for that element; add the attribute once in the Designer (Settings → custom attribute), or rebuild the element fresh.
 
 ### 26. No Navbar element type, and the DropdownToggle subtree refuses `set_text`
 **Symptom:** `data_element_builder` has no `Navbar` type; `set_text` on a block inside a `DropdownToggle` returns "this element doesn't support text" — and when you create such a block via `element_builder`, it silently keeps the placeholder ("This is some text inside of a div block.").
@@ -163,3 +164,39 @@ if (inDesigner) { setActive(0); return; }
 ### 29. `update_page_settings` and link read-backs mislead
 **Symptom (a):** setting SEO title via `update_page_settings` also renames the page's Navigator/display name. **Symptom (b):** `query_elements` reports a correctly page-bound link as `linkType:"none"`. **Symptom (c):** form-input `placeholder` won't set through the API.
 **Fixes:** (a) pass `title` (the display name) in the **same** `update_page_settings` call as `seo.title`, so it isn't overwritten. (b) trust `data_element_settings_tool get_settings` `all_raw_settings` — it shows the real `source_type:page` binding; `query_elements`' `linkType` is unreliable for page/prop links. (c) placeholders are a Designer-only field right now → leave a manual to-do.
+
+---
+
+## Part 4 — sticky/animation & reveal gotchas (added after a full multi-page build)
+
+### 30. Sticky nav vs the body horizontal-overflow guard → `overflow-x: clip`
+**Symptom:** you set the nav to `position:sticky; top:0` and it doesn't stick — it scrolls away.
+**Cause:** an ancestor with `overflow` other than `visible` becomes the scroll container for its sticky descendants. `body{overflow-x:hidden}` (a common guard against sideways scroll) is exactly that.
+**Fix:** change the guard to **`overflow-x: clip`**. `clip` still prevents horizontal scrolling but does NOT establish a scroll container, so `position:sticky` works. (Well supported since 2022.) Keep `overflow-y` at its default `visible`. The nav itself: `position:sticky; top:0; z-index:100; background: <token>` + a hairline bottom border reads clean over scrolling content.
+
+### 31. Scroll-reveal that never fires for above-the-fold content (ScrollTrigger)
+**Symptom:** a GSAP/ScrollTrigger reveal (`autoAlpha:0→1` on `start:"top 95%"`, `once:true`) leaves the hero and other in-view-on-load content **permanently hidden**; below-the-fold reveals may work.
+**Cause:** an element already scrolled past its start on load may never get an "enter" event (or a `ScrollTrigger.refresh()` re-applies the start state), so the reveal tween never plays — and it's stuck at `autoAlpha:0` behind the pre-paint visibility gate.
+**Fix:** drive the reveal with an **IntersectionObserver** (fires reliably for elements intersecting on load) and let it trigger the GSAP tween:
+```js
+const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(!e.isIntersecting) return;
+  const t=e.target.children.length?[...e.target.children]:[e.target];
+  gsap.to(t,{autoAlpha:1,y:0,duration:.6,stagger:.08,ease:'power2.out',overwrite:'auto'}); io.unobserve(e.target); }),
+  {rootMargin:'0px 0px -8% 0px', threshold:.06});
+groups.forEach(g=>{ gsap.set(targetsOf(g),{autoAlpha:0,y:20}); io.observe(g); });
+setTimeout(()=>groups.forEach(revealAll), 4000); // FAILSAFE: never leave content hidden
+```
+Always ship the failsafe + a `prefers-reduced-motion` short-circuit (add a class that releases the gate) + keep the pre-paint hide keyed to an **attribute present in the HTML** (e.g. `[data-reveal] > *{visibility:hidden}`), not a JS-added class, to avoid a flash.
+
+### 32. The in-app preview browser doesn't fire IntersectionObserver or scroll reveals
+**Symptom:** after wiring reveals, the preview pane shows sections "stuck hidden" and `getComputedStyle(...).visibility === 'hidden'` even for the hero — but the code is correct.
+**Cause:** the pane renders in a non-painting/background tab where IntersectionObserver callbacks and scroll-driven triggers don't run. It's a measurement artifact, not a site bug.
+**Fix:** verify reveal/scroll animations in a **headless WebKit** run (Playwright): load, wait, assert `visibility`/`opacity`, scroll to below-fold elements and re-assert, screenshot for the human proof. (Also the Safari-render partial check — see Pitfall 19.) Don't diagnose "stuck hidden" from the pane.
+
+### 33. Read (and reuse) the existing site freeform code before writing your own
+**Symptom:** you `set_site_freeform_code` and overwrite an existing schema block / analytics / an already-wired GSAP reveal system; or you add a SECOND animation layer that fights the first.
+**Cause:** `set_site_freeform_code` / `set_page_freeform_code` **REPLACE** the whole block, and many Webflow templates already ship a reveal system (e.g. GSAP+ScrollTrigger keyed to a `[data-…-transition]` attribute) plus schema/`::selection`/font-smoothing in the head.
+**Fix:** `get_site_freeform_code` FIRST; preserve everything and append. If a reveal system already exists, **activate it** (tag the right wrappers) rather than adding your own — one source of motion. When you must improve it (e.g. add the missing reduced-motion guard, or swap ScrollTrigger→IntersectionObserver per Pitfall 31), edit that block in place and keep its fallbacks (`gsap-not-found`, `noscript`).
+
+### 34. Premium mobile menu, JS-free (extends Pitfall 26)
+**Pattern:** a full-screen overlay menu that reads as "designed," not a default dropdown: checkbox-hack (`input#toggle` + `label`), overlay `position:fixed; inset:0` with `opacity/visibility` transitions; large serif links that **stagger** via per-child `transition-delay` (nth-child or a `--i` var); the hamburger→X morph on 3 `<span>` bars; scroll-lock via `body:has(#toggle:checked){overflow:hidden}`; the primary CTA pinned at the bottom; and a `@media (prefers-reduced-motion:reduce)` branch that drops the transforms/stagger. Panel ~200-350ms, icon morph ~150-250ms. All CSS in the nav component's HTML embed → site-wide via the component.
