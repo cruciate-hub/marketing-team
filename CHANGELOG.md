@@ -1,5 +1,47 @@
 # Changelog
 
+## marketing-team 13.30
+
+`claude-design-to-webflow` — banked the learnings from a live variable-reorg fix and a full accessibility pass on a Webflow site.
+
+**Why:** a real session hit two things the skill didn't cover. (1) Reorganising the site's font variables stranded 37 style bindings as "Font Serif (deleted)"; the fix required knowing that `data_style_tool update_style` MERGES (so you can rebind one property safely), that `variable_as_value` takes the id as a bare string, and how to diff live variables against every style's properties to find the danglers. (2) A site-wide a11y/HTML audit surfaced which fixes the Data API can and cannot do — `set_attributes` (aria-label) and `set_tag` (heading levels, →main) work, but `set_tag` is refused on Webflow-native widget elements (a Dropdown/FAQ `<nav>` can't become a `<div>`) and `<html lang>`/primary locale is API-read-only. Both are now sourced, reproducible pitfalls.
+
+**Changes:**
+- [`claude-design-to-webflow/references/pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): new **Part 6** — **Pitfall 41** (dangling variable bindings after a rename/reorg: detect via `query_variables` vs `get_styles include_properties`, heal via `update_style` MERGE + `variable_as_value` string; watch orphan template classes) and **Pitfall 42** (Data-API dead-ends → Designer: `set_tag` refused on native widgets, `<html lang>`/locale read-only; plus the a11y fixes the API *can* do and the JS-self-heals-role caveat).
+- [`claude-design-to-webflow/references/worked-examples.md`](marketing-team/skills/claude-design-to-webflow/references/worked-examples.md): new **example H** — an accessibility/semantic-HTML pass on a Webflow build, as an API-vs-Designer fix table with the real writes made.
+- [`claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): 41 & 42 added to the gotcha index; worked-examples pointer updated.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.29 to 13.30. `claude-design-to-webflow` is not symlinked into brand-kit, so brand-kit stays at 3.9.
+
+## marketing-team 13.29
+
+`claude-design-to-webflow` — folded in the findings from a 4-agent research sweep (live MCP schemas + Webflow's official developer/LLM/MCP docs + Help Center + forum) into why an agent-built Webflow navbar needs custom CSS.
+
+**Why:** after shipping a native-Navbar build, the user asked (fairly) "why did this need so much CSS — why can't we just make a navigation?" The research turned three vague intuitions into verified, sourced facts worth banking: (1) Webflow Interactions (IX2/IX3) cannot be authored via ANY Webflow API — confirmed by the MCP overview's own Limitations section and Webflow staff — so an agent literally cannot build native nav motion; (2) `data_style_tool`'s settable-pseudo enum has no `:has()`, no arbitrary `:nth-child(N)`, and no descendant/attribute/compound-state/ID selectors, so nav open-state + stagger have no native-API expression; (3) the `.w-container` clearfix-flex trap (Pitfall 35) is avoidable at the source by using a plain Block instead of the NavbarContainer. The upshot is a clean "which half of a navbar embed is genuinely code-only vs. should have been native records" rule.
+
+**Changes:**
+- [`claude-design-to-webflow/references/pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): new **Pitfall 40 — Webflow Interactions can't be authored via any API → an agent's nav motion/open-state is genuinely code-only**, with the full `data_style_tool` pseudo enum, the code-only vs. native split, and a leaner-navbar division of labor (embed only `:has()` overlay + `nth-child` stagger + `::before/::after` morph; native records for gutters/hover/position; inline SVG chevron; native `data-hover/data-delay`; plain Block to dodge the clearfix). Also augmented **Pitfall 35** with the root-cause avoidance (plain Block > NavbarContainer).
+- [`claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): added the Pitfall 40 one-liner to the gotcha index.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.28 to 13.29. `claude-design-to-webflow` is not symlinked into brand-kit, so brand-kit stays at 3.9.
+
+## marketing-team 13.28
+
+`claude-design-to-webflow` — five new pitfalls + one worked example from a native-Webflow-Navbar build (logo/hamburger alignment, `:has()` mobile overlay, retiring an old per-page nav).
+
+**Why:** a native Navbar the user placed rendered its logo *centered* on tablet/mobile and ignored every Style-panel padding edit. Both root causes were non-obvious and reusable: Webflow's `.w-container` clearfix pseudo-elements silently become flex items (mis-centering a flexed nav), and an embed's `#id > div` layout rule outranks any class the user edits in the Designer (id specificity > class). Documented so the next native-nav build doesn't re-derive them.
+
+**Changes:**
+- [`claude-design-to-webflow/references/pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): new **Part 5 — native Webflow Navbar & embed-layout traps**, items **35-39**: (35) `.w-container` clearfix `::before`/`::after` become flex items → a flexed nav under `space-between` renders centered not edge-pinned; `display:none` them (plus the sibling-`.w-embed` mis-match trap and `.w-container`'s `max-width:728px` ≤991); (36) an embed's `#id > div` layout silently overrides the Designer Style panel — own the box-model in native classes OR match content gutters in the embed; (37) a component-nested `HtmlEmbed` `get`/`set_settings` needs `scope_component_id` + object `element_id:{component,element}` (else "Element not found"), code under key `code`, hash-verify big rewrites; (38) you can't build a native Navbar headlessly (no `NavbarLink` in `data_element_builder`) — style one the user placed, wire links via the `link` setting (not `set_link`), `data-collapse="medium"` for mobile, style from one wrapper-`#id`-scoped embed; (39) custom→native nav migration leaves per-page duplicate navs → sweep every page for the old root class, delete each old instance in the Designer.
+- [`claude-design-to-webflow/references/worked-examples.md`](marketing-team/skills/claude-design-to-webflow/references/worked-examples.md): new **example G** — align a native Navbar's logo/hamburger to the content container's responsive gutters (measure `.page-container`'s padding per breakpoint, replay it in the embed at Webflow breakpoints, match `max-width`; verify `logo.left === h1.left` at every width).
+- [`claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): added the 35-39 one-liners to the gotcha index; front-loaded the native-Navbar capability + the two headline gotchas into the routing `description`; added the `publish_site` 400-missing-domain-id / 429-rate-limit note to the Publish section; updated the worked-examples pointer.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.27 to 13.28. `claude-design-to-webflow` is not symlinked into brand-kit, so brand-kit stays at 3.9; no brand-kit scope touched.
+
+## marketing-team 13.25-13.27 (backfilled stubs)
+
+These `claude-design-to-webflow` point releases shipped in git without changelog entries; recorded here from their commit subjects for version continuity (13.24 → 13.28):
+- **13.27** (`cb6ee01`): sticky/overflow-clip, IntersectionObserver-vs-ScrollTrigger, embeds, freeform reuse.
+- **13.26** (`ad8cb33`): whtml-builder quirks, API gaps, component/asset flows.
+- **13.25** (`cedf9d9`): token-efficient rewrite + Webflow MCP learnings.
+
 ## marketing-team 13.24 / brand-kit 3.9
 
 Repo-wide professionalization pass driven by a full multi-agent audit (8 dimensions, adversarially verified findings).
