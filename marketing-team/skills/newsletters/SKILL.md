@@ -212,7 +212,9 @@ Source docs are written for the website, not for email — they often contain no
 1. **Strip emojis from CTA labels** in the source (e.g., "Explore further 🔍" → "Explore further", "Read more →" → "Read more"). `tone.md` forbids emojis in public-facing communication.
 2. **Strip Webflow CMS shortcodes** that appear in scraped content, e.g., `[[pu-commerce="/cta"]]`, `[[pu-console="/cta"]]`, `[[pu-chat="/blog"]]`. They are noise — module attribution is already captured in the tier's `MODULE_TAG`. A simple regex match on `\[\[pu-[a-z]+="[^"]*"\]\]` is enough.
 3. **For Tier 4 items without an explicit module tag in the source:** omit the badge entirely and render only the bullet text. Do not infer a module from the feature title or description — a wrong guess is worse than no tag, and the Tier 4 component in `blocks.md` documents this same rule.
-4. **For Tier 1 / Tier 2 / Tier 3 "Learn more" / "Read the announcement" CTA URLs:** if the source doc does not provide a deeper destination, default to the product-update article URL itself (e.g., `https://social.plus/product-updates/[slug]`). This is the documented fallback — never invent or guess a URL, never leave it empty.
+4. **For Tier 1 / Tier 2 / Tier 3 "Learn more" / "Read the announcement" CTA URLs:** if the source doc does not provide a deeper destination, default to the product-update article URL itself (e.g., `https://social.plus/product-update/[slug]`). This is the documented fallback — never invent or guess a URL, never leave it empty.
+
+   **CMS item paths are singular.** The Webflow collection is named "Product Updates", but item pages live under `/product-update/` — likewise `/release-note/`, not `/release-notes/`. Only the listing page is plural (`/product-updates`). Concatenating the collection name into an item URL produces a 404, so never build a path from the collection name. Ground truth for every live URL is in `website/pages-product-updates.json` and `website/pages-release-notes.json`.
 
 ## Step 5: Generate the HTML
 
