@@ -47,7 +47,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**design-system**](./marketing-team/skills/design-system/SKILL.md) | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
 | [**site-intelligence**](./marketing-team/skills/site-intelligence/SKILL.md) | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
 | [**product-update-vs-website**](./marketing-team/skills/product-update-vs-website/SKILL.md) | Compares product release notes against live website content to find pages that need updating. |
-| [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Migrates Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP — decision rule for native-vs-code, 10 anti-patterns, 42 pitfalls, worked before/after examples, and a pre-mapped social.plus variable-ID catalog. |
+| [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Migrates Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP — decision rule for native-vs-code, 10 anti-patterns, 45 pitfalls, worked before/after examples, and a pre-mapped social.plus variable-ID catalog. |
 
 ### SEO & linking
 

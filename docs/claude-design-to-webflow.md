@@ -9,7 +9,7 @@ This is the engineering-side counterpart to `design-system` and `site-intelligen
 The skill loads a lean `SKILL.md` on invocation and pulls depth from `references/` only when needed:
 
 - **`SKILL.md`** — core: native-vs-code decision rule, the headless-vs-Designer tool stack, `data_whtml_builder` as the fast build path, breakpoints, responsive/component patterns, custom-code-via-API, a one-line gotcha index, a token-efficiency section, the staging verification loop, and the build/publish playbook.
-- **`references/pitfalls.md`** — the full catalog: 10 input anti-patterns (A1–A10) + 42 pitfalls (migration, sticky/animation, and native-Navbar & embed-layout traps) with symptom / cause / fix.
+- **`references/pitfalls.md`** — the full catalog: 10 input anti-patterns (A1–A10) + 45 pitfalls (migration, sticky/animation, native-Navbar & embed-layout traps, and registered-scripts / iOS-paint / big-rewrite safety) with symptom / cause / fix.
 - **`references/worked-examples.md`** — real before/after diffs (section split, descendant trim, JS-injection strip, transform-cascade fix, the responsive sub-nav: making one component work on mobile and connecting a bar to the navbar as one card, and aligning a native Navbar's logo/hamburger to the content container's responsive gutters).
 - **`references/variable-ids.md`** — social.plus site identity + pre-mapped brand variable IDs, so `data_style_tool` calls can pass `variable_as_value` without a `query_variables` round-trip.
 
