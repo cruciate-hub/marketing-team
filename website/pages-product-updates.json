@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-13T10:05:46.243Z",
-    "itemCount": 65,
+    "generatedAt": "2026-07-20T10:23:46.359Z",
+    "itemCount": 66,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-social-plus-for-you-feed-a-feed-worth-every-scroll",
+      "metaTitle": "Introducing social.plus For You Feed: A Feed Worth Every Scroll",
+      "metaDescription": "Introducing social.plus For You feed, a relevance-ranked feed personalized for your users. It puts the posts each user cares about first, powers better discovery across your community, and gives your app a feed worth every scroll.",
+      "content": "# Introducing social.plus For You Feed: A Feed Worth Every Scroll\n### What is the For You feed\n### Signal over noise\n### Built-in discovery\n### Relevance, in every kind of app\n### A feed worth every scroll"
+    },
     {
       "url": "https://www.social.plus/product-update/introducing-vise-the-proof-layer-for-social-plus-ai-assisted-sdk-integration",
       "metaTitle": "Introducing Vise: the proof layer for social.plus AI-assisted SDK integration",
