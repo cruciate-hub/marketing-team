@@ -1,6 +1,6 @@
 # social.plus Webflow — site identity & variable IDs
 
-Pre-mapped so `data_style_tool` calls can pass `variable_as_value` **without** a prior `data_variable_tool query_variables` round-trip (one fewer call per binding). Only load this file when you're binding variables on the social.plus site. If variables get renamed/rebuilt, re-run `data_variable_tool query_variables` (`type: "Color" | "FontFamily" | "Size"`) and update the table.
+Pre-mapped so `data_style_tool` calls can pass `variable_as_value` **without** a prior `data_variable_tool get_variables` round-trip (one fewer call per binding). Only load this file when you're binding variables on the social.plus site. If variables get renamed/rebuilt, re-run `data_variable_tool get_variables` (`type: "Color" | "FontFamily" | "Size"`) and update the table.
 
 > These IDs are already public (they ship in the site's compiled CSS). Nothing secret here — but they are social.plus-specific; on any other site, query first.
 
