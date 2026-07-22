@@ -278,3 +278,23 @@ Registered site scripts (`data_scripts_tool register_inline_script` + `set_site_
 **Cause:** the page links **two** sheets — `…webflow.shared.<hash>.min.css` (small, shared) and `…webflow.<siteId>.<hash>.opt.min.css` (large, page-optimised). Taking the first `<link rel=stylesheet>` (the reflexive `head -1`) usually lands on the small one.
 **Also:** walking `document.styleSheets[].cssRules` from the page throws `SecurityError` for both — they're served cross-origin from the CDN — so an in-page scan reports "no matching rules" and, if you `catch { continue }`, does it silently.
 **Fix:** collect every `<link rel=stylesheet>` href, fetch them all, concatenate, then search — stripping whitespace before matching, since the files are minified (`padding-left:1rem`, not `padding-left: 1rem`). Use the CSS only to find *which rule* supplies a value; for the effective value, `getComputedStyle` in the browser is ground truth. → sharpens Pitfall 21's "fetch the CSS and grep for your rule".
+
+---
+
+## Part 8 — whtml span-class stripping, Block-text writes & icon-font ligatures (added after the Vise page build)
+
+### 46. whtml strips a class that is an inline span's ONLY class — stacked unknown classes survive
+**Symptom:** icon-font spans come out of `data_whtml_builder` classless — `<span class="material-symbols-outlined">close</span>` is inserted as `<span>close</span>` — so every glyph renders as its raw ligature text ("close", "inbox", …).
+**Verified boundary (Vise build, 27 casualties in one section pair):** a class is dropped when it is the span's **only** class AND has no rule in the `css` param. Unknown classes **stacked after a known first class survive** (`vise-diff-label vise-lbl-without`, `vise-wf-item is-active` — all kept, correctly stored as combo classes). `data-*`, `role`, `aria-*` and `href` attributes survive too (`target="_blank"` still drops → Pitfall 23).
+**Prevention:** give every class that must survive a rule in the `css` param — a one-property dummy is enough for state/icon classes whose real styling lives in head code.
+**Recovery:** `create_style` for the missing class (for an icon font include the font properties AND `text-transform:none` → Pitfall 48), then re-apply per element with `set_style`. Finding the naked spans is the tricky part: element-tree dumps **omit String text**, so you can't match by glyph name — match structurally instead: the first style-less `Span` child of each known parent class (label, banner, key, row, title, badge, button…), collected from a `children_depth:-1` dump.
+
+### 47. `set_text` refuses plain div Blocks — write to the String child element
+**Symptom:** `set_text` on an element that visibly contains text returns **"This element doesn't support text"**.
+**Cause:** `set_text` only accepts text-typed elements (Heading, Paragraph, TextBlock, Button, TextLink, LinkBlock). Pages built in the Designer are full of plain `Block` (div) wrappers around a `String` node — the MCP/Vise hero eyebrow, subtitles, button-text divs and card copy are all this shape.
+**Fix:** target the **String child's** element id with `set_text` — that works everywhere. The String is the Block's only child in the tree dump. Headings and buttons still take `set_text` directly.
+
+### 48. Icon-font ligatures break under inherited `text-transform: uppercase`
+**Symptom:** a Material Symbols span inside an uppercase pill/label renders the glyph NAME in caps ("CLOSE") while the identical span elsewhere renders the glyph.
+**Cause:** ligature substitution runs on the *transformed* text and is case-sensitive; the parent's `text-transform:uppercase` turns `close` into `CLOSE`, which matches no ligature.
+**Fix:** `text-transform:none` on the icon class — put it in the native Style record so it also holds when head-code CSS isn't loaded (canvas). Also remember the icon-font stylesheet on this page family is **page-level head code**, not site-wide: a new page only gets it if its head code includes the `Material+Symbols+Outlined` link.
