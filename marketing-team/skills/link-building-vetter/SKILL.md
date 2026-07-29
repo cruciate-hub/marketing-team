@@ -76,28 +76,28 @@ Before evaluating, check article status in [references/excluded-articles.md](ref
 ## Webflow MCP Safety
 
 If Webflow MCP is connected:
-- **Minimize API calls** — Webflow MCP credits are limited. Only fetch what's strictly necessary.
-- **Batch requests** — If multiple articles need checking, ask user which ones first rather than fetching all.
+- **Minimize API calls**: Webflow MCP credits are limited. Only fetch what's strictly necessary.
+- **Batch requests**: If multiple articles need checking, ask user which ones first rather than fetching all.
 - **Read operations**: Only when explicitly needed, not proactively.
 - **Write operations**: NEVER execute without explicit user confirmation.
 - Always state: "I can make this change in Webflow, but I need your green light first. Confirm?"
 
 ## Gmail Draft Safety
 
-**Never write a bare domain (e.g. `fatjoe.com`) as plain text in a draft body.** Gmail auto-linkifies bare domain-like strings, and the resulting link gets wrapped in a `google.com/url?q=...` redirect whose visible anchor text is often the full wrapped URL instead of the domain — producing garbled, unprofessional text like `https://www.google.com/url?q=http://fatjoe.com&source=gmail&ust=...` in the sent email.
+**Never write a bare domain (e.g. `fatjoe.com`) as plain text in a draft body.** Gmail auto-linkifies bare domain-like strings, and the resulting link gets wrapped in a `google.com/url?q=...` redirect whose visible anchor text is often the full wrapped URL instead of the domain: producing garbled, unprofessional text like `https://www.google.com/url?q=http://fatjoe.com&source=gmail&ust=...` in the sent email.
 
 When a draft needs to reference a competitor/partner domain:
-- Prefer not naming the raw domain at all — describe it instead ("the existing outbound link in that sentence", "their current backlink guide").
+- Prefer not naming the raw domain at all: describe it instead ("the existing outbound link in that sentence", "their current backlink guide").
 - If the domain must appear, de-linkify it: `fatjoe[.]com` or `fatjoe dot com`.
-- Never paste a domain immediately followed by `.com`/`.io`/etc. with no separator into a `create_draft` body — that pattern is what triggers the autolink.
+- Never paste a domain immediately followed by `.com`/`.io`/etc. with no separator into a `create_draft` body: that pattern is what triggers the autolink.
 
 Before calling `create_draft`, scan the composed body for bare domain patterns and fix them.
 
 ## Communication Rules
 
-- **Never speak unprompted** — Only respond when the user asks something.
-- **No unsolicited suggestions** — Don't offer additional analysis or next steps unless asked.
-- **Be direct** — Give the score, the issues, the draft. No fluff.
+- **Never speak unprompted**: Only respond when the user asks something.
+- **No unsolicited suggestions**: Don't offer additional analysis or next steps unless asked.
+- **Be direct**: Give the score, the issues, the draft. No fluff.
 
 ## Email Response Templates
 
@@ -108,6 +108,18 @@ Draft emails that are polite, constructive, and strict. See [references/email-te
 - Specific about what's wrong
 - Clear about what would make it acceptable
 - No passive-aggressive language
+
+## Draft Formatting Rules (non-negotiable)
+
+Drafts get pasted straight into LinkedIn or an email client, so they must survive the paste intact.
+
+- **Never hard-wrap.** Write each paragraph as one single unbroken line, however long it runs. Do not break lines at 60, 70 or 80 characters to make the terminal look tidy. Those breaks become ragged mid-sentence enters in LinkedIn and Gmail.
+- **Exactly one blank line between paragraphs.** Never two.
+- **Never use em-dashes (—) or en-dashes (–).** Not in drafts, not in the analysis around them. Use a comma, a colon, or two sentences instead.
+- **3-5 short paragraphs total:** greeting, verdict, reason, next step, sign-off.
+- **Avoid bullet lists in drafts.** Prose reads better in a DM. Only use bullets for 3+ genuinely separate issues, and keep each bullet on one line.
+
+Before handing a draft to the user, reread it and confirm: no mid-sentence line breaks, no double blank lines, no dashes.
 
 ## Quick Reference
 
