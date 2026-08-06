@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:09:38.020Z",
-    "itemCount": 52,
+    "generatedAt": "2026-08-06T08:11:18.275Z",
+    "itemCount": 53,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/1-1-chat-support-for-ios-and-android-uikit",
+      "metaTitle": "1:1 Chat Support for iOS and Android UIKit",
+      "metaDescription": "The iOS and Android UIKit now supports 1:1 chat, allowing users to start direct conversations without creating a group chat.",
+      "content": "# 1:1 Chat Support for iOS and Android UIKit"
+    },
     {
       "url": "https://www.social.plus/release-note/shareable-event-links-with-deep-link-configuration",
       "metaTitle": "Shareable Event Links with Deep Link Configuration",
