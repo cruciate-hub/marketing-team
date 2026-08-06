@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:08:10.262Z",
-    "itemCount": 51,
+    "generatedAt": "2026-08-06T08:09:38.020Z",
+    "itemCount": 52,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/shareable-event-links-with-deep-link-configuration",
+      "metaTitle": "Shareable Event Links with Deep Link Configuration",
+      "metaDescription": "Event hosts can now copy a shareable link that opens directly to the event detail page. ",
+      "content": "# Shareable Event Links with Deep Link Configuration"
+    },
     {
       "url": "https://www.social.plus/release-note/tap-to-control-video-and-live-stream-playback",
       "metaTitle": "Tap-to-Control Video and Live Stream Playback",
