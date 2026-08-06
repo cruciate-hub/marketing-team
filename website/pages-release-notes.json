@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:08:06.263Z",
-    "itemCount": 50,
+    "generatedAt": "2026-08-06T08:08:10.262Z",
+    "itemCount": 51,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/tap-to-control-video-and-live-stream-playback",
+      "metaTitle": "Tap-to-Control Video and Live Stream Playback",
+      "metaDescription": "Tapping a video or live stream no longer pauses playback. ",
+      "content": "# Tap-to-Control Video and Live Stream Playback"
+    },
     {
       "url": "https://www.social.plus/release-note/social-plus-vise-proof-layer-for-social-plus-ai-assisted-sdk-integration",
       "metaTitle": "social.plus Vise: Proof layer for social.plus AI-assisted SDK integration",
