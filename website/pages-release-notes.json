@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:03:58.334Z",
-    "itemCount": 49,
+    "generatedAt": "2026-08-06T08:08:06.263Z",
+    "itemCount": 50,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/social-plus-vise-proof-layer-for-social-plus-ai-assisted-sdk-integration",
+      "metaTitle": "social.plus Vise: Proof layer for social.plus AI-assisted SDK integration",
+      "metaDescription": "Vise is a local CLI and coding agent skill that gives AI agents a repeatable workflow for building social.plus SDK integrations. ",
+      "content": "# social.plus Vise: Proof layer for social.plus AI-assisted SDK integration"
+    },
     {
       "url": "https://www.social.plus/release-note/for-you-feed-with-relevance-based-ranking",
       "metaTitle": "For You Feed with Relevance-Based Ranking",
