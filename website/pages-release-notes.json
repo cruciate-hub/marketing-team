@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:12:17.763Z",
-    "itemCount": 54,
+    "generatedAt": "2026-08-06T08:13:41.722Z",
+    "itemCount": 55,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/updated-error-code-for-max-blocked-users",
+      "metaTitle": "Updated Error Code for Max Blocked Users",
+      "metaDescription": "The error code returned when a user reaches the blocked users limit has been updated to MAX_BLOCKED_USERS_REACHED 400324, making it easier for developers to handle this case explicitly in their applications.",
+      "content": "# Updated Error Code for Max Blocked Users"
+    },
     {
       "url": "https://www.social.plus/release-note/visitor-mode-and-usage-limits-for-react-native-uikit",
       "metaTitle": "Visitor Mode and Usage Limits for React Native UIKit",
