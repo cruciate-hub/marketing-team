@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-07T07:41:49.211Z",
-    "itemCount": 48,
+    "generatedAt": "2026-08-06T08:03:08.485Z",
+    "itemCount": 49,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/for-you-feed-with-relevance-based-ranking",
+      "metaTitle": "For You Feed with Relevance-Based Ranking",
+      "metaDescription": "",
+      "content": "# For You Feed with Relevance-Based Ranking"
+    },
     {
       "url": "https://www.social.plus/release-note/community-tags-for-ios-and-android-sdk",
       "metaTitle": "Community Tags for iOS and Android SDK",
