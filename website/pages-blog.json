@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-21T11:08:17.641Z",
-    "itemCount": 267,
+    "generatedAt": "2026-08-07T10:37:52.147Z",
+    "itemCount": 268,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/plausible-code-is-not-an-integration-why-we-built-vise",
+      "metaTitle": "Plausible Code Is Not an Integration: Why We Built Vise",
+      "metaDescription": "AI coding agents write code that compiles but doesn't work. See why we built Vise to verify SDK integrations instead of just scaffolding them.",
+      "content": "# Plausible Code Is Not an Integration: Why We Built Vise\n## Your compiler is not a witness\n## Why we called it Vise\n## What the benchmark told us (with the error bars on)\n## Demand proof from your tools"
+    },
     {
       "url": "https://www.social.plus/blog/best-social-sdks-for-engagement-retention",
       "metaTitle": "5 Best Social SDKs for Engagement & Retention (2026)",
