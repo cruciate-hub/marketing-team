@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-20T10:23:46.359Z",
-    "itemCount": 66,
+    "generatedAt": "2026-08-07T10:55:52.890Z",
+    "itemCount": 67,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-july-2026",
+      "metaTitle": "What's new in social.plus | July 2026",
+      "metaDescription": "This month we focused on 3 things: helping users find content worth engaging with, giving developers a better operating system, and making sure admins are never stuck at a desk.",
+      "content": "# What's new in social.plus | July 2026\n## For You Feed: A Feed Worth Every Scroll\n## social.plus Vise: Proof layer for social.plus AI-assisted SDK integration\n## Mobile Console for Community Management\n## Tap-to-Control Video and Live Stream Playback\n## Retroactive Tagging for Sentiment Analysis\n## Filter by Date Range in Posts and Comments\n## Shareable Event Links with Deep Link Configuration\n## We also added"
+    },
     {
       "url": "https://www.social.plus/product-update/introducing-social-plus-for-you-feed-a-feed-worth-every-scroll",
       "metaTitle": "Introducing social.plus For You Feed: A Feed Worth Every Scroll",
