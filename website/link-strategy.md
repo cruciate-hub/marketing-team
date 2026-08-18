@@ -3,17 +3,24 @@
 This file is the single source of truth for **site architecture**, **canonical anchor → page** decisions, **cannibalization warnings**, **link budgets**, **anchor distribution targets**, **placement rules**, and **scoring** across the social.plus content ecosystem. The `internal-linking-strategist` skill consumes this file at runtime. Other content skills (`blog-seo-content`, `aeo-content`, `case-study`, `brand-messaging`) defer to the optimizer and, by extension, to this file.
 
 **Generated:** 2026-04-17
-**Refresh by:** 2026-07-16 (90 days) — **⚠ REFRESH DUE.** Page counts in this file (e.g. "646 pages") describe the inventory at generation time; the live inventories have since grown to ~710 pages, and `pages-industry.json` is currently degraded (0 items — worker extraction bug, fix pending deploy). Canonical anchor decisions remain valid; treat all counts and per-file numbers as of 2026-04-17 until the refresh audit runs.
+**Refreshed:** 2026-08-19 (90-day refresh, run ~1 month past the 2026-07-16 due date — see refresh notes below)
+**Refresh by:** 2026-11-17 (90 days)
 **Data sources:**
 - Ahrefs site-explorer (organic-keywords, top-pages, pages-by-internal-links, domain-rating) for `social.plus` (subdomains, both protocols)
 - Ahrefs GSC integration (gsc-keywords, gsc-pages) for project `7031381` — last 90 days of real Google Search Console data
 - The 10 `pages-*.json` snapshots in this directory (regenerated automatically on every Webflow publish)
 
-**Site benchmarks at generation time:**
-- Domain Rating (Ahrefs): **65**
-- Top organic page (non-brand): `https://www.social.plus/white-label/social-network` (606 monthly traffic, UR 7.0)
-- Highest-UR page: `https://www.social.plus/` (UR 11.0) — primary authority hub
-- Total ranked keywords surveyed: top 200 by traffic, top 300 by GSC clicks
+**Site benchmarks as of 2026-08-19 refresh** (superseding the 2026-04-17 generation-time figures below in parens):
+- Domain Rating (Ahrefs): **68** (was 65 — +3, within the ±5 escalation threshold, no higher-level re-evaluation triggered)
+- Top organic page (non-brand): `https://www.social.plus/white-label/social-network` (421 monthly traffic, UR 4.5 — was 606 traffic / UR 7.0. **This hub page lost significant URL Rating since generation; see the Link-equity hubs note below.**)
+- Highest-UR page: `https://www.social.plus/` (UR 10.0 — was 11.0) — still the primary authority hub
+- Total ranked keywords surveyed: top 200 by traffic (site-explorer), top 100 returned by GSC (gsc-keywords/gsc-pages, capped by the API at 100 rows per call — narrower than the 300/100 originally requested, noted for the next refresh)
+- Total inventory: **719 pages** across the 10 `pages-*.json` snapshots (was ~646 at generation, ~710 estimated in the last interim note — now verified: 268 blog / 152 answers / 76 glossary / 65 product-updates / 48 release-notes / 43 customer-stories / 22 marketing / 22 webinars / 13 use-cases / 10 industry). All 10 snapshots currently report zero `_meta.errors` — `pages-industry.json`'s extraction bug noted in the prior refresh is fixed and verified healthy (10/10 items).
+
+**Refresh notes (2026-08-19):** Ran the documented refresh procedure (all 6 Ahrefs MCP queries, §"Refresh procedure" below). Two findings worth flagging, one deferred item:
+- **New cannibalization candidate found:** "community sdk" now has 20 different URLs ranking in GSC (was not previously tracked) — added below as an open item, not yet resolved to a specific rule, since determining the right canonical target needs the fuller 7-step audit-mode pass across all 20 URLs, not just this refresh's top-line data pull.
+- **Hub-page authority drift:** see the Link-equity hubs table update — `/white-label/social-network`'s UR dropped from 7.0 to 4.5 while site-wide DR rose, meaning new backlinks are landing elsewhere and diluting this hub specifically.
+- **Deferred, not done in this pass:** a full per-page re-score against the Structure Score /10 and Anchor Score /10 rubrics (§"Scoring & measurement") was not performed — that requires re-fetching and re-grading each scored page individually and is a larger effort than this refresh's data-pull scope. Existing scores should be treated as unverified since 2026-04-17 until a dedicated audit-mode pass re-scores them.
 
 ---
 
@@ -437,6 +444,11 @@ The data layer now has BOTH a glossary entry and a commercial page for these ter
 - Pitching the product (commercial blog, comparison content): anchor → `/white-label/social-network` or `/white-label/chat-software`.
 - These are HIGH-VALUE commercial keywords (Ahrefs: top 3 ranks across multiple "white label" terms). Don't dilute by mixing the two.
 
+### ⚠️ NEW (2026-08-19, open) — "community sdk" — 20 URLs ranking, not yet resolved
+**Top URL (GSC, 90d):** `https://www.social.plus/blog/best-community-sdks-for-apps` (3 clicks, 98 impressions, avg. position 36.7)
+**Signal:** 20 different URLs currently rank for "community sdk" per GSC — well past this file's own >10-URL cannibalization threshold, and not previously tracked in this section.
+**Status:** flagged, not resolved. This refresh's data pull only surfaces the top-ranking URL, not all 20 competitors — determining the right canonical target (glossary definitional page vs. the blog listicle vs. a product page) needs a full audit-mode pass across the actual 20 URLs before a rule can be prescribed here. Do not anchor "community sdk" with confidence until that audit runs; treat it like an unresolved case, not a solved one.
+
 ### ⚠️ "engagement rate" — weak SERP, not a linking issue
 **Page:** `https://www.social.plus/glossary/engagement-rate` (12,393 impressions, 0.19% CTR over 90d per GSC)
 **Note:** Page exists and ranks but underperforms in SERP. **No linking action required.** Flag for the content team as a separate page-health issue (title/meta refresh).
@@ -463,18 +475,20 @@ Per `messaging/terminology.md`, do not call social.plus a "social network" or "f
 
 When suggesting link **destinations** in draft mode, these are high-priority targets. When suggesting link **sources** in audit mode, these pages are also where outbound links matter most.
 
-| Page | URL Rating | File |
-|---|---|---|
-| `https://www.social.plus/` | 11.0 | pages-marketing |
-| `https://www.social.plus/white-label/social-network` | 7.0 | pages-marketing |
-| `https://www.social.plus/glossary/social-feed` | 4.6 | pages-glossary |
-| `https://www.social.plus/glossary/community-app` | 4.5 | pages-glossary |
-| `https://www.social.plus/glossary/video-sdk` | 4.5 | pages-glossary |
-| `https://www.social.plus/glossary/engagement-rate` | 4.4 | pages-glossary |
-| `https://www.social.plus/glossary/chat-api` | 4.4 | pages-glossary |
-| `https://www.social.plus/blog/what-is-community-based-marketing-cbm` | 4.4 | pages-blog |
+| Page | URL Rating (2026-08-19) | URL Rating (2026-04-17) | File |
+|---|---|---|---|
+| `https://www.social.plus/` | 10.0 | 11.0 | pages-marketing |
+| `https://www.social.plus/white-label/social-network` | **4.5** &#9660; | 7.0 | pages-marketing |
+| `https://www.social.plus/glossary/social-feed` | 4.5 | 4.6 | pages-glossary |
+| `https://www.social.plus/glossary/community-app` | 4.5 | 4.5 | pages-glossary |
+| `https://www.social.plus/glossary/video-sdk` | 4.5 | 4.5 | pages-glossary |
+| `https://www.social.plus/glossary/engagement-rate` | 4.4 | 4.4 | pages-glossary |
+| `https://www.social.plus/glossary/chat-api` | 4.4 | 4.4 | pages-glossary |
+| `https://www.social.plus/blog/what-is-community-based-marketing-cbm` | 4.4 | 4.4 | pages-blog |
 
-Notable absence: no in-scope product/feature page broke UR 4.0 at generation time. **This is a finding, not a bug** — product pages are commercial/short-tail and don't accumulate organic backlinks the way glossary/blog content does.
+**2026-08-19 finding:** every hub held steady except `/white-label/social-network`, which dropped 2.5 points (7.0 → 4.5) while site-wide DR rose (65 → 68) over the same period — new backlinks are landing elsewhere on the domain and diluting this specific hub. It's still the site's #2 authority source and the authority-flow rule below is unchanged, but its ability to redistribute equity downstream is weaker than the generation-time figure assumed. Worth a backlink-source check (which pages lost/gained links) before the next refresh, not just a link-count refresh.
+
+Notable absence: no in-scope product/feature page broke UR 4.0 at generation time, still true as of this refresh. **This is a finding, not a bug** — product pages are commercial/short-tail and don't accumulate organic backlinks the way glossary/blog content does.
 
 ### Authority-flow rules (external → internal redistribution)
 
