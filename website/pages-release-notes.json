@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-18T05:46:37.323Z",
-    "itemCount": 56,
+    "generatedAt": "2026-08-18T05:47:44.077Z",
+    "itemCount": 57,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/retroactive-tagging-for-sentiment-analysis",
+      "metaTitle": "Retroactive Tagging for Sentiment Analysis",
+      "metaDescription": "Analysts can now reprocess historical content on demand to align past insights with updated categories, keywords, and sentiment configuration. ",
+      "content": "# Retroactive Tagging for Sentiment Analysis"
+    },
     {
       "url": "https://www.social.plus/release-note/filter-by-date-range-in-posts-and-comments",
       "metaTitle": "Filter by Date Range in Posts and Comments",
