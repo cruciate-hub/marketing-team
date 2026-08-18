@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-18T05:47:44.077Z",
-    "itemCount": 57,
+    "generatedAt": "2026-08-18T13:47:17.302Z",
+    "itemCount": 58,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/mobile-console-for-community-management",
+      "metaTitle": "Mobile Console for Community Management",
+      "metaDescription": "Admins can now manage their community directly from a mobile browser on iOS and Android, without needing to be at a desk.",
+      "content": "# Mobile Console for Community Management"
+    },
     {
       "url": "https://www.social.plus/release-note/retroactive-tagging-for-sentiment-analysis",
       "metaTitle": "Retroactive Tagging for Sentiment Analysis",
