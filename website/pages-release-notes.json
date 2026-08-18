@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-06T08:13:41.722Z",
-    "itemCount": 55,
+    "generatedAt": "2026-08-18T05:46:37.323Z",
+    "itemCount": 56,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/filter-by-date-range-in-posts-and-comments",
+      "metaTitle": "Filter by Date Range in Posts and Comments",
+      "metaDescription": "Admins can now filter posts and comments by date range directly from the Console, using preset options like last 7 days or this month, or by setting a custom start and end date.",
+      "content": "# Filter by Date Range in Posts and Comments"
+    },
     {
       "url": "https://www.social.plus/release-note/updated-error-code-for-max-blocked-users",
       "metaTitle": "Updated Error Code for Max Blocked Users",
