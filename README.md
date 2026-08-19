@@ -8,7 +8,7 @@ This marketplace ships **two plugins** — install one, not both.
 
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
-| **`marketing-team`** | The marketing team — full kit | 18 skills (content, design, SEO, linking, publishing, media, formatting, competitive intelligence) | `/plugin install marketing-team@cruciate-hub` |
+| **`marketing-team`** | The marketing team — full kit | 17 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
@@ -27,7 +27,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 **Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in the plugin's `.claude-plugin/plugin.json` (versions are single-sourced there; `marketplace.json` entries deliberately carry no version field). Teammates with auto-sync on (Steps 7–10 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
 
-## Available skills (18)
+## Available skills (17)
 
 ### Content creation
 
@@ -46,7 +46,6 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 |---|---|
 | [**design-system**](./marketing-team/skills/design-system/SKILL.md) | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
 | [**site-intelligence**](./marketing-team/skills/site-intelligence/SKILL.md) | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
-| [**competitive-intelligence**](./marketing-team/skills/competitive-intelligence/SKILL.md) | Role-tailored competitor briefings and ad-hoc competitive Q&A, reading from two private knowledge-layer Google Docs (access via Bam). The data never lives in this repo. |
 | [**product-update-vs-website**](./marketing-team/skills/product-update-vs-website/SKILL.md) | Compares product release notes against live website content to find pages that need updating. |
 | [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Migrates Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP — decision rule for native-vs-code, 10 anti-patterns, 45 pitfalls, worked before/after examples, and a pre-mapped social.plus variable-ID catalog. |
 
@@ -82,7 +81,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**assets/**](./assets) | Official logo SVGs |
 | [**emails/**](./emails) | Email template reference, strategy guide, and HTML examples |
 | [**website/**](./website) | Website content JSON + the internal-linking strategy. Live inventories are auto-committed by a Cloudflare Worker to the [`site-data`](https://github.com/cruciate-hub/marketing-team/tree/site-data) branch on every Webflow publish (skills overlay that branch at fetch time); the copies on `main` are a point-in-time snapshot |
-| [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 18 skill definitions that fetch from the folders above |
+| [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 17 skill definitions that fetch from the folders above |
 | [**brand-kit/**](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
 | [**docs/**](./docs) | Per-skill companion docs + the click-by-click [install guide](./docs/install.md) |
 | [**scripts/**](./scripts) | Fetch-block source of truth (`canonical-fetch-block-v2.md`), sync/drift tooling (`sync-fetch-blocks.py`, `audit-skills.sh`), and blog-publisher helpers |

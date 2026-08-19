@@ -58,7 +58,6 @@ NON_FETCHING_SKILLS=(
   "svg-icon-transformer"
   "claude-design-to-webflow"
   "video-to-gif-and-webp"
-  "competitive-intelligence"  # reads private Google Drive docs, not this repo
 )
 
 is_non_fetching() {

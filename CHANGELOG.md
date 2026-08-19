@@ -1,21 +1,5 @@
 # Changelog
 
-## marketing-team 13.34
-
-`competitive-intelligence` — new skill (by Bam): the read layer for social.plus competitive intelligence.
-
-**Why:** competitive questions ("how do we compare to X", battle cards, landscape updates) previously all routed through Bam personally. This skill lets any stakeholder self-serve a role-tailored briefing (Sales, Marketing, Product, Growth, Leadership, Engineering) built from two knowledge-layer Google Docs that Bam maintains on a monthly refresh cadence via the private `/competitive-intel` write-layer skill.
-
-**Privacy design:** all competitor data, the competitor scope/tiers, and data-accuracy caveats live in the private Drive docs — none of it is in this repo. The skill locates the docs by filename search (no stored Drive IDs), Drive sharing enforces access, and every example in the SKILL.md is explicitly invented. Stakeholders without doc access are directed to Bam rather than to external research.
-
-**Changes:**
-- New [`competitive-intelligence/SKILL.md`](marketing-team/skills/competitive-intelligence/SKILL.md) and [`docs/competitive-intelligence.md`](docs/competitive-intelligence.md).
-- READMEs (root, marketing-team, brand-kit), [`docs/install.md`](docs/install.md), and [`brain.md`](brain.md) routing/skills tables updated to 18 skills.
-- [`scripts/audit-skills.sh`](scripts/audit-skills.sh): `competitive-intelligence` added to `NON_FETCHING_SKILLS` (it reads Google Drive, not this repo).
-- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.33 to 13.34. Not symlinked into brand-kit, so brand-kit stays at 3.9.
-
-(Note: 13.32–13.33.1 shipped without changelog entries — see git log for those changes.)
-
 ## marketing-team 13.31
 
 `claude-design-to-webflow` — banked the learnings from a multi-round mobile-navigation rescue on a live Webflow site, including an iOS-only paint bug that no emulator reproduces.
