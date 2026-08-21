@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-17T11:41:34.153Z",
-    "itemCount": 268,
+    "generatedAt": "2026-08-21T10:23:34.289Z",
+    "itemCount": 269,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-smart-fit-uses-in-app-engagement-to-drive-retention",
+      "metaTitle": "From the Stage: How Smart Fit Uses In App Engagement to Drive Retention",
+      "metaDescription": "Discover how SmartFit transformed in-app engagement during their exclusive chat with Social.plus at AGS São Paulo. Learn actionable, high-impact strategies every product team needs to build thriving digital communities and boost retention.",
+      "content": "# From the Stage: How Smart Fit Uses In App Engagement to Drive Retention\n## Why in-app engagement became a retention priority\n## Lesson 1: Design engagement around behavior that already exists\n## Lesson 2: Decide deliberately what to build versus what to partner on\n## Lesson 3: Tie engagement to a real retention metric\n## Lesson 4: Treat personalization as the next stage, not the starting point\n## Final thoughts"
+    },
     {
       "url": "https://www.social.plus/blog/plausible-code-is-not-an-integration-why-we-built-vise",
       "metaTitle": "Plausible Code Is Not an Integration: Why We Built Vise",
