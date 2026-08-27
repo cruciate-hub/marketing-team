@@ -218,7 +218,34 @@ Full rules: `references/writing-style.md`. Non-negotiables:
 - **First mention of a technical entity gets an inline one-clause gloss** using canonical phrasing from `terminology.md`.
 - **Citation density depends on intent** (see below) — don't force citations into product how-tos where they'd be faked.
 - **Concrete over vague.** Named examples and numeric ranges beat adjectives.
-- **Banned constructs:** em dashes, emojis, "revolutionize / unlock / game-changing / leverage", "in today's / now more than ever / in the ever-evolving" openers, passive voice where active works, growth guarantees, wrong `social.plus` casing.
+- **Banned constructs:** em dashes, emojis, the FAIL-tier vocabulary in "Anti-slop rules" below, filler openers, passive voice where active works, growth guarantees, wrong `social.plus` casing.
+
+## Anti-slop rules (generation time)
+
+Unedited AI-generation patterns are the "little added value" signal Google's scaled-content enforcement keys on, and generic filler is exactly what retrieval systems paraphrase without attribution. The remedy is editing until the page earns citation — never disguising how it was drafted.
+
+### Vocabulary tiers
+
+`scripts/compliance.py` enforces this list, and the two tiers below must stay in agreement with it.
+
+- **FAIL tier (hard block):** "delve", "in today's fast-paced", "digital landscape", "ever-evolving". These join the terms the script already FAILs (revolutionize, game-changing, "unlock the power", leverage-as-verb, best-in-class, growth guarantees).
+- **WARN tier (context-dependent):** "unlock", "elevate", "seamless", "robust". Legitimate in narrow technical uses ("robust error handling", "unlock a locked account"); slop as generic filler.
+
+Note: bare "unlock" moves from the old blanket-ban wording to script-enforced WARN — a tightening, since previously only "unlock the power" was actually enforced and bare "unlock" passed silently.
+
+### Structural bans
+
+blog-seo-content's "no intro paragraph that restates the title" ban is deliberately NOT ported here: the answer-first block restates the title as a direct answer by design (principle 1). A future edit must not "fix" that.
+
+- **No additive-transition openers.** No paragraph — and especially no first paragraph of an H2 chunk — begins with "Additionally", "Furthermore", or "Moreover". An additive opener makes the chunk depend on the previous one, breaking the self-contained ~150-word chunk contract (principle 2) — extraction engines lift chunks out of context.
+- **No empty chunks.** An H2 section whose body only restates its heading or the TL;DR in more words gets cut or merged. Every chunk must add at least one concrete element (named entity, numeric range, worked example, or mechanism) beyond what the TL;DR already said.
+- **Conclusion earns its place.** The conclusion remains a required pattern element, but it never opens with "In conclusion" and must give a decision rule or next step rather than a recap. It stays link-free per existing rules.
+
+### Information-gain bar
+
+Every article contains at least 2-3 elements an LLM could not reconstruct from its training data or the current top-ranking pages: an approved customer data point, a concrete sourced numeric range, an original worked example, or first-hand product detail. An answer engine only needs to cite a page that adds something beyond what it can generate itself — the same GEO-research logic as "## Ecosystem hyperlinks". Litmus: if a claim cannot be false, it does not ship.
+
+Information-gain elements about social.plus still come only from the approved-data list (see "Approved data and customer names") — the bar is never a license to fabricate.
 
 ## Citation density by intent
 
@@ -233,6 +260,17 @@ Forcing external citations into product how-tos produces faked or irrelevant lin
 All intents: every numeric claim needs a source (internal approved list or external link). No anonymous or content-farm citations.
 
 Full guidance: `references/citation-playbook.md`.
+
+## Answer honesty (AI-response manipulation guard)
+
+Google's May 2026 spam policy names AI-response manipulation — engineering content so AI answers promote you as if fact — as spam. This skill optimizes to be *cited*, never to *manipulate*. The line:
+
+- **The answer-first block, TL;DR, and every FAQ answer state neutral, defensible facts.** Never engineer a question like "what is the best community SDK?" whose answer names social.plus first as if fact. If a question only exists to smuggle in a self-serving ranking, cut it.
+- **Extraction-target sections are promotion-clean, not just link-clean.** The existing rule keeps FAQs and the conclusion link-free for extraction; it extends to promotion. Self-promotion lives only in the clearly-labeled pitch section, which is generated from the brand files and reads as the publisher speaking.
+- **Comparative-intent articles apply stated criteria evenly across all compared products**, with the required ≥3 external citations. Any row or entry covering social.plus identifies social.plus as the article's publisher.
+- **Numeric or superlative claims about social.plus come only from the approved-data list** (see "Approved data and customer names"). No unsourced "leading", "best-in-class", "#1".
+
+**Incentive alignment:** this rule serves citability as much as policy safety. Retrieval systems skip promotional answer blocks — a neutral, defensible answer is the one that gets extracted; the pitch section does the selling.
 
 ## Ecosystem hyperlinks
 
@@ -350,7 +388,7 @@ Checks:
 - Sentence 1 does not start with a filler opener ("In today's…", "Now more than ever…", "In the ever-evolving…", "In a world where…")
 - First two sentences in 40-60 word range
 - TL;DR paragraph in 120-160 word range
-- No em dashes, no emojis, no forbidden terms
+- No em dashes, no emojis, no forbidden terms (the forbidden-term check now includes the anti-slop FAIL tier; the WARN tier surfaces as warnings)
 - No HTML of any kind — no tags, no comments, no JSON-LD. The output is a Word document.
 - Heading hierarchy well-formed (single H1, no skipped levels)
 - External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
@@ -373,6 +411,8 @@ After the compliance script passes, answer each of these yes/no before returning
 6. Did I check the deferred-tool list for Ahrefs MCP tools before defaulting to WebSearch?
 7. Did the compliance script exit 0?
 8. Does the article include 3-5 ecosystem hyperlinks to non-competing authoritative resources drawn from the approved categories in "## Ecosystem hyperlinks"?
+9. Are the answer-first block, TL;DR, and all FAQ answers free of self-serving rankings and promotion, with social.plus selling confined to the pitch section?
+10. Does the article clear the anti-slop bar — no FAIL-tier vocabulary, no additive-transition chunk openers, no empty chunks, and 2-3 information-gain elements present?
 
 Any "no" → revise before delivering. Do not ship with unresolved "no".
 
@@ -399,6 +439,8 @@ Any "no" → revise before delivering. Do not ship with unresolved "no".
 | "I can invent a plausible customer example." | Never. Use the approved list or omit. |
 | "I should confirm what the user wants before drafting." | Only if genuinely unresolvable. A clear brief is a green light. Asking 3-4 intake questions on a clear brief is the most annoying failure mode this skill has. |
 | "Long anchor text gives the link more context." | Wrong. The claim belongs in the prose. Anchors name the source in 3-6 words. Anchors over 8 words fail compliance — they degrade LLM extraction signal and look like spam to search engines. |
+| "Naming social.plus as the best in the FAQ is what gets us cited." | Backwards. Promotional answer blocks are what AI engines skip and what Google's AI-response-manipulation policy names as spam. Neutral answers get extracted; the pitch section does the selling. |
+| "A definition article is inherently reconstructable — the information-gain bar doesn't apply." | Backwards. A page an LLM can regenerate from training data gives it no reason to cite us. The approved data point, sourced numeric range, or worked example IS the citation reason. No gain, no page. |
 
 ## Batch workflow
 

@@ -33,6 +33,12 @@ These articles are completely excluded. Reject any requests targeting them immed
 - social.plus/blog/the-app-subscription-model-strategies-for-recurring-profits
 - social.plus/blog/build-vs-buy-decide-before-you-add-app-features
 - social.plus/blog/effective-customer-engagement-strategies-with-case-studies
+- social.plus/blog/api-vs-sdk-which-is-which
+- social.plus/blog/exceptional-brand-communities
+- social.plus/blog/duolingo-figma-notion-and-hubspot-leveraging-community-led-growth
+- social.plus/blog/best-chat-apis-messaging-sdks
+- social.plus/blog/best-community-sdks-for-apps
+- social.plus/blog/best-in-app-community-platforms-for-consumer-apps
 
 ## Existing Anchor Text Only
 
@@ -55,5 +61,3 @@ These articles accept anchor changes but NO text modifications.
 - social.plus/blog/best-community-infrastructure-platforms-for-enterprise-apps
 - social.plus/blog/how-to-use-user-tag-filtering-for-segment-level-sentiment
 - social.plus/blog/how-to-turn-sentiment-scores-into-business-specific
-- social.plus/blog/best-community-sdks-for-apps
-- social.plus/blog/best-in-app-community-platforms-for-consumer-apps

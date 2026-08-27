@@ -59,6 +59,15 @@ FORBIDDEN_TERMS_ANY_CASE = [
     # terminology.md "Forbidden and Risky Terminology" — brand law, not style.
     r"\bad[- ]network\b",
     r"\bguarantee[ds]?\s+(?:growth|retention|revenue|results?|outcomes?|success|engagement)\b",
+    # Anti-slop vocabulary, hard-block tier (SKILL.md "Anti-slop rules").
+    # Unedited AI-generation patterns are the "little added value" signal
+    # Google's scaled-content enforcement keys on; these have no legitimate
+    # blog use. Context-dependent items live in RISKY_TERMS_WARN below —
+    # keep both tiers in sync with the SKILL.md list.
+    r"\bdelv(e|es|ed|ing)\b",
+    r"\bin today[’']?s fast[- ]paced\b",
+    r"\bdigital landscape\b",
+    r"\bever[- ]evolving\b",
 ]
 
 # The "social network" rule is self-referential only — social.plus must not
@@ -80,6 +89,15 @@ RISKY_TERMS_WARN = [
     # WARNs on the comma-descriptor form, where a hard FAIL would false-fire on
     # contrasts like "more than a social network".
     r"\bsocial\.plus\s*,\s*(?:a|an|the)\s+social[- ]network\b",
+    # Anti-slop vocabulary, context-dependent tier (SKILL.md "Anti-slop
+    # rules"). Legitimate in narrow technical uses ("robust error handling",
+    # "unlock a locked account"); slop as generic marketing filler. WARN so a
+    # human makes the contextual call. Hard-block tier lives in
+    # FORBIDDEN_TERMS_ANY_CASE above — keep both tiers in sync with SKILL.md.
+    r"\bunlock(s|ed|ing)?\b",
+    r"\belevat(e|es|ed|ing)\b",
+    r"\bseamless(ly)?\b",
+    r"\brobust(ly|ness)?\b",
 ]
 
 # Case-sensitive — brand-name casing (correct form: `social.plus`).

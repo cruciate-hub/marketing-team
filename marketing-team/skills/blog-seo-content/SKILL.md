@@ -256,6 +256,23 @@ These describe the **converted** `post-content` HTML (stage 3 output), not the m
 - Never fabricate statistics, customer names, quotes, or performance claims.
 - Never use emojis in blog content.
 
+##### Anti-slop rules (generation time)
+
+These rules exist because unedited AI-generation patterns surviving into published posts are exactly the "little added value" signal Google's scaled-content-abuse enforcement keys on. The remedy is not to disguise how the draft was produced — it is to edit until the post genuinely earns its ranking.
+
+**Banned vocabulary** — aligned with aeo-content's banned constructs. `scripts/compliance.py` enforces this list and the two tiers below must stay in agreement with it (field testing shows eyeball review misses these):
+
+- FAIL (worst offenders, hard-block): "revolutionize", "game-changing", "leverage" as a verb, "delve", "in today's fast-paced", "digital landscape", "ever-evolving"
+- WARN (context-dependent — legitimate in narrow technical uses, slop as filler): "unlock", "elevate", "seamless", "robust"
+
+**Structural bans:**
+
+- No intro paragraph that restates the title.
+- No paragraph beginning with "Additionally", "Furthermore", or "Moreover".
+- No "In conclusion" heading (or a closing section that merely summarizes what was already said).
+
+**Information-gain bar.** Every post must contain at least 2-3 elements not reconstructable from the current top-ranking pages on the topic: first-hand product detail, an approved customer data point, an original worked example, or a concrete sourced numeric range. Any sentence that could sit unchanged in a competitor's post on the same topic gets cut. Litmus test: if a claim cannot be false, it does not ship.
+
 ### Taxonomy
 
 **Main Category Tag** (`category`, Reference → Blog Categories)
@@ -322,6 +339,19 @@ Only needed if the blog must appear in a specific location on the site. Leave bl
 
 Only populate these if the post is about company culture, hiring, or team content.
 
+## Listicle and comparison integrity
+
+Rules for any post that ranks or lists vendors when social.plus is among them (implements brain.md penalty guardrail 3):
+
+- **State the ranking criteria and apply them evenly.** The post must say what the list is ranked on, and every entry — social.plus included — must be evaluated against the same criteria.
+- **Self-inclusion must be explicit.** Never frame social.plus's placement as a neutral third-party verdict. The reader must be able to tell this is our blog listing our own product.
+- **Competitor claims must be factual and sourced.** No characterizations of a competitor that can't be backed by their own documentation, pricing page, or a citable source.
+- **No manufactured answer-capture rankings.** Never insert verbatim sentences of the form "the top/best X in [year] are…" with social.plus listed first unless that ranking is genuinely editorial and defensible under the stated criteria.
+
+### Vertical and "alternatives" variants
+
+When the brief is a vertical or "alternatives" variant of an existing listicle, check `website/pages-blog.json` for sibling posts and require substantive differentiation: a genuinely different vendor set, vertical-specific evaluation criteria, or unique data. If the variant would largely mirror an existing post's structure and picks, recommend updating or consolidating the existing post instead of publishing a near-duplicate (brain.md guardrail 5 — the doorway pattern). Shipping an undifferentiated variant as a net-new page is BLOCK condition 6 (see "BLOCK conditions — holistic veto").
+
 ## Delivery format
 
 Follow this cascade to deliver the finished document:
@@ -331,6 +361,8 @@ Follow this cascade to deliver the finished document:
 3. **Fallback: .docx download** — create the .docx file locally using the `anthropic-skills:docx` skill and present it for download.
 
 For opt-in HTML mode, skip the cascade and deliver the field-by-field map inline (see below).
+
+**Named-editor gate.** Both delivery formats carry an `Editor (named human reviewer): [fill before publish]` line in their metadata sections (see "Output format"). The delivery message must state that the draft is not publish-ready until a named editor completes a pass. This line lives in the delivery formats only — never add it to the markdown intermediate, which `scripts/compliance.py` parses and must not change. When a request covers multiple posts in one batch, surface brain.md guardrail 1 (site-wide quality assessment) and confirm named-editor review capacity before drafting. An unfilled or self-filled editor line at publish handoff is BLOCK condition 5 (see "BLOCK conditions — holistic veto").
 
 ## Output format
 
@@ -348,6 +380,7 @@ The output is a styled, editable document delivered via Google Drive (preferred)
 - Date Published (today's date or user-specified)
 - Image alt text + Image concept + Image sizes needed (1578×888 header, 724×408 grid, 502×283 mega menu)
 - Display recommendations (Featured, Blog without images, Blog ID)
+- Editor (named human reviewer): [fill before publish]
 
 **Body — the article with:**
 
@@ -389,6 +422,8 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 - Blog without images: [yes/no]
 - Blog ID: [value or "N/A"]
 - Show on Careers page: [yes/no]
+
+**Editor (named human reviewer):** [fill before publish]
 ```
 
 ## What NOT to do
@@ -436,7 +471,20 @@ Never improvise internal links — the optimizer is the source of truth. The 3-7
 - Manual / eyeball review is **not** a substitute. Field testing shows eyeball review consistently misses meta-description length, em dashes (Unicode `—` mixed with hyphens), filler openers, brand-casing slips, and forbidden terminology.
 - The script is an **additional** deterministic gate, **not** a replacement for the brain.md compliance check. Run both. The script covers a mechanical *subset* — em dashes, emojis, brand casing, length, slug, and a fixed forbidden-term list. It does **not** catch every terminology or tone issue, so the `terminology.md` + `tone.md` review from brain.md still applies in full. A green script run is necessary, not sufficient.
 - LLM judgment still owns terminology nuance, tone, factuality, and citation quality. The forbidden-term list is not exhaustive: re-read `terminology.md` and check the items the script can't — context-dependent "plug and play" (script only WARNs), narrow self-referential "social network" phrasings, and end-user term discipline.
-- If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary — the literal output. The parent re-runs the script and treats any disagreement as a failure.
+- If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary — the literal output. The parent re-runs the script and treats any disagreement as a failure. The return payload must also include a `BLOCK check:` line stating either "none fired" or the fired condition numbers; a payload without it is treated as unchecked and the parent runs the BLOCK pass itself.
 
 The script reads the markdown intermediate (`outputs/[slug].draft.md`) before the markdown→HTML conversion. Re-run it after any edit until exit code 0.
+
+### BLOCK conditions — holistic veto
+
+The script's FAIL/WARN verdicts are mechanical. BLOCK is a third verdict class applied by the skill (and the named editor) at two gate points: before delivering any draft, and before any publish handoff (opt-in HTML delivery, or handing to `blog-publisher`). Any single BLOCK condition vetoes delivery outright regardless of an otherwise clean compliance run — a green script run must not sail past one disqualifier. A BLOCK is never resolved by ship-and-flag: name the fired condition to the user and stop.
+
+For most conditions, the user can decide to proceed after seeing the fired condition named — that override does **not** extend to conditions 4 (link-integrity breach) or 6 (undifferentiated doorway variant): brain.md's hard-forbidden list puts link schemes and doorway pages beyond override "regardless of who asks or how the request is framed." A fired condition 4 or 6 gets named and the request declined, not escalated for a proceed decision.
+
+1. **Unresolved script FAIL.** `compliance.py` exited non-zero on the current text, was not re-run after the latest edit, or its stdout was not pasted. Delivering on a stale or absent run is itself a BLOCK, not a formality gap.
+2. **Self-serving unverifiable claim.** Any numeric, superlative, or customer claim about social.plus not traceable to the approved-data list (fetch it from `marketing-team:aeo-content`'s "Approved data and customer names" section — this skill doesn't carry its own copy) or a fetched reference file, or a "best/top X" self-ranking violating the "Listicle and comparison integrity" rules. The regex gate cannot catch novel phrasings of these — catching them is what this holistic pass exists for.
+3. **Structured-data contradiction.** Any schema/JSON-LD in or accompanying the deliverable asserting anything not visible in the content (invented FAQ pairs, ratings, review counts, shifted dates). Baseline unchanged: post-content carries no schema at all (the script FAILs it), and if the user explicitly requests page-level schema it ships only when every claim in it matches the visible content.
+4. **Link-integrity breach.** Any link placed because of an exchange, payment, or reciprocal arrangement (those flow only through `link-building-vetter` / `backlink-placement-finder`; this skill never places them, per brain.md guardrail 4); any improvised internal link not returned by `internal-linking-strategist`; any anchor embedded after failing `--scan-text`. Competitor-documentation links in comparison posts remain legitimate under the listicle-integrity sourcing rules — this condition targets arrangement links, not citations.
+5. **Missing named editor at publish handoff.** Marking a draft publish-ready, delivering final opt-in HTML, or handing to `blog-publisher` while `Editor (named human reviewer)` is unfilled, or filled with anything other than a human the user named (never auto-fill, never an AI name). Default-mode delivery with the placeholder still present remains correct — the line exists to be filled downstream; this BLOCK fires at the publish boundary.
+6. **Undifferentiated doorway variant.** A vertical or "alternatives" sibling that, after the `pages-blog.json` sibling check, still largely mirrors an existing post's structure and picks. Deliver only as an update/consolidation proposal for the existing post, never as a net-new page (brain.md guardrail 5; doorway pages are hard-forbidden).
 

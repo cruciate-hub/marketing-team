@@ -74,6 +74,18 @@ EXPECTATIONS: dict[str, dict] = {
         "note": "hyphenated 'higher-leverage' is strategy English, not fluff",
         "exit_code": 0,
     },
+    "F12-ai-slop-fail": {
+        "must_fail": ["no_forbidden_terms"],
+        "note": "hard-block anti-slop terms (delve, digital landscape, ever-evolving, in today's fast-paced) must FAIL",
+        "exit_code": 1,
+    },
+    "F13-ai-slop-warn": {
+        "must_warn": ["no_risky_terms"],
+        "must_pass": ["no_forbidden_terms"],
+        "must_not_fail": ["no_forbidden_terms"],
+        "note": "context-dependent anti-slop terms (unlock, elevate, seamless, robust) must WARN, not FAIL",
+        "exit_code": 0,
+    },
 }
 
 CHECK_LINE = re.compile(r"\[(PASS|FAIL|WARN)\s*\]\s+(\S+)")

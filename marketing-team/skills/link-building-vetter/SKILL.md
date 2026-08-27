@@ -1,6 +1,6 @@
 ---
 name: link-building-vetter
-description: Vet incoming link building requests for social.plus ABC link exchanges. Use when reviewing backlink proposals, evaluating anchor text, checking article eligibility, scoring text modifications for contextual relevance and writing style, or drafting response emails to link building partners. Triggers on phrases like "review this link request", "check this backlink proposal", "vet this anchor", "is this article eligible", "score this modification", or "draft a response to this partner".
+description: Vet incoming link building requests for social.plus ABC link exchanges, and govern the exchange program's overall exposure (volume caps, wind-down decisions). Use when reviewing backlink proposals, evaluating anchor text, checking article eligibility, scoring text modifications for contextual relevance and writing style, drafting response emails to link building partners, or answering program-governance questions. Triggers on phrases like "review this link request", "check this backlink proposal", "vet this anchor", "is this article eligible", "score this modification", "draft a response to this partner", "exchange volume", "wind down the link exchanges", or "re-home partner links". Do NOT use for outbound prospecting on partner sites (finding where social.plus can be linked FROM a partner's articles) — use backlink-placement-finder for that.
 ---
 
 # Link Building Vetter for social.plus
@@ -32,6 +32,18 @@ Score each applicable criterion 1-10:
 - 8-10: Approve
 - 5-7: Request revision (specify issues)
 - 1-4: Reject
+
+**BLOCK conditions — automatic rejection regardless of average score.** The average is advisory; any single BLOCK condition vetoes the request outright. A 9-average must not sail past one disqualifier:
+
+- Restricted category (see list below)
+- Article is on the excluded list ([references/excluded-articles.md](references/excluded-articles.md))
+- Article is a Tier-1/money-page article
+- DR < 50
+- The social.plus article already carries one exchange-placed outbound link
+- Target page competes with the article's keywords
+- Branded or competitor-keyword anchor
+
+When a BLOCK fires, the rejection email states the reason category politely ("this article isn't available for placements", "the target page overlaps with our article's topic") without exposing internal analysis, scores, or lists.
 
 ## Evaluation Checklist
 
@@ -72,6 +84,17 @@ Before evaluating, check article status in [references/excluded-articles.md](ref
 - **Excluded articles**: Not available for link exchanges (reject immediately)
 - **Existing anchor only**: No text edits allowed (anchor changes only)
 - **All other articles**: Full evaluation applies
+
+**Tier-1 rule (standing):** Tier-1 money posts are permanently ineligible for ABC exchanges. [references/excluded-articles.md](references/excluded-articles.md) is the enforcement list and must carry the current Tier-1 set. If a request touches a high-value post that is absent from that list, stop and surface it to Stefan rather than assuming eligibility — an omission from the list is a gap to fix, not an approval.
+
+## Program-level Exposure and Volume Caps
+
+Google's link-spam policy explicitly names "excessive link exchanges" as spam. This program is the single biggest residual penalty exposure for social.plus, and it stays defensible only while it is small and genuinely editorial. Volume is a policy risk, not a growth lever.
+
+- **Hard cap: 1 exchange-placed outbound link per social.plus article, ever.** A second request on the same article is a BLOCK, regardless of quality.
+- **Aggregate reporting:** With each approval batch, report to Stefan a running aggregate of live exchange-placed outbound links across the site. Label each figure **Measured** (from inventory or Ahrefs data) or **Estimated** — never present an estimate as a measurement.
+- **Shrink, not grow:** The default posture is net reduction. When exchange links are removed from Tier-1 posts, re-homing onto other posts requires a net reduction in total exchange links — never 1:1 re-insertion.
+- **Quarter-over-quarter check:** If aggregate exchange density rises quarter over quarter, stop approvals and flag it to Stefan as a policy-exposure decision, not a throughput question.
 
 ## Webflow MCP Safety
 
@@ -127,8 +150,12 @@ Before handing a draft to the user, reread it and confirm: no mid-sentence line 
 - Domain Rating (DR)
 - Whether target competes with article keywords
 
-**Instant rejections:**
+**Instant rejections (BLOCK):**
 - Restricted category sites
 - Excluded articles
+- Tier-1/money-page articles
 - DR < 50
 - Non-blog pages
+- Article already carries an exchange-placed outbound link
+- Target page competes with article keywords
+- Branded or competitor-keyword anchors
