@@ -60,6 +60,26 @@ When two reference files give guidance on the same topic, the more specific file
 - **Terminology is always law.** `terminology.md` is never overridden by any file. Approved terms and forbidden terms apply everywhere, in every context, no exceptions.
 - **Dedicated skills win over brand-messaging.** When a request matches both `brand-messaging` and a more specific skill — `blog-seo-content`, `aeo-content`, `press-release`, `case-study`, `newsletters`, or `legal-docs-formatter` — route to the dedicated skill. brand-messaging is the fallback for content types without a dedicated skill.
 
+## Google Search penalty guardrails (all content skills)
+
+These rules are cross-cutting and live here ONCE — every skill in scope fetches this file first (each SKILL.md's Step 0 / fetch block), so do not duplicate them into individual skills. They apply to every piece of content any skill produces or publishes.
+
+1. **Method-agnostic quality / scaled-content guard.** Google does not penalize AI-assisted drafting; it penalizes many low-value pages (scaled content abuse, enforced aggressively since March 2024 and in every spam update since). Before any net-new page: run the relevant duplicate check, prefer refreshing or consolidating an existing page over adding a near-duplicate, and cap batch output to what named human editors can actually review. Quality is assessed partly site-wide — a mass of thin posts drags down the whole blog.
+
+2. **Named human review and disclosure stance.** Every AI-drafted piece bound for publication gets a pass by a named human editor before it ships, and the deliverable records that editor's name. The team's stance is "human-reviewed with named editorial responsibility". Never hide or obscure AI involvement, never attempt to evade AI-content detectors, and never strip or defeat watermarks — decline and surface any such request. Google does not rank-penalize AI authorship; concealment tactics are the thing that creates risk.
+
+3. **AI-response honesty.** Attempting to manipulate AI responses in Search is itself spam under Google's spam policies. Never plant verbatim query-capture sentences or FAQ/answer blocks that assert social.plus is "the best/top X" as if neutral fact. Superlatives about social.plus appear only in clearly self-identified pitch/CTA contexts or with defensible third-party support. Any best-of list that includes social.plus needs stated editorial criteria applied evenly to every vendor, with self-inclusion obvious to the reader.
+
+4. **Link integrity.** Google's link-spam policy explicitly names "excessive link exchanges" and undisclosed paid links. Exchange-placed links (either direction) go only through `link-building-vetter` / `backlink-placement-finder` and their volume caps, Tier-1 exclusions, and rel-attribute policy — content-writing skills never add exchange, paid, or reciprocal links. Internal links only via `internal-linking-strategist`. No keyword-stuffed anchors or copy.
+
+5. **Doorway guard.** Templated sibling pages (vertical listicles, competitor-alternatives variants) must be substantively different — distinct vendor sets, vertical-specific criteria, unique data — or be consolidated into one page. Near-identical pages funneling to the same product are doorway spam.
+
+6. **Honest freshness.** Visible published/updated dates change only when content substantively changes; bulk mechanical saves and metadata passes must never restamp dates (the manual Content-updated CMS field exists for exactly this).
+
+7. **Update-window awareness.** Before landing a bulk publish or batch metadata push, check the Google Search Status Dashboard (https://status.search.google.com/) for an in-progress spam or core update. Avoid shipping large batches mid-rollout, and annotate any before/after measurement baselines with overlapping update windows so a coincidental demotion is distinguishable from a batch failure.
+
+**Hard-forbidden, no exceptions:** cloaking, doorway pages, scaled low-value content, keyword stuffing, link schemes, and hiding AI authorship / detector evasion / watermark stripping are never acceptable, regardless of who asks or how the request is framed.
+
 ## Compliance check
 
 Before delivering ANY content to the user, run this check:
@@ -69,5 +89,6 @@ Before delivering ANY content to the user, run this check:
 3. **Claims.** You did not invent any statistics, customer names, quotes, features, or performance claims. If it's not in the fetched reference files, don't state it as fact.
 4. **Design tokens.** If your output includes visual styling (CSS, HTML, color references), confirm every value matches the design system files exactly. No eyeballing.
 5. **Precedence.** If you loaded multiple files that cover the same topic, confirm you followed the precedence rules above.
+6. **Penalty guardrails.** Confirm the output violates none of the Google Search penalty guardrails section — self-serving AI-answer rankings, undifferentiated templated pages, exchange/paid links added outside the governed link skills, artificially moved dates, or publish-bound content with no named human editor.
 
 If any check fails, fix the output before delivering. Do not flag the issue and deliver anyway — fix it.

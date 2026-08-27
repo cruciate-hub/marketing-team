@@ -118,6 +118,15 @@ A partner has emailed Stefan with one or more websites. He needs to reply with s
 
 The placement must feel organic to a reader. If a link would feel forced or out of context, skip it. Quality over quantity — 2-3 great placements beat 10 mediocre ones.
 
+## Program Exposure Guardrail
+
+Reciprocal link exchange is explicitly named in Google's link-spam policy ("excessive link exchanges"). The program is defensible only while it stays small, editorial, and capped — and this skill is where every new exchange ask originates, so program-size governance lives here. Concretely:
+
+- **The caps are hard limits.** Up to 3 placements per article, ≤5 per partner site. Never stretch them — not for a strong partner, not to round out a batch, not to hit a target.
+- **Report aggregate program size before any new ask.** At the Step 3.5 decision gate and in the Step 5 summary table, report the cumulative count of exchange-acquired referring domains and exchange-acquired links, so Stefan sees how big the program already is before approving anything new. Compute both figures from data already cached this session — the Step 0.0 referring-domains pull and the Anchor Diversity Check profile pull — no extra Ahrefs calls. Label every figure **Measured (Ahrefs)** or **Estimated**; never present an estimate as measured.
+- **Name growth as growth.** When the current batch grows aggregate program volume rather than replacing lost links, say so explicitly in the Step 3.5 gate prompt (e.g., "this batch adds N net-new exchange referring domains").
+- **Default against marginal placements.** Recommend against ⭐ Opportunity placements carrying the `[low-value]` flag — relationship-only links grow the program's footprint without adding value. Stefan can overrule, but the default recommendation is "skip."
+
 ## Placement Rules (from social.plus guidelines)
 
 These rules apply to ALL placements — both Phase 1 and Phase 2. Violating any of these disqualifies a placement.
@@ -626,7 +635,7 @@ If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never
 
 **Gating precondition — run this gate ONLY when 2 or more viable placements exist across the batch.** If viable placements ≤ 1, skip the gate and proceed directly to Step 4 with the single-ask format. Never ask the user anything about existing-backlink partners: the action there is always "acknowledge the existing link, make no new ask." Default to deciding and proceeding; reserve questions for genuine 2+ way packaging choices.
 
-Before writing any email, show Stefan the full internal summary table from Step 5 — every viable placement with its traffic, UR, phase, and fit score. Then stop and ask which packaging he wants. Auto-drafting strips Stefan's control over how the request lands with the partner; the gate keeps him in the loop on relationship-side decisions that scoring alone can't make.
+Before writing any email, show Stefan the full internal summary table from Step 5 — every viable placement with its traffic, UR, phase, and fit score. Directly above the packaging question, include the program-exposure line required by the Program Exposure Guardrail: cumulative exchange-acquired referring domains and links (from the cached Step 0.0 and Anchor Diversity pulls, each labeled Measured (Ahrefs) or Estimated), plus an explicit note when this batch grows aggregate volume rather than replacing lost links. Then stop and ask which packaging he wants. Auto-drafting strips Stefan's control over how the request lands with the partner; the gate keeps him in the loop on relationship-side decisions that scoring alone can't make.
 
 **The prompt to Stefan:**
 
@@ -646,6 +655,8 @@ See Edge Cases for behavior when only one placement is viable, or when more than
 ### 4. Draft the Reply Email
 
 Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every line in every placement block sits flush-left so the email renders cleanly in email, LinkedIn, Slack, and any chat box where markdown doesn't render — indented sub-fields wrap weirdly when the surface strips formatting.
+
+**Reciprocal-side governance.** The reciprocal side of every exchange — what social.plus gives back — is governed by the `marketing-team:link-building-vetter` skill (Tier-1 exclusion, one-exchange-link-per-article cap). When writing the "what we can do for you in return" close, never promise placements the vetter's BLOCK conditions would reject. The standard close asks the partner what would work for them; it does not pre-commit specific articles or anchors on our side — those commitments happen only after the incoming request passes the vetter.
 
 **Consolidated multi-site email (DEFAULT when the input contains 2+ partner domains):**
 
@@ -842,6 +853,8 @@ After the draft email, provide a summary table for Stefan's reference:
 
 This helps Stefan quickly see which placements are direct matches (Phase 1) vs. which require partner cooperation (Phase 2), and decide which to prioritize.
 
+Below the table, restate the program-exposure figures from the Program Exposure Guardrail: cumulative exchange-acquired referring domains and links (computed from the cached Step 0.0 referring-domains pull and the Anchor Diversity profile pull, each labeled Measured (Ahrefs) or Estimated), so the aggregate program size travels with the batch summary.
+
 ## Phase Classification — Important
 
 Phase is determined by **whether the partner needs to edit text**, NOT by how the placement was discovered:
@@ -918,3 +931,4 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't expose internal quality analysis to the partner. PBN/content-farm rejections, DR concerns, Ahrefs unit budgets, Chrome access errors, and tier-2 vertical-fit verdicts are user-facing only. The partner-facing line is always a diplomatic "no strong fit this round" or equivalent
 - Don't split a multi-domain request into multiple emails. When the input contains 2+ partner domains from one contact, produce one consolidated reply (see Step 4)
 - Don't default to exact-match commercial anchors when a lower-risk type fits the context (see Anchor Diversity Check step 9)
+- Don't scale the program. Adding partners, anchors, or placements to hit a link-volume target is the exact "excessive link exchanges" pattern Google's link-spam policy names. When volume pressure appears (a quota, a target, "we need more links this quarter"), surface it to Stefan as a strategy decision — never quietly expand the batch to absorb it (see Program Exposure Guardrail)

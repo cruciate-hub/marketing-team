@@ -24,6 +24,8 @@ Exit 0 if every fixture behaves as documented; exit 1 with a per-fixture diff on
 | `F9-bold-filler.md` | filler opener wrapped in `**` markdown emphasis still matches | audit pass 2 |
 | `F10-reading-time.md` | claimed `Minutes to read` vs computed word count (~250 wpm) WARNs when off by >1 | audit pass 2 |
 | `F11-high-leverage.md` | hyphenated "higher-leverage" (strategy English) does NOT trigger the leverage rule | audit pass 2 |
+| `F12-ai-slop-fail.md` | hard-block anti-slop terms ("delve", "digital landscape", "ever-evolving", "in today's fast-paced") FAIL `no_forbidden_terms` | SKILL.md anti-slop rules |
+| `F13-ai-slop-warn.md` | context-dependent anti-slop terms ("unlock", "elevate", "seamless", "robust") WARN via `no_risky_terms`, do not FAIL | SKILL.md anti-slop rules |
 
 ## Adding a fixture
 
