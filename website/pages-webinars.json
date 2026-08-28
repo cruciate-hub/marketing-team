@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-10T11:20:12.419Z",
-    "itemCount": 23,
+    "generatedAt": "2026-08-28T05:40:59.252Z",
+    "itemCount": 24,
     "collectionId": "66e2765d540e1939a89db84e",
     "method": "webflow-data-api"
   },
@@ -143,6 +143,12 @@
       "metaTitle": "Understanding Zero-Party Data (Part 1): A 101 Guide to Data Collection and Implementation",
       "metaDescription": "Schedule a time to chat with our team.",
       "content": "# Understanding Zero-Party Data (Part 1): A 101 Guide to Data Collection and Implementation\n## What you’ll learn:"
+    },
+    {
+      "url": "https://www.social.plus/events/how-to-build-an-engaging-app",
+      "metaTitle": "How to Build an Engaging App ",
+      "metaDescription": "Schedule a time to chat with our team.",
+      "content": "# How to Build an Engaging App "
     }
   ]
 }
