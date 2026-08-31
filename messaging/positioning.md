@@ -6,28 +6,28 @@ Extracted from the social.plus Core Messaging document.
 
 # Company Overview
 
-social.plus is an in-app community infrastructure platform.
+social.plus is the leading engagement infrastructure for consumer apps.
 
-We provide the technology foundations that allow digital products to embed social experiences directly inside their applications, giving companies the ability to own engagement, relationships, and interaction with their users.
+We provide pre-built components that make it easy for digital products to add social and interactive experiences without building from scratch, helping companies turn episodic usage into daily engagement, stronger retention, and valuable first-party insights.
 
 ## Category
-social.plus operates in the category of in-app community infrastructure.
+social.plus operates in the category of engagement infrastructure for consumer apps.
 
-We enable product teams to add social capabilities without becoming a social network themselves and without building complex systems from scratch.
+We enable product teams to add social and interactive capabilities without becoming a social network themselves and without building complex systems from scratch.
 
 ## Who we serve
 social.plus primarily serves consumer applications with large user bases.
 
-Our technology is also used by private or enterprise environments that require secure, controlled, and branded community experiences.
+Our technology is also used by private or enterprise environments that require secure, controlled, and branded engagement experiences.
 
-We are industry agnostic and support any product that benefits from stronger user connection and participation.
+We are industry agnostic and support any product that benefits from stronger user engagement and retention.
 
 ## Who interacts with our platform
 Different stakeholders engage with social.plus in different ways:
 
 - Product leaders define the experience strategy
 - Engineering teams integrate the SDKs and APIs
-- Community and business teams operate, moderate, analyze, and activate engagement once live
+- Marketing and growth teams operate, moderate, analyze, and activate engagement once live
 
 ## Market orientation
 social.plus is built for global companies, with a primary commercial focus on North America and Europe.
@@ -35,14 +35,14 @@ social.plus is built for global companies, with a primary commercial focus on No
 We are particularly well suited for large-scale digital products where engagement, retention, and user intelligence are strategic priorities.
 
 ## What kind of change we enable
-social.plus is typically not a replacement for an existing community vendor.
+social.plus is typically not a replacement for an existing vendor.
 
 We enable companies to launch capabilities that would otherwise require significant internal development, cross-team coordination, and ongoing maintenance.
 
 ## Strategic identity
-At our core, social.plus is a technology infrastructure platform.
+At our core, social.plus is a technology infrastructure company.
 
-We power the systems that allow organizations to turn their applications into environments where users connect, contribute, and create value together.
+We power the systems that allow organizations to turn their applications into environments where users engage, contribute, and create value together.
 
 ---
 
@@ -50,7 +50,7 @@ We power the systems that allow organizations to turn their applications into en
 
 Digital products are evolving from utilities into ecosystems.
 
-Users no longer expect to simply complete transactions inside an app. They expect to participate, connect, learn, and contribute. The products that win are those that transform passive usage into ongoing relationships.
+Users no longer expect to simply complete transactions inside an app. They expect to participate, connect, learn, and contribute. The products that win are those that transform episodic usage into ongoing engagement and lasting relationships.
 
 ## The shift underway
 For years, growth has depended on renting attention from external platforms such as social networks and paid media.
@@ -65,31 +65,31 @@ Purely transactional products struggle to build loyalty.
 When interaction ends at the moment of purchase or task completion, users have little reason to return. Retention weakens, lifetime value declines, and differentiation becomes difficult.
 
 ## What winning companies will look like
-The next generation of category leaders will design for participation.
+The next generation of category leaders will design for engagement.
 
 They will create environments where users interact not only with the product, but also with each other. Engagement will become continuous rather than occasional. Relationships will become assets rather than side effects.
 
 ## The risk of standing still
 Applications that remain transactional will find it harder to maintain attention and relevance.
 
-As user expectations evolve toward connection and community, static experiences will struggle to compete.
+As user expectations evolve toward social and interactive experiences, static products will struggle to compete.
 
-## The role of community
-Community is no longer an accessory.
+## The role of engagement infrastructure
+Engagement is no longer an accessory.
 
-It is becoming a central strategy for how products increase retention, generate insight, and unlock new forms of value creation.
+It is becoming a central strategy for how products increase retention, generate first-party insight, and unlock new forms of value creation.
 
 ---
 
 # Mission
 
-Our mission is to enable and power companies to transform their applications into environments where users connect, participate, and create value together.
+Our mission is to enable and power companies to transform their applications into environments where users engage, participate, and create value together.
 
 social.plus gives product organizations the infrastructure required to build lasting relationships with their audiences, strengthen engagement, and turn everyday interactions into long-term growth assets.
 
-When implemented successfully, these systems help companies improve retention, deepen loyalty, generate actionable insight, and unlock new revenue opportunities.
+When implemented successfully, these systems help companies improve retention, deepen loyalty, generate actionable first-party insight, and unlock new revenue opportunities.
 
-Monetization is not automatic. It is the outcome of building meaningful participation, trusted spaces, and continuous interaction inside the product experience.
+Monetization is not automatic. It is the outcome of building meaningful engagement, trusted spaces, and continuous interaction inside the product experience.
 
 We exist to make that progression achievable, scalable, and sustainable.
 
@@ -99,15 +99,15 @@ We exist to make that progression achievable, scalable, and sustainable.
 
 social.plus sits directly inside the product stack.
 
-We provide embedded infrastructure that allows companies to run rich social and community experiences within their own applications, under their own brand, and with full ownership of the data generated.
+We provide embedded infrastructure that allows companies to run rich social and interactive experiences within their own applications, under their own brand, and with full ownership of the data generated.
 
 ## How we fit
-social.plus becomes a foundational layer that connects product experience, user participation, and downstream business systems.
+social.plus becomes a foundational layer that connects product experience, user engagement, and downstream business systems.
 
-We capture interaction and intent where it naturally occurs, inside the application, and make it available for activation across the organization.
+We capture interaction and intent where it naturally occurs — inside the application — and make it available for activation across the organization.
 
 ## What we are not
-social.plus is not a destination community platform.
+social.plus is not a destination platform.
 
 End users do not visit social.plus. They remain inside the customer's environment.
 
@@ -119,24 +119,24 @@ Most customers continue using their existing vendors.
 social.plus enhances those systems by providing structured engagement and participation data that would otherwise be unavailable or fragmented across external platforms.
 
 ## Visible to the business, invisible to the user
-Our infrastructure powers highly visible community experiences, but the technology itself remains behind the scenes.
+Our infrastructure powers highly visible social and interactive experiences, but the technology itself remains behind the scenes.
 
 Users interact with the customer's brand, not with social.plus.
 
 ## What customers would lose without us
 Without social.plus, organizations typically face a choice between heavy internal development or disconnected point solutions.
 
-They lose the ability to deliver a cohesive, scalable community environment that brings engagement, insight, and activation together in one integrated system.
+They lose the ability to deliver a cohesive, scalable engagement environment that brings interaction, insight, and activation together in one integrated system.
 
 ---
 
 # What social.plus Is
 
-social.plus is a comprehensive community infrastructure.
+social.plus is the leading engagement infrastructure for consumer apps.
 
-We provide the modular building blocks that allow digital products to embed rich, familiar, and scalable social experiences directly inside their applications.
+We provide the modular building blocks that allow digital products to embed rich, familiar, and scalable social and interactive experiences directly inside their applications — without building from scratch.
 
-## An infrastructure for participation
+## An infrastructure for engagement
 At its core, social.plus enables companies to design environments where users can connect, communicate, and contribute.
 
 While engagement is the starting point, the same infrastructure also supports intelligence generation and future monetization capabilities.
@@ -149,7 +149,7 @@ Teams can adopt the capabilities they need, expand over time, and maintain full 
 ## Built for real-world use cases
 The platform supports the types of interactions users already understand from large social environments.
 
-This familiarity lowers friction, accelerates adoption, and allows product teams to introduce community-driven behaviors without reinventing patterns.
+This familiarity lowers friction, accelerates adoption, and allows product teams to introduce engagement-driven behaviors without reinventing patterns.
 
 ## Complete, not partial
 Where many vendors specialize in isolated features, social.plus is designed to deliver an end-to-end foundation.
@@ -166,14 +166,14 @@ social.plus is the system that makes apps engaging.
 Clarity about boundaries is essential to setting the right expectations for customers, partners, and internal teams.
 
 ## Not a destination platform
-social.plus is not a standalone or consumer-facing community.
+social.plus is not a standalone or consumer-facing product.
 
 Users never leave the customer's application. The experience lives entirely inside the product.
 
 ## Not a shortcut to instant engagement
-Providing features does not automatically create an active community.
+Providing features does not automatically create an active user base.
 
-Successful outcomes require clear use cases, thoughtful product design, ongoing participation strategies, and operational commitment from the organization.
+Successful outcomes require clear use cases, thoughtful product design, ongoing engagement strategies, and operational commitment from the organization.
 
 social.plus supplies the infrastructure. Customers build the momentum.
 
@@ -193,7 +193,7 @@ Teams must still define their audience, incentives, governance, and long-term ob
 social.plus accelerates development and removes heavy lifting, but it does not eliminate the need for planning, prioritization, and integration within the broader roadmap.
 
 ## Not a short-term growth hack
-Building meaningful participation is a long-term investment.
+Building meaningful engagement is a long-term investment.
 
 The value compounds over time as engagement deepens, data improves, and new activation opportunities emerge.
 
@@ -203,19 +203,19 @@ The value compounds over time as engagement deepens, data improves, and new acti
 
 The social.plus platform is built around a natural progression.
 
-Meaningful participation generates real user understanding. Real user understanding creates the conditions for sustainable revenue growth. Each builds on the last, compounding in value as activity deepens.
+Meaningful engagement generates real user understanding. Real user understanding creates the conditions for sustainable revenue growth. Each builds on the last, compounding in value as activity deepens.
 
-## Participation as the foundation
+## Engagement as the foundation
 
 At its core, social.plus enables applications to move beyond passive usage. Users interact, share, and contribute in ways that feel natural and familiar.
 
 Not every user participates actively. Many observe, react, or learn from others. These behaviors matter equally — they signal presence, interest, and trust.
 
-When participation becomes embedded in the product experience, engagement stops being occasional and becomes continuous.
+When engagement becomes embedded in the product experience, it stops being occasional and becomes continuous.
 
 ## Understanding users through interaction
 
-Because interactions happen inside the product, companies gain access to first-party and zero-party data that reflects real user intent.
+Because interactions happen inside the product, companies gain access to first-party data that reflects real user intent.
 
 This reveals what audiences care about, how they influence each other, and where opportunities for activation exist. The more engagement a company builds, the more precise and valuable this intelligence becomes.
 
@@ -223,7 +223,7 @@ This reveals what audiences care about, how they influence each other, and where
 
 When companies cultivate active, trusted environments, they create the conditions required for sustainable revenue expansion.
 
-This can include partner activations, sponsored content, commerce integrations, and other models that align naturally with user behavior. Revenue is not the starting point — it is the result of building a system where participation and insight already thrive.
+This can include partner activations, sponsored content, commerce integrations, and other models that align naturally with user behavior. Revenue is not the starting point — it is the result of building a system where engagement and insight already thrive.
 
 ## A system that compounds
 
