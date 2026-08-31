@@ -14,7 +14,7 @@ We speak with confidence, clarity, and energy. Our tone combines visionary think
 
 We do not position ourselves as an incremental tool.
 
-Our language reflects leadership in in-app community infrastructure. We describe the future of digital products as something that is already unfolding, and we speak as a company building that future.
+Our language reflects leadership in engagement infrastructure for consumer apps. We describe the future of digital products as something that is already unfolding, and we speak as a company building that future.
 
 ## Visionary and technical
 
