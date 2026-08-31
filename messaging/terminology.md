@@ -65,16 +65,21 @@ Acceptable supporting terms when needed:
 
 Infrastructure should remain the dominant descriptor.
 
-## Community language
+## Engagement and experience language
 
 Use:
 
-- Community
-- Social layer
+- Engagement infrastructure
+- Social and interactive experiences
+- In-app engagement
 
-Select based on context. "In-app community" is a preferred and encouraged term.
+These are the preferred terms for describing what social.plus enables. "Engagement infrastructure for consumer apps" is the canonical category term and should be used consistently across external-facing communication.
+
+"Community" remains acceptable in product contexts (community features, community management) and in cases where the audience is already familiar with the term. It should not be used as the primary category or positioning descriptor.
 
 Avoid referring to social.plus as a social network.
+
+---
 
 # Forbidden and Risky Terminology
 
@@ -107,15 +112,15 @@ Outcomes depend on implementation quality, use case design, and operational comm
 
 The phrase "plug and play" may be used carefully in technical contexts when speaking to developers, particularly when referring to SDK integration and rapid MVP builds.
 
-It should not be used in business-facing messaging in ways that imply effortless community success.
+It should not be used in business-facing messaging in ways that imply effortless engagement success.
 
-Community infrastructure can be integrated efficiently, but sustained engagement requires strategy and ongoing effort.
+Engagement infrastructure can be integrated efficiently, but sustained engagement requires strategy and ongoing effort.
 
-## "Easy community" language
+## "Easy engagement" language
 
-Avoid framing community building as simple or automatic.
+Avoid framing engagement as simple or automatic.
 
-It is acceptable to highlight how social.plus reduces technical complexity, but messaging must reinforce that meaningful participation is built over time.
+It is acceptable to highlight how social.plus reduces technical complexity and removes the need to build from scratch, but messaging must reinforce that meaningful engagement is built over time.
 
 ## Overly narrow positioning
 
