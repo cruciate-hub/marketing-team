@@ -8,11 +8,9 @@ Extracted from the social.plus Core Messaging document.
 
 These standardised descriptions are the canonical company language across marketing, sales, PR, investor, and AI-generated content. Pick the version by length and context:
 
-- **25-word version** — taglines, social bios, ad copy footers, footer credits, partner directory listings
-- **50-word version** — landing page hero subtitles, sales one-pagers, short company descriptions, short partner profiles
-- **70-word version (press release default)** — the canonical "About social.plus" Block 15 of every press release. Also the default for newswire distribution, PR materials, and any About box on long-form web pages.
-- **Extended description** — investor decks, analyst briefings, RFP responses, long-form company profiles
-- **Elevator pitches** — context-specific framings for investor, enterprise buyer, developer, and general networking conversations
+- **Short** — taglines, social bios, ad copy footers, footer credits, partner directory listings, landing page hero subtitles, short company descriptions
+- **Medium** — sales one-pagers, partner profiles, press releases, newswire distribution, PR materials, About box on long-form web pages
+- **Long** — investor decks, analyst briefings, RFP responses, long-form company profiles
 
 Never edit a boilerplate inline inside a deliverable. If a change is needed, edit it here so every skill and channel inherits it.
 
@@ -20,21 +18,23 @@ Never edit a boilerplate inline inside a deliverable. If a change is needed, edi
 
 # Boilerplates
 
-## 25-word version
+## Short
 
-social.plus is the in-app community infrastructure that lets brands build owned social experiences — connection, conversation, content, and commerce — inside their own apps.
+social.plus is the leading engagement infrastructure for consumer apps. Pre-built components make it easy to add social and interactive experiences without building from scratch, helping turn episodic usage into daily engagement, stronger retention, and valuable first-party insights.
 
-## 50-word version
+## Medium
 
-social.plus is the infrastructure layer for in-app community. Brands embed owned social experiences — connection, conversation, content, and commerce — directly into their apps, with full ownership of the data, the design, and the customer relationship. The result is deeper engagement and a foundation for sustained growth.
+social.plus is the leading engagement infrastructure for consumer apps. We offer pre-built components that make it easy to add social and interactive experiences to any app without building from scratch, helping turn episodic usage into daily engagement and stronger retention. Every interaction generates valuable first-party data and insights that translate into measurable business outcomes across the customer lifecycle.
 
-## 70-word version (press release default)
+Global brands across retail, fitness and wellness, sports, and media, including Ulta Beauty, Noom, Smart Fit, and Harley-Davidson, use social.plus to improve their app experience, deepen customer relationships, and keep users engaged beyond transactions.
 
-social.plus is the infrastructure layer for in-app community. The platform gives brands the building blocks to create owned social experiences — connection, conversation, content, and commerce — inside their own apps, with full ownership of the data, the design, and the customer relationship. Brands across fitness, travel, retail, sports, and entertainment use social.plus to make community core to how their product works. The best version of every app is Social+.
+## Long
 
-## Extended description
+social.plus is the leading engagement infrastructure for consumer apps. We offer pre-built components that make it easy to add social and interactive experiences to any app without building from scratch, helping turn episodic usage into daily engagement and stronger retention. Every interaction generates valuable first-party data and insights that translate into measurable business outcomes across the customer lifecycle.
 
-social.plus is the infrastructure layer for in-app community. Built for product and engineering teams who want owned engagement at the heart of their apps, the platform gives brands the building blocks to create native social experiences — connection, conversation, content, and commerce — directly inside their applications. Through modular SDKs, APIs, and UI components, teams embed familiar social patterns into their products, with full ownership of the data, the design, and the customer relationship. Structured participation generates first-party and zero-party insight that compounds in value over time, unlocking smarter activation and long-term monetisation. Brands across fitness, travel, retail, sports, and entertainment use social.plus to make community core to how their product works. The best version of every app is Social+.
+Global brands across retail, fitness and wellness, sports, and media, including Ulta Beauty, Noom, Smart Fit, and Harley-Davidson, use social.plus to improve their app experience, deepen customer relationships, and keep users engaged beyond transactions.
+
+social.plus makes it easy to launch new engagement features without a heavy engineering lift. Plug in the components you need and start driving usage and collecting data immediately. What makes social.plus unique is that we provide everything brands need to grow, understand, and monetize app engagement in one platform: the technology to launch new experiences quickly, AI-powered moderation to keep interactions safe, AI-powered analytics to understand user behavior and growth drivers, and commerce tools to turn insights into revenue.
 
 ---
 
@@ -44,16 +44,16 @@ The pitches below are situational. Adapt the framing to the conversation, but th
 
 ## Investor version
 
-Digital products are moving from transactional utilities to participatory ecosystems — and the winners will be the brands that own that participation rather than rent it from third-party platforms. social.plus is the infrastructure layer for in-app community: the building blocks brands use to embed connection, conversation, content, and commerce inside their own apps. We turn structured participation into first-party insight and long-term revenue, and we're defining the category before the larger software ecosystem catches up.
+Consumer apps are competing on engagement — and the winners will be the brands that own that engagement rather than rent it from third-party platforms. social.plus is the leading engagement infrastructure for consumer apps: pre-built components that make it easy to add social and interactive experiences without building from scratch. Every interaction generates first-party data and insights that compound in value over time, unlocking smarter activation and long-term monetisation. We provide everything brands need to grow, understand, and monetize app engagement in one platform — and we're defining the category before the larger software ecosystem catches up.
 
 ## Enterprise buyer version
 
-social.plus lets brands embed owned community directly inside their apps — connection, conversation, content, and commerce — with full ownership of the data, the design, and the customer relationship. The outcome is higher retention, deeper first-party insight into how your users behave, and a foundation for engagement and revenue that scales without pulling your product team away from core innovation.
+social.plus lets brands add social and interactive experiences directly inside their apps without a heavy engineering lift — turning episodic usage into daily engagement and stronger retention. Every interaction generates valuable first-party data and insights that translate into measurable business outcomes across the customer lifecycle. The outcome is higher retention, deeper understanding of how your users behave, and a foundation for engagement and revenue that scales without pulling your product team away from core innovation.
 
 ## Developer version
 
-social.plus provides modular SDKs, APIs, and UI components that let engineering teams add community features — connection, conversation, content, and commerce — directly inside their applications. Ship an MVP quickly, keep architectural control, and scale participation without building and maintaining the underlying infrastructure yourself. The platform is also AI-ready by default: build, integrate, and explore social.plus from inside the AI tools you already use, with real-time platform context.
+social.plus provides modular SDKs, APIs, and UI components that let engineering teams add social and interactive experiences directly inside their applications without building from scratch. Ship an MVP quickly, keep architectural control, and scale engagement without maintaining the underlying infrastructure yourself. The platform is also AI-ready by default: build, integrate, and explore social.plus from inside the AI tools you already use, with real-time platform context.
 
 ## General networking version
 
-social.plus is the infrastructure layer for in-app community. We help digital products move beyond transactional utility by giving brands the building blocks to embed owned social experiences inside their own apps — connection, conversation, content, and commerce. The result is deeper engagement and an audience that belongs to the brand, not a third-party network.
+social.plus is the leading engagement infrastructure for consumer apps. We help digital products move beyond transactional utility by giving brands pre-built components to add social and interactive experiences inside their own apps. Every interaction generates first-party data and insights that drive measurable business outcomes — so brands grow an audience that belongs to them, not a third-party network.
