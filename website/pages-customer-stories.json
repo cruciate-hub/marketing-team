@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-20T06:32:00.750Z",
-    "itemCount": 43,
+    "generatedAt": "2026-09-03T02:17:54.976Z",
+    "itemCount": 44,
     "collectionId": "66e2765d540e1939a89db5eb",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/customer-story/performance-golf",
+      "metaTitle": "Performance Golf",
+      "metaDescription": "Discover how Performance Golf built real community into its coaching app with social.plus. See how Community Clubhouse turns solo practice into shared progress.",
+      "content": "# How Performance Golf Turned Solo Training Into a Real Community\nGolf is one of the few sports you can practice for years and still play entirely by yourself. Performance Golf had already solved the coaching half of that problem: AI swing analysis, PGA-certified reviews, a deep training library. What it hadn't solved was giving members anywhere to actually talk to each other.\n&lt;sprscript-green&gt;The Challenge&lt;sprscript-green&gt;\n### A training app with no one to train with\nPerformance Golf's app was built to help golfers improve, but it functioned as a one-way street. Members could work through tutorials and get feedback on their swing, but there was no way to share progress, celebrate a breakthrough, or learn from another member's experience, the kind of social layer athletes on platforms like Strava take for granted. Without it, engagement stalled: golfers would complete a lesson and have nowhere to take the moment next.\n&lt;sprscript-green&gt;Why social.plus&lt;sprscript-green&gt;\n### Community as a growth lever, not an add-on\nPerformance Golf wanted more than a bolt-on chat window. The team needed a real feed and community features that could drive organic participation, encourage peer-to-peer learning between golfers at different skill levels, and give members a safe space to share their game, not just receive instruction.\n&lt;sprscript-green&gt;Implementation&lt;sprscript-green&gt;\n### Community Clubhouse, live in six weeks\nUsing social.plus's Android and iOS SDKs and UIKits, Performance Golf launched what it calls the \"Community Clubhouse\" inside its existing app, going from kickoff to launch in six weeks with light customization on top of the out-of-the-box UIKit.\n&lt;sprscript-green&gt;The Results&lt;sprscript-green&gt;\n### Early signs of a community taking shape\nIn the weeks since launch, Performance Golf has seen a steady increase in user activity and participation inside the Community Clubhouse. It's early, and the feature is still finding its footing, but the initial signal is the one the team was hoping for: golfers are showing up to interact, not just to train.\n&lt;sprscript-green&gt;What's Next&lt;sprscript-green&gt;\n### Building on early momentum\nWith Community Clubhouse live, Performance Golf is focused on turning that early activity into sustained engagement. The team's next milestone is 10% user growth as more members discover the feed and the community features roll out further into the training experience."
+    },
     {
       "url": "https://www.social.plus/customer-story/sisal",
       "metaTitle": "Sisal",
