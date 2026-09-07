@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-07T10:55:52.890Z",
-    "itemCount": 67,
+    "generatedAt": "2026-09-07T12:49:26.191Z",
+    "itemCount": 68,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-august-2026",
+      "metaTitle": "What's new in social.plus | August 2026",
+      "metaDescription": "August is about giving your users more reasons to show up and admins better tools to drive participation. From event management and notifications to profile moderation and a dashboard makeover. ",
+      "content": "# What's new in social.plus | August 2026\n## Full Analytics Dashboard Redesign\n## Push Notifications for Event Creation\n## Pin and Feature Event Posts in Communities and Global Feed\n## User Reporting and Profile Moderation Enhancements\n## We also added"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-july-2026",
       "metaTitle": "What's new in social.plus | July 2026",
