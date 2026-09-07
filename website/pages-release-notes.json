@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T13:06:19.163Z",
-    "itemCount": 59,
+    "generatedAt": "2026-09-07T13:08:33.577Z",
+    "itemCount": 60,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/push-notifications-for-event-creation",
+      "metaTitle": "Push Notifications for Event Creation",
+      "metaDescription": "When creating an event, admins can now optionally send a push notification to members or the entire network.",
+      "content": "# Push Notifications for Event Creation"
+    },
     {
       "url": "https://www.social.plus/release-note/full-analytics-dashboard-redesign",
       "metaTitle": "Full Analytics Dashboard Redesign",
