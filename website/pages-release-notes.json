@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T13:13:06.108Z",
-    "itemCount": 62,
+    "generatedAt": "2026-09-07T13:13:54.736Z",
+    "itemCount": 63,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/dark-mode-for-ios-and-android-chat-uikit",
+      "metaTitle": "Dark Mode for iOS and Android Chat UIKit",
+      "metaDescription": "The new Chat UIKit on iOS and Android now includes dark mode support, giving users a more comfortable viewing experience in low-light environments.",
+      "content": "# Dark Mode for iOS and Android Chat UIKit"
+    },
     {
       "url": "https://www.social.plus/release-note/user-reporting-and-profile-moderation-enhancements",
       "metaTitle": "User Reporting and Profile Moderation Enhancements",
