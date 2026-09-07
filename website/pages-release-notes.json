@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T13:08:33.577Z",
-    "itemCount": 60,
+    "generatedAt": "2026-09-07T13:10:42.565Z",
+    "itemCount": 61,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/pin-and-feature-event-posts-in-communities-and-global-feed",
+      "metaTitle": "Pin and Feature Event Posts in Communities and Global Feed",
+      "metaDescription": "Admins can now pin or feature event posts at the community level or globally from the Console, the same three options available for any post.",
+      "content": "# Pin and Feature Event Posts in Communities and Global Feed"
+    },
     {
       "url": "https://www.social.plus/release-note/push-notifications-for-event-creation",
       "metaTitle": "Push Notifications for Event Creation",
