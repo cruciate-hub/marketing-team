@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T13:13:54.736Z",
-    "itemCount": 63,
+    "generatedAt": "2026-09-07T13:15:53.442Z",
+    "itemCount": 64,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/sentiment-analysis-fields-in-the-first-party-data-api",
+      "metaTitle": "Sentiment Analysis Fields in the First-Party Data API",
+      "metaDescription": "Sentiment and AI insight fields are now exposed in the first-party Data API",
+      "content": "# Sentiment Analysis Fields in the First-Party Data API"
+    },
     {
       "url": "https://www.social.plus/release-note/dark-mode-for-ios-and-android-chat-uikit",
       "metaTitle": "Dark Mode for iOS and Android Chat UIKit",
