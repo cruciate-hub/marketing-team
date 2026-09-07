@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T13:10:42.565Z",
-    "itemCount": 61,
+    "generatedAt": "2026-09-07T13:13:06.108Z",
+    "itemCount": 62,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/user-reporting-and-profile-moderation-enhancements",
+      "metaTitle": "User Reporting and Profile Moderation Enhancements",
+      "metaDescription": "Users can now report profiles with a reason and comment, while moderators can view full context on reported profiles from the Console",
+      "content": "# User Reporting and Profile Moderation Enhancements"
+    },
     {
       "url": "https://www.social.plus/release-note/pin-and-feature-event-posts-in-communities-and-global-feed",
       "metaTitle": "Pin and Feature Event Posts in Communities and Global Feed",
