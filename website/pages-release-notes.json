@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-11T11:32:51.280Z",
-    "itemCount": 66,
+    "generatedAt": "2026-09-11T11:33:38.795Z",
+    "itemCount": 67,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/configurable-live-stream-viewer-count-threshold",
+      "metaTitle": "Configurable Live Stream Viewer Count Threshold",
+      "metaDescription": "Admins can now set a viewer count threshold directly from the Console",
+      "content": "# Configurable Live Stream Viewer Count Threshold"
+    },
     {
       "url": "https://www.social.plus/release-note/multi-media-posts-now-display-as-a-carousel",
       "metaTitle": "Multi-Media Posts Now Display as a Carousel",
