@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-11T11:33:38.795Z",
-    "itemCount": 67,
+    "generatedAt": "2026-09-11T11:35:11.982Z",
+    "itemCount": 68,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/livestream-picture-in-picture-support-for-uninterrupted-viewing",
+      "metaTitle": "Livestream Picture-in-Picture Support for Uninterrupted Viewing",
+      "metaDescription": "Viewers can now watch livestreams in a small floating window while switching to other apps",
+      "content": "# Livestream Picture-in-Picture Support for Uninterrupted Viewing"
+    },
     {
       "url": "https://www.social.plus/release-note/configurable-live-stream-viewer-count-threshold",
       "metaTitle": "Configurable Live Stream Viewer Count Threshold",
