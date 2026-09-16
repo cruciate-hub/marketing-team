@@ -178,6 +178,16 @@ Check for and ask about:
 
 Only ask about items that are genuinely missing from the user's input — don't re-ask what they already provided. Once you have enough information to write without placeholders, proceed to drafting.
 
+### 1c. Identify the story type
+
+Before drafting, decide which type of story this is. Use the user's own framing if they give one; otherwise infer it from the gathered material. This drives the title pattern (see Hero Title below) and which body sections get the most space. It only affects polish, not correctness, so a borderline call is fine.
+
+- **Metrics Transformation** — strong, real before/after numbers. Lean stat-led title; Results gets the most space.
+- **Logo / Brand Recognition** — a well-known name, thinner metrics. Lean category-leadership title; lean on Why social.plus and brand credibility.
+- **Speed-to-Market** — an unusually fast implementation is the story. Lead with the timeline; Implementation section expands.
+- **Category Pioneer** — the customer is doing something novel with the product (e.g. bringing genuine community into a category that hasn't had it). Lean tension/transformation title; hook emphasizes the novelty.
+- **Scale / Enterprise** — a large user base or complex deployment. Lean stat-led on scale; sidebar metrics carry weight.
+
 Finally, **ask once whether the user has the Webflow connector (`webflow-socialplus` MCP) activated.** If yes, you can create the customer story directly as a draft item in the `💼 Customer Stories` CMS collection instead of producing paste-ready output — see the **Output format** section for how the two modes differ.
 
 ## Webflow CMS field mapping
@@ -195,14 +205,19 @@ URL-safe slug. Lowercase, hyphens, no spaces. Example: `smart-fit`, `the-ring-ma
 ### Hero section
 
 **Hero Title** (`title`, PlainText)
-Pattern: "How [Company] [past-tense verb] [outcome] with social.plus"
-Examples from the live site:
-- "How Smart Fit built a digital fitness community with social.plus"
-- "How Talkspace is strengthening teen mental health support with social.plus"
-- "How Snai elevated user engagement by integrating social.plus"
-- "How Winner redefined interactive betting experiences using social.plus"
+Choose the pattern that fits the strongest material available, not a fixed formula. Never force a pattern onto weak material (e.g. don't invent a stat-led title when there's no real standout number).
 
-Keep it under 80 characters when possible. The customer's outcome leads — not social.plus's product.
+| Pattern | When to use | Example |
+|---|---|---|
+| Stat-led | A standout, real metric exists | "60% MAU Growth: How Smart Fit Built a Digital Fitness Community" |
+| Classic transformation | Solid outcome, no single knockout number | "How Winner Redefined Interactive Betting with social.plus" |
+| Tension / before-after | Clear contrast between old and new state | "From Solo Practice to Shared Progress: How Acme Built Community" |
+| Quote-led | An exceptional, quotable customer line | "'It Felt Like Building on Our Own Infrastructure': Inside Talkspace's Integration" |
+| Category leadership | Logo-recognition win, thin metrics, strong brand | "How Harley-Davidson Is Redefining Rider Community" |
+
+The **story type** identified in Step 1c below suggests a starting pattern (Metrics Transformation → stat-led, Logo/Brand Recognition → category leadership, Category Pioneer → tension/transformation, etc.) but the actual material always wins over the suggestion.
+
+Keep it under 80 characters when possible. The customer's outcome leads, not social.plus's product. No em dashes (see What NOT to do).
 
 **Hero Introduction Paragraph** (`hero-introduction-paragraph`, PlainText)
 One to two sentences that expand on the hero title. Sets the scene for the full story.
@@ -258,8 +273,14 @@ This is the full story. It uses rich text with custom HTML tags for section divi
 
 #### Section structure
 
-1. **Opening paragraphs** (2-3 paragraphs)
-   Company background and context. Who they are, what they do, why they matter. Written as narrative prose.
+1. **Hook** (1 paragraph, 60-100 words)
+   Company background already lives in `Sidebar | About` — do NOT reopen the body with a company-bio paragraph; that duplicates the sidebar and reads like a Wikipedia intro. Instead open cold with one of:
+   - **Scene-setting moment** — a specific event or decision point ("In early 2024, Acme's retention numbers told a story leadership didn't want to hear.")
+   - **Tension statement** — the problem stated starkly, present tense, no throat-clearing
+   - **Stat cold-open** — lead with the number, unpack it in the next sentence
+   - **Quote cold-open** — the customer's own words as the first line, then context
+
+   Pick whichever the gathered material actually supports. Then flow straight into the Challenge section.
 
 2. **The Challenge** section
    ```html
@@ -287,6 +308,12 @@ This is the full story. It uses rich text with custom HTML tags for section divi
    ```
    Quantified outcomes. Map to the value creation model from `value-story.md`: functional → strategic → economic → compounding.
 
+6. **What's Next** section (optional, include only when the user gives real forward-looking info)
+   ```html
+   <sprscript-green>What's Next<sprscript-green>
+   ```
+   Followed by an `<h3>` subheading and 1-2 short paragraphs about the customer's roadmap or planned expansion with social.plus. A stated goal or target the customer hasn't hit yet (e.g. "targeting 10% growth next") belongs here, not in Results — Results covers what already happened. Skip this section entirely if there's no real forward-looking info; never pad it with generic optimism like "we're excited to see what's next."
+
 #### Body formatting rules
 - **Output the body as a single raw text block** — NOT inside a code fence, NOT as rendered markdown. The user pastes this directly into Webflow's rich text field (HTML source view). It must be copyable as-is.
 - **Do NOT use `<p>` tags anywhere.** No `<p>` wrapping on paragraphs, section dividers, headings, or anything else. Webflow handles paragraph formatting.
@@ -300,16 +327,14 @@ This is the full story. It uses rich text with custom HTML tags for section divi
 
 #### Example body output
 
-The body should look exactly like this when output (raw text, not in a code block):
+The body should look exactly like this when output (raw text, not in a code block). Note the hook opens cold, no company-bio paragraph (that lives in `Sidebar | About`):
 
-Founded in 2015, Acme Fitness has grown into one of Latin America's largest digital fitness platforms, serving over 3 million active members across 12 countries.
-
-What started as a simple workout logger evolved into a full lifestyle platform. As their user base scaled, the team recognized that social connection was the missing ingredient.
+Acme Fitness had already solved the workout side of the equation: a clean logger, solid tracking, a library members trusted. What it hadn't solved was why members stopped opening the app after a few weeks.
 
 <sprscript-green>The Challenge<sprscript-green>
 
 <h3>Keeping members engaged beyond the workout</h3>
-Acme Fitness faced a familiar problem: users would log workouts for a few weeks, then drop off. The app lacked any social layer — no way to share progress or find workout partners.
+Acme Fitness faced a familiar problem: users would log workouts for a few weeks, then drop off. The app lacked any social layer, no way to share progress or find workout partners.
 
 They needed a solution that could deliver community features at the quality level their 3M+ users expected, without rebuilding their app architecture.
 
@@ -318,7 +343,12 @@ They needed a solution that could deliver community features at the quality leve
 <h3>Infrastructure-grade social, without the infrastructure burden</h3>
 After evaluating three providers, Acme chose social.plus for its pre-built UIKits and flexible SDK. The team integrated Activity Feeds and Group Chat within four weeks.
 
-Note: the text after each `<h3>` always starts on the next line, never on the same line as the heading tag.
+<sprscript-green>What's Next<sprscript-green>
+
+<h3>Building on early momentum</h3>
+With community features live, Acme is focused on turning early activity into sustained engagement, with a next milestone of 10% member growth as the feed rolls out to the rest of the app.
+
+Note: the text after each `<h3>` always starts on the next line, never on the same line as the heading tag. Every section, including What's Next, gets its own `<h3>` subheading.
 
 ### Sidebar
 
@@ -417,6 +447,7 @@ Present the paste-ready output as a clearly labeled field-by-field mapping. Exam
 
 ## What NOT to do
 
+- Never use em dashes (—) anywhere in the output: title, hero paragraph, body, sidebar fields, meta description. Rewrite with a comma, period, parentheses, or a colon instead.
 - Never fabricate metrics, quotes, or customer statements. If the user doesn't provide numbers, ask — leave the field empty rather than inventing data.
 - Never introduce a customer name the user didn't provide. If the user names a customer, proceed — don't interrogate them about contractual approval, NDA coverage, legal sign-off, or brand-usage permission. Those belong to their team, not to you.
 - Never open with a "critical pause," "critical gate question," or a conditional "if yes… if no, we stop" framing. The writer is a social.plus marketing professional, not a liability to be vetted. Just start Step 1a.
@@ -425,9 +456,9 @@ Present the paste-ready output as a clearly labeled field-by-field mapping. Exam
 - Never reference UI affordances that don't exist ("elicitation form," "form widget," "modal"). Use a plain-text question list.
 - Never overstate social.plus's role. The customer built their experience; social.plus provided the infrastructure.
 - Never use competitor names unless the user specifically requests a comparison angle.
-- Never use the `<sprscript-green>` tags for anything other than section headers (The Challenge, Why social.plus, Implementation, The Results).
+- Never use the `<sprscript-green>` tags for anything other than section headers (The Challenge, Why social.plus, Implementation, The Results, What's Next).
+- Never fabricate a "What's Next" paragraph, a before-state for a tension title, or a stat-led title to fill a formula. An honest, shorter story beats a padded one.
 
 ## Before delivering
 
 Run the compliance check from `brain.md`. Customer stories are permanent, public-facing assets — a terminology violation or fabricated claim lives on the website indefinitely.
-
