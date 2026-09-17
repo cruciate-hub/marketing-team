@@ -217,6 +217,86 @@ def count_links(section_text: str) -> int:
     return len(re.findall(r"\[[^\]]+\]\([^)]+\)", section_text))
 
 
+def extract_urls(section_text: str) -> list[str]:
+    urls = []
+    for _, url in re.findall(r"\[([^\]]+)\]\(([^)]+)\)", section_text):
+        # A markdown link may carry a trailing title, e.g. (URL "title") — keep just the URL.
+        urls.append(url.split(" ", 1)[0].strip())
+    return urls
+
+
+def _normalize_url(u: str) -> str:
+    return u.strip().rstrip("/").lower()
+
+
+def extract_evidence_targets(evidence_text: str) -> set[str]:
+    """URLs the optimizer actually proposed as **Target:** lines in its output block."""
+    return {_normalize_url(u) for u in re.findall(r"\*\*Target:\*\*\s*(\S+)", evidence_text)}
+
+
+def check_links_evidence(text: str, path: str) -> CheckResult:
+    """Sibling-file backstop for the internal-linking-strategist invocation.
+
+    This cannot prove the optimizer's two-phase process actually ran — an
+    agent can still hand-type a fake evidence file with plausible-looking
+    Target/Reasoning lines. What it catches is the cheaper, more common
+    failure: the invocation step being skipped entirely (e.g. a Skill call
+    whose arguments never actually delivered the draft to it) while the
+    writer backfills Related Terms from a manual lookup instead, with no
+    evidence file at all, or one that doesn't structurally match the
+    optimizer's real output format. It also forces the fabricated case to
+    at least list the same URLs as real **Target:** lines, which is more
+    than a bare "does the URL substring appear anywhere" check would force.
+    """
+    rt_section = extract_section(text, REQUIRED_H2_KEYWORDS["related_terms"])
+    rt_urls = {_normalize_url(u) for u in extract_urls(rt_section)}
+    if not rt_urls:
+        # related_terms_links (above) already FAILs the draft on <2 links,
+        # so this branch only fires alongside that FAIL, never on its own.
+        return CheckResult("links_evidence_file", False, "WARN", "no Related Terms links to verify — see related_terms_links above")
+
+    if not str(path).endswith(".draft.md"):
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"draft path '{path}' doesn't end in .draft.md — can't derive the sibling evidence file name. "
+            "Name the draft outputs/[slug].draft.md per the skill's own convention.",
+        )
+
+    links_path = Path(str(path)[: -len(".draft.md")] + ".links.md")
+    if not links_path.exists():
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"expected {links_path.name} (the internal-linking-strategist output block) alongside the draft — not found. "
+            "See SKILL.md 'Required evidence': Related Terms links must come from a real invocation, not a manual lookup.",
+        )
+
+    evidence_text = links_path.read_text(encoding="utf-8")
+    if "## Internal link suggestions" not in evidence_text:
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"{links_path.name} exists but is missing the '## Internal link suggestions' header — "
+            "this is not the optimizer's real output format.",
+        )
+
+    evidence_targets = extract_evidence_targets(evidence_text)
+    missing = sorted(u for u in rt_urls if u not in evidence_targets)
+    if missing:
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"Related Terms URL(s) not listed as a **Target:** in {links_path.name}: {missing}",
+        )
+
+    return CheckResult("links_evidence_file", True, "PASS", f"all {len(rt_urls)} Related Terms URL(s) match a **Target:** line in {links_path.name}")
+
+
 def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_words: int) -> Report:
     report = Report(path=path)
 
@@ -298,6 +378,7 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     rt_section = extract_section(text, REQUIRED_H2_KEYWORDS["related_terms"])
     rt_links = count_links(rt_section)
     report.add("related_terms_links", rt_links >= 2, "FAIL", f"{rt_links} link(s) found (minimum 2)")
+    report.checks.append(check_links_evidence(text, path))
 
     # --- Vocabulary ---
     forbidden = find_forbidden(text, FORBIDDEN_TERMS_ANY_CASE)

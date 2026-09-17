@@ -1,16 +1,28 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-15T06:33:13.254Z",
-    "itemCount": 268,
+    "generatedAt": "2026-09-14T10:10:18.425Z",
+    "itemCount": 267,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
     {
+      "url": "https://www.social.plus/blog/how-smart-fit-uses-in-app-engagement-to-drive-retention",
+      "metaTitle": "From the Stage: How Smart Fit Uses In App Engagement to Drive Retention",
+      "metaDescription": "Discover how SmartFit transformed in-app engagement during their exclusive chat with Social.plus at AGS São Paulo. Learn actionable, high-impact strategies every product team needs to build thriving digital communities and boost retention.",
+      "content": "# From the Stage: How Smart Fit Uses In App Engagement to Drive Retention\n## Why in-app engagement became a retention priority\n## Lesson 1: Design engagement around behavior that already exists\n## Lesson 2: Decide deliberately what to build versus what to partner on\n## Lesson 3: Tie engagement to a real retention metric\n## Lesson 4: Treat personalization as the next stage, not the starting point\n## Final thoughts"
+    },
+    {
+      "url": "https://www.social.plus/blog/plausible-code-is-not-an-integration-why-we-built-vise",
+      "metaTitle": "Plausible Code Is Not an Integration: Why We Built Vise",
+      "metaDescription": "AI coding agents write code that compiles but doesn't work. See why we built Vise to verify SDK integrations instead of just scaffolding them.",
+      "content": "# Plausible Code Is Not an Integration: Why We Built Vise\n## Your compiler is not a witness\n## Why we called it Vise\n## What the benchmark told us (with the error bars on)\n## Demand proof from your tools"
+    },
+    {
       "url": "https://www.social.plus/blog/best-social-sdks-for-engagement-retention",
       "metaTitle": "5 Best Social SDKs for Engagement & Retention (2026)",
       "metaDescription": "Five social SDKs that help apps drive engagement and retention. What each offers, how they connect to business outcomes, and how to choose.",
-      "content": "# 5 Best Social SDKs for Engagement & Retention (2026)\n## What Is a Social SDK?\n## What to Look for in a Social SDK for Engagement & Retention\n## 5 Best Social SDKs for Engagement & Retention (2026)\n### social.plus: Best for apps where social engagement drives retention, analytics, and revenue\n### Stream: Best for teams that want composable social features with feed-driven engagement\n### Sendbird: Best for apps where chat is the primary engagement and retention mechanic\n### Agora: Best for apps where real-time voice and video drive user engagement\n### PubNub: Best for teams that want to build custom engagement systems on real-time infrastructure\n## At-a-Glance Comparison\n## How to Choose the Right Social SDK for Engagement & Retention"
+      "content": "# 5 Best Social SDKs for Engagement & Retention (2026)\n## What Is a Social SDK?\n## What to Look for in a Social SDK for Engagement &amp; Retention\n## 5 Best Social SDKs for Engagement &amp; Retention (2026)\n### social.plus: Best for apps where social engagement drives retention, analytics, and revenue\n### Stream: Best for teams that want composable social features with feed-driven engagement\n### Sendbird: Best for apps where chat is the primary engagement and retention mechanic\n### Agora: Best for apps where real-time voice and video drive user engagement\n### PubNub: Best for teams that want to build custom engagement systems on real-time infrastructure\n## At-a-Glance Comparison\n## How to Choose the Right Social SDK for Engagement &amp; Retention"
     },
     {
       "url": "https://www.social.plus/blog/best-alternatives-to-discord-and-facebook-groups-for-brands",
@@ -22,7 +34,7 @@
       "url": "https://www.social.plus/blog/best-in-app-community-platforms-for-retail-e-commerce-apps",
       "metaTitle": "5 Best In-App Community Platforms for Retail & E-Commerce Apps (2026)",
       "metaDescription": "Five in-app community platforms for retail and e-commerce apps. How each supports social commerce, buyer engagement, and community-driven discovery, and how to choose.",
-      "content": "# 5 Best In-App Community Platforms for Retail & E-Commerce Apps (2026)\n## Why Community Matters for Retail & E-Commerce Apps\n## What to Look for in a Community Platform for Retail & E-Commerce Apps\n## 5 Best In-App Community Platforms for Retail & E-Commerce Apps (2026)\n### social.plus: Best for retail apps that want social commerce and community-driven product discovery from one platform\n### Stream: Best for teams that want separate Chat and Activity Feeds SDKs they can adopt per product need\n### Sendbird: Best for retail apps where conversational commerce and buyer-seller messaging drive purchases\n### CometChat: Best for marketplace apps that need branded chat across multiple sellers or store brands\n### Agora: Best for retail apps where live shopping video and interactive product demos are the primary community experience\n## At-a-Glance Comparison\n## How to Choose the Right Community Platform for Your Retail or E-Commerce App"
+      "content": "# 5 Best In-App Community Platforms for Retail & E-Commerce Apps (2026)\n## Why Community Matters for Retail &amp; E-Commerce Apps\n## What to Look for in a Community Platform for Retail &amp; E-Commerce Apps\n## 5 Best In-App Community Platforms for Retail &amp; E-Commerce Apps (2026)\n### social.plus: Best for retail apps that want social commerce and community-driven product discovery from one platform\n### Stream: Best for teams that want separate Chat and Activity Feeds SDKs they can adopt per product need\n### Sendbird: Best for retail apps where conversational commerce and buyer-seller messaging drive purchases\n### CometChat: Best for marketplace apps that need branded chat across multiple sellers or store brands\n### Agora: Best for retail apps where live shopping video and interactive product demos are the primary community experience\n## At-a-Glance Comparison\n## How to Choose the Right Community Platform for Your Retail or E-Commerce App"
     },
     {
       "url": "https://www.social.plus/blog/best-in-app-community-platforms-for-gaming-betting-apps",
@@ -565,12 +577,6 @@
       "content": "# How AI Insights Improve Decision Making for Brands\n## Understanding AI Insights\n## How AI Insights Improve Decision-Making\n### 1. Enhancing Marketing Strategies\n### 2. Improving Product Development\n### 3. Enhancing Customer Experience\n### 4. Optimizing Pricing Strategies\n## &nbsp;Unlocking the Power of AI Analytics for Data-Driven Decisions\n### 1. Topic Analysis\n### 2. Sentiment Analysis\n### 3. Content Insights\n### 4. GPT-Powered Research\n## Conclusion"
     },
     {
-      "url": "https://www.social.plus/blog/10-ways-to-use-ai-in-community-engagement",
-      "metaTitle": "10 Ways to Use AI in Community Engagement",
-      "metaDescription": "Discover how to enhance community engagement with AI in this beginner's guide. Learn 10 practical and easy ways to use AI for better interaction",
-      "content": "# 10 Ways to Use AI in Community Engagement\n## 10 Ways to Use AI in Community Engagement\n### 1. Personalize Your Communications: Make Everyone Feel Special\n### 2. Automate Responses: Be There Even When You're Not\n### 3. Analyze Feedback: Understand What People Really Think\n### 4. Content Creation: Generate Engaging Posts Effortlessly\n### 5. Predictive Analysis: Anticipate Needs and Trends\n### 6. Enhance Member Engagement: Boost Participation and Interaction\n### 7. Improve Content Distribution: Get Your Message Across Efficiently\n### 8. Enhance Community Safety: Create a Secure Environment\n### 9. Improve Member Onboarding: Make a Great First Impression\n### 10. Measure Success: Know What's Working and What's Not\n## Welcome to the Future of Community Engagement"
-    },
-    {
       "url": "https://www.social.plus/blog/data-driven-trend-prediction",
       "metaTitle": "Data-Driven Trend Prediction: the Competitive Edge Every App Needs",
       "metaDescription": "Stay ahead of the curve with data-driven trend prediction! This article explores methods to collect and analyze data to predict trends, innovate",
@@ -599,12 +605,6 @@
       "metaTitle": "The advanced guide to app re-engagement strategies",
       "metaDescription": "Discover advanced app re-engagement strategies to bring users back to your app and boost retention. Learn the latest techniques",
       "content": "# The advanced guide to app re-engagement strategies\n## Advanced app re-engagement strategies to drive growth\n### 1. Harnessing the power of data\n### 2. Dynamic content delivery\n### 3. Omni-channel engagement\n### 4. Behavioral triggers and automation\n### 5. Advanced analytics and optimization\n## Case studies in advanced re-engagement\n## Elevate your re-engagement strategy for app growth"
-    },
-    {
-      "url": "https://www.social.plus/blog/app-re-engagement-beginners-guide",
-      "metaTitle": "App re-engagement for retention & growth: a beginner's guide",
-      "metaDescription": "Learn the ropes of app re-engagement in this beginner's guide. Discover why it's crucial, strategies to implement, and how to measure success. ",
-      "content": "# App re-engagement for retention & growth: a beginner's guide\n## What is app re-engagement?\n## Why is app re-engagement important?\n## Top app re-engagement strategies\n## Measuring success with app re-engagement\n## Best practices for app re-engagement\n## Real-world case studies: learning from the pros\n## Embracing the power of app re-engagement"
     },
     {
       "url": "https://www.social.plus/blog/app-engagement-strategies",
@@ -904,7 +904,7 @@
       "url": "https://www.social.plus/blog/managing-in-app-communities-a-full-guide-future-trends",
       "metaTitle": "Managing in-app communities: a full guide + future trends",
       "metaDescription": "Unlock the power of in-app communities: expert tips, future trends, and the ROI of user-focused digital ecosystems.",
-      "content": "# Managing in-app communities: a full guide + future trends\n## Understanding in-app communities\n### What is an in-app community?\n### ‍What are the benefits of in-app communities?\n## 1. How to build a strong foundation\n### ‍Setting clear goals and objectives\n### Identifying your target audience\n### Selecting the right platform or tools\n## ‍2. Community guidelines and policies\n### Creating community guidelines and rules\n### Communicating and enforcing guidelines\n### Balancing freedom of expression\n## 3. Engaging and moderating\n### ‍Techniques for driving engagement\n### The role of community managers\n### Moderation strategies\n## ‍4. Content creation and sharing\n### Encouraging user-generated content\n### Highlighting user contributions\n### Leveraging user-generated content\n## 5. Providing support and assistance\n### ‍Offering customer support within the community\n### Encouraging peer-to-peer support\n### The impact of timely responses and solutions\n## 6. Analyzing and measuring success\n### Key metrics for evaluating community engagement\n### ‍The importance of feedback and surveys\n### Using data to make improvements\n## 7. Challenges and pitfalls\n### Common challenges in managing in-app communities\n### Strategies for addressing challenges\n## 8. Future trends for in-app community management\n### Emerging technologies and their impact\n## ‍Invest in your app by investing in your community"
+      "content": "# Managing in-app communities: a full guide + future trends\n## Understanding in-app communities\n### What is an in-app community?\n### ‍What are the benefits of in-app communities?\n## 1. How to build a strong foundation\n### ‍Setting clear goals and objectives\n### Identifying your target audience\n### Selecting the right platform or tools\n## ‍2. Community guidelines and policies\n### Creating community guidelines and rules\n### Communicating and enforcing guidelines\n### Balancing freedom of expression\n## 3. Engaging and moderating\n### ‍Techniques for driving engagement\n### The role of community managers\n### Moderation strategies\n## ‍4. Content creation and sharing\n### Encouraging user-generated content\n### Highlighting user contributions\n### Leveraging user-generated content\n## ‍5. Providing support and assistance\n### ‍Offering customer support within the community\n### Encouraging peer-to-peer support\n### The impact of timely responses and solutions\n## 6. Analyzing and measuring success\n### Key metrics for evaluating community engagement\n### ‍The importance of feedback and surveys\n### Using data to make improvements\n## 7. Challenges and pitfalls\n### Common challenges in managing in-app communities\n### Strategies for addressing challenges\n## 8. Future trends for in-app community management\n### Emerging technologies and their impact\n## ‍Invest in your app by investing in your community"
     },
     {
       "url": "https://www.social.plus/blog/how-vertical-social-networks-differ-from-social-media",
@@ -1096,7 +1096,7 @@
       "url": "https://www.social.plus/blog/best-chat-apis-messaging-sdks",
       "metaTitle": "Selecting the best Chat API & Messaging SDK for your app",
       "metaDescription": "Use Chat API & Messaging SDK to build instant messaging in your app without deploying and maintaining them yourself. Find the best solutions on the market.",
-      "content": "# Selecting the best Chat API & Messaging SDK for your app\n## Why use a chat API or SDK for messaging features?\n## The benefits of in-app chat features\n## What to look for in a messaging SDK\n### Scalability\n### Detailed documentation\n### Privacy\n### Additional features to consider\n## 8 SDKs to power your app messaging features\n### social.plus\n#### Key Features of social.plus\n#### Pricing\n#### Overall Impressions\n### Stream\n#### Key Features of Stream\n#### Pricing\n#### Overall Impressions\n### MirrorFly\n#### Key features of MirrorFly\n#### MirrorFly APIs and SDKs are available for\n#### Pricing\n#### Overall Impressions\n### Sendbird\n#### Key Features of Sendbird\n#### Pricing\n#### Overall Impressions\n### PubNub\n#### Key Features of PubNub\n#### Pricing\n#### Overall Impressions\n### Rocket.chat\n#### Key Features of Rocket.chat\n#### Pricing\n#### Overall Impressions\n### CometChat\n#### Key Features of CometChat\n#### Pricing\n#### Overall Impressions\n### Twilio\n#### Key Features of Twilio\n#### Pricing\n#### Overall Impressions\n### HelpCrunch\n#### Key Features of HelpCrunch\n#### Pricing\n#### Overall Impressions\n## Driving your app’s socials with devkits"
+      "content": "# Selecting the best Chat API & Messaging SDK for your app\n## Why use a chat API or SDK for messaging features?\n## The benefits of in-app chat features\n## What to look for in a messaging SDK\n### Scalability&nbsp;\n### Detailed documentation\n### Privacy&nbsp;\n### Additional features to consider\n## 8 SDKs to power your app messaging features\n### social.plus\n#### Key Features of social.plus\n#### Pricing\n#### Overall Impressions\n### Stream\n#### Key Features of Stream\n#### Pricing\n#### Overall Impressions\n### MirrorFly\n#### Key features of MirrorFly\n#### MirrorFly APIs and SDKs are available for\n#### Pricing\n#### Overall Impressions\n### Sendbird\n#### Key Features of Sendbird\n#### Pricing\n#### Overall Impressions\n### PubNub\n#### Key Features of PubNub\n#### Pricing\n#### Overall Impressions\n### Rocket.chat\n#### Key Features of Rocket.chat\n#### Pricing\n#### Overall Impressions\n### CometChat\n#### Key Features of CometChat\n#### Pricing\n#### Overall Impressions\n### Twilio\n#### Key Features of Twilio\n#### Pricing\n#### Overall Impressions\n### HelpCrunch\n#### Key Features of HelpCrunch\n#### Pricing\n#### Overall Impressions\n## Driving your app’s socials with devkits"
     },
     {
       "url": "https://www.social.plus/blog/selecting-the-best-social-sdk-for-your-app",
@@ -1283,12 +1283,6 @@
       "metaTitle": "What is a super app? The new age of mobile disruption is here",
       "metaDescription": "Super apps are stepping in and providing users and companies with the ability to meaningfully engage online, regardless of context or scenario.",
       "content": "# What is a super app? The new age of mobile disruption is here\n## What is a super app?\n## Why super apps?\n## How do super apps increase engagement?&nbsp;\n## Super apps examples\n### Grab\n### TrueID\n### Revolut\n## The next phase of apps is super"
-    },
-    {
-      "url": "https://www.social.plus/blog/40-statistics-you-should-know-about-online-communities",
-      "metaTitle": "40 Statistics You Should Know About Online Communities",
-      "metaDescription": "In this article, we summarize the main statistics on online communities, user engagement, and customer experience. ",
-      "content": "# 40 Statistics You Should Know About Online Communities\n## Chapter 1: Online communities have stolen the spotlight\n## Chapter 2: Users are at the center of change\n## Chapter 3: Engagement is the name of the game\n## Chapter 4: How do online communities benefit users?\n## Chapter 5: Post-pandemic, online communities grow stronger\n## Chapter 6: A promising outlook for the next years\n## The future is social and community-driven"
     },
     {
       "url": "https://www.social.plus/blog/how-to-engage-users-on-your-community-app",
