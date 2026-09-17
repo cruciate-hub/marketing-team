@@ -20,6 +20,11 @@ emails/email-module-*.txt
 workers/
 # Cloudflare Wrangler local cache (contains account id / state)
 **/.wrangler/
+# Skill-distribution build tooling (build-kits.sh, validate-dist.py, RUNBOOK.md).
+# Not secret, but internal ops process — doesn't belong in the public repo either.
+# The actual private skill data it reads (competitive-intel-src/, competitive-intelligence-src/)
+# lives outside this repo entirely, at ~/Downloads/competitive-analysis/skill-distribution/ — see RUNBOOK.md.
+skill-distribution/
 
 # --- OS / tooling noise ---
 .DS_Store
