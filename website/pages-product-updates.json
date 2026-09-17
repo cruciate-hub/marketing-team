@@ -1,29 +1,11 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T12:49:26.191Z",
-    "itemCount": 68,
+    "generatedAt": "2026-07-13T10:05:46.243Z",
+    "itemCount": 65,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
-    {
-      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-august-2026",
-      "metaTitle": "What's new in social.plus | August 2026",
-      "metaDescription": "August is about giving your users more reasons to show up and admins better tools to drive participation. From event management and notifications to profile moderation and a dashboard makeover. ",
-      "content": "# What's new in social.plus | August 2026\n## Full Analytics Dashboard Redesign\n## Push Notifications for Event Creation\n## Pin and Feature Event Posts in Communities and Global Feed\n## User Reporting and Profile Moderation Enhancements\n## We also added"
-    },
-    {
-      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-july-2026",
-      "metaTitle": "What's new in social.plus | July 2026",
-      "metaDescription": "This month we focused on 3 things: helping users find content worth engaging with, giving developers a better operating system, and making sure admins are never stuck at a desk.",
-      "content": "# What's new in social.plus | July 2026\n## For You Feed: A Feed Worth Every Scroll\n## social.plus Vise: Proof layer for social.plus AI-assisted SDK integration\n## Mobile Console for Community Management\n## Tap-to-Control Video and Live Stream Playback\n## Retroactive Tagging for Sentiment Analysis\n## Filter by Date Range in Posts and Comments\n## Shareable Event Links with Deep Link Configuration\n## We also added"
-    },
-    {
-      "url": "https://www.social.plus/product-update/introducing-social-plus-for-you-feed-a-feed-worth-every-scroll",
-      "metaTitle": "Introducing social.plus For You Feed: A Feed Worth Every Scroll",
-      "metaDescription": "Introducing social.plus For You feed, a relevance-ranked feed personalized for your users. It puts the posts each user cares about first, powers better discovery across your community, and gives your app a feed worth every scroll.",
-      "content": "# Introducing social.plus For You Feed: A Feed Worth Every Scroll\n### What is the For You feed\n### Signal over noise\n### Built-in discovery\n### Relevance, in every kind of app\n### A feed worth every scroll"
-    },
     {
       "url": "https://www.social.plus/product-update/introducing-vise-the-proof-layer-for-social-plus-ai-assisted-sdk-integration",
       "metaTitle": "Introducing Vise: the proof layer for social.plus AI-assisted SDK integration",
