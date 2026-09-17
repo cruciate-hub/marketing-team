@@ -35,10 +35,27 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+MT_REPO = Path(os.environ.get("MT_REPO", "/tmp/cruciate-hub-marketing-team"))
+
+
+def _read_text_safe(path: Path) -> str:
+    """Try UTF-8 (with BOM strip) first; fall back to cp1252 — same pattern
+    as blog-seo-content/scripts/compliance.py's _read_draft(), for the same
+    reason: prose pasted from Word emits 0x97 for the em dash, which is
+    valid cp1252 but not valid UTF-8. Raises UnicodeDecodeError if neither
+    decodes, for the caller to handle (main() exits cleanly; a compliance
+    check FAILs gracefully instead of crashing the whole script).
+    """
+    try:
+        return path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        return path.read_text(encoding="cp1252")
 
 
 # Kept in sync with blog-seo-content/scripts/compliance.py and
@@ -104,7 +121,10 @@ class Report:
     checks: list = field(default_factory=list)
 
     def add(self, name: str, ok: bool, level: str, detail: str = "") -> None:
-        self.checks.append(CheckResult(name, ok, level, detail))
+        self.add_result(CheckResult(name, ok, level, detail))
+
+    def add_result(self, result: CheckResult) -> None:
+        self.checks.append(result)
 
     @property
     def has_failure(self) -> bool:
@@ -217,6 +237,165 @@ def count_links(section_text: str) -> int:
     return len(re.findall(r"\[[^\]]+\]\([^)]+\)", section_text))
 
 
+def extract_urls(section_text: str) -> list[str]:
+    urls = []
+    for _, url in re.findall(r"\[([^\]]+)\]\(([^)]+)\)", section_text):
+        # A markdown link may carry a trailing title, e.g. (URL "title") — keep just the URL.
+        urls.append(url.split(" ", 1)[0].strip())
+    return urls
+
+
+def _normalize_url(u: str) -> str:
+    # Intentionally NOT case-folded: social.plus URLs are canonically lowercase,
+    # and folding case would make a mistyped/altered-case URL pass as "the same"
+    # URL the optimizer actually proposed, defeating the exact-match guarantee
+    # this check exists to provide. Only whitespace and a trailing slash are
+    # normalized away, since those are cosmetic, not identity-changing.
+    return u.strip().rstrip("/")
+
+
+def extract_evidence_targets(evidence_text: str) -> set[str]:
+    """URLs the optimizer actually proposed as **Target:** lines in its output block."""
+    return {_normalize_url(u) for u in re.findall(r"\*\*Target:\*\*\s*(\S+)", evidence_text)}
+
+
+def _load_known_glossary_and_answers_urls() -> set[str] | None:
+    """Normalized URLs from the site's own glossary/answers inventory.
+
+    Returns None (not an empty set) when neither snapshot is readable, so
+    callers can distinguish "checked, and every URL is real" from "couldn't
+    check" instead of treating an unreachable clone as license to fabricate
+    URLs. Mirrors the read pattern in aeo-content/scripts/duplicate_check.py.
+    """
+    urls: set[str] = set()
+    read_any = False
+    for rel in ("website/pages-glossary.json", "website/pages-answers.json"):
+        p = MT_REPO / rel
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        pages = data.get("pages") if isinstance(data, dict) else data
+        if not isinstance(pages, list):
+            continue
+        read_any = True
+        for page in pages:
+            u = page.get("url") if isinstance(page, dict) else None
+            if u:
+                urls.add(_normalize_url(u))
+    return urls if read_any else None
+
+
+def check_links_evidence(rt_section: str, path: str) -> CheckResult:
+    """Sibling-file backstop for the internal-linking-strategist invocation.
+
+    This cannot prove the optimizer's two-phase process actually ran — an
+    agent can still hand-type a fake evidence file with plausible-looking
+    Anchor/Target/Reasoning lines for URLs that happen to be real. What it
+    catches: the invocation being skipped entirely (no evidence file, or one
+    that doesn't structurally match the optimizer's real output format); a
+    bare header with copy-pasted Target lines and no actual Anchor/Reasoning
+    content per suggestion; a Related Terms URL that doesn't exactly match a
+    Target line (case-sensitive — see _normalize_url); and, when the site's
+    glossary/answers inventory snapshots are readable, a Related Terms URL
+    that doesn't correspond to any real published page at all. That last
+    check degrades silently to "not checked" (not "passed") when the
+    inventory snapshots aren't reachable, since an unreachable clone is not
+    evidence that a URL is real.
+    """
+    rt_urls = {_normalize_url(u) for u in extract_urls(rt_section)}
+    if not rt_urls:
+        # related_terms_links (above) already FAILs the draft on <2 links,
+        # so this branch only fires alongside that FAIL, never on its own.
+        return CheckResult("links_evidence_file", False, "WARN", "no Related Terms links to verify — see related_terms_links above")
+
+    if not str(path).endswith(".draft.md"):
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"draft path '{path}' doesn't end in .draft.md — can't derive the sibling evidence file name. "
+            "Name the draft outputs/[slug].draft.md per the skill's own convention.",
+        )
+
+    links_path = Path(str(path)[: -len(".draft.md")] + ".links.md")
+    if not links_path.exists():
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"expected {links_path.name} (the internal-linking-strategist output block) alongside the draft — not found. "
+            "See SKILL.md 'Required evidence': Related Terms links must come from a real invocation, not a manual lookup.",
+        )
+
+    try:
+        evidence_text = _read_text_safe(links_path)
+    except UnicodeDecodeError as e:
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"{links_path.name} could not be decoded as utf-8 or cp1252 ({e}) — "
+            "re-save it as plain UTF-8.",
+        )
+
+    if "## Internal link suggestions" not in evidence_text:
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"{links_path.name} exists but is missing the '## Internal link suggestions' header — "
+            "this is not the optimizer's real output format.",
+        )
+
+    # Require actual suggestion content, not just a header plus copy-pasted
+    # Target lines: a bare "## Internal link suggestions\n**Target:** url" with
+    # nothing else would otherwise satisfy every check below despite never
+    # having been touched by the real optimizer output.
+    anchor_count = len(re.findall(r"\*\*Anchor:\*\*", evidence_text))
+    reasoning_count = len(re.findall(r"\*\*Reasoning:\*\*", evidence_text))
+    if anchor_count < len(rt_urls) or reasoning_count < len(rt_urls):
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"{links_path.name} has {anchor_count} **Anchor:** and {reasoning_count} **Reasoning:** "
+            f"line(s) but {len(rt_urls)} Related Terms URL(s) — a real optimizer suggestion has "
+            "an Anchor and a Reasoning alongside every Target, not a bare URL list.",
+        )
+
+    evidence_targets = extract_evidence_targets(evidence_text)
+    missing = sorted(u for u in rt_urls if u not in evidence_targets)
+    if missing:
+        return CheckResult(
+            "links_evidence_file",
+            False,
+            "FAIL",
+            f"Related Terms URL(s) not listed as a **Target:** in {links_path.name}: {missing}",
+        )
+
+    known_urls = _load_known_glossary_and_answers_urls()
+    if known_urls is not None:
+        unknown = sorted(u for u in rt_urls if u not in known_urls)
+        if unknown:
+            return CheckResult(
+                "links_evidence_file",
+                False,
+                "FAIL",
+                f"Related Terms URL(s) not found in website/pages-glossary.json or "
+                f"pages-answers.json — likely fabricated: {unknown}",
+            )
+
+    inventory_note = "confirmed against site inventory" if known_urls is not None else "site inventory unreadable, not confirmed"
+    return CheckResult(
+        "links_evidence_file",
+        True,
+        "PASS",
+        f"all {len(rt_urls)} Related Terms URL(s) match an Anchor/Target/Reasoning suggestion in "
+        f"{links_path.name} ({inventory_note})",
+    )
+
+
 def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_words: int) -> Report:
     report = Report(path=path)
 
@@ -298,6 +477,7 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     rt_section = extract_section(text, REQUIRED_H2_KEYWORDS["related_terms"])
     rt_links = count_links(rt_section)
     report.add("related_terms_links", rt_links >= 2, "FAIL", f"{rt_links} link(s) found (minimum 2)")
+    report.add_result(check_links_evidence(rt_section, path))
 
     # --- Vocabulary ---
     forbidden = find_forbidden(text, FORBIDDEN_TERMS_ANY_CASE)
@@ -334,7 +514,11 @@ def main() -> int:
         print(f"Error: {args.path} does not exist", file=sys.stderr)
         return 2
 
-    text = args.path.read_text(encoding="utf-8")
+    try:
+        text = _read_text_safe(args.path)
+    except UnicodeDecodeError as e:
+        print(f"Error: could not decode {args.path} as utf-8 or cp1252: {e}", file=sys.stderr)
+        return 2
     report = run_checks(text, str(args.path), args.keyword, args.min, args.max)
 
     print(report.as_json() if args.json else report.render())
