@@ -38,27 +38,87 @@ Reference files live in the public `cruciate-hub/marketing-team` GitHub repo. Fe
     if [ ! -e "$REPO" ]; then
       git clone --depth 1 --quiet "$REMOTE" "$REPO" || true
     elif git -C "$REPO" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      # Refresh, but do NOT ignore a failed pull. Silently serving stale
+      # content is the exact bug this block exists to prevent.
       git -C "$REPO" pull --ff-only --quiet 2>/dev/null \
         || echo "Note: could not refresh $REPO; verifying existing content below." >&2
     fi
+    # Mechanical integrity gate. Do not skip. Probes core files across several
+    # top-level dirs so a missing, corrupt, or partial clone stops the skill
+    # here instead of letting it read incomplete content and draw wrong conclusions.
     miss=""
     for f in brain.md messaging/brain.md messaging/terminology.md messaging/tone.md design-system/brain.md; do
       [ -s "$REPO/$f" ] || miss="$miss $f"
     done
     if ! git -C "$REPO" rev-parse HEAD >/dev/null 2>&1 || [ -n "$miss" ]; then
       echo "Fetch failed: clone at $REPO is unreachable or incomplete.${miss:+ Absent files:$miss}" >&2
+      echo "Check your network. If the clone is corrupt and holds no local work, run  rm -rf \"$REPO\"  then re-run." >&2
+      echo "(If \$MT_REPO points at your own checkout, rescue its changes first; this never auto-deletes it.)" >&2
       exit 1
     fi
+
+    # Overlay the live website inventories. The auto-generated pages-*.json
+    # are committed to the `site-data` branch (bot commits stay off main);
+    # main only carries a point-in-time snapshot. Restricting the overlay to
+    # pages-*.json keeps the clone fast-forwardable on the next session's pull.
     if git -C "$REPO" fetch --depth 1 --quiet origin site-data 2>/dev/null; then
       git -C "$REPO" checkout --quiet FETCH_HEAD -- 'website/pages-*.json' 2>/dev/null \
-        || echo "Note: site-data overlay failed; website/pages-*.json may be stale." >&2
+        || echo "Note: site-data overlay failed; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
     else
-      echo "Note: could not fetch site-data; website/pages-*.json may be stale." >&2
+      echo "Note: could not fetch site-data; website/pages-*.json are the main-branch snapshot (may be stale)." >&2
     fi
 
-After the clone exists, read files with `cat "$REPO/<path>"`. If anything fails validation (missing, empty, wrong format), stop and respond with exactly: `Fetch failed: <path>. Please check your network connection and rerun.` Do not reconstruct from memory or training data, and do not fall back to WebFetch.
+After the clone exists, read files with `cat "$REPO/<path>"`. Examples: `cat "$REPO/brain.md"`, `cat "$REPO/messaging/terminology.md"`.
 
-Full truncation-handling and degraded-inventory guidance is identical to `aeo-content` and `blog-seo-content` — see either skill if a `cat` or `pages-*.json` read comes back truncated or empty.
+The integrity gate above fails loud rather than serving partial content, and it never deletes `$REPO` (it can hold un-pushed local work). To make skills read your own local edits, point `MT_REPO` at your working checkout before running them.
+
+The Bash tool truncates large stdout when the output exceeds the harness's token/byte cap (observed at ~50 KB in Cowork; varies by environment). When this happens the harness emits one of these signals — both mean the same thing:
+- `Output too large (NkB). Full output saved to: …` followed by a short preview, OR
+- `Error: result (N characters) exceeds maximum allowed tokens` with no preview, just a sidecar-file pointer.
+
+In either case, the rest of the file is invisible to you in-call. Most files in this repo are small enough that `cat` returns them in full and you never see either signal. **If you do see either form, never proceed using the partial output as if it were the whole file** — switch to one of the patterns below.
+
+- **Truncated markdown** (you saw either truncation signal above) — read in line-range chunks instead. First check the total line count: `wc -l "$REPO/<path>"`. Then read each chunk:
+
+      sed -n '1,250p'     "$REPO/<path>"
+      sed -n '251,500p'   "$REPO/<path>"
+      sed -n '501,$p'     "$REPO/<path>"
+
+  Each ~250-line chunk fits under the preview cap. Concatenate the chunks mentally. For files much larger than 750 lines, add more chunks at 250-line intervals until you reach the total.
+
+  **If a chunk itself comes back as a truncated preview** (output above the harness's display cap — visible as an "Output too large" or similar marker, with the rest spilled to a file you can't see in-call), halve the chunk size and retry. For example, swap `sed -n '1,250p'` for `sed -n '1,125p'` then `sed -n '126,250p'`. Repeat until each chunk lands in full. Never proceed using a truncated chunk as if it were complete.
+
+- **Large JSON inventories** (`website/pages-*.json`, up to 228 KB) — never `cat` raw. Process with `python3` or `jq` and emit only the fields you need:
+
+      python3 -c "import json; d=json.load(open('$REPO/website/pages-blog.json')); print(len(d['pages']))"
+      jq '.pages[].url' "$REPO/website/pages-blog.json"
+
+  Some skills ship helper scripts that already follow this pattern (e.g. `marketing-team/skills/aeo-content/scripts/duplicate_check.py`).
+
+  **Degraded-inventory guard.** The pages-*.json files are auto-generated; a generation failure can leave a file syntactically valid but empty or missing pages. After loading any of them, check `_meta.errors` and `len(pages)`:
+
+      python3 -c "
+      import json; d=json.load(open('$REPO/website/pages-industry.json'))
+      errs = d.get('_meta',{}).get('errors') or []
+      print(len(d.get('pages',[])), 'pages;', len(errs), 'extraction errors', errs)"
+
+  If `pages` is empty, or `_meta.errors` is non-empty, the inventory is degraded: name the affected file and the missing paths in your output, scope any 'site-wide' claims accordingly, and never treat an empty inventory as 'this section has no pages'.
+
+Note: Claude Code's `Read` tool can't reach files in `$REPO` — Cowork sandboxes Read to connected directories and `/tmp` is not connected by default. Use the `cat` / `sed` / `python` patterns above.
+
+Validate every file before using it:
+- Markdown: content must start with `#`
+- JSON: content must start with `{` or `[`
+- HTML: content must start with `<`
+- Content must be non-empty
+
+If anything fails — clone error, missing file, empty content, or wrong format:
+- Do NOT reconstruct from memory or training data.
+- Do NOT fall back to WebFetch or any other tool.
+- Stop immediately and respond with exactly this line:
+
+  `Fetch failed: <path>. Please check your network connection and rerun.`
+
 <!-- FETCH-BLOCK:END v2 -->
 
 ## Before writing
