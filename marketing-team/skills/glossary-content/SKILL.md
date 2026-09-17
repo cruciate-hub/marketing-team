@@ -210,28 +210,28 @@ No HTML in the intermediate. Internal `<a href>` / markdown links in "Related Te
 
 ## Internal linking
 
-Before running compliance, invoke `internal-linking-strategist` in **draft mode**, passing the full draft, the term as target keyword, the category, and content type: `glossary`. It fetches `pages-glossary.json` and `pages-answers.json` (among others) and returns anchor + URL + insertion point suggestions.
+Before running compliance, invoke `internal-linking-strategist` in **draft mode**, passing the full draft, the term as target keyword, the category, and content type: `glossary`. Per its own "Standalone draft mode" routing rule, it fetches `pages-marketing.json`, `pages-use-cases.json`, `pages-industry.json`, and `pages-glossary.json` by default, and will ask whether to also pull in `pages-answers.json` (or blog/customer-stories) — say yes when the term plausibly has a related `/answers/` page.
 
-(Note: this step must come before compliance, not after. `compliance.py`'s `related_terms_links` check FAILs on fewer than 2 links, so a draft can never legitimately "pass compliance" while Related Terms is still empty — invoking the optimizer first is the only ordering that works. `aeo-content` runs it in this same before-compliance position for the same reason.)
+(Note: this step must come before compliance, not after. `compliance.py`'s `related_terms_links` check FAILs on fewer than 2 links, so a draft can never legitimately "pass compliance" while Related Terms is still empty — invoking the optimizer first is the only ordering that works. This is a glossary-specific constraint: `aeo-content`'s own internal-link check is WARN-only, not FAIL, so it isn't forced into this ordering the way this skill is — glossary-content simply chooses to place the step here regardless.)
 
 - Populate "Related Terms" from its output — this is the section that exists specifically for this purpose, so it should rarely come back empty. If it does, surface that to the user rather than inventing related terms from memory.
 - Additional inline links elsewhere in the body (e.g. linking "retention rate" the first time it's mentioned in "Why It Matters") follow the same rule as `aeo-content` and `blog-seo-content`: only from the optimizer's output, never improvised.
 
 **This must be a real invocation, not a substitute.** Confirming a URL exists in `pages-glossary.json` (e.g. via `duplicate_check.py` output or a manual grep) is not the same as running `internal-linking-strategist`'s two-phase shortlist-plus-live-fetch process, and does not satisfy this step. This distinction is here because it was observed in practice: this step was silently replaced with a manual lookup that produced real, valid URLs but skipped the optimizer's cannibalization check and anchor-distribution rules — which read as compliant but wasn't.
 
-**Required evidence (paste into your response before delivering).** `aeo-content` requires this same evidence in its parallel-subagent batch mode, for the identical reason (batch orchestration was observed silently dropping this step); this skill requires it on every draft, batch or not, since the same drop-off can happen in a single-draft run:
+**Required evidence (paste into your response before delivering).** `aeo-content` requires this same class of evidence in its parallel-subagent batch mode, for a related reason (batch orchestration was observed silently dropping this step there too); this skill requires it on every draft, batch or not, since the same drop-off can happen in a single-draft run:
 1. The full labeled output block `internal-linking-strategist` returns (starts with `## Internal link suggestions`). If that heading is missing from what you're about to paste, the skill was not actually invoked — go back and invoke it for real.
-2. For each Related Terms link used: the anchor, URL, and the optimizer's own `Reasoning` line for it. (Related Terms is a bare link list, not body prose, so the optimizer's `Insert at` sentence-quote field does not apply here — don't ask for or fabricate one; `Reasoning` is the field that exists for list-style output.) A URL you sourced yourself (grep, memory, or a duplicate-check hit) without this evidence is an improvised link per BLOCK condition 3 below, even if the URL itself is correct.
+2. For each Related Terms link used: the `**Anchor:**`, `**Target:**` URL, and `**Reasoning:**` line the optimizer gave for it, exactly as it returned them. (Whether its `Insert at` sentence-quote field is populated for a Related Terms suggestion depends on how the optimizer itself treats list-style output — don't assume it's absent and don't fabricate one either way; paste whatever it actually returned.) A URL you sourced yourself (grep, memory, or a duplicate-check hit) without this evidence is an improvised link per BLOCK condition 3 below, even if the URL itself is correct.
 
-Save this evidence block to `outputs/[slug].links.md` alongside the draft — see "Compliance" below for why.
+Save this evidence block verbatim to `outputs/[slug].links.md` alongside the draft — see "Compliance" below for why.
 
 ## Compliance
 
 Run `python3 scripts/compliance.py outputs/[slug].draft.md` before delivering any draft, and again after every edit. Paste the full stdout into your response — a manual eyeball pass is not a substitute (this is the same rule `blog-seo-content` and `aeo-content` enforce, and for the same reason: eyeball review reliably misses meta-description length, em dashes, and forbidden terms).
 
-The script checks: metadata completeness, word count (500-900), the answer-first definition (first paragraph ≤50 words, contains the term), presence of a markdown table, presence and length of Key Takeaways, presence of Related Terms links, presence of a matching `outputs/[slug].links.md` evidence file whose URLs cover every Related Terms link, and the shared forbidden/risky vocabulary tiers. See the script's own docstring for the full list and `--json` output mode.
+The script checks: metadata completeness, word count (500-900), the answer-first definition (first paragraph ≤50 words, contains the term), presence of a markdown table, presence and length of Key Takeaways, presence of Related Terms links, presence of a matching `outputs/[slug].links.md` evidence file with a real Anchor/Target/Reasoning entry (not just a bare Target line) covering every Related Terms link, and the shared forbidden/risky vocabulary tiers. When the site's `pages-glossary.json`/`pages-answers.json` snapshots are readable, it also confirms every Related Terms URL corresponds to a real published page. See the script's own docstring for the full list and `--json` output mode.
 
-The `.links.md` check is a mechanical backstop, not a replacement for honesty: a determined agent can still hand-type a fake evidence file. But it turns "trust the agent's paste" into a checkable, diffable artifact a human (or the script) can inspect independently, instead of relying purely on the same agent that skipped the step to self-report accurately.
+The `.links.md` check is a mechanical backstop, not a replacement for honesty: a determined agent can still hand-type a fake evidence file with real Anchor/Target/Reasoning content for a URL that's genuinely on the site. But it turns "trust the agent's paste" into a checkable, diffable artifact a human (or the script) can inspect independently, and it closes off the cheapest fabrication (a bare URL list, or a URL that doesn't exist), instead of relying purely on the same agent that skipped the step to self-report accurately.
 
 ### BLOCK conditions — holistic veto (same class as blog-seo-content/aeo-content)
 
@@ -239,7 +239,7 @@ A fired BLOCK condition vetoes delivery regardless of a clean compliance run:
 
 1. **Unresolved script FAIL**, or the script wasn't re-run after the latest edit.
 2. **Unverifiable claim about social.plus** in the "and social.plus" section not traceable to the approved-data list.
-3. **Improvised internal link** — any "Related Terms" entry or inline link not returned by `internal-linking-strategist`. This includes a URL that is technically valid (confirmed to exist in `pages-glossary.json` or elsewhere) but was sourced by the writer directly instead of through the optimizer's actual draft-mode run — see "Required evidence" above. Valid-but-improvised still fires this condition.
+3. **Improvised internal link** — any "Related Terms" entry or inline link not returned by `internal-linking-strategist`, including a technically-valid URL sourced by the writer directly instead of through the optimizer's actual draft-mode run (see "Required evidence" above) — valid-but-improvised still fires this condition.
 4. **Missing table** — section 3 (or any section) shipping without at least one markdown table.
 5. **Missing named editor at publish handoff** — same rule as `blog-seo-content`: `Editor (named human reviewer): [fill before publish]` must be present in the delivered metadata and filled with an actual named human before this is marked publish-ready.
 
@@ -266,7 +266,11 @@ Since the primary near-term job is fixing the existing ~76-entry glossary rather
 
 ## Batch rewrites
 
-When asked to rewrite multiple existing entries at once (e.g. "redo the first 10 glossary pages"), follow the same phased/parallel-subagent pattern `aeo-content` uses for batches — see its SKILL.md "Batch workflow" and "Parallel-subagent orchestration" sections for the approval syntax, per-article overview tracking, and subagent-verification requirements (compliance-output fingerprint rule, internal-link evidence requirements). Don't reinvent that orchestration here; the failure modes are the same regardless of content type.
+When asked to rewrite multiple existing entries at once (e.g. "redo the first 10 glossary pages"), follow the same phased/parallel-subagent orchestration *pattern* `aeo-content` uses for batches — see its SKILL.md "Batch workflow" and "Parallel-subagent orchestration" sections for the approval syntax and per-article overview tracking. Don't reinvent that orchestration here; the failure modes are the same regardless of content type.
+
+**Do not import aeo-content's compliance-output fingerprint string or its internal-link evidence format as-is — they don't match this skill's own mechanisms:**
+- aeo-content's fingerprint rule checks a subagent's payload for the literal string `AEO compliance report for`. This skill's own `compliance.py` prints `Glossary compliance report for {path}` — a parent verifying a glossary batch subagent's payload must check for *that* string instead, or the fingerprint check silently never matches anything.
+- aeo-content's batch-mode internal-link evidence is a prose block pasted into the subagent's return payload (per-class link counts and quotes), not a written file. That does not produce this skill's required `outputs/[slug].links.md` sibling file, and `compliance.py`'s `links_evidence_file` check will FAIL every batch item if a subagent follows aeo-content's evidence format literally instead of this skill's. Each glossary batch subagent must still save its own `internal-linking-strategist` output to `outputs/[slug].links.md` per this skill's "Required evidence" section above, and the parent verifying batch output should require that exact evidence, not aeo-content's prose-paste equivalent.
 
 ## Open items (surface these to the user, don't guess silently)
 
