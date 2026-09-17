@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.34
+
+`glossary-content` — new skill for writing and rewriting social.plus /glossary/ entries.
+
+**Why:** the live glossary (76 published URLs) was generated in an early, unsupervised AI pass and reads as generic filler — no tables, no related-terms internal linking, and language the current brand law would reject outright (e.g. the live `active-user` and `app-retention` pages both call a benefit "a game-changer"). A same-session audit of the full collection found the pattern was uniform across essentially every entry (confirmed by matching typos across pages -- "Key rakeaways", "sctivity geed" -- pointing to one unreviewed batch job), plus 16 live URLs that are empty CMS index-letter stub pages (`/glossary/a` through `/glossary/w`) and several real cannibalization clusters (3 retention terms, 4 engagement terms, 7 chat terms, 5 community terms) that predate this skill and need a separate consolidation decision.
+
+**Changes:**
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): new skill. Fixed six-section template (Definition / Why It Matters / Metrics / and social.plus / Related Terms / Key Takeaways) modeled on appsflyer.com/glossary and adjust.com/glossary, with a hard requirement for at least one table per entry (the single highest-value structural element for AI-engine extraction) and a 500-900 word ceiling to keep entries concise rather than blog-length. Reuses `aeo-content`'s duplicate-check script and approved-data/customer list, and `blog-seo-content`'s forbidden-vocabulary tiers, rather than duplicating either. Treats rewriting an existing live entry as the first-class near-term workflow (not an edge case), since the collection needs fixing more than it needs net-new terms right now.
+- [`glossary-content/scripts/compliance.py`](marketing-team/skills/glossary-content/scripts/compliance.py): deterministic checks -- metadata completeness, word count, answer-first definition length + keyword presence, table presence, Key Takeaways bullet count, Related Terms link count, and the shared forbidden/risky vocabulary tiers. Verified against a reconstruction of the live `active-user` page (correctly fails 8 checks) and a compliant rewrite of `app-retention` (passes clean).
+- [`glossary-content/references/formatting-best-practices.md`](marketing-team/skills/glossary-content/references/formatting-best-practices.md): the AppsFlyer/Adjust research behind the skill's structural choices, and a direct comparison against the live social.plus glossary's specific failures.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) from 13.33 to 13.34, 17 skills to 18.
+
+**Open items, not yet resolved:** the actual Webflow CMS field slugs for the Glossary collection aren't confirmed anywhere in this repo (unlike Blog, which has a documented field map), so the skill delivers `.docx` only for now. It also borrows Blog's Main Category Tag list as a placeholder pending confirmation that Glossary uses the same taxonomy.
+
 ## marketing-team 13.31
 
 `claude-design-to-webflow` — banked the learnings from a multi-round mobile-navigation rescue on a live Webflow site, including an iOS-only paint bug that no emulator reproduces.
