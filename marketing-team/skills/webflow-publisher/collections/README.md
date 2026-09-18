@@ -68,7 +68,12 @@ Rules:
   required slug is `null` or `__unconfirmed__` is present.
 - Confirm a slug by reading it, never by guessing: Webflow Designer → collection settings,
   or `GET https://api.webflow.com/v2/collections/{collection_id}` with a token that has
-  `cms:read`.
+  `cms:read`. `scripts/sync_fieldmap.py --collection <name>` automates that read — it fetches
+  the live field list and proposes matches by display name + type, so you don't have to open
+  the Designer by hand. It only proposes a slug when exactly one live field matches; anything
+  ambiguous (e.g. two Reference fields both displayed as "Category") or unmatched is left
+  `null` and printed for you to resolve — it never picks "the only field left" as a guess.
+  Add `--write` to fill in the unambiguous ones; re-run without it first to see the report.
 - Image sizes are exact (the CMS fields use min=max validation). Files are named
   `{slug}_{variant}_{width}x{height}.webp` by `scripts/resize_images.py`.
 
