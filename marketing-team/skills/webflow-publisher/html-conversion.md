@@ -1,92 +1,108 @@
-# HTML Conversion Rules — Google Doc → Webflow Rich Text
+# HTML Conversion Rules — Markdown intermediate → Webflow Rich Text
 
-The Google Drive MCP returns the doc as markdown-like plain text. These rules
-convert it to HTML for the `post-content` RichText field.
+`scripts/md_to_webflow_html.py` converts the common markdown intermediate into HTML for a
+collection's RichText body field and builds the rest of `fielddata.json` from the field
+map. This document describes what it emits and why; the script is the source of truth.
+Google-Doc-export specifics (the `# Listicle N` / `### **Platform: tagline**` shape) are
+normalized *into* this intermediate by `scripts/gdoc_to_fielddata.py` and documented in
+`blog-publisher/SKILL.md`.
 
-## What goes in post-content
+## The intermediate
 
-Start at the first `###` heading (e.g. `### What Is an In-App Community Platform?`).
-Stop just before the line that starts `Image alt text:`.
+```
+# Title                       ← the only H1; becomes the CMS item name
 
-Do NOT include:
-- The `# Listicle N` title line
-- The metadata block at the top (Page title, Main Category Tag, Minutes to read, Meta description, Introduction text)
-- The `Image alt text:`, `Image concept:`, `Image sizes needed:` lines
-- The `Display recommendations:` block
-- Any section marked `OUTREACH VERSION` or `INTERNAL USE ONLY`
-- The `[OPTIONAL DISCLOSURE: ...]` line (omit entirely; user decides whether to include it)
+Meta description: …           ← contiguous `Label: value` block directly under the H1.
+Slug: …                          A wrapped value continues on the next line. Unknown labels
+Alt text: …                      are kept and reported as "unmapped" (e.g. aeo-content's
+Category: …                      `Intent:`), never treated as body text.
+Tags: …
+
+[first paragraph]             ← lifted into `fields.intro` when the map declares one
+                                 (blog → post-summary, PlainText, markdown stripped);
+                                 stays in the body otherwise (glossary definition paragraph)
+
+## Section …                  ← body
+```
+
+Which labels map to which CMS field, and which are required, is decided per collection in
+`collections/<name>.json`. No HTML in the intermediate.
 
 ## Heading conversion
 
-| Doc format | HTML output | When to use |
-|---|---|---|
-| `### Heading text` | `<h2>Heading text</h2>` | Top-level sections |
-| `#### Sub-heading` | `<h3>Sub-heading</h3>` | Sub-sections within a top section |
-| `**Platform Name: tagline**` (at start of line) | `<h2>Platform Name: tagline</h2>` | Platform entries in listicles |
+| Intermediate | HTML |
+|---|---|
+| `## Heading` | `<h2>Heading</h2>` |
+| `### Sub-heading` | `<h3>Sub-heading</h3>` |
+| `#### …` | `<h4>…</h4>` (h5/h6 likewise) |
+| `# Heading` inside the body | emitted as `<h1>` **with a warning**; the dry-run fails `content:no-h1`. The title is the page's only H1. |
 
-Place H2/H3 every 200–300 words to aid readability.
+Place H2/H3 every 200–300 words to aid readability (writing-skill rule, not enforced here).
 
 ## Inline formatting
 
-| Doc format | HTML |
+| Intermediate | HTML |
 |---|---|
 | `**bold text**` | `<strong>bold text</strong>` |
 | `*italic text*` | `<em>italic text</em>` |
-| `[anchor text](url)` | `<a href="url" target="_blank">anchor text</a>` |
-| Plain paragraph | `<p>paragraph text</p>` |
+| `[anchor](https://external.example)` | `<a href="…" target="_blank">anchor</a>` |
+| `[anchor](https://www.social.plus/…)` or `[anchor](/path)` | `<a href="…">anchor</a>` — **internal links open in the same tab** |
+| Plain paragraph (consecutive lines joined with a space) | `<p>paragraph text</p>` |
+| `\*\*` / `\~` (Google Docs export artifacts) | unescaped |
+
+Blank lines separate paragraphs; never `<br>`.
 
 ## Lists
 
-Consecutive lines starting with `- ` or `  - `:
-
-```html
-<ul>
-  <li>First item</li>
-  <li>Second item</li>
-</ul>
+```
+- item                      <ul><li>item</li>
+  - nested item               <li>…<ul><li>nested item</li></ul></li></ul>
+1. step                     <ol><li>step</li></ol>
 ```
 
-Numbered lists (lines starting with `1.`, `2.`, etc.):
-
-```html
-<ol>
-  <li>First item</li>
-  <li>Second item</li>
-</ol>
-```
-
-Nest with `<ul>` inside `<li>` for indented sub-bullets.
+An indented run with no parent bullet (e.g. `  - …` under a plain "Key strengths:"
+paragraph) stays a flat `<ul>`. A blank line ends a list.
 
 ## Tables
 
-Markdown table format → HTML table:
+A GFM pipe table (leading whitespace tolerated; the `|---|` alignment row is dropped) becomes:
 
 ```html
-<table>
-  <thead>
-    <tr>
-      <th>Column A</th>
-      <th>Column B</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Cell 1</td>
-      <td>Cell 2</td>
-    </tr>
-  </tbody>
-</table>
+<div data-rt-embed-type='true'><table><thead><tr><th>Column A</th><th>Column B</th></tr></thead><tbody><tr><td>Cell 1</td><td>Cell 2</td></tr></tbody></table></div>
 ```
 
-Strip `**` bold markers from inside table cells — Webflow renders them as literal asterisks in table cells. Use plain text inside `<td>` and `<th>`.
+- **The table sits inside a Webflow Embed.** `data-rt-embed-type='true'` is Webflow's marker
+  for an Embed block inside rich text. The Designer's rich-text editor has no native table
+  tool, so a bare `<table>` is at risk of being mangled when an editor changes the post body
+  and saves. Inside an Embed the table is one opaque block — editors can change all the
+  surrounding prose and the table survives; they only touch it by double-clicking the embed.
+  The live legal pages embed their fragile HTML the same way. The dry-run check
+  `content:table-in-embed` enforces it for **every** table.
+- **Bold markers are stripped inside cells** — Webflow renders them as literal asterisks in
+  table cells. Plain text only inside `<td>`/`<th>`.
+- **Table CSS does NOT go in the body as a bare `<style>`.** Tried and reverted: Webflow's
+  RichText renderer shows a bare `<style>` block as literal text at the top of the post.
+  Table styling is owned by the **site** (a Webflow custom code field / page embed,
+  maintained outside this skill); the embedded table is still `.w-richtext table` in the
+  DOM so that CSS applies. The dry-run check `content:no-style-block` keeps `<style>` out.
+  Reference CSS for the site:
 
-Strip `\*\*` escaped asterisks (Google Doc export artifact) — convert to the actual text without asterisks.
+  ```html
+  <style>.w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}.w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;text-align:left;vertical-align:top;}.w-richtext thead th{background-color:#f5f5f5;font-weight:600;}.w-richtext tbody tr:nth-child(even){background-color:#fafafa;}</style>
+  ```
+
+- **Never let a table collapse into a paragraph.** The dry-run check
+  `content:table-not-flattened` fails on any `<p>` carrying `| … |` / `|---` syntax and, when
+  `--source <draft.md>` is passed, on fewer `<table>` elements than table blocks in the
+  source. It is structural — it does not care what the heading above the table says (the
+  old check only fired under "At-a-Glance"/"Comparison", which is why a glossary "Metrics"
+  table could have shipped flattened).
 
 ## Inline images (full-width figures)
 
-Every inline image in `post-content` **must** use Webflow's full-width figure structure.
-A bare `<figure><img></figure>` renders at its intrinsic size (not full width) and is
-not recognized as a Webflow image block. The correct format:
+An image line `![alt](anything)` — or a bare `__INLINE_IMG_N__` line — becomes a placeholder
+numbered in document order. At publish time `webflow-publisher.py` uploads the matching
+`--inline` file and replaces the placeholder with Webflow's full-width figure:
 
 ```html
 <figure class="w-richtext-figure-type-image w-richtext-align-fullwidth"
@@ -94,144 +110,52 @@ not recognized as a Webflow image block. The correct format:
   data-rt-type="image"
   data-rt-align="fullwidth"
   data-rt-max-width="1578px">
-  <div><img src="{url}" alt="{alt text}" loading="lazy"></div>
+  <div><img alt="__wf_reserved_inherit" src="{url}" loading="lazy"></div>
 </figure>
 ```
 
-All five attributes on `<figure>` are required:
-- `class="w-richtext-figure-type-image w-richtext-align-fullwidth"` tells the
-  RichText renderer this is a full-width image block.
-- `style="max-width:1578px"` caps the rendered width at the content column.
-- `data-rt-type="image"`, `data-rt-align="fullwidth"`, `data-rt-max-width="1578px"`
-  are Webflow's internal markers that the Designer reads when an editor opens the post.
+All five attributes on `<figure>` are required (a bare `<figure><img>` renders at intrinsic
+size and is not recognized as a Webflow image block), the `<img>` **must** be wrapped in a
+`<div>` (without it the Designer silently strips the image on save), and `max-width` comes
+from the collection's `inline_images.width`. `alt="__wf_reserved_inherit"` matches
+production; the real alt text lives in the collection's standalone alt-text field. The
+dry-run check `content:placeholders-match-inline` requires exactly one `--inline` file per
+placeholder.
 
-The `<img>` **must** be wrapped in a `<div>` inside the `<figure>`. Without that `<div>`,
-Webflow silently strips the image on save in the Designer.
+## Other blocks
 
-When using `blog-publisher.py`, the script replaces `__INLINE_IMG_N__` placeholders with
-this format automatically. When building `post-content` by hand or via the Webflow MCP
-directly, use this exact structure for every inline image.
+| Intermediate | HTML |
+|---|---|
+| `> quote` | `<blockquote><p>quote</p></blockquote>` |
+| `---` alone | dropped (no rich-text equivalent) |
 
-## Platform entry structure in listicles
+## Slugs
 
-Each platform entry follows this pattern in the doc:
-
-```
-### **Platform Name: tagline**
-
-[intro paragraphs]
-
-Key strengths:
-
-  - bullet
-  - bullet
-
-Considerations:
-
-  - bullet
-  - bullet
-
-Pricing: [text]
-
-Best fit: [text]
-```
-
-Convert to:
-
-```html
-<h3>Platform Name: tagline</h3>
-<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth"
-  style="max-width:1578px"
-  data-rt-type="image"
-  data-rt-align="fullwidth"
-  data-rt-max-width="1578px">
-  <div><img src="{cdn-url}" alt="{alt text}" loading="lazy"></div>
-</figure>
-<p>[intro paragraph]</p>
-<p>Key strengths:</p>
-<ul>
-  <li>bullet</li>
-</ul>
-<p>Considerations:</p>
-<ul>
-  <li>bullet</li>
-</ul>
-<p><strong>Pricing:</strong> [text]</p>
-<p><strong>Best fit:</strong> [text]</p>
-```
-
-## Comparison table ("At-a-Glance")
-
-The doc has a comparison table. Convert it as a standard HTML
-`<table><thead><tbody>` with `<th>` for the header row and `<td>` for data cells.
-Strip all `\*\*` from cell content — plain text only inside cells.
-
-**The table sits inside a Webflow Embed.** `convert_table` wraps it as:
-
-```html
-<div data-rt-embed-type='true'><table><thead>…</thead><tbody>…</tbody></table></div>
-```
-
-That `data-rt-embed-type='true'` div is Webflow's marker for an Embed block inside rich
-text. Why it matters: Webflow's Designer rich-text editor has no native table tool, so a
-bare `<table>` is at risk of being mangled when an editor changes the post body and saves.
-Inside an Embed the table is one opaque block — editors can freely change all the
-surrounding prose (intros, H3 platform sections, headings) and the table survives; they
-only touch it by double-clicking the embed. The live legal pages embed their fragile HTML
-the same way. The `--dry-run` check `content:table-in-embed` enforces it.
-
-**Table CSS does NOT go in post-content as a bare `<style>`.** Tried and reverted:
-Webflow's RichText renderer shows a bare `<style>` block as literal text at the top of the
-post. Table CSS lives in the site's custom code instead. The embedded table is still
-`.w-richtext table` in the DOM, so that site CSS applies to it normally. The `--dry-run`
-check `content:no-style-block` keeps a bare `<style>` out of post-content.
-
-Table styling is owned by the **site**, not the CMS field. The reference CSS below
-lives in a Webflow custom code field (page embed or site-wide `<head>` code),
-maintained outside this skill. Scoped to `.w-richtext` so it only affects CMS tables:
-
-```html
-<style>.w-richtext table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:0.95em;}.w-richtext th,.w-richtext td{border:1px solid #d0d0d0;padding:0.75em 1em;text-align:left;vertical-align:top;}.w-richtext thead th{background-color:#f5f5f5;font-weight:600;}.w-richtext tbody tr:nth-child(even){background-color:#fafafa;}</style>
-```
-
-Always keep the `<table><thead><tbody>` structure intact — it must never collapse
-into a paragraph (the `content:table-not-flattened` dry-run check guards this).
-
-## "How to Choose" section
-
-This section uses bold sub-headings inline (e.g. `**What you're building.**`).
-Convert to `<p><strong>What you're building.</strong> [rest of paragraph]</p>`.
-
-## Paragraph spacing
-
-Blank lines in the doc → separate `<p>` tags. Do not use `<br>` for paragraph
-breaks — always `<p>`.
+`Slug:` line > `--slug` override > derived from the title, all subject to the collection's
+`slug_rules`: `strip_years` removes every `19xx`/`20xx` token (`top-1000-apps` survives),
+`strip_leading_count` removes a leading `6-`/`five-` (blog only). A collision is never
+resolved by appending anything — see the NON-NEGOTIABLE rules.
 
 ## What the Webflow Data API keeps vs. drops
 
-These behaviors are for the **Data API** RichText path (what this skill uses) —
-they differ from the Designer paste flow.
+These behaviors are for the **Data API** RichText path — they differ from the Designer paste flow.
 
 Kept by the API:
-- `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, `rowspan` — preserved.
-- `<figure>` with the full Webflow figure class set (`w-richtext-figure-type-image
-  w-richtext-align-fullwidth`) plus `data-rt-*` attributes — preserved as a full-width
-  image block. A bare `<figure><img>` without these classes renders at intrinsic size
-  (not full width). See the "Inline images" section above for the required format.
-- `target="_blank"` on `<a>` — preserved; always include it for external links.
-- The API technically preserves `<style>` blocks too — but DON'T use them (see below).
+- `<table>`, `<thead>`, `<tbody>`, `<th>`, `<td>`, `rowspan` — preserved (inside the Embed div).
+- `<figure>` with the full Webflow class set plus `data-rt-*` attributes — preserved as a
+  full-width image block.
+- `target="_blank"` on `<a>` — preserved; the converter sets it for external links only.
+- `<style>` blocks — technically preserved, but DON'T use them (rendered as literal text).
 
-Never put in post-content:
-- `<style>` blocks — the API keeps them, but the RichText renderer shows the CSS as
-  literal text in the published post. Table CSS goes in the site's custom code instead.
+Never put in the body:
+- `<style>`, `<script>`, `<iframe>` — the dry-run fails `content:no-style-block` /
+  `content:no-script-or-iframe`.
 - `<h1>` — the page title is already the H1.
-- `<div>` wrappers — use `<p>` instead.
-- `<script>` or `<iframe>` — not allowed in RichText.
-- arbitrary `class` attributes — ignored (except the Webflow figure classes above).
+- `<div>` wrappers other than the table Embed — use `<p>`.
+- Arbitrary `class` attributes — ignored (except the Webflow figure classes above).
 
 ## Compliance reminder
 
-After conversion, apply the brain.md compliance check:
-- No em dashes (`—`) → replace with comma, parentheses, or restructure the sentence
-- No emojis in body text
-- No forbidden terminology (see terminology.md)
+Conversion is mechanical. The calling skill's `compliance.py` and the brain.md check
+(no em dashes, no emojis, no forbidden terminology, no fabricated claims) run on the draft
+**before** conversion; a clean conversion does not make a non-compliant draft publishable.

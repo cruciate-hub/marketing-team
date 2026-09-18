@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-apply_internal_links.py — Deterministically embed internal-link suggestions into
-post-content HTML.
+apply_internal_links.py — Deterministically embed internal-link suggestions into the
+body HTML of a fielddata.json (any collection).
 
 The internal-linking-strategist returns suggestions as (anchor, target URL, and a
 "rephrase suggestion" used when the anchor doesn't sit in the prose verbatim). Applying
@@ -12,6 +12,9 @@ and clearly reports anything it couldn't place so the caller can apply the rephr
 
 Usage:
     python3 scripts/apply_internal_links.py <fielddata.json> <links.json> [--out <fielddata.json>]
+        [--collection <name> | --body-field <slug>]
+    The body field defaults to `post-content` (blog); pass --collection to read it from the
+    collection's field map, or --body-field to name it directly.
 
     <links.json>: a list of suggestions from the strategist. Two shapes, matching the two
     cases the strategist itself distinguishes:
@@ -27,7 +30,7 @@ Usage:
 
 Behaviour per suggestion:
   - Case 1 (no rephrase): wrap the FIRST clean occurrence of the anchor in plain prose —
-    NOT inside an <a>, a heading, the comparison-table embed, or any tag. Casing preserved.
+    NOT inside an <a>, a heading, a table embed, or any tag. Casing preserved.
     A singular anchor extends over a regular plural in the prose ("community platform" wraps
     "community platforms"), so the link always spans the whole word, never `…platform</a>s`.
   - Case 2 (rephrase given): find `insert_at` with WHITESPACE-FLEXIBLE matching (the drift
@@ -36,14 +39,22 @@ Behaviour per suggestion:
   - If neither the anchor nor `insert_at` can be located, report UNPLACED rather than forcing
     a bad edit — a genuinely rare case the caller resolves by hand.
 
-Outputs: updated fielddata.json (post-content with links embedded) and a stdout JSON
-summary {applied, unplaced:[…]}. Exits 0 always (unplaced links are expected, not errors).
+Links follow the shared link policy (scripts/md_to_webflow_html.py): internal social.plus
+links open in the same tab; only an external URL gets target="_blank".
+
+Outputs: updated fielddata.json (body with links embedded) and a stdout JSON summary
+{applied, unplaced:[…]}. Exits 0 always (unplaced links are expected, not errors).
 """
+from __future__ import annotations
+
+import argparse
 import json
 import re
 import sys
+from pathlib import Path
 
-LINK_TMPL = '<a href="{url}" target="_blank">{text}</a>'
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from md_to_webflow_html import render_link  # noqa: E402
 
 # Let a singular canonical anchor ("community platform") wrap the plural word that is
 # actually in the prose ("community platforms"), so the link spans the WHOLE word —
@@ -68,7 +79,7 @@ def protected_intervals(html: str):
     patterns = [
         r"<a\b[^>]*>.*?</a>",                       # already-linked text
         r"<h[1-6]\b[^>]*>.*?</h[1-6]>",             # headings
-        r"<div data-rt-embed-type[^>]*>.*?</div>",  # comparison-table embed
+        r"<div data-rt-embed-type[^>]*>.*?</div>",  # table embeds
         r"<figure\b[^>]*>.*?</figure>",             # inline images
         r"<[^>]+>",                                 # any tag's markup
     ]
@@ -87,7 +98,7 @@ def wrap_anchor_in_text(text: str, anchor: str, url: str) -> str:
     m = re.search(anchor_regex(anchor), text)
     if not m:
         return text  # anchor missing from rephrase — leave as-is (reported upstream)
-    return text[:m.start()] + LINK_TMPL.format(url=url, text=m.group(0)) + text[m.end():]
+    return text[:m.start()] + render_link(url, m.group(0)) + text[m.end():]
 
 
 def wrap_first(html: str, anchor: str, url: str):
@@ -96,7 +107,7 @@ def wrap_first(html: str, anchor: str, url: str):
     for flags in (0, re.IGNORECASE):                       # exact case first, then any case
         for m in re.finditer(anchor_regex(anchor), html, flags):
             if not in_protected(m.start(), m.end(), spans):
-                link = LINK_TMPL.format(url=url, text=m.group(0))  # preserve casing
+                link = render_link(url, m.group(0))         # preserve casing
                 return html[:m.start()] + link + html[m.end():], True
     return html, False
 
@@ -145,15 +156,48 @@ def apply_link(html: str, anchor: str, url: str, insert_at: str, rephrase: str):
     return html, None
 
 
-def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    out_flag = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--out"), None)
-    fielddata_path, links_path = args[0], args[1]
-    out_path = out_flag or fielddata_path
+def resolve_body_field(args) -> str:
+    if args.body_field:
+        return args.body_field
+    if args.collection:
+        from webflow_fieldmap import FieldMapError, load_field_map
+        try:
+            body = load_field_map(args.collection)["fields"].get("body")
+        except FieldMapError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            sys.exit(1)
+        if not body:
+            print(f"ERROR: collection '{args.collection}' has no confirmed body field slug yet; "
+                  "pass --body-field explicitly once it is known.", file=sys.stderr)
+            sys.exit(1)
+        return body
+    return "post-content"
 
-    fd = json.load(open(fielddata_path))
-    links = json.load(open(links_path))
-    html = fd.get("post-content", "")
+
+def main():
+    ap = argparse.ArgumentParser(description="Embed internal-link suggestions into a fielddata.json body")
+    ap.add_argument("fielddata")
+    ap.add_argument("links")
+    ap.add_argument("--out", default=None)
+    g = ap.add_mutually_exclusive_group()
+    g.add_argument("--collection", help="read the body field slug from this collection's field map")
+    g.add_argument("--body-field", help="body field slug (default: post-content)")
+    args = ap.parse_args()
+    out_path = args.out or args.fielddata
+    body_field = resolve_body_field(args)
+
+    fd = json.load(open(args.fielddata))
+    links = json.load(open(args.links))
+    html = fd.get(body_field)
+    if html is None:
+        parked = (fd.get("__unconfirmed__") or {}).get("body")
+        if parked is not None:
+            print(f"  note: body is parked under __unconfirmed__ (field slug not confirmed yet) — linking it there",
+                  file=sys.stderr)
+            html = parked
+        else:
+            print(f"ERROR: fielddata has no '{body_field}' field.", file=sys.stderr)
+            sys.exit(1)
 
     applied, unplaced = [], []
     for s in links:
@@ -168,7 +212,10 @@ def main():
             print(f"  ⚠ unplaced {anchor!r} — insert_at sentence not found and anchor not in prose",
                   file=sys.stderr)
 
-    fd["post-content"] = html
+    if body_field in fd:
+        fd[body_field] = html
+    else:
+        fd["__unconfirmed__"]["body"] = html
     json.dump(fd, open(out_path, "w"), indent=2, ensure_ascii=False)
 
     print(f"\n  {len(applied)}/{len(links)} links embedded; {len(unplaced)} need a rephrase",

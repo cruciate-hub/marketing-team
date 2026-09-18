@@ -1,0 +1,42 @@
+{
+  "_doc": "Field map for the social.plus /answers/ (AEO) collection. STATUS: STUB, NOT WIRED — shipped only because aeo-content's .draft.md is already in the common intermediate shape, so wiring it later is a matter of filling these slugs. Every field slug except the Webflow built-ins name/slug is UNCONFIRMED (null); the publisher refuses to publish until they are real. aeo-content's SKILL.md still says a separate downstream automation handles publishing; nothing in this repo implements that (see docs/webflow-publisher-design.md, 'aeo-content finding').",
+  "_status": "UNCONFIRMED — CONFIRM WITH STEFAN. Read the real slugs from the Webflow Designer or `GET https://api.webflow.com/v2/collections/68f643838f7abffca74efbc1`, then replace each null. Keys starting with '_' are documentation and ignored by scripts/webflow_fieldmap.py.",
+  "schema_version": 1,
+  "collection": "answers",
+  "display_name": "Answers (AEO)",
+  "site_id": "66e2765d540e1939a89db4bb",
+  "collection_id": "68f643838f7abffca74efbc1",
+  "_collection_id_provenance": "website/pages-answers.json _meta.collectionId (site-JSON worker via the Webflow Data API, 152 items). Confirmed data, not a guess.",
+  "live_url_prefix": "https://www.social.plus/answers/",
+
+  "fields": {
+    "title": "name",
+    "slug": "slug",
+    "body": null,
+    "_body_confirm": "CONFIRM WITH STEFAN — RichText body field slug.",
+    "intro": null,
+    "_intro_confirm": "aeo-content puts the answer-first block and TL;DR as the first two body paragraphs (compliance detects them by position). Leave null unless the collection has a dedicated summary field.",
+    "date": null,
+    "_date_confirm": "CONFIRM WITH STEFAN — aeo-content says datePublished/dateModified are set downstream; if that is a CMS field, put its slug here."
+  },
+
+  "metadata": {
+    "Meta description": {"slug": null, "required": true, "max_length": 160, "_confirm": "CONFIRM WITH STEFAN"},
+    "Alt text":         {"slug": null, "required": false, "_confirm": "CONFIRM WITH STEFAN — only if the collection has an image field."}
+  },
+  "_metadata_doc": "aeo-content's fourth label, `Intent: definition | procedural | comparative`, is writer-side metadata for compliance.py and is deliberately unmapped (reported as an unmapped label, not an error).",
+
+  "defaults": {},
+  "taxonomies": {},
+  "images": [],
+  "_images_confirm": "CONFIRM WITH STEFAN — unknown.",
+  "inline_images": null,
+
+  "slug_rules": {"strip_years": true, "strip_leading_count": false},
+
+  "checks": {
+    "require_internal_links": false,
+    "_require_internal_links_doc": "aeo-content's own internal-link check is WARN-only and zero links is acceptable when no target exists, so the publisher does not hard-fail on it.",
+    "forbidden_body_strings": ["[fill before publish]"]
+  }
+}

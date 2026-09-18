@@ -1,5 +1,10 @@
 # Webflow Configuration — Blog Publisher
 
+**Source of truth: `marketing-team/skills/webflow-publisher/collections/blog.json`.** The
+scripts read every ID, field slug and category ID from that file; nothing below is read by
+code. This page is the human-readable companion — field notes and display names — and must
+be kept in step with the JSON when a field changes.
+
 ## Site
 
 | Key | Value |
@@ -8,6 +13,7 @@
 | Blog collection ID | `66e2765d540e1939a89db6a4` |
 | API base | `https://api.webflow.com/v2` |
 | Auth header | `Authorization: Bearer $WEBFLOW_API_TOKEN` |
+| Live URL prefix | `https://www.social.plus/blog/` |
 
 ## Blog Post Field Slugs
 
@@ -15,27 +21,30 @@
 
 | Display name | Slug | Type | Notes |
 |---|---|---|---|
-| Page title | `name` | PlainText | Title tag + CMS item name. Max 60 chars for SEO. |
-| Slug | `slug` | PlainText | URL path. Lowercase, hyphens only. No spaces or special chars. |
+| Page title | `name` | PlainText | Title tag + CMS item name. Max 60 chars for SEO. From the intermediate's `# Title`. |
+| Slug | `slug` | PlainText | URL path. Lowercase, hyphens only. Never a year, never the leading listicle count (`slug_rules`). |
 
 ### Content fields
 
 | Display name | Slug | Type | Notes |
 |---|---|---|---|
-| Introduction text | `post-summary` | PlainText | Bold intro paragraph. 1–3 sentences. |
-| Post Content | `post-content` | RichText | Full body as HTML. |
-| Meta description | `meta-description` | PlainText | Max 160 chars including spaces. |
-| Minutes to read | `min-read` | PlainText | Whole number as a string, e.g. `"12"`. |
-| Date Published | `date-published` | DateTime | ISO 8601, e.g. `"2026-06-04T00:00:00.000Z"`. |
+| Introduction text | `post-summary` | PlainText | Bold intro paragraph. 1–3 sentences. The first paragraph of the intermediate (`fields.intro`). |
+| Post Content | `post-content` | RichText | Full body as HTML (`fields.body`). |
+| Meta description | `meta-description` | PlainText | Max 160 chars including spaces (`max_length`). |
+| Minutes to read | `min-read` | PlainText | Whole number as a string, e.g. `"12"`. Defaults to `"5"` when the doc has none. |
+| Date Published | `date-published` | DateTime | ISO 8601, e.g. `"2026-06-04T00:00:00.000Z"` (`fields.date`, set at conversion). |
 
 ### Image fields (16:9, exact pixel dimensions)
 
-| Display name | Slug | Dimensions | Notes |
-|---|---|---|---|
-| Image \| Page Header | `image-page-header` | 1578 × 888 px | Set as `{fileId, url, alt: null}` (matches production). |
-| Image \| Thumbnail grid | `grid-thumbnail` | 724 × 408 px | Set as `{fileId, url, alt: null}`. |
-| Image \| Mega Menu | `thumbnail-mega-menu` | 502 × 283 px | Set as `{fileId, url, alt: null}`. |
-| Image alt text | `image-alt-text` | PlainText | The accessible description. `alt` inside each image object stays `null`; this standalone field holds the real alt text. |
+| Display name | Slug | Role | Dimensions | Notes |
+|---|---|---|---|---|
+| Image \| Page Header | `image-page-header` | `header` | 1578 × 888 px | Set as `{fileId, url, alt: null}` (matches production). |
+| Image \| Thumbnail grid | `grid-thumbnail` | `grid` | 724 × 408 px | Set as `{fileId, url, alt: null}`. |
+| Image \| Mega Menu | `thumbnail-mega-menu` | `menu` | 502 × 283 px | Set as `{fileId, url, alt: null}`. |
+| Image alt text | `image-alt-text` | — | PlainText | The accessible description. `alt` inside each image object stays `null`; this standalone field holds the real alt text. |
+
+Inline body images: 1578 × 888 px, inside `post-content` as a full-width `<figure>`
+(`inline_images` in the field map).
 
 Note: the skill targets these fields by **slug**, never by display name — so renaming a
 field's label in the Designer (e.g. "Image | Mega Menu small thumbnail" → "Image | Mega Menu")
@@ -45,8 +54,8 @@ has no effect on publishing.
 
 | Display name | Slug | Type | Notes |
 |---|---|---|---|
-| Main Category Tag | `category` | Reference | Single item ID string. |
-| Tags | `category-multi-reference-3` | MultiReference | Array of item ID strings. Always include the Main Category Tag. |
+| Main Category Tag | `category` | Reference | Single item ID string. First valid name on the doc's `Main Category Tag:` line. |
+| Tags | `category-multi-reference-3` | MultiReference | Array of item ID strings. Always includes the Main Category Tag (`must_include`). |
 
 ### Switches (all default `false`)
 
@@ -56,23 +65,23 @@ has no effect on publishing.
 | Show as Featured | `featured` |
 | Show on Careers page | `show-on-careers-page` |
 
+### Optional fields the scripts never set
+
+| Display name | Slug | Set by |
+|---|---|---|
+| Related webinar | `related-webinar-to-show-on-page` | blog-publisher Phase 6 (added to `fielddata.json` by hand) |
+| Blog ID | `blog-id-3` | user, if the post must appear in a specific location |
+| Name / Description Careers page | `name-careers-page`, `description-careers-page` | user, careers content only |
+
 ## Category IDs
 
-| Category | ID |
-|---|---|
-| Acquisition | `66e2765d540e1939a89dc2e9` |
-| App Growth | `66e2765d540e1939a89dc04c` |
-| Community | `66e2765d540e1939a89dc049` |
-| Community Stories | `66e2765d540e1939a89dc2e8` |
-| Education | `66e2765d540e1939a89dc2eb` |
-| Engagement | `66e2765d540e1939a89dc04b` |
-| Events | `66e2765d540e1939a89dc48f` |
-| Hospitality | `66e2765d540e1939a89dc2e3` |
-| Insights | `66e2765d540e1939a89dbfd7` |
-| Monetization | `66e2765d540e1939a89dc2e5` |
-| News | `66e2765d540e1939a89dc2e6` |
-| People | `66e2765d540e1939a89dc029` |
-| Product | `69d8d99d7d17ee9ca3ede77f` |
-| Retention | `66e2765d540e1939a89dc2ea` |
-| Social+ | `66e2765d540e1939a89dc2e2` |
-| Vertical Social Networks | `66e2765d540e1939a89dc2e7` |
+The 16 category name → item ID pairs live in `collections/blog.json` under
+`taxonomies.categories` and are resolved by the converter (case-insensitive). Look one up:
+
+```bash
+python3 -c "import json;print(json.load(open('$REPO/marketing-team/skills/webflow-publisher/collections/blog.json'))['taxonomies']['categories'])"
+```
+
+To add a category created in Webflow: add its display name and item ID to that object (and
+mention it in blog-seo-content's "Main Category Tag" list). An unknown name on the doc's
+`Main Category Tag:` line is skipped with a warning; if none resolve, conversion stops.

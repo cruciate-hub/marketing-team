@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (17)
+## Skills (19)
 
 ### Content creation
 
@@ -13,6 +13,7 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | [newsletters](../docs/newsletters.md) | 242 | 16.6 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. | [SKILL.md →](./skills/newsletters/SKILL.md) |
 | [case-study](../docs/case-study.md) | 422 | 27.2 KB | Customer stories and success case studies. | [SKILL.md →](./skills/case-study/SKILL.md) |
 | [aeo-content](../docs/aeo-content.md) | 530 | 38.0 KB | AEO (Answer Engine Optimization) articles for the /answers/ collection, structured for AI search engine citation. | [SKILL.md →](./skills/aeo-content/SKILL.md) |
+| glossary-content | 300 | 28 KB | Glossary entries for /glossary/ — six fixed sections, at least one table, answer-first definition, 500–900 words; deterministic compliance gate (`scripts/compliance.py`). Publishes through `webflow-publisher` once the Glossary field slugs are confirmed. | [SKILL.md →](./skills/glossary-content/SKILL.md) |
 | [press-release](../docs/press-release.md) | 269 | 17.3 KB | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. | [SKILL.md →](./skills/press-release/SKILL.md) |
 
 ### Design & analysis
@@ -44,7 +45,8 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 
 | Skill | Lines | Size | What it does | SKILL.md |
 |---|---:|---:|---|---|
-| [blog-publisher](../docs/blog-publisher.md) | 506 | 26.8 KB | Publishes a completed blog article from Google Docs to Webflow — reads the doc, converts to HTML (year/count-free slug, H3 platform entries, comparison table in a Webflow Embed), adds internal links via `internal-linking-strategist` (deterministic `apply_internal_links.py`), resizes the master PNG to 3 WebP sizes, uploads via Data API v2, and publishes (`--staged` to review first). Side-effect-free `--dry-run` validates the whole payload; `--update <item_id>` refreshes hero images on an existing post in one command. Publish engine is stdlib-only (resize helper uses Pillow). Requires `WEBFLOW_API_TOKEN` with cms:write + assets:write. Helper scripts at repo-root `scripts/`. | [SKILL.md →](./skills/blog-publisher/SKILL.md) |
+| [webflow-publisher](../docs/webflow-publisher.md) | 250 | 16 KB | Shared publishing engine for any Webflow CMS collection. Takes the common markdown intermediate (the `.draft.md` the writing skills already produce) plus a per-collection field map (`collections/<name>.json`: IDs, field slugs, taxonomy, exact image sizes, slug rules), converts to Webflow rich-text HTML (tables in an Embed block, full-width figures, same-tab internal links), resizes images (Pillow), validates side-effect-free (`--dry-run`, incl. structural table checks and a hard fail on unconfirmed slugs), and creates (`--staged` optional), rewrites (`--replace`) or refreshes images (`--update`) via the Data API v2. Stdlib-only engine; regression suite under `tests/`. `blog.json` is ready; `glossary.json` and `answers.json` await confirmed slugs. Requires `WEBFLOW_API_TOKEN`. | [SKILL.md →](./skills/webflow-publisher/SKILL.md) |
+| [blog-publisher](../docs/blog-publisher.md) | 420 | 24 KB | Blog adapter on top of `webflow-publisher`: reads a Google Doc listicle, normalizes the export into the shared intermediate (`gdoc_to_fielddata.py`: year/count-free slug, H3 platform entries, comparison table in a Webflow Embed), adds internal links via `internal-linking-strategist` (deterministic `apply_internal_links.py`), matches a related webinar, resizes the master PNG to 3 WebP sizes and publishes (`--staged` to review first, `--update` to refresh hero images). Same positional CLI as before (`blog-publisher.py`, `resize_blog_images.py` are wrappers over the shared engine). Requires `WEBFLOW_API_TOKEN` with cms:write + assets:write. | [SKILL.md →](./skills/blog-publisher/SKILL.md) |
 
 ## How it works
 
