@@ -260,7 +260,7 @@ Every delivery carries `Editor (named human reviewer): [fill before publish]` in
 This skill's `outputs/[slug].draft.md` **is** the common intermediate `webflow-publisher` consumes: `# Term` as the only H1, the labeled metadata block, six H2 sections, a markdown table, Related Terms as markdown links. No `.docx` round-trip, no hand-written HTML. Run only after `compliance.py` passes on the current text and a named human editor has signed off:
 
 ```bash
-# 0. Readiness — glossary shows UNCONFIRMED until its field slugs are filled in (see below)
+# 0. Readiness check (should show "ready" — see below if it doesn't)
 python3 "$REPO/scripts/webflow-publisher.py" --list-collections
 
 # 1. Convert. The definition paragraph stays as the first <p> of the body; the Metrics table lands
@@ -282,7 +282,7 @@ python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --col
 python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --collection glossary --replace <item_id>
 ```
 
-**Current state: the pipeline exists but is blocked at step 2, on purpose.** `webflow-publisher/collections/glossary.json` carries the real collection ID (`66e2765d540e1939a89db93e`, from `pages-glossary.json`) and URL prefix, but every field slug except the Webflow built-ins `name`/`slug` is `null`, marked `CONFIRM WITH STEFAN`. The converter parks those values under `__unconfirmed__`, the dry-run fails `fieldmap:required-slugs-confirmed`, and the engine refuses to publish. Do not fill in a plausible-looking slug to get past it: run `python3 "$REPO/scripts/sync_fieldmap.py" --collection glossary` (needs `WEBFLOW_API_TOKEN`), which fetches the live field list and proposes slugs by display name + type — add `--write` once you've reviewed the report to fill in the unambiguous ones. Anything ambiguous or unmatched (it will not guess) still needs a manual read from the Webflow Designer (Glossary collection → settings → fields) or `GET https://api.webflow.com/v2/collections/66e2765d540e1939a89db93e`. Either way, edit the JSON (`fields.body` and `Meta description` first) and the same commands publish. Whether Glossary has a category taxonomy, image fields, or a date field is equally unconfirmed (all empty/`null` in the map).
+**Current state: unblocked as of 2026-09-18.** This skill's own `webflow-fields.json` (collection `66e2765d540e1939a89db93e`, from `pages-glossary.json`) has `fields.body` and `metadata['Meta description']` confirmed against the live Webflow schema via `scripts/sync_fieldmap.py`. The collection genuinely has no `intro`, `date`, `Alt text` or `Category` field — confirmed absent, not unconfirmed — so `--dry-run` passes `fieldmap:required-slugs-confirmed` and step 3 publishes. If a future re-run of `sync_fieldmap.py --collection glossary` reports `--list-collections` as UNCONFIRMED again (e.g. Webflow added a required field), do not fill in a plausible-looking slug to get past it: run `python3 "$REPO/scripts/sync_fieldmap.py" --collection glossary` (needs `WEBFLOW_API_TOKEN`) and resolve whatever it flags as ambiguous or unmatched by hand.
 
 ## Rewriting an existing entry (the common case, initially)
 
@@ -303,13 +303,13 @@ When asked to rewrite multiple existing entries at once (e.g. "redo the first 10
 
 ## Open items (surface these to the user, don't guess silently)
 
-- **Webflow CMS field slugs for the Glossary collection are still unconfirmed — but the publish pipeline now exists.** `webflow-publisher/collections/glossary.json` has the real collection ID and URL prefix; every field slug except `name`/`slug` is `null` and marked `CONFIRM WITH STEFAN`. `webflow-publisher.py --dry-run` fails and the engine refuses to publish until they are read from Webflow and filled in (see "Publishing to Webflow"). Until then, deliver `.docx` for review and, if asked to publish, run the dry-run and surface its `fieldmap:required-slugs-confirmed` failure rather than inventing slugs.
-- **Topic category list** — this skill reuses `blog-seo-content`'s Main Category Tag list as a placeholder. Confirm whether Glossary uses the same taxonomy, its own, or none; `glossary.json`'s `taxonomies.categories` is empty until then and the `Category:` line is parked, not sent.
-- **Rewrites publish via `--replace <item_id>`**, which needs the live item ID (slug lookup). Confirm with Stefan whether glossary rewrites should also restamp a date field (brain.md guardrail 6: honest freshness — only when the content substantively changes), once the collection's date field, if any, is known.
+- **Five live Webflow fields have no mapping in `webflow-fields.json` and their purpose is unconfirmed:** `term`, `term-alternative-name` (both PlainText), `meta-title` (PlainText, displayed "Title & Meta title"), `exclude-indexing-letters` (PlainText, displayed "Indexing"), `not-in-use` (Switch). Whether this skill's draft should populate any of them is Stefan's call — don't guess.
+- **Topic category list** — the live Glossary collection has no Reference/Category field at all (confirmed 2026-09-18, not just unconfirmed), so this skill's borrowed `blog-seo-content` Main Category Tag list has nowhere to publish to. The `Category:` metadata entry was removed from `webflow-fields.json` rather than left `null`. Confirm with Stefan whether the `Category:` line in the draft should be dropped entirely or kept for some other purpose (e.g. internal organization only, never sent to Webflow).
+- **Rewrites publish via `--replace <item_id>`**, which needs the live item ID (slug lookup). The collection has no date field, so a rewrite cannot restamp a "last updated" date (brain.md guardrail 6: honest freshness) — confirmed, not an open question.
 
 ## Related skills
 
-- `webflow-publisher` — publishes this skill's `.draft.md` to the Glossary collection once the field map is confirmed; owns conversion, dry-run and the Webflow API calls
+- `webflow-publisher` — publishes this skill's `.draft.md` to the Glossary collection; owns conversion, dry-run and the Webflow API calls. This skill owns the field map (`webflow-fields.json`) that tells it how.
 - `aeo-content` — /answers/ pages; source of the approved-data list and the duplicate-check script this skill reuses
 - `blog-seo-content` — blog posts; source of the forbidden-vocabulary tiers this skill's compliance script mirrors
 - `internal-linking-strategist` — called by this skill; do not reimplement

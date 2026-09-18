@@ -2,7 +2,7 @@
 """
 resize_blog_images.py — thin wrapper: resize a master image into the Blog collection's
 exact WebP sizes via the shared scripts/resize_images.py (sizes come from
-webflow-publisher/collections/blog.json, not from this file).
+blog-seo-content/webflow-fields.json, not from this file).
 
 Usage (unchanged):
     python3 scripts/resize_blog_images.py <master.png|webp> <slug> <outdir> [--inline img1.png img2.png ...]

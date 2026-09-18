@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 md_to_webflow_html.py — convert a markdown intermediate into Webflow CMS fielddata.json
-for any collection described by a field map (marketing-team/skills/webflow-publisher/
-collections/<name>.json).
+for any collection described by a field map (each content-type skill's own
+webflow-fields.json — schema documented in webflow-publisher/field-map-schema.md).
 
 This is the shared, collection-agnostic half of publishing. Content-type skills
 (blog-seo-content, glossary-content, aeo-content, …) already produce this shape as their
@@ -480,7 +480,7 @@ def convert_document(text: str, fm: dict, slug_override: str = None, date: str =
             ids, unknown = resolve_taxonomy(raw, table)
             for u in unknown:
                 warnings.append(f"Unknown {spec.get('taxonomy')} name '{u}' for '{label}' — skipped "
-                                f"(check collections/{fm['_name']}.json)")
+                                f"(check {fm['_path']})")
             if typ == "reference":
                 if ids:
                     fd[slug_key] = ids[0]
@@ -559,7 +559,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="markdown intermediate → Webflow fielddata.json")
     ap.add_argument("draft")
     g = ap.add_mutually_exclusive_group()
-    g.add_argument("--collection", help="registry name in webflow-publisher/collections/")
+    g.add_argument("--collection", help="registry name (each content-type skill's own webflow-fields.json)")
     g.add_argument("--field-map", help="path to a field-map JSON")
     ap.add_argument("--out", help="where to write fielddata.json")
     ap.add_argument("--slug", default=None)

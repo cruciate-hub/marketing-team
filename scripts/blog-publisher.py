@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 blog-publisher.py — thin wrapper: the Blog collection's positional CLI on top of the shared
-engine, scripts/webflow-publisher.py (field map: webflow-publisher/collections/blog.json).
+engine, scripts/webflow-publisher.py (field map: blog-seo-content/webflow-fields.json).
 
 Kept so every documented command keeps working exactly as before:
 

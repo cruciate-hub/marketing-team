@@ -28,8 +28,8 @@ Doc, `.docx`, and markdown), `cms-publisher` (vague).
 | Owned by `webflow-publisher` (shared, mechanical) | Stays per content-type skill |
 |---|---|
 | Markdown intermediate → Webflow rich-text HTML (headings, lists, tables → Embed block, inline formatting, links, image placeholders) | Writing rules, tone, structure, word counts |
-| Per-collection field mapping (`collections/<name>.json`) and taxonomy lookup | Compliance scripts (`glossary-content/scripts/compliance.py`, `blog-seo-content/scripts/compliance.py`, … stay exactly as they are) |
-| Slug derivation + the year/leading-count rules (configurable per collection) | Source-specific parsing (e.g. the Google Doc export → intermediate, in `gdoc_to_fielddata.py`) |
+| Slug derivation + the year/leading-count rules (configurable per collection) | Per-collection field mapping (`webflow-fields.json`, in the content-type skill's own folder) and taxonomy lookup |
+| — | Compliance scripts (`glossary-content/scripts/compliance.py`, `blog-seo-content/scripts/compliance.py`, … stay exactly as they are); source-specific parsing (e.g. the Google Doc export → intermediate, in `gdoc_to_fielddata.py`) |
 | Image resize to exact WebP sizes (sizes come from the field map) | Choosing images, alt text, image concepts |
 | Webflow Data API v2: pre-flight, asset upload, create live / staged, `--update` image refresh | Anything editorial: internal-link *selection* (`internal-linking-strategist`), webinar matching, named-editor gate |
 | Side-effect-free `--dry-run` validation, incl. the structural table checks | Deciding *whether* to publish |
@@ -78,12 +78,20 @@ path), and, where the collection has image fields, the master image(s).
 
 ## Field-mapping config
 
-One JSON file per Webflow collection in
-`marketing-team/skills/webflow-publisher/collections/<name>.json`, selected on every CLI
-with `--collection <name>`; `--field-map <path>` accepts an arbitrary file so a future skill
-can ship its own map without touching the shared skill. The registry lives in the shared
-skill because the shared skill defines and validates the schema and because a collection is
-a property of the site, not of a writing skill; `--field-map` keeps the per-skill option open.
+**Update, 2026-09-18 (Stefan):** the field maps described below no longer live inside
+`webflow-publisher/collections/` — they moved to `marketing-team/skills/<content-type-skill>/
+webflow-fields.json` (e.g. `glossary-content/webflow-fields.json`), one per content-type
+skill. Reasoning revised: which CMS field slug a draft label maps to is domain knowledge
+that belongs with the skill that produces that draft, not with the shared mechanics skill —
+`webflow-publisher` should only own what's genuinely collection-agnostic (HTML conversion,
+table embedding, image pipeline, the publish CLI). The schema itself (below) is unchanged
+and still documented once, in [`field-map-schema.md`](../marketing-team/skills/webflow-publisher/field-map-schema.md).
+The registry name passed to `--collection <name>` is the map's own `"collection"` key,
+resolved by scanning every `skills/*/webflow-fields.json` (`scripts/webflow_fieldmap.py`);
+`--field-map <path>` still accepts an arbitrary file directly.
+
+One JSON file per Webflow collection, selected on every CLI with `--collection <name>` or
+`--field-map <path>`.
 
 ```jsonc
 {
@@ -128,7 +136,8 @@ exactly what the API receives, so `apply_internal_links.py` and the hand-added
 
 | Script (repo-root `scripts/`) | Role |
 |---|---|
-| `webflow_fieldmap.py` | Loader/validator for `collections/*.json` (importable) |
+| `webflow_fieldmap.py` | Loader/validator for `skills/*/webflow-fields.json` (importable) |
+| `sync_fieldmap.py` | Fetches the live Webflow schema and proposes slugs for a field map's `null` entries |
 | `md_to_webflow_html.py` | Intermediate → `fielddata.json` for a collection (importable + CLI) |
 | `webflow-publisher.py` | Engine: `--dry-run`, live, `--staged`, `--update <item_id>`, `--list-collections`; images as `--image <role>=<path>` and `--inline …` |
 | `resize_images.py` | Master (+ inline) → exact WebP sizes read from the field map |
@@ -180,8 +189,8 @@ converter (inspect it with `--emit-intermediate <path>`):
 Kept in `blog-publisher/SKILL.md` as agent steps: reading the doc via the Drive MCP,
 webinar matching (Phase 6), the compliance pass, the NON-NEGOTIABLE slug rules.
 
-Category IDs are no longer hard-coded in Python; `collections/blog.json` is the single
-source (`blog-publisher/webflow-config.md` points at it).
+Category IDs are no longer hard-coded in Python; `blog-seo-content/webflow-fields.json` is
+the single source (`blog-publisher/webflow-config.md` points at it).
 
 ## Deliberate behavior deltas vs. the old scripts
 
@@ -200,21 +209,23 @@ fixture generated with the *original* `gdoc_to_fielddata.py` is asserted in
 6. `>` blockquotes → `<blockquote>`, a lone `---` rule is dropped rather than emitted as `<p>---</p>`.
 7. The two table checks run for every table, not only under "At-a-Glance"/"Comparison".
 
-## Glossary wiring — what exists and what is blocked
+## Glossary wiring — what exists and what's still open
 
-Exists: `collections/glossary.json` (collection `66e2765d540e1939a89db93e` from
-`website/pages-glossary.json` `_meta`, URL prefix `/glossary/`), the converter handles the
-six-section draft as-is (the definition paragraph stays in the body because no separate
-field is known; the Metrics table lands in an Embed; Related Terms links satisfy the
-internal-link check), and glossary-content's SKILL.md now has a "Publishing" section that
-runs compliance → convert → dry-run → publish.
+**Update, 2026-09-18:** unblocked. `glossary-content/webflow-fields.json` (collection
+`66e2765d540e1939a89db93e` from `website/pages-glossary.json` `_meta`, URL prefix
+`/glossary/`) had its required slugs confirmed against the live Webflow schema via
+`scripts/sync_fieldmap.py`: `fields.body` → `glossary` (the collection's only RichText
+field — displayed as "Glossary", not "Body", which is why name-matching alone couldn't find
+it) and `metadata['Meta description']` → `meta-description`. The collection genuinely has no
+`intro`/`date`/`Alt text`/`Category` field (confirmed absent from the live schema, not
+unconfirmed — those entries were deleted rather than left `null`), so `--dry-run` now passes
+`fieldmap:required-slugs-confirmed`.
 
-**Blocked, only Stefan can unblock:** every glossary field slug except `name`/`slug`. Read
-them from the Designer's collection settings or `GET https://api.webflow.com/v2/collections/
-66e2765d540e1939a89db93e` and fill the `null` slugs in `glossary.json` (`body` first — the
-dry-run fails on that alone). Also unknown: whether Glossary has a category taxonomy at all
-(`taxonomies.categories` is empty), any image fields (`images` is `[]`), and a date field.
-Nothing here is guessed.
+**Still open, not blocking:** the live collection has five fields with no mapping at all —
+`term`, `term-alternative-name` (both PlainText), `meta-title` (PlainText, displayed "Title &
+Meta title"), `exclude-indexing-letters` (PlainText, displayed "Indexing") and `not-in-use`
+(Switch). Whether glossary-content's draft shape should populate any of these is Stefan's
+call, not guessed here.
 
 ## aeo-content finding
 
@@ -227,9 +238,9 @@ is wrong (blog's real path is blog-publisher's Google Doc → `gdoc_to_fielddata
 sentence is corrected in this change.
 
 Wiring aeo-content would be cheap: its `.draft.md` is already the intermediate (labels
-`Meta description`, `Slug`, `Alt text`, `Intent`), so `collections/answers.json` is shipped
-as a stub (collection `68f643838f7abffca74efbc1` from `pages-answers.json`, all field slugs
-`null`, `Intent` is writer-side metadata and unmapped). Not wired further: aeo-content's
+`Meta description`, `Slug`, `Alt text`, `Intent`), so `aeo-content/webflow-fields.json` is
+shipped as a stub (collection `68f643838f7abffca74efbc1` from `pages-answers.json`, all field
+slugs `null`, `Intent` is writer-side metadata and unmapped). Not wired further: aeo-content's
 SKILL.md is not edited in this change beyond what the design requires — the automation
 claim may refer to something outside the repo, so the decision is left to Stefan.
 

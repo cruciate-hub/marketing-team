@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 sync_fieldmap.py — fetch a collection's LIVE Webflow schema and propose slugs for the
-null entries in its field map (marketing-team/skills/webflow-publisher/collections/<name>.json).
+null entries in its field map (each content-type skill's own webflow-fields.json — schema
+documented in webflow-publisher/field-map-schema.md).
 
 Why this exists: field slugs are not a mechanical transform of a display name (the live
 Blog collection's "Minutes to Read" field has slug "min-read", not "minutes-to-read"), so
@@ -91,7 +92,7 @@ def propose(fm: dict, live_fields: list) -> dict:
         types, hints = STRUCTURAL_HINTS[key]
         matches = _match(candidates, used, types,
                           lambda f: any(h in normalize(f["displayName"]) for h in hints))
-        report["fields"][key] = _resolve(matches, used)
+        report["fields"][key] = _resolve(matches, used, candidates, types)
 
     for label, spec in (fm.get("metadata") or {}).items():
         if spec.get("slug") is not None:
@@ -105,7 +106,7 @@ def propose(fm: dict, live_fields: list) -> dict:
             matches = _match(candidates, used, wanted,
                               lambda f: label_n in normalize(f["displayName"])
                               or normalize(f["displayName"]) in label_n)
-        report["metadata"][label] = _resolve(matches, used)
+        report["metadata"][label] = _resolve(matches, used, candidates, wanted)
 
     mapped = used | {im.get("slug") for im in fm.get("images", []) if im.get("slug")}
     report["unmapped_live"] = [{"slug": f["slug"], "displayName": f["displayName"], "type": f["type"]}
@@ -113,7 +114,7 @@ def propose(fm: dict, live_fields: list) -> dict:
     return report
 
 
-def _resolve(matches: list, used: set) -> dict:
+def _resolve(matches: list, used: set, candidates: list, types: tuple) -> dict:
     if len(matches) == 1:
         f = matches[0]
         used.add(f["slug"])
@@ -121,6 +122,15 @@ def _resolve(matches: list, used: set) -> dict:
     if len(matches) > 1:
         return {"slug": None, "confidence": "ambiguous",
                 "candidates": [(f["slug"], f["displayName"]) for f in matches]}
+    # No name match at all. Never write this, but if exactly one live field of the right
+    # type exists anywhere (used or not), surface it as a hint — e.g. the only RichText
+    # field in a collection is almost always the body, even if it's literally displayed
+    # as the collection's own name ("Glossary") rather than "Body".
+    type_only = [f for f in candidates if f["type"] in types]
+    if len(type_only) == 1:
+        f = type_only[0]
+        return {"slug": None, "confidence": "likely",
+                "hint": (f["slug"], f["displayName"])}
     return {"slug": None, "confidence": "no match"}
 
 
@@ -145,13 +155,17 @@ def _print_line(name: str, res: dict) -> None:
     elif res["confidence"] == "ambiguous":
         cands = ", ".join(f"{s!r} ({d})" for s, d in res["candidates"])
         print(f"  ⚠️  {name:35s} -> AMBIGUOUS: {cands} — resolve manually")
+    elif res["confidence"] == "likely":
+        s, d = res["hint"]
+        print(f"  ?  {name:35s} -> LIKELY (name didn't match, but it's the only field of this "
+              f"type): {s!r} ({d}) — confirm, then set it by hand; --write will not touch this")
     else:
         print(f"  —  {name:35s} -> no matching live field; delete this entry if the collection has none")
 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--collection", required=True, help="registry name in webflow-publisher/collections/")
+    ap.add_argument("--collection", required=True, help="registry name (each content-type skill's own webflow-fields.json)")
     ap.add_argument("--write", action="store_true", help="write unambiguous matches back into the field map file")
     args = ap.parse_args()
 

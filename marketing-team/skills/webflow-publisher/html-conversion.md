@@ -26,7 +26,8 @@ Tags: …
 ```
 
 Which labels map to which CMS field, and which are required, is decided per collection in
-`collections/<name>.json`. No HTML in the intermediate.
+that content-type skill's own `webflow-fields.json` (schema: `field-map-schema.md`). No HTML
+in the intermediate.
 
 ## Heading conversion
 

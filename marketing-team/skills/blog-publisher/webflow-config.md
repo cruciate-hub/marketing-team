@@ -1,6 +1,6 @@
 # Webflow Configuration — Blog Publisher
 
-**Source of truth: `marketing-team/skills/webflow-publisher/collections/blog.json`.** The
+**Source of truth: `marketing-team/skills/blog-seo-content/webflow-fields.json`.** The
 scripts read every ID, field slug and category ID from that file; nothing below is read by
 code. This page is the human-readable companion — field notes and display names — and must
 be kept in step with the JSON when a field changes.
@@ -75,11 +75,11 @@ has no effect on publishing.
 
 ## Category IDs
 
-The 16 category name → item ID pairs live in `collections/blog.json` under
+The 16 category name → item ID pairs live in `blog-seo-content/webflow-fields.json` under
 `taxonomies.categories` and are resolved by the converter (case-insensitive). Look one up:
 
 ```bash
-python3 -c "import json;print(json.load(open('$REPO/marketing-team/skills/webflow-publisher/collections/blog.json'))['taxonomies']['categories'])"
+python3 -c "import json;print(json.load(open('$REPO/marketing-team/skills/blog-seo-content/webflow-fields.json'))['taxonomies']['categories'])"
 ```
 
 To add a category created in Webflow: add its display name and item ID to that object (and

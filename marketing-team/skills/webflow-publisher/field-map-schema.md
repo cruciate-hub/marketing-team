@@ -1,22 +1,29 @@
-# Collection field maps
+# Field map schema
 
-One JSON file per Webflow CMS collection the publisher can target. Every shared script
-takes `--collection <name>` (a file in this folder) or `--field-map <path>` (any file with
-this schema). `python3 "$REPO/scripts/webflow_fieldmap.py" --list` shows which maps are
-ready and which still have unconfirmed slugs.
+Each content-type skill owns its own field map — `webflow-fields.json` sitting directly in
+that skill's folder, not here. `webflow-publisher` owns the mechanics that are the same for
+every collection (HTML conversion, table embedding, image pipeline, the publish CLI); a
+skill's `webflow-fields.json` is the domain knowledge only that skill has (which Webflow
+collection it targets, which CMS field slug each of its draft labels maps to). This file
+documents the schema they all share.
 
-| File | Collection | Status |
-|---|---|---|
-| `blog.json` | Blog Posts `66e2765d540e1939a89db6a4` | Ready. Single source of truth for blog field slugs and category IDs (moved out of the Python scripts). |
-| `glossary.json` | Glossary `66e2765d540e1939a89db93e` | **Stub.** Collection ID and URL prefix are real; every field slug except `name`/`slug` is `null` pending confirmation. |
-| `answers.json` | Answers `68f643838f7abffca74efbc1` | **Stub, not wired.** Same situation; shipped because aeo-content's draft is already in the intermediate shape. |
+Every shared script takes `--collection <name>` (the map's own `"collection"` key — found by
+scanning every `skills/*/webflow-fields.json`, not by file location) or `--field-map <path>`
+(any file with this schema). `python3 "$REPO/scripts/webflow_fieldmap.py" --list` shows which
+maps are ready and which still have unconfirmed slugs.
+
+| Skill | Field map | Collection | Status |
+|---|---|---|---|
+| `blog-seo-content` | `webflow-fields.json` | Blog Posts `66e2765d540e1939a89db6a4` | Ready. Single source of truth for blog field slugs and category IDs (moved out of the Python scripts). |
+| `glossary-content` | `webflow-fields.json` | Glossary `66e2765d540e1939a89db93e` | Ready. `fields.body`/`metadata['Meta description']` confirmed 2026-09-18 via `sync_fieldmap.py` against the live schema; no `intro`/`date`/`Alt text`/`Category` field exists on the collection (confirmed absent, not unconfirmed). |
+| `aeo-content` | `webflow-fields.json` | Answers `68f643838f7abffca74efbc1` | **Stub, not wired.** Collection ID and URL prefix are real; every field slug except `name`/`slug` is `null` pending confirmation. |
 
 ## Schema (v1)
 
 ```jsonc
 {
   "schema_version": 1,
-  "collection": "blog",                       // registry name; matches the file name
+  "collection": "blog",                       // registry name used by --collection; independent of the skill folder's own name
   "display_name": "Blog Posts",
   "site_id": "…",                             // Webflow site ID
   "collection_id": "…",                       // Webflow collection ID
@@ -77,9 +84,13 @@ Rules:
 - Image sizes are exact (the CMS fields use min=max validation). Files are named
   `{slug}_{variant}_{width}x{height}.webp` by `scripts/resize_images.py`.
 
-## Adding a collection
+## Adding a collection (i.e. a new content-type skill)
 
-1. Copy `glossary.json`, rename, set `collection`, `collection_id`, `live_url_prefix`.
-2. Fill the confirmed slugs; leave `null` + `_confirm` for the rest.
+1. In the new skill's own folder, create `webflow-fields.json`. Copy an existing one (e.g.
+   `../../glossary-content/webflow-fields.json`) as a starting point; set `collection`
+   (the registry name other scripts will use), `collection_id`, `live_url_prefix`.
+2. Fill the confirmed slugs; leave `null` + `_confirm` for the rest, or run
+   `python3 "$REPO/scripts/sync_fieldmap.py" --collection <name>` once `collection_id` is set.
 3. `python3 "$REPO/scripts/webflow_fieldmap.py" <name>` validates the schema.
-4. Add a fixture in `../tests/fixtures/` and an expectation in `../tests/run_tests.py`.
+4. Add a fixture in `../webflow-publisher/tests/fixtures/` and an expectation in
+   `../webflow-publisher/tests/run_tests.py`.

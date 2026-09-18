@@ -104,13 +104,18 @@ def field_maps_load_and_report_readiness():
     assert wf.unconfirmed_slugs(blog) == {"required": [], "optional": []}
     assert blog["fields"]["body"] == "post-content" and blog["collection_id"] == "66e2765d540e1939a89db6a4"
     assert blog["taxonomies"]["categories"]["Community"] == "66e2765d540e1939a89dc049"
-    for name in ("glossary", "answers"):
-        fm = wf.load_field_map(name)
-        unc = wf.unconfirmed_slugs(fm)
-        assert "fields.body" in unc["required"], f"{name}: body must be null until confirmed: {unc}"
-        assert fm["fields"]["title"] == "name" and fm["fields"]["slug"] == "slug"
+    # glossary: confirmed 2026-09-18 (sync_fieldmap.py against the live schema) — ready, not a stub.
+    glossary = wf.load_field_map("glossary")
+    assert wf.unconfirmed_slugs(glossary) == {"required": [], "optional": []}
+    assert glossary["fields"]["body"] == "glossary" and glossary["collection_id"] == "66e2765d540e1939a89db93e"
+    assert glossary["fields"]["title"] == "name" and glossary["fields"]["slug"] == "slug"
+    # answers: still an untouched stub.
+    answers = wf.load_field_map("answers")
+    unc = wf.unconfirmed_slugs(answers)
+    assert "fields.body" in unc["required"], f"answers: body must be null until confirmed: {unc}"
+    assert answers["fields"]["title"] == "name" and answers["fields"]["slug"] == "slug"
     p = run(SCRIPTS / "webflow-publisher.py", "--list-collections")
-    assert p.returncode == 0 and "blog" in p.stdout and "UNCONFIRMED" in p.stdout, p.stdout + p.stderr
+    assert p.returncode == 0 and "blog" in p.stdout and "glossary" in p.stdout and "UNCONFIRMED" in p.stdout, p.stdout + p.stderr
 
 
 # ── Blog adapter: legacy parity ─────────────────────────────────────────────────
@@ -198,9 +203,15 @@ def blog_draft_shape_converts_with_generic_rules():
 
 @test
 def glossary_draft_converts_but_is_blocked_while_slugs_unconfirmed():
+    # Uses a dedicated always-unconfirmed fixture, not --collection glossary: the real
+    # glossary-content/webflow-fields.json is expected to become confirmed over time (it
+    # already is, as of 2026-09-18), and this test must keep exercising the "blocked while
+    # unconfirmed" path regardless of that map's real-world state.
+    unconfirmed_map = FIX / "glossary-test-fieldmap-unconfirmed.json"
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp) / "fd.json"
-        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "glossary-entry.draft.md", "--collection", "glossary", "--out", out)
+        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "glossary-entry.draft.md",
+                "--field-map", unconfirmed_map, "--out", out)
         assert p.returncode == 0, p.stderr
         fd = load(out)
         assert fd["name"] == "Active User" and fd["slug"] == "active-user"
@@ -213,7 +224,7 @@ def glossary_draft_converts_but_is_blocked_while_slugs_unconfirmed():
         assert re.findall(r"<h2>(.*?)</h2>", body)[-1] == "Key Takeaways"
         assert body.count('<a href="https://www.social.plus/glossary/') == 3               # Related Terms, same tab
         # dry-run fails loudly on the unconfirmed map, but the structural checks still run on the parked body
-        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "glossary",
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--field-map", unconfirmed_map,
                 "--source", FIX / "glossary-entry.draft.md", "--dry-run")
         assert p.returncode == 1, p.stderr
         chk = report_checks(tmp)
@@ -223,7 +234,7 @@ def glossary_draft_converts_but_is_blocked_while_slugs_unconfirmed():
         assert chk["content:has-internal-links"] is True
         assert "CONFIRM" in p.stderr.upper() or "unconfirmed" in p.stderr
         # a real publish attempt is refused before any token is needed
-        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "glossary")
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--field-map", unconfirmed_map)
         assert p.returncode == 1 and "unconfirmed" in p.stderr, p.stderr
 
 

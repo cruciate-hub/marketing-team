@@ -28,7 +28,7 @@ when_to_use: >
 Reads a Google Doc, normalizes it into the common markdown intermediate, converts it to
 Webflow HTML, adds internal links, resizes the master PNG to 3 sizes, uploads all assets,
 and publishes live. Everything after "normalizes" is the shared `webflow-publisher` skill
-with the `blog` field map (`webflow-publisher/collections/blog.json` — the single source of
+with the `blog` field map (`blog-seo-content/webflow-fields.json` — the single source of
 truth for the blog's field slugs and category IDs). The commands below are unchanged from
 before the split; they are thin wrappers that call the shared engine with `--collection blog`.
 
@@ -46,7 +46,7 @@ These override convenience, recovery shortcuts, and every other instruction belo
    - ❌ `best-in-app-community-platforms-for-consumer-apps-2026` (has the year)
    - This applies to the title-derived slug, a user `--slug` override, AND — critically —
      **never resolve a slug collision by appending a year/number/suffix.**
-   - The rules are encoded in `collections/blog.json` (`slug_rules`) and applied by the
+   - The rules are encoded in `blog-seo-content/webflow-fields.json` (`slug_rules`) and applied by the
      converter to derived slugs and overrides alike. If you build a slug by hand, strip both yourself.
 
 2. **On a slug collision (pre-flight "already exists" or Webflow 400), STOP and ask the user.**
@@ -157,7 +157,7 @@ cat "$REPO/brain.md"
 cat "$REPO/marketing-team/skills/blog-publisher/webflow-config.md"
 cat "$REPO/marketing-team/skills/webflow-publisher/html-conversion.md"
 cat "$REPO/marketing-team/skills/webflow-publisher/image-pipeline.md"
-cat "$REPO/marketing-team/skills/webflow-publisher/collections/blog.json"
+cat "$REPO/marketing-team/skills/blog-seo-content/webflow-fields.json"
 cat "$REPO/messaging/terminology.md"
 ```
 
@@ -273,7 +273,7 @@ Fix all violations before continuing. Do not flag and proceed.
 
 All production blog images are **WebP** at exact dimensions — the collection's image
 fields enforce them (min=max validation), so the API rejects anything off-size. The sizes
-come from `collections/blog.json`. One command does master + inline:
+come from `blog-seo-content/webflow-fields.json`. One command does master + inline:
 
 ```bash
 python3 "$REPO/scripts/resize_blog_images.py" "$PNG" "$SLUG" "$TMPDIR" \
@@ -417,7 +417,7 @@ explicitly asks to re-evaluate.
 }
 ```
 
-Category IDs come from `collections/blog.json`; the converter resolves them, you do not
+Category IDs come from `blog-seo-content/webflow-fields.json`; the converter resolves them, you do not
 look them up by hand. `date-published` defaults to now (ISO 8601 UTC).
 
 2. **Always dry-run first.** Append `--dry-run` to validate the entire payload

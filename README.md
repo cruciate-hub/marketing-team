@@ -70,7 +70,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| [**webflow-publisher**](./marketing-team/skills/webflow-publisher/SKILL.md) | Shared publishing engine for any Webflow CMS collection: converts a compliance-checked markdown draft to Webflow rich-text HTML (tables in an Embed block), resizes images to the collection's exact WebP sizes, validates everything side-effect-free (`--dry-run`), and creates/rewrites/refreshes items via the Data API v2. Field slugs and taxonomies come from per-collection maps (`collections/blog.json` ready; `glossary.json` awaiting confirmed slugs). Requires `WEBFLOW_API_TOKEN`. |
+| [**webflow-publisher**](./marketing-team/skills/webflow-publisher/SKILL.md) | Shared publishing engine for any Webflow CMS collection: converts a compliance-checked markdown draft to Webflow rich-text HTML (tables in an Embed block), resizes images to the collection's exact WebP sizes, validates everything side-effect-free (`--dry-run`), and creates/rewrites/refreshes items via the Data API v2. Field slugs and taxonomies are each content-type skill's own concern, not this skill's — every consuming skill (`blog-seo-content`, `glossary-content`, `aeo-content`) carries its own `webflow-fields.json`. Requires `WEBFLOW_API_TOKEN`. |
 | [**blog-publisher**](./marketing-team/skills/blog-publisher/SKILL.md) | Blog adapter on top of `webflow-publisher`: reads a Google Doc listicle, normalizes it into the shared intermediate, adds internal links, matches a related webinar, resizes the master PNG to 3 WebP sizes and publishes (`--staged` to review first, `--update` to refresh images on an existing post). Same positional CLI as before. Requires `WEBFLOW_API_TOKEN`. |
 
 ## Repo structure
