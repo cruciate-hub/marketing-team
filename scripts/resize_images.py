@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 resize_images.py — resize a master image into the exact WebP sizes a Webflow collection's
-image fields require. Sizes come from the collection's field map
-(marketing-team/skills/webflow-publisher/collections/<name>.json), never from this file.
+image fields require. Sizes come from the collection's field map — each content-type
+skill's own webflow-fields.json (schema documented in webflow-publisher/field-map-schema.md)
+— never from this file.
 
 Usage:
     python3 scripts/resize_images.py <master.png|webp> <slug> <outdir> --collection <name> \

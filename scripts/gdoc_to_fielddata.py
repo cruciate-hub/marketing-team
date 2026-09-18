@@ -9,7 +9,7 @@ deterministic part — slice out one `# Listicle N`, extract the doc's labeled m
 (`**Page title:**`, `**Meta description**`, `Main Category Tag:` …), normalize the export's
 heading levels and platform entries — then hands the result to the shared converter
 (scripts/md_to_webflow_html.py) as the common markdown intermediate, with the `blog`
-field map (marketing-team/skills/webflow-publisher/collections/blog.json) supplying the
+field map (marketing-team/skills/blog-seo-content/webflow-fields.json) supplying the
 field slugs and category IDs.
 
 Google Doc export → intermediate normalization:

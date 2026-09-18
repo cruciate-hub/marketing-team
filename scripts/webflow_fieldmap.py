@@ -2,12 +2,14 @@
 """
 webflow_fieldmap.py — load and validate a per-collection Webflow field map.
 
-Field maps live in marketing-team/skills/webflow-publisher/collections/<name>.json and
-tell the shared publishing scripts which Webflow collection to target, which CMS field
-slug each draft label maps to, the category taxonomy, the exact image sizes, and the
-slug rules. The schema is documented in
-marketing-team/skills/webflow-publisher/collections/README.md and in
-docs/webflow-publisher-design.md.
+Each content-type skill owns its own field map, at marketing-team/skills/<skill>/webflow-fields.json
+(e.g. glossary-content/webflow-fields.json) — not webflow-publisher, which only owns the
+mechanics (HTML conversion, table embedding, image pipeline, the publish CLI). A field map
+tells the shared publishing scripts which Webflow collection to target, which CMS field
+slug each draft label maps to, the category taxonomy, the exact image sizes, and the slug
+rules. The registry name used by --collection is the map's own "collection" key, not its
+folder — this module finds it by scanning every skills/*/webflow-fields.json. The schema is
+documented in marketing-team/skills/webflow-publisher/field-map-schema.md.
 
 Conventions:
   - Keys that start with "_" are documentation (provenance, CONFIRM notes) and are ignored.
@@ -27,10 +29,8 @@ import json
 import sys
 from pathlib import Path
 
-COLLECTIONS_DIR = (
-    Path(__file__).resolve().parent.parent
-    / "marketing-team" / "skills" / "webflow-publisher" / "collections"
-)
+SKILLS_DIR = Path(__file__).resolve().parent.parent / "marketing-team" / "skills"
+FIELD_MAP_FILENAME = "webflow-fields.json"
 
 SUPPORTED_SCHEMA = 1
 
@@ -39,10 +39,26 @@ class FieldMapError(Exception):
     pass
 
 
+def _registry() -> dict:
+    """{registry name -> path}, discovered by scanning every skills/*/webflow-fields.json
+    and reading each one's own "collection" key (never the folder name — a skill's folder
+    is named for its content type, e.g. glossary-content, not the Webflow collection)."""
+    reg = {}
+    if not SKILLS_DIR.is_dir():
+        return reg
+    for path in sorted(SKILLS_DIR.glob(f"*/{FIELD_MAP_FILENAME}")):
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        name = raw.get("collection")
+        if name:
+            reg[name] = path
+    return reg
+
+
 def list_collections() -> list:
-    if not COLLECTIONS_DIR.is_dir():
-        return []
-    return sorted(p.stem for p in COLLECTIONS_DIR.glob("*.json"))
+    return sorted(_registry())
 
 
 def _strip_doc_keys(obj):
@@ -59,10 +75,10 @@ def resolve_path(ref: str) -> Path:
     p = Path(ref)
     if p.suffix == ".json" or p.exists():
         return p
-    candidate = COLLECTIONS_DIR / f"{ref}.json"
-    if candidate.exists():
-        return candidate
-    known = ", ".join(list_collections()) or "(none found)"
+    reg = _registry()
+    if ref in reg:
+        return reg[ref]
+    known = ", ".join(sorted(reg)) or "(none found)"
     raise FieldMapError(f"unknown collection '{ref}'. Known: {known}. "
                         f"Or pass a path to a field-map JSON file.")
 

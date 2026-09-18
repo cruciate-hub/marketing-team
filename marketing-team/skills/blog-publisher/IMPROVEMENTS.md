@@ -13,7 +13,7 @@ the blog adapter on top of it. Design note: `docs/webflow-publisher-design.md`.
   "Comparison"; a flattened table under any other heading shipped silently. They are now
   structural (flattened-table signature in a `<p>`, source-vs-output table count via
   `--source`, every `<table>` wrapped in the Embed div) and run for every table.
-- ✅ **Field slugs and category IDs out of the Python.** `webflow-publisher/collections/blog.json`
+- ✅ **Field slugs and category IDs out of the Python.** `blog-seo-content/webflow-fields.json`
   is the single source; `gdoc_to_fielddata.py` no longer carries `CATEGORY_IDS`.
 - ✅ **Legacy parity locked by a golden test.** `webflow-publisher/tests/` asserts the
   adapter's output equals the pre-refactor script's for a listicle fixture, modulo the one

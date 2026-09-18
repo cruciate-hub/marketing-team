@@ -4,8 +4,8 @@
 
 Production images are **WebP** at exact dimensions. A collection's image fields enforce
 exact sizes (min=max validation) — the API **rejects** anything off-size. The sizes live in
-`collections/<name>.json` (`images[]` for CMS image fields, `inline_images` for body
-figures), never in a script. For the blog:
+that content-type skill's own `webflow-fields.json` (`images[]` for CMS image fields,
+`inline_images` for body figures), never in a script. For the blog:
 
 | Role | Variant | Size | CMS field |
 |---|---|---|---|

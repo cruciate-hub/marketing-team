@@ -13,9 +13,11 @@ Design note with the reasoning: [`webflow-publisher-design.md`](./webflow-publis
 - Accepts the **common markdown intermediate** — `# Title`, a `Label: value` metadata block,
   a markdown body — which is exactly the `.draft.md` that `blog-seo-content`,
   `glossary-content` and `aeo-content` already produce for their compliance scripts.
-- Reads a **per-collection field map** (`collections/<name>.json`): Webflow IDs, which label
-  maps to which CMS field slug, category taxonomy, exact image sizes, slug rules, checks.
-  Nothing is hard-coded in Python.
+- Reads a **per-collection field map** (`webflow-fields.json`, owned by the content-type skill
+  that produces the draft — not by this skill): Webflow IDs, which label maps to which CMS
+  field slug, category taxonomy, exact image sizes, slug rules, checks. Nothing is hard-coded
+  in Python, and this skill carries no per-collection knowledge of its own — see
+  [`field-map-schema.md`](../marketing-team/skills/webflow-publisher/field-map-schema.md).
 - Converts the body: `##`/`###` headings, bold/italic, bullets (nested), numbered lists,
   blockquotes, external links in a new tab and internal links in the same tab, GFM tables
   wrapped in a Webflow Embed block (`<div data-rt-embed-type='true'>`) so the Designer's
@@ -30,11 +32,11 @@ Design note with the reasoning: [`webflow-publisher-design.md`](./webflow-publis
 
 ## Collections
 
-| Collection | Map | Status |
+| Collection | Field map | Status |
 |---|---|---|
-| Blog Posts | `collections/blog.json` | Ready. Used by `blog-publisher`. |
-| Glossary | `collections/glossary.json` | Pipeline wired; every field slug except `name`/`slug` still `null` pending confirmation from Webflow. Publishing is blocked until then. |
-| Answers (AEO) | `collections/answers.json` | Stub only, not wired into `aeo-content`. |
+| Blog Posts | `blog-seo-content/webflow-fields.json` | Ready. Used by `blog-publisher`. |
+| Glossary | `glossary-content/webflow-fields.json` | Ready. `body`/`Meta description` confirmed 2026-09-18 via `sync_fieldmap.py`; the collection has no `intro`/`date`/`Alt text`/`Category` field (confirmed absent). |
+| Answers (AEO) | `aeo-content/webflow-fields.json` | Stub only, not wired into `aeo-content`. |
 
 `python3 "$REPO/scripts/webflow-publisher.py" --list-collections` prints this at runtime.
 
@@ -64,11 +66,12 @@ webflow-publisher/
 ├── SKILL.md               Skill orchestrator — rules, pipeline, error handling
 ├── html-conversion.md     Intermediate → Webflow rich-text HTML rules (tables in Embed, figures, link policy)
 ├── image-pipeline.md      Resize helper, WebP naming, Drive sourcing, S3 upload notes
-├── collections/           One field map per Webflow collection + README with the schema
+├── field-map-schema.md    Schema every content-type skill's webflow-fields.json follows (this skill owns no field maps itself)
 └── tests/                 run_tests.py + fixtures (legacy golden for the blog adapter, glossary draft, table-bug regressions)
 
 scripts/  (repo root)
-├── webflow_fieldmap.py     Field-map loader/validator
+├── webflow_fieldmap.py     Field-map loader/validator — discovers webflow-fields.json across skills/*/
+├── sync_fieldmap.py        Fetches the live Webflow schema and proposes slugs for a field map's null entries
 ├── md_to_webflow_html.py   Intermediate → fielddata.json (importable + CLI)
 ├── webflow-publisher.py    Engine: --dry-run, live, --staged, --update, --list-collections
 ├── resize_images.py        Master + inline → exact WebP sizes from the field map

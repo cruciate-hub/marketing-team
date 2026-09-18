@@ -12,8 +12,9 @@ description: >
 
   Does NOT write content and does NOT decide what to publish — the calling
   content-type skill owns writing rules, compliance, internal-link selection and
-  the named-editor gate. Field slugs, category IDs and image sizes come from
-  collections/<name>.json, never from code.
+  the named-editor gate. It also owns its own field map (webflow-fields.json,
+  in its own skill folder): field slugs, category IDs and image sizes come from
+  there, never from code and never from this skill.
 
   Requires: WEBFLOW_API_TOKEN with cms:write + assets:write (not for --dry-run).
 when_to_use: >
@@ -36,8 +37,8 @@ finished draft plus a collection name. Design note: `docs/webflow-publisher-desi
 
 These override convenience, recovery shortcuts, and every other instruction below.
 
-1. **Never publish against an unconfirmed field map.** A `null` slug in
-   `collections/<name>.json` means "not read from Webflow yet", never "absent". The engine
+1. **Never publish against an unconfirmed field map.** A `null` slug in a content-type
+   skill's `webflow-fields.json` means "not read from Webflow yet", never "absent". The engine
    refuses to publish and `--dry-run` fails while any required slug is `null` or the
    fielddata carries `__unconfirmed__` values. Do NOT fill in a plausible-looking slug to get
    past it: read the real one from the Designer (collection settings → fields) or
@@ -48,7 +49,7 @@ These override convenience, recovery shortcuts, and every other instruction belo
    the conflict: update the existing item, pick a genuinely different slug, or publish the
    site to free the old one.
 3. **Slug rules are per collection and enforced mechanically.** The blog strips years and
-   the leading listicle count (`slug_rules` in `collections/blog.json`); the converter
+   the leading listicle count (`slug_rules` in `blog-seo-content/webflow-fields.json`); the converter
    applies the rules to derived slugs, `Slug:` lines and `--slug` overrides alike. Do not
    hand-edit a slug in `fielddata.json` to dodge them.
 4. **Always `--dry-run` before a real run.** It is free, needs no token, and is the only
@@ -154,8 +155,8 @@ After the repo is ready, load these reference files in parallel:
 cat "$REPO/brain.md"
 cat "$REPO/marketing-team/skills/webflow-publisher/html-conversion.md"
 cat "$REPO/marketing-team/skills/webflow-publisher/image-pipeline.md"
-cat "$REPO/marketing-team/skills/webflow-publisher/collections/README.md"
-cat "$REPO/marketing-team/skills/webflow-publisher/collections/<collection>.json"
+cat "$REPO/marketing-team/skills/webflow-publisher/field-map-schema.md"
+cat "$REPO/marketing-team/skills/<calling-content-type-skill>/webflow-fields.json"
 ```
 
 All helper scripts live at the repo root (`$REPO/scripts/`), not inside the skill folder.
@@ -166,7 +167,7 @@ Always invoke them with the `$REPO/scripts/...` absolute path.
 | `webflow-publisher` (this skill) | Calling content-type skill |
 |---|---|
 | Intermediate → rich-text HTML (headings, lists, tables → Embed, links, image placeholders) | Writing rules, structure, tone, word counts |
-| Field mapping, taxonomy lookup, slug rules (from `collections/<name>.json`) | Its own `scripts/compliance.py` and BLOCK conditions |
+| Converting and applying a field map it's handed — never owns or edits one | Its own `webflow-fields.json` (field mapping, taxonomy lookup, slug rules) and `scripts/compliance.py`/BLOCK conditions |
 | Image resize to exact WebP sizes; asset upload | Choosing images, alt text |
 | `--dry-run` validation incl. structural table checks | Internal-link *selection* via `internal-linking-strategist` |
 | Pre-flight, create live / `--staged`, `--update` | Named-editor gate; the decision to publish |
@@ -195,8 +196,9 @@ Confirm you have these before proceeding. If any are missing, ask:
 
    Which labels matter is decided by the field map; unknown labels are reported as unmapped
    and ignored. Full rules in `html-conversion.md`. Alternatively a ready `fielddata.json`.
-2. **The collection**: a name from `collections/` (`blog`, `glossary`, `answers`), or a path
-   to a field-map JSON via `--field-map`.
+2. **The collection**: a registry name (`blog`, `glossary`, `answers` — each is the `collection`
+   key of a content-type skill's own `webflow-fields.json`), or a path to a field-map JSON via
+   `--field-map`.
 3. **Images**, only when the collection declares `images[]`: one master (≥ the largest
    target width, matching aspect ratio) and optional inline images in placeholder order.
 
@@ -320,12 +322,16 @@ dimensions only.
 
 ## Adding or confirming a collection
 
-Field maps live in `collections/` (schema in `collections/README.md`). To wire a new
-content type: copy `glossary.json`, set `collection`, `collection_id`, `live_url_prefix`,
-fill the slugs you have confirmed, leave `null` + a `_confirm` note for the rest, validate
-with `python3 "$REPO/scripts/webflow_fieldmap.py" <name>`, add a fixture to `tests/`.
-Collection IDs for existing collections are in the site inventories'
-`website/pages-*.json` `_meta.collectionId`.
+Field maps live inside each content-type skill's own folder as `webflow-fields.json` — never
+here (schema documented in `field-map-schema.md`). To wire a new content type: in the new
+skill's folder, copy an existing `webflow-fields.json` (e.g. `glossary-content`'s) and set
+`collection`, `collection_id`, `live_url_prefix`; fill the slugs you have confirmed, leave
+`null` + a `_confirm` note for the rest — or run `python3 "$REPO/scripts/sync_fieldmap.py"
+--collection <name>` once `collection_id` is set, which proposes slugs from the live schema
+instead of requiring a manual Designer read. Validate with
+`python3 "$REPO/scripts/webflow_fieldmap.py" <name>`, add a fixture to `tests/`. Collection
+IDs for existing collections are in the site inventories' `website/pages-*.json`
+`_meta.collectionId`.
 
 ## No-token fallback: the Webflow MCP
 
@@ -350,7 +356,7 @@ If `WEBFLOW_API_TOKEN` is not set, the same flow works through the Webflow MCP's
 
 | Error | Action |
 |---|---|
-| `--list-collections` says UNCONFIRMED / dry-run fails `fieldmap:required-slugs-confirmed` | Stop. The collection's field slugs must be read from Webflow and filled into `collections/<name>.json` first. Never guess them. |
+| `--list-collections` says UNCONFIRMED / dry-run fails `fieldmap:required-slugs-confirmed` | Stop. The collection's field slugs must be read from Webflow (`sync_fieldmap.py` or the Designer) and filled into that content-type skill's own `webflow-fields.json` first. Never guess them. |
 | `WEBFLOW_API_TOKEN` not set | Use the Webflow MCP fallback above, or ask the user to `export WEBFLOW_API_TOKEN=…` |
 | Master image too small / wrong ratio | Stop. Ask for a full-resolution export at the collection's aspect ratio. |
 | Wrong image dimensions | The collection enforces exact sizes (min=max) — re-run `resize_images.py`. |

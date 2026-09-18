@@ -1,5 +1,5 @@
 {
-  "_doc": "TEST ONLY. Fake, obviously-not-real slugs so the test suite can exercise the glossary conversion + dry-run path end to end. NEVER copy any value from this file into collections/glossary.json — the real slugs must be read from Webflow (Designer or GET /v2/collections/66e2765d540e1939a89db93e).",
+  "_doc": "TEST ONLY. Fake, obviously-not-real slugs so the test suite can exercise the glossary conversion + dry-run path end to end. NEVER copy any value from this file into glossary-content/webflow-fields.json — the real slugs must be read from Webflow (Designer or GET /v2/collections/66e2765d540e1939a89db93e).",
   "schema_version": 1,
   "collection": "glossary-test",
   "display_name": "Glossary (TEST MAP)",

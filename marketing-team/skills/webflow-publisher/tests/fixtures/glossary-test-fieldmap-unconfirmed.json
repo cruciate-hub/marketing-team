@@ -1,0 +1,27 @@
+{
+  "_doc": "TEST ONLY. Deliberately unconfirmed (null) slugs, decoupled from the real glossary-content/webflow-fields.json so this fixture's 'blocked while unconfirmed' behavior never depends on whether the real map happens to be confirmed at the time the test runs.",
+  "schema_version": 1,
+  "collection": "glossary-test-unconfirmed",
+  "display_name": "Glossary (TEST MAP, UNCONFIRMED)",
+  "site_id": "test-only-site-id",
+  "collection_id": "test-only-collection-id",
+  "live_url_prefix": "https://example.invalid/glossary/",
+  "fields": {
+    "title": "name",
+    "slug": "slug",
+    "body": null,
+    "intro": null,
+    "date": null
+  },
+  "metadata": {
+    "Meta description": {"slug": null, "required": true, "max_length": 160},
+    "Alt text":         {"slug": null, "required": false},
+    "Category":         {"slug": null, "required": false, "type": "reference", "taxonomy": "categories"}
+  },
+  "taxonomies": {"categories": {}},
+  "defaults": {},
+  "images": [],
+  "inline_images": null,
+  "slug_rules": {"strip_years": true, "strip_leading_count": false},
+  "checks": {"require_internal_links": true, "forbidden_body_strings": ["[fill before publish]"]}
+}

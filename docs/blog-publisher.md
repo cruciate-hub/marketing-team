@@ -2,7 +2,7 @@
 
 Claude skill for publishing a completed blog article from Google Docs to the social.plus Webflow blog — live immediately, or `--staged` for review first. Also refreshes hero images on existing posts with `--update`.
 
-It is the **blog adapter** on top of the shared [`webflow-publisher`](./webflow-publisher.md) skill: this skill owns reading the Google Doc, the listicle-specific parsing, blog slug rules and webinar matching; conversion, the image pipeline, dry-run validation and the Webflow Data API calls are the shared skill's, driven by the `blog` field map (`webflow-publisher/collections/blog.json`).
+It is the **blog adapter** on top of the shared [`webflow-publisher`](./webflow-publisher.md) skill: this skill owns reading the Google Doc, the listicle-specific parsing, blog slug rules and webinar matching; conversion, the image pipeline, dry-run validation and the Webflow Data API calls are the shared skill's, driven by the `blog` field map (`blog-seo-content/webflow-fields.json`).
 
 ## What it does
 
@@ -73,10 +73,11 @@ If the user asks to write AND publish, run `blog-seo-content` first, then this s
 ```
 blog-publisher/
 ├── SKILL.md               Skill orchestrator — 7-phase pipeline, blog slug rules, webinar matching, error handling
-├── webflow-config.md      Human-readable field notes; the IDs live in webflow-publisher/collections/blog.json
+├── webflow-config.md      Human-readable field notes; the IDs live in blog-seo-content/webflow-fields.json
 └── IMPROVEMENTS.md        Backlog and resolved field feedback
 
-webflow-publisher/         Shared engine docs: html-conversion.md, image-pipeline.md, collections/blog.json
+webflow-publisher/         Shared engine docs: html-conversion.md, image-pipeline.md, field-map-schema.md
+blog-seo-content/          webflow-fields.json — the blog field map lives here, not in webflow-publisher
 
 scripts/  (repo root)
 ├── gdoc_to_fielddata.py   Blog adapter: Google Doc export → intermediate → fielddata.json

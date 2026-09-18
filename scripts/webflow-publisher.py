@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 webflow-publisher.py — upload images and publish a CMS item to any Webflow collection
-described by a field map (marketing-team/skills/webflow-publisher/collections/<name>.json).
+described by a field map (each content-type skill's own webflow-fields.json — schema
+documented in webflow-publisher/field-map-schema.md).
 
 Usage:
     # Validate everything, touch no API (needs no token). Exits non-zero on any failed check.
@@ -528,7 +529,7 @@ def dry_run_validate(field_data: dict, fm: dict, images: dict, inline_paths: lis
     # 0. Field map readiness — a null slug in the map means "not confirmed", never "absent".
     unc = unconfirmed_slugs(fm)
     chk("fieldmap:required-slugs-confirmed", not unc["required"],
-        f"unconfirmed (null) in collections/{fm['_name']}.json: {unc['required']} — read the real slugs "
+        f"unconfirmed (null) in {fm['_path']}: {unc['required']} — read the real slugs "
         f"from Webflow (Designer or GET /v2/collections/{fm['collection_id']}) and fill them in"
         if unc["required"] else "")
     if unc["optional"]:
@@ -666,7 +667,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description="Publish a CMS item to a Webflow collection (field-map driven).")
     ap.add_argument("fielddata", nargs="?", help="fielddata.json (flat fieldData payload)")
     g = ap.add_mutually_exclusive_group()
-    g.add_argument("--collection", help="registry name in webflow-publisher/collections/")
+    g.add_argument("--collection", help="registry name (each content-type skill's own webflow-fields.json)")
     g.add_argument("--field-map", help="path to a field-map JSON")
     ap.add_argument("--image", action="append", default=[], metavar="ROLE=PATH",
                     help="image field by role (repeatable)")
@@ -754,7 +755,7 @@ def main() -> None:
     # with more detail; this is the belt for someone who skipped it.
     unc = unconfirmed_slugs(fm)
     if unc["required"] or field_data.get("__unconfirmed__"):
-        print(f"ERROR: collections/{fm['_name']}.json still has unconfirmed (null) slugs "
+        print(f"ERROR: {fm['_path']} still has unconfirmed (null) slugs "
               f"{unc['required']} or fielddata carries __unconfirmed__ values. Run --dry-run for details. "
               "Confirm the real slugs in Webflow before publishing.", file=sys.stderr)
         sys.exit(1)
