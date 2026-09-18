@@ -3,6 +3,29 @@
 Captured from live test runs publishing Listicle 1 and Listicle 2 (June 2026).
 Ordered by impact. Items marked ✅ are done; the rest are open.
 
+## Resolved in the webflow-publisher refactor (September 2026)
+
+The publish mechanics moved into the shared `webflow-publisher` skill; this skill is now
+the blog adapter on top of it. Design note: `docs/webflow-publisher-design.md`.
+
+- ✅ **Table checks no longer keyed on heading text.** `content:table-not-flattened` and
+  `content:table-in-embed` only fired when the body contained "At-a-Glance" or
+  "Comparison"; a flattened table under any other heading shipped silently. They are now
+  structural (flattened-table signature in a `<p>`, source-vs-output table count via
+  `--source`, every `<table>` wrapped in the Embed div) and run for every table.
+- ✅ **Field slugs and category IDs out of the Python.** `webflow-publisher/collections/blog.json`
+  is the single source; `gdoc_to_fielddata.py` no longer carries `CATEGORY_IDS`.
+- ✅ **Legacy parity locked by a golden test.** `webflow-publisher/tests/` asserts the
+  adapter's output equals the pre-refactor script's for a listicle fixture, modulo the one
+  documented delta (internal links no longer get `target="_blank"` — the documented policy
+  the code never followed). `<ol>` and nested `<ul>` now convert as `html-conversion.md`
+  always said.
+- ✅ **Unreadable image with Pillow present is a FAIL**, not a silent "skipped".
+- ✅ **`--replace <item_id>`** (engine): rewrite an existing item's fields in place, same
+  slug — needed for glossary rewrites, useful for blog content fixes too.
+- ✅ **Backlog items 1 and 2 below (pre-flight slug + token checks) were already implemented
+  in `preflight()`** but still listed as open; corrected here. They carry over unchanged.
+
 ## Resolved from field feedback (hero-image refresh run, June 2026)
 
 A separate session used the skill for an image-refresh job on 5 live posts and filed
@@ -80,16 +103,16 @@ A separate session used the skill for an image-refresh job on 5 live posts and f
 
 ## Open — high impact
 
-1. **Pre-flight slug check before uploading anything.**
+1. ✅ **Pre-flight slug check before uploading anything.**
    The Listicle 1 run uploaded all 9 images, THEN hit a 400 slug collision —
-   wasting 9 uploads. Check `GET /collections/{id}/items?slug={slug}` first.
-   If taken, stop and ask before touching images. Fail fast.
+   wasting 9 uploads. `preflight()` now checks `GET /collections/{id}/items?slug={slug}`
+   first and stops before touching images (never resolving the clash with a suffix).
 
-2. **Pre-flight token-scope check.**
+2. ✅ **Pre-flight token-scope check.**
    Two of the three tokens supplied during testing had wrong scopes
    (missing `sites:read` / `assets:write`), discovered only mid-run.
-   One cheap `GET /sites/{id}` up front confirms the token works before
-   the pipeline starts.
+   `preflight()` runs one cheap `GET /sites/{id}` up front and maps 401/403 to
+   clear messages before the pipeline starts.
 
 3. ✅ **HTML conversion moved into a committed helper script.**
    `scripts/gdoc_to_fielddata.py` takes the raw doc text + listicle number and

@@ -1,0 +1,82 @@
+{
+  "_doc": "Field map for the social.plus Blog Posts collection. Single source of truth for the blog's Webflow IDs, field slugs and category IDs (blog-publisher/webflow-config.md is the human-readable companion). Keys starting with '_' are documentation and ignored by scripts/webflow_fieldmap.py.",
+  "schema_version": 1,
+  "collection": "blog",
+  "display_name": "Blog Posts",
+  "site_id": "66e2765d540e1939a89db4bb",
+  "collection_id": "66e2765d540e1939a89db6a4",
+  "live_url_prefix": "https://www.social.plus/blog/",
+
+  "fields": {
+    "title": "name",
+    "slug": "slug",
+    "body": "post-content",
+    "intro": "post-summary",
+    "date": "date-published"
+  },
+
+  "metadata": {
+    "Meta description": {"slug": "meta-description", "required": true, "max_length": 160},
+    "Minutes to read":  {"slug": "min-read", "required": true, "default": "5"},
+    "Alt text":         {"slug": "image-alt-text", "required": false,
+                         "_doc": "Standalone alt-text field; the alt inside each image object stays null (matches production)."},
+    "Category":         {"slug": "category", "required": true, "type": "reference", "taxonomy": "categories"},
+    "Tags":             {"slug": "category-multi-reference-3", "required": true, "type": "multi_reference",
+                         "taxonomy": "categories", "must_include": "Category",
+                         "_doc": "Always contains the main Category ID plus any secondary tag IDs."}
+  },
+
+  "defaults": {
+    "featured": false,
+    "blog-without-images": false,
+    "show-on-careers-page": false
+  },
+
+  "_optional_fields": {
+    "related-webinar-to-show-on-page": "Reference → Webinars collection 66e2765d540e1939a89db84e. Set by blog-publisher Phase 6 (webinar matching) by adding the key to fielddata.json before publish.",
+    "blog-id-3": "PlainText. Only when the post must appear in a specific site location.",
+    "name-careers-page": "PlainText. Careers-page variant of the title.",
+    "description-careers-page": "PlainText. Careers-page description."
+  },
+
+  "taxonomies": {
+    "categories": {
+      "Acquisition":              "66e2765d540e1939a89dc2e9",
+      "App Growth":               "66e2765d540e1939a89dc04c",
+      "Community":                "66e2765d540e1939a89dc049",
+      "Community Stories":        "66e2765d540e1939a89dc2e8",
+      "Education":                "66e2765d540e1939a89dc2eb",
+      "Engagement":               "66e2765d540e1939a89dc04b",
+      "Events":                   "66e2765d540e1939a89dc48f",
+      "Hospitality":              "66e2765d540e1939a89dc2e3",
+      "Insights":                 "66e2765d540e1939a89dbfd7",
+      "Monetization":             "66e2765d540e1939a89dc2e5",
+      "News":                     "66e2765d540e1939a89dc2e6",
+      "People":                   "66e2765d540e1939a89dc029",
+      "Product":                  "69d8d99d7d17ee9ca3ede77f",
+      "Retention":                "66e2765d540e1939a89dc2ea",
+      "Social+":                  "66e2765d540e1939a89dc2e2",
+      "Vertical Social Networks": "66e2765d540e1939a89dc2e7"
+    }
+  },
+
+  "images": [
+    {"role": "header", "slug": "image-page-header",   "variant": "page-header", "width": 1578, "height": 888},
+    {"role": "grid",   "slug": "grid-thumbnail",      "variant": "thumbnail",   "width": 724,  "height": 408},
+    {"role": "menu",   "slug": "thumbnail-mega-menu", "variant": "mega-menu",   "width": 502,  "height": 283}
+  ],
+  "_images_doc": "The collection's image fields enforce exact dimensions (min=max validation); the API rejects anything off-size. Files are named {slug}_{variant}_{width}x{height}.webp.",
+
+  "inline_images": {"variant": "img", "width": 1578, "height": 888},
+
+  "slug_rules": {
+    "strip_years": true,
+    "strip_leading_count": true,
+    "_doc": "NON-NEGOTIABLE (blog-publisher/SKILL.md): a blog slug never contains a year or the leading listicle count, so '5 Best X' and a later '7 Best X (2027)' share one URL. Never resolve a slug collision by appending a suffix."
+  },
+
+  "checks": {
+    "require_internal_links": true,
+    "forbidden_body_strings": ["OUTREACH VERSION", "INTERNAL USE", "OPTIONAL DISCLOSURE", "[fill before publish]"]
+  }
+}

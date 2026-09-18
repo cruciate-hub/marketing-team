@@ -1,0 +1,116 @@
+# Listicle 1
+
+**Page title:** 6 Best In-App Community Platforms for Consumer Apps (2026)
+
+**Main Category Tag:** Community, Engagement, Retention
+
+**Minutes to read:** 12
+
+**Meta description**
+
+Compare the six best in-app community platforms for consumer apps, with pricing, strengths, and the right fit for each team.
+
+**Introduction text**
+
+Consumer apps that add a community layer keep users coming back. This guide compares six platforms on features, pricing, and fit so you can pick one without a six-week evaluation.
+
+### What Is an In-App Community Platform?
+
+An in-app community platform is an SDK or API layer that adds feeds, groups, chat, and
+moderation inside your own app, so the engagement stays in your product instead of on a third-party network.
+
+Most teams evaluate them on three axes: time to integrate, breadth of social features, and
+how much moderation tooling ships out of the box. *Pricing transparency varies a lot.*
+
+### What to Look for
+
+- Native SDKs for iOS, Android, and web
+- Built-in moderation with AI and human review queues
+- Usage-based pricing that scales with MAU, not seats
+
+### 6 Best In-App Community Platforms
+
+### **social.plus: Best for consumer apps that need community and chat in one SDK**
+
+social.plus bundles feeds, groups, chat, live streaming, and moderation into one set of SDKs with a matching UIKit, so a small team can ship a full community layer without stitching vendors together.
+
+Key strengths:
+
+  - Feeds, groups, chat, and video in one integration
+  - AI moderation plus human review queues
+  - UIKit 4 for a fast first release
+
+Considerations:
+
+  - Deep customization means reading the SDK docs closely
+  - Best value at consumer-app scale
+
+Pricing: Usage-based; see the [social.plus pricing page](https://www.social.plus/pricing).
+
+Best fit: Consumer apps that want community and chat from a single vendor.
+
+### **Discord: Best for gaming communities that already live on Discord**
+
+Discord is where many gaming audiences already gather, and its embedded activities let a game surface community features without rebuilding them. It is not an in-app SDK, so the community lives on Discord's surface rather than inside your product.
+
+Key strengths:
+
+  - Massive existing user base
+  - Free for communities of any size
+
+Considerations:
+
+  - The community is on Discord, not in your app
+  - Limited data ownership ([Discord developer terms](https://discord.com/developers/docs/policies-and-agreements/developer-terms-of-service))
+
+Pricing: Free; Nitro is a consumer subscription.
+
+Best fit: Games whose players are already on Discord.
+
+### At-a-Glance Comparison
+
+| Platform | \*\*Best for\*\* | Pricing model | Moderation |
+|---|---|---|---|
+| social.plus | Consumer apps needing community + chat | Usage-based | AI + human queues |
+| Discord | Gaming communities on Discord | Free / Nitro | Community-run |
+
+### How to Choose
+
+**What you're building.** A consumer app with daily active use needs feeds and chat; a
+B2B tool may only need comments.
+
+**Who moderates.** If nobody on your team owns trust and safety, pick a platform with AI moderation out of the box.
+
+[OPTIONAL DISCLOSURE: social.plus is the publisher of this article.]
+
+Whichever platform you pick, run a two-week pilot with real users before committing to an annual contract.
+
+OUTREACH VERSION
+
+This block is for partner outreach and must never be published.
+
+Image alt text: Six in-app community platform logos arranged on a dark grid Image concept: abstract dashboard tiles Image sizes needed: 1578x888, 724x408, 502x283
+
+Display recommendations: Featured no, Blog without images no.
+
+# Listicle 2
+
+**Page title:** 5 Best Chat SDKs for Mobile Apps (2026)
+
+**Main Category Tag:** Engagement
+
+**Minutes to read:** 9
+
+**Meta description**
+
+Five chat SDKs compared for mobile apps.
+
+**Introduction text**
+
+Chat is the first social feature most apps add.
+
+### What Is a Chat SDK?
+
+A chat SDK adds messaging to your app.
+
+Image alt text: Chat bubbles.

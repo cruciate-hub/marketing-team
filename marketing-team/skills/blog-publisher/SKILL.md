@@ -6,6 +6,11 @@ description: >
   and a master PNG; resizes to the 3 required image sizes, uploads all
   assets, and publishes the CMS item immediately via Webflow Data API v2.
 
+  This is the BLOG ADAPTER on top of the shared webflow-publisher skill: it
+  owns the Google Doc listicle parsing and the blog-specific steps (webinar
+  matching, blog slug rules); conversion, image pipeline, dry-run validation
+  and the Webflow API calls are webflow-publisher's.
+
   Does NOT write content — for that, use blog-seo-content first.
   Does NOT accept Word documents — Google Docs only.
 
@@ -15,12 +20,17 @@ when_to_use: >
   "the article is ready", "publish listicle [N]".
   Must have a Google Doc URL/ID and a PNG file path. If either is missing, ask.
   If the user asks to write AND publish, run blog-seo-content first, then this.
+  For a glossary entry or any non-blog collection, use webflow-publisher directly.
 ---
 
 # Blog Publisher
 
-Reads a Google Doc, converts content to Webflow HTML, adds internal links,
-resizes the master PNG to 3 sizes, uploads all assets, and publishes live.
+Reads a Google Doc, normalizes it into the common markdown intermediate, converts it to
+Webflow HTML, adds internal links, resizes the master PNG to 3 sizes, uploads all assets,
+and publishes live. Everything after "normalizes" is the shared `webflow-publisher` skill
+with the `blog` field map (`webflow-publisher/collections/blog.json` — the single source of
+truth for the blog's field slugs and category IDs). The commands below are unchanged from
+before the split; they are thin wrappers that call the shared engine with `--collection blog`.
 
 ## NON-NEGOTIABLE RULES
 
@@ -36,10 +46,10 @@ These override convenience, recovery shortcuts, and every other instruction belo
    - ❌ `best-in-app-community-platforms-for-consumer-apps-2026` (has the year)
    - This applies to the title-derived slug, a user `--slug` override, AND — critically —
      **never resolve a slug collision by appending a year/number/suffix.**
-   - `gdoc_to_fielddata.py` strips the leading count and every `19xx`/`20xx` token
-     automatically. If you build a slug by hand, strip both yourself.
+   - The rules are encoded in `collections/blog.json` (`slug_rules`) and applied by the
+     converter to derived slugs and overrides alike. If you build a slug by hand, strip both yourself.
 
-2. **On a slug collision (Webflow 400 "slug already exists"), STOP and ask the user.**
+2. **On a slug collision (pre-flight "already exists" or Webflow 400), STOP and ask the user.**
    Do NOT append anything to make it unique — not the year, not `-2`, not `-new`,
    not `-draft`. Webflow holds a slug permanently after an item is deleted (until the
    next full site publish clears the tombstone). Resolving a clash by appending a
@@ -145,17 +155,21 @@ After the repo is ready, load these reference files in parallel:
 ```bash
 cat "$REPO/brain.md"
 cat "$REPO/marketing-team/skills/blog-publisher/webflow-config.md"
-cat "$REPO/marketing-team/skills/blog-publisher/html-conversion.md"
-cat "$REPO/marketing-team/skills/blog-publisher/image-pipeline.md"
+cat "$REPO/marketing-team/skills/webflow-publisher/html-conversion.md"
+cat "$REPO/marketing-team/skills/webflow-publisher/image-pipeline.md"
+cat "$REPO/marketing-team/skills/webflow-publisher/collections/blog.json"
 cat "$REPO/messaging/terminology.md"
 ```
+
+Note: the helper scripts live at the repo root (`$REPO/scripts/`), not inside the
+skill folder. Always invoke them with the `$REPO/scripts/...` absolute path.
 
 ## Inputs
 
 Confirm you have these before proceeding. If any are missing, ask:
 
 1. **Google Doc ID** — from the URL: `docs.google.com/document/d/{DOC_ID}/edit`
-2. **Master PNG** — absolute path to the hero image (must be ≥ 1578 px wide)
+2. **Master PNG** — absolute path to the hero image (must be ≥ 1578 px wide, ~16:9)
 3. **Inline PNGs** (optional) — paths to body images, in section order (img-1 = first platform, img-2 = second, etc.)
 
 ## Phase 1 — Read the Google Doc
@@ -176,28 +190,34 @@ The doc may contain multiple articles separated by `# Listicle N` headings.
 
 ## Phase 2 — Convert to fielddata.json
 
-Run the helper — it does all metadata extraction, HTML conversion, category
-mapping, slug derivation (year-stripped), and `__INLINE_IMG_N__` placeholder
-insertion in one deterministic step. Do NOT hand-write conversion logic.
+Run the blog adapter — it does the blog-specific parsing (listicle slicing, `**Page title:**`
+metadata, `### **Platform: tagline**` entries → H3 + inline-image slot, `###` → H2
+promotion, OUTREACH/INTERNAL/disclosure trimming), then hands the normalized intermediate to
+the shared converter, which applies the `blog` field map: category-name → ID mapping,
+year/count-stripped slug, `post-summary` from the Introduction text, `__INLINE_IMG_N__`
+placeholders, and the comparison table inside a Webflow Embed. Do NOT hand-write conversion logic.
 
 ```bash
 python3 "$REPO/scripts/gdoc_to_fielddata.py" \
   "$TMPDIR/raw-doc.txt" <listicle_number> \
-  --out "$TMPDIR/fielddata.json"
-# --slug <slug>   optional override; default strips a trailing "(YEAR)"
-# --date <iso>    optional; defaults to a fixed date — set today's date
+  --out "$TMPDIR/fielddata.json" \
+  --emit-intermediate "$TMPDIR/draft.md"
+# --slug <slug>   optional override; year + leading count are still stripped
+# --date <iso>    optional; defaults to now (UTC)
 ```
 
-The helper prints a summary (name, slug, category count, char count, inline
-placeholder count) and warns if `meta-description`, `post-summary`, or
-`image-alt-text` came back empty. **If it warns about a missing field, ask the
-user to supply it** — don't invent one. The conversion rules it applies are
-documented in `html-conversion.md` for reference; the helper is the source of truth.
+The helper prints a summary (name, slug, category count, body chars, tables, inline
+placeholder count) and warns if `meta-description`, `post-summary`, or `image-alt-text`
+came back empty. **If it warns about a missing field, ask the user to supply it** — don't
+invent one. `--emit-intermediate` writes the normalized markdown the shared converter
+received; keep it, the dry-run uses it as `--source` for the table-count check. The
+conversion rules are documented in `webflow-publisher/html-conversion.md`; the scripts are
+the source of truth.
 
-Inline placeholders (`__INLINE_IMG_1__` …) are inserted after each platform `<h2>`
-(headings containing a colon, e.g. `social.plus: Best for…`). Section headings like
-"What Is…", "How to Choose", "At-a-Glance" get none. `blog-publisher.py` replaces each
-placeholder with a Webflow `<figure>` tag at publish time.
+Inline placeholders (`__INLINE_IMG_1__` …) follow each platform `<h3>` (a `### **Name:
+tagline**` line in the doc). Section headings like "What Is…", "How to Choose",
+"At-a-Glance" get none. The engine replaces each placeholder with a Webflow `<figure>` at
+publish time.
 
 ## Phase 3 — Internal linking
 
@@ -226,13 +246,14 @@ Include `insert_at` from every suggestion (it tells the helper *where*). Include
 only when the strategist provided one (anchor isn't already in that sentence). Then:
 
 ```bash
-python3 "$REPO/scripts/apply_internal_links.py" "$TMPDIR/fielddata.json" "$TMPDIR/links.json"
+python3 "$REPO/scripts/apply_internal_links.py" "$TMPDIR/fielddata.json" "$TMPDIR/links.json" --collection blog
 ```
 
 The helper locates each `insert_at` sentence (whitespace-flexible), wraps the anchor there
 or swaps in the rephrase, never links inside headings or the comparison-table embed, and
-prints a JSON summary `{applied, unplaced}`. For any `unplaced` entry (rare — neither the
-anchor nor the sentence was found), apply that one by hand using its `rephrase`, or drop it.
+prints a JSON summary `{applied, unplaced}`. Internal links open in the same tab (no
+`target="_blank"`). For any `unplaced` entry (rare — neither the anchor nor the sentence was
+found), apply that one by hand using its `rephrase`, or drop it.
 
 Resolve any cannibalization warnings from the strategist before proceeding.
 
@@ -251,8 +272,8 @@ Fix all violations before continuing. Do not flag and proceed.
 ## Phase 5 — Resize images
 
 All production blog images are **WebP** at exact dimensions — the collection's image
-fields enforce them (min=max validation), so the API rejects anything off-size. One
-command does master + inline:
+fields enforce them (min=max validation), so the API rejects anything off-size. The sizes
+come from `collections/blog.json`. One command does master + inline:
 
 ```bash
 python3 "$REPO/scripts/resize_blog_images.py" "$PNG" "$SLUG" "$TMPDIR" \
@@ -278,7 +299,8 @@ images, fielddata you may re-publish) belongs in a stable path instead.
 
 Every published blog post should have a related webinar set via the
 `related-webinar-to-show-on-page` Reference field (points to the Webinars
-collection `66e2765d540e1939a89db84e`). This phase picks the best match.
+collection `66e2765d540e1939a89db84e`). This phase picks the best match. It is
+blog-specific and editorial, so it stays here rather than in the shared engine.
 
 ### Allowed webinar pool
 
@@ -354,7 +376,8 @@ community trends broadly and works as a catch-all.
 **During a new publish (this skill):**
 
 1. After Phase 5, look up the best webinar from the priority table above.
-2. Add `"related-webinar-to-show-on-page": "<item-id>"` to the fielddata.
+2. Add `"related-webinar-to-show-on-page": "<item-id>"` to `fielddata.json` (it is a flat
+   `fieldData` payload, so adding the key is all that is needed).
 3. If the match is ambiguous, pick the webinar whose title a reader would
    find most relevant after finishing the blog post.
 
@@ -372,9 +395,8 @@ explicitly asks to re-evaluate.
 
 ## Phase 7 — Build and publish
 
-1. Look up the category ID(s) from `webflow-config.md` using the extracted category name(s).
-
-2. Build `fielddata.json` in `$TMPDIR`:
+1. `fielddata.json` from Phase 2 (+ Phase 3 links, + Phase 6 webinar) is the flat `fieldData`
+   payload the API receives. For reference, the blog's shape:
 
 ```json
 {
@@ -384,25 +406,26 @@ explicitly asks to re-evaluate.
   "post-content":              "<h2>...</h2><p>...</p>...",
   "meta-description":          "...",
   "min-read":                  "12",
-  "date-published":            "2026-06-04T00:00:00.000Z",
   "image-alt-text":            "...",
   "category":                  "<main-category-id>",
   "category-multi-reference-3": ["<id1>", "<id2>", "<id3>"],
+  "date-published":            "2026-06-04T00:00:00.000Z",
   "featured":                  false,
   "blog-without-images":       false,
-  "show-on-careers-page":      false
+  "show-on-careers-page":      false,
+  "related-webinar-to-show-on-page": "<webinar-item-id>"
 }
 ```
 
-Use today's date for `date-published` (ISO 8601 UTC).
-For `category-multi-reference-3`, always include the main category ID plus any secondary tag IDs.
+Category IDs come from `collections/blog.json`; the converter resolves them, you do not
+look them up by hand. `date-published` defaults to now (ISO 8601 UTC).
 
-3. **Always dry-run first.** Append `--dry-run` to validate the entire payload
-   (required fields, slug-has-no-year, table not flattened, no `<style>` block,
-   placeholder/inline count match, exact image dimensions) without touching the API.
-   It writes `dry-run-report.json` and exits non-zero on any failure. Fix anything it
-   flags before the real run. This is cheap insurance against a broken publish.
-   Use the absolute `$REPO/scripts/...` path so it works from any working directory:
+2. **Always dry-run first.** Append `--dry-run` to validate the entire payload
+   (required fields, slug rules, Tags ⊇ Category, table not flattened and in an Embed,
+   no `<style>` block, internal links present, placeholder/inline count match, exact image
+   dimensions) without touching the API. `--source` lets it compare table counts against
+   the intermediate from Phase 2. It writes `dry-run-report.json` and exits non-zero on any
+   failure. Fix anything it flags before the real run.
 
 ```bash
 python3 "$REPO/scripts/blog-publisher.py" \
@@ -411,10 +434,11 @@ python3 "$REPO/scripts/blog-publisher.py" \
   "$TMPDIR/${SLUG}_thumbnail_724x408.webp" \
   "$TMPDIR/${SLUG}_mega-menu_502x283.webp" \
   "$TMPDIR/${SLUG}_img-1_1578x888.webp" ... \
+  --source "$TMPDIR/draft.md" \
   --dry-run
 ```
 
-4. Run the real publish — same command, swap `--dry-run` for `--staged` (review
+3. Run the real publish — same command, swap `--dry-run` for `--staged` (review
    before going live) or no flag (publish immediately). Hero images first, inline after:
 
 ```bash
@@ -429,14 +453,15 @@ python3 "$REPO/scripts/blog-publisher.py" \
   --staged
 ```
 
-Note: the helper scripts live at the repo root (`$REPO/scripts/`), not inside the
-skill folder. Always invoke them with the `$REPO/scripts/...` absolute path.
+The three hero positionals map to the blog field map's image roles `header`/`grid`/`menu`;
+further positionals are inline images (the script uploads them and replaces
+`__INLINE_IMG_1__` … placeholders in `post-content` with real Webflow CDN URLs before
+publish). Omit inline image args if the article has no body images. This is exactly
+`webflow-publisher.py … --collection blog --image header=… --image grid=… --image menu=…
+--inline …`; use that form directly if you prefer.
 
-Inline images are passed as additional positional args after the 3 hero images.
-The script uploads them and replaces `__INLINE_IMG_1__` … `__INLINE_IMG_6__`
-placeholders in `post-content` with real Webflow CDN URLs before publish.
-
-Omit inline image args if the article has no body images.
+Pre-flight runs before any upload: token + scopes (`GET /sites/{id}`) and slug availability.
+A taken slug stops the run before images are wasted and is never resolved by a suffix.
 
 The script prints the live URL to stdout on success. Surface it to the user:
 
@@ -469,43 +494,32 @@ Expect the response image URLs to DIFFER from what was sent: Webflow re-ingests 
 file under a new fileId on update (your filename survives as the URL suffix). That is
 normal — the script verifies via the filename, not URL equality.
 
-If image sources come from Google Drive: `download_file_content` returns large files as
-a sidecar `.txt` (JSON with a base64 `content` field) under the project's
-`tool-results/` directory — decode it and confirm the bytes start with `RIFF…WEBP`.
-A direct `drive.google.com/uc?export=download` curl fails for non-link-shared files
-(returns the login page); the Drive MCP is the only reliable path. Designer folders are
-usually named by blog TITLE, not slug — match them to CMS items via a slug lookup.
+If image sources come from Google Drive: see `webflow-publisher/image-pipeline.md`
+("Sourcing images from Google Drive") — large files arrive as a base64 sidecar `.txt`,
+direct `drive.google.com/uc` curls fail for non-shared files, and designer folders are
+named by blog TITLE, not slug.
 
 ## No-token fallback: the Webflow MCP
 
-If `WEBFLOW_API_TOKEN` is not set, the same flow works through the Webflow MCP's own
-OAuth — no token needed:
-
-1. `data_assets_tool > create_asset` — registers the asset; returns the presigned S3
-   upload details and the final hostedUrl.
-2. Upload the file to S3 yourself (curl with `--max-time 60`, or the multipart pattern
-   in `blog-publisher.py`). **Gotcha:** the MCP returns `uploadDetails` keys in
-   camelCase, but S3 wants the exact form-field names — map them:
-   `xAmzAlgorithm→X-Amz-Algorithm`, `xAmzCredential→X-Amz-Credential`,
-   `xAmzDate→X-Amz-Date`, `policy→Policy`, `xAmzSignature→X-Amz-Signature`,
-   `successActionStatus→success_action_status`, `contentType→Content-Type`,
-   `cacheControl→Cache-Control`, plus `key`, `acl`, `bucket` as-is. The file part must
-   be the LAST form field, named `file`. Success is HTTP **201**.
-3. `data_cms_tool > update_collection_items` (or `create_collection_items`), then
-   `publish_collection_items`.
+If `WEBFLOW_API_TOKEN` is not set, follow "No-token fallback" in
+`webflow-publisher/SKILL.md` (create_asset → S3 with the camelCase→form-field mapping →
+`create_collection_items` → `publish_collection_items`). Run the `--dry-run` first regardless;
+it needs no token.
 
 ## Error handling
 
 | Error | Action |
 |---|---|
-| `WEBFLOW_API_TOKEN` not set | Use the Webflow MCP fallback above, or ask the user to `export WEBFLOW_API_TOKEN=…` |
+| `WEBFLOW_API_TOKEN` not set | Use the Webflow MCP fallback, or ask the user to `export WEBFLOW_API_TOKEN=…` |
 | Google Doc unreadable (401) | Stop. Tell user to check file sharing permissions. |
+| `# Listicle N` / `**Page title:**` not found | Stop. The doc is not in the listicle template; ask which article to publish or fix the doc. |
 | PNG width < 1578 px | Stop. Ask for the full-resolution export (min 1578×888 px). |
 | Wrong image dimensions | The collection enforces exact sizes (min=max) — the API rejects off-size images. Re-run the resize helper. |
+| Dry-run fails `content:table-not-flattened` / `content:table-in-embed` | The comparison table did not survive conversion. Check the intermediate (`draft.md`) and re-run Phase 2; never paste table HTML by hand. |
 | S3 upload fails | Retry once. If still failing, report the HTTP status and stop. |
 | Network call hangs | Script calls time out by themselves (30s API / 60s S3) and exit with an error. Any hand-written curl must carry `--max-time`. |
 | Webflow 401 | Token invalid or expired. Ask user to refresh `WEBFLOW_API_TOKEN`. |
-| Webflow 400 "slug already exists" | Stop. Surface the conflict — do not append any suffix. See Slug rules above. |
+| Webflow 400 "slug already exists" / pre-flight slug taken | Stop. Surface the conflict — do not append any suffix. See Slug rules above. |
 | Webflow 429 (rate limited) | Wait 10 s, retry once. |
 | `python3` not found | Stop. The publish script needs Python 3 (stdlib only); the resize helper additionally needs Pillow. |
 
@@ -515,3 +529,10 @@ OAuth — no token needed:
 - Posts that still contain `INTERNAL USE ONLY` or `OUTREACH VERSION` sections
 - Posts with the `[OPTIONAL DISCLOSURE]` line accidentally left in (remove it unless user confirms it should stay)
 - Posts whose primary keyword is flagged as cannibalized by `internal-linking-strategist` — surface the warning and let the user decide before publishing
+- Anything handed over with `Editor (named human reviewer): [fill before publish]` still unfilled (blog-seo-content BLOCK condition 5)
+
+## Related skills
+
+- `webflow-publisher` — the shared engine this skill wraps (conversion, images, dry-run, API)
+- `blog-seo-content` — writes the article this skill publishes
+- `internal-linking-strategist` — supplies the Phase 3 link suggestions

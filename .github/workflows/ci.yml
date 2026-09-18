@@ -38,6 +38,10 @@ jobs:
         run: python3 run_tests.py
         working-directory: marketing-team/skills/blog-seo-content/tests
 
+      - name: webflow-publisher regression suite (converter, field maps, dry-run, blog adapter parity)
+        # Stdlib only; image-dimension assertions self-skip when Pillow is absent.
+        run: python3 marketing-team/skills/webflow-publisher/tests/run_tests.py
+
       - name: Website inventory sanity
         run: |
           # Live inventories are committed to the site-data branch by the

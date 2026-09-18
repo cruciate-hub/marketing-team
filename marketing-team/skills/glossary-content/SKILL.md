@@ -206,7 +206,7 @@ Category: [topic category — reuse blog-seo-content's Main Category Tag list wh
 - ...
 ```
 
-No HTML in the intermediate. Internal `<a href>` / markdown links in "Related Terms" are added by `internal-linking-strategist`, not improvised (see below).
+No HTML in the intermediate. Internal `<a href>` / markdown links in "Related Terms" are added by `internal-linking-strategist`, not improvised (see below). This exact shape is also what `webflow-publisher` converts for publishing (see "Publishing to Webflow"), so keep the `Slug:` line equal to the live slug on a rewrite and never add HTML to work around a formatting need.
 
 ## Internal linking
 
@@ -251,9 +251,38 @@ Same cascade as `blog-seo-content` and `aeo-content`:
 2. **Suggest connection**, if not available — offer to help connect it, then fall through.
 3. **Fallback**: create the `.docx` locally via `anthropic-skills:docx` and present it for download.
 
-Note that both `aeo-content` and `blog-seo-content` deliver `.docx` because a downstream automation converts it to Webflow HTML — this skill follows the same pattern rather than attempting direct HTML/CMS output, since the actual Webflow CMS field slugs for the Glossary collection haven't been confirmed yet (see "Open items" below).
+The `.docx` is the review artifact. Publishing does not go through it: the shared `webflow-publisher` skill converts this skill's `outputs/[slug].draft.md` directly (see "Publishing to Webflow" below). No `.docx`-to-Webflow-HTML automation exists anywhere in this repo — `aeo-content`'s SKILL.md still describes one, but nothing implements it, and `blog-seo-content`'s real publish path is `blog-publisher`, a Google Doc adapter, not a `.docx` converter.
 
 Every delivery carries `Editor (named human reviewer): [fill before publish]` in its metadata block, and the delivery message states the draft isn't publish-ready until a named editor completes a pass.
+
+## Publishing to Webflow (via `webflow-publisher`)
+
+This skill's `outputs/[slug].draft.md` **is** the common intermediate `webflow-publisher` consumes: `# Term` as the only H1, the labeled metadata block, six H2 sections, a markdown table, Related Terms as markdown links. No `.docx` round-trip, no hand-written HTML. Run only after `compliance.py` passes on the current text and a named human editor has signed off:
+
+```bash
+# 0. Readiness — glossary shows UNCONFIRMED until its field slugs are filled in (see below)
+python3 "$REPO/scripts/webflow-publisher.py" --list-collections
+
+# 1. Convert. The definition paragraph stays as the first <p> of the body; the Metrics table lands
+#    in a Webflow Embed block; Related Terms links become same-tab <a href> tags.
+python3 "$REPO/scripts/md_to_webflow_html.py" outputs/[slug].draft.md --collection glossary \
+  --out outputs/[slug].fielddata.json
+
+# 2. Validate, no token needed. --source enables the source-vs-output table count, so a Metrics
+#    table that collapsed into prose fails here regardless of what the section is called.
+python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --collection glossary \
+  --source outputs/[slug].draft.md --dry-run
+
+# 3a. NEW term: create + publish (--staged to review in Webflow first). A slug collision stops the
+#     run — never append a suffix.
+python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --collection glossary [--staged]
+
+# 3b. REWRITE of a live entry (the common case): keep the live slug via the draft's `Slug:` line and
+#     patch the existing item in place. Find the id: GET /v2/collections/66e2765d540e1939a89db93e/items?slug=[slug]
+python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --collection glossary --replace <item_id>
+```
+
+**Current state: the pipeline exists but is blocked at step 2, on purpose.** `webflow-publisher/collections/glossary.json` carries the real collection ID (`66e2765d540e1939a89db93e`, from `pages-glossary.json`) and URL prefix, but every field slug except the Webflow built-ins `name`/`slug` is `null`, marked `CONFIRM WITH STEFAN`. The converter parks those values under `__unconfirmed__`, the dry-run fails `fieldmap:required-slugs-confirmed`, and the engine refuses to publish. Do not fill in a plausible-looking slug to get past it: run `python3 "$REPO/scripts/sync_fieldmap.py" --collection glossary` (needs `WEBFLOW_API_TOKEN`), which fetches the live field list and proposes slugs by display name + type — add `--write` once you've reviewed the report to fill in the unambiguous ones. Anything ambiguous or unmatched (it will not guess) still needs a manual read from the Webflow Designer (Glossary collection → settings → fields) or `GET https://api.webflow.com/v2/collections/66e2765d540e1939a89db93e`. Either way, edit the JSON (`fields.body` and `Meta description` first) and the same commands publish. Whether Glossary has a category taxonomy, image fields, or a date field is equally unconfirmed (all empty/`null` in the map).
 
 ## Rewriting an existing entry (the common case, initially)
 
@@ -274,11 +303,13 @@ When asked to rewrite multiple existing entries at once (e.g. "redo the first 10
 
 ## Open items (surface these to the user, don't guess silently)
 
-- **Webflow CMS field slugs for the Glossary collection** are not yet confirmed in this repo (unlike Blog, which has a documented field map in `blog-seo-content/SKILL.md`). Until confirmed, deliver `.docx` only — don't fabricate a field-by-field HTML mapping.
-- **Topic category list** — this skill reuses `blog-seo-content`'s Main Category Tag list as a placeholder. Confirm whether Glossary uses the same taxonomy or its own.
+- **Webflow CMS field slugs for the Glossary collection are still unconfirmed — but the publish pipeline now exists.** `webflow-publisher/collections/glossary.json` has the real collection ID and URL prefix; every field slug except `name`/`slug` is `null` and marked `CONFIRM WITH STEFAN`. `webflow-publisher.py --dry-run` fails and the engine refuses to publish until they are read from Webflow and filled in (see "Publishing to Webflow"). Until then, deliver `.docx` for review and, if asked to publish, run the dry-run and surface its `fieldmap:required-slugs-confirmed` failure rather than inventing slugs.
+- **Topic category list** — this skill reuses `blog-seo-content`'s Main Category Tag list as a placeholder. Confirm whether Glossary uses the same taxonomy, its own, or none; `glossary.json`'s `taxonomies.categories` is empty until then and the `Category:` line is parked, not sent.
+- **Rewrites publish via `--replace <item_id>`**, which needs the live item ID (slug lookup). Confirm with Stefan whether glossary rewrites should also restamp a date field (brain.md guardrail 6: honest freshness — only when the content substantively changes), once the collection's date field, if any, is known.
 
 ## Related skills
 
+- `webflow-publisher` — publishes this skill's `.draft.md` to the Glossary collection once the field map is confirmed; owns conversion, dry-run and the Webflow API calls
 - `aeo-content` — /answers/ pages; source of the approved-data list and the duplicate-check script this skill reuses
 - `blog-seo-content` — blog posts; source of the forbidden-vocabulary tiers this skill's compliance script mirrors
 - `internal-linking-strategist` — called by this skill; do not reimplement

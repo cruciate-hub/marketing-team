@@ -1,581 +1,88 @@
 #!/usr/bin/env python3
 """
-blog-publisher.py — Upload images and publish a blog post to Webflow CMS live.
+blog-publisher.py — thin wrapper: the Blog collection's positional CLI on top of the shared
+engine, scripts/webflow-publisher.py (field map: webflow-publisher/collections/blog.json).
 
-Usage:
-    # Create + publish a new post:
-    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-1.webp ...] [--staged] [--dry-run]
+Kept so every documented command keeps working exactly as before:
+
+    # Create + publish a new post (--staged: live on next site publish; --dry-run: validate only):
+    python3 scripts/blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> \
+        [img-1.webp ...] [--staged] [--dry-run] [--source <draft.md>]
 
     # Refresh the 3 hero images on an EXISTING post (re-upload, patch, publish):
-    python3 scripts/blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>
+    python3 scripts/blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp> [--dry-run]
 
-    --staged    Create a staged item (goes live on next Webflow site publish) rather
-                than publishing immediately.
-    --dry-run   Validate everything (required fields, slug rules, table not flattened /
-                in embed / no style block, internal links present, placeholder-to-image
-                match, exact image dimensions) and write dry-run-report.json. Makes NO API
-                calls and needs no token. Exits non-zero on any failed check. Use in tests/CI.
-                With --update, validates the 3 image dimensions only.
-    --update    Image-refresh mode for an existing item. Uploads the 3 hero images,
-                PATCHes only the image fields (everything else is preserved), publishes.
+The three hero positionals map to the blog field map's image roles header / grid / menu;
+further positionals are inline body images. New-style flags (--image, --collection,
+--field-map, --list-collections) are passed straight through to the engine.
 
-Environment:
-    WEBFLOW_API_TOKEN  —  Webflow API token with cms:write + assets:write scopes.
-                          Not required for --dry-run.
-
-Dependencies: Python 3 standard library only — no pip install, no virtualenv. (Image
-dimension checks use Pillow if present, and are skipped gracefully if not.)
-All network calls carry timeouts (30s API / 60s S3) — a hung connection exits with an
-error instead of blocking forever.
-
-Outputs (stdout):
-    JSON: { "itemId": "...", "slug": "...", "liveUrl": "https://www.social.plus/blog/..." }
+Environment: WEBFLOW_API_TOKEN (not required for --dry-run). Stdlib only.
 """
+from __future__ import annotations
 
-import hashlib
-import json
 import os
-import re
 import sys
-import urllib.error
-import urllib.parse
-import urllib.request
-import uuid
 from pathlib import Path
 
-# ── Config ─────────────────────────────────────────────────────────────────────
+ENGINE = Path(__file__).resolve().parent / "webflow-publisher.py"
+COLLECTION = "blog"
+HERO_ROLES = ("header", "grid", "menu")
+VALUE_FLAGS = {"--source", "--update", "--collection", "--field-map"}
+
+
+def usage(code: int = 1) -> None:
+    print("Usage:\n"
+          "  create:  python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> "
+          "[img-N.webp ...] [--staged] [--dry-run] [--source draft.md]\n"
+          "  update:  python3 blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>",
+          file=sys.stderr)
+    sys.exit(code)
 
-SITE_ID            = "66e2765d540e1939a89db4bb"
-BLOG_COLLECTION_ID = "66e2765d540e1939a89db6a4"
-API_BASE           = "https://api.webflow.com/v2"
-
-FIGURE_TEMPLATE = (
-    '<figure class="w-richtext-figure-type-image w-richtext-align-fullwidth" '
-    'style="max-width:1578px" data-rt-type="image" data-rt-align="fullwidth" '
-    'data-rt-max-width="1578px">'
-    '<div><img alt="__wf_reserved_inherit" src="{url}" loading="lazy"></div>'
-    '</figure>'
-)
-
-# ── HTTP (stdlib only) ───────────────────────────────────────────────────────────
-
-def get_token() -> str:
-    token = os.environ.get("WEBFLOW_API_TOKEN", "").strip()
-    if not token:
-        print("ERROR: WEBFLOW_API_TOKEN is not set.\n  export WEBFLOW_API_TOKEN=your_token", file=sys.stderr)
-        sys.exit(1)
-    return token
-
-
-def api_headers(token: str) -> dict:
-    return {"Authorization": f"Bearer {token}", "Accept": "application/json"}
-
-
-def md5_file(path: str) -> str:
-    with open(path, "rb") as f:
-        return hashlib.md5(f.read()).hexdigest()
-
-
-def http(method: str, url: str, headers=None, json_body=None, raw_body=None, timeout=30):
-    """
-    Minimal HTTP via urllib. Returns (status, text). Never raises on an HTTP error
-    status — returns the error body so callers can report it. json_body is JSON-encoded
-    and sets Content-Type; raw_body is sent verbatim (used for the S3 multipart upload).
-
-    ALWAYS pass a timeout — a hung connection with no timeout has blocked a scripted run
-    for 45 minutes. Default 30s for API calls; the S3 upload passes a longer one.
-    """
-    headers = dict(headers or {})
-    data = None
-    if json_body is not None:
-        data = json.dumps(json_body).encode("utf-8")
-        headers["Content-Type"] = "application/json"
-    elif raw_body is not None:
-        data = raw_body
-    req = urllib.request.Request(url, data=data, method=method, headers=headers)
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return resp.status, resp.read().decode("utf-8", "replace")
-    except urllib.error.HTTPError as e:
-        return e.code, e.read().decode("utf-8", "replace")
-    except (urllib.error.URLError, TimeoutError) as e:
-        reason = getattr(e, "reason", e)
-        return 0, f"network error / timeout after {timeout}s: {reason}"
-
-
-def _json(text: str) -> dict:
-    try:
-        return json.loads(text)
-    except Exception:
-        return {}
-
-
-def _check(status: int, text: str, label: str) -> None:
-    if not (200 <= status < 300):
-        print(f"ERROR: {label} — HTTP {status}", file=sys.stderr)
-        parsed = _json(text)
-        print(json.dumps(parsed, indent=2)[:800] if parsed else text[:800], file=sys.stderr)
-        sys.exit(1)
-
-
-def _multipart_body(fields: dict, file_field: str, filename: str,
-                    file_bytes: bytes, file_content_type: str):
-    """
-    Build a multipart/form-data body for an AWS S3 POST-policy upload. The file part MUST
-    come last (S3 ignores any field after `file`), so emit all form fields first.
-    Returns (body_bytes, content_type_header).
-    """
-    boundary = "----webflowblog" + uuid.uuid4().hex
-    crlf = "\r\n"
-    head = "".join(
-        f"--{boundary}{crlf}"
-        f'Content-Disposition: form-data; name="{k}"{crlf}{crlf}{v}{crlf}'
-        for k, v in fields.items()
-    )
-    file_head = (
-        f"--{boundary}{crlf}"
-        f'Content-Disposition: form-data; name="{file_field}"; filename="{filename}"{crlf}'
-        f"Content-Type: {file_content_type}{crlf}{crlf}"
-    )
-    body = head.encode("utf-8") + file_head.encode("utf-8") + file_bytes + f"{crlf}--{boundary}--{crlf}".encode("utf-8")
-    return body, f"multipart/form-data; boundary={boundary}"
-
-
-# ── Asset upload ───────────────────────────────────────────────────────────────
-
-def upload_asset(token: str, file_path: str, file_name: str) -> tuple:
-    """
-    Upload an image to Webflow (3-step). Returns (asset_id, hosted_url).
-    The hosted S3 URL is built directly from uploadDetails.bucket + key — no extra GET.
-    Passing that URL to a CMS Image field makes Webflow accept it and re-host it on CDN.
-    """
-    file_hash = md5_file(file_path)
-    print(f"  → {file_name}  (MD5 {file_hash[:8]}…)", file=sys.stderr)
-
-    status, text = http("POST", f"{API_BASE}/sites/{SITE_ID}/assets",
-                        headers=api_headers(token),
-                        json_body={"fileName": file_name, "fileHash": file_hash})
-    _check(status, text, f"asset-register {file_name}")
-    meta = _json(text)
-    upload_url = meta["uploadUrl"]
-    d          = meta["uploadDetails"]
-    asset_id   = meta["id"]
-
-    # S3 POST-policy upload (form fields then the file, file last)
-    fields = {
-        "acl":                   d["acl"],
-        "bucket":                d["bucket"],
-        "X-Amz-Algorithm":       d["X-Amz-Algorithm"],
-        "X-Amz-Credential":      d["X-Amz-Credential"],
-        "X-Amz-Date":            d["X-Amz-Date"],
-        "key":                   d["key"],
-        "Policy":                d["Policy"],
-        "X-Amz-Signature":       d["X-Amz-Signature"],
-        "success_action_status": d["success_action_status"],
-        "Content-Type":          d["content-type"],
-        "Cache-Control":         d["Cache-Control"],
-    }
-    with open(file_path, "rb") as f:
-        file_bytes = f.read()
-    body, ctype = _multipart_body(fields, "file", file_name, file_bytes, "image/webp")
-    # 60s timeout: file transfer, slower than a JSON call. Expected success is 201
-    # (the success_action_status Webflow sets); 200/204 accepted defensively.
-    status, text = http("POST", upload_url, headers={"Content-Type": ctype}, raw_body=body,
-                        timeout=60)
-    if status not in (200, 201, 204):
-        print(f"ERROR: S3 upload failed — HTTP {status}", file=sys.stderr)
-        print(text[:500], file=sys.stderr)
-        sys.exit(1)
-
-    hosted_url = f"https://s3.amazonaws.com/{d['bucket']}/{d['key']}"
-    print(f"     ✓ {hosted_url}", file=sys.stderr)
-    return asset_id, hosted_url
-
-
-# ── Inline image injection ─────────────────────────────────────────────────────
-
-def inject_inline_images(post_content: str, inline_urls: list) -> str:
-    for i, url in enumerate(inline_urls, start=1):
-        placeholder = f"__INLINE_IMG_{i}__"
-        if placeholder in post_content:
-            post_content = post_content.replace(placeholder, FIGURE_TEMPLATE.format(url=url))
-            print(f"  ✓ Injected inline image {i}", file=sys.stderr)
-        else:
-            print(f"  ⚠ Placeholder {placeholder} not found — skipped", file=sys.stderr)
-    return post_content
-
-
-# ── Publish ────────────────────────────────────────────────────────────────────
-
-def publish_live(token: str, field_data: dict) -> dict:
-    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/live",
-                        headers=api_headers(token), json_body={"fieldData": field_data})
-    _check(status, text, "webflow-publish")
-    return _json(text)
-
-
-def _extract_item(data) -> dict:
-    """Bulk endpoint may return a bare list or {"items":[...]}. Normalize to one item dict."""
-    if isinstance(data, dict) and "items" in data:
-        items = data["items"]
-        return items[0] if items else {}
-    if isinstance(data, list):
-        return data[0] if data else {}
-    return data if isinstance(data, dict) else {}
-
-
-def publish_staged(token: str, field_data: dict) -> dict:
-    """
-    Create a staged item via POST /items/bulk.
-
-    Image fields persist directly in the bulk call AS LONG AS each image url is a valid S3
-    hostedUrl (https://s3.amazonaws.com/{bucket}/{key}); Webflow re-hosts it on CDN. A
-    403-returning cdn.prod.website-files.com URL is silently dropped — that was the earlier
-    failure mode, not a bulk-endpoint limitation.
-    """
-    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/bulk",
-                        headers=api_headers(token),
-                        json_body={"fieldData": field_data, "isDraft": False})
-    _check(status, text, "webflow-stage")
-    return _extract_item(_json(text))
-
-
-# ── Update mode: refresh hero images on an EXISTING post ─────────────────────────
-
-def update_hero_images(token: str, item_id: str, header, grid, menu) -> None:
-    """
-    --update <item_id>: re-upload the 3 hero images and patch them onto an existing
-    item, then publish it. The refresh path that previously had to be hand-rolled.
-
-    Field notes (verified in production):
-    - A partial PATCH with ONLY the 3 image fields preserves every other field — no
-      need to round-trip the whole item.
-    - {"url": <hostedUrl>} is sufficient for an Image field.
-    - Webflow RE-INGESTS the image under a new fileId on update, so the response URL
-      differs from what was sent. That is normal, not a failure — verify by checking
-      the uploaded filename survives as the URL suffix.
-    """
-    item_url = f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/{item_id}"
-
-    # The item must exist; grab its name/slug for reporting.
-    status, text = http("GET", item_url, headers=api_headers(token))
-    if status == 404:
-        print(f"ERROR: item {item_id} not found in the Blog collection.", file=sys.stderr)
-        sys.exit(1)
-    _check(status, text, "update-get-item")
-    fd   = _json(text).get("fieldData", {})
-    slug = fd.get("slug", "?")
-    print(f"Updating images on: {fd.get('name', '?')!r}  (slug: {slug})", file=sys.stderr)
-
-    # Validate dimensions BEFORE uploading — the collection enforces exact sizes
-    # (min=max validation); a wrong-size image is rejected by the API.
-    for path, exp in [(header, (1578, 888)), (grid, (724, 408)), (menu, (502, 283))]:
-        dims = _webp_dims(path)
-        if dims is not None and dims != exp:
-            print(f"ERROR: {Path(path).name} is {dims[0]}x{dims[1]} — must be exactly "
-                  f"{exp[0]}x{exp[1]} (the CMS field rejects anything else).", file=sys.stderr)
-            sys.exit(1)
-
-    print("Uploading replacement images…", file=sys.stderr)
-    _, header_url = upload_asset(token, header, Path(header).name)
-    _, grid_url   = upload_asset(token, grid,   Path(grid).name)
-    _, menu_url   = upload_asset(token, menu,   Path(menu).name)
-
-    # Partial PATCH: only the 3 image fields.
-    print("Patching image fields…", file=sys.stderr)
-    status, text = http("PATCH", item_url, headers=api_headers(token),
-                        json_body={"fieldData": {
-                            "image-page-header":   {"url": header_url},
-                            "grid-thumbnail":      {"url": grid_url},
-                            "thumbnail-mega-menu": {"url": menu_url},
-                        }})
-    _check(status, text, "update-patch")
-
-    # Verify via filename suffix (the URL itself is rewritten by Webflow's re-ingest).
-    resp = _json(text).get("fieldData", {})
-    for field, src in [("image-page-header", header), ("grid-thumbnail", grid),
-                       ("thumbnail-mega-menu", menu)]:
-        url = (resp.get(field) or {}).get("url", "") if isinstance(resp.get(field), dict) else ""
-        ok  = Path(src).name in url
-        print(f"  {'✓' if ok else '⚠'} {field}" + ("" if ok else " — filename not in response URL; check the live page"),
-              file=sys.stderr)
-
-    # Publish the updated item.
-    print("Publishing…", file=sys.stderr)
-    status, text = http("POST", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items/publish",
-                        headers=api_headers(token), json_body={"itemIds": [item_id]})
-    _check(status, text, "update-publish")
-
-    print(json.dumps({"itemId": item_id, "slug": slug,
-                      "liveUrl": f"https://www.social.plus/blog/{slug}", "updated": True}))
-    print(f"\n✓ Images refreshed: https://www.social.plus/blog/{slug}", file=sys.stderr)
-
-
-# ── Pre-flight checks ───────────────────────────────────────────────────────────
-
-def preflight(token: str, slug: str) -> None:
-    """
-    Fail fast BEFORE uploading any images:
-      1. Token works and has site access (one cheap GET /sites/{id}).
-      2. Slug is not already taken (avoids 9 wasted uploads then a 400).
-    """
-    status, text = http("GET", f"{API_BASE}/sites/{SITE_ID}", headers=api_headers(token))
-    if status == 401:
-        print("ERROR: Token rejected (401). Check WEBFLOW_API_TOKEN.", file=sys.stderr)
-        sys.exit(1)
-    if status == 403:
-        print("ERROR: Token missing scopes. Needs sites:read, cms:write, assets:write.", file=sys.stderr)
-        sys.exit(1)
-    _check(status, text, "preflight-site")
-
-    qs = urllib.parse.urlencode({"slug": slug})
-    status, text = http("GET", f"{API_BASE}/collections/{BLOG_COLLECTION_ID}/items?{qs}",
-                        headers=api_headers(token))
-    _check(status, text, "preflight-slug")
-    existing = _json(text).get("items", [])
-    if existing:
-        print(f"ERROR: Slug '{slug}' already exists (item {existing[0]['id']}).", file=sys.stderr)
-        print("       Stopping before upload. Choose a new slug or update the existing item.", file=sys.stderr)
-        print("       Do NOT append a year or numeric suffix — pick a genuinely distinct slug.", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"✓ Pre-flight OK — token valid, slug '{slug}' available", file=sys.stderr)
-
-
-# ── Dry-run validation ──────────────────────────────────────────────────────────
-
-# Expected WebP dimensions per role. Hero sizes are fixed by the CMS image fields;
-# inline images are normalized to header width.
-EXPECTED_DIMS = {"header": (1578, 888), "grid": (724, 408), "menu": (502, 283),
-                 "inline": (1578, 888)}
-REQUIRED_FIELDS = ["name", "slug", "post-summary", "post-content", "meta-description",
-                   "min-read", "category", "category-multi-reference-3"]
-YEAR_RE = re.compile(r"(?:19|20)\d{2}")
-
-
-def _webp_dims(path: str):
-    """Return (w, h) of a WebP, or None if Pillow is unavailable / file unreadable."""
-    try:
-        from PIL import Image
-        with Image.open(path) as im:
-            return im.size
-    except Exception:
-        return None
-
-
-def dry_run_validate(field_data: dict, slug: str, header, grid, menu, inline_paths,
-                     fielddata_path) -> None:
-    """
-    Validate the full publish payload WITHOUT calling Webflow. Prints a human report
-    and writes dry-run-report.json next to fielddata.json. Exits non-zero if any
-    hard check fails, so it's usable as a gate in tests and CI.
-    """
-    checks = []  # (name, passed, detail)
-
-    def chk(name, passed, detail=""):
-        checks.append({"check": name, "passed": bool(passed), "detail": detail})
-
-    # 1. Required fields present and non-empty
-    for fld in REQUIRED_FIELDS:
-        v = field_data.get(fld)
-        chk(f"field:{fld}", bool(v), "" if v else "missing/empty")
-
-    # 2. Slug rules: never a year, never a leading listicle count, lowercase-hyphenated
-    chk("slug:no-year", not YEAR_RE.search(slug), slug if YEAR_RE.search(slug) else "")
-    lead_count = re.match(r"^(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|"
-                          r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|"
-                          r"eighteen|nineteen|twenty)-", slug)
-    chk("slug:no-leading-count", not lead_count,
-        f"slug starts with a count: {slug}" if lead_count else "")
-    chk("slug:format", bool(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)), slug)
-
-    # 3. Categories: main category is in the multi-ref list
-    main_cat = field_data.get("category")
-    multi    = field_data.get("category-multi-reference-3", [])
-    chk("category:main-in-tags", main_cat in multi if main_cat else False)
-
-    # 4. post-content integrity
-    pc = field_data.get("post-content", "")
-    chk("content:no-outreach-leak", "OUTREACH VERSION" not in pc and "INTERNAL USE" not in pc)
-    chk("content:no-disclosure-leak", "OPTIONAL DISCLOSURE" not in pc)
-    chk("content:no-h1", "<h1>" not in pc)
-    # Internal links should be present — zero almost always means Phase 3 (internal
-    # linking) was skipped. Internal = relative href or a social.plus URL.
-    n_internal = len(re.findall(r'href="(?:/|https?://(?:www\.)?social\.plus)', pc))
-    chk("content:has-internal-links", n_internal >= 1,
-        "no internal links found — did Phase 3 (internal-linking-strategist) run?" if not n_internal
-        else f"{n_internal} internal links")
-    n_placeholders = len(re.findall(r"__INLINE_IMG_\d+__", pc))
-    chk("content:placeholders-match-inline", n_placeholders == len(inline_paths),
-        f"{n_placeholders} placeholders vs {len(inline_paths)} inline images")
-    # If a table is present it must be real markup, not a flattened paragraph
-    if "At-a-Glance" in pc or "Comparison" in pc:
-        has_table = "<table>" in pc
-        chk("content:table-not-flattened", has_table,
-            "table heading present but no <table> markup" if not has_table else "")
-        # The table must sit inside a Webflow Embed (data-rt-embed-type) so the rest of
-        # the post stays editable in the Designer without the rich-text editor breaking it.
-        if has_table:
-            embedded = "data-rt-embed-type" in pc
-            chk("content:table-in-embed", embedded,
-                "" if embedded else "table is raw <table> — wrap it in a <div data-rt-embed-type='true'> embed")
-    # post-content must NOT carry a <style> block — Webflow renders it as literal text.
-    # Table CSS belongs in the site's custom code, not the CMS field.
-    chk("content:no-style-block", "<style>" not in pc,
-        "post-content contains a <style> block — move table CSS to site custom code" if "<style>" in pc else "")
-
-    # 5. Image dimensions
-    roles = [("header", header), ("grid", grid), ("menu", menu)]
-    roles += [("inline", p) for p in inline_paths]
-    for role, path in roles:
-        exp = EXPECTED_DIMS[role]
-        dims = _webp_dims(path)
-        if dims is None:
-            chk(f"image:{Path(path).name}", True, "dim check skipped (no Pillow)")
-        else:
-            chk(f"image:{Path(path).name}", dims == exp,
-                f"{dims[0]}x{dims[1]} (expected {exp[0]}x{exp[1]})" if dims != exp else f"{dims[0]}x{dims[1]}")
-        chk(f"image:{Path(path).name}:is-webp", str(path).lower().endswith(".webp"))
-
-    # Report
-    passed = sum(1 for c in checks if c["passed"])
-    total  = len(checks)
-    print(f"\n── DRY RUN ── {passed}/{total} checks passed", file=sys.stderr)
-    for c in checks:
-        mark = "✓" if c["passed"] else "✗"
-        line = f"  {mark} {c['check']}"
-        if c["detail"]:
-            line += f"  — {c['detail']}"
-        print(line, file=sys.stderr)
-
-    print(f"\n  Would publish: name={field_data.get('name')!r}", file=sys.stderr)
-    print(f"                 slug={slug!r}", file=sys.stderr)
-    print(f"                 {len(inline_paths)} inline + 3 hero images", file=sys.stderr)
-    print(f"                 post-content {len(pc):,} chars", file=sys.stderr)
-
-    report = {"passed": passed, "total": total, "all_passed": passed == total, "checks": checks}
-    report_path = str(Path(fielddata_path).with_name("dry-run-report.json"))
-    with open(report_path, "w") as f:
-        json.dump(report, f, indent=2)
-    print(f"\n  Report: {report_path}", file=sys.stderr)
-
-    # Machine-readable line on stdout
-    print(json.dumps({"dryRun": True, "passed": passed, "total": total,
-                      "allPassed": passed == total, "slug": slug}))
-    if passed != total:
-        sys.exit(1)
-
-
-# ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    if len(sys.argv) < 5:
-        print("Usage:\n"
-              "  create:  python3 blog-publisher.py <fielddata.json> <header.webp> <grid.webp> <menu.webp> [img-N.webp ...] [--staged] [--dry-run]\n"
-              "  update:  python3 blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>",
-              file=sys.stderr)
-        sys.exit(1)
+    argv = sys.argv[1:]
+    if not argv or argv[0] in ("-h", "--help"):
+        usage(0 if argv else 1)
 
-    all_args    = sys.argv[1:]
-    staged_mode = "--staged" in all_args
-    dry_run     = "--dry-run" in all_args
-    update_mode = "--update" in all_args
-    all_args    = [a for a in all_args if a not in ("--staged", "--dry-run", "--update")]
+    # New-style invocation → pass through, adding the blog collection if none was named.
+    if any(a.startswith("--image") or a in ("--collection", "--field-map", "--list-collections") for a in argv):
+        if not any(a in ("--collection", "--field-map", "--list-collections") for a in argv):
+            argv = ["--collection", COLLECTION, *argv]
+        os.execv(sys.executable, [sys.executable, str(ENGINE), *argv])
 
-    # ── Update mode: --update <item_id> <header> <grid> <menu> ──────────────────
-    if update_mode:
-        if staged_mode:
-            print("ERROR: --update cannot be combined with --staged (it patches an existing item).",
-                  file=sys.stderr)
-            sys.exit(1)
-        if len(all_args) != 4:
-            print("Usage: python3 blog-publisher.py --update <item_id> <header.webp> <grid.webp> <menu.webp>",
-                  file=sys.stderr)
-            sys.exit(1)
-        item_id, header_webp, grid_webp, menu_webp = all_args
-        for path in (header_webp, grid_webp, menu_webp):
-            if not Path(path).exists():
-                print(f"ERROR: File not found: {path}", file=sys.stderr)
-                sys.exit(1)
-        if dry_run:
-            # Dimension-only validation for an image refresh.
-            ok = True
-            for path, exp in [(header_webp, (1578, 888)), (grid_webp, (724, 408)),
-                              (menu_webp, (502, 283))]:
-                dims = _webp_dims(path)
-                good = dims is None or dims == exp
-                ok = ok and good
-                detail = "dim check skipped (no Pillow)" if dims is None else f"{dims[0]}x{dims[1]}"
-                print(f"  {'✓' if good else '✗'} {Path(path).name} — {detail}"
-                      + ("" if good else f" (expected {exp[0]}x{exp[1]})"), file=sys.stderr)
-            print(json.dumps({"dryRun": True, "update": True, "allPassed": ok}))
-            sys.exit(0 if ok else 1)
-        update_hero_images(get_token(), item_id, header_webp, grid_webp, menu_webp)
-        return
+    flags, positional, update_id, i = [], [], None, 0
+    while i < len(argv):
+        a = argv[i]
+        if a == "--update":
+            if i + 1 >= len(argv):
+                usage()
+            update_id = argv[i + 1]; i += 2
+        elif a in VALUE_FLAGS:
+            if i + 1 >= len(argv):
+                usage()
+            flags += [a, argv[i + 1]]; i += 2
+        elif a.startswith("--"):
+            flags.append(a); i += 1
+        else:
+            positional.append(a); i += 1
 
-    fielddata_path = all_args[0]
-    header_webp    = all_args[1]
-    grid_webp      = all_args[2]
-    menu_webp      = all_args[3]
-    inline_paths   = all_args[4:]
-
-    for path in [fielddata_path, header_webp, grid_webp, menu_webp] + inline_paths:
-        if not Path(path).exists():
-            print(f"ERROR: File not found: {path}", file=sys.stderr)
-            sys.exit(1)
-
-    with open(fielddata_path) as f:
-        field_data = json.load(f)
-
-    slug = field_data.get("slug", "blog-post")
-
-    # ── Dry-run: validate everything, touch no API. Repeatable + side-effect-free.
-    if dry_run:
-        dry_run_validate(field_data, slug, header_webp, grid_webp, menu_webp, inline_paths,
-                         fielddata_path)
-        return
-
-    token = get_token()
-
-    # ── Pre-flight: fail before any upload if token or slug is bad ─────────────
-    preflight(token, slug)
-
-    # ── Upload hero images ────────────────────────────────────────────────────
-    print("Uploading hero images…", file=sys.stderr)
-    header_id, header_url = upload_asset(token, header_webp, Path(header_webp).name)
-    grid_id,   grid_url   = upload_asset(token, grid_webp,   Path(grid_webp).name)
-    menu_id,   menu_url   = upload_asset(token, menu_webp,   Path(menu_webp).name)
-
-    field_data["image-page-header"]   = {"fileId": header_id, "url": header_url, "alt": None}
-    field_data["grid-thumbnail"]      = {"fileId": grid_id,   "url": grid_url,   "alt": None}
-    field_data["thumbnail-mega-menu"] = {"fileId": menu_id,   "url": menu_url,   "alt": None}
-
-    # ── Upload inline body images ─────────────────────────────────────────────
-    if inline_paths:
-        print(f"Uploading {len(inline_paths)} inline image(s)…", file=sys.stderr)
-        inline_urls = []
-        for path in inline_paths:
-            _, url = upload_asset(token, path, Path(path).name)
-            inline_urls.append(url)
-
-        if inline_urls and "post-content" in field_data:
-            print("Injecting inline images…", file=sys.stderr)
-            field_data["post-content"] = inject_inline_images(field_data["post-content"], inline_urls)
-
-    # ── Publish ───────────────────────────────────────────────────────────────
-    if staged_mode:
-        print("Staging for next site publish…", file=sys.stderr)
-        result = publish_staged(token, field_data)
+    if update_id:
+        if len(positional) != 3:
+            usage()
+        cmd = ["--update", update_id, "--collection", COLLECTION]
+        for role, path in zip(HERO_ROLES, positional):
+            cmd += ["--image", f"{role}={path}"]
     else:
-        print("Publishing to Webflow…", file=sys.stderr)
-        result = publish_live(token, field_data)
-
-    item_id   = result.get("id", "")
-    live_slug = (result.get("fieldData") or {}).get("slug", slug)
-
-    output = {"itemId": item_id, "slug": live_slug, "liveUrl": f"https://www.social.plus/blog/{live_slug}"}
-    print(json.dumps(output, indent=2))
-    print(f"\n✓ Done: https://www.social.plus/blog/{live_slug}", file=sys.stderr)
+        if len(positional) < 4:
+            usage()
+        fielddata, heroes, inline = positional[0], positional[1:4], positional[4:]
+        cmd = [fielddata, "--collection", COLLECTION]
+        for role, path in zip(HERO_ROLES, heroes):
+            cmd += ["--image", f"{role}={path}"]
+        if inline:
+            cmd += ["--inline", *inline]
+    cmd += flags
+    os.execv(sys.executable, [sys.executable, str(ENGINE), *cmd])
 
 
 if __name__ == "__main__":
