@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:56:47.486Z",
+    "generatedAt": "2026-09-20T11:57:18.640Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -195,32 +195,32 @@
     {
       "url": "https://www.social.plus/glossary/real-time-app",
       "metaTitle": "What is a real-time app?",
-      "metaDescription": "Discover the power of real-time apps and how they revolutionize user engagement and communication. Learn about their benefits, key features",
-      "content": "# Real-Time App\n## Introduction to real-time apps\n## The importance of real-time apps\n## How real-time apps work\n## Key features of real-time apps\n## Benefits of real-time apps in business\n## Real-time apps and user engagement: The role of Social+\n## Key rakeaways"
+      "metaDescription": "A real-time app delivers updates to users the moment they happen, without a manual refresh. Learn how real-time apps work, common types, and key metrics.",
+      "content": "# Real-Time App\n## Why Real-Time Apps Matter\n## How a Real-Time App Works\n## Real-Time Apps and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/in-app-community",
       "metaTitle": "What is in-app community?",
-      "metaDescription": "Explore the transformative power of in-app communities for boosting user engagement, retention, and monetization with Social+'s advanced SDKs.",
-      "content": "# In-App Community\n## Introduction to in-app community\n## The importance of in-app communities\n## How in-app communities work\n## Benefits of building an in-app community\n## Implementing an in-app community with Social+\n## Key takeaways"
+      "metaDescription": "An in-app community is a social space inside your own app where users connect around shared interests. Learn how it works, key metrics, and why it matters.",
+      "content": "# In-App Community\n## Why In-App Community Matters\n## How an In-App Community Works\n## In-App Community and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/in-app-chat",
       "metaTitle": "What is in-app chat?",
-      "metaDescription": "Discover the power of in-app chat and its transformative impact on user engagement, retention, and monetization.",
-      "content": "# In-App Chat\n## Introduction\n## The significance of in-app chat\n## How in-app chat works\n## Key features of in-app chat\n## Benefits of integrating in-app chat with Social+\n## Applications and examples\n## Key takeaways"
+      "metaDescription": "In-app chat lets users message each other or the brand inside an app. Learn the types of in-app chat, how it works, key metrics, and why it drives retention.",
+      "content": "# In-App Chat\n## Why In-App Chat Matters\n## Types of In-App Chat\n## In-App Chat and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/engagement-rate",
       "metaTitle": "What is engagement rate?",
-      "metaDescription": "Discover the significance of the engagement rate in digital marketing and how it influences user interaction and brand loyalty.",
-      "content": "# Engagement Rate\n## Introduction\n## Defining engagement rate\n## The significance of engagement rate\n## How to calculate engagement rate\n## Strategies for improving engagement rate\n## Boost your app engagement rate with Social+\n## Key takeaways"
+      "metaDescription": "Engagement rate is the share of users who actively interact with content or features. Learn how to calculate engagement rate, with a worked example.",
+      "content": "# Engagement Rate\n## Why Engagement Rate Matters\n## How to Calculate Engagement Rate\n## Engagement Rate and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/retention-rate",
       "metaTitle": "What is retention rate?",
-      "metaDescription": "Discover the importance of retention rate for digital platforms, its calculation, and strategies to improve it.",
-      "content": "# Retention Rate\n## Introduction to retention rate\n## The significance of retention rate\n## Calculating retention rate\n## Strategies to improve retention rate\n## Leveraging Social+ to enhance retention rate\n## Key takeaways"
+      "metaDescription": "Retention rate is the percentage of users who keep using an app after a set period. Learn how to calculate retention rate, read cohort curves, and improve it.",
+      "content": "# Retention Rate\n## Why Retention Rate Matters\n## How to Calculate Retention Rate\n## Retention Rate and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/churn-rate",
