@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:59:04.668Z",
+    "generatedAt": "2026-09-20T11:59:51.807Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -81,32 +81,32 @@
     {
       "url": "https://www.social.plus/glossary/in-app-feedback",
       "metaTitle": "What is in-app feedback?",
-      "metaDescription": "Discover the power of in-app feedback to enhance user experience, drive engagement, and foster loyalty. Learn how integrating feedback mechanisms",
-      "content": "# In-App Feedback\n## The significance of in-app feedback\n## How in-app feedback works\n## Benefits of implementing in-app feedback\n### For businesses\n### For Users\n## Best practices for collecting in-app feedback\n## In-app feedback and Social+: Enhancing user engagement and retention\n## Key takeaways"
+      "metaDescription": "In-app feedback is user input collected inside the app through surveys, ratings, and bug reports. Learn the types, metrics, and how to act on it.",
+      "content": "# In-App Feedback\n## Why In-App Feedback Matters\n## Types of In-App Feedback\n## In-App Feedback and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/chat-widget",
       "metaTitle": "What is a chat widget?",
-      "metaDescription": "Discover the transformative power of chat widgets in enhancing user engagement, retention, and monetization on digital platforms.",
-      "content": "# Chat Widget\n## Introduction to chat widgets\n## The significance of chat widgets\n## Key features of effective chat widgets\n## Applications of chat widgets\n## Benefits of integrating chat widgets with Social+\n## Key takeaways"
+      "metaDescription": "A chat widget is an embeddable chat interface that lets users message inside a website or app without leaving the page. Definition, types, and metrics.",
+      "content": "# Chat Widget\n## Why Chat Widgets Matter\n## Types of Chat Widgets\n## Chat Widgets and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/chat-channel",
       "metaTitle": "What is a chat channel?",
-      "metaDescription": "Discover the transformative power of chat channels in digital platforms. Learn how integrating chat channels with Social+'s SDKs can boost user engagement",
-      "content": "# Chat Channel\n## Introduction to chat channels\n## The Importance of chat channels in digital communication\n## How chat channels work\n## Applications of chat channels\n## Enhancing Engagement and Retention with Social+\n## Key benefits of implementing chat channels\n## Key takeaways"
+      "metaDescription": "A chat channel is a defined space where a set of users exchange messages in real time. Learn the types of chat channels and how to measure them.",
+      "content": "# Chat Channel\n## Why Chat Channels Matter\n## Types of Chat Channels\n## Chat Channels and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/white-label-chat",
       "metaTitle": "What is white label chat?",
-      "metaDescription": "Discover how white label chat can transform user engagement and brand loyalty. Learn about its benefits, applications",
-      "content": "# White Label Chat\n## Introduction to white label chat\n## Key features and benefits\n## Why white label chat is essential for businesses\n## Applications of White Label Chat\n### E-commerce platforms\n### Educational platforms\n### Healthcare services\n### Gaming and social apps\n## Integrating white label chat with Social+\n## Key takeaways"
+      "metaDescription": "White label chat is a ready-built chat system a brand integrates and presents under its own name and design. Definition, how it works, and metrics.",
+      "content": "# White Label Chat\n## Why White Label Chat Matters\n## How White Label Chat Works\n## White Label Chat and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/white-label-social-features",
       "metaTitle": "What is white label social features?",
-      "metaDescription": "Discover how white label social features can transform your app or website into an engaging community platform.",
-      "content": "# White Label Social Features\n## Introduction to white label social features\n## The Importance of white label social features\n## Applications and benefits\n### Enhancing user engagement\n### Boosting user retention\n### Unlocking new monetization opportunities\n## How Social+ empowers businesses with white label social features\n## Key takeaways"
+      "metaDescription": "White label social features are ready-built feeds, groups, chat, and profiles a brand adds to its app under its own name. Definition, types, and metrics.",
+      "content": "# White Label Social Features\n## Why White Label Social Features Matter\n## Types of White Label Social Features\n## White Label Social Features and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/white-label-social-network",
