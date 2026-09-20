@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:52:52.980Z",
+    "generatedAt": "2026-09-20T11:56:47.486Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -21,32 +21,32 @@
     {
       "url": "https://www.social.plus/glossary/social-feed",
       "metaTitle": "What is a social feed?",
-      "metaDescription": "Explore the significance of social feeds in digital communication and how Social+ can enhance user engagement, retention, and monetization.",
-      "content": "# Social Feed\n## Introduction to social feeds\n## The significance of social feeds\n## Applications of social feeds\n## Benefits of integrating social feeds with Social+\n## How Social+ enhances social feeds\n## Key takeaways"
+      "metaDescription": "A social feed is a continuously updated stream of posts from users, groups, or topics a person follows, ranked by time or relevance inside an app.",
+      "content": "# Social Feed\n## Why Social Feed Matters\n## Types of Social Feed\n## Social Feed and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/activity-feed",
       "metaTitle": "What is an activity feed?",
-      "metaDescription": "Discover the power of activity feeds in boosting user engagement, retention, and monetization opportunities. Learn how Social+ enhances your platform",
-      "content": "# Activity Feed\n## Introduction to activity feeds\n## The role of activity feeds in user engagement\n## Applications of activity feeds\n## Benefits of implementing an sctivity geed with Social+\n## Key takeaways"
+      "metaDescription": "An activity feed is a chronological stream of actions users take in an app, such as posts, likes, follows, and milestones, shown to the people who follow them.",
+      "content": "# Activity Feed\n## Why Activity Feed Matters\n## How an Activity Feed Works\n## Activity Feed and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/user-experience",
       "metaTitle": "What is user experience (UX)?",
-      "metaDescription": "Discover the critical role of User Experience (UX) in digital platforms, its key components, and how Social+ enhances user engagement and retention.",
-      "content": "# User Experience\n## Introduction to user experience\n## The significance of UX in digital platforms\n## Key components of UX design\n## UX and Social+: Enhancing engagement and retention\n## Practical examples of UX impact\n## Key takeaways"
+      "metaDescription": "User experience (UX) is how a person feels using an app, shaped by usability, speed, clarity, and whether the product helps them reach their goal.",
+      "content": "# User Experience\n## Why User Experience Matters\n## User Experience Metrics\n## User Experience and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/interaction-rate",
       "metaTitle": "What is interaction rate?",
-      "metaDescription": "Discover the importance of the interaction rate in digital engagement, its calculation, and strategies to boost it using Social+ SDKs",
-      "content": "# Interaction Rate\n## Introduction to interaction rate\n## The significance of interaction rate in digital engagement\n## Calculating interaction rate: A primer\n## Applications and benefits of monitoring interaction rate\n## Strategies to boost interaction rate using Social+ features\n## Key takeaways"
+      "metaDescription": "Interaction rate is the share of people who saw a piece of content and acted on it, calculated as interactions divided by impressions or reach.",
+      "content": "# Interaction Rate\n## Why Interaction Rate Matters\n## How to Calculate Interaction Rate\n## Interaction Rate and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/session-length",
       "metaTitle": "What is session length?",
-      "metaDescription": "Explore the significance of session length in user engagement, its impact on content quality, UX, and monetization",
-      "content": "# Session Length\n## Understanding session length\n## The importance of session length\n## Measuring session length\n### Applications and benefits\n## Enhancing session length with Social+\n## Key takeaways"
+      "metaDescription": "Session length is the time a user spends in an app from open to close or timeout, a core metric for measuring how deeply users engage per visit.",
+      "content": "# Session Length\n## Why Session Length Matters\n## How to Calculate Session Length\n## Session Length and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/user-retention",
