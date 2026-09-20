@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:58:24.655Z",
+    "generatedAt": "2026-09-20T11:59:04.668Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -225,32 +225,32 @@
     {
       "url": "https://www.social.plus/glossary/churn-rate",
       "metaTitle": "What is churn rate?",
-      "metaDescription": "Discover how understanding churn rate is crucial for enhancing user engagement and retention, particularly through Social+'s social features.",
-      "content": "# Churn Rate\n## Introduction to churn rate\n## Calculating churn rate\n## The significance of churn rate for apps\n## Key takeaways"
+      "metaDescription": "Churn rate is the percentage of users who stop using an app in a given period. Learn the formula, benchmarks, and how to reduce it.",
+      "content": "# Churn Rate\n## Why Churn Rate Matters\n## How to Calculate Churn Rate\n## Churn Rate and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/app-store-optimization",
       "metaTitle": "What is App Store Optimization (ASO)?",
-      "metaDescription": "Discover the essentials of App Store Optimization (ASO) and learn how it can enhance your app's visibility, improve download rates",
-      "content": "# App Store Optimization\n## Introduction to ASO\n## The importance of ASO for mobile apps\n## Key components of ASO\n### Keywords\n### App title and description\n### Visuals: Icons, screenshots, and videos\n### Ratings and reviews\n## ASO best practices\n## Key Takeaways"
+      "metaDescription": "App Store Optimization (ASO) improves an app's visibility and conversion in app store search. Learn the key ASO factors, metrics, and a worked example.",
+      "content": "# App Store Optimization\n## Why App Store Optimization Matters\n## App Store Optimization Metrics\n## App Store Optimization and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/in-app-subscription",
       "metaTitle": "What is an in-app subscription?",
-      "metaDescription": "Discover the power of in-app subscriptions: a comprehensive guide on how they enhance user engagement, retention, and monetization",
-      "content": "# In-app Subscription\n## Introduction to in-app subscriptions\n## The importance of in-app subscriptions\n## How in-app subscriptions work\n## Benefits of in-app subscriptions\n### For users:\n### For businesses:\n## Implementing in-app subscriptions with Social+\n## Key takeaways"
+      "metaDescription": "An in-app subscription is a recurring payment for ongoing access to app content or features. Learn how in-app subscriptions work and their key metrics.",
+      "content": "# In-App Subscription\n## Why In-App Subscriptions Matter\n## How In-App Subscriptions Work\n## In-App Subscriptions and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/in-app-purchase",
       "metaTitle": "What is an in-app purchase?",
-      "metaDescription": "Discover how in-app purchases can boost user engagement and revenue for your app. This article explores types, importance, and best practices",
-      "content": "# In-app Purchase\n## Introduction to in-app purchases\n## Types of in-app purchases\n## The importance of in-app purchases\n## In-app purchases with Social+: Enhancing engagement and revenue\n## Best practices for implementing in-app purchases\n## Key takeaways"
+      "metaDescription": "An in-app purchase is a transaction made inside an app for digital goods, features, or subscriptions. Learn the types of in-app purchases and key metrics.",
+      "content": "# In-App Purchase\n## Why In-App Purchases Matter\n## Types of In-App Purchases\n## In-App Purchases and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/social-commerce",
       "metaTitle": "What is social commerce?",
-      "metaDescription": "Explore the transformative world of social commerce, its significance, benefits, and how Social+ SDKs can enhance user engagement, retention",
-      "content": "# Social Commerce\n## Introduction to social commerce\n## The significance of social commerce\n### Key benefits:\n## Applications and benefits\n## How Social+ elevates social commerce:\n## Implementing social commerce with Social+\n## Key takeaways"
+      "metaDescription": "Social commerce is buying and selling inside social experiences such as feeds, live streams, and communities. Learn how it works and how to measure it.",
+      "content": "# Social Commerce\n## Why Social Commerce Matters\n## How Social Commerce Works\n## Social Commerce and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/daily-active-user",
