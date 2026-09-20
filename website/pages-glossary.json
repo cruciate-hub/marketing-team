@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:57:18.640Z",
+    "generatedAt": "2026-09-20T11:58:24.655Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -51,32 +51,32 @@
     {
       "url": "https://www.social.plus/glossary/user-retention",
       "metaTitle": "What is user retention?",
-      "metaDescription": "Discover the significance of user retention and how it impacts app success. Learn strategies for improving retention rates",
-      "content": "# User Retention\n## Introduction to user retention\n## The importance of user retention\n## Strategies for improving user retention\n### Personalization\n### Community building\n### Quality content and features\n### Regular updates and feedback loops\n## How Social+ Enhances User Retention\n## Key takeaways"
+      "metaDescription": "User retention is the share of users who keep coming back after first use, tracked by cohort at Day 1, 7, and 30 to show whether the app forms a habit.",
+      "content": "# User Retention\n## Why User Retention Matters\n## How to Calculate User Retention\n## User Retention and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/user-engagement",
       "metaTitle": "What is user engagement?",
-      "metaDescription": "Explore the importance of user engagement, how to measure it, and strategies for improvement with insights on leveraging Social+",
-      "content": "# User Engagement\n## Introduction to user engagement\n## The significance of user engagement\n## Measuring user engagement\n## Strategies to enhance user engagement\n## User engagement with Social+\n## Key takeaways"
+      "metaDescription": "User engagement is how actively and deeply users interact with an app, measured by return frequency, session depth, and actions such as posting and replying.",
+      "content": "# User Engagement\n## Why User Engagement Matters\n## User Engagement Metrics\n## User Engagement and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/brand-advocate",
       "metaTitle": "What is a brand advocate?",
-      "metaDescription": "Discover the power of brand advocates in transforming customer loyalty into authentic endorsements. Learn how to identify, nurture",
-      "content": "# Brand Advocate\n## Introduction to brand advocacy\n## The significance of brand advocates\n## Identifying and Cultivating Brand Advocates\n## Brand advocates vs. influencers: Understanding the difference\n## Leveraging Social+ to foster brand advocacy\n## Key takeaways"
+      "metaDescription": "A brand advocate is a user who recommends a brand voluntarily, helps other users, and defends it publicly without being paid to do so.",
+      "content": "# Brand Advocate\n## Why Brand Advocate Matters\n## Types of Brand Advocate\n## Brand Advocate and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/app-personalization",
       "metaTitle": "What is app personalization?",
-      "metaDescription": "Discover the power of app personalization to enhance user engagement, retention, and monetization. Learn how Social+'s solutions can tailor your app",
-      "content": "# App Personalization\n## Introduction to app personalization\n## The importance of app personalization\n## How app personalization works\n## Benefits of App Personalization\n## Implementing App Personalization with Social+\n## Key takeaways"
+      "metaDescription": "App personalization tailors content, features, and UI to each user based on behavior and preferences. Definition, metrics, and a worked example.",
+      "content": "# App Personalization\n## Why App Personalization Matters\n## App Personalization Metrics\n## App Personalization and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/vertical-social-network",
       "metaTitle": "What is a vertical social network?",
-      "metaDescription": "Discover the power of vertical social networks: niche platforms that connect like-minded individuals and offer targeted engagement opportunities.",
-      "content": "# Vertical Social Network\n## Introduction to vertical social networks\n## The significance of vertical social networks\n## Applications of vertical social networks\n## Benefits of vertical social networks\n## Enhancing vertical social networks with social.plus's social features\n## Key takeaways"
+      "metaDescription": "A vertical social network serves one specific interest, profession, or community rather than a general audience. Definition, types, and metrics.",
+      "content": "# Vertical Social Network\n## Why Vertical Social Networks Matter\n## Types of Vertical Social Networks\n## Vertical Social Networks and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/in-app-feedback",
