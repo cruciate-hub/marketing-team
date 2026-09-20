@@ -221,7 +221,7 @@ def glossary_draft_converts_but_is_blocked_while_slugs_unconfirmed():
         assert body.startswith("<p>An active user is any person"), body[:60]              # definition stays in body
         assert "<div data-rt-embed-type='true'><table><thead><tr><th>Metric</th>" in body  # metrics table embedded
         assert "<h3>" not in body
-        assert re.findall(r"<h2>(.*?)</h2>", body)[-1] == "Key Takeaways"
+        assert re.findall(r"<h2>(.*?)</h2>", body)[-1] == "Related Terms"
         assert body.count('<a href="https://www.social.plus/glossary/') == 3               # Related Terms, same tab
         # dry-run fails loudly on the unconfirmed map, but the structural checks still run on the parked body
         p = run(SCRIPTS / "webflow-publisher.py", out, "--field-map", unconfirmed_map,

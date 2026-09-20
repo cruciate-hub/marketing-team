@@ -156,10 +156,13 @@ class Report:
         )
 
 
+METADATA_FIELDS = r"Meta description|Slug|Alt text|Category|Editor \(named human reviewer\)"
+
+
 def parse_metadata(text: str) -> dict:
     meta = {}
     for line in text.splitlines():
-        m = re.match(r"^\s*(Meta description|Slug|Alt text|Category)\s*:\s*(.+)$", line)
+        m = re.match(rf"^\s*({METADATA_FIELDS})\s*:\s*(.+)$", line)
         if m:
             meta[m.group(1)] = m.group(2).strip()
     return meta
@@ -188,7 +191,7 @@ def word_count(text: str) -> int:
     # length check reflects prose, not table syntax.
     body_lines = [
         l for l in text.splitlines()
-        if not re.match(r"^\s*(Meta description|Slug|Alt text|Category)\s*:", l)
+        if not re.match(rf"^\s*({METADATA_FIELDS})\s*:", l)
     ]
     body = "\n".join(body_lines)
     body = re.sub(r"^#.*$", "", body, flags=re.MULTILINE)  # drop headings from count? keep headings out only if desired
@@ -437,23 +440,23 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     for key, found in section_hits.items():
         report.add(f"required_section_{key}", found, "FAIL", "not found among H2 headings" if not found else "")
 
-    # Key Takeaways must be the final H2 — it's the block an AI engine reads
-    # if it only reads one more section after the definition, so buried
-    # mid-document it loses the reason it exists. Presence alone (the check
-    # above) doesn't catch it landing in the wrong position.
-    kt_last = bool(headings) and any(
-        re.search(p, headings[-1], re.IGNORECASE) for p in REQUIRED_H2_KEYWORDS["key_takeaways"]
+    # Related Terms must be the final H2 — it's the internal-linking section,
+    # and the last thing on the page is where a reader (or an AI engine
+    # extracting the page) most reliably still sees outbound links. Presence
+    # alone (the check above) doesn't catch it landing in the wrong position.
+    rt_last = bool(headings) and any(
+        re.search(p, headings[-1], re.IGNORECASE) for p in REQUIRED_H2_KEYWORDS["related_terms"]
     )
     report.add(
-        "key_takeaways_is_last_section",
-        kt_last,
+        "related_terms_is_last_section",
+        rt_last,
         "FAIL",
-        "" if kt_last else (f"last H2 is '{headings[-1]}'" if headings else "no H2 headings found"),
+        "" if rt_last else (f"last H2 is '{headings[-1]}'" if headings else "no H2 headings found"),
     )
 
     # --- Answer-first definition paragraph ---
     meta_lines_end = 0
-    for fname in ["Meta description", "Slug", "Alt text", "Category"]:
+    for fname in ["Meta description", "Slug", "Alt text", "Category", "Editor (named human reviewer)"]:
         m = re.search(rf"^\s*{re.escape(fname)}\s*:.*$", text, re.MULTILINE)
         if m:
             meta_lines_end = max(meta_lines_end, m.end())

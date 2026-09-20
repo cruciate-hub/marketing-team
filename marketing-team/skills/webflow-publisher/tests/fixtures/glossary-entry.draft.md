@@ -25,14 +25,14 @@ A worked example: 2,000 DAU divided by 8,000 MAU gives a stickiness ratio of 25%
 
 social.plus reports active users per community feature, so a team can see whether chat, feeds, or live streams drive the daily action rather than reading one blended number.
 
-## Related Terms
-
-- [Retention rate](https://www.social.plus/glossary/retention-rate)
-- [Stickiness](https://www.social.plus/glossary/stickiness)
-- [Daily active users](https://www.social.plus/glossary/daily-active-users)
-
 ## Key Takeaways
 
 - An active user completes a meaningful action within a set window.
 - DAU divided by MAU is the stickiness ratio and shows habit strength.
 - Define the meaningful action once and keep it stable so trends stay comparable.
+
+## Related Terms
+
+- [Retention rate](https://www.social.plus/glossary/retention-rate)
+- [Stickiness](https://www.social.plus/glossary/stickiness)
+- [Daily active users](https://www.social.plus/glossary/daily-active-users)
