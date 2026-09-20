@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T12:04:11.774Z",
+    "generatedAt": "2026-09-20T12:04:14.309Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -171,26 +171,26 @@
     {
       "url": "https://www.social.plus/glossary/live-streaming",
       "metaTitle": "What is live streaming?",
-      "metaDescription": "Discover the power of live streaming: its significance, applications, and benefits for user engagement and monetization.",
-      "content": "# Live Streaming\n## Introduction to live streaming\n## The significance of live streaming\n## Applications of live streaming\n## Benefits of live streaming for engagement and monetization\n## Integrating live streaming with Social+\n## Key takeaways"
+      "metaDescription": "Live streaming is real-time video broadcast to an audience as it happens, usually with live chat and reactions. Definition, how it works, and key metrics.",
+      "content": "# Live Streaming\n## Why Live Streaming Matters\n## How Live Streaming Works\n## Live Streaming and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/real-time-messaging",
       "metaTitle": "What is real-time messaging?",
-      "metaDescription": "Discover the power of Real-Time Messaging (RTM) and its impact on user engagement, retention, and monetization.",
-      "content": "# Real-Time Messaging\n## Introduction to real-time messaging\n## The significance of real-time messaging\n## Applications and benefits\n### Enhancing user engagement\n### Improving user retention\n### Unlocking new monetization opportunities\n## Real-time messaging in action: Social+’s solutions\n## Key takeaways"
+      "metaDescription": "Real-time messaging delivers messages between users or systems within milliseconds over a persistent connection. Definition, how it works, and metrics.",
+      "content": "# Real-Time Messaging\n## Why Real-Time Messaging Matters\n## How Real-Time Messaging Works\n## Real-Time Messaging and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/api-token",
       "metaTitle": "What is an API token?",
-      "metaDescription": "Explore the significance and applications of API tokens in securing and streamlining access to web services, especially within Social+'s ecosystem",
-      "content": "# API Token\n## Introduction to API tokens\n## The significance of API tokens\n## How API tokens work\n## API tokens vs. other authentication methods\n## The role of API tokens in Social+'s ecosystem\n## Best practices for managing API tokens\n## Key takeaways"
+      "metaDescription": "An API token is a secret string a client sends with each request to prove its identity and permissions to an API. Definition, types, and how tokens work.",
+      "content": "# API Token\n## Why API Tokens Matter\n## Types of API Tokens\n## API Tokens and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/low-latency",
       "metaTitle": "What is low latency?",
-      "metaDescription": "Discover the significance of low latency and its impact on user engagement, retention, and monetization in digital platforms.",
-      "content": "# Low Latency\n## Introduction to low latency\n## The importance of low latency\n## Low latency in online platforms and social networks\n## How Social+ leverages low latency for enhanced user experience\n## Key takeaways"
+      "metaDescription": "Low latency is the short delay between a user action and the system response. Learn how it is measured, typical targets, and why real-time features need it.",
+      "content": "# Low Latency\n## Why Low Latency Matters\n## How Low Latency Is Measured\n## Low Latency and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/real-time-app",
