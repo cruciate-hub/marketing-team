@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-13T10:08:13.862Z",
+    "generatedAt": "2026-09-20T11:52:52.980Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -9,14 +9,14 @@
     {
       "url": "https://www.social.plus/glossary/websocket",
       "metaTitle": "What is WebSocket?",
-      "metaDescription": "Discover the power of WebSocket for real-time communication and its role in enhancing user engagement, retention, and monetization with Social+.",
-      "content": "# WebSocket\n## Introduction to WebSocket\n## Understanding WebSocket: A deep dive\n## The role of WebSocket in real-time communication\n## WebSocket vs. traditional HTTP polling\n## Advantages of WebSocket for businesses\n## Implementing WebSocket with Social+\n## Key takeaways"
+      "metaDescription": "WebSocket is a protocol that keeps one persistent, two-way connection open between app and server so messages arrive instantly without polling.",
+      "content": "# WebSocket\n## Why WebSocket Matters\n## How WebSocket Works\n## WebSocket and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/video-sdk",
       "metaTitle": "What is Video SDK?",
-      "metaDescription": "Explore the transformative power of Video SDK for live streaming, its key features, applications, and benefits with Social+ solutions.",
-      "content": "# Video SDK\n## Introduction to Video SDKs\n## The significance of live streaming\n## Key features of Video SDK for live streaming\n## Applications of Video SDKs in various industries\n## Benefits of Integrating Video SDK with Social+\n## Key takeaways"
+      "metaDescription": "A video SDK is a developer toolkit that adds live streaming, playback, and video interaction to an app without building the media pipeline from scratch.",
+      "content": "# Video SDK\n## Why Video SDK Matters\n## How a Video SDK Works\n## Video SDK and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/social-feed",
