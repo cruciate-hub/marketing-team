@@ -153,9 +153,9 @@ Unlike `aeo-content` (which branches by query intent), glossary entries use **on
 
 4. **[Term] and social.plus** (H2) — connects the term to the product. This is the section most exposed to overclaiming — every specific or numeric claim about social.plus here must come from the approved-data list (fetch it from `aeo-content`'s "Approved data and customer names" section; this skill doesn't carry its own copy). If there's no approved data point that genuinely fits, keep this section to a general, honest statement of relevance rather than inventing a stat.
 
-5. **Related Terms** (H2) — 3-6 internal links to other glossary or answer entries. This is the section that does the internal-linking work the strategy calls out explicitly (2. Content Types & Goals: "Related Terms (For internal linking)"). Populated by `internal-linking-strategist` (see below), not improvised.
+5. **Key Takeaways** (H2) — 3-4 bullet points, each one sentence, recapping the definition, the "why it matters," and the one metric/formula from section 3. This is the second-most-extractable block after the definition — write it as if it's the only section an AI engine reads.
 
-6. **Key Takeaways** (H2) — 3-4 bullet points, each one sentence, recapping the definition, the "why it matters," and the one metric/formula from section 3. This is the second-most-extractable block after the definition — write it as if it's the only section an AI engine reads. **Must be the last section in the document — nothing follows it.** `compliance.py` enforces this as a FAIL, not just checking that the section exists.
+6. **Related Terms** (H2) — 3-6 internal links to other glossary or answer entries. This is the section that does the internal-linking work the strategy calls out explicitly (2. Content Types & Goals: "Related Terms (For internal linking)"). Populated by `internal-linking-strategist` (see below), not improvised. **Must be the last section in the document — nothing follows it.** `compliance.py` enforces this as a FAIL, not just checking that the section exists: the internal-linking section is deliberately placed last so a reader (or an AI engine extracting the page) still reaches it after everything else.
 
 ## Formatting rules that make this different from the old glossary
 
@@ -194,16 +194,16 @@ Category: [topic category — reuse blog-seo-content's Main Category Tag list wh
 
 ...
 
-## Related Terms
-
-- [Related term 1](URL)
-- [Related term 2](URL)
-
 ## Key Takeaways
 
 - ...
 - ...
 - ...
+
+## Related Terms
+
+- [Related term 1](URL)
+- [Related term 2](URL)
 ```
 
 No HTML in the intermediate. Internal `<a href>` / markdown links in "Related Terms" are added by `internal-linking-strategist`, not improvised (see below). This exact shape is also what `webflow-publisher` converts for publishing (see "Publishing to Webflow"), so keep the `Slug:` line equal to the live slug on a rewrite and never add HTML to work around a formatting need.
@@ -229,7 +229,7 @@ Save this evidence block verbatim to `outputs/[slug].links.md` alongside the dra
 
 Run `python3 scripts/compliance.py outputs/[slug].draft.md` before delivering any draft, and again after every edit. Paste the full stdout into your response — a manual eyeball pass is not a substitute (this is the same rule `blog-seo-content` and `aeo-content` enforce, and for the same reason: eyeball review reliably misses meta-description length, em dashes, and forbidden terms).
 
-The script checks: metadata completeness, word count (500-900), the answer-first definition (first paragraph ≤50 words, contains the term), presence of a markdown table, presence and length of Key Takeaways, Key Takeaways being the final H2 section (not just present — a draft with it placed mid-document FAILs), presence of Related Terms links, presence of a matching `outputs/[slug].links.md` evidence file with a real Anchor/Target/Reasoning entry (not just a bare Target line) covering every Related Terms link, and the shared forbidden/risky vocabulary tiers. When the site's `pages-glossary.json`/`pages-answers.json` snapshots are readable, it also confirms every Related Terms URL corresponds to a real published page. See the script's own docstring for the full list and `--json` output mode.
+The script checks: metadata completeness, word count (500-900), the answer-first definition (first paragraph ≤50 words, contains the term), presence of a markdown table, presence and length of Key Takeaways, presence of Related Terms links, Related Terms being the final H2 section (not just present — a draft with it placed mid-document FAILs), presence of a matching `outputs/[slug].links.md` evidence file with a real Anchor/Target/Reasoning entry (not just a bare Target line) covering every Related Terms link, and the shared forbidden/risky vocabulary tiers. When the site's `pages-glossary.json`/`pages-answers.json` snapshots are readable, it also confirms every Related Terms URL corresponds to a real published page. See the script's own docstring for the full list and `--json` output mode.
 
 The `.links.md` check is a mechanical backstop, not a replacement for honesty: a determined agent can still hand-type a fake evidence file with real Anchor/Target/Reasoning content for a URL that's genuinely on the site. But it turns "trust the agent's paste" into a checkable, diffable artifact a human (or the script) can inspect independently, and it closes off the cheapest fabrication (a bare URL list, or a URL that doesn't exist), instead of relying purely on the same agent that skipped the step to self-report accurately.
 

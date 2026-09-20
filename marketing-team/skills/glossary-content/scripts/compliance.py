@@ -437,18 +437,18 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     for key, found in section_hits.items():
         report.add(f"required_section_{key}", found, "FAIL", "not found among H2 headings" if not found else "")
 
-    # Key Takeaways must be the final H2 — it's the block an AI engine reads
-    # if it only reads one more section after the definition, so buried
-    # mid-document it loses the reason it exists. Presence alone (the check
-    # above) doesn't catch it landing in the wrong position.
-    kt_last = bool(headings) and any(
-        re.search(p, headings[-1], re.IGNORECASE) for p in REQUIRED_H2_KEYWORDS["key_takeaways"]
+    # Related Terms must be the final H2 — it's the internal-linking section,
+    # and the last thing on the page is where a reader (or an AI engine
+    # extracting the page) most reliably still sees outbound links. Presence
+    # alone (the check above) doesn't catch it landing in the wrong position.
+    rt_last = bool(headings) and any(
+        re.search(p, headings[-1], re.IGNORECASE) for p in REQUIRED_H2_KEYWORDS["related_terms"]
     )
     report.add(
-        "key_takeaways_is_last_section",
-        kt_last,
+        "related_terms_is_last_section",
+        rt_last,
         "FAIL",
-        "" if kt_last else (f"last H2 is '{headings[-1]}'" if headings else "no H2 headings found"),
+        "" if rt_last else (f"last H2 is '{headings[-1]}'" if headings else "no H2 headings found"),
     )
 
     # --- Answer-first definition paragraph ---
