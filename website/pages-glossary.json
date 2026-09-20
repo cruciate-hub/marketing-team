@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T12:01:26.659Z",
+    "generatedAt": "2026-09-20T12:02:20.789Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -285,32 +285,32 @@
     {
       "url": "https://www.social.plus/glossary/api",
       "metaTitle": "What is an API (Application Programming Interface)?",
-      "metaDescription": "Discover the power of APIs and how they drive user engagement, retention, and monetization in digital products.",
-      "content": "# API\n## Introduction to APIs\n## The significance of APIs in digital products\n## Types of APIs and their applications\n## How APIs can enhance user engagement and retention\n## APIs and monetization opportunities\n## Integrating APIs with Social+\n## Key takeaways"
+      "metaDescription": "An API (Application Programming Interface) is a defined set of rules and endpoints that lets software systems exchange data and trigger actions.",
+      "content": "# API (Application Programming Interface)\n## Why APIs Matter\n## How an API Works\n## APIs and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/sdk",
       "metaTitle": "What is an SDK (Software Development Kit)?",
-      "metaDescription": "Discover the power of SDKs in software development: Learn how they streamline app creation, enhance user engagement, and open new monetization avenues",
-      "content": "# SDK\n## Introduction to SDKs\n## The significance of SDKs\n## Types of SDKs\n## How SDKs can enhance user engagement and retention\n## SDKs and monetization opportunities\n## The role of Social+'s SDKs in amplifying digital platforms\n## Key takeaways"
+      "metaDescription": "An SDK (Software Development Kit) is a packaged set of libraries, tools, and documentation for adding a capability to an app on a specific platform.",
+      "content": "# SDK (Software Development Kit)\n## Why SDKs Matter\n## How an SDK Works\n## SDKs and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/active-user",
       "metaTitle": "What is an active user?",
-      "metaDescription": "Discover the importance of active users in digital platforms, their types, and how tracking them enhances engagement and monetization.",
-      "content": "# Active User\n## Introduction to active users\n## The significance of active user metrics\n## Types of active users\n## Measuring active users\n## Benefits of tracking active users for engagement and monetization\n## Enhancing active user metrics with Social+'s solutions\n## Key takeaways"
+      "metaDescription": "An active user is anyone who interacts with an app in a set time window, measured as DAU, WAU, or MAU.",
+      "content": "# Active User\n## Why Active Users Matter\n## Active User Metrics\n## Active User and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/community-sdk",
       "metaTitle": "What is a Community SDK?",
-      "metaDescription": "Discover the power of Community SDKs in driving user engagement, retention, and monetization. Learn how Social+'s Community SDK can transform your app",
-      "content": "# Community SDK\n## Introduction to Community SDKs\n## The significance of Community SDKs\n## Core features of a Community SDK\n## Applications and Benefits\n### Enhancing user engagement\n### Boosting user retention\n### Unlocking new monetization opportunities\n## Social+\n## Key takeaways"
+      "metaDescription": "A community SDK is a software development kit that adds groups, feeds, posts, comments, and moderation to an app so users can gather inside it.",
+      "content": "# Community SDK\n## Why a Community SDK Matters\n## Types of Community SDK Features\n## Community SDK and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/social-sdk",
       "metaTitle": "What is a Social SDK?",
-      "metaDescription": "Explore the significance of Social SDKs in enhancing app engagement and community building. Learn how Social+’s Social SDK can revolutionize user",
-      "content": "# Social SDK\n## Introduction to Social SDKs\n## The significance of Social SDKs in digital engagement\n## Core features of Social SDKs\n## Benefits of implementing Social SDKs\n## How Social+’s Social SDK stands out\n## Applications and practical examples\n## Key takeaways"
+      "metaDescription": "A social SDK is a software development kit that adds social features such as feeds, profiles, follows, comments, and reactions to an app.",
+      "content": "# Social SDK\n## Why a Social SDK Matters\n## Types of Social SDK Features\n## Social SDK and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/chat-api",
