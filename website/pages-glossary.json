@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T11:59:51.807Z",
+    "generatedAt": "2026-09-20T12:00:45.258Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -255,32 +255,32 @@
     {
       "url": "https://www.social.plus/glossary/daily-active-user",
       "metaTitle": "What is a Daily Active User (DAU)?",
-      "metaDescription": "Discover the significance of Daily Active Users (DAU) in boosting app engagement and retention. Learn strategies to enhance DAU",
-      "content": "# Daily Active User\n## Introduction to DAU\n## The significance of DAU for digital platforms\n## Measuring DAU: A closer look\n## DAU vs. MAU: Understanding the difference\n## Strategies to increase DAU\n## The role of Social+in enhancing DAU\n## Key takeaways"
+      "metaDescription": "A daily active user (DAU) is a unique user who interacts with an app within a 24-hour period. Learn how DAU is counted, what it signals, and how to use it.",
+      "content": "# Daily Active User (DAU)\n## Why Daily Active Users Matter\n## How to Calculate Daily Active Users\n## Daily Active Users and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/weekly-active-user",
       "metaTitle": "What is a Weekly Active User (WAU)?",
-      "metaDescription": "Discover the significance of Weekly Active User (WAU) as a key metric for measuring user engagement and retention.",
-      "content": "# Weekly Active User\n## Introduction to Weekly Active User (WAU)\n## The importance of WAU in user engagement analysis\n## How to calculate WAU\n## Applications of WAU in business strategy\n## Enhancing WAU with Social+'s features\n## Key takeaways"
+      "metaDescription": "A weekly active user (WAU) is a unique user who interacts with an app at least once in a 7-day period. Learn how WAU is counted and when to use it.",
+      "content": "# Weekly Active User (WAU)\n## Why Weekly Active Users Matter\n## How to Calculate Weekly Active Users\n## Weekly Active Users and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/monthly-active-user",
       "metaTitle": "What is a Monthly Active User (MAU)?",
-      "metaDescription": "Discover the significance of Monthly Active User (MAU) as a key metric for digital platforms. Learn how MAU tracks growth, user engagement",
-      "content": "# Monthly Active User\n## Introduction to MAU\n## Significance of MAU in digital platforms\n## Calculating MAU\n## MAU vs. other engagement metrics\n## Enhancing MAU with Social+'s features\n## Key takeaways"
+      "metaDescription": "A monthly active user (MAU) is a unique user who interacts with an app at least once in a 30-day period. Learn how MAU is counted and what it tells you.",
+      "content": "# Monthly Active User (MAU)\n## Why Monthly Active Users Matter\n## How to Calculate Monthly Active Users\n## Monthly Active Users and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/push-notification",
       "metaTitle": "What is a Push Notification?",
-      "metaDescription": "Discover the power of push notifications to boost user engagement, retention, and monetization. Learn how Social+'s innovative solutions enhance direct",
-      "content": "# Push Notification\n## Definition and overview\n## Significance of push notifications\n## Applications of push notifications\n## Benefits of push notifications for engagement and retention\n## Monetization opportunities through push notifications\n## Best practices for push notification strategy\n## Leverage push notifications with Social+\n## Key takeaways"
+      "metaDescription": "A push notification is a message sent from an app's server to a user's device, shown even when the app is closed. Learn the types and metrics.",
+      "content": "# Push Notification\n## Why Push Notifications Matter\n## Types of Push Notifications\n## Push Notifications and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/api-vs-sdk",
       "metaTitle": "What is the difference between an API and SDK?",
-      "metaDescription": "Explore the distinctions between API and SDK in software development, their roles in enhancing app functionality",
-      "content": "# API vs SDK\n## Introduction\n## Understanding APIs\n### Definition\n### Types of APIs\n### Use cases\n## Understanding SDKs\n### Definition\n### Common Components\n### Use Cases\n## Differences between API and SDK\n## Significance in application development\n### Enhancing user engagement\n### Improving retention\n### Monetization opportunities\n## How Social+ leverages APIs and SDKs\n## Key takeaways"
+      "metaDescription": "API vs SDK: an API is an interface for requesting data or actions from a service; an SDK is a toolkit that wraps the API for one platform.",
+      "content": "# API vs SDK\n## Why API vs SDK Matters\n## How API vs SDK Works\n## API vs SDK and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/api",
