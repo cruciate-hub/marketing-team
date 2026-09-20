@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T12:02:20.789Z",
+    "generatedAt": "2026-09-20T12:02:57.261Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -141,32 +141,32 @@
     {
       "url": "https://www.social.plus/glossary/in-app-notification",
       "metaTitle": "What are in-app notifications?",
-      "metaDescription": "Discover the power of in-app notifications to boost user engagement and retention. Learn about types, best practices",
-      "content": "# In-App Notification\n## Introduction to in-app notification\n## Importance of in-app notifications\n## Types of in-app notifications\n## Best practices for implementing in-app notifications\n## The role of Social+ in enhancing in-app notifications\n## Key takeaways"
+      "metaDescription": "An in-app notification is a message shown to a user while the app is open, such as a banner, modal, or badge. Definition, types, and how to measure it.",
+      "content": "# In-App Notification\n## Why In-App Notifications Matter\n## Types of In-App Notifications\n## In-App Notifications and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/deep-linking",
       "metaTitle": "What is deep linking?",
-      "metaDescription": "Discover the power of deep linking: a game-changer for enhancing user engagement, retention, and monetization in mobile apps and websites.",
-      "content": "# Deep Linking\n## Introduction to deep linking\n## Types of deep linking\n## The significance of leep linking\n## Applications of deep linking\n## Deep linking with Social+: Enhancing engagement and retention\n## Key takeaways"
+      "metaDescription": "Deep linking sends a user to a specific screen inside a mobile app instead of the home screen. Definition, types (URI scheme, universal, deferred), metrics.",
+      "content": "# Deep Linking\n## Why Deep Linking Matters\n## Types of Deep Linking\n## Deep Linking and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/omnichannel-communication",
       "metaTitle": "What is omnichannel communication?",
-      "metaDescription": "Discover the power of omnichannel communication in enhancing customer engagement and experience. Learn how integrating Social+'s solutions can drive user",
-      "content": "# Omnichannel Communication\n## Introduction to omnichannel communication\n## The Significance of omnichannel communication\n## How omnichannel communication works\n## Benefits of omnichannel communication for businesses\n### Enhanced customer experience\n### Improved user engagement and retention\n### Increased monetization opportunities\n## Implementing omnichannel communication with Social+\n## Key takeaways"
+      "metaDescription": "Omnichannel communication connects every channel a brand uses, from in-app chat to email and SMS, into one continuous conversation. Definition and metrics.",
+      "content": "# Omnichannel Communication\n## Why Omnichannel Communication Matters\n## Omnichannel Communication Metrics\n## Omnichannel Communication and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/social-as-a-service",
       "metaTitle": "What is Social as a Service (SoaaS)?",
-      "metaDescription": "Discover the transformative power of Social as a Service (SoaaS) in enhancing digital platforms with engaging social features like profiles, feeds",
-      "content": "# Social as a Service\n## Defining Social as a Service (SoaaS)\n## The significance of SoaaS\n## Key features of SoaaS\n## Benefits of implementing SoaaS\n## SoaaS in action: Use cases and applications\n## How Social+ leads SoaaS\n## Key takeaways"
+      "metaDescription": "Social as a Service (SaaS for social) is a hosted model that lets an app add feeds, profiles, groups, and chat via APIs and SDKs. Definition, how it works.",
+      "content": "# Social as a Service\n## Why Social as a Service Matters\n## How Social as a Service Works\n## Social as a Service and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/chat-as-a-service",
       "metaTitle": "What is Chat as a Service (CaaS)?",
-      "metaDescription": "Discover the power of Chat as a Service (CaaS) and how it transforms customer engagement, retention, and monetization.",
-      "content": "# Chat as a Service\n## Introduction to Chat as a Service\n## The significance of CaaS in today's digital landscape\n## How CaaS works\n## Benefits of implementing CaaS\n## Enhancing user engagement and retention with CaaS\n## Monetization opportunities through CaaS\n## The role of Social+ in Chat as a Service\n## Key takeaways"
+      "metaDescription": "Chat as a Service is a hosted model that gives an app one-to-one and group messaging through APIs and SDKs, without building the backend. Definition, metrics.",
+      "content": "# Chat as a Service\n## Why Chat as a Service Matters\n## Chat as a Service Metrics\n## Chat as a Service and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/live-streaming",
