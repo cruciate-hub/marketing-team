@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-20T12:02:57.261Z",
+    "generatedAt": "2026-09-20T12:04:11.774Z",
     "itemCount": 76,
     "collectionId": "66e2765d540e1939a89db93e",
     "method": "webflow-data-api"
@@ -315,32 +315,32 @@
     {
       "url": "https://www.social.plus/glossary/chat-api",
       "metaTitle": "What is a Chat API?",
-      "metaDescription": "Explore the power of Chat APIs in transforming app engagement and retention. Learn how integrating chat features with Social+ can elevate user experience",
-      "content": "# Chat API\n## Introduction to Chat APIs\n## The importance of Chat APIs in enhancing user experience\n## Key Features and Capabilities\n## Integrating Chat APIs with Social+\n## Practical applications and benefits\n## Key takeaways"
+      "metaDescription": "A chat API is a programming interface for sending, receiving, and managing real-time messages in an app. Learn how chat APIs work and what to measure.",
+      "content": "# Chat API\n## Why a Chat API Matters\n## How a Chat API Works\n## Chat API and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/chat-sdk",
       "metaTitle": "What is a Chat SDK?",
-      "metaDescription": "Discover how integrating a Chat SDK can transform your app's user engagement and retention. Learn about its benefits, key features",
-      "content": "# Chat SDK\n## Introduction to Chat SDKs\n## The significance of Chat SDKs in modern applications\n## How does a Chat SDK work?\n## Key features to look for in a Chat SDK\n## Benefits of integrating Chat SDK in your application\n## Chat SDK and Social+: Enhancing user engagement and retention\n## Key takeaways"
+      "metaDescription": "A chat SDK is a software development kit that adds real-time messaging to an app. Learn how a chat SDK works, what to measure, and when to use one.",
+      "content": "# Chat SDK\n## Why a Chat SDK Matters\n## How a Chat SDK Works\n## Chat SDK and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/community-platform",
       "metaTitle": "What is a community platform?",
-      "metaDescription": "Discover the power of community platforms: Learn how they foster engagement, retention, and monetization opportunities for businesses",
-      "content": "# Community Platform\n## Introduction to community platforms\n## The significance of community platforms\n## Key features of effective community platforms\n## Applications and benefits\n### For user engagement\n### For user retention\n### For monetization opportunities\n## How Social+ elevates community platforms\n## Key takeaways"
+      "metaDescription": "A community platform is software that hosts user-to-user interaction around a shared interest. Learn the types, how to measure one, and how it fits an app.",
+      "content": "# Community Platform\n## Why a Community Platform Matters\n## Types of Community Platform\n## Community Platform and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/community-app",
       "metaTitle": "What is a community app?",
-      "metaDescription": "Explore the power of community apps to boost engagement, retention, and monetization. Discover how Social+'s solutions can enhance your digital platform",
-      "content": "# Community App\n## Introduction to community apps\n## The significance of community apps\n## Key features of effective community apps\n## The role of Social+ in enhancing community apps\n## Benefits of integrating community apps into your strategy\n## Key takeaways"
+      "metaDescription": "A community app is a mobile or web app where users connect around a shared interest. Learn how a community app works, what to measure, and how brands build one.",
+      "content": "# Community App\n## Why a Community App Matters\n## How a Community App Works\n## Community App and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/online-community",
       "metaTitle": "What is an online community?",
-      "metaDescription": "Discover the power of online communities: Learn how they foster engagement, enhance customer loyalty, and unlock new monetization opportunities",
-      "content": "# Online Community\n## Introduction to online communities\n## The significance of online communities\n## Applications of online communities\n## Benefits of online communities\n## How Social+ empowers online communities\n## Key takeaways"
+      "metaDescription": "An online community is a group of people who interact on a digital platform around a shared interest. Learn the types, metrics, and why apps build them.",
+      "content": "# Online Community\n## Why an Online Community Matters\n## Types of Online Community\n## Online Community and social.plus\n## Key Takeaways\n## Related Terms"
     },
     {
       "url": "https://www.social.plus/glossary/app-monetization",
