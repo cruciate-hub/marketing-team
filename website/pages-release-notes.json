@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-11T11:35:11.982Z",
-    "itemCount": 68,
+    "generatedAt": "2026-09-21T06:50:28.622Z",
+    "itemCount": 69,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/comment-approval-across-user-conversations",
+      "metaTitle": "Comment Approval Across User Conversations",
+      "metaDescription": "Comments and replies can now be held for review before becoming visible to the rest of the public thread. ",
+      "content": "# Comment Approval Across User Conversations"
+    },
     {
       "url": "https://www.social.plus/release-note/livestream-picture-in-picture-support-for-uninterrupted-viewing",
       "metaTitle": "Livestream Picture-in-Picture Support for Uninterrupted Viewing",
