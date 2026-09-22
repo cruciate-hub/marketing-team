@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-22T05:42:39.571Z",
-    "itemCount": 70,
+    "generatedAt": "2026-09-22T05:45:03.609Z",
+    "itemCount": 71,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/direct-profile-reset-for-admins-on-console",
+      "metaTitle": "Direct Profile Reset for Admins on Console",
+      "metaDescription": "Admins can now clear a user's avatar, bio, or username directly from the Console without needing an existing user report to trigger the action.",
+      "content": "# Direct Profile Reset for Admins on Console"
+    },
     {
       "url": "https://www.social.plus/release-note/global-mute-for-proportionate-moderation",
       "metaTitle": "Global Mute for Proportionate Moderation",
