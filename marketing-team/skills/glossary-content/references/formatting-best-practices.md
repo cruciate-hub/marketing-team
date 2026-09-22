@@ -22,6 +22,16 @@ Directly quoted from the live `/glossary/active-user` page at the time of this r
 - No "Related Terms" section — a missed internal-linking opportunity the strategy calls out explicitly.
 - Headings follow a "deep dive" essay structure ("Introduction to X," "Understanding X: A deep dive") rather than a fixed, scannable template.
 
+## The two-part opening (added after reviewing appsflyer.com/glossary/ad-spend)
+
+A later look at a second AppsFlyer entry, `/glossary/ad-spend`, showed a more disciplined version of the opening than `active-users` alone made obvious: the page leads with exactly one sentence ("Ad spend is the amount of money spent on paid advertising for a mobile marketing campaign.") — no heading, no elaboration — and only *then* opens a `## What is ad spend?` section that does the explaining. The original version of this skill merged those two jobs into a single "1-2 sentence, 30-50 word" definition paragraph, which in practice pulled toward either a too-thin one-liner or a run-on that tried to define and explain at once.
+
+Splitting them serves the two goals differently:
+- The opening sentence is the extraction target — an AI engine pulling a one-line answer should be able to lift it verbatim and get a complete, correct claim.
+- The "What is [Term]?" paragraph is where the elaboration, scoping, and any caveat belongs — material that would only dilute the opening sentence if left in it.
+
+`compliance.py`'s `definition_is_single_sentence` and `what_is_section_not_duplicate` checks exist specifically to stop the two from collapsing back into each other — the former catches a lead that's still doing two jobs, the latter catches a "What is X?" section that just restates the lead instead of adding anything.
+
 ## Why tables specifically
 
 The user's own framing of this skill's goal — "things AI likes, like tables" — matches the general finding across AEO/GEO research already cited in `aeo-content`'s SKILL.md: structured, self-contained blocks (tables, numbered lists) are lifted and cited by AI answer engines more reliably than equivalent prose. For a glossary entry specifically, a table is also usually the *natural* format for the content anyway (measurement windows, term variants, comparison of related concepts) — so the requirement isn't a stylistic overlay, it fits the material.

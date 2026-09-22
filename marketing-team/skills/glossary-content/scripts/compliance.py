@@ -18,7 +18,11 @@ paragraphs directly under the H1:
     Alt text: ...
     Category: ...
 
-    [definition paragraph starts here]
+    [one-sentence definition]
+
+    ## What is Term?
+
+    [elaboration paragraph]
 
 Usage:
     python scripts/compliance.py path/to/entry.draft.md
@@ -96,6 +100,7 @@ RISKY_TERMS_WARN = [
 REQUIRED_METADATA_FIELDS = ["Meta description", "Slug", "Category"]
 
 REQUIRED_H2_KEYWORDS = {
+    "what_is": [r"what is\b"],
     "why_it_matters": [r"why .* matters?", r"benefits? of"],
     "metrics_or_mechanism": [r"metric", r"measure", r"calculat", r"types? of", r"how .* works?"],
     "and_social_plus": [r"and social\.plus"],
@@ -184,6 +189,14 @@ def get_intro_paragraph(text: str, meta_end_idx: int) -> str:
     body = remainder[: first_h2.start()] if first_h2 else remainder
     paragraphs = [p.strip() for p in body.split("\n\n") if p.strip()]
     return paragraphs[0] if paragraphs else ""
+
+
+def count_sentences(paragraph: str) -> int:
+    """Rough sentence count via terminal punctuation. Not abbreviation-aware —
+    good enough to catch an opening paragraph that's obviously more than one
+    sentence, which is the only thing this check needs to catch."""
+    hits = re.findall(r"[.!?]+(?:\s|$)", paragraph.strip())
+    return max(len(hits), 1 if paragraph.strip() else 0)
 
 
 def word_count(text: str) -> int:
@@ -464,13 +477,42 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     intro_words = len(re.findall(r"\b[\w’']+\b", intro))
     report.add(
         "answer_first_definition_length",
-        0 < intro_words <= 50,
+        0 < intro_words <= 30,
         "WARN",
-        f"{intro_words} words (target 30-50)",
+        f"{intro_words} words (target 10-30 — this is the one-sentence lead, not the full 'What is X?' paragraph)",
+    )
+    intro_sentences = count_sentences(intro)
+    report.add(
+        "definition_is_single_sentence",
+        intro_sentences <= 1,
+        "FAIL",
+        "" if intro_sentences <= 1 else f"opening paragraph reads as {intro_sentences} sentences — split the elaboration into the 'What is [Term]?' section instead",
     )
     if keyword:
         kw_found = keyword.lower() in intro.lower()
         report.add("keyword_in_definition", kw_found, "FAIL", f"'{keyword}' in first paragraph")
+
+    # --- "What is [Term]?" section: exists, is prose, and isn't just the
+    # one-sentence definition copy-pasted under a heading ---
+    what_is_section = extract_section(text, REQUIRED_H2_KEYWORDS["what_is"])
+    wi_words = len(re.findall(r"\b[\w’']+\b", what_is_section))
+    report.add(
+        "what_is_section_length",
+        30 <= wi_words <= 150,
+        "WARN",
+        f"{wi_words} words (target ~40-120 — one elaboration paragraph)",
+    )
+    if what_is_section.strip():
+        wi_first_para = what_is_section.strip().split("\n\n")[0].strip()
+        duplicate_of_intro = bool(intro) and (
+            wi_first_para.strip().rstrip(".!?") == intro.strip().rstrip(".!?")
+        )
+        report.add(
+            "what_is_section_not_duplicate",
+            not duplicate_of_intro,
+            "FAIL",
+            "" if not duplicate_of_intro else "'What is [Term]?' section just repeats the opening sentence verbatim — it needs to elaborate, not restate",
+        )
 
     # --- Word count ---
     wc = word_count(text)

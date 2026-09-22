@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.37
+
+`glossary-content` — opening restructured into a two-part lead, matching appsflyer.com/glossary/ad-spend more closely than the original single merged definition paragraph did.
+
+**Why:** the skill's original "Definition" section asked for "1-2 sentences, 30-50 words" doing two jobs at once -- a clean, extractable claim AND enough elaboration to actually explain the term. A closer look at a second AppsFlyer reference page (`ad-spend`, beyond the `active-users` page the skill was originally modeled on) showed AppsFlyer keeps these separate: one bare sentence, then a `## What is X?` section that does the explaining.
+
+**Changes:**
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): structure is now seven sections, not six. The opening is now a single-sentence definition (no heading) followed by a new `## What is [Term]?` (H2) section -- one paragraph, 3-5 sentences, elaborating on the lead. Every other section shifts down by one; Related Terms is still enforced as the final section. Updated the markdown intermediate template and the three "six-section" references (webflow-publisher intermediate description, rewrite-workflow instructions) accordingly.
+- [`glossary-content/scripts/compliance.py`](marketing-team/skills/glossary-content/scripts/compliance.py): `what_is` added to `REQUIRED_H2_KEYWORDS`. `answer_first_definition_length` tightened from a 30-50 word range to 10-30, since it now checks only the one-sentence lead. New `definition_is_single_sentence` check (FAIL) catches a lead still trying to do both jobs. New `what_is_section_length` (WARN, ~40-120 words) and `what_is_section_not_duplicate` (FAIL) checks cover the new section -- the latter specifically catches a "What is X?" paragraph that just restates the lead verbatim instead of elaborating. Verified against a compliant two-part draft (all four new checks PASS) and two failing drafts (a two-sentence lead correctly FAILs `definition_is_single_sentence`; a verbatim-duplicate "What is X?" section correctly FAILs `what_is_section_not_duplicate`).
+- [`glossary-content/references/formatting-best-practices.md`](marketing-team/skills/glossary-content/references/formatting-best-practices.md): added the `ad-spend` research and the reasoning for splitting the opening into two parts.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.36 -> 13.37 (skill update, not a new skill -- count stays at 19).
+
+**Not changed:** `app-retention`, the one live entry already rewritten with this skill, still has the old single-paragraph opening and needs a follow-up pass to add the new `## What is App Retention?` section -- not done as part of this change.
+
 ## marketing-team 13.36
 
 Field maps move out of `webflow-publisher` into each content-type skill; Glossary's field slugs confirmed live and the publish pipeline unblocked.

@@ -141,27 +141,29 @@ The strategy is explicit that glossary pages are for **high-value, specific term
 - A concept a prospect or user would plausibly search "what is [term]" for, on its own, outside the context of a full article
 - Narrow enough to answer completely in 500-900 words — if the term actually needs 1,200+ words to do justice to, it's a blog or answer topic, not glossary (flag this to the user instead of padding a thin glossary page)
 
-## Structure — six fixed sections, in this order
+## Structure — seven fixed sections, in this order
 
 Unlike `aeo-content` (which branches by query intent), glossary entries use **one fixed template** every time. This is deliberate: appsflyer.com/glossary and adjust.com/glossary — the reference standards named in the strategy — both use a rigid, repeatable structure across their entire glossary, which is part of what makes them easy to scan and easy for AI engines to learn to extract from consistently.
 
-1. **Definition** — the entry's only H1 is the term itself. Immediately below the metadata block, the first paragraph is the definition: 1-2 sentences, 30-50 words total, containing the exact term. No throat-clearing, no "in the world of digital platforms" preamble — the current social.plus glossary's biggest weakness is starting with scene-setting instead of the answer. This paragraph is the block an AI engine extracts verbatim, so it must stand alone as a complete, correct answer to "what is [term]?"
+1. **Definition** — the entry's only H1 is the term itself. Immediately below the metadata block, the first paragraph is a single sentence, containing the exact term, with no heading of its own. No throat-clearing, no "in the world of digital platforms" preamble — the current social.plus glossary's biggest weakness is starting with scene-setting instead of the answer. This is the line an AI engine extracts verbatim in a snippet, so it must stand alone as a complete, correct answer to "what is [term]?" — modeled directly on appsflyer.com/glossary/ad-spend, which opens with exactly one sentence ("Ad spend is the amount of money spent on paid advertising for a mobile marketing campaign.") before anything else.
 
-2. **Why [Term] Matters** (H2) — 2-4 sentences on the practical benefit of tracking/understanding/using this term. Concrete, not aspirational — "helps X team decide Y," not "can be a game-changer."
+2. **What is [Term]?** (H2) — immediately follows the one-sentence definition. One paragraph (3-5 sentences) that elaborates on it: what it covers, how it's typically used or scoped, and any immediate caveat or variant worth knowing before the reader continues. This is the paragraph that used to double as the definition itself in this skill's earlier version — it's now split out under its own heading so the opening sentence can stay a single, clean, extractable claim rather than carrying the elaboration's weight too. Still no table, no bullets — prose only.
 
-3. **[Term] Metrics** or **How to Measure/Calculate [Term]** (H2) — only when the term is quantifiable. **This section requires a markdown table** — a breakdown of variants (like DAU/WAU/MAU), a formula, or a comparison of measurement approaches. This is the section AI engines lift most reliably (tables are the single highest-value structural element for AI readability), and it's also the section the current glossary is missing entirely. If the term genuinely isn't quantifiable (e.g. an abstract concept with no formula or metric), rename this section to fit — e.g. "Types of [Term]" or "How [Term] Works" — but it must still contain a table of some kind (a comparison, a breakdown, or a decision matrix). No glossary entry ships without at least one table.
+3. **Why [Term] Matters** (H2) — 2-4 sentences on the practical benefit of tracking/understanding/using this term. Concrete, not aspirational — "helps X team decide Y," not "can be a game-changer."
 
-4. **[Term] and social.plus** (H2) — connects the term to the product. This is the section most exposed to overclaiming — every specific or numeric claim about social.plus here must come from the approved-data list (fetch it from `aeo-content`'s "Approved data and customer names" section; this skill doesn't carry its own copy). If there's no approved data point that genuinely fits, keep this section to a general, honest statement of relevance rather than inventing a stat.
+4. **[Term] Metrics** or **How to Measure/Calculate [Term]** (H2) — only when the term is quantifiable. **This section requires a markdown table** — a breakdown of variants (like DAU/WAU/MAU), a formula, or a comparison of measurement approaches. This is the section AI engines lift most reliably (tables are the single highest-value structural element for AI readability), and it's also the section the current glossary is missing entirely. If the term genuinely isn't quantifiable (e.g. an abstract concept with no formula or metric), rename this section to fit — e.g. "Types of [Term]" or "How [Term] Works" — but it must still contain a table of some kind (a comparison, a breakdown, or a decision matrix). No glossary entry ships without at least one table.
 
-5. **Key Takeaways** (H2) — 3-4 bullet points, each one sentence, recapping the definition, the "why it matters," and the one metric/formula from section 3. This is the second-most-extractable block after the definition — write it as if it's the only section an AI engine reads.
+5. **[Term] and social.plus** (H2) — connects the term to the product. This is the section most exposed to overclaiming — every specific or numeric claim about social.plus here must come from the approved-data list (fetch it from `aeo-content`'s "Approved data and customer names" section; this skill doesn't carry its own copy). If there's no approved data point that genuinely fits, keep this section to a general, honest statement of relevance rather than inventing a stat.
 
-6. **Related Terms** (H2) — 3-6 internal links to other glossary or answer entries. This is the section that does the internal-linking work the strategy calls out explicitly (2. Content Types & Goals: "Related Terms (For internal linking)"). Populated by `internal-linking-strategist` (see below), not improvised. **Must be the last section in the document — nothing follows it.** `compliance.py` enforces this as a FAIL, not just checking that the section exists: the internal-linking section is deliberately placed last so a reader (or an AI engine extracting the page) still reaches it after everything else.
+6. **Key Takeaways** (H2) — 3-4 bullet points, each one sentence, recapping the definition, the "why it matters," and the one metric/formula from section 4. This is the second-most-extractable block after the definition — write it as if it's the only section an AI engine reads.
+
+7. **Related Terms** (H2) — 3-6 internal links to other glossary or answer entries. This is the section that does the internal-linking work the strategy calls out explicitly (2. Content Types & Goals: "Related Terms (For internal linking)"). Populated by `internal-linking-strategist` (see below), not improvised. **Must be the last section in the document — nothing follows it.** `compliance.py` enforces this as a FAIL, not just checking that the section exists: the internal-linking section is deliberately placed last so a reader (or an AI engine extracting the page) still reaches it after everything else.
 
 ## Formatting rules that make this different from the old glossary
 
 Pulled directly from what appsflyer.com/glossary and adjust.com/glossary do well, and what social.plus's current glossary (built pre-this-skill) does not:
 
-- **Answer-first, not scene-setting.** Never open with "In the world of X" / "In today's landscape" / "Understanding X is pivotal for." Open with the answer.
+- **Answer-first, not scene-setting.** Never open with "In the world of X" / "In today's landscape" / "Understanding X is pivotal for." Open with the answer: a single, standalone definition sentence, then a "What is [Term]?" paragraph that elaborates — not a merged paragraph that tries to define and explain in one breath.
 - **At least one table, every entry.** Not optional, not "where it fits naturally." If section 3 can't produce a real table, the entry needs a table somewhere else (a comparison of related terms, a decision matrix in "Why it matters") — see compliance check `has_table`.
 - **Concise over comprehensive.** 500-900 words. This is a glossary, not a blog post — per the strategy doc, resist the pull to turn it into a long-form article. If a draft exceeds 900 words, that's a signal a sub-topic wants to be its own answer or blog page, not more glossary content.
 - **No filler transitions or hedge words.** Same FAIL/WARN vocabulary tiers as `blog-seo-content` and `aeo-content` (see `scripts/compliance.py`) — "game-changer," "pivotal," "delve," "digital landscape," "leverage" as a verb, "unlock the power," "revolutionize," etc. are hard blocks. The live `active-user` entry currently fails this check twice over; don't reproduce that pattern.
@@ -178,7 +180,11 @@ Slug: [lowercase-with-hyphens]
 Alt text: [for any diagram/formula image, if used]
 Category: [topic category — reuse blog-seo-content's Main Category Tag list where it fits, e.g. Engagement, Retention, Acquisition]
 
-[Definition paragraph — 30-50 words, contains the exact term]
+[One-sentence definition — contains the exact term, nothing else on this line]
+
+## What is [Term]?
+
+[One paragraph, 3-5 sentences, elaborating on the definition above]
 
 ## Why [Term] Matters
 
@@ -257,7 +263,7 @@ Every delivery carries `Editor (named human reviewer): [fill before publish]` in
 
 ## Publishing to Webflow (via `webflow-publisher`)
 
-This skill's `outputs/[slug].draft.md` **is** the common intermediate `webflow-publisher` consumes: `# Term` as the only H1, the labeled metadata block, six H2 sections, a markdown table, Related Terms as markdown links. No `.docx` round-trip, no hand-written HTML. Run only after `compliance.py` passes on the current text and a named human editor has signed off:
+This skill's `outputs/[slug].draft.md` **is** the common intermediate `webflow-publisher` consumes: `# Term` as the only H1, the labeled metadata block, the seven-section structure (six of them H2-headed; the opening definition line carries no heading), a markdown table, Related Terms as markdown links. No `.docx` round-trip, no hand-written HTML. Run only after `compliance.py` passes on the current text and a named human editor has signed off:
 
 ```bash
 # 0. Readiness check (should show "ready" — see below if it doesn't)
@@ -289,7 +295,7 @@ python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --col
 Since the primary near-term job is fixing the existing ~76-entry glossary rather than writing net-new terms, rewrites are a first-class workflow, not an edge case:
 
 1. Pull the current live content for the term (via `pages-glossary.json`'s `content` field for the heading structure, and a live fetch of the URL for full text) so you can see exactly what's being replaced.
-2. Rewrite against the six-section structure above — don't patch the old structure, replace it. The old headings ("Introduction to X," "Understanding X: A deep dive," "X vs. traditional Y") don't map onto the new sections and shouldn't be preserved for continuity's sake.
+2. Rewrite against the seven-section structure above — don't patch the old structure, replace it. The old headings ("Introduction to X," "Understanding X: A deep dive," "X vs. traditional Y") don't map onto the new sections and shouldn't be preserved for continuity's sake.
 3. Keep the same slug and URL unless the user says otherwise — rewrites should not create redirect debt.
 4. Flag in the delivery message that this is a rewrite of an existing live page, not a new one.
 
