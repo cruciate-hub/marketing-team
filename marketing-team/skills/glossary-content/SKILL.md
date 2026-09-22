@@ -4,7 +4,7 @@ description: >
   Writes glossary entries for the social.plus /glossary/ collection —
   short, definition-focused pages engineered to build topical authority
   for high-value terms, feed internal linking, and rank for definitional
-  search queries ("what is X"). Strict format: 6 fixed sections, at least
+  search queries ("what is X"). Strict format: 7 fixed sections, at least
   one table, answer-first definition, concise (500-900 words). Always use
   this skill for glossary entries, dictionary terms, or "add X to the
   glossary" requests — including when the term already exists on
