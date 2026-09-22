@@ -1,11 +1,149 @@
 {
   "_meta": {
-    "generatedAt": "2026-07-07T07:41:49.211Z",
-    "itemCount": 48,
+    "generatedAt": "2026-09-22T05:45:03.609Z",
+    "itemCount": 71,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/direct-profile-reset-for-admins-on-console",
+      "metaTitle": "Direct Profile Reset for Admins on Console",
+      "metaDescription": "Admins can now clear a user's avatar, bio, or username directly from the Console without needing an existing user report to trigger the action.",
+      "content": "# Direct Profile Reset for Admins on Console"
+    },
+    {
+      "url": "https://www.social.plus/release-note/global-mute-for-proportionate-moderation",
+      "metaTitle": "Global Mute for Proportionate Moderation",
+      "metaDescription": "Admins can now mute a user globally across the entire network without removing their access. ",
+      "content": "# Global Mute for Proportionate Moderation"
+    },
+    {
+      "url": "https://www.social.plus/release-note/comment-approval-across-user-conversations",
+      "metaTitle": "Comment Approval Across User Conversations",
+      "metaDescription": "Comments and replies can now be held for review before becoming visible to the rest of the public thread. ",
+      "content": "# Comment Approval Across User Conversations"
+    },
+    {
+      "url": "https://www.social.plus/release-note/livestream-picture-in-picture-support-for-uninterrupted-viewing",
+      "metaTitle": "Livestream Picture-in-Picture Support for Uninterrupted Viewing",
+      "metaDescription": "Viewers can now watch livestreams in a small floating window while switching to other apps",
+      "content": "# Livestream Picture-in-Picture Support for Uninterrupted Viewing"
+    },
+    {
+      "url": "https://www.social.plus/release-note/configurable-live-stream-viewer-count-threshold",
+      "metaTitle": "Configurable Live Stream Viewer Count Threshold",
+      "metaDescription": "Admins can now set a viewer count threshold directly from the Console",
+      "content": "# Configurable Live Stream Viewer Count Threshold"
+    },
+    {
+      "url": "https://www.social.plus/release-note/multi-media-posts-now-display-as-a-carousel",
+      "metaTitle": "Multi-Media Posts Now Display as a Carousel",
+      "metaDescription": "Multi-image and multi-video posts now display as a swipeable carousel instead of a collage grid",
+      "content": "# Multi-Media Posts Now Display as a Carousel"
+    },
+    {
+      "url": "https://www.social.plus/release-note/intelligent-search-for-flutter-sdk-and-uikit",
+      "metaTitle": "Intelligent Search for Flutter SDK and UIKit",
+      "metaDescription": "Intelligent Search is now available on Flutter, allowing users to discover relevant posts and communities beyond exact keyword matches",
+      "content": "# Intelligent Search for Flutter SDK and UIKit"
+    },
+    {
+      "url": "https://www.social.plus/release-note/sentiment-analysis-fields-in-the-first-party-data-api",
+      "metaTitle": "Sentiment Analysis Fields in the First-Party Data API",
+      "metaDescription": "Sentiment and AI insight fields are now exposed in the first-party Data API",
+      "content": "# Sentiment Analysis Fields in the First-Party Data API"
+    },
+    {
+      "url": "https://www.social.plus/release-note/dark-mode-for-ios-and-android-chat-uikit",
+      "metaTitle": "Dark Mode for iOS and Android Chat UIKit",
+      "metaDescription": "The new Chat UIKit on iOS and Android now includes dark mode support, giving users a more comfortable viewing experience in low-light environments.",
+      "content": "# Dark Mode for iOS and Android Chat UIKit"
+    },
+    {
+      "url": "https://www.social.plus/release-note/user-reporting-and-profile-moderation-enhancements",
+      "metaTitle": "User Reporting and Profile Moderation Enhancements",
+      "metaDescription": "Users can now report profiles with a reason and comment, while moderators can view full context on reported profiles from the Console",
+      "content": "# User Reporting and Profile Moderation Enhancements"
+    },
+    {
+      "url": "https://www.social.plus/release-note/pin-and-feature-event-posts-in-communities-and-global-feed",
+      "metaTitle": "Pin and Feature Event Posts in Communities and Global Feed",
+      "metaDescription": "Admins can now pin or feature event posts at the community level or globally from the Console, the same three options available for any post.",
+      "content": "# Pin and Feature Event Posts in Communities and Global Feed"
+    },
+    {
+      "url": "https://www.social.plus/release-note/push-notifications-for-event-creation",
+      "metaTitle": "Push Notifications for Event Creation",
+      "metaDescription": "When creating an event, admins can now optionally send a push notification to members or the entire network.",
+      "content": "# Push Notifications for Event Creation"
+    },
+    {
+      "url": "https://www.social.plus/release-note/full-analytics-dashboard-redesign",
+      "metaTitle": "Full Analytics Dashboard Redesign",
+      "metaDescription": "The dashboard has been redesigned across all pages, and the old version is being sunset. ",
+      "content": "# Full Analytics Dashboard Redesign"
+    },
+    {
+      "url": "https://www.social.plus/release-note/mobile-console-for-community-management",
+      "metaTitle": "Mobile Console for Community Management",
+      "metaDescription": "Admins can now manage their community directly from a mobile browser on iOS and Android, without needing to be at a desk.",
+      "content": "# Mobile Console for Community Management"
+    },
+    {
+      "url": "https://www.social.plus/release-note/retroactive-tagging-for-sentiment-analysis",
+      "metaTitle": "Retroactive Tagging for Sentiment Analysis",
+      "metaDescription": "Analysts can now reprocess historical content on demand to align past insights with updated categories, keywords, and sentiment configuration. ",
+      "content": "# Retroactive Tagging for Sentiment Analysis"
+    },
+    {
+      "url": "https://www.social.plus/release-note/filter-by-date-range-in-posts-and-comments",
+      "metaTitle": "Filter by Date Range in Posts and Comments",
+      "metaDescription": "Admins can now filter posts and comments by date range directly from the Console, using preset options like last 7 days or this month, or by setting a custom start and end date.",
+      "content": "# Filter by Date Range in Posts and Comments"
+    },
+    {
+      "url": "https://www.social.plus/release-note/updated-error-code-for-max-blocked-users",
+      "metaTitle": "Updated Error Code for Max Blocked Users",
+      "metaDescription": "The error code returned when a user reaches the blocked users limit has been updated to MAX_BLOCKED_USERS_REACHED 400324, making it easier for developers to handle this case explicitly in their applications.",
+      "content": "# Updated Error Code for Max Blocked Users"
+    },
+    {
+      "url": "https://www.social.plus/release-note/visitor-mode-and-usage-limits-for-react-native-uikit",
+      "metaTitle": "Visitor Mode and Usage Limits for React Native UIKit",
+      "metaDescription": "The React Native UIKit now supports Visitor Mode, allowing guests to browse community content without signing in.",
+      "content": "# Visitor Mode and Usage Limits for React Native UIKit"
+    },
+    {
+      "url": "https://www.social.plus/release-note/1-1-chat-support-for-ios-and-android-uikit",
+      "metaTitle": "1:1 Chat Support for iOS and Android UIKit",
+      "metaDescription": "The iOS and Android UIKit now supports 1:1 chat, allowing users to start direct conversations without creating a group chat.",
+      "content": "# 1:1 Chat Support for iOS and Android UIKit"
+    },
+    {
+      "url": "https://www.social.plus/release-note/shareable-event-links-with-deep-link-configuration",
+      "metaTitle": "Shareable Event Links with Deep Link Configuration",
+      "metaDescription": "Event hosts can now copy a shareable link that opens directly to the event detail page. ",
+      "content": "# Shareable Event Links with Deep Link Configuration"
+    },
+    {
+      "url": "https://www.social.plus/release-note/tap-to-control-video-and-live-stream-playback",
+      "metaTitle": "Tap-to-Control Video and Live Stream Playback",
+      "metaDescription": "Tapping a video or live stream no longer pauses playback. ",
+      "content": "# Tap-to-Control Video and Live Stream Playback"
+    },
+    {
+      "url": "https://www.social.plus/release-note/social-plus-vise-proof-layer-for-social-plus-ai-assisted-sdk-integration",
+      "metaTitle": "social.plus Vise: Proof layer for social.plus AI-assisted SDK integration",
+      "metaDescription": "Vise is a local CLI and coding agent skill that gives AI agents a repeatable workflow for building social.plus SDK integrations. ",
+      "content": "# social.plus Vise: Proof layer for social.plus AI-assisted SDK integration"
+    },
+    {
+      "url": "https://www.social.plus/release-note/for-you-feed-with-relevance-based-ranking",
+      "metaTitle": "For You Feed with Relevance-Based Ranking",
+      "metaDescription": "A new For You tab now sits alongside the existing Following feed, ranking posts by relevance instead of recency. ",
+      "content": "# For You Feed with Relevance-Based Ranking"
+    },
     {
       "url": "https://www.social.plus/release-note/community-tags-for-ios-and-android-sdk",
       "metaTitle": "Community Tags for iOS and Android SDK",
