@@ -100,7 +100,7 @@ RISKY_TERMS_WARN = [
 REQUIRED_METADATA_FIELDS = ["Meta description", "Slug", "Category"]
 
 REQUIRED_H2_KEYWORDS = {
-    "what_is": [r"what is\b"],
+    "what_is": [r"what (?:is|are)\b"],  # plural terms: "What are Social Features?"
     "why_it_matters": [r"why .* matters?", r"benefits? of"],
     "metrics_or_mechanism": [r"metric", r"measure", r"calculat", r"types? of", r"how .* works?"],
     "and_social_plus": [r"and social\.plus"],
