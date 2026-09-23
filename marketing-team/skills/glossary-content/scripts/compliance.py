@@ -100,7 +100,7 @@ RISKY_TERMS_WARN = [
 REQUIRED_METADATA_FIELDS = ["Meta description", "Slug", "Category"]
 
 REQUIRED_H2_KEYWORDS = {
-    "what_is": [r"what is\b"],
+    "what_is": [r"what (?:is|are)\b"],  # plural terms: "What are Social Features?"
     "why_it_matters": [r"why .* matters?", r"benefits? of"],
     "metrics_or_mechanism": [r"metric", r"measure", r"calculat", r"types? of", r"how .* works?"],
     "and_social_plus": [r"and social\.plus"],
@@ -537,6 +537,40 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     rt_links = count_links(rt_section)
     report.add("related_terms_links", rt_links >= 2, "FAIL", f"{rt_links} link(s) found (minimum 2)")
     report.add_result(check_links_evidence(rt_section, path))
+
+    # --- Inline body links ---
+    # Populating Related Terms is not the whole internal-linking job: the
+    # optimizer's suggestions each carry an "Insert at" body sentence, and
+    # SKILL.md requires those to actually be placed inline (see "Additional
+    # inline links elsewhere in the body"). A draft that only fills the
+    # Related Terms footer and never touches the body passes every check
+    # above — this one exists specifically to catch that, after it happened
+    # in practice: a batch of live entries had verified, real Related Terms
+    # links but zero inline links anywhere in the prose, because the step
+    # that applies suggestions to the body was silently skipped.
+    total_links = count_links(text)
+    inline_links = max(total_links - rt_links, 0)
+    if rt_links >= 2:
+        report.add(
+            "inline_body_links_present",
+            inline_links > 0,
+            "FAIL",
+            (
+                f"{inline_links} inline link(s) in body prose"
+                if inline_links > 0
+                else "Related Terms is populated but 0 links appear anywhere in the body — "
+                "the optimizer's suggestions must also be applied inline at their 'Insert at' "
+                "sentence, not just listed in Related Terms. Don't force one if no suggestion "
+                "had a genuine body insertion point, but that should be rare, not the default."
+            ),
+        )
+    else:
+        report.add(
+            "inline_body_links_present",
+            False,
+            "WARN",
+            "skipped — related_terms_links already FAILed below 2, fix that first",
+        )
 
     # --- Vocabulary ---
     forbidden = find_forbidden(text, FORBIDDEN_TERMS_ANY_CASE)
