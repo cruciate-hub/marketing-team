@@ -24,7 +24,7 @@
     "Meta description": {"slug": null, "required": true, "max_length": 160, "_confirm": "CONFIRM WITH STEFAN"},
     "Alt text":         {"slug": null, "required": false, "_confirm": "CONFIRM WITH STEFAN — only if the collection has an image field."}
   },
-  "_metadata_doc": "aeo-content's fourth label, `Intent: definition | procedural | comparative`, is writer-side metadata for compliance.py and is deliberately unmapped (reported as an unmapped label, not an error).",
+  "_metadata_doc": "aeo-content v2 writes `Intent: how-to | decision | explainer | playbook`, `Queue ID:`, `Last updated:` and `Editor (named human reviewer):`. These are writer-side metadata for compliance.py and the Content Queue and are deliberately unmapped (reported as unmapped labels, not errors). `Last updated` and the editor name should map to CMS fields once the rebuilt Answers collection has them.",
 
   "defaults": {},
   "taxonomies": {},

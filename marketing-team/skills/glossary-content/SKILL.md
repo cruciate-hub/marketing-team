@@ -153,7 +153,7 @@ Unlike `aeo-content` (which branches by query intent), glossary entries use **on
 
 4. **[Term] Metrics** or **How to Measure/Calculate [Term]** (H2) — only when the term is quantifiable. **This section requires a markdown table** — a breakdown of variants (like DAU/WAU/MAU), a formula, or a comparison of measurement approaches. This is the section AI engines lift most reliably (tables are the single highest-value structural element for AI readability), and it's also the section the current glossary is missing entirely. If the term genuinely isn't quantifiable (e.g. an abstract concept with no formula or metric), rename this section to fit — e.g. "Types of [Term]" or "How [Term] Works" — but it must still contain a table of some kind (a comparison, a breakdown, or a decision matrix). No glossary entry ships without at least one table.
 
-5. **[Term] and social.plus** (H2) — connects the term to the product. This is the section most exposed to overclaiming — every specific or numeric claim about social.plus here must come from the approved-data list (fetch it from `aeo-content`'s "Approved data and customer names" section; this skill doesn't carry its own copy). If there's no approved data point that genuinely fits, keep this section to a general, honest statement of relevance rather than inventing a stat.
+5. **[Term] and social.plus** (H2) — connects the term to the product. This is the section most exposed to overclaiming — every specific or numeric claim about social.plus here must come from an `Approved` row in `messaging/evidence-bank.md` (the shared evidence bank; this skill doesn't carry its own copy). If there's no approved data point that genuinely fits, keep this section to a general, honest statement of relevance rather than inventing a stat.
 
 6. **Key Takeaways** (H2) — 3-4 bullet points, each one sentence, recapping the definition, the "why it matters," and the one metric/formula from section 4. This is the second-most-extractable block after the definition — write it as if it's the only section an AI engine reads.
 
@@ -244,7 +244,7 @@ The `.links.md` check is a mechanical backstop, not a replacement for honesty: a
 A fired BLOCK condition vetoes delivery regardless of a clean compliance run:
 
 1. **Unresolved script FAIL**, or the script wasn't re-run after the latest edit.
-2. **Unverifiable claim about social.plus** in the "and social.plus" section not traceable to the approved-data list.
+2. **Unverifiable claim about social.plus** in the "and social.plus" section not traceable to an `Approved` row in `messaging/evidence-bank.md`.
 3. **Improvised internal link** — any "Related Terms" entry or inline link not returned by `internal-linking-strategist`, including a technically-valid URL sourced by the writer directly instead of through the optimizer's actual draft-mode run (see "Required evidence" above) — valid-but-improvised still fires this condition.
 4. **Missing table** — section 3 (or any section) shipping without at least one markdown table.
 5. **Missing named editor at publish handoff** — same rule as `blog-seo-content`: `Editor (named human reviewer): [fill before publish]` must be present in the delivered metadata and filled with an actual named human before this is marked publish-ready.
@@ -316,7 +316,7 @@ When asked to rewrite multiple existing entries at once (e.g. "redo the first 10
 ## Related skills
 
 - `webflow-publisher` — publishes this skill's `.draft.md` to the Glossary collection; owns conversion, dry-run and the Webflow API calls. This skill owns the field map (`webflow-fields.json`) that tells it how.
-- `aeo-content` — /answers/ pages; source of the approved-data list and the duplicate-check script this skill reuses
+- `aeo-content` — /answers/ pages; source of the duplicate-check script this skill reuses. Approved facts now live in `messaging/evidence-bank.md`
 - `blog-seo-content` — blog posts; source of the forbidden-vocabulary tiers this skill's compliance script mirrors
 - `internal-linking-strategist` — called by this skill; do not reimplement
 - `site-intelligence` — for auditing the glossary collection beyond single-entry duplicate checks

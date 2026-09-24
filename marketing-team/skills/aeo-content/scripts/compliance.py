@@ -15,14 +15,18 @@ paragraphs directly under the H1:
     Meta description: ...
     Slug: ...
     Alt text: ...
-    Intent: definition | procedural | comparative
+    Intent: how-to | decision | explainer | playbook
+    Queue ID: A1
+    Last updated: 2026-09-24
+    Editor (named human reviewer): [fill before publish]
 
     [answer-first block starts here]
 
 Usage:
     python scripts/compliance.py path/to/article.draft.md
-    python scripts/compliance.py path/to/article.draft.md --intent definition
-    python scripts/compliance.py path/to/article.draft.md --min 1100 --max 1800
+    python scripts/compliance.py path/to/article.draft.md --intent how-to
+    python scripts/compliance.py path/to/article.draft.md --min 700 --max 1500
+    python scripts/compliance.py path/to/article.draft.md --queue queue.csv
     python scripts/compliance.py path/to/article.draft.md --json
 
 Exit codes:
@@ -128,7 +132,7 @@ WATCHED_UNAPPROVED = re.compile(
 
 # Required metadata keys. `title` comes from the H1; the rest come from
 # labeled paragraphs directly under the H1 ("Meta description: …", etc.).
-REQUIRED_METADATA = ["title", "metaDescription", "slug", "altText", "intent"]
+REQUIRED_METADATA = ["title", "metaDescription", "slug", "altText", "intent", "queueId"]
 
 # Map the labeled-paragraph key (case/space-insensitive) to the canonical key.
 LABELED_PARAGRAPH_KEYS = {
@@ -136,22 +140,45 @@ LABELED_PARAGRAPH_KEYS = {
     "slug": "slug",
     "alttext": "altText",
     "intent": "intent",
+    "queueid": "queueId",
+    "lastupdated": "lastUpdated",
+    "editor(namedhumanreviewer)": "editor",
 }
 
-VALID_INTENTS = {"definition", "procedural", "comparative"}
+# v2 templates. "What is X?" definitions belong to glossary-content, not here.
+VALID_INTENTS = {"how-to", "decision", "explainer", "playbook"}
+RETIRED_INTENTS = {"definition", "procedural", "comparative"}
 
 # Intent-specific defaults.
 INTENT_WORD_RANGE: dict[str, tuple[int, int]] = {
-    "definition": (900, 1400),
-    "procedural": (1100, 1800),
-    "comparative": (1000, 1600),
+    "how-to": (700, 1500),
+    "decision": (700, 1500),
+    "explainer": (700, 1500),
+    "playbook": (700, 1500),
 }
 
 INTENT_CITATION_MIN: dict[str, int] = {
-    "definition": 2,
-    "procedural": 0,  # no minimum
-    "comparative": 3,
+    "how-to": 0,     # internal product consistency instead
+    "decision": 3,   # you are comparing things: cite the things
+    "explainer": 2,  # claims about why/whether need outside evidence
+    "playbook": 1,
 }
+
+SUMMARY_RANGE = (80, 150)
+ANSWER_FIRST_RANGE = (25, 60)
+MIN_STATISTICS = 3
+FAQ_RANGE = (3, 5)
+PITCH_RANGE = (80, 150)
+QUESTION_HEADING_SHARE = 0.6
+
+# Headings that produced identical boilerplate across the legacy collection.
+BOILERPLATE_HEADINGS = re.compile(
+    r"^(?:the\s+)?(?:leading|best|top)\s+.*:\s*social\.plus\s*$"
+    r"|^why\s+social\.plus\s+(?:powers|is)\b"
+    r"|^why\s+teams\s+(?:build|choose|use)\b.*social\.plus",
+    re.IGNORECASE,
+)
+NON_QUESTION_SECTIONS = re.compile(r"^(faqs?|frequently asked questions|conclusion|summary)$", re.IGNORECASE)
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -245,7 +272,7 @@ def parse_metadata(text: str) -> tuple[dict[str, str], str]:
     while i < len(lines) and not lines[i].strip():
         i += 1
     # Consume labeled paragraphs.
-    label_re = re.compile(r"^([A-Za-z][A-Za-z ]+?):\s*(.+)$")
+    label_re = re.compile(r"^([A-Za-z][A-Za-z ()]+?):\s*(.+)$")
     while i < len(lines):
         stripped = lines[i].strip()
         if not stripped:
@@ -325,7 +352,8 @@ def extract_keyword_phrase(title: str) -> str:
     keyword phrase from a title.
     """
     t = re.sub(
-        r"^(what\s+(is|are|does|do)|how\s+to|how\s+do\s+you|guide\s+to|"
+        r"^(what\s+(is|are|does|do|should)|how\s+much\s+does|how\s+long\s+does|how\s+to|how\s+do\s+you|how\s+do|"
+        r"should\s+(you|i)|do|does|which|who|guide\s+to|"
         r"why|when|where|introduction\s+to|the\s+ultimate\s+guide\s+to)\s+",
         "",
         title,
@@ -367,6 +395,11 @@ def check_metadata(meta: dict[str, str]) -> list[CheckResult]:
     intent = meta.get("intent", "")
     if intent:
         ok = intent in VALID_INTENTS
+        if intent in RETIRED_INTENTS:
+            results.append(CheckResult("metadata_intent_valid", "FAIL",
+                f"intent={intent} is a v1 intent. Use one of {sorted(VALID_INTENTS)}; "
+                "'definition' pages belong to glossary-content."))
+            return results
         results.append(
             CheckResult(
                 "metadata_intent_valid",
@@ -399,25 +432,23 @@ def check_word_count(body: str, lo: int, hi: int) -> CheckResult:
 
 def check_answer_first(body: str) -> CheckResult:
     _, wc = first_two_sentences(body)
-    ok = 40 <= wc <= 60
+    lo, hi = ANSWER_FIRST_RANGE
+    ok = lo <= wc <= hi
     return CheckResult(
         "answer_first_block",
         "PASS" if ok else "FAIL",
-        f"first two sentences = {wc} words (target 40-60)",
+        f"first two sentences = {wc} words (target {lo}-{hi})",
     )
 
 
-def check_tldr_word_count(body: str) -> CheckResult:
-    """The TL;DR paragraph is the chunk AI engines extract as the citation
-    candidate. The research-backed sweet spot is 120-160 words (94% of
-    passages selected by Google AI Overviews fall in 134-167 words per the
-    2025 ranking-factor study). Shorter paragraphs get passed over for
-    longer, more self-contained competitor chunks.
-
-    The TL;DR is the paragraph immediately after the answer-first block
-    (i.e., the second substantive paragraph of the body, before any H2).
+def check_summary_word_count(body: str) -> CheckResult:
+    """The summary paragraph sits directly under the answer-first block and
+    above the first H2. AI citations cluster early on the page (one analysis
+    of 1.2M ChatGPT answers found 44.2% of citations come from the first 30%
+    of content), so a direct answer plus a short standalone summary is
+    front-loaded on purpose. The 80-150 range is an editorial choice, not a
+    research threshold.
     """
-    # Consider only paragraphs before the first H2.
     paragraphs: list[str] = []
     for p in body.split("\n\n"):
         stripped = p.strip()
@@ -427,25 +458,16 @@ def check_tldr_word_count(body: str) -> CheckResult:
             break
         paragraphs.append(stripped)
     if len(paragraphs) < 2:
-        return CheckResult(
-            "tldr_word_count",
-            "FAIL",
-            "TL;DR paragraph not found (expected below the answer-first block, above the first H2)",
-        )
-    tldr = paragraphs[1]
-    plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", tldr)
+        return CheckResult("summary_word_count", "FAIL",
+            "summary paragraph not found (expected below the answer-first block, above the first H2)")
+    if len(paragraphs) > 2:
+        return CheckResult("summary_word_count", "FAIL",
+            f"{len(paragraphs)} paragraphs before the first H2 (expected exactly 2: answer-first block, summary)")
+    plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", paragraphs[1])
     wc = len(re.findall(r"\b[\w'-]+\b", plain))
-    if 120 <= wc <= 160:
-        status = "PASS"
-    elif 118 <= wc <= 162:
-        status = "WARN"
-    else:
-        status = "FAIL"
-    return CheckResult(
-        "tldr_word_count",
-        status,
-        f"TL;DR = {wc} words (target 120-160)",
-    )
+    lo, hi = SUMMARY_RANGE
+    status = "PASS" if lo <= wc <= hi else ("WARN" if lo - 10 <= wc <= hi + 10 else "FAIL")
+    return CheckResult("summary_word_count", status, f"summary = {wc} words (target {lo}-{hi})")
 
 
 def check_keyword_in_sentence_1(meta: dict[str, str], body: str) -> CheckResult:
@@ -713,20 +735,172 @@ def check_no_jsonld(body: str) -> CheckResult:
     return CheckResult("no_jsonld_block", "PASS", "")
 
 
+# ---------- v2 checks ----------
+
+
+def h2_sections(body: str) -> list[tuple[str, str]]:
+    """(heading, section text) for each H2 in order."""
+    parts = re.split(r"^##\s+(.+?)\s*$", body, flags=re.MULTILINE)
+    return [(parts[i].strip(), parts[i + 1]) for i in range(1, len(parts) - 1, 2)]
+
+
+def pitch_section(sections: list[tuple[str, str]]) -> tuple[str, str] | None:
+    for h, t in sections:
+        if "social.plus" in h.lower():
+            return h, t
+    return None
+
+
+def check_question_headings(body: str) -> CheckResult:
+    sections = h2_sections(body)
+    pitch = pitch_section(sections)
+    content = [h for h, _ in sections
+               if not NON_QUESTION_SECTIONS.match(h) and (pitch is None or h != pitch[0])]
+    if not content:
+        return CheckResult("question_headings", "FAIL", "no content H2 sections found")
+    q = [h for h in content if h.rstrip().endswith("?")]
+    share = len(q) / len(content)
+    ok = share >= QUESTION_HEADING_SHARE
+    return CheckResult("question_headings", "PASS" if ok else "FAIL",
+        f"{len(q)}/{len(content)} content H2s phrased as questions "
+        f"(minimum {int(QUESTION_HEADING_SHARE * 100)}%). Use the Queue row's sub-questions.")
+
+
+def check_has_table(body: str) -> CheckResult:
+    ok = bool(re.search(r"^\s*\|.+\|\s*$", body, re.MULTILINE)) and bool(
+        re.search(r"^\s*\|?\s*:?-{2,}", body, re.MULTILINE))
+    return CheckResult("has_table", "PASS" if ok else "FAIL", "" if ok else "no markdown table found")
+
+
+STAT_PATTERN = re.compile(
+    r"\b\d+(?:\.\d+)?\s?%"
+    r"|\b\d+(?:\.\d+)?\s?(?:-|to)\s?\d+(?:\.\d+)?\s?(?:%|x|weeks?|months?|days?|hours?)"
+    r"|\b\d[\d,.]*\s?(?:M|K|B|million|billion|thousand)\+?(?![\w])"
+    r"|\$\s?\d[\d,.]*",
+    re.IGNORECASE,
+)
+
+
+def check_statistics(body: str) -> CheckResult:
+    text = re.sub(r"\]\([^)]+\)", "]", body)
+    hits = STAT_PATTERN.findall(text)
+    ok = len(hits) >= MIN_STATISTICS
+    return CheckResult("statistics_count", "PASS" if ok else "FAIL",
+        f"{len(hits)} statistic(s) detected (minimum {MIN_STATISTICS}); each needs a source "
+        "in messaging/evidence-bank.md or an external citation")
+
+
+def check_boilerplate_headings(body: str) -> CheckResult:
+    bad = [h for h, _ in h2_sections(body) if BOILERPLATE_HEADINGS.search(h)]
+    return CheckResult("no_boilerplate_headings", "FAIL" if bad else "PASS",
+        f"legacy boilerplate heading(s): {bad}" if bad else "")
+
+
+def check_pitch(body: str) -> CheckResult:
+    sections = h2_sections(body)
+    pitches = [h for h, _ in sections if "social.plus" in h.lower()]
+    if len(pitches) != 1:
+        return CheckResult("pitch_section", "FAIL",
+            f"expected exactly 1 H2 naming social.plus (the pitch), found {len(pitches)}")
+    _, text = pitch_section(sections)
+    plain = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    wc = len(re.findall(r"\b[\w'-]+\b", plain))
+    lo, hi = PITCH_RANGE
+    return CheckResult("pitch_section", "PASS" if lo <= wc <= hi else "WARN",
+        f"pitch = {wc} words (target {lo}-{hi})")
+
+
+def check_promotion_clean(body: str) -> CheckResult:
+    """The answer-first block, summary and FAQ answers are what AI engines
+    extract. They must not mention social.plus: selling happens only in the
+    pitch section. Google's spam policies (updated May 15, 2026) cover
+    attempts to manipulate generative AI responses in Search."""
+    pre = []
+    for p in body.split("\n\n"):
+        if p.strip().startswith("#"):
+            break
+        if p.strip():
+            pre.append(p)
+    faq = ""
+    for h, t in h2_sections(body):
+        if re.match(r"^(faqs?|frequently asked questions)$", h, re.IGNORECASE):
+            faq = t
+    where = []
+    if "social.plus" in " ".join(pre[:2]).lower():
+        where.append("answer-first block / summary")
+    if "social.plus" in faq.lower():
+        where.append("FAQs")
+    return CheckResult("promotion_clean_extraction_blocks", "FAIL" if where else "PASS",
+        f"social.plus mentioned in: {where}" if where else "")
+
+
+def faq_questions(body: str) -> list[str]:
+    for h, t in h2_sections(body):
+        if re.match(r"^(faqs?|frequently asked questions)$", h, re.IGNORECASE):
+            return [q.strip() for q in re.findall(r"^###\s+(.+?)\s*$", t, re.MULTILINE)]
+    return []
+
+
+def check_faq_count(body: str) -> CheckResult:
+    n = len(faq_questions(body))
+    lo, hi = FAQ_RANGE
+    return CheckResult("faq_count", "PASS" if lo <= n <= hi else "WARN",
+        f"{n} FAQ(s) as H3 questions (target {lo}-{hi})")
+
+
+def check_faq_overlap(body: str, queue: Path | None, own_id: str) -> CheckResult:
+    """An FAQ that fully answers another Queue row's question cannibalises
+    that page. Link to it instead."""
+    if queue is None:
+        return CheckResult("faq_queue_overlap", "WARN", "skipped: pass --queue <Queue CSV> to check")
+    try:
+        root = Path(__file__).resolve().parents[4] / "scripts"
+        sys.path.insert(0, str(root))
+        from intent_match import load_queue, score, LIKELY_DUPLICATE  # type: ignore
+        rows = load_queue(queue)
+    except Exception as e:  # noqa: BLE001
+        return CheckResult("faq_queue_overlap", "WARN", f"skipped: {e}")
+    clashes = []
+    for fq in faq_questions(body):
+        for r in rows:
+            if r["id"] == own_id or r["status"].lower() in {"rejected", "merged", "scheduled for removal"}:
+                continue
+            if score(fq, "", r["question"], "") >= LIKELY_DUPLICATE:
+                clashes.append(f"'{fq}' ~ {r['id']}")
+    return CheckResult("faq_queue_overlap", "FAIL" if clashes else "PASS",
+        ("FAQ duplicates another row's question, replace it with a link: " + "; ".join(clashes)) if clashes else "")
+
+
+def check_conclusion(body: str) -> CheckResult:
+    for h, t in h2_sections(body):
+        if re.match(r"^conclusion$", h, re.IGNORECASE):
+            if re.match(r"\s*in conclusion", t, re.IGNORECASE):
+                return CheckResult("conclusion", "FAIL", "conclusion opens with 'In conclusion'")
+            return CheckResult("conclusion", "PASS", "")
+    return CheckResult("conclusion", "FAIL", "no '## Conclusion' section")
+
+
+def check_editor_line(text: str) -> CheckResult:
+    ok = "Editor (named human reviewer):" in text
+    return CheckResult("editor_line_present", "PASS" if ok else "FAIL",
+        "" if ok else "missing 'Editor (named human reviewer): [fill before publish]' line")
+
+
 # ---------- runner ----------
 
 
-def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None) -> Report:
+def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None,
+        queue: Path | None = None) -> Report:
     report = Report()
     text = path.read_text(encoding="utf-8-sig")  # -sig strips a leading BOM
     meta, body = parse_metadata(text)
 
     intent = intent_override or meta.get("intent", "")
     if intent not in VALID_INTENTS:
-        intent = "definition"  # best-effort default for checks that need one
+        intent = "how-to"  # best-effort default for checks that need one
 
     if lo is None or hi is None:
-        lo_default, hi_default = INTENT_WORD_RANGE.get(intent, (1000, 1600))
+        lo_default, hi_default = INTENT_WORD_RANGE.get(intent, (700, 1500))
         lo = lo if lo is not None else lo_default
         hi = hi if hi is not None else hi_default
 
@@ -739,7 +913,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.append(check_meta_description(meta))
     report.results.append(check_word_count(body, lo, hi))
     report.results.append(check_answer_first(body))
-    report.results.append(check_tldr_word_count(body))
+    report.results.append(check_summary_word_count(body))
     report.results.append(check_keyword_in_sentence_1(meta, body))
     report.results.append(check_filler_opener(body))
     report.results.append(check_em_dashes(body))
@@ -753,6 +927,16 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None)
     report.results.append(check_internal_links(body))
     report.results.append(check_anchor_text_length(body))
     report.results.append(check_approved_customers(body))
+    report.results.append(check_question_headings(body))
+    report.results.append(check_has_table(body))
+    report.results.append(check_statistics(body))
+    report.results.append(check_boilerplate_headings(body))
+    report.results.append(check_pitch(body))
+    report.results.append(check_promotion_clean(body))
+    report.results.append(check_faq_count(body))
+    report.results.append(check_faq_overlap(body, queue, meta.get("queueId", "")))
+    report.results.append(check_conclusion(body))
+    report.results.append(check_editor_line(text))
 
     return report
 
@@ -768,13 +952,14 @@ def main() -> int:
     parser.add_argument("--min", type=int, help="Override minimum word count")
     parser.add_argument("--max", type=int, help="Override maximum word count")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
+    parser.add_argument("--queue", type=Path, help="Content Queue exported as CSV (enables the FAQ overlap check)")
     args = parser.parse_args()
 
     if not args.path.exists():
         print(f"file not found: {args.path}", file=sys.stderr)
         return 2
 
-    report = run(args.path, args.intent, args.min, args.max)
+    report = run(args.path, args.intent, args.min, args.max, args.queue)
 
     if args.json:
         print(report.as_json())

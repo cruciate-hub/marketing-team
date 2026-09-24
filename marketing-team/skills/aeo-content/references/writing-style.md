@@ -17,21 +17,24 @@ If any file is missing or fails the canonical fetch block's validation, stop and
 
 **The pitch section in every article is generated from these files**, not from a template inside this skill. The skill defers to brand messaging for what social.plus says about itself. See each pattern file (`references/patterns/*.md`) for the placement of the pitch in the section order.
 
-## Write for AI engines first, humans second
+## Write so the answer can be lifted out
 
-AEO content exists to be extracted. That changes four things:
+These pages exist to be cited by AI engines and to be genuinely useful to the person who clicks through. The same things serve both: the answer up front, specific headings, real numbers. That changes four things:
 
 ### Answer-first block
-- **Sentence 1** = a literal answer to the title's question. 20-30 words. Must contain the exact target-keyword phrase.
-- **Sentence 2** = the mechanism, scope, or outcome. 20-30 words.
-- **Combined = 40-60 words.** This is the block LLMs extract as the direct answer.
-- No H2 heading sits between H1 and this block.
+- **Sentence 1** = a direct answer to the title's question, containing its keyword phrase.
+- **Sentence 2** (optional) = the main reason, condition or outcome.
+- **Combined = 25-60 words.** No heading sits between the H1 and this block.
+- Never mention social.plus here.
 
-### TL;DR paragraph
-- Immediately after the answer-first block. 120-160 words.
-- Structure: expanded definition → mechanism → outcome → proof point (statistic or citation).
-- Reads as a self-contained passage extractable on its own.
-- The 120-160 range is research-backed: 94% of passages selected by Google AI Overviews fall in 134-167 words (2025 ranking-factor study). Paragraphs shorter than ~100 words are consistently passed over.
+### Summary paragraph
+- Immediately after the answer-first block. 80-150 words.
+- Reads as a complete passage if lifted out of the page on its own.
+- Never mention social.plus here.
+- Why front-load: one analysis of 1.2 million ChatGPT answers found 44.2% of citations come from the first 30% of a page. The 80-150 range itself is an editorial choice, not a research threshold. (v1 of this skill cited a "94th-percentile, 2025 ranking-factor study" for 120-160 words; no source could be found, so it was removed.)
+
+### Headings are questions
+- Body H2s are the Queue row's sub-questions, phrased as questions. AI engines split a prompt into several narrower searches and pick passages per search, so a heading that matches one of those searches is the strongest structural signal a page can send.
 
 ### Chunk structure
 Every H2 section is a ~150-word self-contained passage. A reader landing mid-page should still understand it.
@@ -45,14 +48,15 @@ Named examples and numeric ranges beat adjectives. "20-50% engagement" beats "hi
 ## Citation discipline
 
 Universal rules (all intents):
-- Every numeric claim needs a source — either the approved-data list in SKILL.md or an external citation.
+- Every numeric claim needs a source: a fact from `messaging/evidence-bank.md` or an external citation. At least three statistics per page.
 - No anonymous or content-farm citations.
 - No invented statistics, customer names, or quotes.
 
 Intent-conditional rules (full guidance in `references/citation-playbook.md`):
-- **Definition** articles → ≥2 external citations recommended.
-- **Comparative** articles → ≥3 external citations recommended (one per compared option minimum).
-- **Procedural** articles → no external-citation minimum. Internal product consistency and named methods carry the weight. Forcing citations for "how to use social.plus" produces faked links and degrades trust.
+- **How-to** → no minimum. Correct, specific product detail carries the weight. Forcing citations into "how to use social.plus" produces faked links.
+- **Decision** → at least 3 (one per compared option at minimum).
+- **Explainer** → at least 2.
+- **Playbook** → at least 1.
 
 ### Anchor text length
 
@@ -106,13 +110,13 @@ Hard bans. The compliance script catches the mechanical ones; the rest require j
 
 ## What the downstream pipeline handles (do not duplicate)
 
-The Word document you produce is converted to Webflow-ready HTML by a separate automation. Between the automation and the Webflow template, these are handled for you — do not put them in the document:
+Publishing goes through `webflow-publisher`, which converts the `.draft.md` (the `.docx` is the review copy). The Webflow template handles these, so do not put them in the document:
 
 - Schema markup (Article, FAQPage, Organization, sameAs)
-- Author attribution
-- datePublished / dateModified
+- Author and reviewer display (fed from the metadata lines once the CMS fields exist)
+- datePublished / dateModified display
 - Canonical URL
 - Open Graph / Twitter meta
 - Any HTML at all
 
-The document body stays pure prose: H1 title, four labeled-paragraph metadata lines, answer-first block, TL;DR, sections, tables, lists, FAQs, pitch, conclusion.
+The document body stays pure prose: H1 title, the labeled metadata lines, answer-first block, summary, sections, tables, lists, pitch, FAQs, conclusion.
