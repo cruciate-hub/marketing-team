@@ -151,7 +151,7 @@ APPROVED_CATEGORIES = {
     "People",
 }
 
-REQUIRED_METADATA = ["title", "metaDescription", "slug", "altText", "category"]
+REQUIRED_METADATA = ["title", "metaDescription", "slug", "altText", "category", "type", "queueId"]
 
 # Map the labeled-paragraph key (case/space-insensitive) to the canonical key.
 LABELED_PARAGRAPH_KEYS = {
@@ -161,9 +161,48 @@ LABELED_PARAGRAPH_KEYS = {
     "category": "category",
     "tags": "tags",
     "minutestoread": "minutesToRead",
+    "type": "type",
+    "queueid": "queueId",
+    "author": "author",
+    "lastupdated": "lastUpdated",
+    "editor(namedhumanreviewer)": "editor",
 }
 
 DEFAULT_WORD_RANGE = (900, 2200)
+
+# ---- Article types (v2) ----
+# Each type has its own template in references/types/<type>.md and its own
+# profile here. "How to [do X]?" journey questions belong to aeo-content and
+# "What is [term]?" to glossary-content; the blog keeps the types below.
+TYPE_ALIASES = {
+    "opinion": "opinion", "pov": "opinion", "point-of-view": "opinion", "thought-leadership": "opinion",
+    "original-research": "original-research", "research": "original-research",
+    "listicle": "listicle", "comparison": "listicle",
+    "trend": "trend", "trend-analysis": "trend",
+    "product-deep-dive": "product-deep-dive", "product-announcement": "product-deep-dive",
+    "product-education": "product-education", "tutorial": "product-education",
+    "customer-narrative": "customer-narrative", "narrative": "customer-narrative",
+}
+TYPE_PROFILES: dict[str, dict] = {
+    "opinion":            {"words": (900, 1800),  "author": True},
+    "original-research":  {"words": (1200, 2500), "author": True, "method": True, "min_stats": 5, "table": True},
+    "listicle":           {"words": (1500, 3200), "criteria": True, "table": True, "disclosure": True},
+    "trend":              {"words": (900, 1800),  "min_stats": 3},
+    "product-deep-dive":  {"words": (800, 1600),  "docs_link": True},
+    "product-education":  {"words": (600, 1600),  "docs_link": True, "steps": True},
+    "customer-narrative": {"words": (900, 1800),  "customer": True},
+}
+METHOD_HEADING = re.compile(r"\b(method|methodology|how we (measured|collected|analy[sz]ed|ran)|about (the|this) data|data and method)\b", re.I)
+CRITERIA_HEADING = re.compile(r"\b(criteria|how we (chose|picked|evaluated|ranked|compared|selected)|methodology|how (this|the) list)\b", re.I)
+DISCLOSURE = re.compile(r"\b(disclosure|we (build|make|built|run)|our (own )?product|(this|the) publisher|social\.plus is (our|the publisher))\b", re.I)
+DOCS_DOMAINS = re.compile(r"https?://(?:learn|docs|developer|developers)\.social\.plus|https?://(?:www\.)?social\.plus/(?:docs|developers)", re.I)
+STATS = re.compile(r"\b\d+(?:\.\d+)?\s?%|\b\d+(?:\.\d+)?\s?(?:-|to)\s?\d+(?:\.\d+)?\s?(?:%|x|weeks?|months?|days?)|\b\d[\d,.]*\s?(?:M|K|B|million|billion)\+?(?![\w])|\$\s?\d[\d,.]*", re.I)
+YEAR_IN_TITLE = re.compile(r"\b20\d\d\b")
+
+
+def normalise_type(raw: str) -> str:
+    key = re.sub(r"[\s_]+", "-", (raw or "").strip().lower())
+    return TYPE_ALIASES.get(key, "")
 
 EMOJI_PATTERN = re.compile(
     "["
@@ -260,7 +299,7 @@ def parse_metadata(text: str) -> tuple[dict[str, str], str]:
         i += 1
     while i < len(lines) and not lines[i].strip():
         i += 1
-    label_re = re.compile(r"^([A-Za-z][A-Za-z ]+?):\s*(.+)$")
+    label_re = re.compile(r"^([A-Za-z][A-Za-z ()]+?):\s*(.+)$")
     last_key = None
     while i < len(lines) and lines[i].strip():
         stripped = lines[i].strip()
@@ -707,6 +746,91 @@ def check_no_jsonld(body: str) -> CheckResult:
     return CheckResult("no_jsonld_block", "PASS", "")
 
 
+# ---------- v2: article-type checks ----------
+
+
+def _h2_h3(body: str) -> list[str]:
+    return [h for _, h in HEADING_PATTERN.findall(strip_fenced_code(body)) if h]
+
+
+def check_type(meta: dict[str, str]) -> CheckResult:
+    raw = meta.get("type", "")
+    t = normalise_type(raw)
+    if not raw:
+        return CheckResult("article_type", "FAIL", f"missing 'Type:' line (one of {sorted(TYPE_PROFILES)})")
+    if not t:
+        return CheckResult("article_type", "FAIL",
+            f"'{raw}' is not a blog type (one of {sorted(TYPE_PROFILES)}). "
+            "How-to journey questions belong to aeo-content, 'What is [term]?' to glossary-content.")
+    return CheckResult("article_type", "PASS", f"type={t}")
+
+
+def check_editor_line(text: str) -> CheckResult:
+    ok = "Editor (named human reviewer):" in text
+    return CheckResult("editor_line_present", "PASS" if ok else "FAIL",
+        "" if ok else "missing 'Editor (named human reviewer): [fill before publish]' line")
+
+
+def type_checks(t: str, meta: dict[str, str], body: str) -> list[CheckResult]:
+    prof = TYPE_PROFILES.get(t)
+    out: list[CheckResult] = []
+    if not prof:
+        return out
+    heads = _h2_h3(body)
+    plain = re.sub(r"\]\([^)]+\)", "]", body)
+    if prof.get("author"):
+        a = meta.get("author", "").strip()
+        if not a:
+            out.append(CheckResult("author_named", "FAIL", f"{t} posts need an 'Author:' line naming the human whose view or data this is"))
+        elif "fill" in a.lower() or a.startswith("["):
+            out.append(CheckResult("author_named", "WARN", "author placeholder: must be a named person before publish"))
+        else:
+            out.append(CheckResult("author_named", "PASS", a))
+    if prof.get("method"):
+        ok = any(METHOD_HEADING.search(h) for h in heads)
+        out.append(CheckResult("method_section", "PASS" if ok else "FAIL",
+            "" if ok else "research posts need a methodology heading (sample, period, how it was measured)"))
+    if prof.get("criteria"):
+        ok = any(CRITERIA_HEADING.search(h) for h in heads)
+        out.append(CheckResult("ranking_criteria_section", "PASS" if ok else "FAIL",
+            "" if ok else "listicles need a heading that states the criteria (e.g. 'How we evaluated these platforms')"))
+    if prof.get("table"):
+        ok = bool(re.search(r"^\s*\|.+\|\s*$", body, re.M)) and bool(re.search(r"^\s*\|?\s*:?-{2,}", body, re.M))
+        out.append(CheckResult("has_table", "PASS" if ok else "FAIL", "" if ok else f"{t} posts need a comparison or data table"))
+    if prof.get("disclosure"):
+        if re.search(r"social\.plus", body, re.I):
+            ok = bool(DISCLOSURE.search(body))
+            out.append(CheckResult("self_inclusion_disclosed", "PASS" if ok else "FAIL",
+                "" if ok else "social.plus appears in the list: say plainly that it's our product (e.g. 'Disclosure: social.plus publishes this blog')"))
+        else:
+            out.append(CheckResult("self_inclusion_disclosed", "PASS", "social.plus not listed"))
+    if prof.get("min_stats"):
+        n = len(STATS.findall(plain))
+        ok = n >= prof["min_stats"]
+        out.append(CheckResult("statistics_count", "PASS" if ok else "FAIL",
+            f"{n} statistic(s) (minimum {prof['min_stats']} for {t}); each needs a source"))
+    if prof.get("docs_link"):
+        ok = bool(DOCS_DOMAINS.search(body))
+        out.append(CheckResult("docs_link", "PASS" if ok else "WARN",
+            "" if ok else "no link to social.plus documentation; product posts should point to the docs for exact steps"))
+    if prof.get("steps"):
+        ok = bool(re.search(r"^\s*\d+\.\s+\S", body, re.M))
+        out.append(CheckResult("numbered_steps", "PASS" if ok else "FAIL",
+            "" if ok else "product education posts need numbered steps"))
+    if prof.get("customer"):
+        ok = any(c.lower() in body.lower() for c in APPROVED_CUSTOMERS)
+        out.append(CheckResult("approved_customer_named", "PASS" if ok else "FAIL",
+            "" if ok else "customer narratives must feature an approved customer (messaging/evidence-bank.md)"))
+    title = meta.get("title", "")
+    if YEAR_IN_TITLE.search(title):
+        if t == "trend" and meta.get("lastUpdated"):
+            out.append(CheckResult("year_in_title", "PASS", "trend post with Last updated"))
+        else:
+            out.append(CheckResult("year_in_title", "WARN",
+                "year in the title: only for genuinely year-specific content with an owner who will refresh it; add 'Last updated:'"))
+    return out
+
+
 # ---------- runner ----------
 
 
@@ -730,8 +854,10 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     text = _read_draft(path)
     meta, body = parse_metadata(text)
 
-    lo = lo if lo is not None else DEFAULT_WORD_RANGE[0]
-    hi = hi if hi is not None else DEFAULT_WORD_RANGE[1]
+    art_type = normalise_type(meta.get("type", ""))
+    default_range = TYPE_PROFILES.get(art_type, {}).get("words", DEFAULT_WORD_RANGE)
+    lo = lo if lo is not None else default_range[0]
+    hi = hi if hi is not None else default_range[1]
 
     body_with_h1 = f"# {meta.get('title', '')}\n\n{body}" if meta.get("title") else body
     # Reader-facing prose the checks should scan: body + title + meta
@@ -760,6 +886,9 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     report.results.extend(check_headings(body_with_h1))
     report.results.append(check_image_alt_text(body))
     report.results.append(check_approved_customers(body_with_h1))
+    report.results.append(check_type(meta))
+    report.results.append(check_editor_line(text))
+    report.results.extend(type_checks(art_type, meta, body))
 
     return report
 

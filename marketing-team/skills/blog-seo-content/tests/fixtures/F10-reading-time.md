@@ -6,6 +6,10 @@ Alt text: Engagement curve chart over 30 days
 Category: Engagement
 Tags: Engagement
 Minutes to read: 40
+Type: opinion
+Queue ID: TEST-F10
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Mobile engagement patterns for product teams matter most in the first week.
 

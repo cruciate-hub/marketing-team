@@ -1,26 +1,27 @@
-# Blog SEO Content
+# Blog SEO Content (v2)
 
-Claude skill for writing SEO-optimized blog posts for social.plus/blog.
+Claude skill for writing posts for social.plus/blog in seven article types: opinion, original research, honest listicle (incl. vendor comparisons), trend analysis, product deep-dive / announcement, product education and customer narrative. Each type has its own template (`references/types/`) and compliance profile. Posts are written from Approved Blog rows in the Content Queue (Google Sheet).
 
 By default the output is a styled, editable document (Google Doc or .docx) for team review and editing. HTML field-by-field output for direct Webflow CMS paste is available on request ("push directly to Webflow", "give me the HTML", "publish this to CMS").
 
 ## What it does
 
 - Fetches the full messaging stack via the brain + router — terminology, tone, narrative, value-story, positioning.
-- Checks `website/pages-blog.json` for duplicate topics; suggests updating an existing post when a close match exists.
+- Checks duplication on meaning with the shared `scripts/intent_match.py` against the Content Queue and published pages; listicles also get a sibling check for vertical variants.
 - Delegates internal links to the `internal-linking-strategist` skill before delivery — the optimizer returns 3–7 SEO-grounded link suggestions via the canonical anchor map in `link-strategy.md`.
-- Produces content (5,000–12,000 characters) following the Context → Tension → Infrastructure → Impact → Advantage narrative structure.
+- Produces content following the type's template; length varies by type (600-1,600 words for product education up to 1,500-3,200 for listicles). The brand narrative arc is the spine for opinion posts, not every post.
 - Runs a **two-stage production flow**: drafts a markdown intermediate, checks it with a deterministic script (`scripts/compliance.py` — em dashes, emojis, brand casing, forbidden terminology, length, slug, heading hierarchy), then converts to a styled document (default) or HTML (opt-in). The script is an additional gate on top of the brain.md terminology/tone review, not a replacement.
 - Default delivery: styled Google Doc or .docx via cascade (Google Drive MCP → suggest connection → .docx fallback using `anthropic-skills:docx`). Opt-in HTML: field-by-field CMS mapping for direct Webflow paste.
 
 ## When it triggers
 
-When the user wants a blog post for social.plus/blog — any topic, whether about a social.plus product/feature or an industry/general subject. Trigger phrases include "write a blog post", "blog post about [topic]", "SEO article", "listicle", "opinion piece", "how-to guide", "tutorial", "blog post on [our feature]", "article about our [product]", "feature announcement blog".
+When the user wants a blog post for social.plus/blog — any topic, whether about a social.plus product/feature or an industry/general subject. Trigger phrases include "write a blog post", "blog post about [topic]", "write Queue row BL3", "listicle", "comparison post", "opinion piece", "research report", "trend piece", "feature announcement blog", "how to use [our feature]". General how-to guides and tutorials are no longer blog triggers: they belong to `aeo-content`, except product education (how to use a social.plus feature).
 
 The skill loads the full brand messaging stack (terminology, tone, positioning, value-story, narrative) so product blog posts are brand-correct.
 
 The skill is **not** for:
-- AEO/answer pages for `/answers/` (use `aeo-content`).
+- AEO/answer pages for `/answers/`, including general "How do you [do X]?" guides (use `aeo-content`).
+- "What is [term]?" definitions (use `glossary-content`).
 - Website page copy (use `brand-messaging`).
 - Email content (use `newsletters`).
 - Customer stories (use `case-study`).
@@ -31,8 +32,8 @@ The skill is **not** for:
 1. Fetch `brain.md` and `messaging/brain.md`. Load `terminology.md`, `tone.md`, `positioning.md`, `value-story.md`, and `narrative.md` from `messaging/`.
 2. For comparison or competitive content, lean on `value-story.md`'s differentiation framework.
 3. If the article needs site-awareness (to avoid contradicting existing pages or to find adjacent topics to reference), fetch any of `website/pages-marketing.json`, `pages-industry.json`, `pages-blog.json`, `pages-glossary.json`.
-4. Scan `pages-blog.json` `metaTitle` + `content` for topic overlap before drafting.
-5. Draft the **markdown intermediate** at `outputs/[slug].draft.md` — H1 title, labeled-paragraph metadata, markdown body.
+4. Confirm the Queue row is Approved and a Blog type; run `scripts/intent_match.py` against the Queue and published pages.
+5. Read `references/types/_shared.md` and the type template, then draft the **markdown intermediate** at `outputs/[slug].draft.md`: H1 title, labeled-paragraph metadata (now including Type, Queue ID, Author where required, and the Editor line), markdown body.
 6. Run `python3 scripts/compliance.py outputs/[slug].draft.md` and fix every failure (exit 1) before continuing. This is the mechanical gate; the brain.md terminology + tone review still applies in full.
 7. **Default mode:** convert the markdown body to a styled document — H2/H3 become heading styles, bold becomes actual bold, links become embedded hyperlinks (no HTML). **Opt-in HTML mode:** convert to HTML (wrap images in `<figure>`, add `target="_blank"` to external links only, disable smart punctuation so it can't reintroduce em dashes).
 8. Invoke `internal-linking-strategist` in **draft mode** — it returns 3–7 SEO-grounded link suggestions (anchor + URL + insertion point) using the canonical anchor map in `link-strategy.md`. Before embedding each anchor, vet its visible text with `python3 scripts/compliance.py --scan-text 'anchor text'`; reject and request a replacement on any FAIL (the linker runs after the draft.md compliance pass, so its output otherwise bypasses the gate).

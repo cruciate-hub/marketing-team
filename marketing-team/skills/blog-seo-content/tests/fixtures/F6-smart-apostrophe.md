@@ -5,6 +5,10 @@ Slug: what-is-a-developers-community
 Alt text: Developer community gathering around a whiteboard discussing architecture
 Category: Community
 Tags: Community
+Type: opinion
+Queue ID: TEST-F6
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 A developer’s community is more than a chat workspace. It’s the system around how engineers exchange knowledge and trust.
 

@@ -6,6 +6,10 @@ Alt text: Terminal showing an open source community tool being installed
 Category: Community
 Tags: Community, App Growth
 Minutes to read: 6
+Type: opinion
+Queue ID: TEST-F1
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Open source community tools for developers have matured fast in the last two years. This list covers what we use and recommend.
 

@@ -36,11 +36,13 @@ Then check three cross-cutting lenses:
 
 ## Blog lenses (0-10 per seed)
 
-Blog owns opinion, original research, narrative, honest listicles and genuine trends.
+Blog owns seven types (templates in `blog-seo-content/references/types/`).
 
-- **Point of view**: a defensible stance the team actually holds, backed by data.
+- **Opinion**: a defensible stance the team actually holds, backed by data, with a named author.
 - **Original research**: only with an evidence-bank source; pending data means the row starts Blocked.
-- **Narrative**: lessons from named customers (coordinate with `case-study`).
+- **Customer narrative**: lessons from named customers (coordinate with `case-study`).
+- **Product deep-dive**: a shipped feature and when to use it, from docs and release notes.
+- **Product education**: how to use a social.plus feature well. The only how-to on the blog; a general "How do you [do X]?" belongs to Answer.
 - **Honest listicle**: "best X" or "examples of X", same criteria for every entry, social.plus identified as publisher. Self-published "best of" lists are often cited while AI answers recommend someone else, so they're a weak bet on their own; pair them with third-party placements.
 - **Trend**: a year in the title only when the content is genuinely year-specific and someone will refresh it.
 

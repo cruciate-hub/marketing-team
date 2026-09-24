@@ -5,6 +5,10 @@ Slug: mobile-onboarding-patterns-convert-users
 Alt text: Onboarding screen mockup showing a progressive disclosure pattern
 Category: App Growth
 Tags: App Growth
+Type: opinion
+Queue ID: TEST-F4
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Mobile onboarding patterns that actually convert users follow three principles. Each is worth its own deep dive.
 

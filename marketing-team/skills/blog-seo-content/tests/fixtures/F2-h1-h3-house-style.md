@@ -5,6 +5,10 @@ Slug: how-to-choose-community-sdk-mobile-app
 Alt text: Diagram of community SDK options ranked by integration effort and feature coverage
 Category: Community
 Tags: Community
+Type: opinion
+Queue ID: TEST-F2
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Choosing a community SDK for your mobile app comes down to four tradeoffs, but most teams only consider two of them before they pick.
 

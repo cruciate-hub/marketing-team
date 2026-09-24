@@ -86,6 +86,32 @@ EXPECTATIONS: dict[str, dict] = {
         "note": "context-dependent anti-slop terms (unlock, elevate, seamless, robust) must WARN, not FAIL",
         "exit_code": 0,
     },
+    "T1-listicle-honest": {
+        "must_pass": ["article_type", "ranking_criteria_section", "has_table", "self_inclusion_disclosed", "editor_line_present"],
+        "note": "honest listicle: criteria heading, table and disclosure satisfy the listicle profile",
+        "exit_code": 0,
+    },
+    "T2-listicle-self-ranking": {
+        "must_fail": ["ranking_criteria_section", "has_table", "self_inclusion_disclosed"],
+        "note": "self-ranking listicle without criteria, table or disclosure must FAIL",
+    },
+    "T3-research-no-method": {
+        "must_fail": ["author_named", "method_section", "statistics_count", "has_table"],
+        "note": "original research needs a named author, a method section, data and a table",
+    },
+    "T4-wrong-type": {
+        "must_fail": ["article_type"],
+        "note": "'how-to' is not a blog type: journey how-tos belong to aeo-content",
+    },
+    "T5-product-education": {
+        "must_pass": ["article_type", "numbered_steps", "docs_link"],
+        "note": "product education needs numbered steps and a docs link",
+        "exit_code": 0,
+    },
+    "T6-missing-v2-lines": {
+        "must_fail": ["article_type", "editor_line_present", "metadata_type", "metadata_queueId"],
+        "note": "drafts without Type, Queue ID and Editor lines must FAIL",
+    },
 }
 
 CHECK_LINE = re.compile(r"\[(PASS|FAIL|WARN)\s*\]\s+(\S+)")

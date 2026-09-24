@@ -26,6 +26,14 @@ Exit 0 if every fixture behaves as documented; exit 1 with a per-fixture diff on
 | `F11-high-leverage.md` | hyphenated "higher-leverage" (strategy English) does NOT trigger the leverage rule | audit pass 2 |
 | `F12-ai-slop-fail.md` | hard-block anti-slop terms ("delve", "digital landscape", "ever-evolving", "in today's fast-paced") FAIL `no_forbidden_terms` | SKILL.md anti-slop rules |
 | `F13-ai-slop-warn.md` | context-dependent anti-slop terms ("unlock", "elevate", "seamless", "robust") WARN via `no_risky_terms`, do not FAIL | SKILL.md anti-slop rules |
+| `T1-listicle-honest.md` | honest listicle (criteria heading, table, disclosure) passes the listicle profile | v2 article types |
+| `T2-listicle-self-ranking.md` | self-ranking listicle without criteria, table or disclosure FAILs | v2 article types |
+| `T3-research-no-method.md` | original research without author, methodology, table or 5+ statistics FAILs | v2 article types |
+| `T4-wrong-type.md` | `Type: how-to` FAILs (journey how-tos belong to aeo-content) | v2 article types |
+| `T5-product-education.md` | product education with numbered steps and a docs link passes | v2 article types |
+| `T6-missing-v2-lines.md` | drafts without Type, Queue ID and Editor lines FAIL | v2 article types |
+
+All F-fixtures carry the v2 metadata lines (`Type: opinion`, `Queue ID`, `Author`, `Editor`) so they keep testing only their original behaviour.
 
 ## Adding a fixture
 

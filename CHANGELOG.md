@@ -1,5 +1,21 @@
 # Changelog
 
+## marketing-team 13.40
+
+`blog-seo-content` v2: seven article types, each with its own template and compliance profile, written from approved Content Queue rows. Builds on 13.38 and 13.39.
+
+**Why:** v1 applied one structure (brand narrative arc plus CTA, 900-2,200 words) to every post, which fits opinion pieces but not listicles, research or product posts. It triggered on generic how-tos and tutorials that now belong to /answers/, and checked duplication by scanning blog titles. Classifying the 268 live posts found ~10 self-published "5/6 Best [platforms] for [vertical] (2026)" lists, the vertical-variant pattern the skill's own BLOCK condition 6 forbids and the kind of biased listicle Google's spam policies (updated May 15, 2026) now cover. Decision: one skill with a template per type rather than separate skills, since roughly 70% of the skill (brand loading, Webflow fields, images, delivery, publishing, compliance core, BLOCK conditions, editor gate, linking) is shared.
+
+**Changes:**
+- [`blog-seo-content/SKILL.md`](marketing-team/skills/blog-seo-content/SKILL.md): new description and triggers (general how-tos go to aeo-content, definitions to glossary-content; the AEO/GEO//answers/ anti-trigger that fixed a past routing collision is kept). New sections: Queue input (Approved Blog row, or a row the person confirms), article types, duplication check via `intent_match.py`, Queue update. Content structure now comes from the type template; per-type length; listicle rules default to one list per category, not per vertical; editor line moved into the intermediate; new BLOCK condition 7 (wrong collection or unapproved row).
+- New [`references/types/`](marketing-team/skills/blog-seo-content/references/types/): `_shared.md` plus opinion, original-research, listicle, trend, product-deep-dive, product-education, customer-narrative.
+- [`scripts/compliance.py`](marketing-team/skills/blog-seo-content/scripts/compliance.py): requires `Type`, `Queue ID` and the Editor line (parser now accepts labels with parentheses, which were previously glued onto the preceding value). Type profiles: author (opinion, research), methodology heading + table + 5 statistics (research), criteria heading + table + self-inclusion disclosure (listicle), 3 statistics (trend), numbered steps (product education), docs link WARN (product types), approved customer (narrative), year-in-title WARN without `Last updated`. Friendly type names are normalised. All existing checks unchanged.
+- Tests: the 12 existing fixtures gain the v2 metadata lines and behave exactly as before; 6 new fixtures (T1-T6) cover the type profiles. 18/18 pass.
+- [`content-planner`](marketing-team/skills/content-planner/SKILL.md): Blog intents are now the seven type slugs, with aliases for friendly spellings; a warning flags general how-tos proposed as product education. New test for alias canonicalisation.
+- [`docs/blog-seo-content.md`](docs/blog-seo-content.md), README.md, marketing-team/README.md, brain.md updated. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.39 -> 13.40.
+
+**Open items:** audit of the 268 live posts (the vertical "best of" lists first); the blog collection has no author field, which opinion and research posts need to display; glossary-content still uses the title-based duplicate check.
+
 ## marketing-team 13.39
 
 New `content-planner` skill: the first step of the content engine. Builds on 13.38 (aeo-content v2).

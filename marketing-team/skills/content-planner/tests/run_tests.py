@@ -39,6 +39,7 @@ with tempfile.TemporaryDirectory() as out:
     check("same as published page -> Update existing", "**Update existing**" in report and "What is churn rate?" not in by_q)
     check("previously rejected -> Reject", "**Reject**" in report and "What is the best time to send push notifications?" not in by_q)
     check("legacy page scheduled for removal is ignored", "Why does community retention drop in 2026?" in by_q)
+    check("friendly blog intent is canonicalised", by_q.get("What platform data shows about community and retention", {}).get("Intent") == "original-research")
     check("year warning", "year in an evergreen question" in report)
     check("premise warning", "no premise source" in report)
     check("header matches Queue columns", list(rows[0].keys())[0] == "ID" and len(rows[0]) == 26)

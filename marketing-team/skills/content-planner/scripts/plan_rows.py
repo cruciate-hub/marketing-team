@@ -22,7 +22,7 @@ Candidate JSON
     {"candidates": [{
         "ref": "c1",                          # temporary key, unique in batch
         "collection": "Answer",               # Glossary | Answer | Blog
-        "intent": "explainer",                # see VALID_INTENTS
+        "intent": "explainer",                # see VALID_INTENTS (aliases accepted)
         "cluster": "Retention & engagement",
         "stage": "Problem",                   # Problem | Solution | Evaluation | Implementation | Definition
         "question": "Why do fitness apps struggle with retention?",
@@ -68,8 +68,24 @@ QUEUE_COLUMNS = [
 VALID_INTENTS = {
     "Glossary": {"definition"},
     "Answer": {"how-to", "decision", "explainer", "playbook"},
-    "Blog": {"opinion", "original research", "listicle", "narrative", "trend"},
+    "Blog": {"opinion", "original-research", "listicle", "trend", "product-deep-dive",
+             "product-education", "customer-narrative"},
 }
+# Friendly spellings accepted from people and older Queue rows.
+INTENT_ALIASES = {
+    "original research": "original-research", "research": "original-research",
+    "narrative": "customer-narrative", "customer narrative": "customer-narrative",
+    "comparison": "listicle", "pov": "opinion", "thought leadership": "opinion",
+    "product deep-dive": "product-deep-dive", "announcement": "product-deep-dive",
+    "product education": "product-education", "tutorial": "product-education",
+    "how to": "how-to", "howto": "how-to",
+}
+
+
+def canonical_intent(raw: str) -> str:
+    k = (raw or "").strip().lower()
+    return INTENT_ALIASES.get(k, k.replace(" ", "-") if k.replace(" ", "-") in
+                              {i for s in VALID_INTENTS.values() for i in s} else k)
 ID_PREFIX = {"Glossary": "GL", "Answer": "AN", "Blog": "BL"}
 STAGES = {"Problem", "Solution", "Evaluation", "Implementation", "Definition"}
 MAX_PER_COLLECTION = 10
@@ -98,6 +114,8 @@ def next_ids(queue: list[dict]) -> dict[str, int]:
 
 def validate(cands: list[dict], queue_ids: set[str]) -> tuple[list[str], dict[str, list[str]]]:
     errors: list[str] = []
+    for c in cands:
+        c["intent"] = canonical_intent(c.get("intent", ""))
     warns: dict[str, list[str]] = {c.get("ref", f"#{i}"): [] for i, c in enumerate(cands)}
     refs = [c.get("ref") for c in cands]
     if len(set(refs)) != len(refs) or None in refs:
@@ -134,6 +152,8 @@ def validate(cands: list[dict], queue_ids: set[str]) -> tuple[list[str], dict[st
             warns[ref].append("question makes an assumption but has no premise source")
         if coll in ("Answer", "Glossary") and YEAR_RE.search(q):
             warns[ref].append("year in an evergreen question: drop it unless the answer is genuinely year-specific")
+        if coll == "Blog" and c.get("intent") == "product-education" and form in ("howto",) and not re.search(r"social\.plus|\bour\b", q, re.I):
+            warns[ref].append("general how-to question: unless it teaches a social.plus feature, it belongs to Answer")
         if coll == "Blog" and c.get("intent") == "listicle" and re.search(r"\bsocial\.plus\b", q, re.I):
             warns[ref].append("self-named listicle: keep criteria even and identify social.plus as publisher")
     for coll, n in counts.items():

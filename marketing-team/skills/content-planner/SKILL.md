@@ -147,8 +147,8 @@ Walk the lenses in `references/ideation-lenses.md` for each collection. Every ca
 
 | Field | Rule |
 |---|---|
-| collection | Glossary ("What is [term]?" only), Answer (one journey question), Blog (opinion, research, narrative, honest listicle, trend) |
-| intent | Glossary: definition. Answer: how-to, decision, explainer, playbook. Blog: opinion, original research, listicle, narrative, trend |
+| collection | Glossary ("What is [term]?" only), Answer (one journey question), Blog (the seven blog types) |
+| intent | Glossary: definition. Answer: how-to, decision, explainer, playbook. Blog: opinion, original-research, listicle, trend, product-deep-dive, product-education, customer-narrative |
 | question | The canonical question, phrased as people ask it |
 | first_sentence | The page's opening answer, max 60 words. This is what duplication is judged on |
 | headings | 2+ sub-questions (Answer and Blog) |
@@ -207,5 +207,4 @@ Run after changing `plan_rows.py` or `scripts/intent_match.py` (and run `aeo-con
 
 - **Queue access.** The planner reads a CSV export and outputs rows to paste. Writing to the Google Sheet automatically needs an integration signed off by IT.
 - **Call transcripts as seeds.** Once Gong is in place, sales and support questions can feed the planner as seeds and as unique information.
-- **Blog skill.** `blog-seo-content` doesn't read Queue rows yet; until it does, pass it the approved row's question, sub-questions and information source by hand.
 - **Glossary skill.** `glossary-content` still runs its own title-based duplicate check; it should move to `intent_match.py` so all three writing skills judge duplication the same way.

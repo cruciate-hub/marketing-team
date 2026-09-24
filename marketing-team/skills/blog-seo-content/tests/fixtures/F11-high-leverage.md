@@ -5,6 +5,10 @@ Slug: higher-leverage-infrastructure-decisions-mobile-product-teams
 Alt text: Architecture diagram showing higher-leverage infrastructure decisions
 Category: Insights
 Tags: Insights
+Type: opinion
+Queue ID: TEST-F11
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Higher-leverage infrastructure decisions for mobile product teams compound fastest when you make them early.
 

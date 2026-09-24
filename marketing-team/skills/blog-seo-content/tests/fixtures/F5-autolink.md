@@ -5,6 +5,10 @@ Slug: webhooks-vs-polling-mobile-sync-workflows
 Alt text: Diagram comparing webhook push vs polling pull patterns
 Category: Insights
 Tags: Insights
+Type: opinion
+Queue ID: TEST-F5
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Choosing between webhooks and polling for mobile sync workflows depends on your concurrency profile. See the write-up at <https://www.social.plus/blog/own-your-audience> which covers the tradeoffs.
 
