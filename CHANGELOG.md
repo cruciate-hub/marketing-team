@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.42
+
+`glossary-content` compliance now requires a `Queue ID`, matching aeo-content and blog-seo-content.
+
+**Why:** after 13.38-13.41, Answer and Blog drafts fail compliance without a Queue ID, but glossary drafts could still be written without being tied to a Content Queue row, so the Queue could drift from what was actually written.
+
+**Changes:**
+- [`glossary-content/scripts/compliance.py`](marketing-team/skills/glossary-content/scripts/compliance.py): `Queue ID` added to the required metadata (`metadata_queue_id` FAILs without it). `Queue ID` and `Last updated` are recognised as metadata, so they are excluded from the word count and never mistaken for the one-sentence definition.
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): the markdown intermediate template carries `Queue ID:` (a rewrite uses the live page's `EX-G-` row); the compliance description mentions it.
+- New [`glossary-content/tests/run_tests.py`](marketing-team/skills/glossary-content/tests/run_tests.py): targeted checks that a draft with a Queue ID passes, one without fails, and the line doesn't interfere with definition detection. Verified to fail when the Queue ID handling is removed.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.41 -> 13.42.
+
 ## marketing-team 13.41
 
 `glossary-content` now uses the shared duplication check. Builds on 13.38-13.40.
