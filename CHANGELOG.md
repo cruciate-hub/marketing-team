@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.41
+
+`glossary-content` now uses the shared duplication check. Builds on 13.38-13.40.
+
+**Why:** glossary was the last content skill on the title-word check (`aeo-content/scripts/duplicate_check.py`), which only compared against published pages and missed synonyms. The glossary audit found cannibalisation clusters (retention, engagement, chat, community terms) that a title check can't see; with the Content Queue in place, planned entries must be checked too.
+
+**Changes:**
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): step 1 now runs `scripts/intent_match.py` against the Queue CSV and published pages, with `--exclude-id` for the row being written (a rewrite's `EX-G-` row, so the live page doesn't match itself). A decision table covers the glossary cases: same term or synonym in the glossary (one entry per concept), the same term planned twice (write once, mark the other Merged), near-terms (keep both only if the definitions differ), Answer pages that define terms (they link here instead), blog posts sharing keywords (usually fine). Related-skills list updated.
+- [`aeo-content/tests/run_tests.py`](marketing-team/skills/aeo-content/tests/run_tests.py): three matcher checks for glossary cases (rephrased definition, synonym terms, different terms).
+- `duplicate_check.py` is no longer used by any skill; kept because the canonical fetch block cites it as an example. Noted in [`docs/aeo-content.md`](docs/aeo-content.md).
+- Removed the now-resolved open item from `content-planner/SKILL.md`. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.40 -> 13.41.
+
 ## marketing-team 13.40
 
 `blog-seo-content` v2: seven article types, each with its own template and compliance profile, written from approved Content Queue rows. Builds on 13.38 and 13.39.

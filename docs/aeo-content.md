@@ -119,7 +119,7 @@ marketing-team/skills/aeo-content/
 │   └── workflow-phases.md         Batch workflow (approved Queue IDs)
 ├── scripts/
 │   ├── compliance.py
-│   ├── duplicate_check.py         Legacy title check, still used by glossary-content
+│   ├── duplicate_check.py         Legacy title check, no longer used by any skill (kept because the canonical fetch block cites it as an example)
 │   └── make_zip.py
 └── tests/
     ├── run_tests.py

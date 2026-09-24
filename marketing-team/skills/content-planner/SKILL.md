@@ -207,4 +207,3 @@ Run after changing `plan_rows.py` or `scripts/intent_match.py` (and run `aeo-con
 
 - **Queue access.** The planner reads a CSV export and outputs rows to paste. Writing to the Google Sheet automatically needs an integration signed off by IT.
 - **Call transcripts as seeds.** Once Gong is in place, sales and support questions can feed the planner as seeds and as unique information.
-- **Glossary skill.** `glossary-content` still runs its own title-based duplicate check; it should move to `intent_match.py` so all three writing skills judge duplication the same way.

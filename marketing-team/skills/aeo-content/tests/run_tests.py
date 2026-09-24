@@ -56,6 +56,14 @@ check("improve/increase synonym is a likely duplicate",
 check("distinct questions stay below review",
       score("Should you build or buy social features for your app?", "", "How much does it cost to build in-app chat?", "") < NEEDS_REVIEW)
 
+print("intent_match: glossary cases (shared matcher)")
+check("rephrased definition of the same term is a likely duplicate",
+      score("What is app retention?", "", "What does app retention mean?", "") >= LIKELY_DUPLICATE)
+check("synonym terms are a likely duplicate",
+      score("What is in-app messaging?", "", "What is in-app chat?", "") >= LIKELY_DUPLICATE)
+check("different terms do not match",
+      score("What is app retention?", "", "What is churn rate?", "") < NEEDS_REVIEW)
+
 print("evidence bank and compliance whitelist agree")
 bank = (ROOT / "messaging" / "evidence-bank.md").read_text()
 src = COMPLIANCE.read_text()

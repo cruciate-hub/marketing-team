@@ -123,13 +123,32 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 ## Before writing
 
-### 1. Duplicate-topic check (reuse, don't reimplement)
+### 1. Duplicate check (shared, on meaning)
 
-Run `MT_REPO=/tmp/cruciate-hub-marketing-team python3 "$MT_REPO/marketing-team/skills/aeo-content/scripts/duplicate_check.py" "<term>"`. It already reads both `pages-glossary.json` and `pages-answers.json` and reports matches above a 0.5 coverage threshold.
+Glossary entries are written from a Content Queue row (Google Sheet, Queue tab) with Collection `Glossary`, usually at status `Approved`, or from an existing live entry being rewritten (its `EX-G-` row). Get the Queue as CSV (Queue tab, File > Download > CSV) and run the shared matcher used by every content skill:
 
-- **Exit 0 / `RESULT: CLEAN`** — proceed.
-- **Exit 1 / `RESULT: MATCHES`** — if the match is the *same term already on the glossary*, this is a rewrite, not a new page: keep the existing slug and URL, rewrite the content in full against this skill's structure, and say so explicitly to the user ("rewriting the existing glossary entry, not creating a duplicate"). If the match is in `/answers/` instead, flag it — the term likely belongs to one collection, not both; ask which one before writing.
-- **Exit 2 / `RESULT: UNVERIFIED`** — do not proceed without manually checking `pages-glossary.json` for the term.
+```
+MT_REPO=/tmp/cruciate-hub-marketing-team python3 "$MT_REPO/scripts/intent_match.py" \
+  "What is <term>?" --first-sentence "<draft definition sentence>" \
+  --queue queue.csv --exclude-id <this row's ID>
+```
+
+- Pass the row being written as `--exclude-id` (for a rewrite, the `EX-G-` row of the live page). Otherwise the page matches itself.
+- Without `--queue`, only published pages are checked and planned ideas are missed. Say so in your output if the Queue isn't available.
+
+Read every `LIKELY DUPLICATE` and `REVIEW` line and decide with the same test the other skills use: **would the two pages open with the same first sentence?**
+
+| Match | What it means | Action |
+|---|---|---|
+| Another glossary entry, same term or a synonym ("in-app messaging" vs "in-app chat") | Cannibalisation inside the glossary | Stop. Recommend one entry for the concept; the other becomes a redirect or an alternative name inside it |
+| A planned Glossary row for the same term | The same entry planned twice (for example a map row and the live page's row) | Write it once, from one row; note the other as Merged |
+| A near-term ("app retention" vs "app retention rate") | Possibly two concepts, possibly one | Keep both only if the definitions genuinely differ; otherwise one entry covers both |
+| An Answer page or row | Answers never define terms; if one does, the definition belongs here | Flag it: the Answer row should link to this entry instead |
+| A blog post (strategies, guides) | Different job, shared keywords | Usually fine; note why in one line |
+
+Exit codes: `0` / `RESULT: CLEAN` proceed; `1` / `RESULT: MATCHES` apply the table; `2` / `RESULT: UNVERIFIED` fix the input or check by hand, never treat as clean.
+
+The matcher normalises synonyms and question forms but is still a word-level approximation; the first-sentence test is the decision. The previous title-based check (`aeo-content/scripts/duplicate_check.py`) is no longer used by any skill.
 
 ### 2. Brand-messaging read (non-negotiable)
 
@@ -223,11 +242,11 @@ Before running compliance, invoke `internal-linking-strategist` in **draft mode*
 - Populate "Related Terms" from its output — this is the section that exists specifically for this purpose, so it should rarely come back empty. If it does, surface that to the user rather than inventing related terms from memory.
 - **Also place the same suggestions inline in the body, at each one's "Insert at" sentence.** This is not optional polish and Related Terms does not substitute for it — the optimizer's output is designed around inline placement first, with Related Terms as an additional summary, not the other way around. Follow the same rule as `aeo-content` and `blog-seo-content`: only from the optimizer's output, never improvised. Skip a specific suggestion only when it genuinely has no natural home in the body prose (rare) — skipping *all* of them while still filling Related Terms is exactly the failure `compliance.py`'s `inline_body_links_present` check exists to catch, because it happened in practice: a batch of live entries shipped with verified, real Related Terms links and zero inline links anywhere in the body, because this step was quietly treated as done once Related Terms was filled.
 
-**This must be a real invocation, not a substitute.** Confirming a URL exists in `pages-glossary.json` (e.g. via `duplicate_check.py` output or a manual grep) is not the same as running `internal-linking-strategist`'s two-phase shortlist-plus-live-fetch process, and does not satisfy this step. This distinction is here because it was observed in practice: this step was silently replaced with a manual lookup that produced real, valid URLs but skipped the optimizer's cannibalization check and anchor-distribution rules — which read as compliant but wasn't.
+**This must be a real invocation, not a substitute.** Confirming a URL exists in `pages-glossary.json` (e.g. via `intent_match.py` output or a manual grep) is not the same as running `internal-linking-strategist`'s two-phase shortlist-plus-live-fetch process, and does not satisfy this step. This distinction is here because it was observed in practice: this step was silently replaced with a manual lookup that produced real, valid URLs but skipped the optimizer's cannibalization check and anchor-distribution rules — which read as compliant but wasn't.
 
 **Required evidence (paste into your response before delivering).** `aeo-content` requires this same class of evidence in its parallel-subagent batch mode, for a related reason (batch orchestration was observed silently dropping this step there too); this skill requires it on every draft, batch or not, since the same drop-off can happen in a single-draft run:
 1. The full labeled output block `internal-linking-strategist` returns (starts with `## Internal link suggestions`). If that heading is missing from what you're about to paste, the skill was not actually invoked — go back and invoke it for real.
-2. For each Related Terms link used: the `**Anchor:**`, `**Target:**` URL, and `**Reasoning:**` line the optimizer gave for it, exactly as it returned them. (Whether its `Insert at` sentence-quote field is populated for a Related Terms suggestion depends on how the optimizer itself treats list-style output — don't assume it's absent and don't fabricate one either way; paste whatever it actually returned.) A URL you sourced yourself (grep, memory, or a duplicate-check hit) without this evidence is an improvised link per BLOCK condition 3 below, even if the URL itself is correct.
+2. For each Related Terms link used: the `**Anchor:**`, `**Target:**` URL, and `**Reasoning:**` line the optimizer gave for it, exactly as it returned them. (Whether its `Insert at` sentence-quote field is populated for a Related Terms suggestion depends on how the optimizer itself treats list-style output — don't assume it's absent and don't fabricate one either way; paste whatever it actually returned.) A URL you sourced yourself (grep, memory, or a duplication-check hit) without this evidence is an improvised link per BLOCK condition 3 below, even if the URL itself is correct.
 
 Save this evidence block verbatim to `outputs/[slug].links.md` alongside the draft — see "Compliance" below for why.
 
@@ -316,7 +335,8 @@ When asked to rewrite multiple existing entries at once (e.g. "redo the first 10
 ## Related skills
 
 - `webflow-publisher` — publishes this skill's `.draft.md` to the Glossary collection; owns conversion, dry-run and the Webflow API calls. This skill owns the field map (`webflow-fields.json`) that tells it how.
-- `aeo-content` — /answers/ pages; source of the duplicate-check script this skill reuses. Approved facts now live in `messaging/evidence-bank.md`
+- `aeo-content` — /answers/ pages; they link to glossary entries rather than defining terms. Shared pieces: `scripts/intent_match.py` (duplication) and `messaging/evidence-bank.md` (approved facts)
+- `content-planner` — proposes new glossary terms as Queue rows
 - `blog-seo-content` — blog posts; source of the forbidden-vocabulary tiers this skill's compliance script mirrors
 - `internal-linking-strategist` — called by this skill; do not reimplement
 - `site-intelligence` — for auditing the glossary collection beyond single-entry duplicate checks
