@@ -1,5 +1,21 @@
 # Changelog
 
+## marketing-team 13.39
+
+New `content-planner` skill: the first step of the content engine. Builds on 13.38 (aeo-content v2).
+
+**Why:** the engine starts from a human seed (a keyword, phrase, prompt or idea). Something has to work out how many articles that seed genuinely deserves, of which kind, and whether any of them already exist or are already planned, before anything reaches the writing queue. v1 aeo-content did its own ideation from titles, which is how the /answers/ permutation problem happened.
+
+**Changes:**
+- New [`content-planner/SKILL.md`](marketing-team/skills/content-planner/SKILL.md): loads the Content Queue (CSV export) and evidence bank, researches the seed (AI-style sub-question split, Ahrefs question data, what social.plus can uniquely say), proposes 0-10 candidates per collection with a draft first sentence, sub-questions, information source and premise check, then runs the gate. Never sets status beyond Idea / Blocked, never fills priority, dates or reviewer.
+- New [`content-planner/scripts/plan_rows.py`](marketing-team/skills/content-planner/scripts/plan_rows.py): validates candidates (required fields, Glossary = "What is [term]?", valid intents per collection, 2+ sub-questions, 60-word first sentence, known dependencies, cap of 10 per collection, no duplicates inside the batch), labels each against the Queue as New / Merge (planned row) / Update existing (published) / Reject (previously rejected), ignores rows scheduled for removal, assigns the next free ID per collection (GL, AN, BL), marks pending-data ideas Blocked, and writes paste-ready Queue rows (all 26 columns) plus a report with merges, refresh suggestions, warnings, same-cluster neighbours and the Seeds tab row.
+- New [`content-planner/references/ideation-lenses.md`](marketing-team/skills/content-planner/references/ideation-lenses.md): lenses per collection, rules against permutations, worked example for the seed "app retention".
+- New [`content-planner/tests/run_tests.py`](marketing-team/skills/content-planner/tests/run_tests.py): 18 checks over valid and invalid fixture batches.
+- [`scripts/intent_match.py`](scripts/intent_match.py): question-form awareness. Questions of a different form (definition vs how-to vs why vs decision vs benchmark vs list) are discounted (x0.6), so "What is app retention?" and "How do you increase app retention?" score 0.40 (review) instead of 0.67 (duplicate). Legacy permutation pairs still score 1.00; aeo-content tests unchanged and passing.
+- README.md, marketing-team/README.md and brain.md list content-planner and the v2 aeo-content description. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.38 -> 13.39, 19 skills -> 20.
+
+**Open items:** automatic Queue writes need an IT-approved Sheets integration; blog-seo-content doesn't read Queue rows yet; glossary-content still uses the title-based duplicate check and should move to `intent_match.py`.
+
 ## marketing-team 13.38
 
 `aeo-content` v2: /answers/ pages are rebuilt around one question per page, written only from approved Content Queue rows.

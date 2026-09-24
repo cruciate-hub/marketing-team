@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (19)
+## Skills (20)
 
 ### Content creation
 
@@ -12,7 +12,8 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | [blog-seo-content](../docs/blog-seo-content.md) | 431 | 26.1 KB | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Default output is a styled Google Doc / .docx for team review; HTML field-by-field for Webflow is opt-in. Loads the full messaging stack for brand voice. Drafts run through a deterministic compliance gate (`scripts/compliance.py`) before delivery; `--scan-text` mode vets linker-supplied anchors. Regression suite under `tests/`. | [SKILL.md →](./skills/blog-seo-content/SKILL.md) |
 | [newsletters](../docs/newsletters.md) | 242 | 16.6 KB | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. | [SKILL.md →](./skills/newsletters/SKILL.md) |
 | [case-study](../docs/case-study.md) | 422 | 27.2 KB | Customer stories and success case studies. | [SKILL.md →](./skills/case-study/SKILL.md) |
-| [aeo-content](../docs/aeo-content.md) | 530 | 38.0 KB | AEO (Answer Engine Optimization) articles for the /answers/ collection, structured for AI search engine citation. | [SKILL.md →](./skills/aeo-content/SKILL.md) |
+| content-planner | 211 | 13.9 KB | First step of the content engine: turns one seed (keyword, phrase, prompt or idea) into candidate Glossary, Answer and Blog articles, checks them against the Content Queue for duplication and cannibalisation, and outputs paste-ready Queue rows plus a review report. Never writes or approves articles. | [SKILL.md →](./skills/content-planner/SKILL.md) |
+| [aeo-content](../docs/aeo-content.md) | 438 | 29.7 KB | /answers/ pages (v2): one page per specific buyer or developer question, written only from Approved Content Queue rows. Four templates (how-to, decision, explainer, playbook); shared duplication check (`scripts/intent_match.py`) and evidence bank (`messaging/evidence-bank.md`); deterministic compliance gate with regression tests. | [SKILL.md →](./skills/aeo-content/SKILL.md) |
 | glossary-content | 300 | 28 KB | Glossary entries for /glossary/ — six fixed sections, at least one table, answer-first definition, 500–900 words; deterministic compliance gate (`scripts/compliance.py`). Publishes through `webflow-publisher` once the Glossary field slugs are confirmed. | [SKILL.md →](./skills/glossary-content/SKILL.md) |
 | [press-release](../docs/press-release.md) | 269 | 17.3 KB | Newswire-ready press releases as `.docx` files for PR Newswire / Cision, embargoed announcements, and direct media pitches. | [SKILL.md →](./skills/press-release/SKILL.md) |
 

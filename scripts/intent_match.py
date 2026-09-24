@@ -108,18 +108,45 @@ def normalise(text: str) -> set[str]:
     return set(tokens)
 
 
+# Question form. Two questions about the same subject but of a different
+# form ("What is app retention?" vs "How do you increase app retention?")
+# are usually different pages, so a form mismatch discounts the score.
+FORM_PENALTY = 0.6
+_FORMS = [
+    ("benchmark", r"^what(?:'s| is| are) (?:a |the )?(?:good|average|typical|normal)\b"),
+    ("list", r"^(?:best|top|examples?|\d+ (?:best|ways|examples))\b|^what are (?:the )?(?:best|top)\b|^who are the top\b"),
+    ("decision", r"^(?:should|which|how much|how long)\b|\bvs\.?\b|\bversus\b|\bor\b.*\?$|^(?:build|buy)\b"),
+    ("why", r"^why\b"),
+    ("howto", r"^(?:how (?:do|does|can|to|should|would)|how\b|guide to|steps to)\b"),
+    ("definition", r"^what(?:'s| is| are| does)\b"),
+    ("whether", r"^(?:do|does|is|are|can|will)\b"),
+]
+
+
+def question_form(text: str) -> str:
+    t = (text or "").strip().lower()
+    for name, pat in _FORMS:
+        if re.search(pat, t):
+            return name
+    return "other"
+
+
 def jaccard(a: set[str], b: set[str]) -> float:
     if not a or not b:
         return 0.0
     return len(a & b) / len(a | b)
 
 
-def score(cand_q: str, cand_s: str, other_q: str, other_s: str) -> float:
-    """Best of question-vs-question and combined question+sentence overlap."""
+def score(cand_q: str, cand_s: str, other_q: str, other_s: str, form_aware: bool = True) -> float:
+    """Best of question-vs-question and combined question+sentence overlap,
+    discounted when the two questions are of a different form."""
     q = jaccard(normalise(cand_q), normalise(other_q))
     if cand_s and other_s:
-        combined = jaccard(normalise(cand_q + " " + cand_s), normalise(other_q + " " + other_s))
-        return max(q, combined)
+        q = max(q, jaccard(normalise(cand_q + " " + cand_s), normalise(other_q + " " + other_s)))
+    if form_aware:
+        fa, fb = question_form(cand_q), question_form(other_q)
+        if fa != fb and "other" not in (fa, fb):
+            q *= FORM_PENALTY
     return q
 
 
