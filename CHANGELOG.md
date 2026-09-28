@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.43
+
+`blog-seo-content`: never state prices, ours or a competitor's.
+
+**Why:** the 2026-09-28 audit of the 37 staged blog rewrites found dollar figures (starting prices, per-MAU rates, plan prices) for social.plus and competitors in three listicles. Vendor prices change without notice, so a quoted figure goes stale and becomes a credibility and legal risk; the live chat-APIs and consumer-platforms posts still carry old prices until the rewrites ship.
+
+**Changes:**
+- [`blog-seo-content/SKILL.md`](marketing-team/skills/blog-seo-content/SKILL.md): new rule under "Listicle and comparison integrity": no currency figures for social.plus or any competitor in tables, body copy, FAQs or meta descriptions. Describe the pricing model instead (MAU-based, per-product, usage-based, seat-based, free tier, contact for pricing) and link to the vendor's pricing page. Market-size statistics with a cited source are fine. Applies to every blog post, not only listicles.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.42 -> 13.43.
+
 ## marketing-team 13.42
 
 `glossary-content` compliance now requires a `Queue ID`, matching aeo-content and blog-seo-content.
