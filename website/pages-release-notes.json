@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-28T11:17:58.168Z",
-    "itemCount": 73,
+    "generatedAt": "2026-09-28T11:19:18.070Z",
+    "itemCount": 74,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/pin-messages-in-livestream-chat",
+      "metaTitle": "Pin Messages in Livestream Chat",
+      "metaDescription": "Hosts and moderators can now pin messages to the top of the livestream chat, keeping important links, calls to action, and instructions visible as new messages arrive. ",
+      "content": "# Pin Messages in Livestream Chat"
+    },
     {
       "url": "https://www.social.plus/release-note/surface-real-user-posts-anywhere-with-discovery-widget",
       "metaTitle": "Surface Real User Posts Anywhere with Discovery Widget",
