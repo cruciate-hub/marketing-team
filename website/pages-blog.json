@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-14T10:10:18.425Z",
-    "itemCount": 267,
+    "generatedAt": "2026-09-28T11:06:48.800Z",
+    "itemCount": 268,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/five-questions-every-team-should-ask-their-data",
+      "metaTitle": "Five Questions Every Team Should Ask Their Data",
+      "metaDescription": "Marketing, product, growth, content, and leadership each need different answers from the same first-party data. Here are the questions that drive real decisions.",
+      "content": "# Five Questions Every Team Should Ask Their Data\n## Campaign intelligence: what the marketer needs to know\n## Feature impact: what the product lead needs to know\n## Audience growth: what the growth lead needs to know\n## Trendspotting: what the content strategist needs to know\n## Executive readiness: what leadership needs before the meeting\n## Start with your team's question"
+    },
     {
       "url": "https://www.social.plus/blog/how-smart-fit-uses-in-app-engagement-to-drive-retention",
       "metaTitle": "From the Stage: How Smart Fit Uses In App Engagement to Drive Retention",
