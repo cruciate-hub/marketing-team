@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-28T11:19:18.070Z",
-    "itemCount": 74,
+    "generatedAt": "2026-09-28T11:22:56.835Z",
+    "itemCount": 75,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/dark-mode-chat-support-for-flutter",
+      "metaTitle": "Dark Mode Chat Support for Flutter",
+      "metaDescription": "Flutter now supports chat in dark mode, giving users a more comfortable viewing experience in low-light environments.",
+      "content": "# Dark Mode Chat Support for Flutter"
+    },
     {
       "url": "https://www.social.plus/release-note/pin-messages-in-livestream-chat",
       "metaTitle": "Pin Messages in Livestream Chat",
