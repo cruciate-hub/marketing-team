@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-07T12:49:26.191Z",
-    "itemCount": 68,
+    "generatedAt": "2026-09-28T10:22:15.243Z",
+    "itemCount": 69,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-agentry-ask-your-first-party-data-anything",
+      "metaTitle": "Introducing Agentry: Ask Your First-Party Data Anything",
+      "metaDescription": "social.plus Agentry connects AI assistants to the first-party data your app generates. Ask a question in everyday language, from inside Claude, ChatGPT, or any supported AI assistant, and get a clear answer with the reasoning behind it.",
+      "content": "# Introducing Agentry: Ask Your First-Party Data Anything\n## What is Agentry\n## Any question, in everyday language\n## Inside the AI tools your team already uses\n## Your data stays yours\n## First-party data, wherever your team works"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-august-2026",
       "metaTitle": "What's new in social.plus | August 2026",
