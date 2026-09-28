@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-28T11:16:23.705Z",
-    "itemCount": 72,
+    "generatedAt": "2026-09-28T11:17:58.168Z",
+    "itemCount": 73,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/surface-real-user-posts-anywhere-with-discovery-widget",
+      "metaTitle": "Surface Real User Posts Anywhere with Discovery Widget",
+      "metaDescription": "Brands can now take the real conversations already happening in their app and choose exactly where they show up.",
+      "content": "# Surface Real User Posts Anywhere with Discovery Widget"
+    },
     {
       "url": "https://www.social.plus/release-note/ask-your-first-party-data-anything-with-agentry",
       "metaTitle": "Ask Your First-Party Data Anything with Agentry",
