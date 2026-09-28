@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-22T05:45:03.609Z",
-    "itemCount": 71,
+    "generatedAt": "2026-09-28T11:16:23.705Z",
+    "itemCount": 72,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/ask-your-first-party-data-anything-with-agentry",
+      "metaTitle": "Ask Your First-Party Data Anything with Agentry",
+      "metaDescription": "social.plus Agentry connects AI assistants directly to the first-party data your app generates.",
+      "content": "# Ask Your First-Party Data Anything with Agentry"
+    },
     {
       "url": "https://www.social.plus/release-note/direct-profile-reset-for-admins-on-console",
       "metaTitle": "Direct Profile Reset for Admins on Console",
