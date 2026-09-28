@@ -8,7 +8,7 @@ This marketplace ships **two plugins** — install one, not both.
 
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
-| **`marketing-team`** | The marketing team — full kit | 19 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
+| **`marketing-team`** | The marketing team — full kit | 20 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
@@ -27,15 +27,16 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 **Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in the plugin's `.claude-plugin/plugin.json` (versions are single-sourced there; `marketplace.json` entries deliberately carry no version field). Teammates with auto-sync on (Steps 7–10 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
 
-## Available skills (19)
+## Available skills (20)
 
 ### Content creation
 
 | Skill | What it does |
 |---|---|
 | [**brand-messaging**](./marketing-team/skills/brand-messaging/SKILL.md) | Non-blog marketing content: feature pages, landing pages, homepage copy, product descriptions, release-note CMS items, taglines, pitch materials, investor copy, and brand voice audits. NOT for blog posts (use blog-seo-content for any topic). |
-| [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | SEO-optimized blog posts for social.plus/blog — any topic (product features, industry trends, opinion, listicles). Loads the full messaging stack for brand voice. |
-| [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | AEO (Answer Engine Optimization) articles for the `/answers/` collection, structured for AI search engine citation. |
+| [**blog-seo-content**](./marketing-team/skills/blog-seo-content/SKILL.md) | Blog posts (v2) in seven article types, each with its own template and compliance profile: opinion, original research, honest listicle (incl. vendor comparisons), trend, product deep-dive, product education, customer narrative. Written from Approved Content Queue rows; shared duplication check; deterministic compliance gate with 18 regression fixtures. |
+| [**content-planner**](./marketing-team/skills/content-planner/SKILL.md) | First step of the content engine: turns one seed (keyword, phrase, prompt or idea) into candidate Glossary, Answer and Blog articles, checks them against the Content Queue for duplication and cannibalisation, and outputs paste-ready Queue rows plus a review report. Never writes or approves articles. |
+| [**aeo-content**](./marketing-team/skills/aeo-content/SKILL.md) | /answers/ pages (v2): one page per specific buyer or developer question, written only from Approved Content Queue rows. Four templates (how-to, decision, explainer, playbook); shared duplication check (`scripts/intent_match.py`) and evidence bank (`messaging/evidence-bank.md`); deterministic compliance gate with regression tests. |
 | [**glossary-content**](./marketing-team/skills/glossary-content/SKILL.md) | Glossary entries for `/glossary/` — six fixed sections, at least one table, answer-first definition, 500–900 words; deterministic compliance gate (`scripts/compliance.py`). Publishes via `webflow-publisher` once the Glossary field slugs are confirmed. |
 | [**newsletters**](./marketing-team/skills/newsletters/SKILL.md) | Generates MailerLite-compatible HTML emails — product update emails, feature launch announcements, campaign emails, and one-off marketing emails. |
 | [**case-study**](./marketing-team/skills/case-study/SKILL.md) | Customer stories and success case studies following the social.plus narrative structure. |
@@ -83,7 +84,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**assets/**](./assets) | Official logo SVGs |
 | [**emails/**](./emails) | Email template reference, strategy guide, and HTML examples |
 | [**website/**](./website) | Website content JSON + the internal-linking strategy. Live inventories are auto-committed by a Cloudflare Worker to the [`site-data`](https://github.com/cruciate-hub/marketing-team/tree/site-data) branch on every Webflow publish (skills overlay that branch at fetch time); the copies on `main` are a point-in-time snapshot |
-| [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 19 skill definitions that fetch from the folders above |
+| [**marketing-team/**](./marketing-team) | `marketing-team` plugin — the 20 skill definitions that fetch from the folders above |
 | [**brand-kit/**](./brand-kit) | `brand-kit` plugin — a 2-skill subset (`brand-messaging`, `design-system`), symlinked from `marketing-team/` so updates flow automatically |
 | [**docs/**](./docs) | Per-skill companion docs + the click-by-click [install guide](./docs/install.md) |
 | [**scripts/**](./scripts) | Fetch-block source of truth (`canonical-fetch-block-v2.md`), sync/drift tooling (`sync-fetch-blocks.py`, `audit-skills.sh`), and the webflow-publisher / blog-publisher helpers (`md_to_webflow_html.py`, `webflow-publisher.py`, `resize_images.py`, `gdoc_to_fielddata.py`, …) |

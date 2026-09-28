@@ -5,6 +5,10 @@ Slug: mobile-app-engagement-metrics-product-teams
 Alt text: Revolutionize your roadmap — the game-changing community dashboard
 Category: Engagement
 Tags: Engagement
+Type: opinion
+Queue ID: TEST-F7
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Mobile app engagement metrics for product teams should focus on a small handful of signals.
 

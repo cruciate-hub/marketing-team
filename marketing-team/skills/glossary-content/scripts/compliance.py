@@ -17,6 +17,7 @@ paragraphs directly under the H1:
     Slug: ...
     Alt text: ...
     Category: ...
+    Queue ID: ...
 
     [one-sentence definition]
 
@@ -97,7 +98,8 @@ RISKY_TERMS_WARN = [
     r"\brobust\b",
 ]
 
-REQUIRED_METADATA_FIELDS = ["Meta description", "Slug", "Category"]
+# Queue ID ties every entry to its Content Queue row (same rule as aeo-content and blog-seo-content).
+REQUIRED_METADATA_FIELDS = ["Meta description", "Slug", "Category", "Queue ID"]
 
 REQUIRED_H2_KEYWORDS = {
     "what_is": [r"what (?:is|are)\b"],  # plural terms: "What are Social Features?"
@@ -161,7 +163,7 @@ class Report:
         )
 
 
-METADATA_FIELDS = r"Meta description|Slug|Alt text|Category|Editor \(named human reviewer\)"
+METADATA_FIELDS = r"Meta description|Slug|Alt text|Category|Queue ID|Last updated|Editor \(named human reviewer\)"
 
 
 def parse_metadata(text: str) -> dict:
@@ -469,7 +471,7 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
 
     # --- Answer-first definition paragraph ---
     meta_lines_end = 0
-    for fname in ["Meta description", "Slug", "Alt text", "Category", "Editor (named human reviewer)"]:
+    for fname in ["Meta description", "Slug", "Alt text", "Category", "Queue ID", "Last updated", "Editor (named human reviewer)"]:
         m = re.search(rf"^\s*{re.escape(fname)}\s*:.*$", text, re.MULTILINE)
         if m:
             meta_lines_end = max(meta_lines_end, m.end())

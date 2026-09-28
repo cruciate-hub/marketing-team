@@ -5,6 +5,10 @@ Slug: community-engagement-strategies-mobile-apps
 Alt text: Chart of community engagement strategies
 Category: Engagement
 Tags: Engagement
+Type: opinion
+Queue ID: TEST-F12
+Author: Test Author
+Editor (named human reviewer): [fill before publish]
 
 Community engagement strategies for mobile apps only work when teams delve into the digital landscape of an ever-evolving market in today's fast-paced world.
 

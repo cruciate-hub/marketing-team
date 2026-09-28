@@ -1,0 +1,5 @@
+{"candidates": [
+ {"ref":"d1","collection":"Glossary","intent":"definition","cluster":"Glossary","stage":"Definition","question":"How do you calculate churn?","first_sentence":"x","info_source":"y"},
+ {"ref":"d2","collection":"Answer","intent":"definition","cluster":"X","stage":"Problem","question":"SDK for building community features in apps","first_sentence":"x","headings":["a?","b?"],"info_source":"y"},
+ {"ref":"d3","collection":"Answer","intent":"how-to","cluster":"X","stage":"Problem","question":"Tool for building community features in apps","first_sentence":"x","headings":["a?"],"info_source":"y","dependencies":["NOPE"]}
+]}

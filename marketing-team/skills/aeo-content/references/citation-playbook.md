@@ -4,13 +4,14 @@ Why this file exists: for the topics where external citations genuinely support 
 
 ## Targets by intent
 
-| Intent | External citations | Rationale |
+| Template | External citations | Rationale |
 |---|---|---|
-| Definition | ≥2 required | Definitions and scale claims benefit from authoritative backing. Cite the concept's canonical source (spec, paper, analyst report) and one scale statistic. The compliance script enforces this minimum as a hard FAIL. |
-| Comparative | ≥3 required | You're comparing things — link each compared option to its canonical source. Minimum one citation per compared option plus one for the decision criteria. The compliance script enforces this minimum as a hard FAIL. |
-| Procedural | 0 required | Procedural articles about using social.plus rely on internal product consistency. A real social.plus how-to should name real surfaces (SDK, dashboard, moderation queues). External citations are only welcome if they support a claim about impact (e.g., retention lift from published research). |
+| How-to | 0 required | Trust comes from correct, specific product detail: real SDK names, setup steps, timelines. External links only where they support a claim about impact. |
+| Decision | ≥3 required (FAIL) | You're comparing things: link each option to its canonical source (docs, pricing, policy), plus the decision criteria. |
+| Explainer | ≥2 required (FAIL) | Claims about why something happens or whether something works need evidence beyond social.plus. |
+| Playbook | ≥1 required (FAIL) | Ground the vertical: category data, regulation, market context. |
 
-Universal rule across all intents: **every numeric claim needs a source.** Either from the approved-data list in SKILL.md or an external citation. A number without a source is a fabrication risk.
+Universal rule across all intents: **every numeric claim needs a source.** Either from `messaging/evidence-bank.md` or an external citation. A number without a source is a fabrication risk.
 
 ## What counts as authoritative
 
@@ -69,39 +70,21 @@ Direct quotations from named sources score high AI visibility on their own. Keep
 
 Priority order (concentrate citations where they drive extraction):
 
-1. **Inside the TL;DR paragraph** — at least one citation or statistic for definition and comparative intents. This is the passage LLMs extract verbatim.
-2. **"Why it matters" / "What X is best for" sections** — the business case should not lean on adjectives. At least one citation per major claim here.
-3. **Dimension-by-dimension breakdown** (comparative only) — one citation per dimension where possible.
+1. **The summary paragraph** carries at least one statistic for decision and explainer pages. Keep the link itself in the body where possible, so the summary stays readable when lifted out.
+2. **Evidence sections** ("What does the evidence show?", "What are the options?"): at least one citation per major claim.
+3. **Decision tables and comparisons**: one citation per compared option.
 
 Do not place external citations inside the FAQ section, the conclusion, the pitch, or the metrics table. These stay clean so AI engines extract them without citation-chain overhead.
 
-## Approved social.plus data (use freely, pre-cleared)
+## social.plus data
 
-### Metric ranges (published social.plus data)
-
-| Metric | Range |
-|---|---|
-| Engagement rate (active-user interaction with community features) | 20-50% |
-| Retention lift (vs. apps without community features) | 10-35% |
-| Active contributors (% of MAU who post/react/follow) | 10-30% |
-
-### Approved customers and stats
-
-| Customer | Approved stat |
-|---|---|
-| Noom | 45M+ users |
-| Harley-Davidson | 1M+ community members |
-| Smart Fit | 60% MoM growth |
-| Ulta Beauty | (named only — no stat approved) |
-| Betgames | 200M users |
-
-Never invent customer names, stats, or quotes. Never attribute a customer to a use case they haven't publicly disclosed. When in doubt, omit.
+All facts about social.plus, its customers and its platform live in `messaging/evidence-bank.md`, shared with `glossary-content` and `blog-seo-content`. Only `Approved` rows may be published, each fact has a usage cap, and every Answer page needs at least one fact no other page in its cluster uses. Never invent customer names, stats or quotes, and never attribute a use case a customer hasn't publicly disclosed.
 
 ## Ecosystem hyperlinks
 
 Ecosystem hyperlinks are a distinct link class from external citations. Citations support a specific claim. Ecosystem links let the reader go deeper on a concept, standard, or tool mentioned in the article.
 
-Target count per article: **3-5**. Place in body sections (definition chunk, architecture/features, best-practices). Never in FAQs, conclusion, or pitch.
+Target count per article: **3-5**. Place in body sections (evidence, mechanism and how-to sections). Never in FAQs, conclusion, or pitch.
 
 ### Curated approved domains by category
 
@@ -198,11 +181,11 @@ Target count per article: **3-5**. Place in body sections (definition chunk, arc
 
 Before running compliance, eyeball the article against this list (intent-aware):
 
-- [ ] Intent-appropriate citation count: definition ≥2, comparative ≥3, procedural as-needed
-- [ ] Every numeric claim has a source (approved list or external link)
-- [ ] The TL;DR paragraph carries at least one citation or statistic (definition / comparative)
+- [ ] Template-appropriate citation count: decision ≥3, explainer ≥2, playbook ≥1, how-to as needed
+- [ ] At least 3 statistics, each with a source (evidence bank or external link)
+- [ ] The summary carries at least one statistic (decision / explainer)
 - [ ] FAQ, conclusion, pitch, and metrics table are citation-free
 - [ ] No anonymous, content-farm, or competitor-marketing citations
-- [ ] Every approved-customer mention matches the approved-stat list exactly
+- [ ] Every customer mention and stat matches `messaging/evidence-bank.md` exactly, and no fact is over its usage cap
 - [ ] 3-5 ecosystem hyperlinks placed in body sections (not FAQs, conclusion, or pitch)
 - [ ] No ecosystem link points to a domain in the competitor exclusion list

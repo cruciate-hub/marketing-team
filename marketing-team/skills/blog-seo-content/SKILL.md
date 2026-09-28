@@ -1,28 +1,30 @@
 ---
 name: blog-seo-content
 description: >
-  The ONLY skill for blog posts on social.plus/blog. Owns every blog
-  topic — product features (Chat SDK, Block, UIKit, AI Copilot, Live
-  Stream), industry trends, opinion pieces, how-to guides, tutorials,
-  and listicles. brand-messaging does NOT handle blog posts.
+  The skill for posts on social.plus/blog, in seven article types:
+  opinion, original research, honest listicle (incl. vendor comparisons),
+  trend analysis, product deep-dive / announcement, product education (how
+  to use a social.plus feature) and customer narrative. Each type has its
+  own template and compliance profile. Writes from an Approved Blog row in
+  the Content Queue. Loads the full brand messaging stack; drafts run
+  through a deterministic compliance gate (scripts/compliance.py).
 
-  Loads the full brand messaging stack (terminology, tone, positioning,
-  value-story, narrative) so product blog posts are brand-correct.
-  Delivers markdown mapped to Webflow blog CMS fields. Drafts run through
-  a deterministic compliance gate (scripts/compliance.py).
-
-  Not for: AEO /answers/ pages (aeo-content); website page copy
+  Not for: AEO, GEO or /answers/ pages, including "How do you [do X]?"
+  buyer or developer questions (aeo-content);
+  "What is [term]?" definitions (glossary-content); website page copy
   (brand-messaging); emails (newsletters); customer stories (case-study);
   press releases (press-release).
 when_to_use: >
-  Use for ANY blog post regardless of topic. Trigger phrases: "blog post
-  about Chat SDK", "blog post about Block", "article about AI Copilot for
-  the blog", "feature announcement blog", "blog post on [our feature]",
-  "article about our [product]", "write a blog post", "SEO article",
-  "listicle", "opinion piece", "how-to guide", "tutorial".
+  Trigger phrases: "blog post about X", "write Queue row BL3", "opinion
+  piece", "thought leadership", "research report / benchmark post",
+  "listicle", "best X for the blog", "comparison post", "trend piece",
+  "feature announcement blog", "product deep-dive", "how to use [our
+  feature]", "customer lessons post".
 ---
 
-# social.plus Blog & SEO Content
+# social.plus Blog & SEO Content (v2)
+
+**What changed in v2, and why.** v1 applied one structure (the brand narrative arc plus a CTA, 900-2,200 words) to every post, triggered on generic how-tos and tutorials that now belong to /answers/, and checked duplication by scanning blog titles. The live blog ended up with vertical permutations of self-published "best of" lists, which Google's spam policies (updated May 15, 2026) now explicitly cover. v2 adds seven article types with their own templates and compliance profiles, writes from approved Content Queue rows, checks duplication on meaning with the shared matcher, and moves the editor line into the draft so compliance can check it.
 
 This skill produces brand-aligned blog posts for the social.plus blog. By default the output is a styled, editable document (Google Doc or .docx) for team review and editing. HTML field-by-field output for direct Webflow CMS paste is available on request.
 
@@ -120,6 +122,41 @@ If anything fails — clone error, missing file, empty content, or wrong format:
   `Fetch failed: <path>. Please check your network connection and rerun.`
 <!-- FETCH-BLOCK:END v2 -->
 
+## Input: an Approved Queue row
+
+Posts are written from a row in the Content Queue (Google Sheet, Queue tab) with Collection `Blog` and Status `Approved`. The skill reads: ID, Canonical question (the working title), Draft first sentence, Headings, Unique information source, Premise check, Dependencies, Intent (the article type).
+
+- **No row, no post.** If someone asks for a post with no row, draft the row first (working title, type, sub-topics, unique information source), run the duplication check, and show it. A direct request counts as approval once the person confirms the row; remind them to add it to the Queue.
+- **Status must be `Approved`** and dependencies met. `Blocked: needs data` rows (usually original research) are not written.
+- **Wrong collection:** a "How do you [do X]?" buyer or developer question goes to `aeo-content`; "What is [term]?" goes to `glossary-content`. Say so and stop.
+
+## Article types
+
+Pick the type from the row's Intent and read both `references/types/_shared.md` and the type file before drafting.
+
+| Type (`Type:` value) | For | Template |
+|---|---|---|
+| `opinion` | A stance the team holds, argued with evidence | `references/types/opinion.md` |
+| `original-research` | Findings from platform data or surveys | `references/types/original-research.md` |
+| `listicle` | Honest lists and vendor comparisons | `references/types/listicle.md` |
+| `trend` | What changed in the market and what it means | `references/types/trend.md` |
+| `product-deep-dive` | A shipped feature and when to use it; announcements | `references/types/product-deep-dive.md` |
+| `product-education` | How to use a social.plus feature well | `references/types/product-education.md` |
+| `customer-narrative` | Lessons from named customers | `references/types/customer-narrative.md` |
+
+Queue values like "Original research", "Narrative" or "Comparison" map to these automatically (compliance normalises them).
+
+## Duplication check
+
+Before drafting, run the shared matcher against the Queue and published pages:
+
+```
+MT_REPO=/tmp/cruciate-hub-marketing-team python3 "$MT_REPO/scripts/intent_match.py" \
+  "<working title>" --first-sentence "<draft first sentence>" --queue queue.csv --exclude-id <ID>
+```
+
+For every `LIKELY DUPLICATE` or `REVIEW` line, apply the test: would the two posts open with the same point? If yes, stop and recommend updating the existing post (or merging). For listicles, also check sibling posts in `website/pages-blog.json` for vertical or "alternatives" variants (see "Listicle and comparison integrity").
+
 ## What to do
 
 1. Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance check.
@@ -140,8 +177,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
    - `website/pages-blog.json`
    - `website/pages-glossary.json`
 
-These fetches serve **content awareness** (not linking — internal linking is handled by the `internal-linking-strategist` skill in a dedicated step). Use them for:
-- **Avoiding duplicates** — check if a similar topic has been covered before; if yes, suggest updating the existing post rather than writing a new one.
+These fetches serve **content awareness** (not linking — internal linking is handled by the `internal-linking-strategist` skill in a dedicated step). Duplication itself is checked by `intent_match.py` (above). Use the fetches for:
 - **Cross-topic references** — find adjacent content to reference (e.g., a "user retention" article that mentions concepts from an existing "app engagement" post).
 - **Tone and terminology calibration** — see how similar topics have been written about previously.
 
@@ -153,7 +189,7 @@ Blog posts are produced in two stages: a markdown intermediate that `scripts/com
 
 ### Default mode (styled document)
 
-1. **Draft the markdown intermediate** at `outputs/[slug].draft.md`. Metadata sits in labeled paragraphs directly under the H1; the body uses standard markdown.
+1. **Draft the markdown intermediate** at `outputs/[slug].draft.md`, following the type template. Metadata sits in labeled paragraphs directly under the H1; the body uses standard markdown.
 2. **Run `python3 scripts/compliance.py outputs/[slug].draft.md`**. Fix every failure (exit 1) before moving on. Paste the full stdout into your response.
 3. **Convert the markdown body to a styled document.** H2/H3 headings become actual heading styles, bold text becomes actual bold, and links become embedded hyperlinks (clickable text with the URL behind it). No HTML tags in the document.
 4. **Invoke `internal-linking-strategist`** on the draft to add internal links (see "Internal links" below).
@@ -183,6 +219,11 @@ Alt text: [descriptive alt text for the header image]
 Category: [one of the approved categories — see "Main Category Tag" below]
 Tags: [main category plus 1-2 secondary categories, comma-separated]
 Minutes to read: [number, based on ~250 wpm]
+Type: [opinion | original-research | listicle | trend | product-deep-dive | product-education | customer-narrative]
+Queue ID: [e.g. BL3]
+Author: [named person; required for opinion and original-research]
+Last updated: [YYYY-MM-DD; required when the title carries a year]
+Editor (named human reviewer): [fill before publish]
 
 [Intro paragraph — 1-3 sentences. This becomes `post-summary` (Introduction text).]
 
@@ -231,11 +272,7 @@ The full article body. Uses standard HTML — no custom tags (unlike customer st
 
 #### Content structure
 
-Follow the narrative structure from `narrative.md`: Context → Tension → Infrastructure → Impact → Advantage. But expressed as blog structure:
-
-1. **Opening paragraphs** (2-3 paragraphs) — Set the market context. Open with the shift or tension, not with "social.plus does X."
-2. **H2 sections** — Each major point gets an H2 subheading. Use H3 for sub-points within a section.
-3. **CTA section** — End with a clear next step. Link to a relevant social.plus product page.
+Structure comes from the article type's template in `references/types/`. The brand narrative from `narrative.md` (Context → Tension → Infrastructure → Impact → Advantage) is the spine for opinion posts and can inform trend posts; it is not forced onto listicles, research, product or customer posts. Every type opens with the shift or the point, never with "social.plus does X", and ends with a next step linking to the most relevant social.plus page.
 
 #### HTML formatting rules
 
@@ -250,7 +287,7 @@ These describe the **converted** `post-content` HTML (stage 3 output), not the m
 
 #### Content guidelines
 
-- Target length: 5,000–12,000 characters (matching the typical range on the live blog). The compliance script flags posts under 900 or over 2,200 words as an advisory `WARN`, not a hard failure.
+- Target length: set per type (from 600-1,600 words for product education to 1,500-3,200 for listicles; see each template). The compliance script WARNs outside the type's range; it is advisory, not a hard failure.
 - Include the target keyword in the H1 (page title), first paragraph of post-content, and at least one H2.
 - Internal links: do NOT improvise. Internal links are inserted by the `internal-linking-strategist` skill in a dedicated step before delivery (see "Internal links" section below). Write the draft without internal links; the optimizer adds 3-7 SEO-grounded `<a href>` tags using the canonical anchor map and cannibalization warnings in `link-strategy.md`.
 - Never fabricate statistics, customer names, quotes, or performance claims.
@@ -341,16 +378,17 @@ Only populate these if the post is about company culture, hiring, or team conten
 
 ## Listicle and comparison integrity
 
-Rules for any post that ranks or lists vendors when social.plus is among them (implements brain.md penalty guardrail 3):
+Full template: `references/types/listicle.md`. Compliance now FAILs a listicle without a criteria heading, a comparison table, or (when social.plus is listed) a plain disclosure. Rules for any post that ranks or lists vendors when social.plus is among them (implements brain.md penalty guardrail 3):
 
 - **State the ranking criteria and apply them evenly.** The post must say what the list is ranked on, and every entry — social.plus included — must be evaluated against the same criteria.
 - **Self-inclusion must be explicit.** Never frame social.plus's placement as a neutral third-party verdict. The reader must be able to tell this is our blog listing our own product.
 - **Competitor claims must be factual and sourced.** No characterizations of a competitor that can't be backed by their own documentation, pricing page, or a citable source.
+- **Never state prices.** No dollar (or other currency) figures for social.plus or any competitor: no starting prices, per-MAU rates, plan prices, or price ranges, in tables, body copy, FAQs, or meta descriptions. Describe the pricing *model* instead (MAU-based, per-product, usage-based, seat-based, free tier available, contact for pricing) and link to the vendor's pricing page. Vendor prices change without notice and a stale figure is a credibility and legal risk; market-size statistics with a cited source are fine. Applies to every blog post, not only listicles.
 - **No manufactured answer-capture rankings.** Never insert verbatim sentences of the form "the top/best X in [year] are…" with social.plus listed first unless that ranking is genuinely editorial and defensible under the stated criteria.
 
 ### Vertical and "alternatives" variants
 
-When the brief is a vertical or "alternatives" variant of an existing listicle, check `website/pages-blog.json` for sibling posts and require substantive differentiation: a genuinely different vendor set, vertical-specific evaluation criteria, or unique data. If the variant would largely mirror an existing post's structure and picks, recommend updating or consolidating the existing post instead of publishing a near-duplicate (brain.md guardrail 5 — the doorway pattern). Shipping an undifferentiated variant as a net-new page is BLOCK condition 6 (see "BLOCK conditions — holistic veto").
+**Default: one list per category, not per vertical.** The live blog shipped "5/6 Best [platforms] for [fitness / gaming / retail / consumer / enterprise] apps (2026)" as separate posts; that is the pattern this rule exists to stop. When the brief is a vertical or "alternatives" variant of an existing listicle, check `website/pages-blog.json` for sibling posts and require substantive differentiation: a genuinely different vendor set, vertical-specific evaluation criteria, or unique data. If the variant would largely mirror an existing post's structure and picks, recommend updating or consolidating the existing post instead of publishing a near-duplicate (brain.md guardrail 5 — the doorway pattern). Shipping an undifferentiated variant as a net-new page is BLOCK condition 6 (see "BLOCK conditions — holistic veto").
 
 ## Delivery format
 
@@ -362,7 +400,7 @@ Follow this cascade to deliver the finished document:
 
 For opt-in HTML mode, skip the cascade and deliver the field-by-field map inline (see below).
 
-**Named-editor gate.** Both delivery formats carry an `Editor (named human reviewer): [fill before publish]` line in their metadata sections (see "Output format"). The delivery message must state that the draft is not publish-ready until a named editor completes a pass. This line lives in the delivery formats only — never add it to the markdown intermediate, which `scripts/compliance.py` parses and must not change. When a request covers multiple posts in one batch, surface brain.md guardrail 1 (site-wide quality assessment) and confirm named-editor review capacity before drafting. An unfilled or self-filled editor line at publish handoff is BLOCK condition 5 (see "BLOCK conditions — holistic veto").
+**Named-editor gate.** The markdown intermediate and both delivery formats carry an `Editor (named human reviewer): [fill before publish]` line (v2 moved it into the intermediate so `compliance.py` can check it's present). The delivery message must state that the draft is not publish-ready until a named editor completes a pass. When a request covers multiple posts in one batch, surface brain.md guardrail 1 (site-wide quality assessment) and confirm named-editor review capacity before drafting. An unfilled or self-filled editor line at publish handoff is BLOCK condition 5 (see "BLOCK conditions — holistic veto").
 
 ## Output format
 
@@ -426,7 +464,14 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 **Editor (named human reviewer):** [fill before publish]
 ```
 
+## Queue update
+
+After delivery, output the Queue changes for the row for a human to paste (or write them directly once an automated Sheets connection is approved by IT): Status `In review`, Draft link, final Draft first sentence, and the evidence-bank rows whose `Used on` should get this ID after approval.
+
 ## What NOT to do
+
+- Never write a "How do you [do X]?" buyer or developer guide (aeo-content) or a "What is [term]?" explainer (glossary-content) as a blog post. Product education is the only how-to that stays here.
+- Never publish vertical variants of the same list as separate posts.
 
 - Never fabricate statistics, customer names, quotes, or performance claims.
 - Never position social.plus as a "social network" or "forum platform" (see terminology.md).
@@ -469,6 +514,7 @@ Never improvise internal links — the optimizer is the source of truth. The 3-7
 **Before delivering any draft, run `python3 scripts/compliance.py outputs/[slug].draft.md` and paste the full stdout into your response.**
 
 - Manual / eyeball review is **not** a substitute. Field testing shows eyeball review consistently misses meta-description length, em dashes (Unicode `—` mixed with hyphens), filler openers, brand-casing slips, and forbidden terminology.
+- **Type checks (v2).** Beyond the mechanical checks, the script requires `Type`, `Queue ID` and the Editor line, and applies the type's profile: author for opinion and research; methodology heading, table and 5+ statistics for research; criteria heading, table and self-inclusion disclosure for listicles; 3+ statistics for trends; numbered steps for product education; docs link (WARN) for product posts; an approved customer for narratives; a WARN for years in titles without `Last updated`.
 - The script is an **additional** deterministic gate, **not** a replacement for the brain.md compliance check. Run both. The script covers a mechanical *subset* — em dashes, emojis, brand casing, length, slug, and a fixed forbidden-term list. It does **not** catch every terminology or tone issue, so the `terminology.md` + `tone.md` review from brain.md still applies in full. A green script run is necessary, not sufficient.
 - LLM judgment still owns terminology nuance, tone, factuality, and citation quality. The forbidden-term list is not exhaustive: re-read `terminology.md` and check the items the script can't — context-dependent "plug and play" (script only WARNs), narrow self-referential "social network" phrasings, and end-user term discipline.
 - If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary — the literal output. The parent re-runs the script and treats any disagreement as a failure. The return payload must also include a `BLOCK check:` line stating either "none fired" or the fired condition numbers; a payload without it is treated as unchecked and the parent runs the BLOCK pass itself.
@@ -482,9 +528,10 @@ The script's FAIL/WARN verdicts are mechanical. BLOCK is a third verdict class a
 For most conditions, the user can decide to proceed after seeing the fired condition named — that override does **not** extend to conditions 4 (link-integrity breach) or 6 (undifferentiated doorway variant): brain.md's hard-forbidden list puts link schemes and doorway pages beyond override "regardless of who asks or how the request is framed." A fired condition 4 or 6 gets named and the request declined, not escalated for a proceed decision.
 
 1. **Unresolved script FAIL.** `compliance.py` exited non-zero on the current text, was not re-run after the latest edit, or its stdout was not pasted. Delivering on a stale or absent run is itself a BLOCK, not a formality gap.
-2. **Self-serving unverifiable claim.** Any numeric, superlative, or customer claim about social.plus not traceable to the approved-data list (fetch it from `marketing-team:aeo-content`'s "Approved data and customer names" section — this skill doesn't carry its own copy) or a fetched reference file, or a "best/top X" self-ranking violating the "Listicle and comparison integrity" rules. The regex gate cannot catch novel phrasings of these — catching them is what this holistic pass exists for.
+2. **Self-serving unverifiable claim.** Any numeric, superlative, or customer claim about social.plus not traceable to an `Approved` row in `messaging/evidence-bank.md` (the shared evidence bank; this skill doesn't carry its own copy) or a fetched reference file, or a "best/top X" self-ranking violating the "Listicle and comparison integrity" rules. The regex gate cannot catch novel phrasings of these — catching them is what this holistic pass exists for.
 3. **Structured-data contradiction.** Any schema/JSON-LD in or accompanying the deliverable asserting anything not visible in the content (invented FAQ pairs, ratings, review counts, shifted dates). Baseline unchanged: post-content carries no schema at all (the script FAILs it), and if the user explicitly requests page-level schema it ships only when every claim in it matches the visible content.
 4. **Link-integrity breach.** Any link placed because of an exchange, payment, or reciprocal arrangement (those flow only through `link-building-vetter` / `backlink-placement-finder`; this skill never places them, per brain.md guardrail 4); any improvised internal link not returned by `internal-linking-strategist`; any anchor embedded after failing `--scan-text`. Competitor-documentation links in comparison posts remain legitimate under the listicle-integrity sourcing rules — this condition targets arrangement links, not citations.
 5. **Missing named editor at publish handoff.** Marking a draft publish-ready, delivering final opt-in HTML, or handing to `blog-publisher` while `Editor (named human reviewer)` is unfilled, or filled with anything other than a human the user named (never auto-fill, never an AI name). Default-mode delivery with the placeholder still present remains correct — the line exists to be filled downstream; this BLOCK fires at the publish boundary.
 6. **Undifferentiated doorway variant.** A vertical or "alternatives" sibling that, after the `pages-blog.json` sibling check, still largely mirrors an existing post's structure and picks. Deliver only as an update/consolidation proposal for the existing post, never as a net-new page (brain.md guardrail 5; doorway pages are hard-forbidden).
+7. **Wrong collection or unapproved row.** Writing a post whose Queue row isn't `Approved` (or confirmed by the person in chat), or whose core is an aeo-content or glossary-content question.
 

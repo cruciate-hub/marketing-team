@@ -1,0 +1,8 @@
+{"candidates": [
+ {"ref":"c1","collection":"Glossary","intent":"definition","cluster":"Glossary","stage":"Definition","question":"What is Day 7 retention?","first_sentence":"Day 7 retention is the share of a cohort still active seven days after install.","info_source":"cited benchmark"},
+ {"ref":"c2","collection":"Answer","intent":"how-to","cluster":"Retention & engagement","stage":"Problem","question":"How do you improve app retention?","first_sentence":"Find where users drop off and fix what happens before it.","headings":["Where do users drop off?","Which levers work?"],"info_source":"R2"},
+ {"ref":"c3","collection":"Glossary","intent":"definition","cluster":"Glossary","stage":"Definition","question":"What is churn rate?","first_sentence":"Churn rate is the share of users who stop using a product in a period.","info_source":"cited source"},
+ {"ref":"c4","collection":"Answer","intent":"explainer","cluster":"Retention & engagement","stage":"Problem","question":"What is the best time to send push notifications?","first_sentence":"It depends on the app.","headings":["a?","b?"],"info_source":"cited"},
+ {"ref":"c5","collection":"Blog","intent":"original research","cluster":"Blog","stage":"Problem","question":"What platform data shows about community and retention","first_sentence":"Users who join a community retain better.","headings":["What did we measure?","What did we find?"],"info_source":"Platform benchmark P1 (pending Legal)","dependencies":["c1","A1"]},
+ {"ref":"c6","collection":"Answer","intent":"explainer","cluster":"Retention & engagement","stage":"Problem","question":"Why does community retention drop in 2026?","first_sentence":"Because novelty fades.","headings":["a?","b?"],"info_source":"R2"}
+]}

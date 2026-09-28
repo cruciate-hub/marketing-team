@@ -1,5 +1,89 @@
 # Changelog
 
+## marketing-team 13.43
+
+`blog-seo-content`: never state prices, ours or a competitor's.
+
+**Why:** the 2026-09-28 audit of the 37 staged blog rewrites found dollar figures (starting prices, per-MAU rates, plan prices) for social.plus and competitors in three listicles. Vendor prices change without notice, so a quoted figure goes stale and becomes a credibility and legal risk; the live chat-APIs and consumer-platforms posts still carry old prices until the rewrites ship.
+
+**Changes:**
+- [`blog-seo-content/SKILL.md`](marketing-team/skills/blog-seo-content/SKILL.md): new rule under "Listicle and comparison integrity": no currency figures for social.plus or any competitor in tables, body copy, FAQs or meta descriptions. Describe the pricing model instead (MAU-based, per-product, usage-based, seat-based, free tier, contact for pricing) and link to the vendor's pricing page. Market-size statistics with a cited source are fine. Applies to every blog post, not only listicles.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.42 -> 13.43.
+
+## marketing-team 13.42
+
+`glossary-content` compliance now requires a `Queue ID`, matching aeo-content and blog-seo-content.
+
+**Why:** after 13.38-13.41, Answer and Blog drafts fail compliance without a Queue ID, but glossary drafts could still be written without being tied to a Content Queue row, so the Queue could drift from what was actually written.
+
+**Changes:**
+- [`glossary-content/scripts/compliance.py`](marketing-team/skills/glossary-content/scripts/compliance.py): `Queue ID` added to the required metadata (`metadata_queue_id` FAILs without it). `Queue ID` and `Last updated` are recognised as metadata, so they are excluded from the word count and never mistaken for the one-sentence definition.
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): the markdown intermediate template carries `Queue ID:` (a rewrite uses the live page's `EX-G-` row); the compliance description mentions it.
+- New [`glossary-content/tests/run_tests.py`](marketing-team/skills/glossary-content/tests/run_tests.py): targeted checks that a draft with a Queue ID passes, one without fails, and the line doesn't interfere with definition detection. Verified to fail when the Queue ID handling is removed.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.41 -> 13.42.
+
+## marketing-team 13.41
+
+`glossary-content` now uses the shared duplication check. Builds on 13.38-13.40.
+
+**Why:** glossary was the last content skill on the title-word check (`aeo-content/scripts/duplicate_check.py`), which only compared against published pages and missed synonyms. The glossary audit found cannibalisation clusters (retention, engagement, chat, community terms) that a title check can't see; with the Content Queue in place, planned entries must be checked too.
+
+**Changes:**
+- [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): step 1 now runs `scripts/intent_match.py` against the Queue CSV and published pages, with `--exclude-id` for the row being written (a rewrite's `EX-G-` row, so the live page doesn't match itself). A decision table covers the glossary cases: same term or synonym in the glossary (one entry per concept), the same term planned twice (write once, mark the other Merged), near-terms (keep both only if the definitions differ), Answer pages that define terms (they link here instead), blog posts sharing keywords (usually fine). Related-skills list updated.
+- [`aeo-content/tests/run_tests.py`](marketing-team/skills/aeo-content/tests/run_tests.py): three matcher checks for glossary cases (rephrased definition, synonym terms, different terms).
+- `duplicate_check.py` is no longer used by any skill; kept because the canonical fetch block cites it as an example. Noted in [`docs/aeo-content.md`](docs/aeo-content.md).
+- Removed the now-resolved open item from `content-planner/SKILL.md`. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.40 -> 13.41.
+
+## marketing-team 13.40
+
+`blog-seo-content` v2: seven article types, each with its own template and compliance profile, written from approved Content Queue rows. Builds on 13.38 and 13.39.
+
+**Why:** v1 applied one structure (brand narrative arc plus CTA, 900-2,200 words) to every post, which fits opinion pieces but not listicles, research or product posts. It triggered on generic how-tos and tutorials that now belong to /answers/, and checked duplication by scanning blog titles. Classifying the 268 live posts found ~10 self-published "5/6 Best [platforms] for [vertical] (2026)" lists, the vertical-variant pattern the skill's own BLOCK condition 6 forbids and the kind of biased listicle Google's spam policies (updated May 15, 2026) now cover. Decision: one skill with a template per type rather than separate skills, since roughly 70% of the skill (brand loading, Webflow fields, images, delivery, publishing, compliance core, BLOCK conditions, editor gate, linking) is shared.
+
+**Changes:**
+- [`blog-seo-content/SKILL.md`](marketing-team/skills/blog-seo-content/SKILL.md): new description and triggers (general how-tos go to aeo-content, definitions to glossary-content; the AEO/GEO//answers/ anti-trigger that fixed a past routing collision is kept). New sections: Queue input (Approved Blog row, or a row the person confirms), article types, duplication check via `intent_match.py`, Queue update. Content structure now comes from the type template; per-type length; listicle rules default to one list per category, not per vertical; editor line moved into the intermediate; new BLOCK condition 7 (wrong collection or unapproved row).
+- New [`references/types/`](marketing-team/skills/blog-seo-content/references/types/): `_shared.md` plus opinion, original-research, listicle, trend, product-deep-dive, product-education, customer-narrative.
+- [`scripts/compliance.py`](marketing-team/skills/blog-seo-content/scripts/compliance.py): requires `Type`, `Queue ID` and the Editor line (parser now accepts labels with parentheses, which were previously glued onto the preceding value). Type profiles: author (opinion, research), methodology heading + table + 5 statistics (research), criteria heading + table + self-inclusion disclosure (listicle), 3 statistics (trend), numbered steps (product education), docs link WARN (product types), approved customer (narrative), year-in-title WARN without `Last updated`. Friendly type names are normalised. All existing checks unchanged.
+- Tests: the 12 existing fixtures gain the v2 metadata lines and behave exactly as before; 6 new fixtures (T1-T6) cover the type profiles. 18/18 pass.
+- [`content-planner`](marketing-team/skills/content-planner/SKILL.md): Blog intents are now the seven type slugs, with aliases for friendly spellings; a warning flags general how-tos proposed as product education. New test for alias canonicalisation.
+- [`docs/blog-seo-content.md`](docs/blog-seo-content.md), README.md, marketing-team/README.md, brain.md updated. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.39 -> 13.40.
+
+**Open items:** audit of the 268 live posts (the vertical "best of" lists first); the blog collection has no author field, which opinion and research posts need to display; glossary-content still uses the title-based duplicate check.
+
+## marketing-team 13.39
+
+New `content-planner` skill: the first step of the content engine. Builds on 13.38 (aeo-content v2).
+
+**Why:** the engine starts from a human seed (a keyword, phrase, prompt or idea). Something has to work out how many articles that seed genuinely deserves, of which kind, and whether any of them already exist or are already planned, before anything reaches the writing queue. v1 aeo-content did its own ideation from titles, which is how the /answers/ permutation problem happened.
+
+**Changes:**
+- New [`content-planner/SKILL.md`](marketing-team/skills/content-planner/SKILL.md): loads the Content Queue (CSV export) and evidence bank, researches the seed (AI-style sub-question split, Ahrefs question data, what social.plus can uniquely say), proposes 0-10 candidates per collection with a draft first sentence, sub-questions, information source and premise check, then runs the gate. Never sets status beyond Idea / Blocked, never fills priority, dates or reviewer.
+- New [`content-planner/scripts/plan_rows.py`](marketing-team/skills/content-planner/scripts/plan_rows.py): validates candidates (required fields, Glossary = "What is [term]?", valid intents per collection, 2+ sub-questions, 60-word first sentence, known dependencies, cap of 10 per collection, no duplicates inside the batch), labels each against the Queue as New / Merge (planned row) / Update existing (published) / Reject (previously rejected), ignores rows scheduled for removal, assigns the next free ID per collection (GL, AN, BL), marks pending-data ideas Blocked, and writes paste-ready Queue rows (all 26 columns) plus a report with merges, refresh suggestions, warnings, same-cluster neighbours and the Seeds tab row.
+- New [`content-planner/references/ideation-lenses.md`](marketing-team/skills/content-planner/references/ideation-lenses.md): lenses per collection, rules against permutations, worked example for the seed "app retention".
+- New [`content-planner/tests/run_tests.py`](marketing-team/skills/content-planner/tests/run_tests.py): 18 checks over valid and invalid fixture batches.
+- [`scripts/intent_match.py`](scripts/intent_match.py): question-form awareness. Questions of a different form (definition vs how-to vs why vs decision vs benchmark vs list) are discounted (x0.6), so "What is app retention?" and "How do you increase app retention?" score 0.40 (review) instead of 0.67 (duplicate). Legacy permutation pairs still score 1.00; aeo-content tests unchanged and passing.
+- README.md, marketing-team/README.md and brain.md list content-planner and the v2 aeo-content description. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.38 -> 13.39, 19 skills -> 20.
+
+**Open items:** automatic Queue writes need an IT-approved Sheets integration; blog-seo-content doesn't read Queue rows yet; glossary-content still uses the title-based duplicate check and should move to `intent_match.py`.
+
+## marketing-team 13.38
+
+`aeo-content` v2: /answers/ pages are rebuilt around one question per page, written only from approved Content Queue rows.
+
+**Why:** an audit of the 152 live /answers/ pages found ~80 near-duplicates generated by swapping a vehicle noun (SDK / API / Platform / Solution / Tool / Guide / How-to) across the same few intents. They shared the same Smart Fit stat and the same "Leading [X] for [Y]: social.plus" section. That pattern matches Google's scaled-content and doorway policies and adds no independent evidence for AI engines. The v1 skill couldn't prevent it: it wrote whatever keyword it was given, its duplicate check compared title words, and only seven facts were approved. The decision is to rebuild /answers/ from scratch against a question map (56 rows) held in the Content Queue Google Sheet.
+
+**Changes:**
+- [`aeo-content/SKILL.md`](marketing-team/skills/aeo-content/SKILL.md): rewritten. Writes only from an Approved Queue row (or a row the person confirms in chat); checks status, dependencies and duplication before drafting. Four templates replace three: how-to, decision, explainer, playbook. The definition template is removed and "glossary entry" triggers dropped, since "What is [term]?" belongs to glossary-content. Body H2s are the row's sub-questions phrased as questions. Answer-first block 25-60 words, summary 80-150 (the v1 "94th-percentile" justification for 120-160 had no findable source and was removed). Pitch is one page-specific section; promotion is barred from the answer-first block, summary and FAQs. Batch mode no longer generates ideas. The synced fetch block, anti-slop tiers, ecosystem-link rules, internal-linking step and subagent fingerprint rule carry over unchanged.
+- [`references/patterns/`](marketing-team/skills/aeo-content/references/patterns/): `_shared.md` plus `how-to.md`, `decision.md`, `explainer.md`, `playbook.md` replace `definition.md`, `procedural.md`, `comparative.md`. The v1 procedural instruction that the social.plus row "should read as the best fit for most apps" is gone: every template applies the same criteria to every option.
+- [`scripts/compliance.py`](marketing-team/skills/aeo-content/scripts/compliance.py): new intents (v1 intents FAIL with a pointer), Queue ID and Editor line required, summary check replaces TL;DR, question-phrased headings (≥60%), table required, ≥3 statistics, exactly one pitch H2 and no legacy boilerplate headings, no social.plus in extraction blocks, FAQ count, `--queue` FAQ overlap check against other rows, Conclusion required. Output fingerprint (`AEO compliance report for`) unchanged.
+- New [`scripts/intent_match.py`](scripts/intent_match.py) (repo root, shared): duplication check on meaning. Normalises vehicle nouns and synonyms, compares question and first sentence against the Queue CSV and published pages. Scores legacy permutation pairs at 0.67-1.00 and distinct questions low.
+- New [`messaging/evidence-bank.md`](messaging/evidence-bank.md) (shared): every approved fact with source, status, usage cap and "used on" tracking, plus pending platform benchmarks awaiting Legal. `glossary-content` and `blog-seo-content` now point here instead of at aeo-content's old approved-data section.
+- New [`tests/run_tests.py`](marketing-team/skills/aeo-content/tests/run_tests.py) with synthetic fixtures: a compliant draft passes, a legacy permutation draft fails on 11 named checks, FAQ overlap is caught against a sample queue, intent matching behaves on known pairs, and the evidence bank's customer list matches the compliance whitelist.
+- `references/writing-style.md`, `citation-playbook.md`, `workflow-phases.md`, `webflow-fields.json` notes and [`docs/aeo-content.md`](docs/aeo-content.md) updated to match. v1 ideation examples removed. `duplicate_check.py` kept, since glossary-content still calls it.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.37 -> 13.38 (skill update, count stays at 19).
+
+**Open items:** Answers Webflow field slugs are still unconfirmed, and the rebuilt collection should gain last-updated, author and reviewer fields. The skill reads a CSV export of the Queue until an automated Sheets connection is approved. The evidence bank's product facts are empty and platform benchmarks are pending Legal, so early pages will lean on the legacy approved facts, which the usage caps will flag.
+
 ## marketing-team 13.37
 
 `glossary-content` — opening restructured into a two-part lead, matching appsflyer.com/glossary/ad-spend more closely than the original single merged definition paragraph did.

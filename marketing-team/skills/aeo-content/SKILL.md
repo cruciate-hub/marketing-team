@@ -1,24 +1,29 @@
 ---
 name: aeo-content
 description: >
-  Writes reference-style articles for the social.plus /answers/ collection,
-  engineered to be cited by ChatGPT, Claude, Perplexity, Gemini, Google AI
-  Overviews, and Copilot. Delivers .docx (a downstream automation converts
-  it to Webflow HTML). This skill always wins when the destination is
-  /answers/, regardless of subject.
+  Writes /answers/ pages for social.plus: one page per specific buyer or
+  developer question (how to, should I, cost, why, vertical playbooks),
+  built to be cited by ChatGPT, Claude, Perplexity, Gemini and Google AI
+  Overviews and to be genuinely useful to the reader. Writes only from an
+  Approved row in the Content Queue (Google Sheet). Delivers a markdown
+  intermediate plus .docx for review.
 
-  Do NOT use for: blog posts (use blog-seo-content); customer stories
-  (use case-study); website page copy (use brand-messaging); press
-  releases (use press-release).
+  Do NOT use for: "What is [term]?" definitions or glossary entries (use
+  glossary-content); blog posts, opinion, original research or "best X"
+  listicles (use blog-seo-content); customer stories (use case-study);
+  website page copy (use brand-messaging); press releases (use
+  press-release).
 when_to_use: >
-  Trigger phrases: "AEO article", "GEO article", "answer page", "content
-  for /answers/", "reference article on X", "what is X" reference page,
-  "FAQ for /answers/", "glossary entry".
+  Trigger phrases: "answer page", "AEO article", "GEO article", "content
+  for /answers/", "write Queue row A1", "write the approved answers",
+  "how-to page for /answers/".
 ---
 
-# AEO Article Generation
+# AEO Answer Pages (v2)
 
-AEO articles live at `social.plus/answers/[slug]`. They exist so large-language models will extract and cite them. Every rule in this skill serves that goal.
+Answer pages live at `social.plus/answers/[slug]`. Each one answers **one specific question** from the buyer or developer journey, so well that an AI engine would rather cite it than write its own answer.
+
+**What changed from v1, and why.** v1 wrote whatever keyword it was given, which produced ~80 near-duplicate pages ("SDK for X", "Tool for X", "Platform for X") that repeated the same customer stat and the same "Leading [X] for [Y]: social.plus" section. That pattern matches Google's scaled-content and doorway policies and adds nothing an AI engine would cite. v2 writes only from an approved Content Queue row, checks duplication on meaning rather than titles, requires evidence that isn't reused everywhere, and keeps promotion out of the parts AI engines extract. Definitions moved to `glossary-content`.
 
 ## How to fetch reference files
 
@@ -114,111 +119,131 @@ If anything fails — clone error, missing file, empty content, or wrong format:
   `Fetch failed: <path>. Please check your network connection and rerun.`
 <!-- FETCH-BLOCK:END v2 -->
 
-The Python helper scripts in `scripts/` (e.g. `duplicate_check.py`) read files from `$MT_REPO`. Set the env var when invoking them: `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic>"`.
+The Python helpers read from `$MT_REPO`: `scripts/compliance.py` (this skill) and `$MT_REPO/scripts/intent_match.py` (shared with the planning step and other content skills).
 
-## Standing instructions
+## Four principles
 
-This file is loaded once per session and cached in context. Everything below is a standing rule for the whole task, not a one-time checklist. Treat each numbered step as a gate — if you can't satisfy it, stop and surface the problem rather than proceeding.
+Every rule below serves one of these. If a decision doesn't obviously serve one, reconsider it.
 
-## Three load-bearing AEO principles
+1. **One question per page.** The page answers the Queue row's canonical question and nothing that another row owns. Focused pages are cited more often than pages that try to cover a whole topic.
+2. **Answer first.** The direct answer and a standalone summary come before anything else. AI citations cluster early on the page.
+3. **Something only we can say.** Every page carries facts an AI model couldn't produce itself: approved data, product specifics, sourced numbers, named examples. If a claim cannot be false, it adds nothing.
+4. **Honest.** Neutral, defensible answers in the extracted parts; social.plus is compared on the same criteria as everyone else; selling happens only in the pitch section.
 
-Every structural and stylistic decision ties back to one of these. If a decision doesn't obviously serve one of them, reconsider.
+## Input: an Approved Queue row
 
-1. **Answer-first extractability.** First sentence answers the title's question using the exact target-keyword phrase. First two sentences fit in 40-60 words. TL;DR paragraph of 120-160 words sits immediately below. This is the block LLMs extract verbatim. 120-160 is the 94th-percentile sweet spot for Google AI Overview passage selection (2025 ranking-factor study); shorter chunks get passed over for longer, more self-contained ones.
-2. **Semantic chunking.** Every major section is a self-contained ~150-word passage. Entities are defined inline on first mention within a chunk, not only in the intro.
-3. **Concrete grounding.** Named examples, numeric ranges, and internal consistency with product terminology. Citations where they genuinely support a claim — not as SEO padding.
+The skill writes from a row in the Content Queue (Google Sheet, Queue tab). It reads: ID, Canonical question, Draft first sentence, Headings (sub-questions), Unique information source, Premise check, Dependencies, Intent.
 
-## Single article vs. batch
+- **No row, no page.** If someone asks in chat for an answer page that has no row, draft the row first (question, draft first sentence, sub-questions, unique information source, suggested intent), run the duplication check, and show it. A direct request from the person counts as approval once they confirm the row. Remind them to add it to the Queue so the engine's record stays complete.
+- **Status must be `Approved`.** Rows at `Idea`, `Blocked: needs data`, `Rejected` or `Merged` are not written. Say which, and stop.
+- **Dependencies must be met.** Every ID in Dependencies should be `Published`, or approved in the same batch and written first. Usually these are glossary entries the page links to.
+- **Collection must be `Answer`.** A `Glossary` row goes to `glossary-content`; a `Blog` row goes to `blog-seo-content`.
 
-Two modes, chosen from the brief:
+## Steps (single page)
 
-- **Single article** — user asks for one article ("write an AEO article on activity feeds"). Run the linear flow in "Before writing", then "Writing" and "Delivery".
-- **Batch** — user asks for multiple articles, a theme, or ideas ("5 articles on community infrastructure", "some ideas for /answers/"). Run the four-phase workflow in "Batch workflow" at the end. Full specs in `references/workflow-phases.md`.
+### 1. Duplication check (on meaning)
 
-When unclear, ask: "Single article now, or a batch of ideas to work through in phases?" Default to batch if the brief mentions a count ≥2 or "ideas".
+```
+MT_REPO=/tmp/cruciate-hub-marketing-team python3 "$MT_REPO/scripts/intent_match.py" \
+  "<canonical question>" --first-sentence "<draft first sentence>" \
+  --queue queue.csv --exclude-id <ID>
+```
 
-## Before writing
+Exit `0` / `RESULT: CLEAN`: continue. Exit `1` / `RESULT: MATCHES`: read every `LIKELY DUPLICATE` and `REVIEW` line and apply the test **"would the two pages open with the same first sentence?"** If yes, stop and recommend Update existing, Merge or Reject for this row. If no, note in one line why they differ and continue. Exit `2` / `RESULT: UNVERIFIED`: do not treat as clean; fix the input or check by hand.
 
-### 1. Intake — minimal, only when the brief is genuinely ambiguous
+Without `--queue`, only published pages are checked. Say so in your output.
 
-**Default: do not ask intake questions.** If the brief names a topic ("write an AEO article on in-app activity feeds", "answer page on zero-party data"), proceed to the duplicate check. Infer everything else:
+The script is a lexical approximation. It over-flags shared keywords (for example "app retention" in both a benchmark question and a glossary entry); the first-sentence test is the actual decision.
 
-- **Intent** — infer from title phrasing. "What is X?" → definition. "How to X?" / "How do you X?" → procedural. "X vs Y" / "alternatives to X" → comparative. If ambiguous, default to definition.
-- **Audience** — social.plus's default is product and engineering teams at consumer apps. Use that unless told otherwise.
-- **Must-cover sub-topics** — pick what the intent pattern naturally calls for (see `references/patterns/*.md`).
-- **Word count** — use the intent-specific range (definition 900-1400, procedural 1100-1800, comparative 1000-1600).
+### 2. Brand read (non-negotiable)
 
-**Only use `AskUserQuestion`** when something is genuinely unresolvable:
+Read from the clone: `messaging/terminology.md`, `tone.md`, `narrative.md`, `value-story.md`, `positioning.md`, `boilerplates.md`. If any file fails validation, stop. Do not write from memory.
 
-- The topic name has multiple plausible meanings (`feeds` — activity feeds? news feeds? RSS?) → ask *one* question: which one?
-- The title phrasing doesn't clearly map to an intent and the wrong intent would produce a structurally different article → ask *one*: definition, how-to, or comparison?
-- Batch mode only: user said "give me ideas" without a topic → ask *one*: what topic area and roughly how many.
+### 3. Evidence selection
 
-Never ask about word count, audience, or must-cover sub-topics. Never ask "just to confirm." Never chain multiple `AskUserQuestion` calls — that's the bad UX this rule exists to prevent.
+Read `messaging/evidence-bank.md`. Pick the facts this page will use and confirm:
 
-If the article misses the mark, the colleague will tell you via chat edits. Cheaper than front-loading a 4-question survey.
+- Every fact is `Approved`. If the page's core claim needs a `Pending` fact, stop and set the row back to `Blocked: needs data`.
+- No fact is over its usage cap.
+- At least one fact is not used by any other page in the same Queue cluster.
+- The page will contain at least 3 statistics in total (evidence bank or external citations).
 
-### 2. Duplicate-topic check
-Run the canonical fetch block first (so `$MT_REPO` is populated), then `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic phrase>"`. The script reads `website/pages-answers.json` and `website/pages-glossary.json` from the cloned repo and lists matches above a 0.5 query-coverage threshold, sorted by score.
+For how-to pages, check product specifics against current social.plus documentation (learn.social.plus) on the day of writing. Propose new Product facts rows for anything you rely on.
 
-The script signals outcome two ways — use whichever your environment makes more reliable:
-- **Exit code**: `0` = clean, `1` = matches found, `2` = unverified (read failure)
-- **Final stdout line**: `RESULT: CLEAN`, `RESULT: MATCHES`, or `RESULT: UNVERIFIED`
+Check the row's Premise check. If the question assumes something ("Why do fitness apps have low retention?"), the premise needs a source before the page is built on it.
 
-Both signals must agree. If they disagree (e.g. exit `0` but stdout says `RESULT: MATCHES`), treat as `UNVERIFIED` and surface to the user — the result can't be trusted.
+### 4. Question research for FAQs
 
-- If the script flags a close match in `/answers/`, surface the URL and ask whether to update that page instead. Duplicate pages split authority across the same citation slot.
-- If the script flags a match in `/glossary/`, consider whether the topic belongs in the glossary instead.
+Use Ahrefs MCP when available (`serp-overview` for People Also Ask, `keywords-explorer-matching-terms` with `terms=questions`, `keywords-explorer-search-suggestions`); fall back to web search. Pick 3-5 real questions. Drop any that another Queue row owns; link to that page from the body instead. List FAQ sources in your final message, not in the document.
 
-### 3. Brand-messaging read (non-negotiable)
-Read these files from the cloned repo:
-- `messaging/terminology.md`
-- `messaging/tone.md`
-- `messaging/narrative.md`
-- `messaging/value-story.md`
-- `messaging/positioning.md`
-- `messaging/boilerplates.md`
+### 5. Pick the template
 
-Use the canonical fetch block's validation rules. If any file is missing or fails validation, stop and tell the user. Do not proceed on memorized brand content.
+Use the row's Intent:
 
-The pitch section at the end of every article is **generated from these brand-messaging files**, not from a template inside this skill. `positioning.md` and `value-story.md` define what social.plus says about itself; `boilerplates.md` provides the approved long-form descriptions.
+| Intent | Template | For |
+|---|---|---|
+| how-to | `references/patterns/how-to.md` | Carrying out a task |
+| decision | `references/patterns/decision.md` | Build vs buy, cost, timeline, X or Y, what to look for |
+| explainer | `references/patterns/explainer.md` | Why, does, what is a good... (not definitions) |
+| playbook | `references/patterns/playbook.md` | How a specific vertical uses social features |
 
-### 4. Question research
-Before writing the FAQ section, surface real follow-up questions. Use Ahrefs MCP tools when available, fall back to WebSearch:
+All four fill the shared page shape in `references/patterns/_shared.md`. Read both files.
 
-- **Preferred (Ahrefs MCP tools available):**
-  - `serp-overview` for the core question — returns the literal PAA block and "Related searches". Most accurate source.
-  - `keywords-explorer-search-suggestions` for question-form variants of the target keyword.
-  - `keywords-explorer-overview` for the target keyword — confirms volume and intent alignment.
-- **Fallback (no Ahrefs):**
-  - `WebSearch` on the core question; capture "People Also Ask" phrasings from results.
-- Write the FAQ using real phrasings, not invented ones. In `outputs/questions.md`, the **Source** column records each candidate's origin (Ahrefs PAA, Ahrefs suggestions, WebSearch, LLM fallback).
-- Do not embed source URLs in the document (no HTML comments — output is a Word document). List source URLs in the final message to the user.
+### 6. Draft
 
-## Article structure — choose by intent
+Write `outputs/[slug].draft.md`. Body H2s are the row's sub-questions, phrased as questions. Full style rules: `references/writing-style.md`. Citation rules: `references/citation-playbook.md`.
 
-Match structure to query intent. Don't force every article into one template. Each pattern is a starting point; adapt as the topic demands.
+### 7. Internal linking
 
-| Intent signal | Pattern file |
-|---|---|
-| "What is X?" / topic is a concept | `references/patterns/definition.md` |
-| "How to X?" / "How do you X?" / "Steps to..." | `references/patterns/procedural.md` |
-| "X vs Y" / "X or Y" / "alternatives to X" | `references/patterns/comparative.md` |
+Invoke `internal-linking-strategist` in draft mode (see "Internal linking" below) before compliance.
 
-Every pattern shares these required elements: answer-first block (sentences 1-2 = 40-60 words, TL;DR = 120-160 words), at least one markdown table, 4-6 FAQ pairs from real phrasings, pitch section (brand-driven), conclusion. No fixed section count beyond those — if a sub-topic doesn't belong, don't add it.
+### 8. Compliance
+
+Run `python3 scripts/compliance.py outputs/[slug].draft.md --queue queue.csv` and paste the full stdout. Fix and re-run until it exits 0.
+
+### 9. Self-check, deliver, update the Queue
+
+See "Self-check", "Delivery" and "Queue update" below.
+
+## Markdown intermediate
+
+```
+# [Canonical question, word for word]
+
+Meta description: [≤160 characters]
+Slug: [lowercase-with-hyphens, keep the keyword phrase, no years]
+Alt text: [describes the page's main visual, if any]
+Intent: [how-to | decision | explainer | playbook]
+Queue ID: [e.g. A1]
+Last updated: [YYYY-MM-DD]
+Editor (named human reviewer): [fill before publish]
+
+[Answer-first block: 1-2 sentences, 25-60 words, no heading]
+
+[Summary: 80-150 words, no heading]
+
+## [Sub-question 1?]
+...
+## [Sub-question 2?]
+...
+## [How social.plus helps with <this question>]
+...
+## FAQs
+### [Question?]
+...
+## Conclusion
+...
+```
+
+Exactly two paragraphs sit between the metadata block and the first H2. No HTML, no JSON-LD, no comments: schema and page meta are handled by the Webflow template.
 
 ## Writing rules (essentials)
 
-Full rules: `references/writing-style.md`. Non-negotiables:
-
-- **Sentence 1** = a direct definition containing the exact target-keyword phrase. 20-30 words.
-- **Sentence 2** = the mechanism, scope, or outcome. 20-30 words. Combined with sentence 1: 40-60 words total.
-- **TL;DR paragraph** immediately below = 120-160 words, structured as expanded definition → mechanism → outcome → proof point. This is the block AI engines extract verbatim; 120-160 is the research-backed sweet spot for AI-Overview passage selection.
-- **~150-word chunks.** Each H2 section is self-contained. A reader landing mid-page still understands it.
-- **First mention of a technical entity gets an inline one-clause gloss** using canonical phrasing from `terminology.md`.
-- **Citation density depends on intent** (see below) — don't force citations into product how-tos where they'd be faked.
-- **Concrete over vague.** Named examples and numeric ranges beat adjectives.
-- **Banned constructs:** em dashes, emojis, the FAIL-tier vocabulary in "Anti-slop rules" below, filler openers, passive voice where active works, growth guarantees, wrong `social.plus` casing.
+- **Sentence 1** answers the title directly and contains its keyword phrase. Never mention social.plus in the answer-first block or summary.
+- **Self-contained sections.** Each H2 section makes sense on its own. Define technical entities inline on first mention in a section, using `terminology.md` wording.
+- **At least one table**, where it answers a sub-question.
+- **Concrete over vague.** Ranges and named examples beat adjectives. "4-8 weeks" beats "quickly".
+- **Banned:** em dashes, emojis, filler openers, growth guarantees, wrong `social.plus` casing, and the vocabulary tiers below.
 
 ## Anti-slop rules (generation time)
 
@@ -235,42 +260,23 @@ Note: bare "unlock" moves from the old blanket-ban wording to script-enforced WA
 
 ### Structural bans
 
-blog-seo-content's "no intro paragraph that restates the title" ban is deliberately NOT ported here: the answer-first block restates the title as a direct answer by design (principle 1). A future edit must not "fix" that.
+blog-seo-content's "no intro paragraph that restates the title" ban is deliberately NOT ported here: the answer-first block restates the title as a direct answer by design (principle 2). A future edit must not "fix" that.
 
-- **No additive-transition openers.** No paragraph — and especially no first paragraph of an H2 chunk — begins with "Additionally", "Furthermore", or "Moreover". An additive opener makes the chunk depend on the previous one, breaking the self-contained ~150-word chunk contract (principle 2) — extraction engines lift chunks out of context.
-- **No empty chunks.** An H2 section whose body only restates its heading or the TL;DR in more words gets cut or merged. Every chunk must add at least one concrete element (named entity, numeric range, worked example, or mechanism) beyond what the TL;DR already said.
+- **No additive-transition openers.** No paragraph — and especially no first paragraph of an H2 chunk — begins with "Additionally", "Furthermore", or "Moreover". An additive opener makes the chunk depend on the previous one, breaking the self-contained section contract — extraction engines lift chunks out of context.
+- **No empty chunks.** An H2 section whose body only restates its heading or the summary in more words gets cut or merged. Every chunk must add at least one concrete element (named entity, numeric range, worked example, or mechanism) beyond what the summary already said.
 - **Conclusion earns its place.** The conclusion remains a required pattern element, but it never opens with "In conclusion" and must give a decision rule or next step rather than a recap. It stays link-free per existing rules.
 
-### Information-gain bar
 
-Every article contains at least 2-3 elements an LLM could not reconstruct from its training data or the current top-ranking pages: an approved customer data point, a concrete sourced numeric range, an original worked example, or first-hand product detail. An answer engine only needs to cite a page that adds something beyond what it can generate itself — the same GEO-research logic as "## Ecosystem hyperlinks". Litmus: if a claim cannot be false, it does not ship.
+## Answer honesty
 
-Information-gain elements about social.plus still come only from the approved-data list (see "Approved data and customer names") — the bar is never a license to fabricate.
+On May 15, 2026, Google updated its spam policies to cover attempts to manipulate generative AI responses in Search, and reporting on the change names biased listicles and "recommendation poisoning". This skill optimizes to be cited, never to manipulate. The line:
 
-## Citation density by intent
+- **Extraction blocks are promotion-free.** The answer-first block, summary and every FAQ answer state neutral, defensible facts and never mention social.plus. `compliance.py` enforces this.
+- **Same criteria for everyone.** Decision tables and trade-off tables apply the same dimensions to every option, including social.plus. If another option is better for a case, say so. No template instructs the writer to make social.plus "win".
+- **No self-ranking on Answer pages.** "Best X" lists belong on the Blog, with social.plus identified as the publisher.
+- **Claims about social.plus come only from `messaging/evidence-bank.md`.** No unsourced "leading", "#1" or "best-in-class".
 
-Forcing external citations into product how-tos produces faked or irrelevant links. Apply per-intent rules:
-
-| Intent | External citations | Internal grounding |
-|---|---|---|
-| Definition | ≥2 required — cite authoritative sources for the definition and scale | Named social.plus entities and inline glosses |
-| Comparative | ≥3 required — you're comparing things, cite the things | Dimension-specific data points, honest positioning |
-| Procedural | None required | Internal product consistency, named methods, numeric ranges, concrete timelines |
-
-All intents: every numeric claim needs a source (internal approved list or external link). No anonymous or content-farm citations.
-
-Full guidance: `references/citation-playbook.md`.
-
-## Answer honesty (AI-response manipulation guard)
-
-Google's May 2026 spam policy names AI-response manipulation — engineering content so AI answers promote you as if fact — as spam. This skill optimizes to be *cited*, never to *manipulate*. The line:
-
-- **The answer-first block, TL;DR, and every FAQ answer state neutral, defensible facts.** Never engineer a question like "what is the best community SDK?" whose answer names social.plus first as if fact. If a question only exists to smuggle in a self-serving ranking, cut it.
-- **Extraction-target sections are promotion-clean, not just link-clean.** The existing rule keeps FAQs and the conclusion link-free for extraction; it extends to promotion. Self-promotion lives only in the clearly-labeled pitch section, which is generated from the brand files and reads as the publisher speaking.
-- **Comparative-intent articles apply stated criteria evenly across all compared products**, with the required ≥3 external citations. Any row or entry covering social.plus identifies social.plus as the article's publisher.
-- **Numeric or superlative claims about social.plus come only from the approved-data list** (see "Approved data and customer names"). No unsourced "leading", "best-in-class", "#1".
-
-**Incentive alignment:** this rule serves citability as much as policy safety. Retrieval systems skip promotional answer blocks — a neutral, defensible answer is the one that gets extracted; the pitch section does the selling.
+This also serves citability: retrieval systems skip promotional answer blocks.
 
 ## Ecosystem hyperlinks
 
@@ -280,7 +286,7 @@ Ecosystem hyperlinks are contextual links to authoritative, non-competing refere
 
 ### Density
 
-Every article includes **3-5 ecosystem hyperlinks**. Fewer than 3 is a missed AEO opportunity; more than 5 dilutes the signal. Zero is a self-check failure (item 8 below) and triggers a compliance warning.
+Every article includes **3-5 ecosystem hyperlinks**. Fewer than 3 is a missed AEO opportunity; more than 5 dilutes the signal. Zero is a missed opportunity; the reviewer should ask why.
 
 ### Approved targets
 
@@ -290,294 +296,143 @@ Never link to direct or partial competitors: in-app messaging/feed platforms (ge
 
 ### Placement rules
 
-- Embed in body sections where the concept is introduced: definition chunk, architecture/features, best-practices sections.
-- Do not place in: FAQs, conclusion, pitch — keep these link-clean for AI extraction.
+- Embed in body sections where the concept is introduced (evidence, mechanism and how-to sections).
+- Do not place in: answer-first block, summary, FAQs, conclusion, pitch. Keep these link-clean for AI extraction.
 - Anchor text names the concept, standard, or resource. 2-5 words. The claim stays in the prose; the anchor names the source.
   - Good: `relies on the [WebSocket protocol (RFC 6455)](https://www.rfc-editor.org/rfc/rfc6455)`
   - Good: `per [Nielsen Norman Group's notification UX research](https://www.nngroup.com/articles/push-notifications/)`
   - Bad: `[research shows notifications increase 30-day retention by 25%](https://...)` — the claim is in the anchor, not the prose
 
-## Approved data and customer names
-
-Use only these. Never fabricate.
-
-**Metric ranges (from published social.plus data):**
-- Engagement rate: 20-50%
-- Retention lift: 10-35%
-- Active contributors: 10-30%
-
-**Approved customers:** Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames.
-
-**Approved customer stats:**
-- Noom: 45M+ users
-- Harley-Davidson: 1M+ community members
-- Smart Fit: 60% MoM growth
-- Betgames: 200M users
-
-## Output format
-
-The final deliverable is a **Word document** saved as `outputs/[slug].docx`. A separate automation (outside this skill) converts it to Webflow-ready HTML.
-
-Because the output is Word, **no HTML of any kind appears in the document** — no JSON-LD, no `<script>`, no `<!-- comments -->`, no inline HTML. Schema, canonical tags, and page meta are handled downstream by the Webflow automation.
-
-### Two-stage production
-
-1. **Draft a markdown intermediate** at `outputs/[slug].draft.md`. This is what the compliance script reads.
-2. **Convert to `.docx`** by invoking `anthropic-skills:docx` with the intermediate as input. It preserves headings, tables, lists, bold, hyperlinks. Deliver `outputs/[slug].docx` as the primary artifact.
-
-Keep the `.draft.md` alongside the `.docx` so maintainers can diff edits.
-
-### Markdown intermediate structure
-
-```
-# [Article title]
-
-Meta description: [≤160 chars including spaces]
-Slug: [lowercase-with-hyphens; preserve compound modifiers like "in-app" or "multi-user"; drop leading articles ("a", "the"); keep the keyword phrase intact]
-Alt text: Abstract visualization of [main topic from title]
-Intent: [definition | procedural | comparative]
-
-[Answer-first block — sentences 1-2, 40-60 words combined]
-
-[TL;DR paragraph — 120-160 words]
-
-## [First body section]
-
-...
-```
-
-Rules for the intermediate:
-- `# Title` is the only H1.
-- The four labeled-paragraph metadata lines sit between the H1 and the answer-first block. They become body paragraphs in the Word doc; the Webflow automation parses and strips them.
-- **Exactly two paragraphs sit between the metadata block and the first H2**, in this order:
-  1. The answer-first block (sentences 1-2, 40-60 words combined). **No heading, no prefix.**
-  2. The TL;DR paragraph (120-160 words). **No heading, no "TL;DR:" prefix, never wrap in a `## TL;DR` section.**
-  Additional paragraphs here will be mis-identified by compliance and fail the TL;DR check. Compliance detects the TL;DR by position (second paragraph), not by label.
-- Markdown tables, numbered/bulleted lists, `**bold**`, and inline markdown links `[anchor](URL)` are supported by the docx conversion.
-- External citations as markdown links where intent calls for them. Internal links (to social.plus URLs) are handled by `internal-linking-strategist`.
-
-Alt text pattern: `Abstract visualization of [main topic from title]`.
-
 ## Internal linking
 
-After drafting and before running compliance, invoke `internal-linking-strategist` in **draft mode**:
-- Pass: full article markdown, article title (= target keyword), content type `AEO`.
-- The optimizer returns two classes of markdown links for AEO drafts:
-  - **Topical links**, scaled by length (~1 per 300 words; floor 2, ceiling 6 — a 900-word definition typically gets 2-3, a 1.5k+ word pillar gets 4-6). Zero only when no relevant target exists — never force them.
-  - **Customer-story links**, a separate class not counted toward the topical budget. When an approved customer is named (Noom, Harley-Davidson, Smart Fit, Ulta Beauty, Betgames), the **first mention** becomes a `[customer name](https://social.plus/customer-story/[customer])` link; subsequent mentions stay plain text. Multiple customers each get their own first-mention link.
-- Allowed sections (both classes): definition chunk, "why it matters", architecture/features, step-by-step, the social.plus pitch.
-- Disallowed (both classes): FAQs, conclusion, metrics table — stay link-free for clean citation extraction. If a customer's first mention falls in a disallowed section, wait for the next allowed-section mention.
-- AEO articles use markdown links only, never HTML.
-- Never force links. Zero topical and zero customer-story is acceptable when no relevant target exists and no approved customer is named.
+After drafting and before compliance, invoke `internal-linking-strategist` in **draft mode**:
+- Pass: full draft markdown, the canonical question as target keyword, content type `AEO`.
+- It returns **topical links** (about 1 per 300 words, floor 2, ceiling 6; zero only when no relevant target exists) and **customer-story links** (the first mention of an approved customer links to their story; later mentions stay plain).
+- Allowed sections: body sections and the pitch. Not allowed: answer-first block, summary, FAQs, conclusion.
+- Also link to the glossary entries and Answer pages listed in the row's Dependencies, and to any Queue page whose question an FAQ would otherwise have duplicated.
+- Markdown links only. Never force links, never improvise URLs.
 
 ## Compliance is non-negotiable
 
-**Before delivering any draft, run `python3 scripts/compliance.py outputs/[slug].draft.md` and paste the full stdout into your response.**
+Run before delivering any draft, and after every edit:
 
-- Manual / eyeball review is **not** a substitute. Field testing shows eyeball review consistently misses meta-description length, em dashes (Unicode `—` mixed with hyphens), filler openers, TL;DR position edge cases, customer-whitelist violations.
-- If you are a subagent in a parallel orchestration, the full script stdout is a required field in your return payload. Not a summary, not a paraphrase — the literal output. The parent re-runs the script and treats any disagreement as a failure.
-- If any check fails, fix and re-run. Do not ship-and-flag. Do not claim the script "is not available" — if you can read the markdown with Read, you can run the script with `python3`.
+```
+python3 scripts/compliance.py outputs/[slug].draft.md --queue queue.csv
+```
 
-The script reads the markdown intermediate. Exit 0 = ready to convert; exit 1 = fix first.
+Paste the full stdout. Eyeball review is not a substitute: it reliably misses meta length, em dashes, summary position and FAQ overlap. Exit 0 = ready; exit 1 = fix first.
 
-Checks:
-- Required labeled-paragraph metadata present (title from H1; Meta description, Slug, Alt text, Intent from labeled paragraphs under H1)
-- Intent is one of: definition, procedural, comparative
-- Meta description ≤ 160 characters including spaces
-- Title-keyword phrase appears in sentence 1 of the answer-first block
-- Sentence 1 does not start with a filler opener ("In today's…", "Now more than ever…", "In the ever-evolving…", "In a world where…")
-- First two sentences in 40-60 word range
-- TL;DR paragraph in 120-160 word range
-- No em dashes, no emojis, no forbidden terms (the forbidden-term check now includes the anti-slop FAIL tier; the WARN tier surfaces as warnings)
-- No HTML of any kind — no tags, no comments, no JSON-LD. The output is a Word document.
-- Heading hierarchy well-formed (single H1, no skipped levels)
-- External citations count meets intent target (definition ≥2, comparative ≥3, procedural any)
-- Approved-customer whitelist — no mentions of unapproved customer names
-- Internal-link presence — at least one `https://social.plus/...` link in the body (WARN only — a zero usually means `internal-linking-strategist` was skipped). Binary presence check, **not a topical-link-floor check**: the optimizer enforces its own per-length floor (2 for short, up to 6 for long). Compliance just catches "optimizer never ran." Legitimate zero only when no related page exists AND no approved customer was named.
-- Ecosystem hyperlink count — 3-5 links to approved non-competing external domains (WARN only, manual check — the compliance script does not yet count these automatically; item 8 in the self-check handles enforcement).
-- Word count inside the intent-specific typical range (warning only)
+What it checks:
+- Metadata present (title, meta description, slug, alt text, intent, Queue ID) and an `Editor (named human reviewer)` line; intent is one of the four v2 templates (v1 intents FAIL)
+- Meta description ≤ 160 characters
+- Answer-first block 25-60 words, keyword phrase in sentence 1, no filler opener
+- Summary 80-150 words, exactly two paragraphs before the first H2
+- At least 60% of body H2s phrased as questions
+- At least one table; at least 3 statistics
+- Exactly one H2 naming social.plus (the pitch, 80-150 words); no legacy boilerplate headings ("Leading [X] for [Y]: social.plus", "Why social.plus powers...")
+- social.plus not mentioned in the answer-first block, summary or FAQs
+- 3-5 FAQs as H3 questions; with `--queue`, no FAQ duplicates another row's question
+- A Conclusion section that doesn't open with "In conclusion"
+- External citations per template (decision ≥3, explainer ≥2, playbook ≥1, how-to none); anchors ≤ 8 words
+- No em dashes, emojis, forbidden terms (WARN tier as warnings), HTML or JSON-LD; single H1, no skipped heading levels
+- Approved-customer whitelist (kept in sync with the evidence bank by `tests/run_tests.py`); internal links present (WARN)
+- Word count 700-1,500 (WARN)
 
-Fix every failure before delivering. Warnings are informational — address if it strengthens the article, skip if not.
+Run `python3 tests/run_tests.py` after changing the script, the evidence bank's customer table, or `intent_match.py`.
 
 ## Self-check before delivery
 
-After the compliance script passes, answer each of these yes/no before returning the article:
+After compliance passes, answer yes or no:
 
-1. Does sentence 1 literally answer the question the title asks, using the target-keyword phrase?
-2. Does the TL;DR paragraph stand alone as an extractable 120-160 word passage?
-3. Does every numeric claim have a source (approved-data list or external citation)?
-4. Does the pitch section reflect the fetched `positioning.md` / `value-story.md` / `boilerplates.md`, not a template from memory?
-5. Are the FAQ questions phrased from real-user research (not invented patterns)?
-6. Did I check the deferred-tool list for Ahrefs MCP tools before defaulting to WebSearch?
-7. Did the compliance script exit 0?
-8. Does the article include 3-5 ecosystem hyperlinks to non-competing authoritative resources drawn from the approved categories in "## Ecosystem hyperlinks"?
-9. Are the answer-first block, TL;DR, and all FAQ answers free of self-serving rankings and promotion, with social.plus selling confined to the pitch section?
-10. Does the article clear the anti-slop bar — no FAIL-tier vocabulary, no additive-transition chunk openers, no empty chunks, and 2-3 information-gain elements present?
+1. Does the page answer the row's canonical question and nothing another row owns?
+2. Would sentence 1 stand alone as a correct answer if an AI engine quoted only that?
+3. Is every statistic traceable to the evidence bank or an external source, with no fact over its cap and at least one fact unique within the cluster?
+4. Does the page contain something an AI model couldn't write without us?
+5. Are comparisons and trade-offs fair to every option, including when social.plus isn't the best fit?
+6. Is the pitch specific to this question, built from the fetched brand files?
+7. Are FAQs from real research, with no duplication of other rows?
+8. Did the premise check hold up?
 
-Any "no" → revise before delivering. Do not ship with unresolved "no".
+Any "no": revise before delivering.
+
+### BLOCK conditions
+
+These veto delivery regardless of a clean compliance run:
+
+1. Unresolved compliance FAIL, or the script wasn't re-run after the last edit.
+2. Row not `Approved` (or not confirmed by the person in chat), or dependencies unmet.
+3. A claim about social.plus not traceable to an `Approved` evidence-bank row.
+4. Duplication check skipped, or a likely duplicate waved through without the first-sentence test.
+5. Improvised internal links (not returned by `internal-linking-strategist`).
+6. Missing `Editor (named human reviewer)` line.
 
 ## Delivery
 
-1. After compliance passes, convert `outputs/[slug].draft.md` to `outputs/[slug].docx`. Two options:
-   - **Preferred:** invoke `anthropic-skills:docx` with the intermediate as input.
-   - **Fast fallback (if docx skill unavailable):** `pandoc outputs/[slug].draft.md -o outputs/[slug].docx` — sufficient for this markdown profile (H1/H2, tables, lists, bold, inline links).
-2. Tell the user the `.docx` is ready in the artifact panel; `.draft.md` is kept alongside for diff-able revisions.
-3. In the same message, list the FAQ source URLs (not embedded in the document).
-4. For edits, modify `.draft.md`, re-run compliance, re-convert to `.docx` and overwrite. Keep them in sync.
+1. Convert `outputs/[slug].draft.md` to `outputs/[slug].docx` (`anthropic-skills:docx`, or `pandoc` as a fallback). The `.docx` is the review copy; keep the `.draft.md` alongside, since it is what gets published.
+2. In the same message: compliance output, FAQ sources, evidence-bank facts used, and anything the reviewer should check (premises, Legal-sensitive statements).
+3. For edits, change the `.draft.md`, re-run compliance, re-convert.
 
-## Rationalization table — common shortcuts that fail
+### Queue update
+
+Output the Queue changes for the row so a human can paste them (or write them directly once the automated Sheets connection is approved by IT):
+- Status: `In review`
+- Draft link: where the `.docx` or draft lives
+- Draft first sentence: the final sentence 1 (keeps future duplication checks accurate)
+- Evidence bank: the rows whose `Used on` should get this ID after approval
+
+## Publishing to Webflow
+
+Publishing runs through `webflow-publisher`, after compliance passes and a named editor signs off. The Answers field map (`webflow-fields.json`) is still a stub: only `name` and `slug` are confirmed, so the publisher will refuse to run until the body and meta description slugs are filled in from the live collection (`scripts/sync_fieldmap.py --collection answers`, needs `WEBFLOW_API_TOKEN`). Don't guess slugs.
+
+## Rationalization table
 
 | Excuse | Reality |
 |---|---|
-| "The intro reads better with context first." | LLMs extract the first two sentences. If the answer isn't there, it isn't cited. |
-| "Procedural articles need external citations too." | No — they need internal product consistency. Fake citations are worse than none. |
-| "I can skip the duplicate check — this topic feels unique." | Check anyway. Rewriting into an existing page beats creating a near-duplicate. |
-| "The brand fetch failed but I remember the tone." | Stop. Memorized brand content drifts. Tell the user. |
-| "I'll eyeball compliance — the article looks clean." | Run the script. Meta length, keyword-in-sentence-1, and filler openers consistently slip past eyeball review. |
-| "I can pad to hit the word count target." | Padding dilutes chunk quality. Under target → brief is thinner than expected; raise with the user. Over → cut padding, not substance. |
-| "The pitch template is easier than adapting from brand files." | The pitch is brand-driven. Generic pitches get skipped by LLMs. |
-| "I can invent a plausible customer example." | Never. Use the approved list or omit. |
-| "I should confirm what the user wants before drafting." | Only if genuinely unresolvable. A clear brief is a green light. Asking 3-4 intake questions on a clear brief is the most annoying failure mode this skill has. |
-| "Long anchor text gives the link more context." | Wrong. The claim belongs in the prose. Anchors name the source in 3-6 words. Anchors over 8 words fail compliance — they degrade LLM extraction signal and look like spam to search engines. |
-| "Naming social.plus as the best in the FAQ is what gets us cited." | Backwards. Promotional answer blocks are what AI engines skip and what Google's AI-response-manipulation policy names as spam. Neutral answers get extracted; the pitch section does the selling. |
-| "A definition article is inherently reconstructable — the information-gain bar doesn't apply." | Backwards. A page an LLM can regenerate from training data gives it no reason to cite us. The approved data point, sourced numeric range, or worked example IS the citation reason. No gain, no page. |
+| "This topic is obviously new, I'll skip the duplication check." | The legacy collection is 80 pages of "obviously new" topics. Run it. |
+| "The row is at Idea but the person clearly wants it." | Ask them to approve the row. The Queue is the record. |
+| "A small permutation (SDK vs API) deserves its own page." | Only if the first sentence would differ. It almost never does. |
+| "Smart Fit's 60% fits here too." | Check the cap and the cluster rule. Repeated facts add no evidence. |
+| "Mentioning social.plus in the summary helps us get cited." | Backwards. Promotional answer blocks get skipped, and Google's spam policies now cover manipulating AI answers. |
+| "The trade-off table should show social.plus as the best fit." | Same criteria for every option. Say so when another approach wins. |
+| "This FAQ is useful even if another row covers it." | Link to that page instead. Otherwise the two pages compete. |
+| "I'll eyeball compliance." | Run the script and paste the output. |
+| "The brand fetch failed but I remember the tone." | Stop and say so. |
+| "I can pad to reach 700 words." | Under length means the question is narrow. That's fine; the word count is a warning, not a target. |
+| "A definition page is basically an answer page." | Definitions belong to glossary-content. Link to the glossary entry. |
 
 ## Batch workflow
 
-When the brief covers multiple articles, run these four phases instead of the single-article flow. Each phase produces a markdown artifact in `outputs/` that the colleague reviews. She approves or refines via chat using the approval syntax below. The skill moves to the next phase when she says `next`. Full specs in `references/workflow-phases.md`.
+For several Approved rows at once ("write A1, A3, D1"), follow `references/workflow-phases.md`: pre-flight checks for every row, drafts, then review handoff with Queue updates. v2 batch mode never generates ideas; that is the planning step's job.
 
-### Phase A — Ideas
-- If the brief names a topic area and count ("5 articles on community infrastructure"), **skip intake** and proceed to brand fetch + gap scan. Only ask one `AskUserQuestion` when the user said "give me ideas" with no topic area — and even then, ask about topic area and count, nothing else.
-- Fetch brand once, then scan `pages-answers.json` (and `pages-glossary.json`) for gaps.
-- **Fit scoring:** if Ahrefs MCP tools are available, use `keywords-explorer-overview` for real volume + difficulty per candidate, and `site-explorer-organic-keywords` on existing /answers/ URLs to catch semantic duplicates the JSON scan missed. Without Ahrefs, fall back to qualitative fit (high/medium/low).
-- Write `outputs/ideas.md` with **8-15 candidate articles** (columns: #, title, intent, rationale, target keyword, fit). Always more than requested — extras exist so she has real choice. If she asked for 3, show 8-12 and note `approved: 0 of 3 target (from 10 candidates)`. If she asked for 10, show 12-15. Never show fewer than the target.
-- She approves a subset. The skill rewrites `outputs/ideas.md` to show only the approved set.
+## Parallel-subagent orchestration
 
-### Phase B — Questions
-- For each approved idea, run the question research (PAA via Ahrefs or WebSearch fallback).
-- Write `outputs/questions.md` — one section per approved idea, 8-10 candidate FAQ questions each.
-- She approves per-article. The skill updates the file.
+Drafting rows in parallel is fine, but subagents rationalize around rules. These safeguards are mandatory.
 
-### Phase C — Drafts
-- For each approved idea with approved questions, draft `outputs/[slug].draft.md` following the single-article structure.
-- Write `outputs/overview.md` — one row per article with title, word count, compliance status.
-- She can chat edits on any draft ("article 2 shorter", "add pitfalls to article 3"). The skill edits, re-runs `scripts/compliance.py`, updates `overview.md`.
+**Parent session, before spawning:** run the fetch block; run pre-flight from `references/workflow-phases.md`; pass each subagent its Queue row, template path, chosen evidence-bank facts and `$MT_REPO`.
 
-### Phase D — Delivery
-- When all drafts pass compliance, convert each `[slug].draft.md` to `outputs/[slug].docx` via `anthropic-skills:docx`.
-- Run `python3 scripts/make_zip.py` to bundle all `.docx` files into `outputs/aeo-batch-YYYY-MM-DD.zip`.
-- Send a final chat summary listing each `.docx` filename, the zip filename, and FAQ source URLs per article. Files appear in the artifact panel.
-
-### Approval syntax
-
-Consistent across phases. Parse these lines at the start of each chat turn; fall back to natural language if the message doesn't match.
-
-```
-approve: 1, 3, 5-7
-drop: 2, 6
-revise: 4 — make it about retention
-next
-```
-
-For Phase B, scope to an article:
-```
-article 1: approve 1-4, drop 5
-article 2: approve 1, 3, 5; revise 2 — drop the pricing angle
-next
-```
-
-### When to abort a batch
-
-- Brand fetch fails → stop at Phase A, tell her, do not proceed on memorized brand.
-- No gaps found in `pages-answers.json` → surface this at Phase A, ask whether to update existing articles instead.
-- Compliance failures in Phase C that can't be auto-fixed after one rewrite → surface to her before moving to Phase D.
-- `anthropic-skills:docx` unavailable → fall back to `pandoc outputs/[slug].draft.md -o outputs/[slug].docx` (see Delivery section). If pandoc is also unavailable, deliver the `.draft.md` files and tell the user.
-
-### Parallel-subagent orchestration (alternative to the phased flow)
-
-The four-phase workflow is a gated review loop — fits "help me decide which ideas are worth pursuing, then iterate each draft." Some briefs are different: **"draft all N articles in parallel, no per-phase review"**. Parallel subagents are the right tool.
-
-Field testing shows subagents consistently rationalize around the skill's rules when orchestrated in parallel. The mitigations below are mandatory in this mode.
-
-**Required parent-session setup (once before spawning subagents):**
-
-1. Run the canonical fetch block (clones the repo to `$MT_REPO`). Brand files are at `$MT_REPO/messaging/*.md`. Pass `$MT_REPO` to each subagent so they read from the same clone.
-2. Run `MT_REPO=/tmp/cruciate-hub-marketing-team python3 scripts/duplicate_check.py "<topic>"` for each topic. **Check the exit code.** `0` = clean; `1` = likely duplicates, get user confirmation before drafting; `2` = "RESULT: UNVERIFIED" — do not proceed without manually checking via GitHub UI. Do not silently assume "clean" on UNVERIFIED.
-3. Decide the intent for each topic up front from title phrasing; pass the matching `references/patterns/<intent>.md` path in the subagent brief.
-
-**Required subagent contract (each return payload must include):**
-
+**Each subagent returns:**
 1. The path to `outputs/[slug].draft.md`.
-2. The **full, verbatim stdout** of `python3 scripts/compliance.py outputs/[slug].draft.md`. Not a summary, not a paraphrase — the literal output. See "Compliance-output fingerprint rule" and "Sample expected compliance output" below.
-3. Evidence that `internal-linking-strategist` was invoked. Paste both classes:
-   - **Topical links** (count + each anchor + URL + insertion-point quote — section heading + first 8 words). Example: `Returned 3 topical links: [activity feed SDK](https://social.plus/chat/sdk) — inserted in "## How activity feeds work", paragraph starting "A modern feed platform adds a ranking layer…".` If zero, state the reason.
-   - **Customer-story links** (count + each customer-name anchor + URL + first-mention location). Example: `Returned 1 customer-story link: [Noom](https://social.plus/customer-story/noom) — first mention inside "## Where social.plus fits".` If no approved customer named, write `none — no approved customer mentioned`.
+2. The **full, verbatim stdout** of `compliance.py --queue` for that draft.
+3. Evidence that `internal-linking-strategist` ran: each link's anchor, URL and the section plus first 8 words where it was inserted. If zero, the reason. URLs without insertion evidence count as improvised.
+4. FAQ sources and evidence-bank facts used.
 
-   Memory-guessed URLs without insertion-point proof are an auto-failure. The parent's `check_internal_links` backstop catches absence; per-class evidence catches fabrication.
-4. A list of FAQ source URLs used.
+**Fingerprint rule.** The parent checks each payload for the literal string `AEO compliance report for` and at least one `[PASS]`, `[FAIL]` or `[WARN]` line. If either is missing, treat it as "script not run", re-run in the parent, and mark the draft higher-risk.
 
-**Compliance-output fingerprint rule.** Before trusting any subagent's claim, the parent checks the payload for two literal strings:
+**Parent verification:** re-run compliance on every draft; if `internal_links` WARNs, run `internal-linking-strategist` from the parent; check that no two drafts in the batch now use the same unique fact; then deliver.
 
-1. `AEO compliance report for`
-2. At least one line matching `[PASS]`, `[FAIL]`, or `[WARN]`
-
-If either is missing, treat as "script not run" regardless of what the subagent says. The parent re-runs the script as a backstop — and marks the draft as higher-risk, because a subagent that fabricates output once will fabricate again.
-
-**Sample expected compliance output.** The script's stdout looks exactly like this:
-
-```
-AEO compliance report for outputs/[slug].draft.md
-
-  [PASS] metadata_title
-  [PASS] metadata_metaDescription
-  [PASS] metadata_slug
-  [PASS] metadata_altText
-  [PASS] metadata_intent
-  [PASS] metadata_intent_valid — intent=definition
-  [PASS] meta_description_length — 135 chars (max 160)
-  [PASS] word_count — 1247 words (target 900-1400)
-  [PASS] answer_first_block — first two sentences = 48 words (target 40-60)
-  [PASS] tldr_word_count — TL;DR = 138 words (target 120-160)
-  [PASS] keyword_in_first_sentence — full phrase '...' found in sentence 1
-  [PASS] no_filler_opener
-  [PASS] no_em_dashes — 0
-  [PASS] no_emojis — 0
-  [PASS] no_forbidden_terms — 0
-  [PASS] no_html — 0
-  [PASS] no_jsonld_block
-  [PASS] single_h1 — found 1 H1 heading(s)
-  [PASS] no_skipped_heading_levels — well-formed
-  [PASS] external_citations — 2 external citation(s); intent=definition (minimum 2)
-  [PASS] internal_links — 1 internal social.plus link(s)
-  [PASS] approved_customers_only — 0
-
-All checks passed.
-```
-
-Paste it verbatim. Do not reformat, summarize, or invent checkmarks/percentage bars/headings. The fingerprint rule looks for the literal `AEO compliance report for` and `[PASS]` / `[FAIL]` / `[WARN]` lines — anything else, the parent treats the claim as unverified.
-
-**Required parent-session verification (after subagents return, before converting to `.docx`):**
-
-1. Re-run `python3 scripts/compliance.py` on every `.draft.md`. If the re-run disagrees with the subagent's claim, fix in the parent and re-verify. Don't trust the subagent's claim alone.
-2. Confirm each draft includes at least one `https://social.plus/...` link (the `internal_links` check WARNs if zero). If zero, invoke `internal-linking-strategist` from the parent and re-insert.
-3. Convert each `.draft.md` to `.docx` via `anthropic-skills:docx` or `pandoc`.
-4. Zip via `scripts/make_zip.py`.
-5. Report per-article status in the chat summary.
-
-**Known subagent failure modes to guard against:**
-
-- "Manual compliance check ✓" without running the script. → Re-run in the parent; treat as failure.
-- **Fabricated compliance output** in a format that isn't the script's (e.g., `1. METADATA REQUIREMENTS ✓ Title present: True` with unicode checkmarks). → Fingerprint rule catches; treat as "script not run" and re-run in parent.
-- **Prose-summary compliance claim** with no pasted output ("Compliance status: All checks PASSED (exit code 0)"). → Same; fingerprint catches.
-- `## TL;DR` heading or extra paragraph between metadata and first H2. → Compliance catches; do not override.
-- Em dashes introduced despite the writing-style ban. → Compliance catches; do not override.
-- Dropped `internal-linking-strategist` call "to simplify orchestration." → Parent runs it as a backstop when `internal_links` WARNs.
-- **Claimed internal links not actually in the draft** (or URLs fabricated from memory). → Parent's re-run catches zero real links; if WARN fires while the subagent claimed N, the optimizer claim was fabricated — invoke from the parent and re-insert.
+Known failure modes: invented compliance output (unicode checkmarks, prose summaries), dropped linking step, summary with an extra paragraph or a "TL;DR" heading, em dashes, and two parallel drafts answering each other's FAQs.
 
 ## Related skills
 
-- `blog-seo-content` — blog posts for social.plus/blog
-- `case-study` — customer stories
-- `brand-messaging` — general website copy
-- `internal-linking-strategist` — called by this skill; do not re-implement
-- `site-intelligence` — content audits beyond `pages-answers.json`
+- `glossary-content`: "What is [term]?" entries; Answer pages link to them
+- `blog-seo-content`: opinion, original research, narratives, honest listicles
+- `internal-linking-strategist`: called by this skill; do not reimplement
+- `webflow-publisher`: publishes the `.draft.md`
+- `site-intelligence`: audits beyond single-page checks
+- Shared: `$MT_REPO/scripts/intent_match.py`, `messaging/evidence-bank.md`
+
+## Open items
+
+- **Answers Webflow fields.** Body and meta description slugs are unconfirmed. Since the collection is being rebuilt, add fields for last-updated date, author and reviewer so freshness and expertise are visible on the page. Needs whoever manages the Webflow CMS (the repo names Stefan).
+- **Queue access.** The skill reads a CSV export of the Queue until an automated Google Sheets connection is set up and signed off by IT.
+- **Evidence bank growth.** Product facts are empty and platform benchmarks are pending Legal. Until they fill up, many pages will be limited to the legacy approved ranges and customer stats, which is exactly what the usage caps are designed to flag.
