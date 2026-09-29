@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-28T11:06:48.800Z",
+    "generatedAt": "2026-09-29T10:51:43.109Z",
     "itemCount": 268,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -1526,9 +1526,9 @@
     },
     {
       "url": "https://www.social.plus/blog/api-vs-sdk-which-is-which",
-      "metaTitle": "API vs. SDK: which is which?",
-      "metaDescription": "What is an API and what is an SDK? API (Application Programming Interface) and SDK (Software Development Kits) may easily be confused with one another.",
-      "content": "# API vs. SDK: which is which?\n## What is an API?\n## What is an SDK?\n#### Things to remember&nbsp;\n## API and SDK can elevate your app&nbsp;"
+      "metaTitle": "API vs SDK: What's the Difference? (Definitions, Examples & Comparison)",
+      "metaDescription": "An API lets software systems communicate; an SDK is a full toolkit for building on a platform and usually includes APIs. Learn when to use each.",
+      "content": "# API vs SDK: What's the Difference? (Definitions, Examples & Comparison)\n## What is an API?\n## What is an SDK?\n## How we compared APIs and SDKs\n## API vs SDK: the key differences\n## When to use an API vs an SDK\n## Frequently asked questions\n### Is an API part of an SDK?\n### Can you use an API without an SDK?\n### Is REST an API or an SDK?\n### Which should I use for adding chat to my app?\n### Do SDKs slow down your app?\n## Choose the layer that fits your architecture"
     },
     {
       "url": "https://www.social.plus/blog/social-connections-in-times-of-social-distancing",
