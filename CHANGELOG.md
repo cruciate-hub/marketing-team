@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.44
+
+`webflow-publisher` now ships in the org marketing-team plugin, so its description has to fit the org limit.
+
+**Why:** the org plugin validator caps skill descriptions at 1,024 characters and `webflow-publisher`'s was 1,026. Until now it wasn't in any org kit, so glossary-content and aeo-content pointed at a publishing skill nobody on the team could install.
+
+**Changes:**
+- [`webflow-publisher/SKILL.md`](marketing-team/skills/webflow-publisher/SKILL.md): shortened the caller list in the description (1,026 -> 990 characters). No behaviour change.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.43 -> 13.44.
+
 ## marketing-team 13.43
 
 `blog-seo-content`: never state prices, ours or a competitor's.

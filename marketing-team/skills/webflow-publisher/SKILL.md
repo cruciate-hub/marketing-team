@@ -2,9 +2,8 @@
 name: webflow-publisher
 description: >
   Shared publishing engine for the social.plus Webflow site. Takes a finished,
-  compliance-checked markdown draft from a content-type skill (blog-publisher for
-  blog posts, glossary-content for glossary entries, future per-content-type skills)
-  plus a per-collection field map, converts it to Webflow rich-text HTML (tables in
+  compliance-checked markdown draft from a content-type skill (blog-publisher,
+  glossary-content, future per-content-type skills) plus a per-collection field map, converts it to Webflow rich-text HTML (tables in
   an Embed block, full-width figures), resizes images to the collection's exact
   WebP sizes, validates the whole payload side-effect-free (--dry-run), and creates
   the CMS item via the Webflow Data API v2 — live, --staged, or --update to refresh
