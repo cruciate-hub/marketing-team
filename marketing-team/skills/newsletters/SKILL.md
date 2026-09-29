@@ -122,8 +122,9 @@ Fetch `messaging/brain.md` to get the messaging router.
 
 Always load `terminology.md` and `tone.md` (the always-load rows). Email body copy that frames the product or makes value claims also needs `positioning.md` and/or `value-story.md`. For "About social.plus" footers, hero subtitles, taglines, and CTAs sourced from approved copy, load `boilerplates.md` (the 25w version is the canonical tagline source).
 
-Fetch the color system directly (emails need hex values, not CSS variables):
+Fetch the color system directly (emails need hex values, not CSS variables). Emails match the website, so `website.md` is the source of truth for color; the palette files add the extended tokens it doesn't cover:
 
+- `design-system/website.md`
 - `design-system/colors-palette.md`
 - `design-system/colors-usage.md`
 
@@ -161,7 +162,7 @@ Use when: the user asks for a campaign email, one-off announcement, promotional 
 - Fetch the base HTML template at `emails/product-update-newsletter-examples/email-template.html`.
 - Fetch `messaging/boilerplates.md` for standardized descriptions and elevator pitches — use these as starting points for body copy.
 - Apply `terminology.md` and `tone.md` for copy.
-- Apply `colors-palette.md` and `colors-usage.md` for all color values (hex only — no CSS variables).
+- Apply `website.md` for all color values (hex only — no CSS variables); fall back to `colors-palette.md` / `colors-usage.md` only for a token `website.md` doesn't define.
 - Follow the email content guidelines in `emails.md` for body structure and CTA.
 - **Subject line rules (mandatory):**
   - 40–50 characters maximum

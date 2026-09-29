@@ -40,7 +40,7 @@ Subject line rules (mandatory):
 
 1. Fetch `brain.md` (main brain).
 2. Fetch `messaging/brain.md`. Always load `terminology.md` + `tone.md`. Add `positioning.md` and/or `value-story.md` when body copy frames the product or makes value claims; add `boilerplates.md` for "About social.plus" footers, hero subtitles, and taglines.
-3. Fetch color files directly: `design-system/colors-palette.md`, `design-system/colors-usage.md`.
+3. Fetch color files directly: `design-system/website.md` (source of truth for email colors, matches the site), plus `design-system/colors-palette.md` and `design-system/colors-usage.md` for tokens it doesn't define.
 4. Fetch the email template stack: spec, structure, blocks, assembly, and `emails.md`.
 5. Determine email type. Parse the input (Google Doc via `google_drive_fetch`, or pasted text).
 6. Generate HTML following the correct assembly order.

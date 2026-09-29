@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.45
+
+Website output now uses the live Webflow design tokens, and a third-party script was removed from the public brand guidelines page.
+
+**Why:** every skill that styles output routes through `design-system/brain.md`, which only loaded the extended design system. That system has none of the 15 values aligned to Webflow in June, so skills produced the old button hover `#3133D1` instead of `#272B9D`, the old orange `#F66005` instead of `#FF6937`, and pulled in-app UI components into website tasks. Separately, `brand-guidelines.html` (published on GitHub Pages) loaded a script from `media.ekoapp.com` through a signed URL, carried over from an HTML export on 2026-06-26 (`1c3a6d98`).
+
+**Changes:**
+- New [`design-system/website.md`](design-system/website.md): the live Webflow tokens (colors, gradients, fluid heading scale, containers, buttons, nav/footer) plus a table of every value that differs from the extended system.
+- [`design-system/brain.md`](design-system/brain.md): website tasks load `website.md` first, it wins on conflict, and the app-UI Components/Patterns groups are skipped for website work. New rule naming the correct hover/pressed/orange values.
+- [`colors-palette.md`](design-system/colors-palette.md), [`colors-usage.md`](design-system/colors-usage.md), [`buttons.md`](design-system/buttons.md): a pointer to `website.md` at the top; values unchanged, since they remain the product/app UI reference.
+- [`newsletters/SKILL.md`](marketing-team/skills/newsletters/SKILL.md), [`emails/emails.md`](emails/emails.md), [`brain.md`](brain.md), [`docs/newsletters.md`](docs/newsletters.md), [`docs/design-system.md`](docs/design-system.md): emails take their colors from `website.md`, matching the existing email templates.
+- [`design-system/brand-guidelines.html`](design-system/brand-guidelines.html): removed the `media.ekoapp.com` script tag. The signed URL now returns 403, but it remains in git history.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.44 -> 13.45.
+
 ## marketing-team 13.44
 
 `webflow-publisher` now ships in the org marketing-team plugin, so its description has to fit the org limit.

@@ -14,7 +14,7 @@ Most tasks need references from more than one domain. Use this table to determin
 | Visual output (HTML, CSS, components, decks) | `messaging/brain.md` + `design-system/brain.md` |
 | Blog posts for social.plus/blog (any topic — product features, industry trends, opinion, listicles) | `marketing-team/skills/blog-seo-content/SKILL.md` + `messaging/brain.md` |
 | Customer stories / case studies | `marketing-team/skills/case-study/SKILL.md` + `messaging/brain.md` |
-| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
+| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/website.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
 | Website audit or content analysis (what pages say, messaging consistency, content gaps) | `marketing-team/skills/site-intelligence/SKILL.md` + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
