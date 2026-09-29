@@ -2,6 +2,8 @@
 
 Source: canonical design system HTML
 
+> **Website output?** Load `website.md` first. Its Webflow values override this file where they differ (button hover `#272B9D`, pressed `#27265E`, orange `#FF6937`). This file is the extended system, used as-is for product/app UI.
+
 Semantic tokens, named gradients, and usage principles. For the full primitive palette, see `colors-palette.md`.
 
 ---

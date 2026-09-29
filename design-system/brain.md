@@ -18,6 +18,11 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 
 ## Routing table
 
+### Website output (load FIRST, overrides the files below on conflict)
+- `website.md` - Live Webflow tokens: colors (button hover `#272B9D`, orange `#FF6937`, text greys, borders, nav background), fluid heading scale, containers, pill buttons, nav/footer components.
+
+Website output = anything that appears on or must match social.plus the website: Webflow builds, landing pages and section mockups, blog/glossary/answers visuals, marketing HTML, emails, social graphics. For these tasks, load `website.md` plus the always-load files below, and skip the **Components** and **Patterns** groups: those describe the in-app product UI kit (app bars, bottom sheets, feeds), not the website. Where a value in the extended files conflicts with `website.md`, `website.md` wins; the conflicts are listed at the end of that file.
+
 ### Any visual task (always load these)
 - `colors-palette.md` - Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status.
 - `colors-usage.md` - Semantic tokens (light + dark mode), 11 named gradients, usage principles.
@@ -64,6 +69,7 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 - **Design tokens are law.** Use the exact values from these files. Never approximate colours, spacing, or border-radius.
 - **Dark-first.** `#111111` is the default background. Design on dark unless a specific light context is needed.
 - **Ultramarine leads.** When you need one brand colour, reach for `#3B41EC` (as background fill). For text/icons on dark, use `#7B94FE` (action-accent).
+- **Website values beat extended values.** On website output, button hover is `#272B9D` (not `#3133D1`), pressed `#27265E`, orange `#FF6937` (not `#F66005`). See `website.md`.
 - **No gradient text.** `background-clip: text` is forbidden. Text is always a solid colour.
 - **One primary button per section.** Never stack two primary CTAs.
 - **12px minimum.** No UI text below 12px. Ever.
@@ -75,6 +81,7 @@ Reference files live in the public `cruciate-hub/marketing-team` repo. Skills lo
 
 | File | Contains |
 |---|---|
+| `website.md` | Live Webflow tokens for website output; overrides the extended files on conflict |
 | `colors-palette.md` | Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status |
 | `colors-usage.md` | Semantic tokens (light + dark), gradients, usage principles |
 | `typography.md` | Figtree type scale, weights, heading scale, line heights |

@@ -2,6 +2,8 @@
 
 Source: canonical design system HTML
 
+> **Website output?** Load `website.md` first. Its Webflow values override this file where they differ (button hover `#272B9D`, pressed `#27265E`, orange `#FF6937`). This file is the extended system, used as-is for product/app UI.
+
 Every button maps to a clear intent hierarchy. Primary drives conversion. Secondary offers alternatives. Ghost keeps things quiet. Destructive signals consequence. All hit 44px minimum touch targets.
 
 ---

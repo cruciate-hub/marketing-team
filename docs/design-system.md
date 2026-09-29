@@ -15,7 +15,7 @@ This is the generic design-system skill — it routes to the appropriate design 
 
 For any output where visual accuracy matters — writing CSS, styling components, building Webflow elements, creating HTML mockups, designing visual layouts. Also for quick reference questions about brand colors, color palette, button states, dark mode colors, design tokens, spacing, border radius, typography, or layout.
 
-Trigger even for small questions like "what blue do we use" or "what's the hover color for buttons".
+Trigger even for small questions like "what blue do we use" or "what's the hover color for buttons" (on the website: `#272B9D`, from `website.md`).
 
 The skill is not for written content only — use `brand-messaging` for copy without visual output.
 
@@ -30,7 +30,9 @@ The skill is not for written content only — use `brand-messaging` for copy wit
 
 `design-system` is intentionally minimal — a dispatcher, not a content producer. The heavy lifting lives in the routing layer (`design-system/brain.md`) and the individual token files (colors, typography, spacing, buttons, etc.). Keeping the skill shell small means token updates flow through without needing to rewrite this skill.
 
-For format-heavy tasks (emails with specific MailerLite requirements), a dedicated skill loads format-specific design files directly — which is why `newsletters` fetches `colors-palette.md` and `colors-usage.md` itself rather than going through this router.
+For format-heavy tasks (emails with specific MailerLite requirements), a dedicated skill loads format-specific design files directly — which is why `newsletters` fetches `website.md`, `colors-palette.md` and `colors-usage.md` itself rather than going through this router.
+
+**Two token layers.** `design-system/website.md` holds the live Webflow values and wins for any website output (Webflow, landing pages, marketing HTML, emails). The other token files are the extended system from the canonical design-system HTML, used as-is for product/app UI. The router loads `website.md` first for website tasks and skips the app-UI component files.
 
 ## Files
 
