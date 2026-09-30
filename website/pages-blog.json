@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-30T11:36:26.966Z",
+    "generatedAt": "2026-09-30T11:36:51.252Z",
     "itemCount": 268,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -87,8 +87,8 @@
     {
       "url": "https://www.social.plus/blog/best-community-sdks-for-apps",
       "metaTitle": "5 Best Community SDKs for Apps (2026)",
-      "metaDescription": "Five community SDKs for building social features into your app. What each covers, how they integrate, and how to choose the right one for your stack.",
-      "content": "# 5 Best Community SDKs for Apps (2026)\n## What Is a Community SDK?\n## What to Look for in a Community SDK\n## 5 Best Community SDKs for Apps (2026)\n### social.plus: Best for teams that want one unified SDK covering the full community stack\n### Stream: Best for composable community building blocks with strong documentation\n### Sendbird: Best for chat-first community apps at enterprise scale\n### CometChat: Best for fast chat SDK integration with compliance built in\n### PubNub: Best for teams that want to build community on top of real-time infrastructure\n## At-a-Glance Comparison\n## How to Choose the Right Community SDK"
+      "metaDescription": "Compare social.plus, Stream, Sendbird, CometChat, and PubNub on features, platforms, and pricing to find the best community SDK for your app in 2026.",
+      "content": "# 5 Best Community SDKs for Apps (2026)\n## What Is a Community SDK?\n## How We Evaluated These Community SDKs\n## 5 Best Community SDKs for Apps (2026)\n### social.plus: Best for teams that want one unified SDK covering the full community stack\n### Stream: Best for composable community building blocks with strong documentation\n### Sendbird: Best for chat-first community apps at enterprise scale\n### CometChat: Best for fast chat SDK integration with compliance built in\n### PubNub: Best for teams that want to build community on top of real-time infrastructure\n## At-a-Glance Comparison\n## How to Choose the Right Community SDK\n## Frequently Asked Questions\n### What is the best community SDK?\n### Community SDK vs chat SDK?\n### How much does a community SDK cost?\n### Which community SDKs support React Native and Flutter?\n### How does a community SDK work?"
     },
     {
       "url": "https://www.social.plus/blog/best-in-app-community-platforms-for-consumer-apps",
