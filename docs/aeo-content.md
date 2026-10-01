@@ -107,7 +107,7 @@ Run after changing `compliance.py`, `intent_match.py`, or the customer table in 
 ```
 marketing-team/skills/aeo-content/
 ├── SKILL.md
-├── webflow-fields.json            Answers field map (stub: slugs unconfirmed)
+├── webflow-fields.json            Answers field map (confirmed 2026-10-01)
 ├── references/
 │   ├── patterns/_shared.md        Page shape used by every template
 │   ├── patterns/how-to.md

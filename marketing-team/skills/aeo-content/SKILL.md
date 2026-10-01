@@ -235,7 +235,7 @@ Editor (named human reviewer): [fill before publish]
 ...
 ```
 
-Exactly two paragraphs sit between the metadata block and the first H2. No HTML, no JSON-LD, no comments: schema and page meta are handled by the Webflow template.
+Exactly two paragraphs sit between the metadata block and the first H2. No HTML (the one exception: a `<figure>` block carried over from the live page when an existing answer is rewritten), no JSON-LD, no comments. Page meta comes from the Webflow template; the FAQPage schema is added by the converter at publish, built from the `## FAQs` section.
 
 ## Writing rules (essentials)
 
@@ -382,7 +382,7 @@ Output the Queue changes for the row so a human can paste them (or write them di
 
 ## Publishing to Webflow
 
-Publishing runs through `webflow-publisher`, after compliance passes and a named editor signs off. The Answers field map (`webflow-fields.json`) is still a stub: only `name` and `slug` are confirmed, so the publisher will refuse to run until the body and meta description slugs are filled in from the live collection (`scripts/sync_fieldmap.py --collection answers`, needs `WEBFLOW_API_TOKEN`). Don't guess slugs.
+Publishing runs through `webflow-publisher`, after compliance passes and a named editor signs off. The Answers field map (`webflow-fields.json`) was confirmed against the live collection on 2026-10-01: the whole article below the H1 goes into `content`, the meta title is copied from the title unless the draft sets `Meta title:`, and the optional `image-2` stays empty until a person approves an image. The converter adds FAQPage schema from the `## FAQs` section (the answers template has none of its own) and puts every table in the table standard.
 
 ## Rationalization table
 

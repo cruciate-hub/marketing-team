@@ -464,6 +464,34 @@ Present the output as a clearly labeled field-by-field mapping. The user copies 
 **Editor (named human reviewer):** [fill before publish]
 ```
 
+## Rewriting a live post (refresh)
+
+A refresh rewrites a post that is already live (Queue IDs `EX-B-…`). The engine enforces most
+of this at publish time (`webflow-publisher.py --replace`); the draft has to make it possible.
+
+- **Keep the URL.** Put the live slug on the `Slug:` line and convert with `--keep-slug`, so the
+  year/count slug rules (which shape new slugs) leave it as it is.
+- **Numbers in URLs** (Stefan, 2026-09-30). If the new title's number differs from the number
+  in the live slug (`/blog/4-strategies-…` for "5 Strategies…"), the post moves to a slug
+  without the number and the old URL gets a 301. Flag it in the reviewer notes with the
+  proposed slug; a person sets the slug and the 301 in Webflow before it publishes (the
+  dry-run fails `slug:number-matches-title` until then). A slug whose number still matches the
+  title stays. New posts: keep counts out of slugs.
+- **Carry every image and video over** (Stefan, 2026-09-29). Rewritten drafts tend to come out
+  with no images while the live post has them. Copy each live `<figure>…</figure>` block into
+  the draft at its matching section, on its own lines (it passes through the converter
+  unchanged); if no section fits, place it at the end of the closest one and flag it. Never put
+  one before the first paragraph: that paragraph becomes the post summary. Only the reviewer
+  removes an image, explicitly. The replace refuses to run when one is missing.
+- **Header images stay** unless a new one is approved: a rewrite does not touch the three image
+  fields. A post that already has the new dark header keeps it; only the old pastel headers are
+  candidates for a new one.
+- **Dates are automatic:** "Published on" keeps the original date, "Edited on" is set to the
+  rewrite date.
+- **Tables and FAQs are automatic:** every table gets the table standard and an FAQ section gets
+  FAQPage schema (webflow-publisher html-conversion.md). Write the FAQ as `## Frequently asked
+  questions` with one `### Question?` per question.
+
 ## Queue update
 
 After delivery, output the Queue changes for the row for a human to paste (or write them directly once an automated Sheets connection is approved by IT): Status `In review`, Draft link, final Draft first sentence, and the evidence-bank rows whose `Used on` should get this ID after approval.
@@ -529,7 +557,7 @@ For most conditions, the user can decide to proceed after seeing the fired condi
 
 1. **Unresolved script FAIL.** `compliance.py` exited non-zero on the current text, was not re-run after the latest edit, or its stdout was not pasted. Delivering on a stale or absent run is itself a BLOCK, not a formality gap.
 2. **Self-serving unverifiable claim.** Any numeric, superlative, or customer claim about social.plus not traceable to an `Approved` row in `messaging/evidence-bank.md` (the shared evidence bank; this skill doesn't carry its own copy) or a fetched reference file, or a "best/top X" self-ranking violating the "Listicle and comparison integrity" rules. The regex gate cannot catch novel phrasings of these — catching them is what this holistic pass exists for.
-3. **Structured-data contradiction.** Any schema/JSON-LD in or accompanying the deliverable asserting anything not visible in the content (invented FAQ pairs, ratings, review counts, shifted dates). Baseline unchanged: post-content carries no schema at all (the script FAILs it), and if the user explicitly requests page-level schema it ships only when every claim in it matches the visible content.
+3. **Structured-data contradiction.** Any schema/JSON-LD in or accompanying the deliverable asserting anything not visible in the content (invented FAQ pairs, ratings, review counts, shifted dates). Baseline: the draft carries no schema (the script FAILs it). At publish the converter adds one FAQPage block built from the visible FAQ section, so its question and answer text always match the content; any other page-level schema ships only when the user explicitly requests it and every claim in it matches the visible content.
 4. **Link-integrity breach.** Any link placed because of an exchange, payment, or reciprocal arrangement (those flow only through `link-building-vetter` / `backlink-placement-finder`; this skill never places them, per brain.md guardrail 4); any improvised internal link not returned by `internal-linking-strategist`; any anchor embedded after failing `--scan-text`. Competitor-documentation links in comparison posts remain legitimate under the listicle-integrity sourcing rules — this condition targets arrangement links, not citations.
 5. **Missing named editor at publish handoff.** Marking a draft publish-ready, delivering final opt-in HTML, or handing to `blog-publisher` while `Editor (named human reviewer)` is unfilled, or filled with anything other than a human the user named (never auto-fill, never an AI name). Default-mode delivery with the placeholder still present remains correct — the line exists to be filled downstream; this BLOCK fires at the publish boundary.
 6. **Undifferentiated doorway variant.** A vertical or "alternatives" sibling that, after the `pages-blog.json` sibling check, still largely mirrors an existing post's structure and picks. Deliver only as an update/consolidation proposal for the existing post, never as a net-new page (brain.md guardrail 5; doorway pages are hard-forbidden).

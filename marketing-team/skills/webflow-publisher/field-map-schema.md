@@ -16,7 +16,7 @@ maps are ready and which still have unconfirmed slugs.
 |---|---|---|---|
 | `blog-seo-content` | `webflow-fields.json` | Blog Posts `66e2765d540e1939a89db6a4` | Ready. Single source of truth for blog field slugs and category IDs (moved out of the Python scripts). |
 | `glossary-content` | `webflow-fields.json` | Glossary `66e2765d540e1939a89db93e` | Ready. `fields.body`/`metadata['Meta description']` confirmed 2026-09-18 via `sync_fieldmap.py` against the live schema; no `intro`/`date`/`Alt text`/`Category` field exists on the collection (confirmed absent, not unconfirmed). |
-| `aeo-content` | `webflow-fields.json` | Answers `68f643838f7abffca74efbc1` | **Stub, not wired.** Collection ID and URL prefix are real; every field slug except `name`/`slug` is `null` pending confirmation. |
+| `aeo-content` | `webflow-fields.json` | Answers `68f643838f7abffca74efbc1` | Ready. Confirmed 2026-10-01 against the live schema (7 fields): body `content`, `meta-description`, `meta-title` (copied from the title), optional `image-2` + `alt-text`; no summary or date field. |
 
 ## Schema (v1)
 
@@ -34,13 +34,17 @@ maps are ready and which still have unconfirmed slugs.
     "slug":  "slug",                          //   always "slug"
     "body":  "post-content",                  //   RichText body; null = unconfirmed (blocks publish)
     "intro": "post-summary",                  //   first paragraph lifted out of the body; null = stays in body
-    "date":  "date-published"                 //   ISO 8601 UTC set at conversion time; null = no date field
+    "date":  "date-published",                //   ISO 8601 UTC set at conversion time; null = no date field.
+                                              //   --replace keeps the live value (fills an empty one from createdOn)
+    "date_edited": "date-edited-manual"       //   optional: set to now on every --replace
   },
+  "faq_schema": true,                         // optional: append a FAQPage JSON-LD embed built from the FAQ section
 
   "metadata": {                               // draft `Label: value` line → CMS field
     "Meta description": {"slug": "meta-description", "required": true, "max_length": 160},
     "Minutes to read":  {"slug": "min-read", "required": true, "default": "5"},
     "Alt text":         {"slug": "image-alt-text"},                       // optional text field
+    "Meta title":       {"slug": "meta-title", "from_title": "{title}"},  // filled from the title when the draft has no such line
     "Category":         {"slug": "category", "required": true,
                          "type": "reference", "taxonomy": "categories"},  // first name → one item ID
     "Tags":             {"slug": "category-multi-reference-3", "required": true,
@@ -53,6 +57,7 @@ maps are ready and which still have unconfirmed slugs.
 
   "images": [                                                             // one entry per CMS image field
     {"role": "header", "slug": "image-page-header", "variant": "page-header", "width": 1578, "height": 888}
+    // add "optional": true for an image field that may stay empty (answers' image-2)
   ],
   "inline_images": {"variant": "img", "width": 1578, "height": 888},      // body <figure> images; null = none
 

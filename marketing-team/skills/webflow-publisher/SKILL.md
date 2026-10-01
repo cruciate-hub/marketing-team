@@ -267,12 +267,19 @@ python3 "$REPO/scripts/webflow-publisher.py" "$TMPDIR/fielddata.json" --collecti
 Omit `--image`/`--inline` for collections without image fields. `--source` enables the
 source-vs-output table count. It writes `dry-run-report.json` next to the fielddata and exits
 non-zero on any failure. Checks: field-map readiness (no `null` required slugs), required
-fields and `max_length`, slug rules, taxonomy consistency (e.g. Tags ⊇ Category),
-`forbidden_body_strings`, no `<h1>`/`<style>`/`<script>`/`<iframe>`, internal links present
-(when the map requires them), placeholder ↔ inline count, **structural table checks**
+fields and `max_length`, slug rules, **slug number vs title number**
+(`slug:number-matches-title`: a slug number the title no longer has, e.g. `4-strategies-…` for
+"5 Strategies…", fails; the post needs a slug without the number and a 301 from the old URL,
+set by a person in Webflow), taxonomy consistency (e.g. Tags ⊇ Category),
+`forbidden_body_strings`, no `<h1>`/`<style>`/`<script>`/`<iframe>` (the FAQPage JSON-LD embed
+and carried-over video figures are the only exceptions), internal links present (when the map
+requires them), placeholder ↔ inline count, **structural table checks**
 (`content:table-not-flattened`: no `<p>` carrying `| … |` syntax and no source table missing
 from the output; `content:table-in-embed`: every `<table>` wrapped in
-`<div data-rt-embed-type='true'>`; `content:table-structure`: `<thead>` + `<tbody>`), exact
+`<div data-rt-embed-type='true'>`; `content:table-structure`: `<thead>` + `<tbody>`;
+`content:table-standard`: scroll wrapper with the 2rem gap, `margin-bottom:0` and a caption,
+see html-conversion.md), **FAQ schema** (`content:faq-schema`, when the map sets
+`faq_schema`: a body with an FAQ section carries exactly one parsable FAQPage embed), exact
 image dimensions and `.webp` extension. Fix everything it flags, then re-run.
 
 ### 5. Publish
@@ -290,14 +297,33 @@ Webflow's full-width `<figure>`, and the item is created. Surface the result:
 
 ### Rewrite an EXISTING item in place (`--replace`)
 
-For a rewrite that keeps the live slug and URL (the glossary's common case), do not create
-a new item — pre-flight would reject the taken slug, and a suffix is forbidden anyway:
+For a rewrite that keeps the live slug and URL (a glossary rewrite, a blog refresh), do not
+create a new item — pre-flight would reject the taken slug, and a suffix is forbidden anyway.
+Convert with `--keep-slug` so the live slug survives the collection's slug rules (the blog
+rules would otherwise strip a leading count such as `15-` and the replace would refuse the
+mismatch):
 
 ```bash
+python3 "$REPO/scripts/md_to_webflow_html.py" "$DRAFT" --collection "$COLLECTION" --keep-slug \
+  --out "$TMPDIR/fielddata.json"
 python3 "$REPO/scripts/webflow-publisher.py" "$TMPDIR/fielddata.json" --collection "$COLLECTION" \
   --replace <item_id> [--image role=… ...] [--inline …] [--source "$DRAFT"] --dry-run
 python3 "$REPO/scripts/webflow-publisher.py" "$TMPDIR/fielddata.json" --collection "$COLLECTION" --replace <item_id>
 ```
+
+Rewrite rules the engine enforces before it PATCHes anything:
+
+- **Images and videos carry over.** Every `<figure>` in the live body must appear in the new
+  body (matched on its `src`); otherwise the replace stops and lists what is missing. Copy each
+  live `<figure>` block into the draft at its matching section, on its own lines: the converter
+  passes it through unchanged. Only when the reviewer removed images on purpose, add
+  `--allow-image-removal`.
+- **Dates.** The publish date (`fields.date`, the blog's "Published on") is the post's original
+  date: the live value is kept, and an empty one is filled from the item's `createdOn`. The
+  map's `fields.date_edited` (the blog's "Edited on") is set to now.
+- **Slug numbers.** The dry-run fails when the slug carries a number the title no longer has
+  (see the checks above). The engine never changes a slug: a person sets the new slug and the
+  301 in Webflow first.
 
 Find `<item_id>` by slug: `GET /v2/collections/{collection}/items?slug={slug}`. The engine
 verifies the live item's slug equals the draft's, PATCHes every field in `fielddata.json`
@@ -349,7 +375,9 @@ If `WEBFLOW_API_TOKEN` is not set, the same flow works through the Webflow MCP's
    be the LAST form field, named `file`. Success is HTTP **201**.
 3. `data_cms_tool > create_collection_items` (or `update_collection_items`) with the
    `fieldData` from `fielddata.json` (image fields as `{"url": <hostedUrl>}`), then
-   `publish_collection_items`.
+   `publish_collection_items`. For a rewrite through `update_collection_items`, apply the
+   `--replace` rules by hand: read the live item first, keep its publish date (drop the field
+   from the payload), set the edited date, and check every live `<figure>` is in the new body.
 
 ## Error handling
 
@@ -360,6 +388,11 @@ If `WEBFLOW_API_TOKEN` is not set, the same flow works through the Webflow MCP's
 | Master image too small / wrong ratio | Stop. Ask for a full-resolution export at the collection's aspect ratio. |
 | Wrong image dimensions | The collection enforces exact sizes (min=max) — re-run `resize_images.py`. |
 | `content:table-not-flattened` / `content:table-in-embed` fails | The draft's table did not survive conversion (check `--source` counts) or was hand-pasted as a bare `<table>`. Re-run the converter; never paste HTML by hand. |
+| `content:table-standard` fails | A table without the scroll wrapper, `margin-bottom:0` or caption — it was built by hand. Re-run the converter on the draft. |
+| `content:faq-schema` fails | FAQ section without exactly one FAQPage embed, an embed without an FAQ section, or questions that are not `### Question?` headings. Fix the draft's FAQ and re-convert. |
+| `slug:number-matches-title` fails | On a rewrite: the post needs a slug without the stale number or year and a 301 from the old URL, set by a person in Webflow first. On a new page: derive the slug from the title or drop the number. |
+| `content:figures-closed` fails / converter says a `<figure>` has no closing tag | A carried-over figure was copied incompletely. Copy the whole `<figure>…</figure>` block from the live item. |
+| `--replace` stops: "drops N image(s)/video(s)" | Carry the listed live figures into the draft. Only when the reviewer removed them: `--allow-image-removal`. |
 | S3 upload fails | Retry once. If still failing, report the HTTP status and stop. |
 | Network call hangs | Script calls time out by themselves (30s API / 60s S3) and exit with an error. Any hand-written curl must carry `--max-time`. |
 | Webflow 401 | Token invalid or expired. Ask user to refresh `WEBFLOW_API_TOKEN`. |

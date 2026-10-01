@@ -20,13 +20,20 @@ Design note with the reasoning: [`webflow-publisher-design.md`](./webflow-publis
   [`field-map-schema.md`](../marketing-team/skills/webflow-publisher/field-map-schema.md).
 - Converts the body: `##`/`###` headings, bold/italic, bullets (nested), numbered lists,
   blockquotes, external links in a new tab and internal links in the same tab, GFM tables
-  wrapped in a Webflow Embed block (`<div data-rt-embed-type='true'>`) so the Designer's
-  editor cannot mangle them, image lines → full-width `<figure>` placeholders.
+  in the table standard inside a Webflow Embed block (`<div data-rt-embed-type='true'>`) so the
+  Designer's editor cannot mangle them, image lines → full-width `<figure>` placeholders, live
+  `<figure>` blocks passed through unchanged, and a FAQPage JSON-LD embed for collections whose
+  map sets `faq_schema`. `--keep-slug` keeps a live slug exactly for rewrites.
 - Resizes a master image to every size the collection declares (Pillow; WebP; exact pixels).
-- `--dry-run`: required fields, slug rules, Tags ⊇ Category, forbidden strings, no
-  `<h1>`/`<style>`/`<script>`, internal links, placeholder ↔ inline-image count, **structural
-  table checks** (flattened-table signature, source-vs-output table count, every table in an
-  Embed), exact image dimensions, and a hard fail on any field slug still unconfirmed.
+- `--dry-run`: required fields, slug rules, slug number vs title number, Tags ⊇ Category,
+  forbidden strings, no `<h1>`/`<style>`/`<script>` (except the FAQPage embed and carried-over
+  video figures), closed `<figure>` blocks, internal links, placeholder ↔ inline-image count,
+  **structural table checks** (flattened-table signature, source-vs-output table count, every
+  table in an Embed, the table standard), FAQ schema, exact image dimensions, and a hard fail
+  on any field slug still unconfirmed.
+- `--replace` (rewrite a live item): keeps the live publish date, sets the edited date,
+  keeps a custom live meta title, and refuses when a live image or video is missing from the
+  new body (`--allow-image-removal` when the reviewer removed it).
 - Publishes with pre-flight (token scopes + slug availability) before any upload; never
   resolves a slug collision by appending a suffix.
 
@@ -36,7 +43,7 @@ Design note with the reasoning: [`webflow-publisher-design.md`](./webflow-publis
 |---|---|---|
 | Blog Posts | `blog-seo-content/webflow-fields.json` | Ready. Used by `blog-publisher`. |
 | Glossary | `glossary-content/webflow-fields.json` | Ready. `body`/`Meta description` confirmed 2026-09-18 via `sync_fieldmap.py`; the collection has no `intro`/`date`/`Alt text`/`Category` field (confirmed absent). |
-| Answers (AEO) | `aeo-content/webflow-fields.json` | Stub only, not wired into `aeo-content`. |
+| Answers (AEO) | `aeo-content/webflow-fields.json` | Ready. Confirmed 2026-10-01 against the live schema (body `content`, meta title from the title, optional `image-2`). |
 
 `python3 "$REPO/scripts/webflow-publisher.py" --list-collections` prints this at runtime.
 

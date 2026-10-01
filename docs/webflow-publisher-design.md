@@ -208,6 +208,11 @@ fixture generated with the *original* `gdoc_to_fielddata.py` is asserted in
    is now a FAIL instead of a silent skip.
 6. `>` blockquotes → `<blockquote>`, a lone `---` rule is dropped rather than emitted as `<p>---</p>`.
 7. The two table checks run for every table, not only under "At-a-Glance"/"Comparison".
+8. (2026-10-01) Tables use the table standard: a scroll wrapper with a 2rem gap inside the
+   Embed, `margin-bottom:0 !important` on the table, a visually hidden caption, `scope="col"`
+   headers and the first body cell as a `scope="row"` header (html-conversion.md, Tables).
+9. (2026-10-01) When the field map sets `faq_schema` (blog, answers), a body with an FAQ
+   section ends with a FAQPage JSON-LD embed built from that section.
 
 ## Glossary wiring — what exists and what's still open
 
@@ -228,6 +233,11 @@ Meta title"), `exclude-indexing-letters` (PlainText, displayed "Indexing") and `
 call, not guessed here.
 
 ## aeo-content finding
+
+**Update, 2026-10-01:** wired. `aeo-content/webflow-fields.json` is confirmed against the live
+Answers schema (body `content`, `meta-description`, `meta-title` from the title, optional
+`image-2` + `alt-text`, FAQ schema on), and aeo-content's SKILL.md publishes through
+`webflow-publisher`. The text below is the 2026-09-18 finding, kept for history.
 
 The "downstream automation converts the .docx to Webflow HTML and publishes to /answers/"
 statement (SKILL.md, `references/workflow-phases.md`, `docs/aeo-content.md`) has no

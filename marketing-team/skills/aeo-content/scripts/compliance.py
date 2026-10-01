@@ -599,6 +599,9 @@ def check_html_tags(body: str) -> CheckResult:
     the source corrupts both. Includes `<!-- comments -->`, which some
     markdown→docx converters render as visible text.
     """
+    # A whole <figure>…</figure> block is an image or video carried over from the live page on a
+    # rewrite (webflow-publisher passes it through unchanged) — legitimate, not stray HTML.
+    body = re.sub(r"<figure\b.*?</figure>", "", body, flags=re.DOTALL | re.IGNORECASE)
     tag_hits = HTML_TAG_PATTERN.findall(body)
     comment_hits = re.findall(r"<!--.*?-->", body, flags=re.DOTALL)
     total = len(tag_hits) + len(comment_hits)
