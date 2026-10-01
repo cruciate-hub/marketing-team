@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.47
+
+The imagery rules now describe the blog headers the site actually uses.
+
+**Why:** [`imagery.md`](design-system/imagery.md) said product illustrations never show people and that blog headers are photography, while the current blog headers are dark interface scenes with one real element (a person, a hand holding a phone, faces or app logos). Skills that read the brand rules for header work were steered away from the live style.
+
+**Changes:**
+- [`design-system/imagery.md`](design-system/imagery.md): new "Blog Headers" section (composition, one lit focal element, at most one photographic element, no readable text, true numbers only, two concepts per image and a fresh composition per page, photos and logos, editable Figma production and team review), also covering answer page images and glossary concept images; the intro names it as the one deliberate mix of the two modes, the section states its two exceptions to the illustration rules (photos, third-party logos), and the summary table points to it.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.46 -> 13.47.
+
 ## marketing-team 13.46
 
 The rules the content engine adopted between 29 September and 1 October 2026 now live in the skills and the shared publishing scripts, so every rewrite and new page follows them, not only the scheduled publisher.

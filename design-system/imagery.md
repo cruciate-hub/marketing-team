@@ -2,7 +2,7 @@
 
 Source: canonical design system HTML
 
-social.plus uses two distinct imagery modes: **product illustrations** for in-product and documentation contexts, and **photography** for marketing and campaign contexts. The two modes are never mixed in the same layout.
+social.plus uses two distinct imagery modes: **product illustrations** for in-product and documentation contexts, and **photography** for marketing and campaign contexts. The two modes are never mixed in the same layout, with one deliberate exception: **blog headers** (see below) combine a dark product-illustration scene with one real photographic element.
 
 ---
 
@@ -74,6 +74,32 @@ A mix of:
 
 ---
 
+## Blog Headers
+
+Used in: the blog post header and its two thumbnails (1578 × 888, 724 × 408 and 502 × 283 px, all the same 16:9 shape). The same style applies to the answer page image (1240 × 840 px) and to the concept image inside a glossary entry (1578 × 888 px).
+
+The current blog headers set the style: dark interface scenes with a blue glow, usually anchored by one real element such as a person, a hand holding a phone, or app logos. They replace the older pastel illustrations. A post whose header is already in this style keeps it.
+
+### Composition
+
+- **Dark ground** (`#111111`) with a soft ultramarine-to-violet glow behind the subject.
+- **Floating interface cards** (posts, chat, stats, charts, notifications, profile chips) in muted dark glass, styled like the product illustrations above (generous rounding, layering, depth, blue as the only brand accent). Two deliberate exceptions to those rules: the photographic element below, and official third-party logos in comparisons, which keep their own colours.
+- **One lit focal element.** A single ultramarine card or tile carries the post's point; everything else recedes in grey.
+- **At most one real element**, as a photograph: a cut-out person (portrait or half body), a hand holding a phone, faces in avatar slots, a group photo, or app logos for listicles and comparisons.
+- **No readable text.** Grey bars stand in for copy. A number appears only when it is true for the post (a figure the article quotes); no made-up counters.
+- **Each image starts from the page's own idea.** Two different concepts are drafted (the metaphor, the lit element, the real element), each guided by the reference headers that fit it, and the team picks one. The shared kit keeps images on brand; the composition should differ from page to page rather than repeat a recent layout.
+
+### Photos and logos in headers
+
+- Photos follow the photography treatment and people guidelines above: dark, cool grade, no warm tones, real-feeling people, cut out cleanly where the slot asks for it.
+- Logos: official versions only, never altered, only the products the post names. The post's focus (or social.plus) is the lit tile in front.
+
+### Production and review
+
+Headers are built as editable vectors in the shared Figma image file (brand colour variables, effect and text styles, components with photo slots), so a designer can adjust every shape and drop in the photos. Every header is reviewed by someone on the team before it goes live, then exported at the three exact sizes as WebP.
+
+---
+
 ## Decorative Visuals
 
 Used in: hero section backgrounds, section dividers, empty states, loading screens.
@@ -96,6 +122,7 @@ Decorative visuals are abstract and use the brand palette directly:
 | Documentation or help centre | Product illustration |
 | Empty states and onboarding | Product illustration |
 | Hero section of marketing page | Photography or gradient abstract |
-| Blog post header | Photography |
+| Blog post header | Blog header (dark UI scene + one photographic element) |
+| Answer page image, glossary concept image | Same style as blog headers |
 | Section divider / background texture | Decorative visual |
 | Email header | Gradient abstract or product illustration |
