@@ -1,36 +1,45 @@
 {
-  "_doc": "Field map for the social.plus /answers/ (AEO) collection. STATUS: STUB, NOT WIRED — shipped only because aeo-content's .draft.md is already in the common intermediate shape, so wiring it later is a matter of filling these slugs. Every field slug except the Webflow built-ins name/slug is UNCONFIRMED (null); the publisher refuses to publish until they are real. aeo-content's SKILL.md still says a separate downstream automation handles publishing; nothing in this repo implements that (see docs/webflow-publisher-design.md, 'aeo-content finding').",
-  "_status": "UNCONFIRMED — CONFIRM WITH STEFAN. Read the real slugs from the Webflow Designer or `GET https://api.webflow.com/v2/collections/68f643838f7abffca74efbc1`, then replace each null. Keys starting with '_' are documentation and ignored by scripts/webflow_fieldmap.py.",
+  "_doc": "Field map for the social.plus /answers/ (AEO) collection. Confirmed 2026-10-01 against the live schema (7 fields: name 'H1 Title', slug, meta-title, meta-description, content, image-2, alt-text) and live items such as /answers/api-for-building-social-features-in-apps. Replaces the 2026-09-18 stub.",
   "schema_version": 1,
   "collection": "answers",
   "display_name": "Answers (AEO)",
   "site_id": "66e2765d540e1939a89db4bb",
   "collection_id": "68f643838f7abffca74efbc1",
-  "_collection_id_provenance": "website/pages-answers.json _meta.collectionId (site-JSON worker via the Webflow Data API, 152 items). Confirmed data, not a guess.",
+  "_collection_id_provenance": "website/pages-answers.json _meta.collectionId (site-JSON worker via the Webflow Data API). Confirmed data, not a guess.",
   "live_url_prefix": "https://www.social.plus/answers/",
 
   "fields": {
     "title": "name",
+    "_title_doc": "Displayed as 'H1 Title' in Webflow: the canonical question, word for word.",
     "slug": "slug",
-    "body": null,
-    "_body_confirm": "CONFIRM WITH STEFAN — RichText body field slug.",
+    "body": "content",
+    "_body_doc": "The only RichText field. Holds the whole article below the H1: the answer-first block and summary as the first two paragraphs (aeo-content's compliance.py detects them by position), then the H2 sections, FAQs and conclusion.",
     "intro": null,
-    "_intro_confirm": "aeo-content puts the answer-first block and TL;DR as the first two body paragraphs (compliance detects them by position). Leave null unless the collection has a dedicated summary field.",
+    "_intro_doc": "Confirmed 2026-10-01: no separate summary field (intentional null, not unconfirmed).",
     "date": null,
-    "_date_confirm": "CONFIRM WITH STEFAN — aeo-content says datePublished/dateModified are set downstream; if that is a CMS field, put its slug here."
+    "_date_doc": "Confirmed 2026-10-01: no DateTime field on the collection (intentional null, not unconfirmed)."
   },
 
   "metadata": {
-    "Meta description": {"slug": null, "required": true, "max_length": 160, "_confirm": "CONFIRM WITH STEFAN"},
-    "Alt text":         {"slug": null, "required": false, "_confirm": "CONFIRM WITH STEFAN — only if the collection has an image field."}
+    "Meta description": {"slug": "meta-description", "required": true, "max_length": 160},
+    "Meta title":       {"slug": "meta-title", "required": false, "from_title": "{title}",
+                         "_doc": "Live items use the H1 title as the meta title. A draft may set its own `Meta title:` line; otherwise the converter copies the title."},
+    "Alt text":         {"slug": "alt-text", "required": false,
+                         "_doc": "Only meaningful when image-2 is set."}
   },
-  "_metadata_doc": "aeo-content v2 writes `Intent: how-to | decision | explainer | playbook`, `Queue ID:`, `Last updated:` and `Editor (named human reviewer):`. These are writer-side metadata for compliance.py and the Content Queue and are deliberately unmapped (reported as unmapped labels, not errors). `Last updated` and the editor name should map to CMS fields once the rebuilt Answers collection has them.",
+  "_metadata_doc": "aeo-content v2 also writes `Intent:`, `Queue ID:`, `Last updated:` and `Editor (named human reviewer):`. These are writer-side metadata for compliance.py and the Content Queue and stay unmapped (reported as unmapped labels, not errors); the collection has no fields for them.",
 
   "defaults": {},
   "taxonomies": {},
-  "images": [],
-  "_images_confirm": "CONFIRM WITH STEFAN — unknown.",
+
+  "images": [
+    {"role": "image", "slug": "image-2", "variant": "answer", "width": 1240, "height": 840, "optional": true,
+     "_doc": "Optional: about a third of the live answers have no image, and an image goes live only after a person approves it. Unlike the blog image fields, the collection does not enforce a size; 1240x840 WebP is the house spec, and the dry-run checks it when an image is passed."}
+  ],
   "inline_images": null,
+
+  "faq_schema": true,
+  "_faq_schema_doc": "Checked 2026-10-01: the answers template emits only Article + Organization JSON-LD, while the pages carry a visible FAQ section. The converter appends a FAQPage JSON-LD embed built from that section.",
 
   "slug_rules": {"strip_years": true, "strip_leading_count": false},
 

@@ -64,6 +64,38 @@ check("synonym terms are a likely duplicate",
 check("different terms do not match",
       score("What is app retention?", "", "What is churn rate?", "") < NEEDS_REVIEW)
 
+print("intent_match: default inventories cover every page type")
+import json, os, tempfile  # noqa: E401,E402
+with tempfile.TemporaryDirectory() as tmp:
+    web = Path(tmp) / "website"
+    web.mkdir()
+    page = lambda url, title, desc: {"url": url, "metaTitle": title, "metaDescription": desc, "content": ""}  # noqa: E731
+    (web / "pages-marketing.json").write_text(json.dumps({"pages": [page(
+        "https://www.social.plus/vs-stream", "social.plus vs Stream | Which platform is right for your product?",
+        "Compare social.plus and Stream on features and integration.")]}))
+    (web / "pages-blog.json").write_text(json.dumps({"pages": [page(
+        "https://www.social.plus/blog/x", "How to Improve Community Retention", "Retention tactics.")]}))
+    p = subprocess.run([sys.executable, str(ROOT / "scripts" / "intent_match.py"),
+                        "social.plus vs Stream: which platform is right for your product?"],
+                       capture_output=True, text=True, env={**os.environ, "MT_REPO": tmp})
+    line = next((l for l in p.stdout.splitlines() if "/vs-stream" in l), "")
+    check("a /vs page (pages-marketing.json) is compared by default", bool(line), p.stdout[-300:])
+    check("a non-editorial page is REVIEW, never LIKELY DUPLICATE", "REVIEW" in line and "LIKELY" not in line, line)
+    p = subprocess.run([sys.executable, str(ROOT / "scripts" / "intent_match.py"), "How to increase online community retention"],
+                       capture_output=True, text=True, env={**os.environ, "MT_REPO": tmp})
+    check("an editorial page can still be a LIKELY DUPLICATE", "LIKELY DUPLICATE" in p.stdout, p.stdout[-300:])
+
+print("compliance: a carried-over <figure> block is not stray HTML")
+with tempfile.TemporaryDirectory() as tmp:
+    src = (FIX / "pass-how-to.draft.md").read_text()
+    parts = src.split("\n## ", 1)
+    fig = ('<figure class="w-richtext-figure-type-image" data-rt-type="image"><div>'
+           '<img alt="Example" src="https://cdn.example.test/a.png"></div></figure>')
+    draft = Path(tmp) / "fig.draft.md"
+    draft.write_text(parts[0] + "\n## " + parts[1].replace("\n\n", "\n\n" + fig + "\n\n", 1))
+    out = subprocess.run([sys.executable, str(COMPLIANCE), str(draft)], capture_output=True, text=True).stdout
+    check("no_html passes with a figure block", "[PASS] no_html" in out, out[:400])
+
 print("evidence bank and compliance whitelist agree")
 bank = (ROOT / "messaging" / "evidence-bank.md").read_text()
 src = COMPLIANCE.read_text()

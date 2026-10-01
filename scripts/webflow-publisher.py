@@ -16,7 +16,7 @@ Usage:
     # Rewrite an EXISTING item (same slug) from fielddata.json — e.g. a glossary rewrite —
     # then publish it. Images are optional here; given ones are re-uploaded and patched too:
     python3 scripts/webflow-publisher.py <fielddata.json> --collection <name> --replace <item_id> \
-        [--image <role>=<path> ...] [--inline …] [--dry-run]
+        [--image <role>=<path> ...] [--inline …] [--allow-image-removal] [--dry-run]
 
     # Refresh image fields on an EXISTING item (re-upload → partial PATCH → publish):
     python3 scripts/webflow-publisher.py --update <item_id> --collection <name> --image <role>=<path> ...
@@ -28,12 +28,19 @@ Usage:
     --inline       body images, in placeholder order (__INLINE_IMG_1__, _2_, …).
     --source       the markdown intermediate; lets the dry-run compare the number of tables
                    in the source with the number of <table> elements in the body.
-    --dry-run      required fields, slug rules, taxonomy consistency, forbidden strings,
-                   no <h1>/<style>/<script>, internal links, placeholder↔inline match,
-                   structural table checks, exact image dimensions, unconfirmed field slugs.
-                   Writes dry-run-report.json next to fielddata.json.
+    --dry-run      required fields, slug rules (incl. slug number vs title number), taxonomy
+                   consistency, forbidden strings, no <h1>/<style>/<script>/<iframe> (except the
+                   FAQPage JSON-LD embed and carried-over video figures), internal links,
+                   placeholder↔inline match, the table standard, FAQ schema, exact image
+                   dimensions, unconfirmed field slugs. Writes dry-run-report.json next to
+                   fielddata.json.
     --replace      PATCH the given item's fields from fielddata.json (its slug must match) and
                    publish. Find the id with GET /v2/collections/{id}/items?slug={slug}.
+                   Keeps the live publish date (fills it from createdOn when empty), sets the
+                   map's date_edited field to now, and refuses when an image or video from the
+                   live body is missing from the new body.
+    --allow-image-removal
+                   with --replace: the reviewer removed live images/videos on purpose.
 
 Environment:
     WEBFLOW_API_TOKEN  —  cms:write + assets:write (+ sites:read for pre-flight).
@@ -431,12 +438,76 @@ def upload_and_attach_images(token: str, fm: dict, field_data: dict, images: dic
                                                          fm["inline_images"]["width"])
 
 
-def replace_item(token: str, fm: dict, item_id: str, field_data: dict, images: dict, inline_paths: list) -> None:
+FIGURE_BLOCK_RE = re.compile(r"<figure\b.*?</figure>", re.DOTALL | re.IGNORECASE)
+SRC_RE = re.compile(r'\bsrc="([^"]+)"')
+
+
+def figure_sources(body_html: str) -> list:
+    """The image or video URL of every <figure> block in a rich-text body, in order."""
+    out = []
+    for block in FIGURE_BLOCK_RE.findall(body_html or ""):
+        m = SRC_RE.search(block)
+        if m:
+            out.append(m.group(1))
+    return out
+
+
+def missing_live_figures(live_body: str, new_body: str) -> list:
+    """Live images/videos that the rewritten body no longer contains. A rewrite carries every
+    one over (Stefan, 2026-09-29: "this is not being honored"); only the reviewer removes one.
+    Compared after HTML-unescaping both sides (`&amp;` in one copy, `&` in the other)."""
+    import html as html_lib
+    new_body = html_lib.unescape(new_body or "")
+    return [src for src in figure_sources(live_body) if html_lib.unescape(src) not in new_body]
+
+
+def keep_live_title_copies(fm: dict, live: dict, field_data: dict) -> list:
+    """A metadata field filled `from_title` (answers' meta-title) must not overwrite a custom
+    live value on a rewrite: drop it from the payload when the live item already has one and
+    the draft only had the title-derived default."""
+    kept, title = [], str(field_data.get(fm["fields"]["title"], ""))
+    for spec in fm.get("metadata", {}).values():
+        slug, tpl = spec.get("slug"), spec.get("from_title")
+        if slug and tpl and live.get(slug) and field_data.get(slug) == tpl.replace("{title}", title):
+            field_data.pop(slug, None)
+            kept.append(slug)
+    return kept
+
+
+def apply_rewrite_dates(fm: dict, live: dict, created_on: str, field_data: dict, now: str) -> list:
+    """Date rules for a rewrite (Stefan, 2026-09-29). The publish date ("Published on") is the
+    post's original date: never overwrite it; fill it from the item's createdOn only when the
+    live field is empty. The edited date ("Edited on", fields.date_edited) is set to now.
+    Mutates field_data; returns notes for the log."""
+    f, notes = fm["fields"], []
+    pub = f.get("date")
+    if pub:
+        if live.get(pub):
+            field_data.pop(pub, None)
+            notes.append(f"{pub}: kept the live value {live[pub]}")
+        else:
+            field_data[pub] = created_on or now
+            notes.append(f"{pub}: was empty, set to {field_data[pub]} (item created date)")
+    edited = f.get("date_edited")
+    if edited:
+        field_data[edited] = now
+        notes.append(f"{edited}: set to {now}")
+    return notes
+
+
+def now_iso() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
+
+def replace_item(token: str, fm: dict, item_id: str, field_data: dict, images: dict, inline_paths: list,
+                 allow_image_removal: bool = False) -> None:
     """
     --replace <item_id>: rewrite an existing item in place (the glossary's common case —
     a rewrite keeps the live slug and URL). Verifies the item exists and that its slug
-    matches fielddata's, uploads any given images, PATCHes every field in fielddata
-    (partial PATCH: fields not in the payload are preserved), then publishes the item.
+    matches fielddata's, refuses if a live image/video would be dropped, applies the rewrite
+    date rules, uploads any given images, PATCHes every field in fielddata (partial PATCH:
+    fields not in the payload are preserved), then publishes the item.
     """
     cid = fm["collection_id"]
     item_url = f"{API_BASE}/collections/{cid}/items/{item_id}"
@@ -449,7 +520,8 @@ def replace_item(token: str, fm: dict, item_id: str, field_data: dict, images: d
               file=sys.stderr)
         sys.exit(1)
     _check(status, text, "replace-get-item")
-    live = _json(text).get("fieldData", {})
+    item = _json(text)
+    live = item.get("fieldData", {})
     live_slug, new_slug = live.get("slug", ""), field_data.get(f["slug"], "")
     if live_slug != new_slug:
         print(f"ERROR: live item slug is '{live_slug}' but fielddata says '{new_slug}'. A rewrite keeps the "
@@ -457,6 +529,24 @@ def replace_item(token: str, fm: dict, item_id: str, field_data: dict, images: d
               "`Slug:` line, or create a new item instead.", file=sys.stderr)
         sys.exit(1)
     print(f"Replacing content on: {live.get('name', '?')!r}  (slug: {live_slug})", file=sys.stderr)
+
+    if f.get("body") and f["body"] in field_data:
+        missing = missing_live_figures(live.get(f["body"], ""), field_data[f["body"]])
+        if missing and not allow_image_removal:
+            print(f"ERROR: the new body drops {len(missing)} image(s)/video(s) that are on the live page:",
+                  file=sys.stderr)
+            for src in missing:
+                print(f"  - {src}", file=sys.stderr)
+            print("Carry each live <figure> block into the draft at its matching section (it passes through "
+                  "the converter unchanged). Only if the reviewer removed them on purpose, re-run with "
+                  "--allow-image-removal.", file=sys.stderr)
+            sys.exit(1)
+        if missing:
+            print(f"Removing {len(missing)} live image(s)/video(s) (--allow-image-removal).", file=sys.stderr)
+    for note in apply_rewrite_dates(fm, live, item.get("createdOn", ""), field_data, now_iso()):
+        print(f"Dates: {note}", file=sys.stderr)
+    for slug in keep_live_title_copies(fm, live, field_data):
+        print(f"{slug}: kept the live value (the draft only had the title-derived default)", file=sys.stderr)
 
     upload_and_attach_images(token, fm, field_data, images, inline_paths)
 
@@ -480,7 +570,47 @@ YEAR_RE = re.compile(r"(?:19|20)\d{2}")
 LEAD_COUNT_RE = re.compile(r"^(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|"
                            r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|"
                            r"eighteen|nineteen|twenty)-")
+
+
+def slug_numbers(slug: str) -> list:
+    """Whole-number tokens in a slug, years excluded ("4-strategies-…" → ["4"])."""
+    return [t for t in slug.split("-") if t.isdigit() and not YEAR_RE.fullmatch(t)]
+
+
+def title_numbers(title: str) -> set:
+    """Numbers in a title, years excluded: "3.5%" yields 3, 5 and 35 (a derived slug drops the
+    point, so "3.5%" becomes "35"); "1,000" yields 1, 000 and 1000; "24/7" yields 24, 7 and 247."""
+    title = title or ""
+    joined = re.sub(r"(?<=\d)[.,/:](?=\d)", "", title)
+    return {n for n in re.findall(r"\d+", title) + re.findall(r"\d+", joined) if not YEAR_RE.fullmatch(n)}
+
+
+def stale_slug_years(slug: str, title: str) -> list:
+    """Year tokens in a (kept) slug that the title no longer has: '…-for-2025-…' vs a 2026 title."""
+    title_years = set(re.findall(r"(?<!\d)(?:19|20)\d{2}(?!\d)", title or ""))
+    return [t for t in slug.split("-") if YEAR_RE.fullmatch(t) and t not in title_years]
+
+
 INTERNAL_LINK_RE = re.compile(r'href="(?:/|https?://(?:www\.)?social\.plus)')
+# Allowed exceptions to "no <script>/<iframe> in the body": the FAQPage JSON-LD embed the
+# converter appends (one script, nothing else in the embed), and a video <figure> carried over
+# from the live post (an iframe, never a script).
+JSONLD_EMBED_RE = re.compile(r"""<div data-rt-embed-type=['"]true['"]><script type="application/ld\+json">((?:(?!</?script)[\s\S])*?)</script></div>""")
+VIDEO_FIGURE_RE = re.compile(r"""<figure\b[^>]*data-rt-type=["']video["'][^>]*>.*?</figure>""", re.DOTALL | re.IGNORECASE)
+FAQ_TEXT_RE = re.compile(r"^(?:faqs?\b|frequently asked questions\b)", re.IGNORECASE)
+
+
+def faq_section(body_html: str):
+    """(found, n_questions): the first <h2> whose plain text reads FAQ/FAQs/Frequently asked
+    questions, and the number of <h3> under it before the next <h2>. Same rule as the converter."""
+    for m in re.finditer(r"<h2[^>]*>(.*?)</h2>", body_html, re.DOTALL):
+        if FAQ_TEXT_RE.match(re.sub(r"<[^>]+>", "", m.group(1)).strip()):
+            nxt = body_html.find("<h2", m.end())
+            return True, body_html[m.end(): nxt if nxt != -1 else len(body_html)].count("<h3")
+    return False, 0
+TABLE_IN_EMBED_RE = re.compile(r"""<div data-rt-embed-type=['"]true['"]>(?:<div[^>]*>)?<table\b""")
+STANDARD_TABLE_RE = re.compile(r"""<div style="[^"]*overflow-x:auto[^"]*margin-bottom:2rem[^"]*"><table style="margin-bottom:0 !important"><caption\b""")
+
 # A markdown table that collapsed into prose looks like "<p>| a | b | |---|---| …</p>".
 FLATTENED_TABLE_RE = re.compile(r"<p>\s*\|.*?\|.*?</p>|<p>[^<]*\|-{2,}[^<]*</p>", re.DOTALL)
 GFM_TABLE_LINE_RE = re.compile(r"^\s*\|")
@@ -549,13 +679,31 @@ def dry_run_validate(field_data: dict, fm: dict, images: dict, inline_paths: lis
             chk(f"field:{sl}:max-length", n <= mx, f"{n} chars (max {mx})" if n > mx else f"{n} chars")
 
     # 2. Slug rules as configured for the collection
+    # The year/count rules shape NEW slugs. A rewrite (--replace, require_images=False) keeps
+    # the live slug, so there they are informational; the number check below still applies.
     rules = fm.get("slug_rules", {})
+    rewrite = not require_images
     if rules.get("strip_years"):
-        chk("slug:no-year", not YEAR_RE.search(slug), slug if YEAR_RE.search(slug) else "")
+        bad = bool(YEAR_RE.search(slug))
+        chk("slug:no-year", rewrite or not bad,
+            (f"live slug kept (rewrite): {slug}" if rewrite else slug) if bad else "")
     if rules.get("strip_leading_count"):
-        lead = LEAD_COUNT_RE.match(slug)
-        chk("slug:no-leading-count", not lead, f"slug starts with a count: {slug}" if lead else "")
+        lead = bool(LEAD_COUNT_RE.match(slug))
+        chk("slug:no-leading-count", rewrite or not lead,
+            (f"live slug kept (rewrite): {slug}" if rewrite else f"slug starts with a count: {slug}") if lead else "")
     chk("slug:format", bool(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)), slug)
+    # Numbers in URLs (Stefan, 2026-09-30): a slug number the title no longer has ("4-strategies-…"
+    # for a post titled "5 Strategies…") is a fail — the post moves to a slug without the number
+    # and the old URL gets a 301 (set in Webflow by a person; this script never changes a slug).
+    nums, title = slug_numbers(slug), str(field_data.get(f["title"], ""))
+    stale = [n for n in nums if n not in title_numbers(title)] + stale_slug_years(slug, title)
+    if stale:
+        fix = ("use a slug without the number and add a 301 from the old URL before publishing" if rewrite
+               else "derive the slug from the title, or drop the number")
+        chk("slug:number-matches-title", False, f"slug number(s)/year(s) {stale} not in the title — {fix}")
+    else:
+        chk("slug:number-matches-title", True,
+            f"slug contains {nums}: prefer slugs without counts for new pages" if nums else "")
 
     # 3. Taxonomy consistency (e.g. Tags ⊇ Category)
     for label, spec in fm.get("metadata", {}).items():
@@ -577,7 +725,33 @@ def dry_run_validate(field_data: dict, fm: dict, images: dict, inline_paths: lis
     chk("content:no-style-block", "<style" not in pc,
         "body contains a <style> block — Webflow renders it as literal text; table CSS belongs in site custom code"
         if "<style" in pc else "")
-    chk("content:no-script-or-iframe", not re.search(r"<(script|iframe)\b", pc, re.IGNORECASE))
+    pc_scan = JSONLD_EMBED_RE.sub(lambda m: "" if '"FAQPage"' in m.group(1) else m.group(0), pc)
+    pc_scan = VIDEO_FIGURE_RE.sub(lambda m: m.group(0) if re.search(r"<script\b", m.group(0), re.I) else "", pc_scan)
+    chk("content:figures-closed", pc.count("<figure") == pc.count("</figure>"),
+        "" if pc.count("<figure") == pc.count("</figure>") else
+        f"{pc.count('<figure')} <figure> vs {pc.count('</figure>')} </figure> — a carried-over figure is broken")
+    chk("content:no-script-or-iframe", not re.search(r"<(script|iframe)\b", pc_scan, re.IGNORECASE),
+        "only the FAQPage JSON-LD embed and carried-over video figures may hold <script>/<iframe>"
+        if re.search(r"<(script|iframe)\b", pc_scan, re.IGNORECASE) else "")
+    if fm.get("faq_schema"):
+        has_faq, n_h3 = faq_section(pc)
+        blocks = [b for b in JSONLD_EMBED_RE.findall(pc) if '"FAQPage"' in b]
+        detail, ok = "", True
+        if has_faq and not n_h3:
+            ok, detail = False, ("the FAQ section has no questions as headings — write each question as "
+                                 "`### Question?` so the converter can build the FAQPage schema")
+        elif has_faq:
+            try:
+                n_q = len(json.loads(blocks[0].replace("<\\/", "</"))["mainEntity"]) if len(blocks) == 1 else 0
+            except (ValueError, KeyError, TypeError):
+                n_q = 0
+            ok = len(blocks) == 1 and n_q > 0
+            detail = (f"FAQPage with {n_q} question(s)" if ok else
+                      f"FAQ section without exactly one parsable FAQPage JSON-LD embed ({len(blocks)} found)")
+        else:
+            ok = not blocks
+            detail = "no FAQ section" if ok else "FAQPage JSON-LD present but the body has no FAQ section"
+        chk("content:faq-schema", ok, detail)
     if fm.get("checks", {}).get("require_internal_links"):
         n_internal = len(INTERNAL_LINK_RE.findall(pc))
         chk("content:has-internal-links", n_internal >= 1,
@@ -589,7 +763,7 @@ def dry_run_validate(field_data: dict, fm: dict, images: dict, inline_paths: lis
 
     # 5. Tables — structural, never keyed on heading text.
     n_tables   = pc.count("<table")
-    n_embedded = pc.count(f"<div data-rt-embed-type='true'><table") + pc.count('<div data-rt-embed-type="true"><table')
+    n_embedded = len(TABLE_IN_EMBED_RE.findall(pc))
     flattened  = FLATTENED_TABLE_RE.search(pc) is not None
     src_tables = None
     if source_path:
@@ -610,11 +784,16 @@ def dry_run_validate(field_data: dict, fm: dict, images: dict, inline_paths: lis
             f"{n_tables - n_embedded} raw <table> not wrapped in <div data-rt-embed-type='true'> — the Designer can mangle it")
         chk("content:table-structure", pc.count("<thead>") == n_tables and pc.count("<tbody>") == n_tables,
             "" if pc.count("<thead>") == n_tables and pc.count("<tbody>") == n_tables else "a table lacks <thead>/<tbody>")
+        n_std = len(STANDARD_TABLE_RE.findall(pc))
+        chk("content:table-standard", n_std == n_tables,
+            "" if n_std == n_tables else
+            f"{n_tables - n_std} table(s) without the scroll wrapper (2rem gap), margin-bottom:0 and a <caption> "
+            "— convert them with md_to_webflow_html.py (html-conversion.md, Tables)")
 
     # 6. Images — every image field in the map must be supplied at exact dimensions.
     for spec in fm.get("images", []):
         role, path = spec["role"], images.get(spec["role"])
-        if require_images or path:
+        if (require_images and not spec.get("optional")) or path:
             chk(f"image:{role}:provided", bool(path), "" if path else f"--image {role}=<path> missing")
         if path:
             ok, detail = check_dims(path, (spec["width"], spec["height"]))
@@ -678,6 +857,8 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--update", metavar="ITEM_ID", help="refresh image fields on an existing item")
     ap.add_argument("--replace", metavar="ITEM_ID",
                     help="rewrite an existing item's fields from fielddata.json (same slug), then publish")
+    ap.add_argument("--allow-image-removal", action="store_true",
+                    help="with --replace: the reviewer removed live images/videos on purpose")
     ap.add_argument("--list-collections", action="store_true")
     return ap
 
@@ -733,6 +914,9 @@ def main() -> None:
     # ── Create / replace mode ────────────────────────────────────────────────────
     if not args.fielddata:
         ap.error("fielddata.json is required (or use --update / --list-collections)")
+    if args.allow_image_removal and not args.replace:
+        print("ERROR: --allow-image-removal only applies to --replace (a rewrite of a live item).", file=sys.stderr)
+        sys.exit(1)
     if args.replace and args.staged:
         print("ERROR: --replace cannot be combined with --staged (it patches a live item).", file=sys.stderr)
         sys.exit(1)
@@ -759,7 +943,7 @@ def main() -> None:
               f"{unc['required']} or fielddata carries __unconfirmed__ values. Run --dry-run for details. "
               "Confirm the real slugs in Webflow before publishing.", file=sys.stderr)
         sys.exit(1)
-    missing_roles = [s["role"] for s in fm.get("images", []) if s["role"] not in images]
+    missing_roles = [s["role"] for s in fm.get("images", []) if s["role"] not in images and not s.get("optional")]
     if missing_roles and not args.replace:
         print(f"ERROR: missing --image for role(s) {missing_roles} (every image field in the map is required).",
               file=sys.stderr)
@@ -771,7 +955,8 @@ def main() -> None:
     token = get_token()
 
     if args.replace:
-        replace_item(token, fm, args.replace, field_data, images, args.inline)
+        replace_item(token, fm, args.replace, field_data, images, args.inline,
+                     allow_image_removal=args.allow_image_removal)
         return
 
     preflight(token, fm, slug)

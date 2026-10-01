@@ -23,8 +23,11 @@ Inputs
     --queue PATH        Content Queue exported as CSV (File > Download > CSV,
                         Queue tab). Columns used: ID, Canonical question,
                         Draft first sentence, Status, Collection, Published URL
-    --pages GLOB        website/pages-*.json inventories (default: glossary,
-                        answers and blog under $MT_REPO/website)
+    --pages GLOB        website/pages-*.json inventories (default: every
+                        $MT_REPO/website/pages-*.json — blog, glossary and answers,
+                        plus marketing pages such as /vs-stream, use cases,
+                        industries, customer stories, webinars, product updates
+                        and release notes)
     --exclude-id ID     ignore this Queue ID (the row being checked itself)
 
 Output
@@ -49,6 +52,7 @@ from pathlib import Path
 
 MT_REPO = Path(os.environ.get("MT_REPO", "/tmp/cruciate-hub-marketing-team"))
 
+EDITORIAL = {"blog", "glossary", "answers"}
 LIKELY_DUPLICATE = 0.60
 NEEDS_REVIEW = 0.40
 
@@ -190,7 +194,7 @@ def main() -> int:
     ap.add_argument("--first-sentence", default="")
     ap.add_argument("--queue", type=Path)
     ap.add_argument("--pages", action="append",
-                    help="glob for pages-*.json (repeatable). Default: glossary, answers, blog")
+                    help="glob for pages-*.json (repeatable). Default: every website/pages-*.json")
     ap.add_argument("--exclude-id", default="")
     ap.add_argument("--include-removed", action="store_true",
                     help="also compare against rows with status Scheduled for removal / Rejected / Merged")
@@ -200,7 +204,9 @@ def main() -> int:
     try:
         if args.queue:
             candidates += load_queue(args.queue)
-        patterns = args.pages or [str(MT_REPO / "website" / f"pages-{c}.json") for c in ("glossary", "answers", "blog")]
+        # Every page type (2026-09-30): comparing only glossary, answers and blog missed /vs
+        # pages and the use-case, industry, customer-story and marketing pages.
+        patterns = args.pages or [str(MT_REPO / "website" / "pages-*.json")]
         for pat in patterns:
             if not glob.glob(pat):
                 raise FileNotFoundError(pat)
@@ -231,6 +237,12 @@ def main() -> int:
     hits.sort(key=lambda x: -x[0])
     for s, c in hits:
         label = "LIKELY DUPLICATE" if s >= LIKELY_DUPLICATE else "REVIEW"
+        # Marketing, /vs, use-case, industry, customer-story, webinar, product-update and
+        # release-note pages are listed for context (would the new page compete with them?) but
+        # never as a likely duplicate: their meta titles are not questions, so the form penalty
+        # never applies and the score runs high.
+        if c["source"] == "published" and c["collection"] not in EDITORIAL and label == "LIKELY DUPLICATE":
+            label = "REVIEW"
         ref = c["id"] or c["url"]
         print(f"{s:.2f}  {label:16}  [{c['collection']}/{c['status']}]  {ref}  |  {c['question']}")
 

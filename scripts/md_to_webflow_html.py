@@ -19,13 +19,17 @@ compliance-checked draft, so no new format is needed:
 
     ## Section → <h2>   ### → <h3>   #### → <h4>
     paragraphs, **bold**, *italic*, [links](url), - bullets, 1. numbered, > quotes
-    | GFM | tables |  →  <div data-rt-embed-type='true'><table>…</table></div>
+    | GFM | tables |  →  <div data-rt-embed-type='true'><div style="overflow-x:auto;…"><table …>
+                         <caption>…</caption>…</table></div></div>   (the table standard)
     ![alt](anything)  →  __INLINE_IMG_N__   (a bare __INLINE_IMG_N__ line is accepted too)
+    <figure …>…</figure>  →  passed through unchanged (images/videos carried over from the live post)
+    ## FAQs + ### Question?  →  FAQPage JSON-LD embed at the end of the body, when the map sets faq_schema
 
 Usage:
     python3 scripts/md_to_webflow_html.py <draft.md> --collection <name> --out <fielddata.json>
     python3 scripts/md_to_webflow_html.py <draft.md> --field-map <map.json> --out <fielddata.json>
         [--slug <slug>]        override the slug (still subject to the collection's slug rules)
+        [--keep-slug]          rewrite of a live post: use the given slug exactly (no slug rules)
         [--date <iso8601>]     value for fields.date (default: now, UTC)
         [--report <path>]      also write a JSON conversion report (tables, placeholders, warnings)
     python3 scripts/md_to_webflow_html.py <draft.md> --html-only
@@ -40,6 +44,7 @@ Stdlib only.
 from __future__ import annotations
 
 import argparse
+import html as html_lib
 import json
 import re
 import sys
@@ -105,11 +110,27 @@ def to_plain_text(text: str) -> str:
 RT_EMBED_OPEN  = "<div data-rt-embed-type='true'>"
 RT_EMBED_CLOSE = "</div>"
 
+# The table standard (Stefan, 2026-09-29). The site CSS forces `table{margin-bottom:.5rem
+# !important}` and `th{background:#2a2a2a !important}`, so the next paragraph sat glued to the
+# table and row labels rendered as dark header cells; there was no mobile scroll either. Every
+# table therefore gets: a scroll wrapper with a 2rem (32px) gap below, `margin-bottom:0
+# !important` on the table, a visually hidden <caption> saying what the table compares,
+# `scope="col"` header cells, and the first cell of each body row as a `scope="row"` header
+# with a transparent background. Inline `!important` is the only thing that beats the site CSS.
+TABLE_WRAP_OPEN = '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:2rem">'
+TABLE_OPEN      = '<table style="margin-bottom:0 !important">'
+CAPTION_STYLE   = ("position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;"
+                   "clip:rect(0,0,0,0);white-space:nowrap;border:0")
+ROW_HEADER_STYLE = "background:transparent !important"
+
 TABLE_LINE_RE      = re.compile(r"^\s*\|")
 TABLE_ALIGN_ROW_RE = re.compile(r"^\s*\|[\s:\-|]+\|\s*$")
 
 
-def convert_table(table_lines: list) -> str:
+def convert_table(table_lines: list, caption: str = "") -> str:
+    """GFM table lines → the standard table HTML. `caption` says what the table compares
+    (the converter passes the nearest heading above the table); without one, the column
+    headers are used."""
     rows = []
     for line in table_lines:
         if TABLE_ALIGN_ROW_RE.match(line):                 # alignment row
@@ -120,12 +141,17 @@ def convert_table(table_lines: list) -> str:
         rows.append(cells)
     if not rows:
         return ""
-    thead = "<thead><tr>" + "".join(f"<th>{clean_cell(c)}</th>" for c in rows[0]) + "</tr></thead>"
+    thead = "<thead><tr>" + "".join(f'<th scope="col">{clean_cell(c)}</th>' for c in rows[0]) + "</tr></thead>"
     tbody = "<tbody>" + "".join(
-        "<tr>" + "".join(f"<td>{clean_cell(c)}</td>" for c in r) + "</tr>" for r in rows[1:]
+        "<tr>" + f'<th scope="row" style="{ROW_HEADER_STYLE}">{clean_cell(r[0])}</th>'
+        + "".join(f"<td>{clean_cell(c)}</td>" for c in r[1:]) + "</tr>" for r in rows[1:]
     ) + "</tbody>"
-    # Wrap in a Webflow Embed so the rest of the post stays safely editable in the Designer.
-    return f"{RT_EMBED_OPEN}<table>{thead}{tbody}</table>{RT_EMBED_CLOSE}"
+    cap = to_plain_text(caption) or "Table: " + ", ".join(to_plain_text(clean_cell(c)) for c in rows[0] if c)
+    cap = html_lib.escape(html_lib.unescape(cap), quote=False)   # "AT&amp;T" stays single-escaped
+    # Wrap in a Webflow Embed so the rest of the post stays safely editable in the Designer,
+    # and in the scroll wrapper so a wide table scrolls on a phone instead of the page.
+    return (f"{RT_EMBED_OPEN}{TABLE_WRAP_OPEN}{TABLE_OPEN}"
+            f'<caption style="{CAPTION_STYLE}">{cap}</caption>{thead}{tbody}</table></div>{RT_EMBED_CLOSE}')
 
 
 # NOTE: never inject a <style> block into the body. The Data API preserves <style>, but
@@ -142,6 +168,9 @@ IMAGE_LINE_RE  = re.compile(r"^\s*!\[([^\]]*)\]\(([^)]*)\)\s*$")
 PLACEHOLDER_RE = re.compile(r"^\s*(__INLINE_IMG_\d+__)\s*$")
 QUOTE_RE       = re.compile(r"^\s*>\s?(.*)$")
 HRULE_RE       = re.compile(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$")
+# A Webflow <figure> block copied verbatim from the live post (image or video). Rewrites
+# carry every live image and video over this way (Stefan, 2026-09-29: never drop one silently).
+FIGURE_START_RE = re.compile(r"^\s*<figure\b", re.IGNORECASE)
 
 
 def is_block_start(line: str) -> bool:
@@ -156,6 +185,7 @@ def is_block_start(line: str) -> bool:
         or PLACEHOLDER_RE.match(line)
         or QUOTE_RE.match(line)
         or HRULE_RE.match(line)
+        or FIGURE_START_RE.match(line)
     )
 
 
@@ -198,13 +228,15 @@ def _convert_list(lines: list, i: int, item_re, tag: str) -> tuple:
 def convert_body(raw: str) -> dict:
     """
     Body markdown → Webflow rich-text HTML.
-    Returns {"html", "placeholders" (count), "tables" (count), "warnings" [..]}.
+    Returns {"html", "placeholders" (count), "tables" (count), "figures" (carried-over
+    <figure> blocks), "warnings" [..]}.
     Image lines become __INLINE_IMG_N__ placeholders numbered in document order; a bare
     placeholder line is passed through as-is (that is how the blog adapter marks the
     image slot after each platform heading).
     """
     lines, html, i = raw.split("\n"), [], 0
-    n_img, n_tbl, warnings = 0, 0, []
+    n_img, n_tbl, n_fig, warnings = 0, 0, 0, []
+    last_heading = ""                                        # caption source for the next table
     while i < len(lines):
         line = lines[i].rstrip()
         if not line:
@@ -215,9 +247,22 @@ def convert_body(raw: str) -> dict:
             tbl = []
             while i < len(lines) and TABLE_LINE_RE.match(lines[i].rstrip()):
                 tbl.append(lines[i].rstrip()); i += 1
-            t = convert_table(tbl)
+            t = convert_table(tbl, caption=last_heading)
             if t:
                 html.append(t); n_tbl += 1
+            continue
+
+        if FIGURE_START_RE.match(line):                      # live <figure> carried over verbatim
+            fig, start = [], i
+            while i < len(lines) and lines[i].strip():
+                fig.append(lines[i].strip()); i += 1
+                if "</figure>" in fig[-1].lower():
+                    break
+            if "</figure>" not in fig[-1].lower():
+                # Never let an unclosed block swallow the rest of the article.
+                raise ValueError(f"the <figure> block on body line {start + 1} has no closing </figure> before "
+                                 "the next blank line — copy the whole block from the live post")
+            html.append(" ".join(fig)); n_fig += 1
             continue
 
         m = PLACEHOLDER_RE.match(line)                       # bare inline-image placeholder
@@ -238,6 +283,7 @@ def convert_body(raw: str) -> dict:
                 warnings.append(f"H1 in body ('{m.group(2)[:40]}') — the title is the only H1; "
                                 "the dry-run will fail content:no-h1")
             html.append(f"<h{level}>{clean_inline(m.group(2))}</h{level}>")
+            last_heading = m.group(2)
             i += 1; continue
 
         if HRULE_RE.match(line):                             # --- : drop (no rich-text equivalent)
@@ -267,7 +313,70 @@ def convert_body(raw: str) -> dict:
         if para:
             html.append(f"<p>{clean_inline(' '.join(para))}</p>")
 
-    return {"html": "".join(html), "placeholders": n_img, "tables": n_tbl, "warnings": warnings}
+    return {"html": "".join(html), "placeholders": n_img, "tables": n_tbl, "figures": n_fig,
+            "warnings": warnings}
+
+
+# ── FAQ schema ──────────────────────────────────────────────────────────────────
+# Blog and answer templates emit only Article + Organization JSON-LD (checked 2026-10-01; the
+# glossary template already emits FAQPage, so its map leaves faq_schema off). A collection whose
+# map sets "faq_schema": true gets a FAQPage block at the end of the body, built from the same
+# markdown as the visible FAQ so the question and answer text always match it.
+FAQ_HEADING_RE = re.compile(r"^(?:faqs?\b|frequently asked questions\b)", re.IGNORECASE)
+
+
+def extract_faq(body_md: str) -> tuple:
+    """(found_faq_heading, [(question, answer), ...]) from the first H2 that reads "FAQ(s)" or
+    "Frequently asked questions…". Each H3 under it is a question; its answer is the plain text
+    of the paragraphs and list items up to the next H3 or H2."""
+    pairs, in_faq, found, q, ans = [], False, False, None, []
+    in_fence = in_figure = False
+
+    def flush():
+        if q and ans:
+            pairs.append((q, " ".join(ans).strip()))
+
+    for raw in body_md.split("\n"):
+        line = raw.rstrip()
+        if line.lstrip().startswith("```"):                  # code fences never become answer text
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        if in_figure or FIGURE_START_RE.match(line):         # nor do carried-over figures
+            in_figure = "</figure>" not in line.lower()
+            continue
+        m = HEADING_RE.match(line)
+        if m:
+            level, text = len(m.group(1)), to_plain_text(m.group(2))
+            if level <= 2:
+                if in_faq:
+                    flush()
+                    q, ans = None, []
+                    in_faq = False
+                if level == 2 and not found and FAQ_HEADING_RE.match(text):
+                    in_faq = found = True
+                continue
+            if in_faq and level == 3:
+                flush()
+                q, ans = text, []
+            continue
+        if (not in_faq or q is None or not line.strip() or TABLE_LINE_RE.match(line)
+                or HRULE_RE.match(line) or IMAGE_LINE_RE.match(line) or PLACEHOLDER_RE.match(line)):
+            continue
+        lm = BULLET_RE.match(line) or NUMBERED_RE.match(line) or QUOTE_RE.match(line)
+        ans.append(to_plain_text(lm.group(lm.lastindex) if lm else line))
+    if in_faq:
+        flush()
+    return found, pairs
+
+
+def faq_jsonld(pairs: list) -> str:
+    data = {"@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": q,
+                            "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]}
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'{RT_EMBED_OPEN}<script type="application/ld+json">{payload}</script>{RT_EMBED_CLOSE}'
 
 
 def count_source_tables(markdown: str) -> int:
@@ -406,7 +515,8 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 
-def convert_document(text: str, fm: dict, slug_override: str = None, date: str = None) -> tuple:
+def convert_document(text: str, fm: dict, slug_override: str = None, date: str = None,
+                     keep_slug: bool = False) -> tuple:
     """
     Returns (fielddata: dict, report: dict). Hard errors are raised as ValueError.
     fielddata is the flat fieldData payload (plus "__unconfirmed__" when the map still has
@@ -424,15 +534,22 @@ def convert_document(text: str, fm: dict, slug_override: str = None, date: str =
     # Title
     fd[fields["title"]] = to_plain_text(doc["title"])
 
-    # Slug: CLI override > `Slug:` label > derived from title. Rules apply to all three.
+    # Slug: CLI override > `Slug:` label > derived from title. Rules apply to all three —
+    # except with keep_slug: a rewrite keeps the live URL exactly (webflow-publisher --replace
+    # refuses a slug that differs from the live item's).
     rules = fm.get("slug_rules", {})
     slug = (slug_override or meta.get("Slug") or "").strip()
+    if keep_slug and not slug:
+        raise ValueError("--keep-slug needs the live slug (a `Slug:` line or --slug)")
     if slug:
         slug = slugify(slug) if not SLUG_FORMAT_RE.fullmatch(slug) else slug
     else:
         slug = derive_slug(doc["title"], rules)
-    slug, w = apply_slug_rules(slug, rules)
-    warnings += w
+    if keep_slug:
+        warnings.append(f"slug '{slug}' kept as given (rewrite of a live post): slug rules not applied")
+    else:
+        slug, w = apply_slug_rules(slug, rules)
+        warnings += w
     if not SLUG_FORMAT_RE.fullmatch(slug):
         raise ValueError(f"slug '{slug}' is not lowercase-hyphenated")
     fd[fields["slug"]] = slug
@@ -447,10 +564,16 @@ def convert_document(text: str, fm: dict, slug_override: str = None, date: str =
             warnings.append(f"{fields['intro']} empty — no plain paragraph found before the first heading")
     conv = convert_body(body_md)
     warnings += conv["warnings"]
+    body_html = conv["html"]
+    faq_found, faq_pairs = extract_faq(body_md)
+    if fm.get("faq_schema") and faq_pairs:
+        body_html += faq_jsonld(faq_pairs)
+    elif fm.get("faq_schema") and faq_found:
+        warnings.append("FAQ heading found but no '### Question' under it — no FAQPage schema added")
     if fields.get("body"):
-        fd[fields["body"]] = conv["html"]
+        fd[fields["body"]] = body_html
     else:
-        unconfirmed["body"] = conv["html"]
+        unconfirmed["body"] = body_html
 
     # Metadata labels
     mapped_labels = set(fm.get("metadata", {})) | {"Slug"}
@@ -460,6 +583,8 @@ def convert_document(text: str, fm: dict, slug_override: str = None, date: str =
         typ = spec.get("type", "text")
         if not raw and spec.get("default") is not None:
             raw = str(spec["default"])
+        if not raw and spec.get("from_title"):                # e.g. "{title}" or "What is {title}?"
+            raw = spec["from_title"].replace("{title}", doc["title"])
         if slug_key is None:
             if raw:
                 unconfirmed[label] = raw
@@ -525,7 +650,9 @@ def convert_document(text: str, fm: dict, slug_override: str = None, date: str =
         "tables": conv["tables"],
         "source_tables": count_source_tables(body_md),
         "placeholders": conv["placeholders"],
-        "body_chars": len(conv["html"]),
+        "figures": conv["figures"],
+        "faq_questions": len(faq_pairs) if fm.get("faq_schema") else 0,
+        "body_chars": len(body_html),
         "intro_chars": len(intro),
         "unmapped_labels": unmapped,
         "unconfirmed": sorted(unconfirmed),
@@ -544,7 +671,8 @@ def print_summary(out_path: str, fd: dict, fm: dict, report: dict) -> None:
     print(f"  name:        {fd.get(f['title'])}", file=sys.stderr)
     print(f"  slug:        {report['slug']}", file=sys.stderr)
     print(f"  body:        {report['body_chars']:,} chars | tables: {report['tables']} "
-          f"(source: {report['source_tables']}) | inline placeholders: {report['placeholders']}",
+          f"(source: {report['source_tables']}) | inline placeholders: {report['placeholders']}"
+          f" | carried-over figures: {report['figures']} | FAQ schema questions: {report['faq_questions']}",
           file=sys.stderr)
     if report["unmapped_labels"]:
         print(f"  unmapped labels (ignored): {report['unmapped_labels']}", file=sys.stderr)
@@ -563,6 +691,8 @@ def main() -> int:
     g.add_argument("--field-map", help="path to a field-map JSON")
     ap.add_argument("--out", help="where to write fielddata.json")
     ap.add_argument("--slug", default=None)
+    ap.add_argument("--keep-slug", action="store_true",
+                    help="rewrite of a live post: keep the given slug exactly (no year/count stripping)")
     ap.add_argument("--date", default=None, help="ISO 8601 for fields.date (default: now UTC)")
     ap.add_argument("--report", default=None, help="write the conversion report JSON here")
     ap.add_argument("--html-only", action="store_true", help="print only the body HTML to stdout")
@@ -586,7 +716,11 @@ def main() -> int:
 
     if args.html_only:
         doc = parse_document(text)
-        conv = convert_body(doc["body"] if doc["title"] else text)
+        try:
+            conv = convert_body(doc["body"] if doc["title"] else text)
+        except ValueError as e:
+            print(f"ERROR: {e}", file=sys.stderr)
+            return 1
         for w in conv["warnings"]:
             print(f"  ⚠ {w}", file=sys.stderr)
         print(conv["html"])
@@ -597,7 +731,7 @@ def main() -> int:
 
     try:
         fm = load_field_map(args.collection or args.field_map)
-        fd, report = convert_document(text, fm, slug_override=args.slug, date=args.date)
+        fd, report = convert_document(text, fm, slug_override=args.slug, date=args.date, keep_slug=args.keep_slug)
     except (FieldMapError, ValueError) as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 1

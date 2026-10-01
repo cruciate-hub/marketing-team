@@ -305,6 +305,8 @@ python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --col
 
 # 3b. REWRITE of a live entry (the common case): keep the live slug via the draft's `Slug:` line and
 #     patch the existing item in place. Find the id: GET /v2/collections/66e2765d540e1939a89db93e/items?slug=[slug]
+#     Carry every live <figure> (formula cards, charts) into the draft at its section: the replace
+#     refuses when one is missing (add --allow-image-removal only when the reviewer removed it).
 python3 "$REPO/scripts/webflow-publisher.py" outputs/[slug].fielddata.json --collection glossary --replace <item_id>
 ```
 

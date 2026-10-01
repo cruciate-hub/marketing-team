@@ -46,6 +46,12 @@ EXPECTATIONS: dict[str, dict] = {
         "note": "CommonMark autolinks <https://…> are valid markdown, not HTML",
         "exit_code": 0,
     },
+    "F14-carried-figure": {
+        "must_pass": ["no_html"],
+        "must_not_fail": ["no_html"],
+        "note": "a whole <figure>…</figure> block carried over from the live post on a rewrite is not stray HTML",
+        "exit_code": 0,
+    },
     "F6-smart-apostrophe": {
         "must_pass": ["keyword_in_first_paragraph"],
         "must_not_fail": ["keyword_in_first_paragraph"],

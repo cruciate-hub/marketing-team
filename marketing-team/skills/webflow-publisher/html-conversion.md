@@ -66,11 +66,25 @@ paragraph) stays a flat `<ul>`. A blank line ends a list.
 
 ## Tables
 
-A GFM pipe table (leading whitespace tolerated; the `|---|` alignment row is dropped) becomes:
+A GFM pipe table (leading whitespace tolerated; the `|---|` alignment row is dropped) becomes
+the **table standard** (Stefan, 2026-09-29):
 
 ```html
-<div data-rt-embed-type='true'><table><thead><tr><th>Column A</th><th>Column B</th></tr></thead><tbody><tr><td>Cell 1</td><td>Cell 2</td></tr></tbody></table></div>
+<div data-rt-embed-type='true'><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:2rem"><table style="margin-bottom:0 !important"><caption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Heading above the table</caption><thead><tr><th scope="col">Column A</th><th scope="col">Column B</th></tr></thead><tbody><tr><th scope="row" style="background:transparent !important">Row label</th><td>Cell</td></tr></tbody></table></div></div>
 ```
+
+- **Why the inline styles.** A site-wide hidden embed sets `table{margin-bottom:.5rem
+  !important}` and `th{background-color:#2a2a2a !important; color:#fff !important}`, so the next
+  paragraph sat glued to the table and row labels looked like header cells; there was no mobile
+  scroll either. Only inline `!important` beats that CSS. The wrapper scrolls a wide table
+  sideways on a phone (the page itself never scrolls sideways) and leaves a 32px gap below it.
+- **Caption and header cells.** The visually hidden `<caption>` says what the table compares:
+  the converter uses the nearest heading above the table, or the column names when there is
+  none. Column headers get `scope="col"`; the first cell of each body row is the row label,
+  a `scope="row"` header with a transparent background. The dry-run check
+  `content:table-standard` fails any table without the wrapper, `margin-bottom:0` and a caption.
+- **Check after publishing:** a 375px-wide viewport shows no sideways page scroll and a 32px
+  gap under each table. Reference post: /blog/api-vs-sdk-which-is-which (29 Sep 2026).
 
 - **The table sits inside a Webflow Embed.** `data-rt-embed-type='true'` is Webflow's marker
   for an Embed block inside rich text. The Designer's rich-text editor has no native table
@@ -123,6 +137,32 @@ production; the real alt text lives in the collection's standalone alt-text fiel
 dry-run check `content:placeholders-match-inline` requires exactly one `--inline` file per
 placeholder.
 
+## Images and videos carried over from the live post
+
+A rewrite keeps every image and video of the live post (Stefan, 2026-09-29: never drop one
+silently; only the reviewer may remove one). Copy each live `<figure>…</figure>` block into
+the draft at its matching section, on its own lines. The converter passes it through
+unchanged (`carried-over figures` in the conversion summary), and `webflow-publisher.py
+--replace` refuses to run when a live figure is missing from the new body. A video figure
+(`data-rt-type="video"` with its `<iframe>`) is the one place an `<iframe>` may appear.
+
+## FAQ schema (FAQPage JSON-LD)
+
+When the field map sets `"faq_schema": true` (blog and answers; their templates emit only
+Article + Organization JSON-LD), the converter finds the first H2 that reads "FAQ", "FAQs" or
+"Frequently asked questions…", takes each H3 under it as a question and the paragraphs and
+list items up to the next H3 as its answer (plain text, links dropped), and appends one embed
+at the very end of the body:
+
+```html
+<div data-rt-embed-type='true'><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[…]}</script></div>
+```
+
+Question and answer text come from the same markdown as the visible FAQ, so they always match
+it. The glossary template already emits FAQPage, so the glossary map leaves `faq_schema` off
+(two FAQPage blocks on one page would conflict). The dry-run check `content:faq-schema` fails
+a body with an FAQ section but no parsable FAQPage embed, or an embed without an FAQ section.
+
 ## Other blocks
 
 | Intermediate | HTML |
@@ -150,9 +190,10 @@ Kept by the API:
 
 Never put in the body:
 - `<style>`, `<script>`, `<iframe>` — the dry-run fails `content:no-style-block` /
-  `content:no-script-or-iframe`.
+  `content:no-script-or-iframe`. Exceptions: the FAQPage JSON-LD embed the converter appends,
+  and a video `<figure>` carried over from the live post.
 - `<h1>` — the page title is already the H1.
-- `<div>` wrappers other than the table Embed — use `<p>`.
+- `<div>` wrappers other than the table Embed and its scroll wrapper — use `<p>`.
 - Arbitrary `class` attributes — ignored (except the Webflow figure classes above).
 
 ## Compliance reminder

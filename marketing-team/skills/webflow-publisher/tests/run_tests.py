@@ -3,14 +3,17 @@
 
 Covers, without touching any API:
   * the blog adapter (gdoc_to_fielddata.py) still produces what the pre-refactor script
-    produced for a Google Doc listicle export (legacy golden fixture), modulo the one
-    documented delta (internal links no longer carry target="_blank");
+    produced for a Google Doc listicle export (legacy golden fixture), modulo the documented
+    deltas (docs/webflow-publisher-design.md: internal links without target="_blank", and
+    since 2026-10-01 the table standard and the FAQPage embed, items 8 and 9);
   * the common intermediate (blog-seo-content / glossary-content `.draft.md` shape)
     converts correctly for the blog and glossary field maps;
   * the generalized dry-run catches a flattened table and a raw (non-embedded) table under
     headings that contain neither "At-a-Glance" nor "Comparison" (the bug this refactor fixes);
   * the glossary path is blocked, loudly, while its field slugs are unconfirmed;
-  * the old positional CLIs (blog-publisher.py, resize_blog_images.py) still work.
+  * the old positional CLIs (blog-publisher.py, resize_blog_images.py) still work;
+  * the content-engine rules (2026-09-29 to 10-01): the table standard, FAQPage schema,
+    live images/videos carried over on a rewrite, rewrite dates, and slug numbers.
 
 Stdlib only. Image-dimension assertions run only when Pillow is importable (the engine
 itself skips dimension checks without Pillow and says so).
@@ -69,6 +72,29 @@ def normalize_legacy_links(html: str) -> str:
     return re.sub(r'(<a href="(?:/|https?://(?:www\.)?social\.plus)[^"]*")\s+target="_blank"', r"\1", html)
 
 
+def to_legacy_shape(html: str) -> str:
+    """Deltas 8 and 9 in docs/webflow-publisher-design.md (2026-10-01): tables now use the table
+    standard (scroll wrapper, margin-bottom:0, hidden caption, scope="col"/"row" header cells)
+    and a post with an FAQ section ends with a FAQPage JSON-LD embed. Map new output back to the
+    legacy shape so the golden parity test keeps checking everything else."""
+    html = re.sub(r'<div style="overflow-x:auto[^"]*">(<table)', r"\1", html)
+    html = html.replace("</table></div></div>", "</table></div>")
+    html = html.replace('<table style="margin-bottom:0 !important">', "<table>")
+    html = re.sub(r"<caption[^>]*>.*?</caption>", "", html)
+    html = html.replace('<th scope="col">', "<th>")
+    html = re.sub(r'<th scope="row" style="[^"]*">(.*?)</th>', r"<td>\1</td>", html)
+    return re.sub(r"""<div data-rt-embed-type='true'><script type="application/ld\+json">.*?</script></div>""", "", html)
+
+
+def publisher_module():
+    """Import scripts/webflow-publisher.py (hyphenated name) for its pure helpers."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("webflow_publisher", SCRIPTS / "webflow-publisher.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def make_webp(path: Path, size):
     if PILLOW:
         Image.new("RGB", size, (40, 90, 200)).save(path, "WEBP", quality=80)
@@ -109,13 +135,18 @@ def field_maps_load_and_report_readiness():
     assert wf.unconfirmed_slugs(glossary) == {"required": [], "optional": []}
     assert glossary["fields"]["body"] == "glossary" and glossary["collection_id"] == "66e2765d540e1939a89db93e"
     assert glossary["fields"]["title"] == "name" and glossary["fields"]["slug"] == "slug"
-    # answers: still an untouched stub.
+    # answers: confirmed 2026-10-01 against the live schema (7 fields).
     answers = wf.load_field_map("answers")
-    unc = wf.unconfirmed_slugs(answers)
-    assert "fields.body" in unc["required"], f"answers: body must be null until confirmed: {unc}"
-    assert answers["fields"]["title"] == "name" and answers["fields"]["slug"] == "slug"
+    assert wf.unconfirmed_slugs(answers) == {"required": [], "optional": []}
+    assert answers["fields"]["body"] == "content" and answers["fields"]["title"] == "name"
+    assert answers["metadata"]["Meta title"]["slug"] == "meta-title" and answers["faq_schema"] is True
+    assert answers["images"][0]["slug"] == "image-2" and answers["images"][0]["optional"] is True
+    # the blog map carries the rewrite date field and the FAQ schema switch; glossary has neither
+    assert blog["fields"]["date_edited"] == "date-edited-manual" and blog["faq_schema"] is True
+    assert not glossary.get("faq_schema"), "the glossary template already emits FAQPage"
     p = run(SCRIPTS / "webflow-publisher.py", "--list-collections")
-    assert p.returncode == 0 and "blog" in p.stdout and "glossary" in p.stdout and "UNCONFIRMED" in p.stdout, p.stdout + p.stderr
+    assert p.returncode == 0 and all(n in p.stdout for n in ("blog", "glossary", "answers")), p.stdout + p.stderr
+    assert "UNCONFIRMED" not in p.stdout, p.stdout
 
 
 # ── Blog adapter: legacy parity ─────────────────────────────────────────────────
@@ -129,11 +160,13 @@ def gdoc_adapter_matches_legacy_golden_listicle_1():
         assert p.returncode == 0, p.stderr
         new, legacy = load(out), load(FIX / "gdoc-listicle.expected-legacy.json")
         legacy["post-content"] = normalize_legacy_links(legacy["post-content"])
+        pc = new["post-content"]
+        new["post-content"] = to_legacy_shape(pc)
         diff = {k for k in set(new) | set(legacy) if new.get(k) != legacy.get(k)}
         assert not diff, f"fields differ from the pre-refactor script: {sorted(diff)}"
-        # The Embed-wrapped table and the H3 platform entries survived the move.
-        pc = new["post-content"]
-        assert "<div data-rt-embed-type='true'><table><thead>" in pc
+        # The Embed-wrapped table (now in the standard shape) and the H3 platform entries survived.
+        assert "<div data-rt-embed-type='true'><div style=\"overflow-x:auto" in pc
+        assert '<table style="margin-bottom:0 !important"><caption' in pc
         assert pc.count("</h3>__INLINE_IMG_") == 2
         assert "OPTIONAL DISCLOSURE" not in pc and "OUTREACH" not in pc
         assert new["slug"] == "best-in-app-community-platforms-for-consumer-apps"
@@ -154,6 +187,7 @@ def gdoc_adapter_listicle_2_and_slug_override_rules():
         assert p.returncode == 0, p.stderr
         new, legacy = load(out), load(FIX / "gdoc-listicle-2.expected-legacy.json")
         legacy["post-content"] = normalize_legacy_links(legacy["post-content"])
+        new["post-content"] = to_legacy_shape(new["post-content"])
         assert new == legacy
         # NON-NEGOTIABLE: a --slug override is still stripped of year + leading count.
         p = run(SCRIPTS / "gdoc_to_fielddata.py", FIX / "gdoc-listicle.txt", "2", "--out", out,
@@ -185,7 +219,9 @@ def blog_draft_shape_converts_with_generic_rules():
         assert ("<ul><li>Single-SDK approach<ul><li>Fewer moving parts</li><li>One vendor data model</li></ul></li>"
                 "<li>Multi-vendor approach</li></ul>") in pc                                # nested bullets
         assert "<ol><li>Pick the surface you need first</li><li>Run a two-week pilot</li>" in pc  # numbered list
-        assert "<div data-rt-embed-type='true'><table><thead><tr><th>Option</th>" in pc   # indented table still a table
+        assert ("<div data-rt-embed-type='true'><div style=\"overflow-x:auto;-webkit-overflow-scrolling:touch;"
+                "margin-bottom:2rem\"><table style=\"margin-bottom:0 !important\"><caption") in pc  # indented table, standard shape
+        assert '<thead><tr><th scope="col">Option</th>' in pc
         assert "<blockquote><p>Ship the smallest social surface" in pc
         assert "<p>---</p>" not in pc
         assert fd["category"] == "66e2765d540e1939a89dc049"                              # Community
@@ -219,7 +255,8 @@ def glossary_draft_converts_but_is_blocked_while_slugs_unconfirmed():
         assert "body" in parked and "Meta description" in parked and "Category" in parked, sorted(parked)
         body = parked["body"]
         assert body.startswith("<p>An active user is any person"), body[:60]              # definition stays in body
-        assert "<div data-rt-embed-type='true'><table><thead><tr><th>Metric</th>" in body  # metrics table embedded
+        assert "<div data-rt-embed-type='true'><div style=\"overflow-x:auto" in body       # metrics table embedded
+        assert '<thead><tr><th scope="col">Metric</th>' in body
         assert "<h3>" not in body
         assert re.findall(r"<h2>(.*?)</h2>", body)[-1] == "Related Terms"
         assert body.count('<a href="https://www.social.plus/glossary/') == 3               # Related Terms, same tab
@@ -305,12 +342,296 @@ def dry_run_catches_raw_table_not_in_embed():
         chk = report_checks(tmp)
         assert chk["content:table-not-flattened"] is True
         assert chk["content:table-in-embed"] is False, chk
-        # Wrapping it fixes it.
-        fd["test-only-body"] = fd["test-only-body"].replace("<table>", "<div data-rt-embed-type='true'><table>") \
-                                                   .replace("</table>", "</table></div>")
+        # Wrapping it in the Embed fixes that check, but the table standard still fails…
+        raw_body = fd["test-only-body"]
+        fd["test-only-body"] = raw_body.replace("<table>", "<div data-rt-embed-type='true'><table>") \
+                                       .replace("</table>", "</table></div>")
+        fd_path.write_text(json.dumps(fd))
+        p = run(SCRIPTS / "webflow-publisher.py", fd_path, "--field-map", FIX / "glossary-test-fieldmap.json", "--dry-run")
+        assert p.returncode == 1 and report_checks(tmp)["content:table-in-embed"] is True
+        assert report_checks(tmp)["content:table-standard"] is False and "scroll wrapper" in p.stderr, p.stderr
+        # …until the table has the standard shape (scroll wrapper, margin-bottom:0, caption).
+        fd["test-only-body"] = raw_body.replace(
+            "<table>", "<div data-rt-embed-type='true'><div style=\"overflow-x:auto;-webkit-overflow-scrolling:touch;"
+                       "margin-bottom:2rem\"><table style=\"margin-bottom:0 !important\"><caption>Metrics</caption>") \
+            .replace("</table>", "</table></div></div>")
         fd_path.write_text(json.dumps(fd))
         p = run(SCRIPTS / "webflow-publisher.py", fd_path, "--field-map", FIX / "glossary-test-fieldmap.json", "--dry-run")
         assert p.returncode == 0, p.stderr
+
+
+# ── Content-engine rules (2026-09-29 to 10-01) ──────────────────────────────────
+
+@test
+def table_standard_caption_comes_from_the_heading():
+    p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--html-only")
+    assert p.returncode == 0, p.stderr
+    html = p.stdout
+    assert ('<caption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;'
+            'clip:rect(0,0,0,0);white-space:nowrap;border:0">Feeds and groups</caption>') in html, html[:400]
+    assert ('<tr><th scope="row" style="background:transparent !important">Activity feed</th>'
+            "<td>Shows new posts</td>") in html
+    assert html.count('<th scope="col">') == 3 and html.count("</table></div></div>") == 1
+
+
+@test
+def faq_schema_for_blog_and_answers_but_not_glossary():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        for name, expect in (("blog", True), ("answers", True), ("glossary", False)):
+            out = tmp / f"{name}.json"
+            p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--collection", name,
+                    "--out", out, "--keep-slug")
+            assert p.returncode == 0, p.stderr
+            fd = load(out)
+            body = fd[{"blog": "post-content", "answers": "content", "glossary": "glossary"}[name]]
+            blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', body, re.S)
+            assert bool(blocks) is expect, (name, blocks)
+            if expect:
+                assert body.endswith("</script></div>"), "the FAQPage embed goes at the very end"
+                data = json.loads(blocks[0])
+                assert data["@type"] == "FAQPage" and len(data["mainEntity"]) == 2
+                q1, q2 = data["mainEntity"]
+                assert q1["name"] == "What is the most important community feature?"
+                assert q1["acceptedAnswer"]["text"] == ("An activity feed, because it gives members a reason to "
+                                                        "return every day. See feeds.")      # plain text, links dropped
+                assert q2["acceptedAnswer"]["text"] == ("Start with a feed and groups. Add moderation before you "
+                                                        "open to the public.")              # list items joined
+        # answers: meta-title defaults to the title (live items use the H1 title)
+        assert load(tmp / "answers.json")["meta-title"] == "15 Must-Have Community Features for Any App"
+        # the dry-run accepts the JSON-LD embed and the carried-over video iframe, and checks the schema
+        p = run(SCRIPTS / "webflow-publisher.py", tmp / "blog.json", "--collection", "blog", "--replace", "abc123",
+                "--source", FIX / "blog-rewrite.draft.md", "--dry-run")
+        chk = report_checks(tmp)
+        assert chk["content:no-script-or-iframe"] is True and chk["content:faq-schema"] is True, chk
+        assert p.returncode == 0, p.stderr
+        # a FAQ section whose schema went missing is caught
+        fd = load(tmp / "blog.json")
+        fd["post-content"] = re.sub(r"<div data-rt-embed-type='true'><script.*?</script></div>", "", fd["post-content"])
+        (tmp / "blog.json").write_text(json.dumps(fd))
+        p = run(SCRIPTS / "webflow-publisher.py", tmp / "blog.json", "--collection", "blog", "--replace", "abc123", "--dry-run")
+        assert p.returncode == 1 and report_checks(tmp)["content:faq-schema"] is False
+
+
+@test
+def rewrite_keeps_slug_and_carries_live_figures():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        out, rep_path = tmp / "fd.json", tmp / "rep.json"
+        # without --keep-slug the blog rules strip the leading count (new-post behaviour)…
+        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--collection", "blog", "--out", out)
+        assert p.returncode == 0 and load(out)["slug"] == "must-have-community-features-for-any-app"
+        # …with --keep-slug the live URL stays exactly as it is
+        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--collection", "blog", "--out", out,
+                "--keep-slug", "--report", rep_path)
+        assert p.returncode == 0, p.stderr
+        fd, report = load(out), load(rep_path)
+        assert fd["slug"] == "15-must-have-community-features-for-any-app"
+        assert report["figures"] == 2 and report["faq_questions"] == 2
+        pc = fd["post-content"]
+        assert '<img alt="Feed example" src="https://cdn.example.test/live-feed.webp" loading="lazy">' in pc
+        assert '<iframe src="https://www.youtube.com/embed/test123"' in pc
+        # in rewrite mode the slug-shape rules are informational; the number matches the title
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "blog", "--replace", "abc123", "--dry-run")
+        chk = report_checks(tmp)
+        assert chk["slug:no-leading-count"] is True and chk["slug:number-matches-title"] is True, chk
+        assert p.returncode == 0, p.stderr
+        # the guard that runs before any PATCH: a live image missing from the new body is reported
+        wp = publisher_module()
+        live_body = pc + ('<figure class="w-richtext-figure-type-image" data-rt-type="image"><div>'
+                          '<img src="https://cdn.example.test/old-chart.webp"></div></figure>')
+        assert wp.missing_live_figures(live_body, pc) == ["https://cdn.example.test/old-chart.webp"]
+        assert wp.missing_live_figures(pc, pc) == []
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "blog", "--replace", "abc123",
+                "--allow-image-removal", "--dry-run")
+        assert p.returncode == 0, p.stderr
+
+
+@test
+def rewrite_dates_keep_published_and_set_edited():
+    wp = publisher_module()
+    blog = __import__("webflow_fieldmap").load_field_map("blog")
+    now = "2026-10-01T10:00:00.000Z"
+    fd = {"date-published": now, "name": "x"}
+    notes = wp.apply_rewrite_dates(blog, {"date-published": "2024-09-12T00:00:00.000Z"}, "2024-09-10T00:00:00.000Z", fd, now)
+    assert "date-published" not in fd, "a rewrite never overwrites the original publish date"
+    assert fd["date-edited-manual"] == now and len(notes) == 2
+    fd = {"date-published": now}
+    wp.apply_rewrite_dates(blog, {}, "2024-09-10T00:00:00.000Z", fd, now)
+    assert fd["date-published"] == "2024-09-10T00:00:00.000Z", "empty publish date is filled from createdOn"
+    glossary = __import__("webflow_fieldmap").load_field_map("glossary")
+    fd = {"name": "x"}
+    assert wp.apply_rewrite_dates(glossary, {}, "2024-09-10T00:00:00.000Z", fd, now) == [] and fd == {"name": "x"}
+
+
+@test
+def slug_number_must_match_the_title():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        out = tmp / "fd.json"
+        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--collection", "blog", "--out", out,
+                "--keep-slug", "--slug", "4-strategies-to-ensure-mobile-app-user-retention")
+        assert p.returncode == 0, p.stderr
+        fd = load(out)
+        fd["name"] = "5 Strategies to Ensure Mobile App User Retention"         # the title's count changed
+        out.write_text(json.dumps(fd))
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "blog", "--replace", "abc123", "--dry-run")
+        assert p.returncode == 1 and report_checks(tmp)["slug:number-matches-title"] is False, p.stderr
+        assert "add a 301" in p.stderr
+        wp = publisher_module()
+        assert wp.slug_numbers("only-3-and-a-half-procent-of-followers") == ["3"]
+        assert wp.title_numbers("Only 3.5% of Followers See Your Posts (2026)") == {"3", "5", "35"}   # year ignored
+        assert wp.slug_numbers("best-chat-apis-2026") == []
+
+
+def write_draft(tmp: Path, name: str, body: str, title="Test Page", extra="") -> Path:
+    path = tmp / name
+    path.write_text(f"# {title}\n\nMeta description: A short test description.\nCategory: Community\n"
+                    f"Tags: Community\n{extra}\nOpening paragraph for the summary.\n\n{body}\n")
+    return path
+
+
+@test
+def faq_extraction_skips_non_prose_and_dry_run_agrees_on_headings():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        body = ("## *FAQs*\n\n### What is a test?\n\nX is a thing.\n\n![diagram](x.png)\n\n__INLINE_IMG_1__\n\n"
+                "```\ncode here\n```\n\n<figure data-rt-type=\"video\"><div><iframe src=\"https://www.youtube.com/embed/x\">"
+                "</iframe></div>\n</figure>\n\n---\n\n## Conclusion\n\nDone.")
+        draft = write_draft(tmp, "faq.md", body)
+        out = tmp / "fd.json"
+        p = run(SCRIPTS / "md_to_webflow_html.py", draft, "--collection", "answers", "--out", out)
+        assert p.returncode == 0, p.stderr
+        fd = load(out)
+        data = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', fd["content"], re.S).group(1))
+        assert data["mainEntity"][0]["acceptedAnswer"]["text"] == "X is a thing.", data
+        # italic FAQ heading: the dry-run finds the section the converter used (no false fail)
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "answers", "--dry-run")
+        assert report_checks(tmp)["content:faq-schema"] is True, p.stderr
+        # an FAQ section whose questions are not H3 headings fails with a useful message
+        draft2 = write_draft(tmp, "faq2.md", "## FAQs\n\n**What is a test?** X is a thing.\n\n## Conclusion\n\nDone.")
+        p = run(SCRIPTS / "md_to_webflow_html.py", draft2, "--collection", "answers", "--out", out)
+        assert p.returncode == 0 and "no FAQPage schema added" in p.stderr, p.stderr
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "answers", "--dry-run")
+        assert p.returncode == 1 and "### Question?" in p.stderr, p.stderr
+
+
+@test
+def figure_blocks_must_be_closed_and_keep_their_spacing():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        bad = write_draft(tmp, "bad.md", '## A\n\n<figure class="x"><div><img src="https://cdn.example.test/a.webp">\n\n## B\n\nText.')
+        p = run(SCRIPTS / "md_to_webflow_html.py", bad, "--collection", "answers", "--out", tmp / "fd.json")
+        assert p.returncode == 1 and "no closing </figure>" in p.stderr, p.stderr
+        p = run(SCRIPTS / "md_to_webflow_html.py", bad, "--html-only")
+        assert p.returncode == 1 and "no closing </figure>" in p.stderr, p.stderr
+        ok = write_draft(tmp, "ok.md", '## A\n\n<figure class="x"\ndata-rt-type="image"><div><img alt="Feed\nexample" '
+                                       'src="https://cdn.example.test/a.webp"></div></figure>\n\n## B\n\nText.')
+        p = run(SCRIPTS / "md_to_webflow_html.py", ok, "--html-only")
+        assert p.returncode == 0 and 'class="x" data-rt-type="image"' in p.stdout and 'alt="Feed example"' in p.stdout, p.stdout
+        # the dry-run catches a broken figure in a hand-built body
+        fd = {"name": "T", "slug": "t", "content": "<p>x</p><figure><div><img src=\"a\"></div>", "meta-description": "d"}
+        (tmp / "h.json").write_text(json.dumps(fd))
+        p = run(SCRIPTS / "webflow-publisher.py", tmp / "h.json", "--collection", "answers", "--dry-run")
+        assert p.returncode == 1 and report_checks(tmp)["content:figures-closed"] is False
+
+
+@test
+def script_exceptions_are_narrow():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        base = {"name": "T", "slug": "t", "meta-description": "d"}
+        cases = {
+            "smuggled second script": "<div data-rt-embed-type='true'><script type=\"application/ld+json\">{\"@type\":\"FAQPage\"}</script><script>alert(1)</script></div>",
+            "non-FAQPage JSON-LD": "<div data-rt-embed-type='true'><script type=\"application/ld+json\">{\"@type\":\"Product\"}</script></div>",
+            "script inside a video figure": "<figure data-rt-type=\"video\"><div><iframe src=\"https://x\"></iframe><script>x()</script></div></figure>",
+        }
+        for name, html in cases.items():
+            (tmp / "h.json").write_text(json.dumps({**base, "content": "<p>x</p>" + html}))
+            run(SCRIPTS / "webflow-publisher.py", tmp / "h.json", "--collection", "answers", "--dry-run")
+            assert report_checks(tmp)["content:no-script-or-iframe"] is False, name
+        # --allow-image-removal only means something on a rewrite
+        p = run(SCRIPTS / "webflow-publisher.py", tmp / "h.json", "--collection", "answers", "--allow-image-removal", "--dry-run")
+        assert p.returncode == 1 and "only applies to --replace" in p.stderr
+
+
+@test
+def slug_numbers_accept_derived_slugs_and_catch_stale_years():
+    sys.path.insert(0, str(SCRIPTS))
+    import md_to_webflow_html as conv
+    wp = publisher_module()
+    for title in ("Why only 3.5% of followers see your posts", "How to reach 1,000 users",
+                  "Why 24/7 moderation matters", "What is a Web 3.0 community?", "How to add 1:1 chat to an app"):
+        slug = conv.derive_slug(title, {"strip_years": True})
+        assert all(n in wp.title_numbers(title) for n in wp.slug_numbers(slug)), (title, slug)
+    assert wp.stale_slug_years("top-5-social-sdks-for-2025-and-how-to-choose-one", "Top 5 Social SDKs for 2026") == ["2025"]
+    assert wp.stale_slug_years("social-sdks-2026", "Best Social SDKs (2026)") == []
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        out = tmp / "fd.json"
+        p = run(SCRIPTS / "md_to_webflow_html.py", FIX / "blog-rewrite.draft.md", "--collection", "blog", "--out", out,
+                "--keep-slug", "--slug", "top-5-social-sdks-for-2025-and-how-to-choose-one")
+        fd = load(out); fd["name"] = "Top 5 Social SDKs for 2026 and How to Choose One"; out.write_text(json.dumps(fd))
+        p = run(SCRIPTS / "webflow-publisher.py", out, "--collection", "blog", "--replace", "abc123", "--dry-run")
+        assert p.returncode == 1 and report_checks(tmp)["slug:number-matches-title"] is False, p.stderr
+
+
+@test
+def replace_end_to_end_with_a_mocked_api():
+    import contextlib, io
+    wp = publisher_module()
+    sys.path.insert(0, str(SCRIPTS))
+    import webflow_fieldmap as wf
+    blog = wf.load_field_map("blog")
+    live_fig = ('<figure class="w-richtext-figure-type-image" data-rt-type="image"><div>'
+                '<img src="https://cdn.example.test/live.png?a=1&amp;b=2"></div></figure>')
+    live = {"slug": "post", "name": "Post", "post-content": "<p>Old.</p>" + live_fig,
+            "date-published": "2021-02-18T05:12:03.721Z"}
+    calls = []
+
+    def fake_http(method, url, headers=None, json_body=None, raw_body=None, timeout=30):
+        calls.append((method, url, json_body))
+        if method == "GET" and "/items/" in url:
+            return 200, json.dumps({"fieldData": live, "createdOn": "2021-02-18T05:12:03.721Z"})
+        return 200, "{}"
+    wp.http = fake_http
+
+    def attempt(body, allow):
+        calls.clear()
+        fd = {"name": "Post", "slug": "post", "post-content": body, "date-published": "2026-10-01T00:00:00.000Z"}
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
+            try:
+                wp.replace_item("token", blog, "abc123", fd, {}, [], allow_image_removal=allow)
+                code = 0
+            except SystemExit as e:
+                code = e.code
+        patch = next((c[2] for c in calls if c[0] == "PATCH"), None)
+        return code, patch, err.getvalue()
+
+    code, patch, err = attempt("<p>New.</p>", allow=False)
+    assert code == 1 and patch is None and "drops 1 image" in err, err          # refused before any PATCH
+    code, patch, _ = attempt("<p>New.</p>", allow=True)
+    assert code == 0 and patch is not None                                        # reviewer removed it on purpose
+    code, patch, _ = attempt("<p>New.</p>" + live_fig.replace("&amp;", "&"), allow=False)
+    assert code == 0, "the same figure with & instead of &amp; is carried over"
+    fields = patch["fieldData"]
+    assert "date-published" not in fields and fields["date-edited-manual"].startswith("20")
+    # answers: a custom live meta title survives a rewrite whose draft had no Meta title line
+    answers = wf.load_field_map("answers")
+    fd = {"name": "Q?", "slug": "q", "content": "<p>A.</p>", "meta-title": "Q?"}
+    assert wp.keep_live_title_copies(answers, {"meta-title": "Custom title"}, fd) == ["meta-title"] and "meta-title" not in fd
+    fd = {"name": "Q?", "slug": "q", "content": "<p>A.</p>", "meta-title": "Set by the draft"}
+    assert wp.keep_live_title_copies(answers, {"meta-title": "Custom title"}, fd) == [] and fd["meta-title"] == "Set by the draft"
+
+
+@test
+def caption_is_not_double_escaped():
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        d = write_draft(tmp, "c.md", "## AT&amp;T vs Stream\n\n| A | B |\n|---|---|\n| x | y |")
+        p = run(SCRIPTS / "md_to_webflow_html.py", d, "--html-only")
+        assert ">AT&amp;T vs Stream</caption>" in p.stdout, p.stdout
 
 
 # ── Blog wrapper CLI + internal links ───────────────────────────────────────────

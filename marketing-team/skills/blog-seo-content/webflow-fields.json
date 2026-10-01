@@ -12,8 +12,13 @@
     "slug": "slug",
     "body": "post-content",
     "intro": "post-summary",
-    "date": "date-published"
+    "date": "date-published",
+    "date_edited": "date-edited-manual",
+    "_dates_doc": "Both are manual fields (Stefan, 2026-09-29). date-published ('Published on') is set when a post is created and never overwritten by a rewrite; webflow-publisher --replace keeps the live value and fills it from the item's createdOn only when empty. date-edited-manual ('Edited on') is set to now on every rewrite."
   },
+
+  "faq_schema": true,
+  "_faq_schema_doc": "The blog template emits only Article + Organization JSON-LD, so the converter appends a FAQPage JSON-LD embed built from the visible FAQ section (Stefan, 2026-09-29).",
 
   "metadata": {
     "Meta description": {"slug": "meta-description", "required": true, "max_length": 160},

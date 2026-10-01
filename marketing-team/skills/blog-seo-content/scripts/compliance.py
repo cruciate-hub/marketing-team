@@ -632,6 +632,9 @@ def check_html_tags(body: str) -> CheckResult:
     """
     prose = re.sub(r"```.*?```", "", body, flags=re.DOTALL)
     prose = re.sub(r"`[^`]+`", "", prose)
+    # A whole <figure>…</figure> block is an image or video carried over from the live post on a
+    # rewrite (webflow-publisher passes it through unchanged) — legitimate, not stray HTML.
+    prose = re.sub(r"<figure\b.*?</figure>", "", prose, flags=re.DOTALL | re.IGNORECASE)
     # CommonMark autolinks (<https://…>, <mailto:…>, <user@host>) are legitimate
     # markdown, not raw HTML — strip them before the tag scan.
     prose = re.sub(r"<(?:https?://|mailto:)[^>\s]+>", "", prose)
