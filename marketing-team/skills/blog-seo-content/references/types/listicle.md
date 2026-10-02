@@ -20,5 +20,8 @@ Self-published "best of" lists are often cited by AI engines, which then recomme
 
 - **One list per category, not per vertical.** "Best community platforms for fitness / gaming / retail / consumer apps" is one list with vertical notes, unless each vertical genuinely has a different vendor set and different criteria. Undifferentiated vertical variants are BLOCK condition 6 and cannot be overridden.
 - Competitor claims come from their own documentation or pricing pages. No characterisations you can't source.
+- **Per product, not per vendor.** When a vendor sells several products, state each capability for the product that has it ("Chat and Video ship pre-built UI components; Activity Feeds does not"). Never write "each product ships X" or "UI component libraries for Chat, Feeds and Video" unless you checked each product's own docs. A vendor's SDK list is not proof of UI components.
+- **UIKit is not UI Kit.** Follow `messaging/terminology.md`: UIKit (or "pre-built UI components") means code components inside an SDK; UI Kit means Figma or other design files. Vendors often call their Figma files a "UI kit", so check whether code components exist before writing either term, and don't present design files as code or code as design files only.
+- **No speed or effort claims without a source**, for any vendor including social.plus: "reduces integration time", "speed of integration", "faster interface work" need a cited figure or come out. Describe what ships instead. `compliance.py` WARNs on these phrases (`no_unsourced_effort_claims`).
 - social.plus is not placed first by default. If it ranks first, the stated criteria must show why.
 - No year in the title unless someone owns a refresh; then add `Last updated:`.
