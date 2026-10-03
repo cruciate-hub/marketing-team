@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.48
+
+Listicles now describe competitors per product, keep code UI components apart from design files, and flag unsourced speed claims.
+
+**Why:** a reviewer caught (2 October 2026) review drafts that credited a vendor with "strong UI component libraries that meaningfully reduce integration time" and "UI component libraries for Chat, Feeds, and Video". The vendor's chat and video SDKs ship pre-built UI components, but its own feeds tutorial says the feeds SDKs don't ship UI components yet, and its "UI kits" are Figma design files. The existing rule (competitor claims come from their own docs) was too general to stop a per-vendor generalisation, and nothing checked speed claims.
+
+**Changes:**
+- [`blog-seo-content/references/types/listicle.md`](marketing-team/skills/blog-seo-content/references/types/listicle.md): three rules: state capabilities per product, not per vendor; UIKit (code components) is not UI Kit (design files), as in `messaging/terminology.md`; no speed or effort claims without a source, for any vendor including social.plus.
+- [`blog-seo-content/scripts/compliance.py`](marketing-team/skills/blog-seo-content/scripts/compliance.py): new WARN check `no_unsourced_effort_claims` ("reduces integration time", "reduce front-end development time", "speed of integration", "faster interface work", "meaningfully reduce"). WARN, not FAIL: a cited figure makes the sentence fine. No false positives on the 37 current blog refresh drafts.
+- Tests: fixture `F15-effort-claim.md` (must WARN, not FAIL).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.47 -> 13.48.
+
 ## marketing-team 13.47
 
 The imagery rules now describe the blog headers the site actually uses.

@@ -105,6 +105,18 @@ RISKY_TERMS_WARN = [
     r"\brobust(ly|ness)?\b",
 ]
 
+# Unsourced speed/effort claims — WARN, not FAIL (listicle.md "No speed or
+# effort claims without a source"). "Strong UI component libraries that
+# meaningfully reduce integration time" reached a review Doc about a vendor
+# whose feed product ships no UI components (2026-10-02). A cited figure makes
+# the sentence fine, so a human decides; the WARN makes sure someone looks.
+EFFORT_CLAIMS_WARN = [
+    r"\b(?:reduc|cut|shorten|lower)\w*\s+(?:[\w-]+\s+){0,3}?(?:integration|implementation|development|dev|front-end|frontend|build)\s+(?:time|effort)\b",
+    r"\bspeed\s+(?:of|up)\s+(?:the\s+)?integration\b",
+    r"\bfaster\s+(?:interface|integration|front-end|frontend|ui)\s+(?:work|development|builds?)\b",
+    r"\bmeaningfully\s+(?:reduc|speed|accelerat|cut)\w*",
+]
+
 # Case-sensitive — brand-name casing (correct form: `social.plus`).
 FORBIDDEN_TERMS_CASE_SENSITIVE = [
     r"\bSocial\.Plus\b",
@@ -620,6 +632,21 @@ def check_risky_terms(text: str) -> CheckResult:
     )
 
 
+def check_effort_claims(text: str) -> CheckResult:
+    """Speed or effort claims ("reduces integration time") need a cited figure
+    or come out — WARN, not FAIL (see EFFORT_CLAIMS_WARN)."""
+    prose = strip_code_and_link_urls(text)
+    hits: list[str] = []
+    for pattern in EFFORT_CLAIMS_WARN:
+        for m in re.finditer(pattern, prose, re.IGNORECASE):
+            hits.append(m.group(0))
+    return CheckResult(
+        "no_unsourced_effort_claims",
+        "PASS" if not hits else "WARN",
+        "cite a figure or describe what ships instead (listicle.md): " + ", ".join(sorted(set(hits))) if hits else "0",
+    )
+
+
 def check_html_tags(body: str) -> CheckResult:
     """Forbid raw HTML in the markdown intermediate. The final delivery
     converts the body to HTML for the Webflow `post-content` field; HTML in
@@ -884,6 +911,7 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     report.results.append(check_emojis(prose))
     report.results.append(check_forbidden_terms(prose))
     report.results.append(check_risky_terms(prose))
+    report.results.append(check_effort_claims(prose))
     report.results.append(check_html_tags(body))
     report.results.append(check_no_jsonld(body))
     report.results.extend(check_headings(body_with_h1))

@@ -92,6 +92,12 @@ EXPECTATIONS: dict[str, dict] = {
         "note": "context-dependent anti-slop terms (unlock, elevate, seamless, robust) must WARN, not FAIL",
         "exit_code": 0,
     },
+    "F15-effort-claim": {
+        "must_warn": ["no_unsourced_effort_claims"],
+        "must_not_fail": ["no_unsourced_effort_claims"],
+        "note": "unsourced speed/effort claims (reduce integration time, speed of integration, faster interface work) must WARN, not FAIL",
+        "exit_code": 0,
+    },
     "T1-listicle-honest": {
         "must_pass": ["article_type", "ranking_criteria_section", "has_table", "self_inclusion_disclosed", "editor_line_present"],
         "note": "honest listicle: criteria heading, table and disclosure satisfy the listicle profile",
