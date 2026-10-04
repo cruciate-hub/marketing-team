@@ -243,6 +243,7 @@ Exactly two paragraphs sit between the metadata block and the first H2. No HTML 
 - **Self-contained sections.** Each H2 section makes sense on its own. Define technical entities inline on first mention in a section, using `terminology.md` wording.
 - **At least one table**, where it answers a sub-question.
 - **Concrete over vague.** Ranges and named examples beat adjectives. "4-8 weeks" beats "quickly".
+- **Never state prices.** No currency figures for social.plus or any other vendor: no starting prices, per-MAU rates, plan prices or price ranges, in the body, tables, FAQs or meta description. Describe the pricing *model* instead (MAU-based, usage-based, volume discounts, contact sales for a quote) and link to the vendor's pricing page. Prices change without notice and a stale figure is a credibility and legal risk. Cited cost statistics (for example an industry breach-cost study) are fine. Same rule as `blog-seo-content`; `compliance.py` WARNs on price-like figures (`no_price_figures`).
 - **Banned:** em dashes, emojis, filler openers, growth guarantees, wrong `social.plus` casing, and the vocabulary tiers below.
 
 ## Anti-slop rules (generation time)
@@ -433,6 +434,6 @@ Known failure modes: invented compliance output (unicode checkmarks, prose summa
 
 ## Open items
 
-- **Answers Webflow fields.** Body and meta description slugs are unconfirmed. Since the collection is being rebuilt, add fields for last-updated date, author and reviewer so freshness and expertise are visible on the page. Needs whoever manages the Webflow CMS (the repo names Stefan).
+- **Answers Webflow fields.** Confirmed against the live collection on 2026-10-01 (see "Publishing to Webflow"). Still open: add fields for last-updated date, author and reviewer so freshness and expertise are visible on the page. Needs whoever manages the Webflow CMS (the repo names Stefan).
 - **Queue access.** The skill reads a CSV export of the Queue until an automated Google Sheets connection is set up and signed off by IT.
 - **Evidence bank growth.** Product facts are empty and platform benchmarks are pending Legal. Until they fill up, many pages will be limited to the legacy approved ranges and customer stats, which is exactly what the usage caps are designed to flag.

@@ -414,6 +414,14 @@ def check_links_evidence(rt_section: str, path: str) -> CheckResult:
     )
 
 
+# Price-like figures (team decision, 19 Aug 2026: no specific prices on any page; describe the pricing model).
+# A currency amount followed by a billing unit, or introduced by price wording. Cited cost statistics
+# ("an average breach costs $4.44M") do not match.
+PRICE_FIGURE = re.compile(
+    r"(?:[$\u20ac\u00a3]\s?\d[\d,.]*\s?(?:k|K|M)?\s*(?:/|per|a|an)\s*(?:MAU|month|mo|user|seat|year|yr|license|licence)\b)"
+    r"|(?:\b(?:starting at|starts at|priced at|pricing (?:is|starts at|from)|plans? (?:start|begin) at)\s+[$\u20ac\u00a3]\s?\d)",
+    re.IGNORECASE)
+
 def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_words: int) -> Report:
     report = Report(path=path)
 
@@ -592,6 +600,9 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     )
     emoji_count = len(emoji_pattern.findall(text))
     report.add("no_emojis", emoji_count == 0, "FAIL", f"{emoji_count} found")
+
+    prices = [m.group(0) for m in PRICE_FIGURE.finditer(text)]
+    report.add("no_price_figures", len(prices) == 0, "WARN", f"price-like figure(s): {prices[:3]}; describe the pricing model instead" if prices else "")
 
     return report
 
