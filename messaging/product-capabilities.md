@@ -286,7 +286,7 @@ Things writers often attach to an engagement or community platform. None of them
 
 | Topic | Words the check looks for | Status | Closest real capability (what you may say instead) |
 |---|---|---|---|
-| Payments and wallets | payment processing, process payments, processes payments, payment gateway, in-app payments, digital wallet, e-wallet, money transfer | Not in the docs as of 2026-10-05. | None. Product tags link out to the brand's own product page. |
+| Payments and wallets | payment processing, process payments, processes payments, payment gateway, in-app payments, in-app wallet, wallet feature, money transfer | Not in the docs as of 2026-10-05. | None. Product tags link out to the brand's own product page. |
 | Paid subscriptions, paywalls, in-app purchases | paywall, in-app purchase, paid subscription, subscription billing | Not in the docs as of 2026-10-05. The monetization page mentions subscriber-only groups (awaiting product-owner confirmation). | Private communities, roles and user tags can restrict access; billing stays in the customer's own systems. |
 | KYC and identity verification | kyc, identity verification, verify identity, verifies identity, verify the identity, know your customer | Not in the docs as of 2026-10-05. | None. The customer's app owns identity; social.plus receives a user ID. The brand account badge and "Official" community badge are not identity verification. |
 | Biometric authentication | biometric, fingerprint, facial recognition, face id, face scan | Not in the docs as of 2026-10-05. | Authentication runs through the customer's login, with optional Secure Mode tokens. |

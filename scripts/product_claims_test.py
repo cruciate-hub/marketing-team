@@ -22,6 +22,8 @@ CASES = [
     ("another company's feature in an attributing paragraph is a WARN", "# T\n\nStrava built leaderboards. The same patterns are available through social.plus.\n", 0),
     ("negation after the word does not count", "# T\n\nsocial.plus leaderboards are not hard to set up.\n", 1),
     ("change-summary note under the H1 is skipped", "# T\n\nRemoved the claim that social.plus offers leaderboards.\n\n## H\n\nText.\n", 0),
+    ("'has no' before the word is a negation", "# T\n\nsocial.plus has no native leaderboard, so teams build one.\n", 0),
+    ("a section heading is not a claim", "# T\n\n## Payments and social.plus\n\nText about something else.\n", 0),
     ("metadata block is skipped", "# T\n\nMeta description: social.plus and payments\n\n## H\n\nText.\n", 0),
 ]
 

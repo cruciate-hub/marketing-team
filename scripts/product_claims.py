@@ -39,7 +39,7 @@ LINK = re.compile(r"\]\((https?://(?:www\.)?social\.plus(/[^)\s]*)?)\)")
 # offer leaderboards"). Words like "instead of", "rather than" and "without" are not negations of the claim:
 # "add leaderboards through social.plus instead of building them" is still a claim.
 NEGATION = re.compile(r"\b(not|never|doesn't|does not|isn't|is not|aren't|are not|don't|do not|cannot|can't|neither|nor|"
-                      r"out of scope|outside (?:social\.plus )?scope)\b", re.I)
+                      r"has no|have no|no native|no built-in|lacks|out of scope|outside (?:social\.plus )?scope)\b", re.I)
 # Reviewer notes that older drafts keep between the H1 and the first H2 (change summaries, push checks).
 NOTE_START = re.compile(r"^\s*(?:\*\*)?(?:Confirm|Re-confirm|Re-verify|Verify|Verified|Check|Checked|Removed|Added|Rewrote|"
                         r"Restructured|Replaced|Rebuilt|Confirmed|Kept|Converted|Re-scoped|Ran|Original live post|Internal-linking|"
@@ -86,7 +86,9 @@ def strip_meta(md: str) -> str:
     return "\n".join(out)
 
 
-def paragraphs(md: str) -> list[str]:
+def paragraphs(md: str, keep_headings: bool = True) -> list[str]:
+    """Paragraphs and table rows. Headings ("In-App Purchases and social.plus") end a paragraph and are
+    dropped when keep_headings is False: a section title names a topic, it does not claim a feature."""
     paras, cur = [], []
     for ln in md.splitlines():
         if ln.lstrip().startswith("|"):   # a table row is its own unit; a whole table is not one paragraph
@@ -100,7 +102,7 @@ def paragraphs(md: str) -> list[str]:
             if cur:
                 paras.append(" ".join(cur))
                 cur = []
-            if ln.startswith("#"):
+            if ln.startswith("#") and keep_headings:
                 paras.append(ln.lstrip("# ").strip())
             continue
         cur.append(ln.strip())
@@ -135,7 +137,7 @@ def check_text(md: str, scope: list[tuple[str, list[str]]]) -> dict:
     if "ARTICLE STARTS HERE" in md:   # a review Doc exported as text: only the article counts
         md = md.split("ARTICLE STARTS HERE", 1)[1]
     claims, hits = [], []
-    for p in paragraphs(strip_meta(md)):
+    for p in paragraphs(strip_meta(md), keep_headings=False):
         if not attributes(p):
             continue
         found = []
