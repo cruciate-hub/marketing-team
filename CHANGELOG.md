@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.51
+
+The claims check also runs when a skill is used from the installed kit.
+
+**Why:** the compliance scripts found `scripts/product_claims.py` only in a full repo checkout (four folders up). In an installed kit that path does not exist, so the `product_claims` check was skipped with a WARN.
+
+**Changes:**
+- `aeo-content`, `blog-seo-content` and `glossary-content` compliance scripts: when the shared script is not next to the repo root, use the clone the fetch block makes (`$MT_REPO`, default `/tmp/cruciate-hub-marketing-team`).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.50 -> 13.51.
+
 ## marketing-team 13.50
 
 A list of what social.plus offers, read by every writing skill, and a check that stops drafts from tying social.plus to features it does not have.
