@@ -11,6 +11,12 @@ from the "Outside social.plus scope" table of product-capabilities.md is
   WARN  when only the paragraph does ("Strava built leaderboards. ... the same patterns are available
         pre-built"), because the word may describe another company; the reviewer decides,
 unless a negation comes before the word in its sentence ("social.plus does not process payments").
+Headings count too, because the text under a heading is about what the heading names:
+  - under social.plus's own entry in a list ("### social.plus: Best for ...", "### 1. social.plus") every
+    sentence is about social.plus, so a word there is a FAIL even when the sentence does not repeat the name;
+  - under any other heading that names social.plus ("## Where social.plus fits") the paragraph attributes, so a
+    word there is at least a WARN.
+  The context lasts until the next heading of the same or a higher level; the page's H1 never sets it.
 
   python3 scripts/product_claims.py DRAFT.md [--json] [--capabilities PATH]
       Lists every attributing paragraph (for the reviewer's "Claims about social.plus" box) and the
@@ -44,6 +50,11 @@ NEGATION = re.compile(r"\b(not|never|doesn't|does not|isn't|is not|aren't|are no
 NOTE_START = re.compile(r"^\s*(?:\*\*)?(?:Confirm|Re-confirm|Re-verify|Verify|Verified|Check|Checked|Removed|Added|Rewrote|"
                         r"Restructured|Replaced|Rebuilt|Confirmed|Kept|Converted|Re-scoped|Ran|Original live post|Internal-linking|"
                         r"Dropped|Cut|Preserved|Changed|Updated|Merged|Split|Moved|Fixed)\b")
+# A sentence that says the customer does the work ("connecting products to your checkout requires integration work on
+# your team's side") describes a limit, not a feature: its hits are WARN, so the reviewer reads the wording.
+LIMITATION = re.compile(r"\b(requires? (?:integration|custom|extra|engineering) work|on your (?:team's |own )?side|"
+                        r"(?:you|your team) (?:would |will )?(?:need to |have to )?(?:build|connect|integrate|wire)\b[^.]*\b(?:yourself|yourselves|separately)|"
+                        r"is up to (?:you|your team)|not included)\b", re.I)
 SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\[(\"'])")
 
 
@@ -84,6 +95,52 @@ def strip_meta(md: str) -> str:
             continue
         out.append(ln)
     return "\n".join(out)
+
+
+# social.plus's own entry in a vendor list: the heading starts with the name (after an optional "1." number) and the
+# name is followed by nothing, a colon, a dash or a bracket ("social.plus: Best for ...", "1. social.plus").
+# "social.plus and payments" is a section about a topic, not an entry.
+ENTRY_HEADING = re.compile(r"^(?:\d+[.)]\s*)?social\.plus\s*(?:$|[:(\u2013\u2014-])", re.I)
+
+
+def heading_context(md: str) -> list[tuple[str, str | None]]:
+    """(paragraph, context) for every paragraph and table row, headings dropped. context is "entry" under
+    social.plus's own list entry, "section" under another heading that names social.plus, else None."""
+    out, cur, stack = [], [], []   # stack: (level, heading text) of the open H2..H6 headings
+
+    def ctx():
+        texts = [t for _, t in stack]
+        if any(ENTRY_HEADING.match(t) for t in texts):
+            return "entry"
+        if any(re.search(r"social\.plus", t, re.I) for t in texts):
+            return "section"
+        return None
+
+    def flush():
+        if cur:
+            out.append((" ".join(cur), ctx()))
+            cur.clear()
+
+    for ln in md.splitlines():
+        if ln.lstrip().startswith("|"):
+            flush()
+            if not set(ln.replace("|", "").strip()) <= set("-: "):
+                out.append((ln.strip(), ctx()))
+            continue
+        if re.match(r"^\s*(?:[-*+]|\d+[.)])\s+", ln):   # a list item is its own unit, like a table row
+            flush()
+        if not ln.strip() or ln.startswith("#"):
+            flush()
+            if ln.startswith("#"):
+                level = len(ln) - len(ln.lstrip("#"))
+                text = plain(ln.lstrip("# ").strip()).replace("*", "").replace("\\", "").strip()
+                stack[:] = [(lv, t) for lv, t in stack if lv < level]
+                if level > 1:
+                    stack.append((level, text))
+            continue
+        cur.append(ln.strip())
+    flush()
+    return out
 
 
 def paragraphs(md: str, keep_headings: bool = True) -> list[str]:
@@ -138,8 +195,8 @@ def check_text(md: str, scope: list[tuple[str, list[str]]]) -> dict:
         md = md.split("ARTICLE STARTS HERE", 1)[1]
     claims, hits = [], []
     h1 = next((ln[2:] for ln in md.splitlines() if ln.startswith("# ")), "")
-    for p in paragraphs(strip_meta(md), keep_headings=False):
-        if not attributes(p):
+    for p, ctx in heading_context(strip_meta(md)):
+        if not (attributes(p) or ctx):
             continue
         found = []
         for raw in SENTENCE.split(p):
@@ -150,7 +207,9 @@ def check_text(md: str, scope: list[tuple[str, list[str]]]) -> dict:
                     if m and not NEGATION.search(sent[:m.start()]):
                         # A word from the page's own title (a glossary entry for "In-App Purchase") is the topic of the
                         # page, so its "and social.plus" section must mention it: WARN, the reviewer checks the wording.
-                        level = "FAIL" if attributes(raw) and not word_re(w).search(h1) else "WARN"
+                        # Under social.plus's own list entry every sentence is about social.plus.
+                        level = "FAIL" if ((attributes(raw) or ctx == "entry") and not word_re(w).search(h1)
+                                           and not LIMITATION.search(sent)) else "WARN"
                         found.append({"topic": topic, "word": w, "level": level,
                                       "sentence": sent.strip()[:300]})
                         break
