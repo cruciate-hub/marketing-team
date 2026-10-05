@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-05T01:26:37.198Z",
-    "itemCount": 269,
+    "generatedAt": "2026-10-05T05:03:20.060Z",
+    "itemCount": 270,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-to-ask-better-questions-about-your-first-party-data",
+      "metaTitle": "How to Ask Better Questions About Your First-Party Data",
+      "metaDescription": "The quality of the answer depends on the quality of the question. Learn how to ask first-party data questions that return answers you can act on.",
+      "content": "# How to Ask Better Questions About Your First-Party Data\n## What your first-party data actually covers\n## The anatomy of a question that works\n## Follow-up questions that turn a number into a narrative\n## Reading the methodology behind the answer\n## Start with the question you already have"
+    },
     {
       "url": "https://www.social.plus/blog/five-questions-every-team-should-ask-their-data",
       "metaTitle": "Five Questions Every Team Should Ask Their Data",
