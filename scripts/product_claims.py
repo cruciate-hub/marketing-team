@@ -44,7 +44,9 @@ NEGATION = re.compile(r"\b(not|never|doesn't|does not|isn't|is not|aren't|are no
 NOTE_START = re.compile(r"^\s*(?:\*\*)?(?:Confirm|Re-confirm|Re-verify|Verify|Verified|Check|Checked|Removed|Added|Rewrote|"
                         r"Restructured|Replaced|Rebuilt|Confirmed|Kept|Converted|Re-scoped|Ran|Original live post|Internal-linking|"
                         r"Dropped|Cut|Preserved|Changed|Updated|Merged|Split|Moved|Fixed)\b")
-SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\[(\"'])")
+# A new sentence starts with a capital, a bracket or a quote, or with the brand, which is always lowercase:
+# "Circle offers gamification. social.plus does not." is two sentences.
+SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\[(\"']|social\.plus\b)")
 
 
 def load_scope(path: Path = DEFAULT_CAPS) -> list[tuple[str, list[str]]]:

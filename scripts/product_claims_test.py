@@ -26,6 +26,7 @@ CASES = [
     ("a section heading is not a claim", "# T\n\n## Payments and social.plus\n\nText about something else.\n", 0),
     ("the page's own topic word is a WARN", "# What is an In-App Purchase?\n\nsocial.plus connects to in-app purchases in two ways.\n", 0),
     ("metadata block is skipped", "# T\n\nMeta description: social.plus and payments\n\n## H\n\nText.\n", 0),
+    ("a sentence starting with lowercase social.plus is its own sentence", "# T\n\nCircle includes courses and gamification. social.plus does not offer gamification.\n", 0),
 ]
 
 

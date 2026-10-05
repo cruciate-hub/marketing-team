@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.52
+
+The claims check no longer reads a competitor's feature as a social.plus claim when the next sentence starts with "social.plus".
+
+**Why:** the check split sentences only before a capital letter, and the brand is always written lowercase. In "Circle includes courses and gamification. social.plus does not offer gamification." it read both sentences as one, so Circle's gamification came before the negation and the check reported a FAIL (5 October 2026, social.plus vs Circle FAQ).
+
+**Changes:**
+- [`scripts/product_claims.py`](scripts/product_claims.py): a sentence also starts at "social.plus".
+- [`scripts/product_claims_test.py`](scripts/product_claims_test.py): regression case for the example above (it failed before the fix). All skill test suites still pass.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.51 -> 13.52. No kit upload needed: installed kits read this script from the repo clone.
+
 ## marketing-team 13.51
 
 The claims check also runs when a skill is used from the installed kit.
