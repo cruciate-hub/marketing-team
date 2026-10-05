@@ -620,7 +620,12 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
 def _product_claim_hits(text: str):
     """Hits of scripts/product_claims.py: paragraphs that name social.plus or link a product page and tie it to
     something in the 'Outside social.plus scope' table of messaging/product-capabilities.md. None = check skipped."""
+    # In a repo checkout the shared script sits four levels up; in an installed kit it does not, so fall back to
+    # the clone the fetch block makes ($MT_REPO, default /tmp/cruciate-hub-marketing-team).
+    import os
     root = Path(__file__).resolve().parents[4]
+    if not (root / "scripts" / "product_claims.py").exists():
+        root = Path(os.environ.get("MT_REPO", "/tmp/cruciate-hub-marketing-team"))
     try:
         sys.path.insert(0, str(root / "scripts"))
         from product_claims import load_scope, check_text  # type: ignore
