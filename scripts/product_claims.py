@@ -137,6 +137,7 @@ def check_text(md: str, scope: list[tuple[str, list[str]]]) -> dict:
     if "ARTICLE STARTS HERE" in md:   # a review Doc exported as text: only the article counts
         md = md.split("ARTICLE STARTS HERE", 1)[1]
     claims, hits = [], []
+    h1 = next((ln[2:] for ln in md.splitlines() if ln.startswith("# ")), "")
     for p in paragraphs(strip_meta(md), keep_headings=False):
         if not attributes(p):
             continue
@@ -147,7 +148,10 @@ def check_text(md: str, scope: list[tuple[str, list[str]]]) -> dict:
                 for w in words:
                     m = word_re(w).search(sent)
                     if m and not NEGATION.search(sent[:m.start()]):
-                        found.append({"topic": topic, "word": w, "level": "FAIL" if attributes(raw) else "WARN",
+                        # A word from the page's own title (a glossary entry for "In-App Purchase") is the topic of the
+                        # page, so its "and social.plus" section must mention it: WARN, the reviewer checks the wording.
+                        level = "FAIL" if attributes(raw) and not word_re(w).search(h1) else "WARN"
+                        found.append({"topic": topic, "word": w, "level": level,
                                       "sentence": sent.strip()[:300]})
                         break
         claims.append({"paragraph": plain(p)[:600], "hits": found})

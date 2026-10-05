@@ -24,6 +24,7 @@ CASES = [
     ("change-summary note under the H1 is skipped", "# T\n\nRemoved the claim that social.plus offers leaderboards.\n\n## H\n\nText.\n", 0),
     ("'has no' before the word is a negation", "# T\n\nsocial.plus has no native leaderboard, so teams build one.\n", 0),
     ("a section heading is not a claim", "# T\n\n## Payments and social.plus\n\nText about something else.\n", 0),
+    ("the page's own topic word is a WARN", "# What is an In-App Purchase?\n\nsocial.plus connects to in-app purchases in two ways.\n", 0),
     ("metadata block is skipped", "# T\n\nMeta description: social.plus and payments\n\n## H\n\nText.\n", 0),
 ]
 
