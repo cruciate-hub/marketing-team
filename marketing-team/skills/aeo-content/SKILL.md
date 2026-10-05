@@ -157,7 +157,7 @@ The script is a lexical approximation. It over-flags shared keywords (for exampl
 
 ### 2. Brand read (non-negotiable)
 
-Read from the clone: `messaging/terminology.md`, `tone.md`, `narrative.md`, `value-story.md`, `positioning.md`, `boilerplates.md`. If any file fails validation, stop. Do not write from memory.
+Read from the clone: `messaging/terminology.md`, `tone.md`, `narrative.md`, `value-story.md`, `positioning.md`, `boilerplates.md`, `product-capabilities.md`. If any file fails validation, stop. Do not write from memory. Every sentence that says social.plus does something, including the pitch section and any sentence next to a product-page link, must match a row in `product-capabilities.md`; nothing from its "Outside social.plus scope" table is ever tied to social.plus (compliance check `product_claims`, FAIL).
 
 ### 3. Evidence selection
 

@@ -133,7 +133,7 @@ The planner uses `scripts/plan_rows.py` (this skill) and the shared `$MT_REPO/sc
 
 ### 1. Load context
 
-Run the fetch block. Read `messaging/terminology.md`, `positioning.md`, `value-story.md` and `messaging/evidence-bank.md`. Skim the Queue: which clusters exist, what's planned near this seed, what was rejected.
+Run the fetch block. Read `messaging/terminology.md`, `positioning.md`, `value-story.md`, `messaging/evidence-bank.md` and `messaging/product-capabilities.md`. Prefer candidates whose answer can feature capabilities social.plus offers; for a listicle or feature list, check that most items map to rows in `product-capabilities.md` and say in the row's Notes which items do not. Skim the Queue: which clusters exist, what's planned near this seed, what was rejected.
 
 ### 2. Research the seed
 

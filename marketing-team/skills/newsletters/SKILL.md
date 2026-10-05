@@ -120,7 +120,7 @@ Fetch `brain.md` for cross-domain routing, precedence rules, and the compliance 
 
 Fetch `messaging/brain.md` to get the messaging router.
 
-Always load `terminology.md` and `tone.md` (the always-load rows). Email body copy that frames the product or makes value claims also needs `positioning.md` and/or `value-story.md`. For "About social.plus" footers, hero subtitles, taglines, and CTAs sourced from approved copy, load `boilerplates.md` (the 25w version is the canonical tagline source).
+Always load `terminology.md` and `tone.md` (the always-load rows), and `product-capabilities.md` whenever the email names a social.plus feature (every feature named must match a row there). Email body copy that frames the product or makes value claims also needs `positioning.md` and/or `value-story.md`. For "About social.plus" footers, hero subtitles, taglines, and CTAs sourced from approved copy, load `boilerplates.md` (the 25w version is the canonical tagline source).
 
 Fetch the color system directly (emails need hex values, not CSS variables). Emails match the website, so `website.md` is the source of truth for color; the palette files add the extended tokens it doesn't cover:
 

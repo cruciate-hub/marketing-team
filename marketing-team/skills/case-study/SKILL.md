@@ -129,6 +129,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 3. Customer stories hit every conditional row in the router except UI. Load each with `cat "$REPO/messaging/<file>"`:
    - `terminology.md` + `tone.md` (always-load)
+   - `product-capabilities.md` (always-load when the copy says what social.plus does): every feature or capability named must match a row; never attribute anything from its "Outside social.plus scope" table
    - `positioning.md` (product pillars for framing the solution)
    - `value-story.md` (value creation model — maps directly to customer story outcomes)
    - `narrative.md` (messaging hierarchy and narrative structure)

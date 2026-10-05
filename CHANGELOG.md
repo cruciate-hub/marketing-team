@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.50
+
+A list of what social.plus offers, read by every writing skill, and a check that stops drafts from tying social.plus to features it does not have.
+
+**Why:** a reviewer rejected a fintech listicle (5 October 2026) because almost every feature in it is one social.plus does not offer, and its closing implied the product covers biometrics, budgeting tools and gamification. The skills require claims about social.plus to come from the evidence bank, but its Product facts table was empty, so no file said what social.plus does or does not offer and no check could catch a wrong feature.
+
+**Changes:**
+- New [`messaging/product-capabilities.md`](messaging/product-capabilities.md): capabilities per product area with the learn.social.plus link and the date checked, recent additions, an "Outside social.plus scope" table (things writers tend to attribute that social.plus does not offer, with the words the check looks for), and items that need the product owner's confirmation.
+- New [`scripts/product_claims.py`](scripts/product_claims.py) (with `scripts/product_claims_test.py`): finds every paragraph that names social.plus or links a product page and flags outside-scope words in it: FAIL when the word's own sentence ties it to social.plus, WARN when only the paragraph does (it may describe another company), nothing when a negation comes first. Also lists those paragraphs for a reviewer. Tried on the 14 blog rewrites waiting to publish: it caught three real problems (leaderboards attributed to social.plus, in-app purchases next to a social.plus link) and two paragraph-level warnings about other companies' leaderboards.
+- [`aeo-content`](marketing-team/skills/aeo-content/scripts/compliance.py), [`blog-seo-content`](marketing-team/skills/blog-seo-content/scripts/compliance.py) and [`glossary-content`](marketing-team/skills/glossary-content/scripts/compliance.py) compliance scripts: new check `product_claims` (FAIL or WARN as above). All existing skill tests still pass.
+- [`messaging/brain.md`](messaging/brain.md): new routing row (load `product-capabilities.md` for any copy that says what social.plus does) and the "Never invent" rule now points to it; messaging README and the evidence bank's Product facts section point to it too.
+- Brand-read steps of `aeo-content`, `blog-seo-content`, `glossary-content`, `content-planner`, `case-study`, `press-release` and `newsletters` load the file; `blog-seo-content` adds that listicles and feature posts feature capabilities social.plus offers where the topic allows, and discuss others in their own paragraphs; `content-planner` checks listicle items against the file.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.49 -> 13.50.
+
 ## marketing-team 13.49
 
 No prices on answers and glossary pages either, with a warning check; the answers skill's Webflow open item is updated.

@@ -604,7 +604,31 @@ def run_checks(text: str, path: str, keyword: str | None, min_words: int, max_wo
     prices = [m.group(0) for m in PRICE_FIGURE.finditer(text)]
     report.add("no_price_figures", len(prices) == 0, "WARN", f"price-like figure(s): {prices[:3]}; describe the pricing model instead" if prices else "")
 
+    hits = _product_claim_hits(text)
+    if hits is None:
+        report.add("product_claims", False, "WARN", "skipped: scripts/product_claims.py or messaging/product-capabilities.md missing")
+    else:
+        fails = [h for h in hits if h["level"] == "FAIL"]
+        report.add("product_claims", not hits, "FAIL" if fails else "WARN",
+                   ("social.plus tied to something it does not offer (messaging/product-capabilities.md"
+                    + ("" if fails else "; only in the same paragraph, check whether it describes another company") + "): "
+                    + "; ".join(f'{h["word"]} in "{h["sentence"][:120]}"' for h in (fails or hits)[:3])) if hits else "")
+
     return report
+
+
+def _product_claim_hits(text: str):
+    """Hits of scripts/product_claims.py: paragraphs that name social.plus or link a product page and tie it to
+    something in the 'Outside social.plus scope' table of messaging/product-capabilities.md. None = check skipped."""
+    root = Path(__file__).resolve().parents[4]
+    try:
+        sys.path.insert(0, str(root / "scripts"))
+        from product_claims import load_scope, check_text  # type: ignore
+    except Exception:  # noqa: BLE001
+        return None
+    scope = load_scope(root / "messaging" / "product-capabilities.md")
+    return check_text(text, scope)["hits"] if scope else None   # each hit has level FAIL (sentence) or WARN (paragraph)
+
 
 
 def main() -> int:

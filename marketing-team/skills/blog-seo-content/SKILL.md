@@ -165,6 +165,7 @@ For every `LIKELY DUPLICATE` or `REVIEW` line, apply the test: would the two pos
 
 3. Blog posts hit these conditional rows in the router. Load each with `cat "$REPO/messaging/<file>"`:
    - `terminology.md` + `tone.md` (always-load)
+   - `product-capabilities.md` (always-load): what social.plus offers and does not offer. Every sentence that says or implies social.plus does something (including the closing section, CTAs and sentences around product-page links) must match a row; nothing in its "Outside social.plus scope" table is ever tied to social.plus (compliance check `product_claims`, FAIL). Listicles and feature posts about social.plus's market should feature capabilities social.plus offers wherever the topic allows; a feature it does not offer can be discussed, but in its own paragraph, never presented as part of social.plus.
    - `positioning.md` (the post mentions or frames social.plus)
    - `value-story.md` (the post makes value, comparison, or differentiation claims)
    - `narrative.md` (multi-section content using the 5-step messaging hierarchy)
