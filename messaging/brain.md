@@ -21,6 +21,9 @@ Each row below is a condition based on **what your output is or contains** — n
 - `terminology.md` — Approved and forbidden terms. This is law.
 - `tone.md` — Tone of voice and writing style rules (overridden by `ui-micro-copy.md` for UI surfaces).
 
+### Content that says what social.plus does, offers or includes (features, product pages, "how social.plus helps" sections, pitches, CTAs, links to product pages)
+- `product-capabilities.md` — What social.plus offers, per product area, with the docs link for each capability, and what it does not offer ("Outside social.plus scope"). Every claim about social.plus, and every link to a product page used as evidence of a capability, must match a row. Not listed means: do not claim it.
+
 ### Content that describes what social.plus is or its category
 - `positioning.md` — Company overview, vision, mission, ecosystem position, product pillars.
 
@@ -43,7 +46,7 @@ Each row below is a condition based on **what your output is or contains** — n
 
 - **Terminology is law.** Always use approved terms. Never use forbidden terms. No exceptions.
 - **Tone comes from the documents, not from your defaults.** Override your natural writing style with what the tone file specifies.
-- **Never invent.** Do not fabricate statistics, customer names, quotes, features, or performance claims. If it's not in the loaded documents, don't state it.
+- **Never invent.** Do not fabricate statistics, customer names, quotes, features, or performance claims. If it's not in the loaded documents, don't state it. Features come only from `product-capabilities.md`; never attribute anything in its "Outside social.plus scope" table to social.plus, not even by placing it next to a product link.
 - **Messaging hierarchy matters.** For multi-section content: establish the market shift → define infrastructure → engagement → intelligence → revenue → long-term advantage.
 - **Boilerplates are starting points.** Adapt to context but preserve meaning and claims.
 - **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule — do not proceed with stale or memorized content.
@@ -60,3 +63,4 @@ Each row below is a condition based on **what your output is or contains** — n
 | `narrative.md` | Messaging hierarchy, 5-step narrative structure |
 | `boilerplates.md` | Boilerplates (25w / 50w / 70w / extended), elevator pitches |
 | `ui-micro-copy.md` | UI copy patterns, capitalisation rules, microcopy do/don'ts |
+| `product-capabilities.md` | What social.plus offers per product area (with docs links), recent additions, and what it does not offer |

@@ -145,6 +145,7 @@ cat "$REPO/messaging/brain.md"
 Press releases trigger every conditional row in the router except UI. Load each file with `cat "$REPO/messaging/<file>"`:
 
 - `terminology.md` and `tone.md` — voice, capitalization, banned/preferred terms (always-load)
+- `product-capabilities.md` (always-load when the copy says what social.plus does): every feature or capability named must match a row; never attribute anything from its "Outside social.plus scope" table
 - `positioning.md` — product pillars used for category framing
 - `value-story.md` — value creation model (functional → strategic → economic → compounding)
 - `narrative.md` — messaging hierarchy and 5-step narrative structure

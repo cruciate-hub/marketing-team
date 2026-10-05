@@ -919,6 +919,7 @@ def run(path: Path, lo: int | None, hi: int | None) -> Report:
     report.results.append(check_approved_customers(body_with_h1))
     report.results.append(check_type(meta))
     report.results.append(check_editor_line(text))
+    report.results.append(check_product_claims(text))
     report.results.extend(type_checks(art_type, meta, body))
 
     return report
@@ -936,6 +937,31 @@ def scan_text(text: str) -> Report:
     report.results.append(check_forbidden_terms(text))
     report.results.append(check_risky_terms(text))
     return report
+
+
+def _product_claim_hits(text: str):
+    """Hits of scripts/product_claims.py: paragraphs that name social.plus or link a product page and tie it to
+    something in the 'Outside social.plus scope' table of messaging/product-capabilities.md. None = check skipped."""
+    root = Path(__file__).resolve().parents[4]
+    try:
+        sys.path.insert(0, str(root / "scripts"))
+        from product_claims import load_scope, check_text  # type: ignore
+    except Exception:  # noqa: BLE001
+        return None
+    scope = load_scope(root / "messaging" / "product-capabilities.md")
+    return check_text(text, scope)["hits"] if scope else None   # each hit has level FAIL (sentence) or WARN (paragraph)
+
+
+def check_product_claims(text: str) -> CheckResult:
+    hits = _product_claim_hits(text)
+    if hits is None:
+        return CheckResult("product_claims", "WARN", "skipped: scripts/product_claims.py or messaging/product-capabilities.md missing")
+    fails = [h for h in hits if h["level"] == "FAIL"]
+    status = "FAIL" if fails else "WARN" if hits else "PASS"
+    return CheckResult("product_claims", status,
+        "" if not hits else "social.plus tied to something it does not offer (messaging/product-capabilities.md"
+        + ("" if fails else "; only in the same paragraph, check whether it describes another company") + "): "
+        + "; ".join(f'{h["word"]} in "{h["sentence"][:120]}"' for h in (fails or hits)[:3]))
 
 
 def main() -> int:

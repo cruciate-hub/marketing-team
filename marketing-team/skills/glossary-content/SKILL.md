@@ -152,7 +152,7 @@ The matcher normalises synonyms and question forms but is still a word-level app
 
 ### 2. Brand-messaging read (non-negotiable)
 
-Read `messaging/terminology.md` and `messaging/tone.md` from the cloned repo. If the entry's "and social.plus" section will make any product or comparative claim, also read `messaging/positioning.md` and `messaging/value-story.md`. Do not proceed on memorized brand content if any file fails validation.
+Read `messaging/terminology.md`, `messaging/tone.md` and `messaging/product-capabilities.md` from the cloned repo. The "and social.plus" section may only name capabilities listed in `product-capabilities.md`; if the term is outside social.plus scope (its "Outside social.plus scope" table), say how it relates instead of implying social.plus provides it (compliance check `product_claims`, FAIL). If the entry's "and social.plus" section will make any product or comparative claim, also read `messaging/positioning.md` and `messaging/value-story.md`. Do not proceed on memorized brand content if any file fails validation.
 
 ### 3. Scope check — does this term deserve a glossary page?
 

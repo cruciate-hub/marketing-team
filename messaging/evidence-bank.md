@@ -39,6 +39,8 @@ The legacy /answers/ collection repeated the same four customer stats on nearly 
 
 Verifiable specifics from social.plus documentation (learn.social.plus). These are the easiest source of unique information for how-to pages. Add each with the docs URL and the date checked.
 
+The full list of what social.plus offers (and does not offer) is in [`product-capabilities.md`](./product-capabilities.md). Any claim that social.plus has a feature must match a row there. This table is for specific facts worth citing on a page (a limit, a supported platform, a number from the docs).
+
 | ID | Claim | Source (docs URL) | Date checked | Status | Cap (Answers) | Used on |
 |---|---|---|---|---|---|---|
 | | | | | | | |

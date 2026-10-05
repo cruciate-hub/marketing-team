@@ -16,6 +16,7 @@ Brand messaging source of truth for social.plus. These files are fetched live fr
 | [tone.md](./tone.md) | 106 | 3.2 KB | Tone of voice and writing style for marketing and external content. |
 | [terminology.md](./terminology.md) | 124 | 2.9 KB | Approved terminology — brand name, product names, capitalization, phrasing to avoid. |
 | [ui-micro-copy.md](./ui-micro-copy.md) | 134 | 5.9 KB | Product UI copy conventions — labels, errors, buttons, tooltips, placeholders. |
+| [product-capabilities.md](./product-capabilities.md) | | | What social.plus offers (per product area, with docs links) and what it does not offer. Checked by `scripts/product_claims.py` in the content skills' compliance scripts. |
 
 ## Precedence
 
