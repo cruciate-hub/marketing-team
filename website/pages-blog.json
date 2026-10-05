@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-05T01:22:42.041Z",
+    "generatedAt": "2026-10-05T01:26:37.198Z",
     "itemCount": 269,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
@@ -93,8 +93,8 @@
     {
       "url": "https://www.social.plus/blog/best-in-app-community-platforms-for-consumer-apps",
       "metaTitle": "6 Best In-App Community Platforms for Consumer Apps (2026)",
-      "metaDescription": "Comparing six in-app community platforms for consumer apps. What each does well, where each fits, and how to choose the right one for your product.",
-      "content": "# 6 Best In-App Community Platforms for Consumer Apps (2026)\n## What Is an In-App Community Platform?\n## What to Look for in an In-App Community Platform\n## 6 Best In-App Community Platforms for Consumer Apps (2026)\n### social.plus: Best for apps building a complete in-app community ecosystem\n### Stream: Best for engineering teams that want composable building blocks\n### Sendbird: Best for apps where chat is the primary community mechanic\n### Circle (Headless): Best for teams that want a managed community backend with API access to their app\n### Agora: Best for apps where voice and video are the community backbone\n### PubNub: Best for teams that want maximum low-level control\n## At-a-Glance Comparison\n## How to Choose the Right Platform for Your App"
+      "metaDescription": "Compare the 6 best in-app community platforms for consumer apps in 2026 and see how community-based apps like Noom and Strava keep users engaged.",
+      "content": "# 6 Best In-App Community Platforms for Consumer Apps (2026)\n## What Is an In-App Community Platform?\n## How We Evaluated These In-App Community Platforms\n## 6 Best In-App Community Platforms for Consumer Apps (2026)\n### social.plus: Best for apps building a complete in-app community ecosystem\n### Stream: Best for engineering teams that want composable building blocks\n### Sendbird: Best for apps where chat is the primary community mechanic\n### Circle (Headless): Best for teams that want a managed community backend with API access\n### Agora: Best for apps where voice and video are the community backbone\n### PubNub: Best for teams that want maximum low-level control\n## At-a-Glance Comparison\n## Best In-App Community Platforms by Vertical\n### Fitness and wellness apps\n### Gaming and betting apps\n### Retail and e-commerce apps\n## Examples of Community-Based Apps\n## How to Choose the Right Platform for Your Community-Based App\n## Frequently Asked Questions\n### What is a community-based app?\n### What is the best in-app community platform for consumer apps?\n### How much does an in-app community platform cost?\n### Should you build or buy in-app community infrastructure?\n### What is the difference between an in-app community and Discord?"
     },
     {
       "url": "https://www.social.plus/blog/how-to-prompt-the-mcp-server-for-your-industry-use-case",
