@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.52
+
+The claims check now reads headings and list items, so it catches false claims in social.plus's own entry of a vendor list.
+
+**Why:** a check of all live pages (5 October 2026) missed two lines in social.plus's entry of a chat SDK listicle ("Key strengths: chat with ... typing indicators", which the docs say the SDK does not expose). The sentences did not repeat the name, and the check dropped headings, so it could not see they sat under "social.plus: Best for ...". Drafts had the same blind spot.
+
+**Changes:**
+- [`scripts/product_claims.py`](scripts/product_claims.py): text under social.plus's own list entry ("### social.plus: Best for ...", "### 1. social.plus") counts as a claim about social.plus, so an outside-scope word there is a FAIL; text under another heading that names social.plus ("## Where social.plus fits") is at least a WARN. The context lasts until the next heading of the same or a higher level; the H1 never sets it. List items are separate units, like table rows (two vendor bullets in one paragraph no longer mix). A sentence that says the customer does the work ("requires integration work on your team's side") is a WARN, not a FAIL.
+- [`scripts/product_claims_test.py`](scripts/product_claims_test.py): 9 new cases. All existing skill tests still pass.
+- Effect on the live site: the same 10 pages fail, now with 13 sentences (11 before); on the 41 blog drafts, no new FAIL and two false FAILs in EX-B-006's draft are gone.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.51 -> 13.52.
+
 ## marketing-team 13.51
 
 The claims check also runs when a skill is used from the installed kit.
