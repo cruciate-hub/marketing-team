@@ -1,8 +1,11 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-02T09:56:39.345Z",
-    "itemCount": 22,
-    "method": "webflow-data-api"
+    "generatedAt": "2026-10-05T07:28:35.220Z",
+    "itemCount": 21,
+    "method": "webflow-data-api",
+    "errors": [
+      "/vs-stream"
+    ]
   },
   "pages": [
     {
@@ -112,12 +115,6 @@
       "metaTitle": "Video SDK - Build video features with API-based Video SDKs",
       "metaDescription": "Build engaging video features in your app with Video SDKs for iOS, Android, JavaScript, TypeScript, and React Native.",
       "content": "# Launch faster with social.plus Video SDK\nWith our Video SDK, you have everything you need to build interactive and immersive video features, such as live streaming, stories, and live commerce, without the hassle of deploying and maintaining any server infrastructure.\nDocumentation\n## Get started with our Video SDK\nBuild engaging video features in your app with our SDK for iOS, Android, JavaScript, TypeScript, Flutter and React Native.\n## Android Video SDK\nThe social.plus Video Android SDK is a powerful toolkit for building custom video experiences. It’s so easy to get started!\n## iOS Video SDK\nDo you want to launch video features in your iOS app? With the social.plus Video iOS SDK, you'll be up and running in no time.\n## React Native Video SDK\nThe social.plus Video SDK for React Native lets you build custom video experiences that look and feel native on iOS and Android.\n## TypeScript Video SDK\nLooking to build video features with TypeScript? The social.plus Video SDK for TypeScript has everything you need!\n## Flutter Video SDK\nThe social.plus Video SDK for Flutter is a powerful toolkit for building custom video experiences. It’s so easy to get started!"
-    },
-    {
-      "url": "https://www.social.plus/vs-stream",
-      "metaTitle": "social.plus vs Stream | Which platform is right for your product?",
-      "metaDescription": "Compare social.plus and Stream on features, pricing, and integration to find the right in-app community infrastructure for your product.",
-      "content": "# Which platform is right for your product?\nCompare social.plus and Stream to find the best fit for your app’s social engagement needs. See how they stack up in features, customization, AI capabilities, and scalability.\n## How does social.plus compare with Stream?\nsocial.plus and Stream are both powerful API-driven solutions for integrating social and chat features into applications. While both offer robust SDKs and developer flexibility, social.plus provides a full social suite with UIKit for customization, advanced moderation tools, AI-driven insights, and in-depth analytics. Stream focuses on high-performance chat and activity feeds, with strong moderation and developer control.\nSDKs\nUIKits\nAPIs\nSolutions overview\n## SDKs\nFeature-rich toolkit for building apps across platforms and developer languages, enabling efficient feature integration\nsocial.plus\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\n## UIKits\nUser interfaces and components that can be fully customized to meet your app's unique requirements.\nsocial.plus\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\nDesign files\n## APIs\nUser interfaces and components that can be fully customized to meet your app's unique requirements.\nsocial.plus\nStream\nProfiles\nActivity feeds\nGroups\nStories\nChat\nVideo and audio call\nLivestream\n## Solutions overview\nCompare platform capabilities, from integration approach to built-in growth tools, to understand which solution best suits your needs.\nsocial.plus\nStream\nIntegration approach\nAPI/SDK-driven with UIKit 4.0, offering both low-code customization and open-source flexibility.\nAPI/SDK-driven with high developer control. Various sample applications available for key use cases.\nUI customization\nFully customizable, supporting both quick out-of-the-box configurations and deep open-source modifications.\nDevelopers must build their own UI components, though detailed sample applications are provided.\nAds & sponsored content\nNative advertising solutions with sponsored content features.\nDoes not include built-in ad or sponsored content features.\nAnalytics\nComplete social and chat analytics AI-powered insights to analyze community trends, sentiments, and engagement.\nBasic analytics to track user interactions and behaviors.\nModeration tools\nAI-driven moderation with customizable rules and filtering.\nAdvanced moderation with auto-moderation, flagging, and profanity filters.\n### Who is social.plus best suited for?\nsocial.plus is ideal for companies seeking a full social engagement suite beyond chat and feeds. With AI-powered insights, built-in monetization, and flexible moderation, it’s designed for product teams and developers who need scalability and deep customization. social.plus UIKits offers both quick configurations and open-source flexibility, making social.plus a strong choice for driving engagement and revenue.\n### Who is Stream best suited for?\nStream is best for developers needing high-performance chat and feeds with strong moderation. It offers detailed documentation and sample apps, allowing for flexible integration. While great for real-time communication, its UI components require custom development, making it well-suited for teams that prefer full control over their front-end implementation."
     },
     {
       "url": "https://www.social.plus/white-label/chat-software",
