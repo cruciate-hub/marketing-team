@@ -1,5 +1,18 @@
 # Changelog
 
+## marketing-team 13.49
+
+No prices on answers and glossary pages either, with a warning check; the answers skill's Webflow open item is updated.
+
+**Why:** the team decided on 19 August 2026 that no page states specific prices (per-MAU rates, plan prices); pages describe the pricing model and send readers to sales. The rule existed only in `blog-seo-content`. The answers skill still listed its Webflow fields as unconfirmed, although they were confirmed against the live collection on 1 October.
+
+**Changes:**
+- [`aeo-content/SKILL.md`](marketing-team/skills/aeo-content/SKILL.md) and [`glossary-content/SKILL.md`](marketing-team/skills/glossary-content/SKILL.md): new writing rule "Never state prices" (same as the blog rule; cited cost statistics stay fine).
+- [`aeo-content/scripts/compliance.py`](marketing-team/skills/aeo-content/scripts/compliance.py) and [`glossary-content/scripts/compliance.py`](marketing-team/skills/glossary-content/scripts/compliance.py): new WARN check `no_price_figures` (a currency amount followed by a billing unit such as per MAU, /month, per seat, or introduced by "starting at", "priced at", "plans start at"). WARN, not FAIL. No hits on the 28 current answers drafts or the glossary drafts.
+- `aeo-content/SKILL.md` Open items: Answers Webflow fields confirmed (1 Oct); adding date, author and reviewer fields stays open.
+- Tests: aeo-content `run_tests.py` checks the price WARN (and no warning on the clean fixture).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.48 -> 13.49.
+
 ## marketing-team 13.48
 
 Listicles now describe competitors per product, keep code UI components apart from design files, and flag unsourced speed claims.

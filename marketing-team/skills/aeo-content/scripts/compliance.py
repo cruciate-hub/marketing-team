@@ -883,6 +883,21 @@ def check_conclusion(body: str) -> CheckResult:
     return CheckResult("conclusion", "FAIL", "no '## Conclusion' section")
 
 
+# Price-like figures (team decision, 19 Aug 2026: no specific prices on any page; describe the pricing model).
+# A currency amount followed by a billing unit, or introduced by price wording. Cited cost statistics
+# ("an average breach costs $4.44M") do not match.
+PRICE_FIGURE = re.compile(
+    r"(?:[$\u20ac\u00a3]\s?\d[\d,.]*\s?(?:k|K|M)?\s*(?:/|per|a|an)\s*(?:MAU|month|mo|user|seat|year|yr|license|licence)\b)"
+    r"|(?:\b(?:starting at|starts at|priced at|pricing (?:is|starts at|from)|plans? (?:start|begin) at)\s+[$\u20ac\u00a3]\s?\d)",
+    re.IGNORECASE)
+
+
+def check_price_figures(text: str) -> CheckResult:
+    hits = [m.group(0) for m in PRICE_FIGURE.finditer(text)]
+    return CheckResult("no_price_figures", "PASS" if not hits else "WARN",
+        "" if not hits else f"price-like figure(s): {hits[:3]}; describe the pricing model instead")
+
+
 def check_editor_line(text: str) -> CheckResult:
     ok = "Editor (named human reviewer):" in text
     return CheckResult("editor_line_present", "PASS" if ok else "FAIL",
@@ -939,6 +954,7 @@ def run(path: Path, intent_override: str | None, lo: int | None, hi: int | None,
     report.results.append(check_faq_count(body))
     report.results.append(check_faq_overlap(body, queue, meta.get("queueId", "")))
     report.results.append(check_conclusion(body))
+    report.results.append(check_price_figures(body))
     report.results.append(check_editor_line(text))
 
     return report

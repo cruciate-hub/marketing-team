@@ -42,6 +42,16 @@ for name in ["metadata_intent_valid", "no_em_dashes", "no_forbidden_terms", "que
              "conclusion", "editor_line_present", "no_filler_opener"]:
     check(f"flags {name}", re.search(rf"\[FAIL\] {name}\b", out) is not None)
 
+print("compliance: price figures (no prices on any page)")
+import tempfile
+src = (FIX / "pass-how-to.draft.md").read_text(encoding="utf-8")
+with tempfile.NamedTemporaryFile("w", suffix=".draft.md", delete=False, encoding="utf-8") as tf:
+    tf.write(src.replace("## FAQs", "Plans start at $499/month and cost $0.05 per MAU.\n\n## FAQs", 1))
+p = subprocess.run([sys.executable, str(COMPLIANCE), tf.name], capture_output=True, text=True)
+check("price-like figures WARN, not FAIL", "[WARN] no_price_figures" in p.stdout and p.returncode == 0, p.stdout[-400:])
+code, out = run("pass-how-to.draft.md")
+check("clean draft has no price warning", "[PASS] no_price_figures" in out)
+
 print("compliance: FAQ overlap against a queue")
 p = subprocess.run([sys.executable, str(COMPLIANCE), str(FIX / "pass-how-to.draft.md"), "--queue",
                     str(FIX / "queue-sample.csv")], capture_output=True, text=True)
