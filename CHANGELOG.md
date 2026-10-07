@@ -1,5 +1,18 @@
 # Changelog
 
+## marketing-team 13.58
+
+Pages built in Claude Design show the AI tools as their icons in the "Works in" row, and cards keep the site's layout (icon above the title).
+
+**Why:** the Agentry test page (7 October 2026) wrote Claude, ChatGPT, Claude Code and Cursor as plain text, because the definition of done allowed third-party logos only as files in `assets/media/` and the site's icons are inline SVG; and it put the card icons beside the text, which no card on the site does, because no section note said where the icon sits. Stefan decided: one fix for both, label "Works in", the Claude mark for Claude Code and the OpenAI mark for ChatGPT.
+
+**Changes:**
+- New [`assets/third-party/ai-tools/`](design-system/assets/third-party/ai-tools/): Claude, Cursor, VS Code, GitHub Copilot and OpenAI, taken from the live "Works in" row (/ai/mcp-server), single colour #b3b3b3 set on the shapes (the site's `currentColor` turns black as an image), no `<style>` block. Rendered on #111 in the 40px tile: all five show.
+- [`foundations/logo/foundation.md`](design-system/foundations/logo/foundation.md): new "Third-party logos (approved)" list (which file for which tool, Claude Code → Claude mark, ChatGPT and Codex → OpenAI mark) and how to add one; `preview.html` shows the row.
+- Definition of done, in [`README.md`](design-system/README.md), [`sections/README.md`](design-system/sections/README.md) (identical), [`brain.md`](design-system/brain.md) and `capture/pack-README.md`: point 3 now includes "with its inner layout as captured"; point 7 points at the approved set in `assets/third-party/`. The rule adds: keep each section's inner layout as its screenshots and `source.html` show it; a different inner layout is a proposal.
+- [`sections/13-card-grid-icons/section.md`](design-system/sections/13-card-grid-icons/section.md): the card layout (icon top-left, title under it, text under the title) and "icon beside the text" under Not allowed. [`sections/02-hero-simple/section.md`](design-system/sections/02-hero-simple/section.md): the "Works in" row described with the approved icons; plain text when an icon exists and any other label are not allowed. [`recipes/product-landing.md`](design-system/sections/recipes/product-landing.md) and [`taste.md`](design-system/taste.md): "Works in" (was "Works with"), the row built from the icons, card icons above the title.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.57 -> 13.58. No brand-kit bump: no symlinked skill file changed.
+
 ## marketing-team 13.57
 
 The social.plus logo and six icons keep their colours in Claude Design.

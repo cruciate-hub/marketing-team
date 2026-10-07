@@ -18,11 +18,14 @@ The items are long (two-column 11), need a border and a text link (14), or have 
 - card-v3: icon, title (28px, the h4 size), 1 to 2 sentences; 3 or 6 cards in 3 columns
 - v3 docs: 3 link cards, each with a title, a short line and a 3-item checklist; the whole card is the link
 
+- Layout of both cards (v2 and v3): the icon tile sits top-left, the title under it, the text under the title, all left-aligned. Never the icon beside the text
+
 ## Allowed variations
 - 3 or 4 columns; v2 or v3 card; link cards or plain cards; background plain dark or `.c-radial-gradient`
 - The audit recommends merging v2 and v3 into one icon card; until decided both are captured as-is
 
 ## Not allowed
+- The icon beside the title and text (a side-by-side card is not on the site), centred cards
 - Mixing v2 and v3 in one grid, bordered cards (14), images instead of icons, more than 16 cards, 2 columns on desktop
 
 ## Accessibility and mobile

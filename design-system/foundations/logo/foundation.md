@@ -37,6 +37,21 @@ Intersecting rounded shapes reveal a plus sign and a chat bubble: connection at 
 
 The website (dark) uses the full logo in colour with the **white** wordmark: `assets/media/66fe6169153dc88a03557da6_29a5aaff9e31043f2175762ac854a9e5_logo.svg`, as the nav (G1) and the footer (G5) show it. Use that file as it is; never the `#111` wordmark on a dark page. A logo that renders black on a dark page is a bug: the file lost its colours (see Known inconsistencies).
 
+## Third-party logos (approved)
+
+Other companies' logos appear only from this set or as files the team supplies; anything else is written as text. Single-colour icons in the site's grey (`--text--text-color-grey-light`, #b3b3b3), shown in the 40px "Works in" tile of section 02. Taken from the live site's "Works in" row (https://www.social.plus/ai/mcp-server, 7 October 2026), where they are inline SVG in `currentColor`; the files have the grey set on the shapes so they keep it as images.
+
+| Tool | File | Notes |
+|---|---|---|
+| Claude | `assets/third-party/ai-tools/claude.svg` | also for Claude Code (Stefan, 7 October 2026) |
+| Cursor | `assets/third-party/ai-tools/cursor.svg` | |
+| VS Code | `assets/third-party/ai-tools/vs-code.svg` | |
+| GitHub Copilot | `assets/third-party/ai-tools/github-copilot.svg` | the site's label is "Copilot" |
+| OpenAI | `assets/third-party/ai-tools/openai.svg` | for Codex (as on the site) and ChatGPT (Stefan, 7 October 2026) |
+
+- Adding one: the official single-colour mark from the company's brand or press page (or from Victoria), set to #b3b3b3 on the shapes, no `<style>` block, into `assets/third-party/<group>/`, listed here; approval Stefan or Amadeus. Check the company's brand guidelines before it goes live.
+- Never redraw, recolour beyond the grey, crop or put a third-party logo in the colour of ours.
+
 ## Inline SVG
 
 Full logo, colour. The wordmark paths use `fill="#111"` (light backgrounds); use `fill="#ffffff"` on dark backgrounds. Rename the gradient ids when two logos share a page.
