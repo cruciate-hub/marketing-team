@@ -12,6 +12,8 @@
 // capture.mjs and foundations.mjs run this at the end; standalone: node localize-media.mjs [--prune] [--refresh]
 //   --prune    delete files in assets/media/ that nothing references any more
 //   --refresh  download every referenced file again (otherwise a file already on disk is kept)
+// SVGs that colour their shapes in a <style> block get those colours moved onto the shapes as attributes
+// (inlineSvgStyles), because Claude Design strips <style> from uploaded SVGs and the shapes then render black.
 // The manifest capture/media.json records where every file came from. Read-only towards the CDN (one GET per
 // file, one at a time, a pause between them). No AI calls.
 
@@ -89,6 +91,57 @@ async function writeManifest(m) {
   await fs.writeFile(manifestFile, JSON.stringify(doc, null, 2) + '\n');
 }
 
+// Claude Design strips the <style> block from every SVG it uploads, so an SVG that colours its shapes through
+// classes (.cls-1 { fill: #fff }) renders black there: the social.plus logo did on 7 October 2026. This moves each
+// class rule onto the elements as presentation attributes (fill, stroke, opacity …; anything else into style="…")
+// and drops the <style> block. Only plain class selectors are handled; any other selector leaves the file as it is
+// and is reported. Returns the new text, or null when there is nothing to change or it cannot be done safely.
+const PRESENTATION = new Set(['fill', 'fill-opacity', 'fill-rule', 'stroke', 'stroke-width', 'stroke-opacity', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-dasharray', 'stroke-dashoffset', 'opacity', 'clip-rule', 'display', 'visibility', 'stop-color', 'stop-opacity']);
+export function inlineSvgStyles(svg) {
+  const blocks = [...svg.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)];
+  if (!blocks.length) return null;
+  const rules = new Map(); // class -> [[prop, value], …] in source order
+  for (const [, css] of blocks) {
+    for (const [, sel, body] of css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const classes = sel.split(',').map((s) => s.trim());
+      if (!classes.every((c) => /^\.[\w-]+$/.test(c))) return null;
+      const decls = body.split(';').map((d) => d.split(':').map((x) => x.trim())).filter(([p, v]) => p && v);
+      for (const c of classes) rules.set(c.slice(1), [...(rules.get(c.slice(1)) || []), ...decls]);
+    }
+  }
+  let out = svg.replace(/\s*<style[^>]*>[\s\S]*?<\/style>/g, '');
+  out = out.replace(/<([\w:-]+)([^<>]*?)\sclass="([^"]*)"([^<>]*?)(\/?)>/g, (all, tag, before, cls, after, slash) => {
+    const props = new Map();
+    for (const c of cls.split(/\s+/).filter(Boolean)) for (const [p, v] of rules.get(c) || []) props.set(p, v);
+    let attrs = before + after;
+    const style = [];
+    for (const [p, v] of props) {
+      if (PRESENTATION.has(p)) {
+        if (!new RegExp(`\\s${p}="`).test(attrs)) attrs += ` ${p}="${v}"`;
+      } else style.push(`${p}:${v}`);
+    }
+    if (style.length) attrs += ` style="${style.join(';')}"`;
+    return `<${tag}${attrs}${slash}>`;
+  });
+  return out;
+}
+
+async function inlineSvgFiles(stats) {
+  for (const n of (await fs.readdir(mediaDir)).filter((n) => extOf(n) === '.svg')) {
+    const file = path.join(mediaDir, n);
+    const text = await fs.readFile(file, 'utf8');
+    if (!text.includes('<style')) continue;
+    const fixed = inlineSvgStyles(text);
+    if (fixed === null) {
+      stats.svgSkipped.push(n);
+      continue;
+    }
+    await fs.writeFile(file, fixed);
+    stats.svgInlined++;
+    log(`  colours inlined ${n}`);
+  }
+}
+
 async function download(url, dest) {
   let lastErr;
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -149,7 +202,7 @@ export async function localizeMedia({ prune = false, refresh = false } = {}) {
   const manifest = await readManifest();
   const byUrl = new Map(Object.entries(manifest.files).map(([name, f]) => [f.url, name]));
   const files = (await Promise.all(scanDirs.map((d) => listFiles(d, /\.(html|css)$/)))).flat().sort();
-  const stats = { files: 0, rewritten: 0, downloaded: 0, kept: 0, failed: [], videos: 0, stills: 0, noStill: [] };
+  const stats = { files: 0, rewritten: 0, downloaded: 0, kept: 0, failed: [], videos: 0, stills: 0, noStill: [], svgInlined: 0, svgSkipped: [] };
   let ffmpeg;
 
   // the local name for a CDN URL: reuse the manifest's, else the decoded Webflow name (with a hash suffix on a clash)
@@ -288,6 +341,7 @@ export async function localizeMedia({ prune = false, refresh = false } = {}) {
       }
     }
   }
+  await inlineSvgFiles(stats);
   const onDisk = (await fs.readdir(mediaDir)).filter((n) => !n.startsWith('.'));
   const unreferenced = onDisk.filter((n) => !referenced.has(n));
   if (prune) {
@@ -303,16 +357,17 @@ export async function localizeMedia({ prune = false, refresh = false } = {}) {
   const total = (await Promise.all((await fs.readdir(mediaDir)).map((n) => fs.stat(path.join(mediaDir, n)).then((s) => s.size)))).reduce((a, b) => a + b, 0);
   log(
     `media: ${stats.files} files scanned, ${stats.rewritten} rewritten; ${stats.downloaded} copied, ${stats.kept} already there, ${stats.failed.length} failed; ` +
-      `${stats.videos} video references, ${stats.stills} stills made; ${(await fs.readdir(mediaDir)).length} files in ${posix(path.relative(path.resolve(here, '..'), mediaDir))} (${(total / 1e6).toFixed(1)} MB)` +
+      `${stats.videos} video references, ${stats.stills} stills made; ${stats.svgInlined} SVGs with colours inlined; ${(await fs.readdir(mediaDir)).length} files in ${posix(path.relative(path.resolve(here, '..'), mediaDir))} (${(total / 1e6).toFixed(1)} MB)` +
       (unreferenced.length ? `; ${unreferenced.length} unreferenced${prune ? ' (pruned)' : ' (run with --prune to delete)'}: ${unreferenced.join(', ')}` : '')
   );
   for (const f of stats.failed) log(`  FAILED ${f}`);
   for (const f of stats.noStill) log(`  NO STILL ${f}`);
+  for (const f of stats.svgSkipped) log(`  SVG <style> NOT INLINED (selector other than a class; Claude Design will strip it) ${f}`);
   return stats;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
   const stats = await localizeMedia({ prune: args.includes('--prune'), refresh: args.includes('--refresh') });
-  process.exitCode = stats.failed.length || stats.noStill.length ? 1 : 0;
+  process.exitCode = stats.failed.length || stats.noStill.length || stats.svgSkipped.length ? 1 : 0;
 }
