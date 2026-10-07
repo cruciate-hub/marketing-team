@@ -62,12 +62,12 @@ a { color: var(--main--white); }
 <main class="fx-page">
   <header class="fx-head">
     <h1>Shadows and radius</h1>
-    <p>The border radii and shadows the live site uses, with rule counts from the 7 October audit, and the reduced set the audit proposes for the team to decide. Depth on dark pages comes from lighter surfaces; the values are in foundation.md.</p>
+    <p>The border radii and shadows the live site uses, with rule counts measured on 7 October 2026 by the site audit, and the reduced set the audit proposes for the team to decide. Depth on dark pages comes from lighter surfaces; the values are in foundation.md.</p>
   </header>
 
   <section class="fx-block">
-    <h2 class="fx-label">Border radius: every value the live stylesheet uses more than twice (55 values in all, no token)</h2>
-    <p class="fx-note">Rule counts from the 7 October audit of the two Webflow stylesheets. The set the audit proposes (to decide, Stefan or Amadeus): <strong>8px</strong> cards and holders, <strong>16px</strong> images and forms, <strong>24px</strong> large images, <strong>pill</strong> buttons and tags, <strong>circle</strong> avatars. The 4px and 12px values stay where the site uses them until the team retires them.</p>
+    <h2 class="fx-label">Border radius: the values the live stylesheet uses most (55 values in all, no token)</h2>
+    <p class="fx-note">Rule counts over the two Webflow stylesheets, measured on 7 October 2026 by the site audit. Not shown: the px spellings 12px (8 rules), 16px (8), 8px (7) and 0 (7), nearly all on the AI pages and in Webflow defaults, and 35 values with one to four rules each. The set the audit proposes (to decide, Stefan or Amadeus): <strong>8px</strong> cards and holders, <strong>16px</strong> images and forms, <strong>24px</strong> large images, <strong>pill</strong> buttons and tags, <strong>circle</strong> avatars. The 4px and 12px values stay where the site uses them until the team retires them.</p>
     <div class="fx-sample"><div class="sr-grid">
 <div class="sr-r"><div class="sr-box" style="border-radius:.25rem"></div><span class="fx-cap">.25rem (4px)<br>33 rules: checkbox, announcement bar, blog share, inputs (4px), .tag.c-nav-webinar</span></div>
 <div class="sr-r"><div class="sr-box" style="border-radius:.36rem"></div><span class="fx-cap">.36rem (5.8px)<br>3 rules: .tag, .blog-tag, .pu-tag</span></div>
@@ -76,7 +76,7 @@ a { color: var(--main--white); }
 <div class="sr-r"><div class="sr-box" style="border-radius:1rem"></div><span class="fx-cap">1rem (16px)<br>52 rules: image ratio classes, thumbnails, forms, pop-ups, answers image, rich-text images (product updates)</span></div>
 <div class="sr-r"><div class="sr-box" style="border-radius:1.5rem"></div><span class="fx-cap">1.5rem (24px)<br>11 rules: rich-text images (.rich-text), hero tag, image_radius-parent, slider</span></div>
 <div class="sr-r"><div class="sr-box" style="border-radius:10em"></div><span class="fx-cap">10em / 25em (pill)<br>2 rules: .cta-button outer / .cta-button_bg inner (primary and secondary buttons)</span></div>
-<div class="sr-r"><div class="sr-box" style="border-radius:999px"></div><span class="fx-cap">999px, 99rem, 100rem, 20rem, 25rem, 10rem (pill)<br>20 rules: nav links, card-icon-v1, filter tags, .button submit, rounded inputs, .tag.c-new (six spellings)</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:999px"></div><span class="fx-cap">999px, 99rem, 100rem, 20rem, 25rem, 10rem (pill)<br>26 rules: nav links, card-icon-v1, filter tags, .button submit, rounded inputs, .tag.c-new (six spellings)</span></div>
 <div class="sr-r"><div class="sr-box" style="border-radius:50%"></div><span class="fx-cap">50% / 100% (circle)<br>25 rules: avatars, author images, button arrow circle, dots</span></div>
 
     </div></div>

@@ -1,6 +1,6 @@
 # Accessibility
 
-WCAG 2.1 AA is the target for every page, email and graphic. This foundation holds the contrast of the live token pairs (computed from tokens.css), the site's focus rules, touch targets, text sizes, motion, keyboard and structure rules, and the open items the section notes marked TO CHECK.
+WCAG 2.1 AA is the target for every page, email and graphic. This foundation holds the contrast of the text and background token pairs the site and the emails use (computed from tokens.css; every surface token has its rows), the site's focus rules, touch targets, text sizes, motion, keyboard and structure rules, and the open items the section notes marked TO CHECK.
 
 - Status: draft (2026-10-07), as-is: ratios computed from the live tokens, rules from the brand guidelines (formerly `design-system/accessibility.md`) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: tokens.css (WCAG 2.1 relative luminance), the captured sections' CSS (`a:focus-visible`, `.text-field:focus`), the section notes
@@ -24,13 +24,22 @@ Body text needs 4.5:1; large text (24px, or 19px bold) and interface parts (bord
 | `--text--text-color-grey-medium` | `--social--dark-gray-background` | 3.62:1 | large text and UI only | muted text on cards |
 | `--main--white` | `--secondary--menu-bg` #181818 | 17.76:1 | AA | nav links |
 | `--text--text-color-grey-medium` | `--secondary--menu-bg` | 3.69:1 | large text and UI only | nav small text |
+| `--main--white` | `--social--dark-card` #161616 | 18.10:1 | AA | card headings |
+| `--text--text-color-grey-light` | `--social--dark-card` | 8.63:1 | AA | card body |
+| `--text--text-color-grey-medium` | `--social--dark-card` | 3.76:1 | large text and UI only | |
+| `--main--white` | `--social--dark-pill` #2e2e2e | 13.58:1 | AA | pill label |
+| `--text--text-color-grey-light` | `--social--dark-pill` | 6.48:1 | AA | |
+| `--text--text-color-grey-medium` | `--social--dark-pill` | 2.82:1 | fails | never |
+| `--main--white` | `--social--light-grey` #444 | 9.74:1 | AA | chip label |
+| `--text--text-color-grey-light` | `--social--light-grey` | 4.65:1 | AA | just above the line |
+| `--text--text-color-grey-medium` | `--social--light-grey` | 2.02:1 | fails | never |
 | `--main--white` | `--social--grey` #222 | 15.91:1 | AA | panels |
 | `--text--text-color-grey-light` | `--social--grey` | 7.59:1 | AA | panel body |
 | `--main--white` | `--social--main-blue` #3b41ec | 6.66:1 | AA | primary button label, tags on blue |
 | `--main--white` | `--social--button-hover` #272b9d | 10.95:1 | AA | primary button hover |
 | `--main--white` | `--social--button-pressed` #27265e | 13.77:1 | AA | primary button pressed |
 | `--social--main-blue` #3b41ec | `--social--dark` | 2.84:1 | fails | blue as text or icon colour on dark: never. Blue is a fill (button, circle, tag background), not a text colour on dark |
-| `--gradient--medium-blue` #3769ec | `--social--dark` | 3.95:1 | large text and UI only | plain links and superscripts on the live site: TO CHECK (underline or a lighter blue such as #7b94fe, 6.75:1, which page embeds already use) |
+| `--gradient--medium-blue` #3769ec | `--social--dark` | 3.95:1 | large text and UI only | plain links and superscripts on the live site: TO CHECK (underline or a lighter blue such as #7b94fe, 6.75:1, which the page embeds and three AI-page rules already use; until decided follow the rule in `brain.md`: white, or #7b94fe) |
 | `--social--main-blue` | `--main--whitesmoke` #f5f5f5 | 6.11:1 | AA | `.tag` text |
 | `--social--main-blue` | `--main--white` | 6.66:1 | AA | blue text and outlined buttons on white (emails) |
 | `--gradient--medium-blue` | `--main--white` | 4.78:1 | AA | links on white |
@@ -40,6 +49,10 @@ Body text needs 4.5:1; large text (24px, or 19px bold) and interface parts (bord
 | `--text--text-color-dark` | `--social--grey-background` #f9f9f9 | 17.94:1 | AA | text on grey sections |
 | `--text--text-color-grey-dark` | `--social--grey-background` | 9.41:1 | AA | |
 | `--text--text-color-grey-medium` | `--social--grey-background` | 4.57:1 | AA | just above the line |
+| `--text--text-color-dark` | `--main--whitesmoke` #f5f5f5 | 17.32:1 | AA | headings on whitesmoke, email page background |
+| `--text--text-color-grey-dark` | `--main--whitesmoke` | 9.09:1 | AA | body and small text on whitesmoke |
+| `--text--text-color-grey-medium` | `--main--whitesmoke` | 4.41:1 | large text and UI only | fails for body or small text: on whitesmoke use `--text--text-color-grey-dark` #414347 (emails: the #f5f5f5 page background) |
+| `--gradient--medium-blue` | `--main--whitesmoke` | 4.38:1 | large text and UI only | links on whitesmoke: use `--social--main-blue` (6.11:1) |
 | `--secondary--green` #1dc497 | `--social--dark` | 8.45:1 | AA | status text |
 | `--secondary--yellow` #f7c506 | `--social--dark` | 11.64:1 | AA | status text |
 | `--secondary--red` #ff305a | `--social--dark` | 5.24:1 | AA | status and error text |
@@ -53,8 +66,9 @@ Body text needs 4.5:1; large text (24px, or 19px bold) and interface parts (bord
 | `--border--border-hover` #39393a | `--social--dark` | 1.64:1 | decorative | card borders carry no meaning |
 | `--border--border-dark` #232324 | `--social--dark` | 1.20:1 | decorative | dividers |
 | `--border--border-med-grey` #d0d0d1 | `--main--white` | 1.54:1 | decorative | light input border: the input needs another cue (label, focus ring) |
+| `--border--border-light-grey` #e7e7e7 | `--main--white` | 1.24:1 | decorative | email dividers and the footer top border carry no meaning |
 
-Values regular sections use that are not tokens: `#dc3545` form error on #111 is 4.17:1 (below 4.5:1, TO CHECK: use `--secondary--red`); `.tag.c-new` #3ccb7f on #093a20 is 6.13:1; input background #1b1b1b with grey-light text is 8.21:1.
+Values regular sections use that are not tokens: `#dc3545` form error on #111 is 4.17:1 (below 4.5:1, TO CHECK: use `--secondary--red`); `.tag.c-new` #3ccb7f on #093a20 is 6.13:1; input background #1b1b1b with grey-light text is 8.21:1. Not a token either: #7b94fe on #111 is 6.75:1 (the blue the page embeds and three AI-page rules use for text on dark; see the rule for links on dark in `brain.md`).
 
 ## Focus
 
@@ -65,7 +79,7 @@ Values regular sections use that are not tokens: `#dc3545` form error on #111 is
 
 ## Touch targets and text size
 
-- 44px minimum for every interactive element (the brand keeps 44 although WCAG 2.5.8 asks 24). The primary and secondary buttons are 2.8rem = 44.8px; the form submit is 52px; text links and footer links are a text line of about 22px and need padding or spacing (TO CHECK); accordion rows are 12px padding around a 19.2px line, about 43px (TO CHECK).
+- 44px minimum for every interactive element (the brand keeps 44 although WCAG 2.2 criterion 2.5.8 asks 24). The primary and secondary buttons are 2.8rem = 44.8px; the form submit `.button` is 48px (min-height 3rem) and the input fields 52px (3.25rem); text links and footer links are a text line of about 22px and need padding or spacing (TO CHECK); FAQ accordion rows are about 48px (`.accordion_top` padding .75rem and .5rem around a 1.2rem question line at 1.25 with its .25rem margin).
 - 12px is the floor. Smallest live sizes: `.tag` .8rem = 12.8px, `.superscript` 14px, `.text-size-tiny` and `.heading-xsmall` 14.4px. The blog grid overrides the tag to 10.8px (TO CHECK: below the floor).
 - Uppercase only at tag and superscript size, with letter spacing (.025rem on tags, .044rem on superscripts).
 
@@ -92,7 +106,7 @@ Values regular sections use that are not tokens: `#dc3545` form error on #111 is
 
 ## Checklist before a page or email ships
 
-- [ ] Every text and background pair is in the table above with AA, or large text at 3:1
+- [ ] Every text and background pair is in the table above with AA (or large text at 3:1), or computed the same way and added to it
 - [ ] No `--social--main-blue` text or icon on a dark background
 - [ ] Focus ring visible on every link, button and field, on dark and on light
 - [ ] 44px targets; nothing under 12px
@@ -101,4 +115,4 @@ Values regular sections use that are not tokens: `#dc3545` form error on #111 is
 - [ ] Accordions, tabs and sliders work with the keyboard, or the page uses the static state
 - [ ] Forms: visible labels, text errors linked to the field
 - [ ] Reduced motion: nothing keeps moving
-- [ ] Emails: the same pairs on white (`#414347` body, `#717275` small text, `#3b41ec` links and buttons with white labels)
+- [ ] Emails: the same pairs on white (`#414347` body, `#717275` small text on white only, `#414347` for small text on the `#f5f5f5` page background, `#3b41ec` links and buttons with white labels)
