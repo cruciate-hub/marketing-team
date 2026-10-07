@@ -2,7 +2,7 @@
    Source: the :root block of the live Webflow stylesheet, captured 2026-10-07 by capture/capture.mjs.
    61 variables in the stylesheet; 17 Webflow "deleted" leftovers dropped; 44 kept.
    Change values in Webflow, then re-run the capture. Do not edit by hand. */
-@font-face { font-family:Figtree;src: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6a27dab3fc94d9c8e91232ce_figtree.woff2)format("woff2"), url(figtree.woff2) format("woff2");font-weight:300 900;font-style:normal;font-display:swap; }
+@font-face { font-family: "Figtree"; src: url(figtree.woff2) format("woff2"); font-weight: 300 900; font-style: normal; font-display: swap; }
 :root {
   color-scheme: dark;
   --social--dark: #111;

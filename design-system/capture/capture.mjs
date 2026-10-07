@@ -405,16 +405,12 @@ function buildTokens(optCss, sharedCss) {
   const vars = parseRootVariables(optCss);
   const live = vars.filter((v) => !v.deleted);
   const deleted = vars.filter((v) => v.deleted);
-  const fontFace = parseCss(sharedCss).find(
-    (n) => n.type === 'rule' && n.selector === '@font-face' && /font-family:\s*Figtree/i.test(n.body)
-  );
-  let fontFaceCss = '';
-  if (fontFace) {
-    const src = fontFace.body.match(/src:\s*([^;]+)/);
-    const fallback = `url(${out.fontFallbackFile}) format("woff2")`;
-    const body = src ? fontFace.body.replace(src[0], `src: ${src[1].trim()}, ${fallback}`) : fontFace.body;
-    fontFaceCss = `@font-face { ${body.replace(/;?$/, ';')} }`;
-  }
+  // The font is social.plus's own build of Figtree (single-storey "a" is the default glyph, basic Latin only).
+  // It is loaded only from the local figtree.woff2: never from the Webflow CDN, Google Fonts or any other source,
+  // and without font-feature-settings. Anything outside basic Latin falls back to Arial, sans-serif.
+  const fontFaceCss =
+    `@font-face { font-family: "Figtree"; src: url(${out.fontFile}) format("woff2"); ` +
+    `font-weight: 300 900; font-style: normal; font-display: swap; }`;
   const extra = Object.entries(config.tokens.extraRootDeclarations || {})
     .map(([k, v]) => `  ${k}: ${v};`)
     .join('\n');

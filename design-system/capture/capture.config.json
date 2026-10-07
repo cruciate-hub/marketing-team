@@ -8,7 +8,7 @@
     "rawDir": "raw",
     "galleryFile": "../sections/index.html",
     "readmeDiffFile": "README.md",
-    "fontFallbackFile": "figtree.woff2"
+    "fontFile": "figtree.woff2"
   },
   "viewports": {
     "desktop": {

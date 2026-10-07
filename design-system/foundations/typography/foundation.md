@@ -1,6 +1,6 @@
 # Typography
 
-Figtree (variable font 300 to 900; Inter is loaded but unused). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px.
+Figtree (variable font 300 to 900; Inter is loaded on the live site but unused). **Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px.
 
 - Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide (the style guide's own heading, text, weight, alignment and colour samples)

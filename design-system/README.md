@@ -14,7 +14,7 @@ design-system/
   README.md               this file
   brain.md                router: what to load for which task (every skill reads it)
   tokens.css, tokens.json the 44 live Webflow variables (+ Figtree @font-face); the JSON adds a use per token
-  figtree.woff2           fallback font file for tokens.css
+  figtree.woff2           the only font file (social.plus Figtree build; see "Font" below)
   foundations/<name>/     foundation.md (values as measured, rules, known inconsistencies), preview.html (self-contained markup),
                           styles.css (the site's own rules), desktop.png (1440), mobile.png (390)
     colors, typography, spacing, buttons, cards, rich-text, form-inputs, tags, accordion-row, dividers, imagery   captured from the site
@@ -33,9 +33,13 @@ Everything is as the site is today. No team decision from the 7 October 2026 aud
 
 ## The rule
 
-> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree, one blue for actions (`--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
+> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif), one blue for actions (`--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
 
 The same text is in `sections/README.md` for pasting into a Claude Design project.
+
+## Font
+
+**Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`).
 
 ## Who approves
 

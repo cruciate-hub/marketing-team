@@ -6,9 +6,9 @@ Everything is as the site is today. No team decision from the 7 October audit ha
 
 ## The rule
 
-> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark` #111), Figtree, one blue for actions (`--social--main-blue` #3B41EC). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
+> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark` #111), Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif), one blue for actions (`--social--main-blue` #3B41EC). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
 
-Short form for a project's instructions: dark background, Figtree, one blue for actions; only these sections, only these tokens; anything new is proposed and marked "proposed".
+Short form for a project's instructions: dark background, Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif), one blue for actions; only these sections, only these tokens; anything new is proposed and marked "proposed".
 
 ## How it is organised
 
@@ -16,7 +16,7 @@ Short form for a project's instructions: dark background, Figtree, one blue for 
 README.md                 this file
 tokens.css                the 44 live Webflow variables as CSS custom properties (+ the Figtree @font-face)
 tokens.json               the same tokens with their use, machine-readable
-figtree.woff2             fallback font file for tokens.css
+figtree.woff2             the only font file (social.plus Figtree build)
 foundations/<name>/       preview.html (self-contained), styles.css, foundation.md (values, rules, inconsistencies), desktop.png, mobile.png
 sections/README.md        the rule and the index of all sections
 sections/<nn-name>/       section.md (use it when, don't, content slots, allowed variations, not allowed, accessibility and mobile),

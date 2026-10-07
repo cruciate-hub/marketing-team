@@ -26,6 +26,8 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 
 ## Rules
 
+- **Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`).
+
 - **Tokens are law.** Use the exact names and values in `tokens.css` (`var(--social--main-blue)` in CSS, `#3B41EC` where a hex is needed, as in emails). Never approximate. A colour that is not a token is listed in the colors foundation as "not a token" and is not used for new work.
 - **Dark-first.** `--social--dark` #111 is the page; raised blocks are `--social--dark-gray-background` #1a1a1a; depth comes from lighter surfaces, not shadows. Light sections use `--social--grey-background` #f9f9f9 or white.
 - **One blue for actions.** `--social--main-blue` fills buttons, tags and icon holders; hover `--social--button-hover` #272B9D, pressed `--social--button-pressed` #27265E. The secondary colours decorate and signal status; they never make a call to action.
