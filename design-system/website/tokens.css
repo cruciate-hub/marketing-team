@@ -1,0 +1,52 @@
+/* social.plus website tokens.
+   Source: the :root block of the live Webflow stylesheet, captured 2026-10-07 by capture/capture.mjs.
+   61 variables in the stylesheet; 17 Webflow "deleted" leftovers dropped; 44 kept.
+   Change values in Webflow, then re-run the capture. Do not edit by hand. */
+@font-face { font-family:Figtree;src: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6a27dab3fc94d9c8e91232ce_figtree.woff2)format("woff2"), url(figtree.woff2) format("woff2");font-weight:300 900;font-style:normal;font-display:swap; }
+:root {
+  color-scheme: dark;
+  --social--dark: #111;
+  --font--figtree: Figtree,Arial,sans-serif;
+  --text--text-color-grey-light: #b3b3b3;
+  --main--white: white;
+  --_typography---h1-font-size: clamp(2.75rem,1.5rem + 2svw,5rem);
+  --_typography---h2-font-size: clamp(2.25rem,1.5rem + 2svw,3.25rem);
+  --_typography---h3-font-size: clamp(1.75rem,1rem + 2svw,2.25rem);
+  --_typography---h4-font-size: clamp(1.5rem,.875rem + 2svw,1.75rem);
+  --_typography---h5-font-size: 1.25rem;
+  --_typography---h6-font-size: 1.125rem;
+  --gradient--medium-blue: #3769ec;
+  --text--text-color-grey-dark: #414347;
+  --secondary--green: #1dc497;
+  --social--grey: #222;
+  --secondary--red: #ff305a;
+  --main--transparant: #0000;
+  --social--main-blue: #3b41ec;
+  --gradient--light-blue: #45a5ed;
+  --gradient--dark-blue: var(--social--main-blue);
+  --text--text-color-grey-medium: #717275;
+  --border--border-dark: #232324;
+  --social--grey-background: #f9f9f9;
+  --social--dark-gray-background: #1a1a1a;
+  --border--border-light-grey: #e7e7e7;
+  --main--whitesmoke: whitesmoke;
+  --border--border-hover: #39393a;
+  --secondary--menu-bg: #181818;
+  --social--blue-transparent: #2a31e91a;
+  --border--border-med-grey: #d0d0d1;
+  --text--text-color-dark: #111;
+  --social--light-grey: #444;
+  --social--button-hover: #272b9d;
+  --social--button-pressed: #27265e;
+  --border--border-dark-grey: #666;
+  --secondary--yellow: #f7c506;
+  --secondary--purple: #9f72ff;
+  --secondary--pink: #f568f0;
+  --cta-button_icon-size: 1.75rem;
+  --secondary--orange: #ff6937;
+  --text--text-color-grey-lighter: #d1d1d1;
+  --social--dark-card: #161616;
+  --text--text-color-grey-mid: #a4a4a4;
+  --social--dark-pill: #2e2e2e;
+  --text--text-color-grey-muted: #929292;
+}
