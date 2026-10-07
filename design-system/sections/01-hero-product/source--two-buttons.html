@@ -407,7 +407,7 @@
     </style>
   </head>
   <body>
-    <!-- 01 Hero / Product (two buttons). Captured 2026-10-07 from https://www.social.plus/chat/sdk/ios by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- 01 Hero / Product (two buttons). Captured 2026-10-07 from https://www.social.plus/chat/sdk/ios by design-system/capture/capture.mjs. Images are copies of the site's own files in design-system/assets/media/ (capture/localize-media.mjs); videos are not copied, a <video> shows its first frame as poster. -->
     <!-- hero (product, two-buttons variant): as on the SDK pages, with a second grey button (Documentation). -->
     <header class="main-hero">
       <div class="container-large">
@@ -475,12 +475,13 @@
             </div>
           </div>
           <div class="product-video-wrapper">
+            <!-- The live section plays the video 672ddc68bc3d014e1b61da0a_chat-transcode.mp4 (not in the repo: team decision, 7 October 2026); the poster is its first frame. -->
             <video
+              poster="../../assets/media/672ddc68bc3d014e1b61da0a_chat-transcode-still.jpg"
               playsinline="true"
               type="video/mp4"
               height="100%"
               width="100%"
-              src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb%2F672ddc68bc3d014e1b61da0a_chat-transcode.mp4"
               loop=""
               defaultmuted="muted"
               muted=""

@@ -425,7 +425,7 @@
     </style>
   </head>
   <body>
-    <!-- 11 Two-column (video, CTA). Captured 2026-10-07 from https://www.social.plus/chat/sdk/ios by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- 11 Two-column (video, CTA). Captured 2026-10-07 from https://www.social.plus/chat/sdk/ios by design-system/capture/capture.mjs. Images are copies of the site's own files in design-system/assets/media/ (capture/localize-media.mjs); videos are not copied, a <video> shows its first frame as poster. -->
     <!-- two-column (video variant): the media column is a looping product video; a poster shows when it does not play. -->
     <aside class="section padding_y background-color_dark c-radial-gradient">
       <div class="page-padding">
@@ -433,12 +433,13 @@
           <main class="grid-2">
             <div class="grid-child">
               <div class="product-video-wrapper">
+                <!-- The live section plays the video 672de7af791a6a9d62b8a090_social-sdk-transcode.mp4 (not in the repo: team decision, 7 October 2026); the poster is its first frame. -->
                 <video
+                  poster="../../assets/media/672de7af791a6a9d62b8a090_social-sdk-transcode-still.jpg"
                   playsinline="true"
                   type="video/mp4"
                   height="100%"
                   width="100%"
-                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb%2F672de7af791a6a9d62b8a090_social-sdk-transcode.mp4"
                   loop=""
                   defaultmuted="muted"
                   muted=""

@@ -346,7 +346,7 @@ img {
   color: #0000;
   text-indent: 101%;
   white-space: nowrap;
-  background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac34b51e4cd922c8d4fff30_vs-compare-dash.svg);
+  background-image: url(../../assets/media/6ac34b51e4cd922c8d4fff30_vs-compare-dash.svg);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -359,7 +359,7 @@ img {
   overflow: hidden;
 }
 .vs-compare_mark.is-yes {
-  background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac34b50e70cc31fe97d1805_vs-compare-check.svg);
+  background-image: url(../../assets/media/6ac34b50e70cc31fe97d1805_vs-compare-check.svg);
 }
 @media screen and (max-width: 991px) {
   .ecp-tab-link {
