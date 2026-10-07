@@ -46,7 +46,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 | Skill | What it does |
 |---|---|
-| [**design-system**](./marketing-team/skills/design-system/SKILL.md) | Full visual design system — colors, typography, spacing, buttons, layout, accessibility, and more. |
+| [**design-system**](./marketing-team/skills/design-system/SKILL.md) | The design system built from the live website: tokens, foundations (colors, typography, spacing, buttons, cards, imagery, logo, icons, accessibility, shadows and radius, and more) and the 41 section types with page recipes. |
 | [**site-intelligence**](./marketing-team/skills/site-intelligence/SKILL.md) | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
 | [**product-update-vs-website**](./marketing-team/skills/product-update-vs-website/SKILL.md) | Compares product release notes against live website content to find pages that need updating. |
 | [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Migrates Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP — decision rule for native-vs-code, 10 anti-patterns, 45 pitfalls, worked before/after examples, and a pre-mapped social.plus variable-ID catalog. |
@@ -80,7 +80,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 |---|---|
 | [**brain.md**](./brain.md) | Main brain — cross-domain routing, precedence rules, compliance check |
 | [**messaging/**](./messaging) | Brand messaging files — tone, terminology, positioning, narrative, boilerplates, UI micro-copy |
-| [**design-system/**](./design-system) | Full visual design system — colors, typography, spacing, buttons, shadows, layout, accessibility, and more. [View brand guidelines live](https://cruciate-hub.github.io/marketing-team/design-system/brand-guidelines.html) |
+| [**design-system/**](./design-system) | The design system built from the live website: `tokens.css`, `foundations/`, `sections/` with recipes, and the capture scripts. [View the gallery live](https://cruciate-hub.github.io/marketing-team/design-system/sections/index.html) |
 | [**assets/**](./assets) | Official logo SVGs |
 | [**emails/**](./emails) | Email template reference, strategy guide, and HTML examples |
 | [**website/**](./website) | Website content JSON + the internal-linking strategy. Live inventories are auto-committed by a Cloudflare Worker to the [`site-data`](https://github.com/cruciate-hub/marketing-team/tree/site-data) branch on every Webflow publish (skills overlay that branch at fetch time); the copies on `main` are a point-in-time snapshot |

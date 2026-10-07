@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>42 · Customer story body · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      img {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      blockquote {
+        border-left: 5px solid #e2e2e2;
+        margin: 0 0 10px;
+        padding: 10px 20px;
+        font-size: 18px;
+        line-height: 22px;
+      }
+      figure {
+        margin: 0 0 10px;
+      }
+      figcaption {
+        text-align: center;
+        margin-top: 5px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      .w-richtext figure {
+        max-width: 60%;
+        position: relative;
+      }
+      .w-richtext figure > div:before {
+        cursor: default !important;
+      }
+      .w-richtext figure img {
+        width: 100%;
+      }
+      .w-richtext figure div {
+        color: #0000;
+        font-size: 0;
+      }
+      .w-richtext figure.w-richtext-figure-type-image,
+      .w-richtext figure[data-rt-type="image"] {
+        display: table;
+      }
+      .w-richtext figure.w-richtext-figure-type-image > div,
+      .w-richtext figure[data-rt-type="image"] > div {
+        display: inline-block;
+      }
+      .w-richtext figure.w-richtext-figure-type-image > figcaption,
+      .w-richtext figure[data-rt-type="image"] > figcaption {
+        caption-side: bottom;
+        display: table-caption;
+      }
+      .w-richtext figure.w-richtext-align-fullwidth {
+        text-align: center;
+        clear: both;
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+      .w-richtext figure.w-richtext-align-fullwidth > div {
+        padding-bottom: inherit;
+        display: inline-block;
+      }
+      .w-richtext figure.w-richtext-align-fullwidth > figcaption {
+        display: block;
+      }
+      .w-dyn-hide,
+      .w-dyn-bind-empty,
+      .w-condition-invisible {
+        display: none !important;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db69d.ba8644901.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      blockquote {
+        border-style: solid;
+        border-width: 0 0 0 0.0625rem;
+        border-color: black black black var(--main--white);
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      figure {
+        margin-bottom: 0.625rem;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .page-with-sidebar_wrapper {
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+      }
+      .text-size-small {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .margin-bottom_none {
+        margin-bottom: 0;
+      }
+      .sprscript-green {
+        background-image: linear-gradient(145deg, var(--gradient--light-blue), var(--gradient--dark-blue));
+        letter-spacing: 0.044rem;
+        text-transform: uppercase;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+      .cs-quote {
+        color: var(--main--white);
+        padding-top: 0;
+        padding-bottom: 1.25rem;
+        padding-right: 0;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.25;
+      }
+      .image-full-width_height {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+      .cs-story-rich-text h1,
+      .cs-story-rich-text h2,
+      .cs-story-rich-text h4,
+      .cs-story-rich-text h5 {
+        color: var(--main--white);
+      }
+      .arrow-social {
+        width: var(--cta-button_icon-size);
+        height: var(--cta-button_icon-size);
+        flex: none;
+        padding: 0.25rem;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-icon_wrapper {
+        background-color: var(--social--main-blue);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: -1rem;
+        display: flex;
+      }
+      .icon-embed-xxsmall {
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        height: 1rem;
+        display: flex;
+      }
+      .cs-story_sidebar {
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 1.5rem;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        width: 33%;
+        margin-bottom: 2.25rem;
+        margin-right: 4rem;
+        display: flex;
+      }
+      .cs-story_content {
+        flex: 1;
+      }
+      .cs-quote_wrapper {
+        align-items: center;
+        display: flex;
+      }
+      .cs-quote_parent {
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .cs-story_sidebar_heading-wrapper {
+        grid-column-gap: 0.25rem;
+        grid-row-gap: 0.25rem;
+        display: flex;
+      }
+      .cs-story_tag {
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        background-color: var(--border--border-dark);
+        opacity: 0.6;
+        border-radius: 0.5rem;
+        justify-content: flex-start;
+        align-items: center;
+        height: 2.2rem;
+        padding: 0.75rem;
+        display: flex;
+      }
+      .cs-story_tag.c-icon {
+        grid-column-gap: 0rem;
+        grid-row-gap: 0rem;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 2.2rem;
+        height: 2.2rem;
+        padding: 0;
+      }
+      .cs-story_tag.c-clickable {
+        border: 1px solid var(--border--border-dark);
+        color: var(--text--text-color-grey-light);
+        cursor: pointer;
+      }
+      .cs-story_tag.c-clickable:hover {
+        border-color: var(--border--border-hover);
+        transform: translateY(-1px);
+      }
+      .cs-story_tags-wrapper {
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        flex-flow: wrap;
+        margin-top: 0.5rem;
+        display: flex;
+      }
+      .cs-story_tag-type {
+        color: var(--main--white);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.6;
+      }
+      .cs-divider {
+        background-color: var(--border--border-dark);
+        width: 100%;
+        max-width: 100%;
+        height: 1px;
+      }
+      .cs-story_sidebar_double {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        display: flex;
+      }
+      .cs-aside-header {
+        color: var(--main--white);
+        margin-bottom: 0.5rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+      .cs-story_sidebar_double-child {
+        width: 50%;
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      .icon-embed-xsmall {
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+      }
+      @media screen and (max-width: 991px) {
+        .cs-story_sidebar {
+          display: none;
+        }
+        .cs-story_content {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .cs-story-rich-text p {
+          line-height: 1.4;
+        }
+        .cs-story_content {
+          border-left-style: none;
+        }
+        .cs-aside-header {
+          font-size: 1.125rem;
+          line-height: 1.1;
+        }
+        .cta-button {
+          left: auto;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        blockquote {
+          font-size: 1.4rem;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .page-with-sidebar_wrapper {
+          flex-direction: column;
+        }
+        .cs-quote {
+          font-size: 1.4rem;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .rich-text,
+      .w-richtext {
+        overflow-wrap: break-word;
+      }
+      @media (max-width: 767px) {
+        .rich-text img,
+        .rich-text iframe,
+        .rich-text video,
+        .w-richtext img,
+        .w-richtext iframe,
+        .w-richtext video {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      .nav_content-link,
+      .nav_link-more,
+      .nav_link,
+      .nav_dropdown,
+      .cta-button,
+      .nav-logo {
+        -webkit-tap-highlight-color: rgba(249, 249, 249, 0.1);
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      .cta-border_rotate {
+        animation: spin 3s linear infinite;
+        background: conic-gradient(
+          from 0 at 50% 50%,
+          rgba(255, 255, 255, 0.5) 0deg,
+          rgba(255, 255, 255, 0) 60deg,
+          rgba(255, 255, 255, 0) 310deg,
+          rgba(255, 255, 255, 0.5) 360deg
+        );
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s ease,
+          visibility 0.4s ease;
+      }
+      .cta-button:hover .cta-border_rotate {
+        opacity: 1;
+        visibility: visible;
+      }
+      .cta-button:hover .button-icon_wrapper {
+        background-color: var(--social--button-hover);
+        transition: background-color 0.3s ease;
+      }
+      .cta-button:active .button-icon_wrapper {
+        background-color: white;
+        color: var(--social--main-blue);
+      }
+      .w-richtext figure img {
+        margin-top: 1rem;
+      }
+      .w-richtext figure img {
+        margin-bottom: 1rem;
+      }
+      .w-richtext figure img {
+        border-radius: 1rem;
+      }
+      .cs-story-rich-text p {
+        line-height: 1.9;
+        margin-bottom: 2rem;
+      }
+      .w-richtext h2 {
+        font-size: 2.2rem;
+      }
+      @media only screen and (max-width: 35.5em) {
+        .w-richtext h2 {
+          font-size: 2rem;
+        }
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 42 Customer story body. Captured 2026-10-07 from https://www.social.plus/customer-story/activerse by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- customer story body: two columns, the aside is sticky on the live site. -->
+    <section id="watch-video" class="section padding_y">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="page-with-sidebar_wrapper">
+            <aside class="cs-story_sidebar">
+              <div>
+                <div class="cs-story_sidebar_heading-wrapper">
+                  <div class="cs-aside-header">About</div>
+                  <div class="cs-aside-header">Activerse</div>
+                </div>
+                <p class="text-size-small margin-bottom_none">
+                  Activerse creates innovative fitness and diet apps, partnering with top influencers to deliver
+                  personalized training and nutrition plans. Known for Diet &amp; Training by Ann, with over 3 million
+                  downloads, Activerse’s technology gives influencer-led apps a competitive edge.
+                </p>
+              </div>
+              <div>
+                <div class="cs-aside-header">Location</div>
+                <div class="text-size-small margin-bottom_none">Poland</div>
+              </div>
+              <div class="cs-divider"></div>
+              <div>
+                <div class="cs-aside-header">Industry</div>
+                <div class="w-dyn-list">
+                  <div role="list" class="cs-story_tags-wrapper w-dyn-items">
+                    <div role="listitem" class="w-dyn-item">
+                      <a href="https://www.social.plus/industry/fitness" class="cs-story_tag c-clickable w-inline-block"
+                        ><div class="icon-embed-xxsmall w-embed">
+                          <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 20 14">
+                            <path
+                              fill="currentColor"
+                              d="M19.8,6.5h-.8v-3c0-.8-.7-1.5-1.5-1.5h-1c-.2,0-.3,0-.5,0v-.6c0-.8-.7-1.5-1.5-1.5h-1c-.8,0-1.5.7-1.5,1.5v5h-4V1.5c0-.8-.7-1.5-1.5-1.5h-1c-.8,0-1.5.7-1.5,1.5v.6c-.2,0-.3,0-.5,0h-1c-.8,0-1.5.7-1.5,1.5v3H.2c-.2,0-.2.1-.2.2v.5c0,.2,0,.2.2.2h.8v3c0,.8.7,1.5,1.5,1.5h1c.2,0,.3,0,.5,0v.6c0,.8.7,1.5,1.5,1.5h1c.8,0,1.5-.7,1.5-1.5v-5h4v5c0,.8.7,1.5,1.5,1.5h1c.8,0,1.5-.7,1.5-1.5v-.6c.2,0,.3,0,.5,0h1c.8,0,1.5-.7,1.5-1.5v-3h.8c.1,0,.2,0,.2-.2v-.5c0-.1-.1-.2-.2-.2ZM3.5,11h-1c-.3,0-.5-.2-.5-.5V3.5c0-.2.2-.5.5-.5h1c.2,0,.5.2.5.5v7c0,.3-.2.5-.5.5ZM7,12.5c0,.3-.2.5-.5.5h-1c-.3,0-.5-.2-.5-.5V1.5c0-.2.2-.5.5-.5h1c.2,0,.5.2.5.5v11ZM15,12.5c0,.3-.2.5-.5.5h-1c-.3,0-.5-.2-.5-.5V1.5c0-.2.2-.5.5-.5h1c.2,0,.5.2.5.5v11ZM18,10.5c0,.3-.2.5-.5.5h-1c-.3,0-.5-.2-.5-.5V3.5c0-.2.2-.5.5-.5h1c.2,0,.5.2.5.5v7Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="cs-story_tag-type">Fitness</div></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-divider"></div>
+              <div>
+                <div class="cs-aside-header">Use Cases</div>
+                <div class="w-dyn-list">
+                  <div role="list" class="cs-story_tags-wrapper w-dyn-items">
+                    <div role="listitem" class="w-dyn-item">
+                      <a
+                        href="https://www.social.plus/use-case/user-profiles"
+                        class="cs-story_tag c-clickable w-inline-block"
+                        ><div class="icon-embed-xxsmall w-embed">
+                          <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 32 32" fill="none">
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              fill="currentColor"
+                              d="M15.9994 6.05873C18.9799 6.05873 21.3958 8.47479 21.3958 11.4551C21.3958 13.2289 20.5392 14.8017 19.218 15.7853C22.2743 17.05 24.4246 20.0603 24.4246 23.5737V25.0881C24.4246 25.5587 24.0432 25.9402 23.5726 25.9402C23.1023 25.9398 22.7205 25.5584 22.7205 25.0881V23.5737C22.7205 19.8615 19.7116 16.8517 15.9994 16.8515C12.2873 16.8517 9.27726 19.8615 9.27726 23.5737V25.0881C9.27726 25.5587 8.89578 25.9402 8.4252 25.9402C7.95479 25.94 7.57314 25.5586 7.57314 25.0881V23.5737C7.57314 20.0607 9.72386 17.0503 12.7798 15.7853C11.459 14.8017 10.6031 13.2286 10.6031 11.4551C10.6031 8.47479 13.019 6.05873 15.9994 6.05873ZM15.9994 7.76285C13.9602 7.76285 12.3072 9.41593 12.3072 11.4551C12.3072 13.4944 13.9602 15.1474 15.9994 15.1474C18.0387 15.1474 19.6917 13.4944 19.6917 11.4551C19.6917 9.41593 18.0387 7.76285 15.9994 7.76285Z"
+                            ></path>
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              fill="currentColor"
+                              d="M15.9994 0C24.8356 0.000199814 31.9998 7.16328 32 15.9994C31.9998 24.8356 24.8356 31.9998 15.9994 32C7.16328 31.9998 0.000199826 24.8356 0 15.9994C0.000200261 7.16328 7.16328 0.000200249 15.9994 0ZM15.9994 1.70412C8.10445 1.70432 1.70432 8.10445 1.70412 15.9994C1.70432 23.8944 8.10445 30.2957 15.9994 30.2959C23.8944 30.2957 30.2957 23.8944 30.2959 15.9994C30.2957 8.10445 23.8944 1.70432 15.9994 1.70412Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="cs-story_tag-type">User Profiles</div></a
+                      >
+                    </div>
+                    <div role="listitem" class="w-dyn-item">
+                      <a
+                        href="https://www.social.plus/use-case/activity-feed"
+                        class="cs-story_tag c-clickable w-inline-block"
+                        ><div class="icon-embed-xxsmall w-embed">
+                          <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 32 32" fill="none">
+                            <path
+                              fill="currentColor"
+                              d="M30.1176 11.0954C30.1176 9.79733 29.0404 8.74462 27.712 8.74462H25.3076V25.811C25.3078 27.1087 26.384 28.1603 27.712 28.1606C29.0402 28.1606 30.1174 27.1089 30.1176 25.811V11.0954ZM17.6728 21.6207C18.1926 21.6207 18.614 22.0325 18.614 22.5404C18.614 23.0484 18.1926 23.4602 17.6728 23.4602H7.63358C7.11397 23.4599 6.6924 23.0483 6.6924 22.5404C6.6924 22.0326 7.11397 21.6209 7.63358 21.6207H17.6728ZM17.6728 8.53984C18.1925 8.53984 18.6138 8.9518 18.614 9.45956V16.0006C18.6138 16.5084 18.1925 16.9203 17.6728 16.9203H7.63358C7.1141 16.9201 6.69262 16.5082 6.6924 16.0006V9.45956C6.69262 8.95193 7.11411 8.54006 7.63358 8.53984H17.6728ZM8.57476 15.0809H16.7316V10.3793H8.57476V15.0809ZM23.4252 6.19024C23.4252 4.89215 22.348 3.83944 21.0196 3.83944H4.28799C2.95962 3.83944 1.88235 4.89215 1.88235 6.19024V25.811C1.88257 27.1089 2.95975 28.1606 4.28799 28.1606H24.1618C23.6965 27.4905 23.4253 26.6817 23.4252 25.811V6.19024ZM25.3076 6.90518H27.712C30.08 6.90518 32 8.78143 32 11.0954V25.811C31.9998 28.1248 30.0798 30 27.712 30H4.28799C1.92016 30 0.000219816 28.1248 0 25.811V6.19024C7.4798e-08 3.87625 1.92002 2 4.28799 2H21.0196C23.3876 2 25.3076 3.87625 25.3076 6.19024V6.90518Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="cs-story_tag-type">Activity Feed</div></a
+                      >
+                    </div>
+                    <div role="listitem" class="w-dyn-item">
+                      <a href="https://www.social.plus/use-case/groups" class="cs-story_tag c-clickable w-inline-block"
+                        ><div class="icon-embed-xxsmall w-embed">
+                          <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 32 32" fill="none">
+                            <path
+                              fill="currentColor"
+                              d="M24.1982 2.87988C26.8937 2.88 29.0791 5.06532 29.0791 7.76074C29.079 9.38062 28.2893 10.8153 27.0742 11.7031C29.8647 12.8391 31.8328 15.5768 31.833 18.7754V19.4639C31.8328 19.8778 31.4969 20.2137 31.083 20.2139C30.669 20.2137 30.3332 19.8778 30.333 19.4639V18.7754C30.3328 15.3878 27.5858 12.6418 24.1982 12.6416C20.8623 12.6419 18.1495 15.3049 18.0674 18.6211C19.774 20.4719 20.8172 22.9433 20.8174 25.6592V27.0361C20.8174 27.4503 20.4816 27.7861 20.0674 27.7861C19.6534 27.7859 19.3174 27.4502 19.3174 27.0361V25.6592C19.317 20.7507 15.3373 16.7715 10.4287 16.7715C5.52057 16.772 1.54137 20.751 1.54102 25.6592V27.0361C1.54102 27.4503 1.20523 27.7861 0.791016 27.7861C0.377019 27.7859 0.0410156 27.4502 0.0410156 27.0361V25.6592C0.041298 21.0836 3.00105 17.2017 7.10938 15.8164C5.34585 14.7099 4.17205 12.7501 4.17188 10.5146C4.17188 7.0588 6.97387 4.25697 10.4297 4.25684C13.8854 4.25699 16.6865 7.0588 16.6865 10.5146C16.6863 12.7501 15.5133 14.7099 13.75 15.8164C14.82 16.1772 15.8122 16.7061 16.6943 17.374C17.1734 14.7932 18.9497 12.6692 21.3223 11.7031C20.1075 10.8153 19.3175 9.38041 19.3174 7.76074C19.3174 5.0654 21.5029 2.88012 24.1982 2.87988ZM10.4297 5.75684C7.8023 5.75697 5.67188 7.88722 5.67188 10.5146C5.67215 13.1418 7.80247 15.2713 10.4297 15.2715C13.0568 15.2713 15.1863 13.1418 15.1865 10.5146C15.1865 7.88724 13.057 5.75699 10.4297 5.75684ZM24.1982 4.37988C22.3313 4.38012 20.8174 5.89381 20.8174 7.76074C20.8176 9.62165 22.3219 11.1309 24.1807 11.1406H24.2158C26.0748 11.1313 27.5789 9.62187 27.5791 7.76074C27.5791 5.89373 26.0653 4.38 24.1982 4.37988Z"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="cs-story_tag-type">Groups</div></a
+                      >
+                    </div>
+                    <div role="listitem" class="w-dyn-item">
+                      <a
+                        href="https://www.social.plus/use-case/1-1-chat"
+                        class="cs-story_tag c-clickable w-inline-block"
+                        ><div class="icon-embed-xxsmall w-embed">
+                          <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                            <path
+                              d="m20.808 10.012c-0.4154-1.9547-1.5171-3.7338-3.1025-5.0095-1.6214-1.2972-3.6362-2.0035-5.7126-2.0025-2.4477 0-4.7338 0.94299-6.443 2.6554-1.6517 1.657-2.557 3.8447-2.5497 6.1586 6e-5 1.6964 0.4981 3.3556 1.4324 4.7716l0.17477 0.2431-0.59684 2.5818c-0.16815 0.7274 0.49121 1.3759 1.2157 1.1956l3.0293-0.7536s0.09241 0.0309 0.16071 0.0571c0.06831 0.0261 0.65612 0.2515 1.2797 0.4258 0.51831 0.1447 1.5967 0.3617 2.4416 0.3617 2.3967 0 4.6346-0.9282 6.3012-2.6141 1.6518-1.6726 2.5614-3.8965 2.5614-6.2642 1e-4 -0.6074-0.0642-1.2131-0.1921-1.8068zm-12.665 3.2737c-0.25429 0-0.50287-0.0754-0.7143-0.2167-0.21144-0.1412-0.37623-0.342-0.47354-0.577-0.09732-0.2349-0.12278-0.4934-0.07317-0.7428s0.17206-0.4785 0.35187-0.6583 0.4089-0.3023 0.65831-0.3519c0.2494-0.0496 0.50792-0.0242 0.74285 0.0732 0.23493 0.0973 0.43573 0.2621 0.57701 0.4735 0.14127 0.2114 0.21668 0.46 0.21668 0.7143 0 0.341-0.13546 0.668-0.37658 0.9091-0.24111 0.2412-0.56814 0.3766-0.90913 0.3766zm3.8571 0c-0.2543 0-0.5028-0.0754-0.7143-0.2167-0.2114-0.1412-0.3762-0.342-0.4735-0.577-0.0973-0.2349-0.1228-0.4934-0.0732-0.7428s0.1721-0.4785 0.3519-0.6583 0.4089-0.3023 0.6583-0.3519 0.5079-0.0242 0.7428 0.0732c0.235 0.0973 0.4358 0.2621 0.5771 0.4735 0.1412 0.2114 0.2166 0.46 0.2166 0.7143 0 0.341-0.1354 0.668-0.3765 0.9091-0.2412 0.2412-0.5682 0.3766-0.9092 0.3766zm3.8572 0c-0.2543 0-0.5029-0.0754-0.7143-0.2167-0.2115-0.1412-0.3763-0.342-0.4736-0.577-0.0973-0.2349-0.1228-0.4934-0.0732-0.7428 0.0497-0.2494 0.1721-0.4785 0.3519-0.6583s0.4089-0.3023 0.6583-0.3519 0.5079-0.0242 0.7429 0.0732c0.2349 0.0973 0.4357 0.2621 0.577 0.4735s0.2167 0.46 0.2167 0.7143c0 0.341-0.1355 0.668-0.3766 0.9091-0.2411 0.2412-0.5682 0.3766-0.9091 0.3766z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="cs-story_tag-type">1-1 Chat</div></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-divider"></div>
+              <div class="cs-story_sidebar_double">
+                <div class="cs-story_sidebar_double-child">
+                  <div class="cs-aside-header">Implementation</div>
+                  <div class="cs-story_tags-wrapper">
+                    <div class="cs-story_tag">
+                      <img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67c9aaab2569e80f80c73c57_implementation-app.svg"
+                        alt=""
+                        class="icon-embed-xxsmall"
+                      />
+                      <div class="cs-story_tag-type">App</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-story_sidebar_double-child">
+                  <div class="cs-aside-header">SDK</div>
+                  <div class="cs-story_tags-wrapper">
+                    <div class="cs-story_tag c-icon">
+                      <img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6745768673dd01e74469f7af_ios.svg"
+                        alt=""
+                        class="icon-embed-xsmall"
+                      />
+                    </div>
+                    <div class="cs-story_tag c-icon">
+                      <img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67457685a4db03433f6588e6_android.svg"
+                        alt=""
+                        class="icon-embed-xsmall"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-story_sidebar_double">
+                <div class="cs-story_sidebar_double-child">
+                  <div class="cs-aside-header">UIKit</div>
+                  <div class="cs-story_tags-wrapper">
+                    <div class="cs-story_tag c-icon">
+                      <img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6745768673dd01e74469f7af_ios.svg"
+                        alt=""
+                        class="icon-embed-xsmall"
+                      />
+                    </div>
+                    <div class="cs-story_tag c-icon">
+                      <img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67457685a4db03433f6588e6_android.svg"
+                        alt=""
+                        class="icon-embed-xsmall"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-story_sidebar_double-child">
+                  <div class="cs-aside-header">UI&nbsp;Customization</div>
+                  <div class="cs-story_tags-wrapper">
+                    <div class="cs-story_tag"><div class="cs-story_tag-type">Low</div></div>
+                  </div>
+                </div>
+              </div>
+              <div></div>
+            </aside>
+            <article class="cs-story_content">
+              <div class="cs-story-rich-text w-richtext">
+                <p id="">
+                  Activerse is a dynamic development company dedicated to building innovative health and wellness apps
+                  for personal trainers, influencers, and fitness professionals. With a strong focus on engagement and
+                  community-driven experiences, they help their clients create digital platforms that go beyond just
+                  workouts and meal plans—they foster real connections between users.
+                </p>
+                <p id=""><span class="sprscript-green">The Challenge</span></p>
+                <h2 id="">Building community at scale</h2>
+                <p id="">
+                  As Activerse continued to grow, they faced a critical challenge: providing interactive community
+                  features at scale across multiple client apps. They recognized that social interaction is a key driver
+                  of motivation in health and wellness, whether it's users encouraging each other, discussing progress,
+                  or engaging with their favorite fitness influencers. However, building and maintaining these social
+                  features in-house was complex and resource-intensive.
+                </p>
+                <figure
+                  id=""
+                  class="w-richtext-figure-type-image w-richtext-align-fullwidth"
+                  data-rt-type="image"
+                  data-rt-align="fullwidth"
+                  data-rt-max-width="1200px"
+                >
+                  <div id="">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6995a82e609c0b839ea2da25_698c7f941ef88b639ff4e8c0_6967a93b5719193adbb3eb6b_687391e276a57371c1dad5fc_67bed41ed9b6a1ae192331df_social-customer-story-activerse-img-1.webp"
+                      alt="__wf_reserved_inherit"
+                      width="auto"
+                      height="auto"
+                      id=""
+                    />
+                  </div>
+                  <figcaption id="">
+                    Image source: <a href="https://dieta.hpba.pl/" target="_blank" id="">Diet &amp; Training by Ann</a>
+                  </figcaption>
+                </figure>
+                <p id="">
+                  Additionally, Activerse wanted to leverage existing Infrastructure-as-a-Service solutions rather than
+                  build everything from scratch. They needed a flexible, scalable way to integrate social capabilities
+                  seamlessly into various apps, ensuring that each platform felt unique while maintaining a high level
+                  of user engagement.
+                </p>
+                <p id=""><span class="sprscript-green">Why social.plus</span></p>
+                <h2 id="">A flexible &amp; scalable solution</h2>
+                <p id="">
+                  After evaluating different options, Activerse partnered with social.plus to bring a seamless social
+                  experience to their clients' apps. social.plus stood out for its flexibility, allowing Activerse to
+                  integrate social, chat, and video features directly into apps with minimal friction. This meant that
+                  fitness influencers and personal trainers could interact directly with their users, while
+                  community-driven apps could facilitate peer-to-peer motivation and engagement.
+                </p>
+                <p id="">
+                  More importantly, social.plus provided room for growth—Activerse could start with core social features
+                  and expand into chat and video as needed, depending on each client's requirements. This adaptability
+                  made it the perfect long-term solution for their expanding ecosystem of fitness and wellness apps.
+                </p>
+                <p id=""><span class="sprscript-green">Implementation and Use Case</span></p>
+                <h2 id="">Bringing social features to life</h2>
+                <p id="">
+                  Activerse's first implementation with social.plus was for Diet by Ann, a nutrition and workout
+                  training app created by renowned fitness expert Anna Lewandowska. They began by rolling out discussion
+                  feeds and dedicated group spaces, allowing users to talk about topics like nutrition, fitness
+                  routines, and wellness tips. These features created a structured environment where users could engage,
+                  share progress, and support one another, making the app experience more interactive and
+                  community-driven.
+                </p>
+                <figure
+                  id=""
+                  class="w-richtext-figure-type-image w-richtext-align-fullwidth"
+                  data-rt-type="image"
+                  data-rt-align="fullwidth"
+                  data-rt-max-width="1200px"
+                >
+                  <div id="">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6995a82e609c0b839ea2da1e_698c7f941ef88b639ff4e8bc_6967a93b5719193adbb3eb67_687391e276a57371c1dad5f8_67bed4044e1eac3e996186e2_social-customer-story-activerse-img-1.webp"
+                      alt="__wf_reserved_inherit"
+                      width="auto"
+                      height="auto"
+                      id=""
+                    />
+                  </div>
+                  <figcaption id="">
+                    Image source:&nbsp;<a href="https://dieta.hpba.pl/" target="_blank" id=""
+                      >Diet &amp; Training by Ann</a
+                    >
+                  </figcaption>
+                </figure>
+                <p id="">
+                  By seamlessly embedding these features into Diet by Ann, Activerse was able to transform the app from
+                  a simple fitness tool into an engaging social hub where users stayed active not just for workouts, but
+                  for conversations, advice, and motivation.
+                </p>
+                <p id=""><span class="sprscript-green">Results and Impact</span></p>
+                <h2 id="">Driving engagement and growth</h2>
+                <p id="">
+                  The addition of social features proved to be a game-changer. With over 45,000+ active users and steady
+                  month-over-month growth, Diet by Ann became more than just a fitness and nutrition app—it became a
+                  thriving community. Activerse saw firsthand how discussion capabilities drove deeper engagement,
+                  making users more likely to return to the app and participate in conversations.
+                </p>
+                <p id="">
+                  This successful implementation reinforced Activerse's belief in the power of social interaction within
+                  the health and wellness space. The ability to connect users with one another, as well as with fitness
+                  influencers, created an environment where motivation and accountability flourished.
+                </p>
+                <p id=""><span class="sprscript-green">Future Plans</span></p>
+                <h2 id="">Expanding social capabilities across more apps</h2>
+                <p id="">
+                  Looking ahead, Activerse is excited to bring these social capabilities to more client apps, using Diet
+                  by Ann as a successful blueprint. With the growing demand for interactive fitness experiences, they
+                  plan to expand beyond discussion feeds into chat and video functionalities, tailoring each
+                  implementation to the specific needs of their clients.
+                </p>
+                <p id="">
+                  By continuing to leverage social.plus, Activerse is set to redefine how fitness and wellness apps
+                  engage users—transforming them from solo workout tools into vibrant, supportive communities that keep
+                  people coming back for more.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>40 · Article (answer) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      h1 {
+        margin: 0.67em 0;
+        font-size: 2em;
+      }
+      img {
+        border: 0;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      td,
+      th {
+        padding: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        line-height: 44px;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      ul,
+      ol {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 40px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      .w-richtext ol,
+      .w-richtext ul {
+        overflow: hidden;
+      }
+      /* copied from social-plus.webflow.68f643838f7abffca74efbc8.d030fa3b0.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h1 {
+        z-index: 2;
+        background-image: radial-gradient(
+          circle farthest-corner at 50% 50%,
+          white 33%,
+          var(--text--text-color-grey-lighter)
+        );
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      ul {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      ol {
+        margin-top: 0;
+        margin-bottom: 0.625rem;
+      }
+      li {
+        -webkit-text-stroke-color: var(--text--text-color-grey-dark);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 6px;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .container-medium {
+        width: 100%;
+        max-width: 47.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .h2-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .text-align-center {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .answers-img {
+        border-radius: 1rem;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .answers_rich-text {
+        width: 100%;
+      }
+      .answers_rich-text h2 {
+        font-size: var(--_typography---h4-font-size);
+      }
+      .answers_rich-text h3,
+      .answers_rich-text h4 {
+        font-size: var(--_typography---h5-font-size);
+      }
+      @media screen and (max-width: 767px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .h2-font-size {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        h1 {
+          margin-bottom: 0.75rem;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .text-align-center {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .rich-text,
+      .w-richtext {
+        overflow-wrap: break-word;
+      }
+      @media (max-width: 767px) {
+        .rich-text .w-embed,
+        .w-richtext .w-embed {
+          max-width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .rich-text table,
+        .w-richtext table {
+          max-width: 100%;
+        }
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        border: 1px solid #39393a !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.4 !important;
+        font-size: 1rem !important;
+      }
+      th,
+      td {
+        border: 1px solid #39393a !important;
+        padding: 10px 14px !important;
+        text-align: left !important;
+        vertical-align: top !important;
+      }
+      thead tr {
+        background-color: #2a2a2a !important;
+      }
+      th {
+        font-weight: 600 !important;
+        background-color: #2a2a2a !important;
+        color: #fff !important;
+      }
+      td {
+        color: #b3b3b3 !important;
+      }
+      tbody tr:nth-child(odd) {
+        background-color: #1a1a1a !important;
+      }
+      tbody tr:nth-child(even) {
+        background-color: rgba(57, 57, 58, 0.3) !important;
+      }
+      .w-richtext ol li {
+        background-image: none;
+        padding-left: 0rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 40 Article (answer). Captured 2026-10-07 from https://www.social.plus/answers/api-for-adding-online-community-features-to-mobile-apps by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- article (answer variant): one column, title, image and .answers_rich-text body. -->
+    <section id="main-content" class="section padding_y">
+      <div class="page-padding">
+        <main class="container-medium">
+          <div class="margin-bottom_m">
+            <h1 class="h2-font-size text-align-center">API for Adding Online Community Features to Mobile Apps</h1>
+          </div>
+          <img
+            src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/697cb2dc102c2fd9bcf7fd4c_answers_API%20for%20Adding%20Online%20Community%20Features%20to%20Mobile%20Apps.webp"
+            alt="Abstract visualization of API for adding online community features to mobile apps"
+            class="answers-img"
+          />
+          <div class="answers_rich-text w-richtext">
+            <p>&nbsp;</p>
+            <h2>API for adding online community features to mobile apps</h2>
+            <p>
+              An <a href="https://www.social.plus/glossary/api">API</a> for adding online community features to mobile
+              apps is a backend service that exposes programmable endpoints for embedding app-owned community
+              functionality such as user profiles,
+              <a href="https://www.social.plus/glossary/activity-feed">activity feeds</a>, posts, comments, reactions,
+              groups, notifications, moderation, and analytics into iOS and Android apps. These APIs enable mobile teams
+              to launch scalable, native community experiences without building and maintaining a full social backend
+              from scratch.
+            </p>
+            <p>&nbsp;</p>
+            <h2>What an online community API for mobile apps is</h2>
+            <p>
+              An online community API provides the infrastructure needed to support user interaction inside a mobile
+              app. Instead of relying on external forums or fixed-UI SDKs, the API integrates directly with the app's
+              authentication, frontend, and data systems.
+            </p>
+            <p>Common mobile community API capabilities include:</p>
+            <ul>
+              <li>App-owned user identity and profile management</li>
+              <li>Activity and community feed generation</li>
+              <li>Post creation, comments, and reactions</li>
+              <li>Groups, spaces, or topic-based communities</li>
+              <li>Mentions and in-app or push notification triggers</li>
+              <li>Moderation, reporting, and role-based permissions</li>
+              <li>
+                <a href="https://www.social.plus/glossary/user-engagement">Engagement</a>,
+                <a href="https://www.social.plus/glossary/user-retention">retention</a>, and contribution analytics
+              </li>
+            </ul>
+            <p>The API handles scalability and logic while the mobile app controls UX.</p>
+            <p>&nbsp;</p>
+            <h2>Why mobile apps use APIs to add online communities</h2>
+            <p>APIs offer flexibility and speed while preserving mobile-first design control.</p>
+            <p>Key benefits include:</p>
+            <ul>
+              <li>Full control over mobile UI and interaction patterns</li>
+              <li>Faster time to launch than custom backend builds</li>
+              <li>Ownership of community data and user relationships</li>
+              <li>Easier integration with existing mobile stacks</li>
+              <li>Scalable moderation and governance</li>
+            </ul>
+            <p>
+              <a href="https://dojobusiness.com/blogs/news/mobile-app-retention-rate"
+                >Apps that add in-app community and social features see higher retention compared to apps without
+                them.</a
+              >
+            </p>
+            <p>&nbsp;</p>
+            <h2>API-based approach vs other community options</h2>
+            <p>Different approaches vary in mobile fit and long-term flexibility.</p>
+            <h3>Approach comparison</h3>
+            <div class="w-embed">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Approach</th>
+                    <th>Mobile UX control</th>
+                    <th>Build effort</th>
+                    <th>When it fits</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>External community platforms</td>
+                    <td>Low</td>
+                    <td>Low</td>
+                    <td>Marketing or support</td>
+                  </tr>
+                  <tr>
+                    <td>Fixed-UI mobile SDKs</td>
+                    <td>Medium</td>
+                    <td>Low</td>
+                    <td>Simple discussions</td>
+                  </tr>
+                  <tr>
+                    <td>Fully custom backend</td>
+                    <td>Very high</td>
+                    <td>Very high</td>
+                    <td>Social-first apps</td>
+                  </tr>
+                  <tr>
+                    <td>Community APIs</td>
+                    <td>Very high</td>
+                    <td>Medium</td>
+                    <td>Most product-led apps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Community APIs provide the strongest balance for mobile product teams.</p>
+            <p>&nbsp;</p>
+            <h2>What an API for mobile community features should provide</h2>
+            <p>A production-ready API must support mobile performance, scale, and governance.</p>
+            <p>Typical API capabilities include:</p>
+            <ul>
+              <li>Secure integration with mobile authentication</li>
+              <li>Feed creation, ranking, and pagination logic</li>
+              <li>Content creation and interaction endpoints</li>
+              <li>Group and membership management</li>
+              <li>Role-based access control and permissions</li>
+              <li>Moderation workflows and abuse reporting</li>
+              <li>Notification hooks for in-app and push delivery</li>
+              <li>Analytics endpoints for engagement and retention</li>
+              <li>Integration with analytics and billing systems</li>
+            </ul>
+            <p>This allows mobile teams to focus on experience design.</p>
+            <p>&nbsp;</p>
+            <h2>Core online community features to build using a mobile API</h2>
+            <p>Launching with focused features improves adoption on mobile.</p>
+            <h3>Essential API-driven features</h3>
+            <div class="w-embed">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Why it matters</th>
+                    <th>Typical range</th>
+                    <th>Action to take</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Activity feeds</td>
+                    <td>Drive discovery</td>
+                    <td>20% to 50% engagement</td>
+                    <td>Surface in main tabs</td>
+                  </tr>
+                  <tr>
+                    <td>User profiles</td>
+                    <td>Establish identity</td>
+                    <td>70% to 90% completion</td>
+                    <td>Keep fields minimal</td>
+                  </tr>
+                  <tr>
+                    <td>Groups or spaces</td>
+                    <td>Increase relevance</td>
+                    <td>25% to 60% adoption</td>
+                    <td>Auto-assign users</td>
+                  </tr>
+                  <tr>
+                    <td>Reactions and comments</td>
+                    <td>Enable participation</td>
+                    <td>60% to 80% usage</td>
+                    <td>One-tap actions</td>
+                  </tr>
+                  <tr>
+                    <td>Moderation endpoints</td>
+                    <td>Maintain trust</td>
+                    <td>Required at scale</td>
+                    <td>Define policies early</td>
+                  </tr>
+                  <tr>
+                    <td>Analytics APIs</td>
+                    <td>Measure ROI</td>
+                    <td>Retention lift 10% to 35%</td>
+                    <td>Review weekly</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>&nbsp;</p>
+            <h2>How to add online community features to a mobile app using an API</h2>
+            <p>Implementation should align API usage with mobile user behavior.</p>
+            <p>Key steps include:</p>
+            <ol>
+              <li>Define the purpose of the online community</li>
+              <li>Choose an API designed for in-app mobile communities</li>
+              <li>Connect mobile authentication and user identity</li>
+              <li>Design mobile-native feeds and group experiences</li>
+              <li>Implement moderation and permission logic</li>
+              <li>Enable push notifications for community activity</li>
+              <li>Track engagement and iterate on feature usage</li>
+            </ol>
+            <p>API-first development supports phased rollouts and testing.</p>
+            <p>&nbsp;</p>
+            <h2>Leading API for adding online community features to mobile apps: social.plus</h2>
+            <p>
+              <a href="https://www.social.plus/product">social.plus</a> is a leading in-app social and community
+              infrastructure platform offering robust APIs for adding online community features to mobile and web
+              applications.
+            </p>
+            <p>With social.plus APIs, teams can:</p>
+            <ul>
+              <li>Build mobile-native profiles, feeds, posts, comments, and reactions</li>
+              <li>Create public, private, or paid community spaces</li>
+              <li>Fully <a href="https://www.social.plus/social">white-label all community experiences</a></li>
+              <li>
+                Define roles, permissions, and <a href="https://www.social.plus/moderation">moderation</a> workflows
+              </li>
+              <li>Access engagement, retention, and community health analytics</li>
+              <li>
+                <a href="https://www.social.plus/analytics">Capture zero-party data</a> from community interactions
+              </li>
+              <li>Integrate with existing mobile authentication, analytics, and billing systems</li>
+            </ul>
+            <p>
+              social.plus combines API flexibility with a managed, scalable community backend optimized for mobile apps.
+            </p>
+            <p>&nbsp;</p>
+            <h2>Metrics to track when using a mobile community API</h2>
+            <p>Measurement ensures the community delivers measurable mobile value.</p>
+            <h3>Key mobile community metrics</h3>
+            <div class="w-embed">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Typical range</th>
+                    <th>Why it matters</th>
+                    <th>Optimization action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Community engagement rate</td>
+                    <td>20% to 50%</td>
+                    <td>Indicates adoption</td>
+                    <td>Improve placement</td>
+                  </tr>
+                  <tr>
+                    <td>Active contributors</td>
+                    <td>10% to 30%</td>
+                    <td>Measures participation</td>
+                    <td>Reduce posting friction</td>
+                  </tr>
+                  <tr>
+                    <td>Group participation</td>
+                    <td>25% to 60%</td>
+                    <td>Shows relevance</td>
+                    <td>Refine segmentation</td>
+                  </tr>
+                  <tr>
+                    <td>Retention lift</td>
+                    <td>10% to 35%</td>
+                    <td>Confirms impact</td>
+                    <td>Expand community surfaces</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>&nbsp;</p>
+            <h2>FAQs</h2>
+            <div class="w-embed">
+              <div itemscope="" itemtype="https://schema.org/FAQPage">
+                <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                  <h3 itemprop="name">What is an API for adding online community features to mobile apps?</h3>
+                  <div itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <p itemprop="text">
+                      It is a backend service that provides endpoints for embedding community functionality directly
+                      into iOS and Android apps.
+                    </p>
+                  </div>
+                </div>
+                <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                  <h3 itemprop="name">Is an API better than a mobile SDK for community features?</h3>
+                  <div itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <p itemprop="text">
+                      APIs offer greater flexibility and UI control, while SDKs prioritize speed with less
+                      customization.
+                    </p>
+                  </div>
+                </div>
+                <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                  <h3 itemprop="name">Can a mobile community API support both iOS and Android?</h3>
+                  <div itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <p itemprop="text">
+                      Yes. Most community APIs are platform-agnostic and work across multiple mobile frontends.
+                    </p>
+                  </div>
+                </div>
+                <div itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                  <h3 itemprop="name">Can online community features in mobile apps be monetized?</h3>
+                  <div itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                    <p itemprop="text">
+                      Yes. Gated access, premium groups, and subscriptions are common
+                      <a href="https://www.social.plus/monetization">monetization</a> models.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>&nbsp;</p>
+            <h2>Conclusion</h2>
+            <p>
+              Using an API for adding online community features to mobile apps allows product teams to create flexible,
+              scalable, and app-owned social experiences optimized for mobile behavior. API-driven community solutions
+              reduce backend complexity while preserving full control over UX, data, and governance. Platforms like
+              social.plus provide a production-ready API foundation for building, managing, and scaling online
+              communities directly inside mobile applications.
+            </p>
+          </div>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>G5 · Footer · social.plus website section</title>
+    <link rel="stylesheet" href="../../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      img {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        color: inherit;
+        font: inherit;
+        margin: 0;
+      }
+      button[disabled],
+      html input[disabled] {
+        cursor: default;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+      }
+      input {
+        line-height: normal;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-button {
+        color: #fff;
+        line-height: inherit;
+        cursor: pointer;
+        background-color: #3898ec;
+        border: 0;
+        border-radius: 0;
+        padding: 9px 15px;
+        text-decoration: none;
+        display: inline-block;
+      }
+      input.w-button {
+        -webkit-appearance: button;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-form {
+        margin: 0 0 15px;
+      }
+      .w-input,
+      .w-select {
+        color: #333;
+        vertical-align: middle;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 100%;
+        height: 38px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.42857;
+        display: block;
+      }
+      .w-input::placeholder,
+      .w-select::placeholder {
+        color: #999;
+      }
+      .w-input:focus,
+      .w-select:focus {
+        border-color: #3898ec;
+        outline: 0;
+      }
+      .w-nav-brand {
+        float: left;
+        color: #333;
+        text-decoration: none;
+        position: relative;
+      }
+      @media screen and (max-width: 767px) {
+        .w-nav-brand {
+          padding-left: 10px;
+        }
+      }
+      /* copied from social-plus.webflow.6ac30c228a3f1a4ad38a4cf7.7003fb5fe.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .in-text-link {
+        color: var(--social--main-blue);
+        text-decoration: underline;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .form__html-hidden {
+        display: none;
+      }
+      .footer-wrapper {
+        z-index: 5;
+        background-color: var(--social--dark);
+        color: var(--main--white);
+        padding: 4rem 2rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .footer-social-link {
+        color: #d0d0d1;
+        flex: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 1.25rem;
+      }
+      .footer-social-link:hover {
+        color: var(--social--main-blue);
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .text-color-grey-medium {
+        color: var(--text--text-color-grey-medium);
+      }
+      .text-size-tiny {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .text-color-grey-4 {
+        color: var(--text--text-color-grey-medium);
+      }
+      .nav-logo_img {
+        object-fit: contain;
+        width: 10.5rem;
+        height: 2.5rem;
+      }
+      .footer-icon {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.25rem;
+        display: flex;
+      }
+      .logo-footer {
+        object-fit: contain;
+        width: 10rem;
+        height: 2.5rem;
+      }
+      .button {
+        border: 0.125rem solid var(--social--main-blue);
+        background-color: var(--social--main-blue);
+        min-height: 3rem;
+        color: var(--main--white);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 25rem;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transition:
+          border-color 0.15s,
+          color 0.15s,
+          background-color 0.15s;
+        display: inline-flex;
+      }
+      .button:hover {
+        border-color: var(--social--button-hover);
+        background-color: var(--social--button-hover);
+      }
+      .button:active {
+        border-color: var(--social--button-pressed);
+        background-color: var(--social--button-pressed);
+      }
+      .icon-small {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        display: flex;
+      }
+      .footer-bottom_link {
+        color: var(--text--text-color-grey-medium);
+        align-items: center;
+        display: flex;
+      }
+      .footer-row-3 {
+        justify-content: space-between;
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 2rem;
+        display: flex;
+      }
+      .footer-row-2 {
+        border-top: 0.0625rem solid var(--border--border-dark);
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        justify-content: space-between;
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        display: flex;
+      }
+      .footer-content {
+        z-index: 2;
+        position: relative;
+      }
+      .footer-link-block {
+        color: var(--text--text-color-grey-light);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        transition: color 0.15s;
+        display: flex;
+      }
+      .footer-link-block:hover {
+        color: var(--main--white);
+      }
+      .footer-link-block.is--horizontal {
+        color: var(--text--text-color-grey-medium);
+        cursor: pointer;
+        flex: none;
+        margin-bottom: 0;
+        margin-right: 1.75rem;
+      }
+      .footer-link-block.c-careers {
+        grid-column-gap: 0.25rem;
+        grid-row-gap: 0.25rem;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .footer-horizontal-links {
+        flex: 1;
+        align-items: center;
+        display: flex;
+      }
+      .footer-social-icons {
+        align-items: center;
+        display: flex;
+      }
+      .footer-row-3_middle {
+        grid-column-gap: 2.5rem;
+        display: flex;
+      }
+      .gpdr-icon {
+        flex: none;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-right: 0.35rem;
+      }
+      .footer-child-wrapper {
+        flex-direction: column;
+        flex: 0 auto;
+        display: flex;
+      }
+      .footer-heading {
+        margin-bottom: 1.25rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .footer-row-1_right {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 66.66%;
+        padding-bottom: 4rem;
+        display: flex;
+      }
+      .footer-parent {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        padding-bottom: 2rem;
+        display: flex;
+      }
+      .footer-row-1_left {
+        flex-direction: column;
+        flex: 1;
+        align-items: flex-start;
+        margin-top: -0.5rem;
+        padding-right: 4rem;
+        display: flex;
+      }
+      .footer-newsletter-wrapper {
+        flex-flow: column;
+        width: 100%;
+        display: flex;
+      }
+      .newsletter-footer-input-field {
+        background-color: var(--social--grey);
+        border: 0.0625rem solid #383838;
+        border-radius: 0.25rem;
+        width: 100%;
+        min-height: 2.7rem;
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+      }
+      .newsletter-footer-input-field:hover {
+        border-color: var(--border--border-med-grey);
+      }
+      .newsletter-footer {
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        display: flex;
+      }
+      .newsletter-footer_hide,
+      .logo-footer_link.mobile,
+      .logo-footer_link.mobile {
+        display: none;
+      }
+      .social-icon-embed {
+        width: 100%;
+        height: 100%;
+      }
+      .gdpr-footer {
+        flex: none;
+        align-items: center;
+        display: flex;
+      }
+      .newsletter-footer-wrapper {
+        margin-bottom: 1rem;
+      }
+      .footer-logo {
+        flex: none;
+        margin-bottom: 2rem;
+      }
+      .nav-hiring-alert {
+        color: #b3b3b3;
+        background-color: #222;
+        border-radius: 0.25rem;
+        margin-left: 0.35rem;
+        padding: 0.25rem 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1;
+      }
+      @media screen and (max-width: 991px) {
+        .footer-wrapper {
+          overflow: hidden;
+        }
+        .footer-social-link {
+          margin-left: 0;
+          margin-right: 1.25rem;
+        }
+        .nav-logo_img {
+          width: 9.5rem;
+        }
+        .footer-row-3,
+        .footer-row-2 {
+          flex-direction: column;
+        }
+        .footer-link-block {
+          margin-bottom: 1.5rem;
+        }
+        .footer-horizontal-links {
+          border-bottom: 0.0625rem solid #232324;
+          margin-bottom: 1.5rem;
+          padding-bottom: 1.5rem;
+        }
+        .footer-social-icons {
+          margin-top: 1rem;
+        }
+        .footer-row-3_middle {
+          padding-top: 1.5rem;
+          padding-bottom: 1.5rem;
+        }
+        .footer-heading {
+          margin-bottom: 1.5rem;
+        }
+        .footer-row-1_right {
+          width: 100%;
+          padding-bottom: 0;
+        }
+        .footer-parent {
+          flex-direction: column-reverse;
+        }
+        .footer-row-1_left {
+          width: 100%;
+          margin-top: 2rem;
+          padding-right: 0;
+        }
+        .footer-newsletter-wrapper {
+          margin-top: 2rem;
+          padding-bottom: 2rem;
+        }
+        .logo-footer_link,
+        .logo-footer_link.w--current {
+          display: none;
+        }
+        .logo-footer_link.mobile {
+          margin-bottom: 1.5rem;
+          display: flex;
+        }
+        .footer-logo {
+          padding-left: 0;
+        }
+        .nav-hiring-alert {
+          font-size: 1rem;
+        }
+        .nav-hiring-alert.c-footer {
+          font-size: 0.875rem;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        .footer-wrapper {
+          padding-bottom: 4rem;
+        }
+        .footer-icon {
+          margin-left: 0;
+        }
+        .footer-row-3 {
+          flex-direction: column;
+        }
+        .footer-link-block.is--horizontal {
+          color: var(--text--text-color-grey-light);
+          margin-bottom: 1.5rem;
+        }
+        .footer-horizontal-links {
+          flex-direction: column;
+          align-items: flex-start;
+          padding-top: 1.5rem;
+        }
+        .footer-child-wrapper {
+          width: 50%;
+          padding-bottom: 2rem;
+        }
+        .footer-row-1_left {
+          margin-top: 0;
+        }
+        .footer-logo {
+          display: none;
+        }
+        .nav-hiring-alert {
+          font-size: 0.875rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .form__html-hidden {
+          display: none;
+        }
+        .footer-wrapper {
+          padding: 3rem 1.5rem;
+        }
+        .footer-row-3 {
+          flex-direction: column;
+          padding-top: 1rem;
+        }
+        .footer-link-block.is--horizontal {
+          margin-bottom: 1.5rem;
+          margin-right: 0;
+        }
+        .footer-horizontal-links {
+          padding-bottom: 1rem;
+        }
+        .footer-row-3_middle {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+        .footer-child-wrapper.mobile_padding-right {
+          padding-left: 0.5rem;
+        }
+        .footer-newsletter-wrapper {
+          flex-direction: column;
+          align-items: flex-start;
+          padding-bottom: 0;
+          display: flex;
+        }
+        .newsletter-footer-input-field {
+          max-width: 100%;
+          margin-right: 0;
+        }
+        .newsletter-footer {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .newsletter-footer-wrapper {
+          width: 100%;
+        }
+      }
+      #w-node-_00054916-7761-de35-bfd7-a1a8043e3766-ac7d2d49 {
+        grid-area: span 1 / span 1 / span 1 / span 1;
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      select:-webkit-autofill,
+      select:-webkit-autofill:hover,
+      select:-webkit-autofill:focus,
+      textarea:-webkit-autofill,
+      textarea:-webkit-autofill:hover,
+      textarea:-webkit-autofill:focus {
+        background-color: #1b1b1b !important;
+        box-shadow: 0 0 0px 1000px #1b1b1b inset !important;
+        color: #fff !important;
+        -webkit-text-fill-color: white !important;
+      }
+      input:-webkit-autofill::first-line,
+      select:-webkit-autofill::first-line,
+      textarea:-webkit-autofill::first-line {
+        color: #fff !important;
+      }
+      input:hover,
+      input:focus,
+      select:hover,
+      select:focus,
+      textarea:hover,
+      textarea:focus {
+        background-color: var(--field-bg, #1b1b1b) !important;
+        color: white !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- G5 Footer. Captured 2026-10-07 from https://www.social.plus/vs/circle by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- footer: newsletter form posts to the site's form endpoint; the action is removed here. -->
+    <footer aria-label="Site footer" class="footer-wrapper">
+      <div class="footer-content">
+        <div class="container-large">
+          <div class="footer-parent">
+            <div class="footer-row-1_left">
+              <div class="footer-newsletter-wrapper">
+                <a href="https://www.social.plus/" class="footer-logo w-nav-brand"
+                  ><img
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66fe6169153dc88a03557da6_29a5aaff9e31043f2175762ac854a9e5_logo.svg"
+                    alt="social.plus logo"
+                    class="nav-logo_img"
+                /></a>
+                <div class="footer-heading">Subscribe to our newsletter:</div>
+                <div id="newsletter-footer" class="newsletter-footer-wrapper w-form">
+                  <form
+                    id="wf-form-social-club-newsletter"
+                    name="wf-form-social-club-newsletter"
+                    method="post"
+                    class="newsletter-footer"
+                    aria-label="social-club-newsletter"
+                  >
+                    <input
+                      class="newsletter-footer-input-field w-input"
+                      maxlength="256"
+                      name="email-address"
+                      placeholder="Enter your email address"
+                      type="email"
+                      id="email"
+                      required=""
+                    />
+                    <div class="newsletter-footer_hide">
+                      <input type="submit" class="button w-button" value="Join" />
+                    </div>
+                  </form>
+                </div>
+                <div class="newsletter-footer_hide">
+                  <div class="text-size-tiny text-color-grey-medium">
+                    By clicking Join, I acknowledge receipt of the social.plus
+                    <a href="https://www.social.plus/legal" target="_blank" class="in-text-link text-color-grey-medium"
+                      >Privacy Policy</a
+                    >.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-row-1_right">
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Product</div>
+                <a role="button" href="https://www.social.plus/product" class="footer-link-block w-inline-block"
+                  ><div translate="no">Product Overview</div></a
+                ><a role="button" href="https://www.social.plus/analytics" class="footer-link-block w-inline-block"
+                  ><div>Analytics &amp; Social Insights</div></a
+                ><a role="button" href="https://www.social.plus/moderation" class="footer-link-block w-inline-block"
+                  ><div>Moderation</div></a
+                ><a role="button" href="https://www.social.plus/monetization" class="footer-link-block w-inline-block"
+                  ><div>Monetization</div></a
+                ><a role="button" href="https://www.social.plus/pricing" class="footer-link-block w-inline-block"
+                  ><div>Pricing</div></a
+                >
+              </div>
+              <div class="footer-child-wrapper mobile_padding-right">
+                <div class="footer-heading">Company</div>
+                <a role="button" href="https://www.social.plus/about" class="footer-link-block w-inline-block"
+                  ><div>About</div></a
+                ><a role="button" href="https://www.social.plus/press/news" class="footer-link-block w-inline-block"
+                  ><div>Company News</div></a
+                ><a
+                  role="button"
+                  href="https://www.social.plus/press/news?tab=in-the-news"
+                  class="footer-link-block w-inline-block"
+                  ><div>In the News</div></a
+                ><a
+                  role="button"
+                  href="https://www.social.plus/careers"
+                  class="footer-link-block c-careers w-inline-block"
+                  ><div>Careers</div>
+                  <div class="nav-hiring-alert c-footer">We're hiring!</div></a
+                ><a
+                  role="button"
+                  href="https://www.social.plus/contact/partnership"
+                  class="footer-link-block w-inline-block"
+                  ><div>Partner Program</div></a
+                >
+              </div>
+              <div class="footer-child-wrapper">
+                <div class="footer-heading">Resources</div>
+                <a
+                  role="button"
+                  href="https://www.social.plus/customer-stories"
+                  class="footer-link-block w-inline-block"
+                  ><div>Customer Stories</div></a
+                ><a role="button" href="https://www.social.plus/blog" class="footer-link-block w-inline-block"
+                  ><div>Blog</div></a
+                ><a
+                  role="button"
+                  href="https://www.social.plus/community-corner"
+                  class="footer-link-block w-inline-block"
+                  ><div>Community Corner</div></a
+                ><a role="button" href="https://www.social.plus/webinars" class="footer-link-block w-inline-block"
+                  ><div>Webinars</div></a
+                ><a role="button" href="https://www.social.plus/glossary" class="footer-link-block w-inline-block"
+                  ><div>Glossary</div></a
+                >
+              </div>
+              <div class="footer-child-wrapper mobile_padding-right">
+                <div class="footer-heading">Support</div>
+                <a
+                  role="button"
+                  href="https://www.social.plus/developer-portal"
+                  class="footer-link-block w-inline-block"
+                  ><div>Developer Portal</div></a
+                ><a
+                  role="button"
+                  href="https://learn.social.plus/"
+                  target="_blank"
+                  class="footer-link-block w-inline-block"
+                  ><div>Documentation</div>
+                  <div class="icon-small w-embed">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      aria-hidden="true"
+                      role="img"
+                      width="100%"
+                      height="100%"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg></div></a
+                ><a role="button" href="https://www.social.plus/ai" class="footer-link-block w-inline-block"
+                  ><div>AI</div></a
+                ><a
+                  role="button"
+                  href="https://forum.social.plus/"
+                  target="_blank"
+                  class="footer-link-block w-inline-block"
+                  ><div>Developer Forum</div>
+                  <div class="icon-small w-embed">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      aria-hidden="true"
+                      role="img"
+                      width="100%"
+                      height="100%"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg></div></a
+                ><a
+                  role="button"
+                  href="https://status.social.plus/"
+                  target="_blank"
+                  class="footer-link-block w-inline-block"
+                  ><div>Service Status</div>
+                  <div class="icon-small w-embed">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      aria-hidden="true"
+                      role="img"
+                      width="100%"
+                      height="100%"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg></div
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-row-2 mobile">
+            <div class="footer-horizontal-links">
+              <a
+                role="button"
+                href="https://www.social.plus/legal/gdpr-commitment"
+                class="footer-link-block is--horizontal w-inline-block"
+                ><div class="gdpr-footer">
+                  <img
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66e2765d540e1939a89db77f_gpdr-icon.svg"
+                    alt="GDPR icon"
+                    class="gpdr-icon"
+                  />
+                  <div class="footer-link">GDPR</div>
+                </div></a
+              ><a
+                role="button"
+                href="https://www.social.plus/legal/privacy-policy"
+                class="footer-link-block is--horizontal w-inline-block"
+                ><div class="footer-link">Privacy Policy</div></a
+              ><a
+                role="button"
+                href="https://www.social.plus/legal/terms-and-conditions"
+                class="footer-link-block is--horizontal w-inline-block"
+                ><div class="footer-link">Terms and Conditions</div></a
+              ><a
+                role="button"
+                href="https://www.social.plus/legal"
+                class="footer-link-block is--horizontal w-inline-block"
+                ><div class="footer-link">Legal</div></a
+              ><a
+                role="button"
+                href="https://www.social.plus/trust"
+                class="footer-link-block is--horizontal w-inline-block"
+                ><div class="footer-link">Trust</div></a
+              >
+              <div role="button" class="footer-link-block is--horizontal"><div class="footer-link">Cookies</div></div>
+            </div>
+            <a href="https://www.social.plus/" class="logo-footer_link mobile w-inline-block"
+              ><img
+                src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66fe6169153dc88a03557da6_29a5aaff9e31043f2175762ac854a9e5_logo.svg"
+                alt="SocialPlus logo"
+                class="logo-footer"
+            /></a>
+            <div class="footer-social-icons">
+              <a
+                role="button"
+                href="https://www.linkedin.com/company/socialpluscorp/"
+                target="_blank"
+                class="footer-social-link w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 448 512"
+                    aria-labelledby="linkedin-title linkedin-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="linkedin-title">social.plus's LinkedIn Profile</title>
+                    <desc id="linkedin-desc">Icon linking to the social.plus LinkedIn page.</desc>
+                    <path
+                      d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                      fill="currentColor"
+                    ></path>
+                  </svg></div></a
+              ><a
+                role="button"
+                href="https://x.com/socialpluscorp"
+                target="_blank"
+                class="footer-social-link hide w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 512 512"
+                    aria-labelledby="twitter-title twitter-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="twitter-title">Social+'s Twitter Profile</title>
+                    <desc id="twitter-desc">Icon linking to Social+'s Twitter page.</desc>
+                    <path
+                      d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+                      fill="currentColor"
+                    ></path>
+                  </svg></div></a
+              ><a
+                role="button"
+                href="https://www.instagram.com/wearesocial.plus"
+                target="_blank"
+                class="footer-social-link w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 448 512"
+                    aria-labelledby="instagram-title instagram-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="instagram-title">social.plus Instagram Profile</title>
+                    <desc id="instagram-desc">Icon linking to social.plus's Instagram page.</desc>
+                    <path
+                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                      fill="currentColor"
+                    ></path>
+                  </svg></div></a
+              ><a
+                role="button"
+                href="https://www.youtube.com/@wearesocialplus"
+                target="_blank"
+                class="footer-social-link w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 576 512"
+                    aria-labelledby="youtube-title youtube-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="youtube-title">social.plus YouTube Channel</title>
+                    <desc id="youtube-desc">Icon linking to social.plus's YouTube page.</desc>
+                    <path
+                      d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+                      fill="currentColor"
+                    ></path>
+                  </svg></div></a
+              ><a
+                role="button"
+                href="https://www.figma.com/@socialplus"
+                target="_blank"
+                class="footer-social-link w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 256 256"
+                    aria-labelledby="figma-title figma-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="figma-title">social.plus Figma Profile</title>
+                    <desc id="figma-desc">Icon linking to social.plus's Figma page.</desc>
+                    <path
+                      fill="currentColor"
+                      d="M198.15 96A44 44 0 0 0 168 20H96a44 44 0 0 0-30.15 76a43.9 43.9 0 0 0 1.23 65.12A48 48 0 1 0 148 196v-28.83A44 44 0 0 0 198.15 96M188 64a20 20 0 0 1-20 20h-20V44h20a20 20 0 0 1 20 20M76 64a20 20 0 0 1 20-20h28v40H96a20 20 0 0 1-20-20m20 84a20 20 0 0 1 0-40h28v40zm28 48a24 24 0 1 1-24-24h24Zm44-48a20 20 0 1 1 20-20a20 20 0 0 1-20 20"
+                    ></path>
+                  </svg></div></a
+              ><a
+                role="button"
+                href="https://github.com/Amityco"
+                target="_blank"
+                class="footer-social-link w-inline-block"
+                ><div class="social-icon-embed w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    viewBox="0 0 496 512"
+                    aria-labelledby="github-title github-desc"
+                    role="img"
+                    focusable="false"
+                  >
+                    <title id="github-title">social.plus GitHub Repository</title>
+                    <desc id="github-desc">Icon linking to social.plus's GitHub page.</desc>
+                    <path
+                      d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+                      fill="currentColor"
+                    ></path>
+                  </svg></div
+              ></a>
+            </div>
+          </div>
+          <div class="footer-row-3">
+            <div class="text-size-tiny text-color-grey-medium">
+              © 2026 Social Plus Holdings Ltd. All rights reserved.
+            </div>
+            <div class="footer-row-3_middle">
+              <a
+                role="button"
+                rel="nofollow"
+                href="https://www.social.plus/search"
+                class="footer-bottom_link w-inline-block"
+                ><div class="footer-icon w-embed">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    aria-hidden="true"
+                    role="img"
+                    width="1rem"
+                    height="1rem"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="text-size-tiny text-color-grey-4">Search</div></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

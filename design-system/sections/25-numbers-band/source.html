@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>25 · Numbers band · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db4ba.0492adcf5.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .z-index_2 {
+        z-index: 2;
+        position: relative;
+      }
+      .container-heading {
+        z-index: 3;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: relative;
+      }
+      .hmpg_no-wrapper {
+        text-align: center;
+        flex-flow: column;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        justify-content: center;
+        align-items: center;
+        width: 25%;
+        padding: 2.5rem;
+        display: flex;
+      }
+      .hmpg_no {
+        transform-origin: 50% 100%;
+        color: #ffffff6b;
+        margin-bottom: 0.5rem;
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        transition-property: color, transform;
+        transition-duration: 0.25s, 0.45s;
+        transition-timing-function: ease, cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .hmpg_no.hmpg_no-on {
+        color: #fff;
+        transform: translateY(-4px) scale(1.05);
+      }
+      .hmpg_no_description {
+        color: #ffffff80;
+        max-width: 20ch;
+        line-height: 1.1;
+        transition-property: color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease;
+      }
+      .hmpg_no_description.hmpg_no_description-on {
+        color: #ffffffbf;
+      }
+      .hmpg_no-parent {
+        width: 100%;
+        display: flex;
+      }
+      .hmpg_no-line-wrapper {
+        background-color: #0000;
+        width: 100%;
+        height: 56px;
+        position: relative;
+      }
+      .hmpg_no-line {
+        width: 360px;
+        height: 2px;
+        box-shadow: none;
+        opacity: 0.9;
+        background-color: #0000;
+        background-image: linear-gradient(90deg, #3b41ec00, #3b41ec 35% 65%, #3b41ec00);
+        border-radius: 2px;
+        margin-top: -1px;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+      }
+      .hmpg_no-line_section {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      .hmpg_no-hairline {
+        background-color: #ffffff21;
+        height: 1px;
+        margin-top: -0.5px;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        right: 0%;
+      }
+      .hmpg-average {
+        color: #ffffff80;
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 991px) {
+        .hmpg_no-wrapper {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .hmpg_no {
+          color: #fff;
+        }
+        .hmpg_no_description {
+          color: var(--text--text-color-grey-light);
+        }
+        .hmpg_no-line {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .hmpg_no {
+          font-size: 3.5rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .hmpg_no-wrapper {
+          width: 100%;
+          padding: 2rem 1rem;
+        }
+        .hmpg_no {
+          margin-bottom: 0.25rem;
+        }
+        .hmpg_no_description {
+          font-size: 0.875rem;
+        }
+        .hmpg_no-parent {
+          flex-flow: column;
+          grid-template-rows: auto auto;
+          grid-template-columns: 1fr 1fr;
+          grid-auto-columns: 1fr;
+          display: grid;
+        }
+        .hmpg-average {
+          margin-top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 25 Numbers band. Captured 2026-10-07 from https://www.social.plus/ by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- numbers band: four metrics in a row; the count-up is a script, the numbers are static here. -->
+    <section class="section padding_y">
+      <div class="page-padding z-index_2">
+        <div class="container-large">
+          <div class="container-heading margin-bottom_m">
+            <h2>Built to move the numbers your board actually asks about</h2>
+          </div>
+          <div class="hmpg_no-line_section">
+            <div class="hmpg_no-line-wrapper">
+              <div class="hmpg_no-hairline"></div>
+              <div class="hmpg_no-line"></div>
+            </div>
+            <div class="hmpg_no-parent">
+              <div class="hmpg_no-wrapper">
+                <div class="hmpg_no hmpg_no-on">22%</div>
+                <div class="hmpg_no_description hmpg_no_description-on">lift in monthly active users</div>
+              </div>
+              <div class="hmpg_no-wrapper">
+                <div class="hmpg_no">35%</div>
+                <div class="hmpg_no_description">increase in sessions per user per week</div>
+              </div>
+              <div class="hmpg_no-wrapper">
+                <div class="hmpg_no">18%</div>
+                <div class="hmpg_no_description">increase in customer lifetime value</div>
+              </div>
+              <div class="hmpg_no-wrapper">
+                <div class="hmpg_no">12%</div>
+                <div class="hmpg_no_description">reduction in 90-day churn</div>
+              </div>
+            </div>
+            <div class="hmpg_no-line-wrapper">
+              <div class="hmpg_no-hairline"></div>
+              <div class="hmpg_no-line"></div>
+            </div>
+          </div>
+          <div class="container-heading">
+            <div class="hmpg-average">
+              Representative client results. Outcomes vary by app type, goals, and implementation.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hide w-embed w-script">
+        <!-- Stat band — "magnetic segment" (v2.6.0).
+     Replaces the earlier single-bar mouse-follow script, which drove these same
+     .hmpg_no-line elements - running both would fight over transform.
+
+     v2.6.0: the segment's opacity is now a plain native style (.hmpg_no-line,
+     opacity .9) instead of something this script lerps every frame. There is
+     always exactly one active stat - at rest it is column 1 - so a dimmed
+     "inactive" bar no longer means anything. The script is left doing only what
+     CSS genuinely cannot: the position.
+     v2.5.0: the intro sweep was removed (it read as autoplay). Nothing runs
+     until someone hovers.
+
+     Behaviour:
+       SNAPPING   the segment always heads for one of the four column centres,
+                  never a point in between. The cursor decides WHICH column
+                  (nearest centre to the pointer X); the target is that column's
+                  centre. At rest the target is column 1.
+       REST       the column the segment rests under keeps the full hover
+                  styling (white number, lifted + scaled, lighter label), so the
+                  band never shows a bar sitting under a dim number.
+       MOTION     one rAF loop, no CSS transition on the segment - that is what
+                  lets the two rules lag apart and settle at a different rate:
+                    per frame  pos += (target - pos) * ease; translateX(pos-180)
+                    ease       tracking .17 top / .10 bottom; at rest .045/.033
+                  the loop parks 160 frames after leaving, restarts on the next
+                  pointer move.
+
+     Stat highlight is class-driven so the easing stays in the stylesheet
+     (hmpg_no-on / hmpg_no_description-on). IMPORTANT: those combos are added at
+     runtime, so column 1 carries them permanently in the Designer - otherwise
+     Webflow lists them as unused classes and a cleanup silently deletes them,
+     which kills the white highlight everywhere.
+
+     BELOW 992px the whole interaction is off - no tracking, no highlight
+     classes - and the segments are hidden, so the band is simply static there.
+     Numbers are plain white and labels the site grey via native breakpoint
+     overrides in the stylesheet.
+
+     Measurements re-sync on load, fonts.ready and resize: this script runs
+     inline while the page is still parsing, so its first measurement can land
+     before the band has its final width (measured: segment parked at x=64
+     instead of column 1 at x=148). While idle, a re-sync also re-pins it. -->
+      </div>
+    </section>
+  </body>
+</html>

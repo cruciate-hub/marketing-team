@@ -284,6 +284,8 @@ Registered site scripts (`data_scripts_tool register_inline_script` + `set_site_
 
 ## Part 8 — whtml span-class stripping, Block-text writes & icon-font ligatures (added after the Vise page build)
 
+Icon fonts are a legacy of the AI page family (page-level head code). The design system's icons foundation (`design-system/foundations/icons/`) uses inline SVG and the site stylesheets load no icon font, so a new build should not need pitfalls 46 and 48; they stay here for the pages that already use Material Symbols.
+
 ### 46. whtml strips a class that is an inline span's ONLY class — stacked unknown classes survive
 **Symptom:** icon-font spans come out of `data_whtml_builder` classless — `<span class="material-symbols-outlined">close</span>` is inserted as `<span>close</span>` — so every glyph renders as its raw ligature text ("close", "inbox", …).
 **Verified boundary (Vise build, 27 casualties in one section pair):** a class is dropped when it is the span's **only** class AND has no rule in the `css` param. Unknown classes **stacked after a known first class survive** (`vise-diff-label vise-lbl-without`, `vise-wf-item is-active` — all kept, correctly stored as combo classes). `data-*`, `role`, `aria-*` and `href` attributes survive too (`target="_blank"` still drops → Pitfall 23).
