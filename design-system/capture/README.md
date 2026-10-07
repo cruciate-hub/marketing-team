@@ -53,10 +53,10 @@ Driven by `capture.config.json` (pages, sections, snippets, selectors, per-secti
 
 ## Quality check (2026-10-07, re-run after the move to `design-system/`)
 
-Every `source.html` rendered from disk at 1440 and 390 and compared with the live screenshot (`node verify.mjs`). "Pixels differing" counts pixels that differ on the shared area (threshold 0.15); 1 to 4% is text anti-aliasing and image decoding noise, so a row near the 4% line (the quote carousel, 26) can flip between OK and minor from one run to the next. Height delta is the rendered height minus the live height in CSS pixels.
+Every `source.html` rendered from disk at 1440 and 390 and compared with the live screenshot (`node verify.mjs`). "Pixels differing" counts pixels that differ on the shared area (threshold 0.15); 1 to 4% is text anti-aliasing and image decoding noise, so a row near the 4% line (the quote carousel 26, the feature icon cards 13) can flip between OK and minor from one run to the next. Height delta is the rendered height minus the live height in CSS pixels.
 
 <!-- quality-table:start -->
-80 items checked: 67 OK, 13 minor, 0 broken.
+80 items checked: 66 OK, 14 minor, 0 broken.
 
 | Item | Result | Desktop: pixels differing, height delta | Mobile: pixels differing, height delta, sideways scroll | Leftovers / broken images |
 |---|---|---|---|---|
@@ -66,7 +66,7 @@ Every `source.html` rendered from disk at 1440 and 390 and compared with the liv
 | G3 Breadcrumb bar | OK | 1.0%, +0px | 0.0%, +0px, no sideways scroll | none |
 | G3 Breadcrumb bar (plain) (light) | OK | 0.3%, +0px | 0.7%, +0px, no sideways scroll | none |
 | G4 Footer CTA band | OK | 0.9%, -1px | 0.5%, +0px, no sideways scroll | none |
-| G5 Footer | OK | 1.0%, -1px | 0.4%, +0px, no sideways scroll | none |
+| G5 Footer | OK | 1.1%, -1px | 0.5%, +0px, no sideways scroll | none |
 | G5 Footer (no newsletter) (no-newsletter) | OK | 0.7%, +0px | 1.1%, -1px, no sideways scroll | none |
 | 01 Hero / Product (two-column) | OK | 0.7%, +0px | 1.5%, +0px, no sideways scroll | none |
 | 01 Hero / Product (video right) (video) | OK | 2.5%, +0px | 2.4%, +0px, no sideways scroll | none |
@@ -84,10 +84,10 @@ Every `source.html` rendered from disk at 1440 and 390 and compared with the liv
 | 11 Two-column (video, CTA) (video-cta) | OK | 1.3%, -1px | 3.3%, +0px, no sideways scroll | none |
 | 11 Two-column (three alternating rows) (three-rows) | OK | 0.6%, -1px | 2.9%, -1px, no sideways scroll | none |
 | 12 Feature grid (3 columns, icon + text) | OK | 0.9%, -1px | 2.2%, -1px, no sideways scroll | none |
-| 13 Card grid / Feature icons (v2) | OK | 0.8%, +0px | 3.8%, -1px, no sideways scroll | none |
+| 13 Card grid / Feature icons (v2) | minor | 1.1%, +0px | 4.5%, -1px, no sideways scroll | none |
 | 13 Card grid / Icon cards (v3) (v3-link-cards) | OK | 0.7%, +0px | 3.4%, -1px, no sideways scroll | none |
 | 13 Card grid / Documentation cards (v3) (v3-docs) | OK | 1.2%, +0px | 3.3%, -1px, no sideways scroll | none |
-| 14 Card grid / Bordered (v1) | minor | 2.1%, -1px | 4.6%, -1px, no sideways scroll | none |
+| 14 Card grid / Bordered (v1) | minor | 2.3%, -1px | 5.1%, -1px, no sideways scroll | none |
 | 15 Card grid / Plain | OK | 0.9%, +0px | 2.5%, -1px, no sideways scroll | none |
 | 15 Card grid / Plain (3 columns) (three-columns) | OK | 0.7%, +0px | 2.6%, +0px, no sideways scroll | none |
 | 16 Image-card grid (use cases, industries) | OK | 0.4%, +0px | 0.9%, +0px, no sideways scroll | none |
@@ -98,7 +98,7 @@ Every `source.html` rendered from disk at 1440 and 390 and compared with the liv
 | 18 FAQ accordion (border top) (border-top) | minor | 1.6%, -1px | 3.0%, -1px, no sideways scroll | by design: first answer open (live: all closed) |
 | 19 Customer story strip | OK | 0.9%, +0px | 2.0%, +0px, no sideways scroll | none |
 | 19 Customer story strip (6, aside) (six-stories) | OK | 0.2%, +0px | 2.1%, +0px, no sideways scroll | none |
-| 20 Why social.plus grid | OK | 1.5%, -1px | 1.8%, -1px, no sideways scroll | none |
+| 20 Why social.plus grid | OK | 1.4%, -1px | 2.1%, -1px, no sideways scroll | none |
 | 20 Why social.plus grid (no heading) (no-heading) | OK | 1.7%, -1px | 2.0%, -1px, no sideways scroll | none |
 | 21 Feature grid / Product details | OK | 0.5%, +0px | 1.3%, -1px, no sideways scroll | none |
 | 22 Explore more (links with images) | OK | 1.8%, +0px | 2.0%, +0px, no sideways scroll | none |
@@ -123,7 +123,7 @@ Every `source.html` rendered from disk at 1440 and 390 and compared with the liv
 | 52 vs / Comparison table | minor | 1.0%, +2160px | 2.6%, +2239px, no sideways scroll | by design: all 5 categories show (the live page shows one at a time, a script switches) |
 | 53 vs / Customer stories (tabbed) + form | OK | 1.7%, +0px | 2.0%, +0px, no sideways scroll | none |
 | 60 Pricing / Plan cards | OK | 0.8%, +0px | 1.8%, +0px, no sideways scroll | none |
-| 61 Pricing / Compare table | OK | 0.5%, -1px | 2.4%, -1px, no sideways scroll | none |
+| 61 Pricing / Compare table | OK | 0.7%, -1px | 3.3%, -1px, no sideways scroll | none |
 | 62 Pricing / Additional fees | OK | 1.0%, -1px | 2.5%, +0px, no sideways scroll | none |
 | Foundation: accessibility | OK | – | – no sideways scroll | none |
 | Foundation: accordion-row | OK | – | – no sideways scroll | none |
@@ -140,8 +140,6 @@ Every `source.html` rendered from disk at 1440 and 390 and compared with the liv
 | Foundation: spacing | OK | – | – no sideways scroll | none |
 | Foundation: tags | OK | – | – no sideways scroll | none |
 | Foundation: typography | OK | – | – no sideways scroll | none |
-
-"Minor" rows at 4 to 6% differing pixels on phones with a height delta of 1px or less are text anti-aliasing; the "by design" rows show a static state (see the deviations above). 16 Image-card grid (4 columns): +29px on desktop from one wrapped card line. The five hand-made or renamed foundations (accessibility, icons, imagery, logo, shadows-and-radius) were checked from the new location on 2026-10-07 after the move.
 <!-- quality-table:end -->
 
 No leftover `<script>`, `<iframe>`, inline styles (other than the checkboxes), tracking attributes or consent code in any `source.html` or `preview.html`. All images are absolute Webflow CDN URLs. No sideways scroll at 390px.

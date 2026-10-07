@@ -77,7 +77,7 @@
     <article class="card" id="f-accessibility">
       <header>
         <h3>Accessibility</h3>
-        <p class="meta">WCAG 2.1 AA is the target for every page, email and graphic. This foundation holds the contrast of the live token pairs (computed from tokens.css), the site's focus rules, touch targets, text sizes, motion, keyboard and structure rules, and the open items the section notes marked TO CHECK. · <a href="../foundations/accessibility/preview.html">preview.html</a> · <a href="../foundations/accessibility/foundation.md">foundation.md</a></p>
+        <p class="meta">WCAG 2.1 AA is the target for every page, email and graphic. This foundation holds the contrast of the text and background token pairs the site and the emails use (computed from tokens.css; every surface token has its rows), the site's focus rules, touch targets, text sizes, motion, keyboard and structure rules, and the open items the section notes marked TO CHECK. · <a href="../foundations/accessibility/preview.html">preview.html</a> · <a href="../foundations/accessibility/foundation.md">foundation.md</a></p>
       </header>
       <div class="shots">
         <figure class="desktop"><img src="../foundations/accessibility/desktop.png" alt="Accessibility, desktop" loading="lazy"><figcaption>1440</figcaption></figure>
@@ -154,7 +154,7 @@
     <article class="card" id="f-icons">
       <header>
         <h3>Icons</h3>
-        <p class="meta">The icons the live site uses: inline SVG interface icons that take the text colour (arrow, checkmark, external link, chevron, info mark, nav and social glyphs) and white feature glyphs as image files inside two holders. There is no icon font on the site. · <a href="../foundations/icons/preview.html">preview.html</a> · <a href="../foundations/icons/foundation.md">foundation.md</a></p>
+        <p class="meta">The icons the live site uses: inline SVG interface icons that take the text colour (arrow, checkmark, external link, chevron, info mark, nav and social glyphs) and feature glyphs as image files inside two holders (white shapes in the blue circle, blue-gradient shapes in the grey square). The two site stylesheets load no icon font. · <a href="../foundations/icons/preview.html">preview.html</a> · <a href="../foundations/icons/foundation.md">foundation.md</a></p>
       </header>
       <div class="shots">
         <figure class="desktop"><img src="../foundations/icons/desktop.png" alt="Icons, desktop" loading="lazy"><figcaption>1440</figcaption></figure>
@@ -176,7 +176,7 @@
     <article class="card" id="f-logo">
       <header>
         <h3>Logo</h3>
-        <p class="meta">The social.plus logo: full logo (icon mark + wordmark) and icon mark, in colour and in monochrome, with the clear-space rule and the backgrounds it may sit on. The vector data is below so emails and HTML can embed it inline; the files are in `assets/`. · <a href="../foundations/logo/preview.html">preview.html</a> · <a href="../foundations/logo/foundation.md">foundation.md</a></p>
+        <p class="meta">The social.plus logo: full logo (icon mark + wordmark) and icon mark, in colour and in monochrome, with the clear-space rule and the backgrounds it may sit on. The vector data is below so HTML can embed it inline; the colour files are `assets/social-plus-logo.svg` and `assets/social-plus-icon.svg` at the repository root (`$MT_REPO/assets/`, not under `design-system/`). The white and black mono sets are not in the repository (TO CHECK: Figma or the brand kit); until then make them from the inline SVG as described below. · <a href="../foundations/logo/preview.html">preview.html</a> · <a href="../foundations/logo/foundation.md">foundation.md</a></p>
       </header>
       <div class="shots">
         <figure class="desktop"><img src="../foundations/logo/desktop.png" alt="Logo, desktop" loading="lazy"><figcaption>1440</figcaption></figure>
@@ -231,7 +231,7 @@
     <article class="card" id="f-typography">
       <header>
         <h3>Typography</h3>
-        <p class="meta">Figtree (variable font 300 to 900; Inter is loaded but unused). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px. · <a href="../foundations/typography/preview.html">preview.html</a> · <a href="../foundations/typography/foundation.md">foundation.md</a></p>
+        <p class="meta">Figtree (variable font 300 to 900; Inter is loaded on the live site but unused). **Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey &quot;a&quot; is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: &quot;Figtree&quot;, Arial, sans-serif`). Emails are the exception: they follow the email spec (`emails/product-update-newsletter-spec.md`, Inter with system fallbacks). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px. · <a href="../foundations/typography/preview.html">preview.html</a> · <a href="../foundations/typography/foundation.md">foundation.md</a></p>
       </header>
       <div class="shots">
         <figure class="desktop"><img src="../foundations/typography/desktop.png" alt="Typography, desktop" loading="lazy"><figcaption>1440</figcaption></figure>
