@@ -28,7 +28,7 @@ Never leave it out. Landing pages without navigation are not part of the set (TO
 
 ## Accessibility and mobile
 - `<nav aria-label="Main navigation">`, menu as `role="list"`, dropdown toggles with `role="button"`, `aria-expanded` and `aria-controls`; keyboard focus ring is 2 px white
-- Bar height 5.75 rem on desktop (4.25 rem on phones), background `--secondary--menu-bg` (#181818), 1 px border `--border--border-hover`, radius .25 rem, frosted-glass blur behind it
+- Bar height 5.75 rem on desktop (`.nav_mega-menu_wrapper`; the link row inside it, `.nav_link-content`, is 5.25 rem; 4.25 rem on phones), background `--secondary--menu-bg` (#181818), 1 px border `--border--border-hover`, radius .25 rem, frosted-glass blur behind it
 - Sticky at the top of the page (`position: sticky`). Mobile: hamburger with `aria-label="Open menu"`, `aria-haspopup`, `aria-controls="nav-menu"`
 - Open panels and hover states are script driven and not shown in the screenshots. TO CHECK: capture one open panel as a second screenshot
 

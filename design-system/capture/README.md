@@ -53,7 +53,7 @@ Driven by `capture.config.json` (pages, sections, snippets, selectors, per-secti
 
 ## Quality check (2026-10-07, re-run after the move to `design-system/`)
 
-Every `source.html` rendered from disk at 1440 and 390 and compared with the live screenshot (`node verify.mjs`). "Pixels differing" counts pixels that differ on the shared area (threshold 0.15); 1 to 4% is text anti-aliasing and image decoding noise. Height delta is the rendered height minus the live height in CSS pixels.
+Every `source.html` rendered from disk at 1440 and 390 and compared with the live screenshot (`node verify.mjs`). "Pixels differing" counts pixels that differ on the shared area (threshold 0.15); 1 to 4% is text anti-aliasing and image decoding noise, so a row near the 4% line (the quote carousel, 26) can flip between OK and minor from one run to the next. Height delta is the rendered height minus the live height in CSS pixels.
 
 <!-- quality-table:start -->
 80 items checked: 67 OK, 13 minor, 0 broken.

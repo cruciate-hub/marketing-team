@@ -16,6 +16,7 @@ The rich-text styles as they are today: `.rich-text` (blog with `.c-blog`, gloss
 | `.cs-story-rich-text`, `.event_rich-text`, `.people-rich-text` | customer stories, events, people | own colour overrides | | | | per-template overrides |
 
 ## Known inconsistencies (as-is, no decision applied)
+- No monospace token on the site: code and `<pre>` use `ui-monospace, monospace`
 - Three heading scales and two paragraph sizes for the same job; the audit proposes one rich-text style with a light variant, product updates adopting it
 - Rich-text headings are 700 where page headings are 600
 - Every rich-text style has to undo the h1 gradient text fill (`-webkit-text-fill-color: inherit; background-image: none`)

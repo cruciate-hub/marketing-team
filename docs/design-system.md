@@ -38,8 +38,7 @@ For format-heavy tasks (emails with specific MailerLite requirements), a dedicat
 
 ```
 design-system/
-├── SKILL.md                          Skill entry point — minimal, routes to GitHub files
-└── README.md                         This file
+└── SKILL.md                          Skill entry point — minimal, routes to GitHub files
 ```
 
 No `references/` subdirectory — the tokens, foundations and sections live in the repo root's `design-system/` folder and are fetched at runtime.

@@ -17,6 +17,9 @@ The four card styles as they are today (v1, v2, v3, plain), the thumbnail card o
 | Thumbnail card | image wrapper radius 16px; tags above the title | 28px/600 | author row, date | every listing | none (CMS lists) |
 | Story card `.cs-cta_link-block` | photo, dark gradient overlay, logo | story title | – | 23 pages | Section / Customer Stories, CC / Customer Stories Section |
 
+## Rule (brand)
+- Cards in one set are greyscale (the dark surfaces with a `--border--border-dark` border); colour or a gradient goes on one highlighted card at most (a featured card, a hero CTA block), never across the set
+
 ## Known inconsistencies (as-is, no decision applied)
 - Four paddings (40 / 16 / 32 / 32px), two border treatments, two heading sizes (20 vs 28px). The audit proposes one card with three variants: bordered (v1), icon-compact (v2 and v3 merged), plain. Audit open question 4
 - `Card / Button` exists as a Webflow component (4 instances) but no live page renders it
