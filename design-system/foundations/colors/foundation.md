@@ -2,7 +2,7 @@
 
 The 44 live Webflow variables (General and Typography collections) as swatches with name, value and use. The page is dark-first: `--social--dark` #111 is the page background and `--social--main-blue` #3B41EC is the only action colour.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied; the brand extras at the end come from the former `colors-usage.md` and `website.md` · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide and the `:root` block of the live stylesheet (tokens.css, tokens.json)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)
@@ -23,3 +23,14 @@ The 44 live Webflow variables (General and Typography collections) as swatches w
 - `--text--text-color-grey-medium` #717275 on #111 is 3.9:1, below 4.5:1; used on 114 pages (nav, footer)
 - No light-surface pair, no radius or shadow tokens (radii in use: .5rem, 1rem, .75rem, .25rem, 1.5rem, 16px, 12px, pill 999px/99rem/100rem/20rem; the recurring shadow is `0 16px 2rem #12141914`)
 - `--main--transparant` is spelled with an "a" on the site
+
+## Brand extras (emails, social graphics): not website tokens, clearly separate
+
+Things emails and social graphics need that `tokens.css` does not define. They are not Webflow variables; on a web page use the tokens above.
+
+- **Brand blue gradient** (announcement banner, heroes, social graphics): `--gradient--light-blue` #45a5ed to `--gradient--medium-blue` #3769ec to `--gradient--dark-blue` (= main blue #3b41ec). The direction on the site is 135deg; in the logo mark the same stops run medium to main to light
+- **Warm gradient** (decoration and the logo mark only, never CTAs): `--secondary--pink` #f568f0 to `--secondary--orange` #ff6937 to `--secondary--yellow` #f7c506; pairs the site also uses: orange to yellow, pink to orange, red #ff305a to pink. The logo mark's own warm stop is #f66005 (artwork, not a token)
+- **No gradient on text**: a gradient is a background or a shape; text stays one solid colour. The live `h1` radial text fill is a known inconsistency (typography foundation), not a licence
+- **Light-mode email palette** (MailerLite emails render on white; the full spec is `emails/product-update-newsletter-spec.md`): background `--main--white` and `--main--whitesmoke` #f5f5f5 panels; text `--text--text-color-dark` #111 headings, `--text--text-color-grey-dark` #414347 body, `--text--text-color-grey-medium` #717275 small; button `--social--main-blue` #3b41ec with white label, hover `--social--button-hover` #272b9d; outlined button text #3b41ec on white (6.66:1). The dark email header uses #1a1a1a (= `--social--dark-gray-background`) and #2d2d2d, #7b7fff for links on dark, #a0a0a3 muted: email-only values that live in the email spec, not here
+- **Blue text on dark**: `--social--main-blue` fails as a text colour on #111 (2.84:1). Page embeds on the site use #7b94fe (6.75:1) for that; it is not a token (TO CHECK: add it, or always use white text with a blue fill)
+- **Status colours** are the secondary tokens: green #1dc497 success, yellow #f7c506 warning (dark text on it), red #ff305a error (text on dark; white on red only for large text), `--gradient--medium-blue` #3769ec info. Light-mode variants of the former extended palette (#cc9202, #1b89dc, #f66005) are not on the site and are not used

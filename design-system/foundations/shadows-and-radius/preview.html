@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shadows and radius · social.plus website foundations</title>
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+
+/* preview chrome (not part of the site) */
+body { margin: 0; background: var(--social--dark); color: var(--text--text-color-grey-light); font-family: var(--font--figtree); font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+img { max-width: 100%; display: inline-block; vertical-align: middle; }
+a { color: var(--main--white); }
+.fx-page { max-width: 80rem; margin: 0 auto; padding: 2rem 2.5rem 5rem; }
+.fx-head { border-bottom: 1px solid var(--border--border-dark); padding-bottom: 1rem; margin-bottom: 2rem; }
+.fx-head h1 { font-size: 1.5rem; margin: 0 0 .25rem; color: var(--main--white); font-weight: 600; }
+.fx-head p { margin: 0; color: var(--text--text-color-grey-light); font-size: .95rem; max-width: 60rem; }
+.fx-block { margin: 0 0 2.5rem; }
+.fx-label { font-size: .875rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text--text-color-grey-medium); margin: 0 0 .5rem; }
+.fx-note { font-size: .875rem; color: var(--text--text-color-grey-light); margin: 0 0 1rem; max-width: 60rem; }
+.fx-sample { border: 1px dashed var(--border--border-hover); border-radius: .5rem; padding: 1.5rem; overflow: hidden; }
+.fx-sample.fx-tight { padding: 1rem; }
+.fx-sample.fx-light { background: var(--main--white); color: var(--text--text-color-dark); }
+.fx-sample.fx-whitesmoke { background: var(--main--whitesmoke); color: var(--text--text-color-dark); }
+.fx-sample.fx-blue { background: var(--social--main-blue); }
+.fx-sample.fx-raised { background: var(--social--dark-gray-background); }
+.fx-row { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; align-items: center; }
+.fx-col { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.fx-item { display: flex; flex-direction: column; gap: .5rem; align-items: flex-start; }
+.fx-cap { font-size: .75rem; color: var(--text--text-color-grey-medium); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.fx-light .fx-cap, .fx-whitesmoke .fx-cap { color: var(--text--text-color-grey-dark); }
+.fx-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-table { border-collapse: collapse; font-size: .85rem; width: 100%; max-width: 60rem; }
+.fx-table th, .fx-table td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--border--border-dark); vertical-align: top; }
+.fx-table th { color: var(--text--text-color-grey-medium); font-weight: 600; }
+.fx-table td { color: var(--text--text-color-grey-light); }
+.fx-table code { color: var(--main--white); }
+.fx-ok { color: var(--secondary--green); font-weight: 600; }
+.fx-warn { color: var(--secondary--yellow); font-weight: 600; }
+.fx-fail { color: var(--secondary--red); font-weight: 600; }
+@media (max-width: 991px) { .fx-grid-3, .fx-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .fx-page { padding: 1.5rem 1rem 3rem; } .fx-grid-3, .fx-grid-2, .fx-grid-4 { grid-template-columns: 1fr; } .fx-sample { padding: 1rem; } .fx-table { font-size: .8rem; } }
+
+
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.25rem; }
+.sr-r, .sr-s { display: flex; flex-direction: column; gap: .5rem; }
+.sr-box { width: 100%; height: 5rem; background: var(--social--dark-gray-background); border: 1px solid var(--border--border-hover); }
+.sr-s { padding: 1.5rem 1.5rem .75rem; border-radius: .5rem; background: var(--social--dark); border: 1px dashed var(--border--border-hover); }
+.sr-s.fx-light { background: var(--social--grey-background); }
+.sr-card { width: 100%; height: 5rem; border-radius: .5rem; }
+.sr-s.fx-light .fx-cap { color: var(--text--text-color-grey-dark); }
+.sr-layers { display: flex; gap: 1rem; flex-wrap: wrap; }
+.sr-layer { width: 9rem; height: 6rem; border-radius: .5rem; display: flex; align-items: flex-end; padding: .5rem; font-size: .75rem; font-family: ui-monospace, Menlo, monospace; color: var(--main--white); }
+
+</style>
+</head>
+<body>
+<!-- Foundation preview written by hand (design-system/capture is not involved): see foundation.md. Static, no scripts. -->
+<main class="fx-page">
+  <header class="fx-head">
+    <h1>Shadows and radius</h1>
+    <p>The border radii and shadows the live site uses, with rule counts from the 7 October audit, and the reduced set the audit proposes for the team to decide. Depth on dark pages comes from lighter surfaces; the values are in foundation.md.</p>
+  </header>
+
+  <section class="fx-block">
+    <h2 class="fx-label">Border radius: every value the live stylesheet uses more than twice (55 values in all, no token)</h2>
+    <p class="fx-note">Rule counts from the 7 October audit of the two Webflow stylesheets. The set the audit proposes (to decide, Stefan or Amadeus): <strong>8px</strong> cards and holders, <strong>16px</strong> images and forms, <strong>24px</strong> large images, <strong>pill</strong> buttons and tags, <strong>circle</strong> avatars. The 4px and 12px values stay where the site uses them until the team retires them.</p>
+    <div class="fx-sample"><div class="sr-grid">
+<div class="sr-r"><div class="sr-box" style="border-radius:.25rem"></div><span class="fx-cap">.25rem (4px)<br>33 rules: checkbox, announcement bar, blog share, inputs (4px), .tag.c-nav-webinar</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:.36rem"></div><span class="fx-cap">.36rem (5.8px)<br>3 rules: .tag, .blog-tag, .pu-tag</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:.5rem"></div><span class="fx-cap">.5rem (8px)<br>65 rules: cards v1, v2, v3, plain; card-icon-v2; AWS logo box; AI cards</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:.75rem"></div><span class="fx-cap">.75rem (12px)<br>40 rules: accordion image wrapper, story thumbnails, consultation CTA, gallery cards</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:1rem"></div><span class="fx-cap">1rem (16px)<br>52 rules: image ratio classes, thumbnails, forms, pop-ups, answers image, rich-text images (product updates)</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:1.5rem"></div><span class="fx-cap">1.5rem (24px)<br>11 rules: rich-text images (.rich-text), hero tag, image_radius-parent, slider</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:10em"></div><span class="fx-cap">10em / 25em (pill)<br>2 rules: .cta-button outer / .cta-button_bg inner (primary and secondary buttons)</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:999px"></div><span class="fx-cap">999px, 99rem, 100rem, 20rem, 25rem, 10rem (pill)<br>20 rules: nav links, card-icon-v1, filter tags, .button submit, rounded inputs, .tag.c-new (six spellings)</span></div>
+<div class="sr-r"><div class="sr-box" style="border-radius:50%"></div><span class="fx-cap">50% / 100% (circle)<br>25 rules: avatars, author images, button arrow circle, dots</span></div>
+
+    </div></div>
+  </section>
+  <section class="fx-block">
+    <h2 class="fx-label">Shadows: the 9 that regular pages use (24 values in the stylesheet, none a token)</h2>
+    <p class="fx-note">One shadow recurs: <code>0 16px 2rem #12141914</code> (#121419 at 8%), stronger at 16% on forms and on hover. It lives on light tiles; on dark pages depth comes from lighter surfaces, not shadows. The blue glows exist on the AI pages and the /vs/ comparison only. To decide: keep the card shadow and one glow as tokens; drop the rest.</p>
+    <div class="sr-grid">
+<div class="sr-s fx-light"><div class="sr-card" style="box-shadow:0 16px 2rem #12141914;background:var(--main--white)"></div><span class="fx-cap">0 16px 2rem #12141914<br>10 rules: the card shadow: AWS logo box, hero tag, news featured, SDK language card, pop-up, testimonial link</span></div>
+<div class="sr-s fx-light"><div class="sr-card" style="box-shadow:0 16px 2rem #12141929;background:var(--main--white)"></div><span class="fx-cap">0 16px 2rem #12141929<br>5 rules: the same shadow, stronger: forms, hover state of the cards above</span></div>
+<div class="sr-s fx-light"><div class="sr-card" style="box-shadow:0 8px 2rem #12141929;background:var(--main--white)"></div><span class="fx-cap">0 8px 2rem #12141929<br>2 rules: hover of the pop-up trigger and the testimonial link</span></div>
+<div class="sr-s fx-light"><div class="sr-card" style="box-shadow:0 0 1rem #12141929;background:var(--main--white)"></div><span class="fx-cap">0 0 1rem #12141929<br>1 rule: pricing tooltip</span></div>
+<div class="sr-s "><div class="sr-card" style="box-shadow:0 -24px 50px #00000073;background:var(--social--dark-gray-background)"></div><span class="fx-cap">0 -24px 50px #00000073<br>1 rule: mobile nav sheet (upwards)</span></div>
+<div class="sr-s "><div class="sr-card" style="box-shadow:0 16px 40px -20px #3b41ec73;background:var(--social--dark-gray-background)"></div><span class="fx-cap">0 16px 40px -20px #3b41ec73<br>3 rules: blue glow: AI pages (code block, folder, term)</span></div>
+<div class="sr-s "><div class="sr-card" style="box-shadow:0 0 24px #3b41ec2e;background:var(--social--dark-gray-background)"></div><span class="fx-cap">0 0 24px #3b41ec2e<br>1 rule: blue glow: /vs/ comparison highlight card</span></div>
+<div class="sr-s "><div class="sr-card" style="box-shadow:0 0 40px #3b41ec1a;background:var(--social--dark-gray-background)"></div><span class="fx-cap">0 0 40px #3b41ec1a<br>1 rule: blue glow: AI page "ours" column</span></div>
+<div class="sr-s "><div class="sr-card" style="box-shadow:0 0 .1875rem #3b41ec80;background:var(--social--dark-gray-background)"></div><span class="fx-cap">0 0 .1875rem #3b41ec80<br>1 rule: text field focus ring (see accessibility)</span></div>
+
+    </div>
+  </section>
+  <section class="fx-block">
+    <h2 class="fx-label">Depth on dark pages: surfaces, not shadows</h2>
+    <p class="fx-note">The page is <code>--social--dark</code> #111; a raised block is <code>--social--dark-gray-background</code> #1a1a1a (cards v2, v3, plain; secondary button); a panel is <code>--social--grey</code> #222 (card-v1 gradient start, tiles); chips and icon holders go to #2b2b2b (card-icon-v2, not a token) and <code>--social--light-grey</code> #444. Borders separate same-colour layers: <code>--border--border-dark</code> #232324, <code>--border--border-hover</code> #39393a.</p>
+    <div class="fx-sample"><div class="sr-layers">
+      <div class="sr-layer" style="background:var(--social--dark);border:1px solid var(--border--border-dark)">#111 page</div>
+      <div class="sr-layer" style="background:var(--secondary--menu-bg)">#181818 nav</div>
+      <div class="sr-layer" style="background:var(--social--dark-gray-background)">#1a1a1a card</div>
+      <div class="sr-layer" style="background:var(--social--grey)">#222 panel</div>
+      <div class="sr-layer" style="background:#2b2b2b">#2b2b2b holder</div>
+      <div class="sr-layer" style="background:var(--social--light-grey)">#444 chip</div>
+    </div></div>
+  </section>
+
+</main>
+</body>
+</html>

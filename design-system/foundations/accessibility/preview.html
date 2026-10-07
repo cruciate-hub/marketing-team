@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accessibility · social.plus website foundations</title>
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+
+/* preview chrome (not part of the site) */
+body { margin: 0; background: var(--social--dark); color: var(--text--text-color-grey-light); font-family: var(--font--figtree); font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+img { max-width: 100%; display: inline-block; vertical-align: middle; }
+a { color: var(--main--white); }
+.fx-page { max-width: 80rem; margin: 0 auto; padding: 2rem 2.5rem 5rem; }
+.fx-head { border-bottom: 1px solid var(--border--border-dark); padding-bottom: 1rem; margin-bottom: 2rem; }
+.fx-head h1 { font-size: 1.5rem; margin: 0 0 .25rem; color: var(--main--white); font-weight: 600; }
+.fx-head p { margin: 0; color: var(--text--text-color-grey-light); font-size: .95rem; max-width: 60rem; }
+.fx-block { margin: 0 0 2.5rem; }
+.fx-label { font-size: .875rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text--text-color-grey-medium); margin: 0 0 .5rem; }
+.fx-note { font-size: .875rem; color: var(--text--text-color-grey-light); margin: 0 0 1rem; max-width: 60rem; }
+.fx-sample { border: 1px dashed var(--border--border-hover); border-radius: .5rem; padding: 1.5rem; overflow: hidden; }
+.fx-sample.fx-tight { padding: 1rem; }
+.fx-sample.fx-light { background: var(--main--white); color: var(--text--text-color-dark); }
+.fx-sample.fx-whitesmoke { background: var(--main--whitesmoke); color: var(--text--text-color-dark); }
+.fx-sample.fx-blue { background: var(--social--main-blue); }
+.fx-sample.fx-raised { background: var(--social--dark-gray-background); }
+.fx-row { display: flex; flex-wrap: wrap; gap: 1.5rem 2rem; align-items: center; }
+.fx-col { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.fx-item { display: flex; flex-direction: column; gap: .5rem; align-items: flex-start; }
+.fx-cap { font-size: .75rem; color: var(--text--text-color-grey-medium); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.fx-light .fx-cap, .fx-whitesmoke .fx-cap { color: var(--text--text-color-grey-dark); }
+.fx-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; align-items: start; }
+.fx-table { border-collapse: collapse; font-size: .85rem; width: 100%; max-width: 60rem; }
+.fx-table th, .fx-table td { text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--border--border-dark); vertical-align: top; }
+.fx-table th { color: var(--text--text-color-grey-medium); font-weight: 600; }
+.fx-table td { color: var(--text--text-color-grey-light); }
+.fx-table code { color: var(--main--white); }
+.fx-ok { color: var(--secondary--green); font-weight: 600; }
+.fx-warn { color: var(--secondary--yellow); font-weight: 600; }
+.fx-fail { color: var(--secondary--red); font-weight: 600; }
+@media (max-width: 991px) { .fx-grid-3, .fx-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .fx-page { padding: 1.5rem 1rem 3rem; } .fx-grid-3, .fx-grid-2, .fx-grid-4 { grid-template-columns: 1fr; } .fx-sample { padding: 1rem; } .fx-table { font-size: .8rem; } }
+
+
+.ax-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .75rem; }
+.ax-sw { border: 1px solid var(--border--border-dark); border-radius: .5rem; padding: .75rem; min-height: 5.5rem; display: flex; flex-direction: column; justify-content: space-between; }
+.ax-big { font-size: 1.75rem; font-weight: 600; line-height: 1; }
+.ax-small { font-size: .78rem; line-height: 1.3; }
+/* the site's focus rules (copied) */
+a.ax-link:focus-visible { outline-offset: .125rem; outline-width: .125rem; outline-style: solid; }
+.ax-link { color: var(--main--white); font-weight: 500; }
+.ax-link.sim-focus { outline: .125rem solid currentColor; outline-offset: .125rem; }
+.text-field { background: #1b1b1b; border: 1px solid var(--social--main-blue); border-radius: .25rem; color: var(--main--white); font: inherit; padding: .75rem 1rem; height: 3.25rem; width: 16rem; max-width: 100%; }
+.text-field:focus, .text-field.sim-focus { box-shadow: 0 0 .1875rem #3b41ec80; outline: none; }
+.ax-btn { display: inline-flex; align-items: center; background: var(--social--main-blue); color: var(--main--white); border-radius: 10em; padding: .5rem 1.5rem; min-height: 2.8rem; font-weight: 500; text-decoration: none; position: relative; }
+.ax-btn.sim-focus { outline: .125rem solid var(--main--white); outline-offset: .125rem; }
+.ax-target { display: inline-flex; flex-direction: column; gap: .4rem; align-items: flex-start; }
+.ax-box { display: inline-block; outline: 1px dashed var(--secondary--green); outline-offset: 2px; }
+.ax-sizes span { display: block; }
+.ax-sizes code { color: var(--text--text-color-grey-medium); font-size: .75rem; margin-left: .5rem; }
+
+</style>
+</head>
+<body>
+<!-- Foundation preview written by hand (design-system/capture is not involved): see foundation.md. Static, no scripts. -->
+<main class="fx-page">
+  <header class="fx-head">
+    <h1>Accessibility</h1>
+    <p>Contrast of the live token pairs (computed from tokens.css), the site's focus rules, touch targets, text sizes and motion, with the items that still need a decision marked TO CHECK. The checklist and the open items from the section notes are in foundation.md.</p>
+  </header>
+
+  <section class="fx-block">
+    <h2 class="fx-label">Contrast of the token pairs the site uses (WCAG 2.1, computed from tokens.css)</h2>
+    <p class="fx-note">Body text needs 4.5:1, large text (24px, or 19px bold) and interface parts 3:1. Green passes AA, yellow passes only for large text and UI, red fails. The full table with every pair is in foundation.md.</p>
+    <div class="ax-swatches">
+<div class="ax-sw" style="background:#111111;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">18.88:1 · headings, white body text</span></div>
+<div class="ax-sw" style="background:#111111;color:#b3b3b3"><span class="ax-big">Aa</span><span class="ax-small">9.01:1 · body text (every page)</span></div>
+<div class="ax-sw" style="background:#111111;color:#717275"><span class="ax-big">Aa</span><span class="ax-small">3.93:1 · nav and footer small text (114 pages)</span></div>
+<div class="ax-sw" style="background:#1a1a1a;color:#b3b3b3"><span class="ax-big">Aa</span><span class="ax-small">8.30:1 · card body text</span></div>
+<div class="ax-sw" style="background:#1a1a1a;color:#717275"><span class="ax-big">Aa</span><span class="ax-small">3.62:1 · muted text on cards</span></div>
+<div class="ax-sw" style="background:#3b41ec;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">6.66:1 · primary button label</span></div>
+<div class="ax-sw" style="background:#272b9d;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">10.95:1 · primary button hover</span></div>
+<div class="ax-sw" style="background:#27265e;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">13.77:1 · primary button pressed</span></div>
+<div class="ax-sw" style="background:#111111;color:#3b41ec"><span class="ax-big">Aa</span><span class="ax-small">2.84:1 · blue text on dark: never</span></div>
+<div class="ax-sw" style="background:#111111;color:#3769ec"><span class="ax-big">Aa</span><span class="ax-small">3.95:1 · links, superscripts (plain a)</span></div>
+<div class="ax-sw" style="background:#f5f5f5;color:#3b41ec"><span class="ax-big">Aa</span><span class="ax-small">6.11:1 · tag text (.tag)</span></div>
+<div class="ax-sw" style="background:#ffffff;color:#3b41ec"><span class="ax-big">Aa</span><span class="ax-small">6.66:1 · blue text on white (emails)</span></div>
+<div class="ax-sw" style="background:#ffffff;color:#111111"><span class="ax-big">Aa</span><span class="ax-small">18.88:1 · text on light sections</span></div>
+<div class="ax-sw" style="background:#ffffff;color:#414347"><span class="ax-big">Aa</span><span class="ax-small">9.91:1 · secondary text on light</span></div>
+<div class="ax-sw" style="background:#ffffff;color:#717275"><span class="ax-big">Aa</span><span class="ax-small">4.81:1 · muted text on light</span></div>
+<div class="ax-sw" style="background:#f9f9f9;color:#717275"><span class="ax-big">Aa</span><span class="ax-small">4.57:1 · muted text on grey sections</span></div>
+<div class="ax-sw" style="background:#111111;color:#1dc497"><span class="ax-big">Aa</span><span class="ax-small">8.45:1 · status text, decoration</span></div>
+<div class="ax-sw" style="background:#111111;color:#ff305a"><span class="ax-big">Aa</span><span class="ax-small">5.24:1 · status text</span></div>
+<div class="ax-sw" style="background:#1dc497;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">2.24:1 · white on green: never for text</span></div>
+<div class="ax-sw" style="background:#ff305a;color:#ffffff"><span class="ax-big">Aa</span><span class="ax-small">3.61:1 · white on red: large text or UI only</span></div>
+<div class="ax-sw" style="background:#111111;color:#666666"><span class="ax-big">Aa</span><span class="ax-small">3.29:1 · secondary button outline (UI, needs 3:1)</span></div>
+<div class="ax-sw" style="background:#111111;color:#39393a"><span class="ax-big">Aa</span><span class="ax-small">1.64:1 · card borders (decorative, no requirement)</span></div>
+
+    </div>
+    <table class="fx-table" style="margin-top:1.5rem">
+      <tr><th>Text</th><th>Background</th><th>Ratio</th><th>Verdict</th><th>Where</th></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--social--dark</code> #111111</td><td>18.88:1</td><td class="fx-ok">AA</td><td>headings, white body text</td></tr>
+<tr><td><code>--text--text-color-grey-light</code> #b3b3b3</td><td><code>--social--dark</code> #111111</td><td>9.01:1</td><td class="fx-ok">AA</td><td>body text (every page)</td></tr>
+<tr><td><code>--text--text-color-grey-medium</code> #717275</td><td><code>--social--dark</code> #111111</td><td>3.93:1</td><td class="fx-warn">3:1 only (large text, UI)</td><td>nav and footer small text (114 pages)</td></tr>
+<tr><td><code>--text--text-color-grey-light</code> #b3b3b3</td><td><code>--social--dark-gray-background</code> #1a1a1a</td><td>8.30:1</td><td class="fx-ok">AA</td><td>card body text</td></tr>
+<tr><td><code>--text--text-color-grey-medium</code> #717275</td><td><code>--social--dark-gray-background</code> #1a1a1a</td><td>3.62:1</td><td class="fx-warn">3:1 only (large text, UI)</td><td>muted text on cards</td></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--social--main-blue</code> #3b41ec</td><td>6.66:1</td><td class="fx-ok">AA</td><td>primary button label</td></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--social--button-hover</code> #272b9d</td><td>10.95:1</td><td class="fx-ok">AA</td><td>primary button hover</td></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--social--button-pressed</code> #27265e</td><td>13.77:1</td><td class="fx-ok">AA</td><td>primary button pressed</td></tr>
+<tr><td><code>--social--main-blue</code> #3b41ec</td><td><code>--social--dark</code> #111111</td><td>2.84:1</td><td class="fx-fail">fails</td><td>blue text on dark: never</td></tr>
+<tr><td><code>--gradient--medium-blue</code> #3769ec</td><td><code>--social--dark</code> #111111</td><td>3.95:1</td><td class="fx-warn">3:1 only (large text, UI)</td><td>links, superscripts (plain a)</td></tr>
+<tr><td><code>--social--main-blue</code> #3b41ec</td><td><code>--main--whitesmoke</code> #f5f5f5</td><td>6.11:1</td><td class="fx-ok">AA</td><td>tag text (.tag)</td></tr>
+<tr><td><code>--social--main-blue</code> #3b41ec</td><td><code>--main--white</code> #ffffff</td><td>6.66:1</td><td class="fx-ok">AA</td><td>blue text on white (emails)</td></tr>
+<tr><td><code>--text--text-color-dark</code> #111111</td><td><code>--main--white</code> #ffffff</td><td>18.88:1</td><td class="fx-ok">AA</td><td>text on light sections</td></tr>
+<tr><td><code>--text--text-color-grey-dark</code> #414347</td><td><code>--main--white</code> #ffffff</td><td>9.91:1</td><td class="fx-ok">AA</td><td>secondary text on light</td></tr>
+<tr><td><code>--text--text-color-grey-medium</code> #717275</td><td><code>--main--white</code> #ffffff</td><td>4.81:1</td><td class="fx-ok">AA</td><td>muted text on light</td></tr>
+<tr><td><code>--text--text-color-grey-medium</code> #717275</td><td><code>--social--grey-background</code> #f9f9f9</td><td>4.57:1</td><td class="fx-ok">AA</td><td>muted text on grey sections</td></tr>
+<tr><td><code>--secondary--green</code> #1dc497</td><td><code>--social--dark</code> #111111</td><td>8.45:1</td><td class="fx-ok">AA</td><td>status text, decoration</td></tr>
+<tr><td><code>--secondary--red</code> #ff305a</td><td><code>--social--dark</code> #111111</td><td>5.24:1</td><td class="fx-ok">AA</td><td>status text</td></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--secondary--green</code> #1dc497</td><td>2.24:1</td><td class="fx-fail">fails</td><td>white on green: never for text</td></tr>
+<tr><td><code>--main--white</code> #ffffff</td><td><code>--secondary--red</code> #ff305a</td><td>3.61:1</td><td class="fx-warn">3:1 only (large text, UI)</td><td>white on red: large text or UI only</td></tr>
+<tr><td><code>--border--border-dark-grey</code> #666666</td><td><code>--social--dark</code> #111111</td><td>3.29:1</td><td class="fx-warn">3:1 only (large text, UI)</td><td>secondary button outline (UI, needs 3:1)</td></tr>
+<tr><td><code>--border--border-hover</code> #39393a</td><td><code>--social--dark</code> #111111</td><td>1.64:1</td><td class="fx-fail">fails</td><td>card borders (decorative, no requirement)</td></tr>
+
+    </table>
+  </section>
+  <section class="fx-block">
+    <h2 class="fx-label">Focus (the site's own rules, shown as static states)</h2>
+    <p class="fx-note">Links: <code>a:focus-visible</code> gets a 2px solid outline, 2px offset, in the text colour. Text fields: a 3px blue glow <code>0 0 .1875rem #3b41ec80</code>. Buttons rely on the browser default (TO CHECK: the nav sets a 2px white ring; give every button the link rule). Webflow's custom checkbox focus ring is #3898ec, not a brand colour (TO CHECK).</p>
+    <div class="fx-sample"><div class="fx-row">
+      <div class="fx-item"><a class="ax-link sim-focus" href="#">Focused link</a><span class="fx-cap">a:focus-visible: outline 2px solid, offset 2px</span></div>
+      <div class="fx-item"><input class="text-field sim-focus" type="text" value="Focused field" aria-label="Example field"><span class="fx-cap">.text-field:focus: 0 0 .1875rem #3b41ec80</span></div>
+      <div class="fx-item"><a class="ax-btn sim-focus" href="#">Focused button</a><span class="fx-cap">proposed: same 2px ring as links (TO CHECK)</span></div>
+    </div></div>
+  </section>
+  <section class="fx-block">
+    <h2 class="fx-label">Touch targets and text sizes</h2>
+    <p class="fx-note">Interactive elements need 44px (WCAG 2.5.8 says 24px minimum; the brand keeps 44px). The primary button is 2.8rem = 44.8px high; text links and footer links are a text line (about 22px) and need padding or spacing (TO CHECK). Smallest text on the site: tags .8rem = 12.8px; the blog grid overrides the tag to 10.8px, below the 12px floor (TO CHECK).</p>
+    <div class="fx-sample"><div class="fx-row" style="align-items:flex-start">
+      <div class="ax-target"><span class="ax-box"><a class="ax-btn" href="#">Primary button</a></span><span class="fx-cap">44.8px high: passes</span></div>
+      <div class="ax-target"><span class="ax-box" style="padding:.7rem 0"><a class="ax-link" href="#">Text link</a></span><span class="fx-cap">22px line + padding to 44px (proposed)</span></div>
+      <div class="ax-sizes">
+        <span style="font-size:1.1rem">Body 17.6px <code>body</code></span>
+        <span style="font-size:1rem">Small 16px <code>.text-size-small</code></span>
+        <span style="font-size:.9rem">Tiny 14.4px <code>.text-size-tiny</code></span>
+        <span style="font-size:.8rem;text-transform:uppercase;letter-spacing:.025rem;font-weight:500">Tag 12.8px <code>.tag</code> (the floor)</span>
+      </div>
+    </div></div>
+  </section>
+  <section class="fx-block">
+    <h2 class="fx-label">Motion</h2>
+    <p class="fx-note">The brand rule: every animation and transition respects <code>prefers-reduced-motion</code>; no flashing above 3 per second. On the live site only the nav and the /vs/ hero carry a reduced-motion rule; the logo marquee, the count-up numbers and the GSAP reveals keep moving (TO CHECK). Section captures show the still state.</p>
+    <div class="fx-sample fx-tight"><code style="color:var(--main--white);font-size:.85rem">@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }</code></div>
+  </section>
+
+</main>
+</body>
+</html>

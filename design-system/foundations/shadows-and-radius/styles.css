@@ -1,0 +1,11 @@
+/* Shadows and radius: values as the live stylesheet has them (see foundation.md); the preview boxes are chrome. */
+
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1.25rem; }
+.sr-r, .sr-s { display: flex; flex-direction: column; gap: .5rem; }
+.sr-box { width: 100%; height: 5rem; background: var(--social--dark-gray-background); border: 1px solid var(--border--border-hover); }
+.sr-s { padding: 1.5rem 1.5rem .75rem; border-radius: .5rem; background: var(--social--dark); border: 1px dashed var(--border--border-hover); }
+.sr-s.fx-light { background: var(--social--grey-background); }
+.sr-card { width: 100%; height: 5rem; border-radius: .5rem; }
+.sr-s.fx-light .fx-cap { color: var(--text--text-color-grey-dark); }
+.sr-layers { display: flex; gap: 1rem; flex-wrap: wrap; }
+.sr-layer { width: 9rem; height: 6rem; border-radius: .5rem; display: flex; align-items: flex-end; padding: .5rem; font-size: .75rem; font-family: ui-monospace, Menlo, monospace; color: var(--main--white); }

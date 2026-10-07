@@ -1,0 +1,13 @@
+/* Logo: the preview is hand-made; there are no site rules to copy. The SVG data is in foundation.md and in assets/. */
+
+.lg-full svg { width: 18rem; height: auto; display: block; }
+.lg-icon svg { width: 4.5rem; height: auto; display: block; }
+.lg-tile { display: flex; align-items: center; justify-content: center; min-height: 9rem; }
+.lg-clear { position: relative; display: inline-block; padding: 4.5rem; outline: 1px dashed var(--social--main-blue); background: var(--social--blue-transparent); }
+.lg-clear svg { width: 18rem; height: auto; display: block; }
+.lg-clear .lg-x { position: absolute; left: 0; top: 0; width: 4.5rem; height: 4.5rem; border-right: 1px dashed var(--social--main-blue); border-bottom: 1px dashed var(--social--main-blue); display: flex; align-items: center; justify-content: center; font-size: .7rem; color: var(--main--white); font-family: ui-monospace, Menlo, monospace; }
+.lg-min svg { height: 24px; width: auto; display: block; }
+.lg-min-icon svg { height: 16px; width: auto; display: block; }
+.lg-dont { position: relative; }
+.lg-dont::after { content: "don't"; position: absolute; top: .5rem; right: .75rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--main--white); background: var(--secondary--red); padding: .1rem .5rem; border-radius: .25rem; }
+@media (max-width: 767px) { .lg-full svg, .lg-clear svg { width: 14rem; } .lg-clear { padding: 3.5rem; } .lg-clear .lg-x { width: 3.5rem; height: 3.5rem; } }

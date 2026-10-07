@@ -1,0 +1,23 @@
+/* Icons: holder rules copied from the captured sections (tokens as var(--…), see ../../tokens.css); the glyphs are inline SVG. */
+
+/* the site's own rules for the icon holders (copied from the captured sections; tokens as var(--…)) */
+.button-icon_wrapper { background-color: var(--social--main-blue); border-radius: 100%; flex: none; justify-content: center; align-items: center; width: var(--cta-button_icon-size); height: var(--cta-button_icon-size); display: flex; color: var(--main--white); }
+.button-icon_wrapper.c-grey { background-color: var(--border--border-dark-grey); }
+.arrow-social { width: 1.25rem; height: 1.25rem; display: block; }
+.arrow-social.c-small { width: 1rem; height: 1rem; }
+.icon-small { flex: none; justify-content: center; align-items: center; width: 1rem; height: 1rem; margin: 0 .25rem; display: flex; color: var(--main--white); }
+.checkmark-icon { width: 1.25rem; height: 1.25rem; color: var(--social--main-blue); display: flex; }
+.accordion-icon { width: 1.5rem; height: 1.5rem; font-size: 1.5rem; color: var(--main--white); display: flex; }
+.pricing_icon-info { width: 1rem; height: 1rem; color: var(--text--text-color-grey-light); display: flex; }
+.nav-icon_wrapper { width: 1.5rem; height: 1.5rem; color: var(--main--white); display: flex; }
+.social-icon_wrapper { width: 1.25rem; height: 1.25rem; color: var(--main--white); display: flex; }
+.card-icon-v1 { background-color: var(--social--main-blue); width: 3rem; height: 3rem; color: var(--main--whitesmoke); border-radius: 99rem; flex: none; justify-content: center; align-items: center; padding: .75rem; display: flex; }
+.card-icon-v2 { width: 4.5rem; height: 4.5rem; color: var(--main--whitesmoke); background-color: #2b2b2b; border-radius: .5rem; flex: none; justify-content: center; align-items: center; padding: 1rem; display: flex; }
+.icon-full { flex: none; width: 100%; height: 100%; max-height: 100%; position: relative; }
+.why-icon { width: 2.5rem; height: 2.5rem; object-fit: contain; }
+/* preview only */
+.ic-cell { display: flex; flex-direction: column; align-items: center; gap: .5rem; text-align: center; min-width: 7rem; }
+.ic-cell .fx-cap { max-width: 9rem; }
+.ic-text-link { display: inline-flex; align-items: center; gap: .5rem; color: var(--main--white); font-weight: 500; text-decoration: none; }
+.ic-btn { display: inline-flex; align-items: center; gap: .75rem; background: var(--social--main-blue); color: var(--main--white); border-radius: 10em; padding: .5rem .5rem .5rem 1.5rem; font-weight: 500; text-decoration: none; min-height: 2.8rem; }
+.ic-btn.c-grey { background: var(--social--dark-gray-background); box-shadow: inset 0 0 0 2px var(--border--border-dark-grey); }
