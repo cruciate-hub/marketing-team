@@ -31,7 +31,7 @@ One blue button (`--social--main-blue`) per section, and never two blue buttons 
 
 The picture next to a claim is the product: a screenshot in the dark rounded frame, a product video, a UI illustration in the style of `foundations/imagery/` (dark, one blue glow, UI metaphors). Not a drawn flow diagram, not clip art, not a generated abstract shape, not a stock photo of people at laptops.
 
-When there is no product visual yet: use the simple hero (02) with text and buttons and the "Works with" logos row, and leave the right column empty; or place the approved placeholder (a rounded frame in `--social--dark-gray-background` with a 1px `--border--border-dark` border and the grey-light label "Product visual to come", see `sections/recipes/product-landing.md`) and say in the reply that the page needs a product visual. Never draw one to fill the gap.
+When there is no product visual yet: use the simple hero (02) with text and buttons and the "Works in" row, and leave the right column empty; or place the approved placeholder (a rounded frame in `--social--dark-gray-background` with a 1px `--border--border-dark` border and the grey-light label "Product visual to come", see `sections/recipes/product-landing.md`) and say in the reply that the page needs a product visual. Never draw one to fill the gap.
 
 - Do: /chat: the hero video is the product; the three two-column rows show screens of the product.
 - Don't: the test build drew a flow of boxes and arrows as the hero visual. That is a diagram, not the product.

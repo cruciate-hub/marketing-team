@@ -41,11 +41,11 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 - **Definition of done.** Before saying a page is finished, check each point and report it in the reply:
   1. The page follows a recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
   2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
-  3. Every section is one from the set, used as its `section.md` allows. Anything else is marked "proposed" on the page itself and in the reply.
+  3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
   4. Only values from `tokens.css`; Figtree from `figtree.woff2`; no new text effect, icon style, shadow or colour.
   5. One primary (blue) button per section; two actions of equal weight only with approval.
   6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
-  7. No third-party logo unless its approved file is in `assets/media/` or supplied by the team; otherwise the name as text.
+  7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
   8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
   9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
   10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
