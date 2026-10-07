@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>62 · Pricing / Additional fees · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-clearfix:before,
+      .w-clearfix:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-clearfix:after {
+        clear: both;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db796.16ef20404.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .text-align-center {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-color-grey-medium {
+        color: var(--text--text-color-grey-medium);
+      }
+      .text-size-tiny {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .heading-small {
+        color: var(--main--white);
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .heading-small.is-pricing {
+        color: var(--main--white);
+        white-space: nowrap;
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      .h3-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .margin-bottom_s {
+        margin-bottom: 0.625rem;
+      }
+      .margin-bottom_l {
+        margin-bottom: 3.125rem;
+      }
+      .accordion-icon {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        position: relative;
+      }
+      .faq-icon_content {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      .accodrion-icon {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .container-medium-large {
+        width: 100%;
+        max-width: 65rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .compare-plans_heading {
+        color: var(--main--white);
+        font-size: var(--_typography---h6-font-size);
+        white-space: nowrap;
+        font-weight: 600;
+      }
+      .accordion_top {
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.75rem;
+        padding-bottom: 0.5rem;
+        display: flex;
+      }
+      .accordion_item {
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        flex-direction: column;
+        width: 100%;
+        display: flex;
+      }
+      .accordion_bottom {
+        height: auto;
+        overflow: hidden;
+      }
+      .feedback_positive {
+        z-index: 4;
+        border: 0.0625rem solid var(--secondary--green);
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--secondary--green);
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        padding: 0.2rem;
+        display: flex;
+        position: relative;
+      }
+      .feedback_positive:hover {
+        background-color: #1dc49733;
+        transform: translateY(-0.05rem);
+      }
+      .faq_feedback-parent {
+        margin-top: 0.25rem;
+        padding-bottom: 2rem;
+      }
+      .faq_feedback-wrapper {
+        flex-direction: column;
+        margin-bottom: 0.75rem;
+      }
+      .faq_feedback {
+        float: left;
+        color: var(--text--text-color-dark);
+        cursor: pointer;
+        align-items: center;
+        margin-top: -0.1rem;
+        margin-right: 0.5rem;
+        display: flex;
+        position: relative;
+      }
+      .faq_feedback-title {
+        float: left;
+        color: var(--text--text-color-grey-medium);
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25;
+      }
+      .feedback_negative {
+        z-index: 4;
+        border: 0.0625rem solid var(--secondary--red);
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--secondary--red);
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        padding: 0.2rem;
+        display: flex;
+        position: relative;
+      }
+      .feedback_negative:hover {
+        background-color: #ff305a66;
+        transform: translateY(-0.05rem);
+      }
+      .faq_feedback-reply {
+        float: left;
+        flex: none;
+        align-items: center;
+        width: 100%;
+        font-size: 1rem;
+        display: none;
+      }
+      .faq_feedback-reply-text {
+        max-width: 52ch;
+        margin-bottom: 0;
+        padding-right: 2rem;
+      }
+      .faq_feedback-reply_content {
+        border: 0.0625rem solid var(--border--border-dark);
+        background-color: var(--social--dark-gray-background);
+        border-radius: 0.5rem;
+        align-items: center;
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        padding: 1rem;
+        display: flex;
+      }
+      .lottie-animation {
+        z-index: 3;
+        width: 4.5rem;
+        height: 4.5rem;
+        position: absolute;
+        top: -1.5rem;
+        bottom: 0%;
+        left: -1.55rem;
+      }
+      .pricing_row {
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        align-items: center;
+        padding-top: 0.5rem;
+        display: flex;
+      }
+      .pricing_column {
+        flex: 1;
+      }
+      .pricing_column-right {
+        flex: 1;
+        padding-bottom: 0.5rem;
+        padding-left: 3em;
+      }
+      .pricing-feedback-text {
+        color: var(--secondary--green);
+        white-space: nowrap;
+        font-size: 0.75rem;
+        display: none;
+        position: absolute;
+        left: 1.5rem;
+      }
+      .arrow-social {
+        width: var(--cta-button_icon-size);
+        height: var(--cta-button_icon-size);
+        flex: none;
+        padding: 0.25rem;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-icon_wrapper {
+        background-color: var(--social--main-blue);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: -1rem;
+        display: flex;
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      @media screen and (max-width: 991px) {
+        .heading-small.is-pricing {
+          white-space: normal;
+          white-space: normal;
+        }
+        .compare-plans_heading {
+          line-height: 1.25;
+        }
+        .faq_feedback,
+        .faq_feedback-title {
+          margin-right: 0.75rem;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .heading-small {
+          font-size: 1.125rem;
+          line-height: 1.1;
+        }
+        .h3-font-size {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .cta-button {
+          left: auto;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .text-align-center {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .heading-small.is-pricing {
+          margin-bottom: 0.35rem;
+          font-size: 1.125rem;
+        }
+        .faq_feedback {
+          margin-right: 1rem;
+        }
+        .faq_feedback-reply-text {
+          margin-bottom: 1rem;
+        }
+        .faq_feedback-reply_content,
+        .pricing_row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .pricing_column-right {
+          padding-left: 0;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 62 Pricing / Additional fees. Captured 2026-10-07 from https://www.social.plus/pricing by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- pricing additional fees: fee rows in two columns. -->
+    <section id="payment-information" class="section padding_y">
+      <div class="page-padding">
+        <div class="container-medium-large">
+          <div class="text-align-center margin-bottom_l"><h2 class="h3-font-size">Additional fees</h2></div>
+          <div class="accordion_item">
+            <div class="accordion_top">
+              <h3 class="heading-small is-pricing">Additional fees</h3>
+              <div class="accordion-icon">
+                <div class="faq-icon_content">
+                  <div class="accodrion-icon w-embed">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      aria-hidden="true"
+                      role="img"
+                      width="1em"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion_bottom">
+              <div class="pricing_row">
+                <div class="pricing_column">
+                  <div class="compare-plans_heading margin-bottom_s">File Storage Overage Fee</div>
+                </div>
+                <div class="pricing_column-right"><div>$0.05/GB/month</div></div>
+              </div>
+              <div class="pricing_row">
+                <div class="pricing_column">
+                  <div class="compare-plans_heading margin-bottom_s">Concurrent Users Overage<br /></div>
+                </div>
+                <div class="pricing_column-right">
+                  <div>$0.05/connection/day<br /></div>
+                </div>
+              </div>
+              <div class="pricing_row">
+                <div class="pricing_column">
+                  <div class="compare-plans_heading">Inactive Users Overage Fee</div>
+                  <div class="text-size-tiny margin-bottom_s text-color-grey-medium">
+                    (chargeable after exceeding 10x of MAU)
+                  </div>
+                </div>
+                <div class="pricing_column-right"><div>$0.024/MAU</div></div>
+              </div>
+              <div class="pricing_row">
+                <div class="pricing_column"><div class="compare-plans_heading margin-bottom_s">Video - SD</div></div>
+                <div class="pricing_column-right"><div>$0.003/min</div></div>
+              </div>
+              <div class="pricing_row">
+                <div class="pricing_column"><div class="compare-plans_heading margin-bottom_s">Video - FHD</div></div>
+                <div class="pricing_column-right"><div>$0.0044/min</div></div>
+              </div>
+              <div class="pricing_row margin-bottom_l">
+                <div class="pricing_column">
+                  <div class="compare-plans_heading margin-bottom_s">Social &amp; Chat Image Moderation</div>
+                </div>
+                <div class="pricing_column-right"><div>$0.003/image</div></div>
+              </div>
+              <div class="faq_feedback-parent">
+                <div class="faq_feedback-wrapper w-clearfix">
+                  <div class="faq_feedback-title">Was this helpful?</div>
+                  <div class="faq_feedback">
+                    <div class="feedback_negative w-embed">
+                      <svg
+                        preserveAspectRatio="xMidYMid meet"
+                        height="100%"
+                        width="100%"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        stroke="none"
+                        class="icon-7f6730be--text-3f89f380"
+                      >
+                        <g>
+                          <path
+                            d="M9.707 8.707a.993.993 0 0 0 .006-1.396 1.007 1.007 0 0 0-1.408-.03C8.273 7.312 7.519 8 6 8c-1.497 0-2.251-.67-2.303-.717a1 1 0 0 0-1.404 1.424C2.425 8.839 3.653 10 6 10c2.347 0 3.575-1.161 3.707-1.293m12 0a.993.993 0 0 0 .006-1.396 1.006 1.006 0 0 0-1.408-.03C20.273 7.312 19.519 8 18 8c-1.497 0-2.251-.67-2.303-.717a1 1 0 0 0-1.404 1.424C14.425 8.839 15.653 10 18 10c2.347 0 3.575-1.161 3.707-1.293M21.001 19a1 1 0 0 1-.896-.553C20.036 18.314 18.225 15 12 15c-6.225 0-8.036 3.314-8.11 3.456a1.002 1.002 0 0 1-1.344.43.997.997 0 0 1-.441-1.333C2.198 17.367 4.469 13 12 13s9.802 4.367 9.895 4.553A1.001 1.001 0 0 1 21.001 19"
+                            fill-rule="evenodd"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                  <a href="#" class="faq_feedback w-inline-block"
+                    ><div
+                      data-is-ix2-target="1"
+                      class="lottie-animation"
+                      data-animation-type="lottie"
+                      data-src="https://cdn.prod.website-files.com/5eddccffdb3c6a27f79757c1/611e684cb5fcc8846ebc30dc_explosion.json"
+                      data-loop="0"
+                      data-direction="1"
+                      data-autoplay="0"
+                      data-renderer="svg"
+                      data-default-duration="2"
+                      data-duration="0"
+                      data-loading="eager"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 1080 1080"
+                        width="1080"
+                        height="1080"
+                        preserveAspectRatio="xMidYMid meet"
+                      >
+                        <defs>
+                          <clipPath id="__lottie_element_64">
+                            <rect width="1080" height="1080" x="0" y="0"></rect>
+                          </clipPath>
+                        </defs>
+                        <g clip-path="url(#__lottie_element_64)">
+                          <g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g></g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g></g>
+                            <g>
+                              <path></path>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g></g>
+                            <g>
+                              <path></path>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g></g>
+                            <g>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                          <g>
+                            <g></g>
+                            <g>
+                              <path></path>
+                              <path
+                                stroke-linecap="butt"
+                                stroke-linejoin="miter"
+                                fill-opacity="0"
+                                stroke-miterlimit="4"
+                              ></path>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="feedback_positive w-embed">
+                      <svg
+                        preserveAspectRatio="xMidYMid meet"
+                        height="100%"
+                        width="100%"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        stroke="none"
+                        class="icon-7f6730be--text-3f89f380"
+                      >
+                        <g>
+                          <path
+                            d="M9.707 8.707a.999.999 0 0 0 0-1.414C9.575 7.161 8.347 6 6 6 3.653 6 2.425 7.161 2.293 7.293a.992.992 0 0 0-.005 1.396 1.007 1.007 0 0 0 1.408.029C3.727 8.689 4.481 8 6 8c1.52 0 2.273.689 2.293.707a.997.997 0 0 0 1.414 0m12 0a.999.999 0 0 0 0-1.414C21.575 7.161 20.347 6 18 6c-2.347 0-3.575 1.161-3.707 1.293a.992.992 0 0 0-.005 1.396 1.006 1.006 0 0 0 1.407.029C15.727 8.689 16.481 8 18 8c1.52 0 2.273.689 2.293.707a.997.997 0 0 0 1.414 0M12 19c-7.53 0-9.8-4.367-9.894-4.553a1.001 1.001 0 0 1 1.786-.902C3.974 13.704 5.792 17 12 17c6.226 0 8.037-3.314 8.111-3.456a1.007 1.007 0 0 1 1.344-.43.998.998 0 0 1 .441 1.333C21.802 14.633 19.531 19 12 19"
+                            fill-rule="evenodd"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="pricing-feedback-text">Thank you!</div></a
+                  >
+                  <div class="faq_feedback-reply">
+                    <div class="faq_feedback-reply_content">
+                      <p class="faq_feedback-reply-text">
+                        We’re sorry this wasn't helpful enough. Please feel free to contact us, someone from our team
+                        will get in touch with you.
+                      </p>
+                      <a
+                        id="talk_to_sales_button_click"
+                        aria-label="Contact Sales"
+                        href="https://www.social.plus/contact/contact-sales"
+                        class="cta-button w-inline-block"
+                        ><div class="cta-button_bg">
+                          <div class="button-content">
+                            <div class="button-text">Contact Sales</div>
+                            <div class="button-icon_wrapper">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 25"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                class="arrow-social"
+                              >
+                                <path
+                                  d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                                  fill="currentColor"
+                                ></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cta-border_rotate"></div
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

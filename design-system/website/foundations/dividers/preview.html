@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dividers · social.plus website foundations</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      .styleguide_right {
+        border-top: 0.0625rem solid var(--border--border-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        width: 75%;
+        padding: 4.5em;
+        display: flex;
+        position: relative;
+      }
+      .full-width {
+        width: 100%;
+      }
+      .divider {
+        background-color: var(--border--border-light-grey);
+        flex: 1;
+        height: 0.0625rem;
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .styleguide_right {
+          width: 100%;
+          padding: 1.5em;
+        }
+        .superscript.c-divider {
+          max-width: 30ch;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+        }
+        .divider.c-divider {
+          display: none;
+        }
+      }
+      .superscript {
+        color: var(--gradient--medium-blue);
+        letter-spacing: 0.044rem;
+        -webkit-text-stroke-color: var(--gradient--medium-blue);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1rem;
+      }
+      .superscript.c-divider {
+        color: var(--text--text-color-grey-medium);
+        margin-bottom: 0;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+      }
+      .text-divider {
+        z-index: 3;
+        color: #a0a1a3;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      .divider.c-divider {
+        background-color: var(--main--transparant);
+        background-image: linear-gradient(90deg, #23232400, var(--text--text-color-grey-medium));
+        max-width: 10rem;
+      }
+      .divider.c-divider.c-reversed {
+        background-image: linear-gradient(270deg, #23232400, var(--text--text-color-grey-medium));
+        background-image: linear-gradient(270deg, #23232400, var(--text--text-color-grey-medium));
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+
+      /* preview chrome (not part of the site) */
+      body {
+        margin: 0;
+        background: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+        font-family: var(--font--figtree);
+      }
+      .fx-page {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 2.5rem 5rem;
+      }
+      .fx-sample .add-ons_image-wrapper {
+        display: none;
+      } /* preview: the accordion item's image column is shown in section 17 */
+      .fx-head {
+        border-bottom: 1px solid var(--border--border-dark);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+      .fx-head h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--main--white);
+        color: var(--main--white);
+        letter-spacing: 0;
+      }
+      .fx-head p {
+        margin: 0;
+        color: var(--text--text-color-grey-light);
+        font-size: 0.95rem;
+        max-width: 60rem;
+      }
+      .fx-block {
+        margin: 0 0 2.5rem;
+      }
+      .fx-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text--text-color-grey-medium);
+        margin: 0 0 0.5rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-note {
+        font-size: 0.875rem;
+        color: var(--text--text-color-grey-light);
+        margin: 0 0 1rem;
+        max-width: 60rem;
+      }
+      .fx-sample {
+        border: 1px dashed var(--border--border-hover);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        overflow: hidden;
+      }
+      .fx-sample.fx-tight {
+        padding: 1rem;
+      }
+      .fx-sample.fx-light {
+        background: var(--main--white);
+        color: var(--text--text-color-dark);
+      }
+      .fx-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        align-items: center;
+      }
+      .fx-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .fx-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+      .fx-cap {
+        font-size: 0.75rem;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .fx-measure {
+        display: block;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        margin: 1.25rem 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-measure:first-child {
+        margin-top: 0;
+      }
+      .fx-swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        gap: 1rem;
+      }
+      .fx-swatch {
+        border: 1px solid var(--border--border-dark);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background: var(--social--dark-gray-background);
+      }
+      .fx-swatch-color {
+        height: 4.5rem;
+        border-bottom: 1px solid var(--border--border-dark);
+      }
+      .fx-swatch-text {
+        padding: 0.6rem 0.75rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+      .fx-swatch-text code {
+        display: block;
+        color: var(--main--white);
+        font-size: 0.78rem;
+        word-break: break-all;
+      }
+      .fx-swatch-text .fx-val {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-swatch-text .fx-use {
+        color: var(--text--text-color-grey-medium);
+      }
+      .fx-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-max-m {
+        max-width: 47.5rem;
+      }
+      .fx-box {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+      }
+      .fx-box-inner {
+        background: var(--social--dark-gray-background);
+        border: 1px solid var(--border--border-hover);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-container-demo {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table {
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 60rem;
+      }
+      .fx-table th,
+      .fx-table td {
+        text-align: left;
+        padding: 0.4rem 0.6rem;
+        border-bottom: 1px solid var(--border--border-dark);
+        vertical-align: top;
+      }
+      .fx-table th {
+        color: var(--text--text-color-grey-medium);
+        font-weight: 600;
+      }
+      .fx-table td {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table code {
+        color: var(--main--white);
+      }
+      @media (max-width: 991px) {
+        .fx-grid-3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 767px) {
+        .fx-page {
+          padding: 1.5rem 1rem 3rem;
+        }
+        .fx-grid-3,
+        .fx-grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .fx-sample {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Foundation preview built 2026-10-07 by design-system/website/capture/foundations.mjs from live site snippets (see foundation.md). Images are the site's own CDN files. -->
+    <main class="fx-page">
+      <header class="fx-head">
+        <h1>Dividers</h1>
+        <p>
+          The .divider line (1px --border--border-light-grey, a light grey line on a dark site) and the text divider of
+          the logo wall (.text-divider: a superscript between two fading lines, .divider.c-divider).
+        </p>
+      </header>
+      <section class="fx-block">
+        <h2 class="fx-label">.divider (style guide)</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div class="full-width">
+              <div class="divider"></div>
+              <div>#e7e7e7</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">.text-divider with .superscript.c-divider (logo wall)</h2>
+        <div class="fx-sample">
+          <div class="text-divider">
+            <div class="divider c-divider"></div>
+            <div class="superscript c-divider">Trusted by some of the world's biggest brands</div>
+            <div class="divider c-divider c-reversed"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

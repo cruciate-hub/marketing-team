@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>10 · Logo wall (marquee) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      img {
+        border: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db644.b6ae40d9f.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .superscript {
+        color: var(--gradient--medium-blue);
+        letter-spacing: 0.044rem;
+        -webkit-text-stroke-color: var(--gradient--medium-blue);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1rem;
+      }
+      .superscript.c-divider {
+        color: var(--text--text-color-grey-medium);
+        margin-bottom: 0;
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+      }
+      .text-divider {
+        z-index: 3;
+        color: #a0a1a3;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      .divider {
+        background-color: var(--border--border-light-grey);
+        flex: 1;
+        height: 0.0625rem;
+      }
+      .divider.c-divider {
+        background-color: var(--main--transparant);
+        background-image: linear-gradient(90deg, #23232400, var(--text--text-color-grey-medium));
+        max-width: 10rem;
+      }
+      .divider.c-divider.c-reversed {
+        background-image: linear-gradient(270deg, #23232400, var(--text--text-color-grey-medium));
+        background-image: linear-gradient(270deg, #23232400, var(--text--text-color-grey-medium));
+      }
+      .logos-marquee {
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .logo-wrapper {
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 1rem;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .marquee-gradient {
+        background-image: linear-gradient(90deg, var(--social--dark), #fff0);
+        width: 10%;
+        position: absolute;
+        inset: 0% auto 0% 0%;
+      }
+      .marquee-gradient.right {
+        background-image: linear-gradient(270deg, var(--social--dark), #fff0);
+        background-image: linear-gradient(270deg, var(--social--dark), #fff0);
+        inset: 0% 0% 0% auto;
+        inset: 0% 0% 0% auto;
+      }
+      .logo-row {
+        background-color: var(--social--dark);
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .hidden {
+        display: none;
+      }
+      .cs-logo_marquee {
+        opacity: 0.7;
+        object-fit: contain;
+        width: 9rem;
+        height: 3.8rem;
+      }
+      .cs-logo_marquee_item {
+        flex: none;
+      }
+      .cs-logo_marquee_list {
+        display: flex;
+      }
+      .cs-logo_marquee_wrapper {
+        flex: none;
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .superscript.c-divider {
+          max-width: 30ch;
+          margin-left: 0.5rem;
+          margin-right: 0.5rem;
+        }
+        .divider.c-divider {
+          display: none;
+        }
+        .cs-logo_marquee {
+          width: 8rem;
+          height: 4rem;
+        }
+      }
+      /* static state, added by the capture */
+      /* static state: the marquee does not move */
+      .logo-row [class*="marquee"] {
+        animation: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 10 Logo wall (marquee). Captured 2026-10-07 from https://www.social.plus/chat by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- logo marquee: the logos scroll sideways on the live site (CSS animation); here the row stands still. -->
+    <section class="logo-row">
+      <div class="logos-marquee">
+        <div class="text-divider">
+          <div class="divider c-divider"></div>
+          <div class="superscript c-divider">Trusted by some of the world's biggest brands</div>
+          <div class="divider c-divider c-reversed"></div>
+        </div>
+        <div class="hidden w-embed">
+          <style>
+            @keyframes scroll {
+              from {
+                transform: translateX(0);
+              }
+              to {
+                transform: translateX(calc(-100% - 0rem));
+              }
+            }
+            .cs-logo_marquee_wrapper {
+              -webkit-transform: translateZ(0);
+              animation: scroll 55s linear infinite;
+            }
+            @media only screen and (max-width: 568px) {
+              .cs-logo_marquee_wrapper {
+                animation: scroll 70s linear infinite;
+              }
+            }
+          </style>
+        </div>
+        <div class="logo-wrapper">
+          <div class="cs-logo_marquee_wrapper w-dyn-list">
+            <div role="list" class="cs-logo_marquee_list w-dyn-items">
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3814f1175cd56ba08db_logo_ulta-beauty.svg"
+                  alt="Ulta Beauty logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d35cd79013fc38f211b6_logo_xm.svg"
+                  alt="XM logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d34ee209007f475e6f0c_logo_harley-davidson.svg"
+                  alt="Harley-Davidson logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3761ae44fcc0130737b_logo_snai.svg"
+                  alt="Snai logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d395e19b3235e661d3f7_logo_noom.svg"
+                  alt="Noom logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3c0092977d504229cc4_logo_syngenta.svg"
+                  alt="Syngenta logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3e98174fa9b814a637c_logo_smartfit.svg"
+                  alt="Smartfit logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d39f1ae44fcc01308566_logo_cipla.svg"
+                  alt="Cipla logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d38bafd3b39d5563522e_logo_betsson.svg"
+                  alt="Betsson logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/69048c01b7d629338fbca57f_logo-complex.svg"
+                  alt="Complex logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3cf1710dd7295e11c24_logo_talkspace.svg"
+                  alt="Talkspace logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d44b1f68fbab6363e4e3_logo_sisal.svg"
+                  alt="Sisal logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4331f53d396ecb278f4_logo_thryv.svg"
+                  alt="Thrive logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d49ac4fba6981eafd3d9_logo_winner.svg"
+                  alt="Winner logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4ace1f3ee34f04d3292_logo_bitazza.svg"
+                  alt="Bitazza logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4beb9812a3c031cafda_logo_volkswagen.svg"
+                  alt="Volkswagen logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d507a575a9df6199a9fe_logo_pharmacy2u.svg"
+                  alt="Pharmacy2u logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6981967fa018b4dc226a414b_logo_the-ring.svg"
+                  alt="The Ring Magazine logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d554c7bc5375850b3334_logo_vivat.svg"
+                  alt="Vitat logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d57a3067022493b93cbf_logo_betgames.svg"
+                  alt="Betgames logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d5d4afd3b39d55645acf_logo_sawgrass.svg"
+                  alt="Sawgrass logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d53f9a21f28bb273fdee_logo_true-money.svg"
+                  alt="True Money logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d462b8d27767c5503dcd_logo_trueid.svg"
+                  alt="TrueID logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d6c928754e9d9b0b6189_logo_bsw-health.svg"
+                  alt="BSW Health logo"
+                  class="cs-logo_marquee"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="cs-logo_marquee_wrapper w-dyn-list">
+            <div role="list" class="cs-logo_marquee_list w-dyn-items">
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3814f1175cd56ba08db_logo_ulta-beauty.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d35cd79013fc38f211b6_logo_xm.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d34ee209007f475e6f0c_logo_harley-davidson.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3761ae44fcc0130737b_logo_snai.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d395e19b3235e661d3f7_logo_noom.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3c0092977d504229cc4_logo_syngenta.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3e98174fa9b814a637c_logo_smartfit.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d39f1ae44fcc01308566_logo_cipla.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d38bafd3b39d5563522e_logo_betsson.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/69048c01b7d629338fbca57f_logo-complex.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d3cf1710dd7295e11c24_logo_talkspace.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d44b1f68fbab6363e4e3_logo_sisal.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4331f53d396ecb278f4_logo_thryv.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d49ac4fba6981eafd3d9_logo_winner.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4ace1f3ee34f04d3292_logo_bitazza.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d4beb9812a3c031cafda_logo_volkswagen.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d507a575a9df6199a9fe_logo_pharmacy2u.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6981967fa018b4dc226a414b_logo_the-ring.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d554c7bc5375850b3334_logo_vivat.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d57a3067022493b93cbf_logo_betgames.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d5d4afd3b39d55645acf_logo_sawgrass.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d53f9a21f28bb273fdee_logo_true-money.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d462b8d27767c5503dcd_logo_trueid.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+              <div role="listitem" class="cs-logo_marquee_item w-dyn-item">
+                <img
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/68c2d6c928754e9d9b0b6189_logo_bsw-health.svg"
+                  alt=""
+                  class="cs-logo_marquee"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="marquee-gradient"></div>
+          <div class="marquee-gradient right"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

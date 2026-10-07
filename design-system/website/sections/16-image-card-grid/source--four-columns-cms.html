@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>16 · Image-card grid (4 columns, CMS) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      img {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db7ed.7e618d8ef.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .section.padding_y.background-color_dark.c-radial-gradient {
+        background-image: radial-gradient(circle farthest-corner at 50% 0%, #141414, var(--social--dark));
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .full-width {
+        width: 100%;
+      }
+      .h5-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h5-font-size);
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .margin-bottom_xs {
+        margin-bottom: 0.3rem;
+      }
+      .margin-bottom_l {
+        margin-bottom: 3.125rem;
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .max-ch-30 {
+        max-width: 30ch;
+      }
+      .mobile-space {
+        display: none;
+      }
+      .arrow-social {
+        width: var(--cta-button_icon-size);
+        height: var(--cta-button_icon-size);
+        flex: none;
+        padding: 0.25rem;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-icon_wrapper {
+        background-color: var(--social--main-blue);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: -1rem;
+        display: flex;
+      }
+      .button-icon_wrapper.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .content-header {
+        flex-flow: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+      }
+      .content-header_main {
+        flex-flow: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-right: 2rem;
+        display: flex;
+      }
+      .product_feature-bttn {
+        white-space: nowrap;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .show-mobile {
+        display: none;
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-button.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .cta-button.c-grey:active {
+        color: var(--main--white);
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-border_rotate.c-white {
+        min-height: 16rem;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      .cta-button_bg.c-white {
+        background-color: var(--social--dark-gray-background);
+        background-image: none;
+      }
+      .industry-grid_child-text {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .industry-grid_img {
+        width: 100%;
+      }
+      .usecase-grid {
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-columns: 1fr;
+        place-items: stretch stretch;
+        display: grid;
+      }
+      .usecase-grid.c-4 {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+      .usecase-grid_link {
+        border: 1px solid var(--social--dark-gray-background);
+        background-color: var(--social--dark-gray-background);
+        width: 100%;
+        height: 100%;
+        color: var(--text--text-color-grey-light);
+        border-radius: 0.5rem;
+        flex-flow: column;
+        transition: transform 0.15s;
+        display: flex;
+        overflow: hidden;
+      }
+      .usecase-grid_link:hover {
+        border-color: var(--border--border-hover);
+        transform: translateY(-2px);
+      }
+      .usecase-grid_link:active {
+        opacity: 0.9;
+      }
+      @media screen and (max-width: 991px) {
+        .usecase-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .usecase-grid.c-4 {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .h5-font-size {
+          font-size: 1.4rem;
+          line-height: 1.1;
+        }
+        .content-header {
+          flex-flow: wrap;
+        }
+        .content-header_main {
+          padding-right: 0;
+        }
+        .product_feature-bttn {
+          display: none;
+        }
+        .cta-button {
+          left: auto;
+        }
+        .usecase-grid {
+          grid-template-columns: 1fr;
+        }
+        .usecase-grid.c-4 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .mobile-space {
+          width: 100%;
+          height: 2rem;
+          padding: 0;
+          display: block;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .show-mobile {
+          display: block;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+        .industry-grid_child-content,
+        .industry-grid_child-text {
+          height: auto;
+        }
+        .usecase-grid.c-4 {
+          grid-template-columns: 1fr;
+        }
+        .usecase-grid_link {
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 16 Image-card grid (4 columns, CMS). Captured 2026-10-07 from https://www.social.plus/white-label/social-network by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- image-card grid (4-column CMS variant). -->
+    <section class="section padding_y background-color_dark c-radial-gradient">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="content-header margin-bottom_l">
+            <div class="content-header_main">
+              <h2 class="max-ch-30">Bring the most popular features from social networks to your own app</h2>
+              <p class="margin-bottom_m">
+                All the essential social features you need to build an engaging social network.
+              </p>
+            </div>
+            <div class="product_feature-bttn">
+              <a
+                aria-label="All Use Cases"
+                href="https://www.social.plus/use-cases"
+                class="cta-button c-grey w-inline-block"
+                ><div class="cta-button_bg c-white">
+                  <div class="button-content">
+                    <div class="button-text">All Use Cases</div>
+                    <div class="button-icon_wrapper c-grey">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 25"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        class="arrow-social"
+                      >
+                        <path
+                          d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="cta-border_rotate c-white"></div
+              ></a>
+            </div>
+          </div>
+          <div class="full-width w-dyn-list">
+            <div role="list" class="usecase-grid c-4 w-dyn-items">
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/1-1-chat" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Private two-way messaging within your app."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6992ba319cfe88433f078331_1-on-1%20Chat.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">1-1 Chat</h2>
+                    <div class="text-style-3lines">Private two-way messaging within your app.</div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/activity-feed" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Dynamic feed for updates, posts, and reactions."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/69f9e192a7977b87e0811c0d_Activity%20Feed.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Activity Feed</h2>
+                    <div class="text-style-3lines">Dynamic feed for updates, posts, and reactions.</div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/clips" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Clips are short, vertical videos built for continuous discovery."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a799b05fa47480b3ec443f4_clips-thumbnail.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Clips</h2>
+                    <div class="text-style-3lines">
+                      Clips are short, vertical videos built for continuous discovery.
+                    </div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/custom-posts" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Structured, custom-designed content types beyond standard posts."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6992ba424227ec41907b7808_Custom%20Posts.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Custom Posts</h2>
+                    <div class="text-style-3lines">
+                      Structured, custom-designed content types beyond standard posts.
+                    </div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/events" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt=" Give your community something to show up for."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/69d48b7a90621b766d125280_events-thumbnail.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Events</h2>
+                    <div class="text-style-3lines">Give your community something to show up for.</div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/for-you-feed" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="The For You Feed is a relevance-ranked feed personalized for every user in your app."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a61c95970944b518e4fceab_for-you-feed_use-case.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">For You Feed</h2>
+                    <div class="text-style-3lines">
+                      The For You Feed is a relevance-ranked feed personalized for every user in your app.
+                    </div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/group-chat" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Shared real-time conversations between multiple participants."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6992ba214bd0e522f6508e32_Group%20Chat.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Group Chat</h2>
+                    <div class="text-style-3lines">Shared real-time conversations between multiple participants.</div>
+                  </div></a
+                >
+              </div>
+              <div role="listitem" class="full-width w-dyn-item">
+                <a href="https://www.social.plus/use-case/groups" class="usecase-grid_link w-inline-block"
+                  ><img
+                    alt="Topic-based spaces for organized community discussions."
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6992ba97ec677b2ce2c5af3f_Groups.webp"
+                    class="industry-grid_img"
+                  />
+                  <div class="industry-grid_child-text">
+                    <h2 class="h5-font-size margin-bottom_xs">Groups</h2>
+                    <div class="text-style-3lines">Topic-based spaces for organized community discussions.</div>
+                  </div></a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="mobile-space"></div>
+          <div class="show-mobile">
+            <a
+              aria-label="All Use Cases"
+              href="https://www.social.plus/use-cases"
+              class="cta-button c-grey w-inline-block"
+              ><div class="cta-button_bg c-white">
+                <div class="button-content">
+                  <div class="button-text">All Use Cases</div>
+                  <div class="button-icon_wrapper c-grey">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 25"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      class="arrow-social"
+                    >
+                      <path
+                        d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="cta-border_rotate c-white"></div
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

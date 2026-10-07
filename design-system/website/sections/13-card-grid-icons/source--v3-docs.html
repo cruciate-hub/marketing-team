@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>13 · Card grid / Documentation cards (v3) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      b,
+      strong {
+        font-weight: 700;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      ul,
+      ol {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 40px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.697713f21a4cfd3f4db2769c.3098290c4.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      ul {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      li {
+        -webkit-text-stroke-color: var(--text--text-color-grey-dark);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 6px;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+      strong {
+        font-weight: 600;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .section.padding_y.background-color_dark.c-radial-gradient {
+        background-image: radial-gradient(circle farthest-corner at 50% 0%, #141414, var(--social--dark));
+      }
+      .list {
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      .list-item {
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 0.25rem;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+      }
+      .list-item.is-checkmark {
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66e2765d540e1939a89dbcbe_checkmark-circle-grey.svg);
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-color-white {
+        color: var(--main--white);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .icon-small {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        display: flex;
+      }
+      .grid-3 {
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-columns: 1fr;
+        place-items: start center;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        display: grid;
+      }
+      .link {
+        color: var(--social--main-blue);
+        transition: color 0.15s;
+      }
+      .link:hover {
+        color: var(--social--button-hover);
+      }
+      .link:active {
+        color: var(--social--button-pressed);
+      }
+      .link.is-white {
+        color: var(--main--white);
+      }
+      .link.is-white:hover {
+        color: var(--text--text-color-grey-light);
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-content.is-no-arrow {
+        grid-column-gap: 0rem;
+        grid-row-gap: 0rem;
+      }
+      .card-v3 {
+        grid-column-gap: 1.25rem;
+        grid-row-gap: 1.25rem;
+        background-color: var(--social--dark-gray-background);
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        color: var(--text--text-color-grey-light);
+        border-radius: 0.5rem;
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 2rem;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .card-v3.c-link {
+        border: 1px solid var(--main--transparant);
+        transition: transform 0.15s;
+      }
+      .card-v3.c-link:hover {
+        border-color: var(--border--border-hover);
+        transform: translateY(-0.125rem);
+      }
+      .card-content_full-height {
+        flex-flow: column;
+        justify-content: space-between;
+        height: 100%;
+        display: flex;
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .card-v3 {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 13 Card grid / Documentation cards (v3). Captured 2026-10-07 from https://www.social.plus/release-note/1-1-chat-support-for-ios-and-android-uikit by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- card grid (docs variant): three link cards with a checklist each; ends every release note and tutorial. -->
+    <section class="section padding_y background-color_dark c-radial-gradient">
+      <div class="page-padding">
+        <div class="container-large">
+          <h2>Explore our documentation</h2>
+          <p>Find all the information you need to in our documentation.</p>
+          <main class="grid-3">
+            <a
+              href="https://learn.social.plus/social-plus-sdk/overview"
+              target="_blank"
+              class="card-v3 c-link w-inline-block"
+              ><div class="card-con">
+                <div>
+                  <h3>SDK</h3>
+                  <div class="text-color-white"><strong>Build Custom Experiences</strong></div>
+                  <ul role="list" class="list margin-bottom_m">
+                    <li class="list-item is-checkmark"><div>Unique user interface requirements</div></li>
+                    <li class="list-item is-checkmark"><div>Custom user flows and interactions</div></li>
+                    <li class="list-item is-checkmark"><div>Complete design freedom</div></li>
+                    <li class="list-item is-checkmark"><div>Integrate with existing apps</div></li>
+                  </ul>
+                </div>
+                <div class="link is-white">
+                  <div class="button-content is-no-arrow">
+                    <div class="button-text">SDK</div>
+                    <div class="icon-small w-embed">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true"
+                        role="img"
+                        width="100%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                        <g fill="none">
+                          <path
+                            d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                            fill="currentColor"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div></div></a
+            ><a href="https://learn.social.plus/uikit/overview" target="_blank" class="card-v3 c-link w-inline-block"
+              ><div class="card-con">
+                <div>
+                  <h3>UIKit</h3>
+                  <div class="text-color-white"><strong>Pre-built UI Components</strong></div>
+                  <ul role="list" class="list margin-bottom_m">
+                    <li class="list-item is-checkmark"><div>Need to launch quickly (weeks not months)</div></li>
+                    <li class="list-item is-checkmark"><div>Standard social app layouts</div></li>
+                    <li class="list-item is-checkmark"><div>Minimal to moderate customization</div></li>
+                    <li class="list-item is-checkmark"><div>Perfect for MVPs and rapid prototyping</div></li>
+                  </ul>
+                </div>
+                <div class="link is-white">
+                  <div class="button-content is-no-arrow">
+                    <div class="button-text">UIKit</div>
+                    <div class="icon-small w-embed">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true"
+                        role="img"
+                        width="100%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                        <g fill="none">
+                          <path
+                            d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                            fill="currentColor"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div></div></a
+            ><a
+              href="https://learn.social.plus/analytics-and-moderation/social+-apis-and-services/README"
+              target="_blank"
+              class="card-v3 c-link w-inline-block"
+              ><div class="card-content_full-height">
+                <div>
+                  <h3>API</h3>
+                  <div class="text-color-white"><strong>Direct API&nbsp;Integration</strong></div>
+                  <ul role="list" class="list margin-bottom_m">
+                    <li class="list-item is-checkmark"><div>Server-to-server communication</div></li>
+                    <li class="list-item is-checkmark"><div>Custom backend integration</div></li>
+                    <li class="list-item is-checkmark"><div>Non-standard platforms</div></li>
+                    <li class="list-item is-checkmark"><div>Advanced technical requirements</div></li>
+                  </ul>
+                </div>
+                <div class="link is-white">
+                  <div class="button-content is-no-arrow">
+                    <div class="button-text">API</div>
+                    <div class="icon-small w-embed">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true"
+                        role="img"
+                        width="100%"
+                        height="100%"
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24"
+                      >
+                        <g fill="none">
+                          <path
+                            d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                            fill="currentColor"
+                          ></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div></div
+            ></a>
+          </main>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

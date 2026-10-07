@@ -1,0 +1,1170 @@
+{
+  "$comment": "Drives capture.mjs. Paths are relative to the capture/ folder. Edit this file to add a section, a variant, a snippet or a page; the script needs no change. A section id is `<folder>` or `<folder>--<variant>`: the variant files get the `--<variant>` suffix inside the same folder. Locators: `selector` (+ optional `selectorIndex`, `containsText`) or `headingText` (+ optional `headingSelector`, `closest`).",
+  "output": {
+    "sectionsDir": "../sections",
+    "foundationsDir": "../foundations",
+    "tokensCss": "../tokens.css",
+    "tokensJson": "../tokens.json",
+    "rawDir": "raw",
+    "galleryFile": "../sections/index.html",
+    "readmeDiffFile": "README.md",
+    "websiteTokensDoc": "../../website.md",
+    "fontFallbackFile": "figtree.woff2"
+  },
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "browser": {
+    "deviceScaleFactor": 1,
+    "locale": "en-US",
+    "timezoneId": "Europe/Amsterdam",
+    "mobileUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+    "pauseBetweenPagesMs": 1500
+  },
+  "blockRequests": [
+    "optibase.io",
+    "analytics.ahrefs.com",
+    "iubenda.com",
+    "usebasin.com",
+    "googletagmanager.com",
+    "google-analytics.com",
+    "clickcease.com",
+    "apollo.io",
+    "intellimize.com",
+    "slater.app",
+    "hotjar.com",
+    "facebook.net",
+    "linkedin.com/px",
+    "doubleclick.net",
+    "challenges.cloudflare.com",
+    "youtube.com",
+    "vimeo.com",
+    "wistia.com"
+  ],
+  "settle": {
+    "scrollStep": 600,
+    "scrollPauseMs": 150,
+    "imageTimeoutMs": 15000,
+    "removeFromPage": [
+      "#announcement-bar",
+      ".announcement",
+      "#iubenda-cs-banner",
+      "[class*='iubenda-tp']",
+      "#mobile-sticky-cta",
+      ".exit-intent_pop-up",
+      ".pricing_pop-up",
+      ".pop-up_wrapper",
+      ".w-form-done",
+      ".w-form-fail"
+    ],
+    "keepInlineStyleOn": [
+      "input[type=checkbox]",
+      "input[type=radio]"
+    ],
+    "unwrapSelectors": [
+      ".sp-w"
+    ],
+    "removeClasses": [
+      "sp-pre",
+      "sp-go",
+      "sp-hero"
+    ],
+    "chromeSelectors": [
+      "header.nav",
+      ".sub-navbar"
+    ]
+  },
+  "clean": {
+    "removeSelectors": [
+      "script",
+      "noscript",
+      "iframe",
+      ".skip-link-embed",
+      ".announcement",
+      ".w-dyn-empty",
+      ".w-condition-invisible",
+      "[data-wf-ignore]",
+      ".hidden.w-iframe",
+      ".form__html-hidden",
+      "input[type=hidden]",
+      ".logo-menu",
+      "[cs-logo-wall]",
+      ".preload-checkbox-checked-icon",
+      ".w-form-done",
+      ".w-form-fail",
+      ".contact-form_popup",
+      "video source[src^='blob:']",
+      ".contact-sales_cs-logo"
+    ],
+    "removeAttributes": [
+      "data-w-id",
+      "data-vs-init",
+      "data-vs-stories",
+      "data-i",
+      "data-mag",
+      "loading",
+      "srcset",
+      "sizes",
+      "fetchpriority",
+      "data-spdd-toggle",
+      "data-name",
+      "data-wait",
+      "data-form-version",
+      "data-turnstile-sitekey",
+      "data-basin-form",
+      "fs-list-ignore",
+      "data-file-url",
+      "cs-story",
+      "nav-animate",
+      "integrity",
+      "crossorigin",
+      "action",
+      "disabled",
+      "data-click",
+      "data-ix",
+      "data-optibase-submit-conversion-id"
+    ],
+    "removeAttributePrefixes": [
+      "data-wf-",
+      "data-optibase",
+      "data-gsap",
+      "fs-cmsfilter",
+      "fs-cmsload",
+      "fs-toc"
+    ],
+    "removeIdPattern": "^w-node-|^[0-9a-f]{24,}$",
+    "removeClasses": [
+      "iubenda-cs-preferences-link",
+      "w-condition-invisible",
+      "w-form-loading"
+    ],
+    "dropInlineCssSelectorsContaining": [
+      "iubenda",
+      "announcement",
+      "sp-annc",
+      "skip-link",
+      "sp-ripple",
+      "w-mod-",
+      "grecaptcha",
+      "recaptcha",
+      "exit-intent",
+      "pricing_pop-up"
+    ],
+    "deletedVariableMap": {
+      "--social--grey-200": "var(--text--text-color-grey-lighter)",
+      "--background--dark-background": "var(--social--dark)",
+      "--amity-green-hover": "#04be8c",
+      "--social--dark": "var(--social--dark)",
+      "--social--button-pressed": "var(--social--button-pressed)",
+      "--grey--grey-2": "#2e2e2e",
+      "--grey--grey-3": "#444",
+      "--light-blue-bg": "var(--social--blue-transparent)",
+      "--secondary--amity-blue": "var(--social--main-blue)",
+      "--background--blue-background": "var(--social--blue-transparent)",
+      "--background--red-background": "#ff305a1a",
+      "--background--purple-background": "#9f72ff1a",
+      "--background--yellow-background": "#f7c5061a"
+    },
+    "alwaysKeepSelectors": [
+      "*",
+      "html",
+      "body",
+      ":after",
+      ":before",
+      "*:after",
+      "*:before"
+    ]
+  },
+  "tokens": {
+    "fontFamily": "Figtree",
+    "extraRootDeclarations": {
+      "color-scheme": "dark"
+    },
+    "nameAliases": {
+      "--h1-font-size": "--_typography---h1-font-size",
+      "--h2-font-size": "--_typography---h2-font-size",
+      "--h3-font-size": "--_typography---h3-font-size",
+      "--h4-font-size": "--_typography---h4-font-size",
+      "--h5-font-size": "--_typography---h5-font-size",
+      "--h6-font-size": "--_typography---h6-font-size"
+    }
+  },
+  "pages": [
+    {
+      "id": "vs-circle",
+      "url": "https://www.social.plus/vs/circle"
+    },
+    {
+      "id": "home",
+      "url": "https://www.social.plus/"
+    },
+    {
+      "id": "chat",
+      "url": "https://www.social.plus/chat"
+    },
+    {
+      "id": "chat-sdk-ios",
+      "url": "https://www.social.plus/chat/sdk/ios"
+    },
+    {
+      "id": "chat-sdk",
+      "url": "https://www.social.plus/chat/sdk"
+    },
+    {
+      "id": "industry-gaming",
+      "url": "https://www.social.plus/industry/gaming"
+    },
+    {
+      "id": "social-uikit",
+      "url": "https://www.social.plus/social/uikit"
+    },
+    {
+      "id": "white-label-social-network",
+      "url": "https://www.social.plus/white-label/social-network"
+    },
+    {
+      "id": "why-social",
+      "url": "https://www.social.plus/why-social"
+    },
+    {
+      "id": "ai-mcp-server",
+      "url": "https://www.social.plus/ai/mcp-server"
+    },
+    {
+      "id": "glossary-activity-feed",
+      "url": "https://www.social.plus/glossary/activity-feed"
+    },
+    {
+      "id": "customer-story-activerse",
+      "url": "https://www.social.plus/customer-story/activerse"
+    },
+    {
+      "id": "blog",
+      "url": "https://www.social.plus/blog"
+    },
+    {
+      "id": "blog-post",
+      "url": "https://www.social.plus/blog/10-common-online-community-challenges-and-how-to-overcome-them"
+    },
+    {
+      "id": "answer",
+      "url": "https://www.social.plus/answers/api-for-adding-online-community-features-to-mobile-apps"
+    },
+    {
+      "id": "release-note",
+      "url": "https://www.social.plus/release-note/1-1-chat-support-for-ios-and-android-uikit"
+    },
+    {
+      "id": "tutorial",
+      "url": "https://www.social.plus/tutorials/add-a-vector-database-to-your-gpt-custom-content-bot"
+    },
+    {
+      "id": "contact-sales",
+      "url": "https://www.social.plus/contact/contact-sales"
+    },
+    {
+      "id": "pricing",
+      "url": "https://www.social.plus/pricing"
+    },
+    {
+      "id": "use-case-1-1-chat",
+      "url": "https://www.social.plus/use-case/1-1-chat"
+    },
+    {
+      "id": "product",
+      "url": "https://www.social.plus/product"
+    },
+    {
+      "id": "styleguide",
+      "url": "https://www.social.plus/styleguide"
+    }
+  ],
+  "sections": [
+    {
+      "id": "global/nav",
+      "number": "G1",
+      "title": "Nav",
+      "page": "vs-circle",
+      "selector": "header.nav",
+      "screenshotSelector": "header.nav .nav_mega-menu",
+      "chrome": true,
+      "variant": "Dark, mega menu closed",
+      "staticCss": "/* static state: dropdown panels stay closed; the hamburger menu stays closed */",
+      "comment": "nav: the pills open mega-menu panels (.nav-dropdown-list) on hover or click; the panels are in the HTML but closed. On small screens the hamburger opens the same menu as a sheet."
+    },
+    {
+      "id": "global/sub-nav",
+      "number": "G2",
+      "title": "Sub-nav",
+      "page": "chat",
+      "selector": "header.sub-navbar",
+      "chrome": true,
+      "variant": "Product sub-nav (Chat): product name, 4 links, Contact Sales",
+      "comment": "sub-nav: the product sub-navigation under the main nav; dropdowns open on hover (script). Captured closed."
+    },
+    {
+      "id": "global/sub-nav--blog",
+      "number": "G2",
+      "title": "Sub-nav (blog)",
+      "page": "blog",
+      "selector": "div.sub-navbar",
+      "chrome": true,
+      "variant": "Resources sub-nav (Blog): category links",
+      "comment": "sub-nav (blog variant): the same bar with the blog categories."
+    },
+    {
+      "id": "global/breadcrumb-bar",
+      "number": "G3",
+      "title": "Breadcrumb bar",
+      "page": "customer-story-activerse",
+      "selector": "div.breadcrumb-bar",
+      "variant": "Dark (`.c-dark`)",
+      "comment": "breadcrumb bar: one line above an article hero; links to the overview page."
+    },
+    {
+      "id": "global/breadcrumb-bar--light",
+      "number": "G3",
+      "title": "Breadcrumb bar (plain)",
+      "page": "tutorial",
+      "selector": "div.breadcrumb-bar",
+      "variant": "Plain (no `.c-dark`), as on tutorials",
+      "comment": "breadcrumb bar (plain variant): the class without .c-dark, as on the tutorials template."
+    },
+    {
+      "id": "global/footer-cta-band",
+      "number": "G4",
+      "title": "Footer CTA band",
+      "page": "vs-circle",
+      "selector": "section.footer",
+      "variant": "Heading, one line, one primary button",
+      "comment": "footer cta band: sits directly above the footer on most pages."
+    },
+    {
+      "id": "global/footer",
+      "number": "G5",
+      "title": "Footer",
+      "page": "vs-circle",
+      "selector": "footer.footer-wrapper",
+      "variant": "Dark, newsletter form, 4 link columns",
+      "comment": "footer: newsletter form posts to the site's form endpoint; the action is removed here."
+    },
+    {
+      "id": "global/footer--no-newsletter",
+      "number": "G5",
+      "title": "Footer (no newsletter)",
+      "page": "contact-sales",
+      "selector": "footer.footer-wrapper",
+      "variant": "Dark, without the newsletter form (contact pages)",
+      "comment": "footer (no newsletter variant): the same footer without the newsletter form, as on the contact pages."
+    },
+    {
+      "id": "01-hero-product",
+      "number": "01",
+      "title": "Hero / Product (two-column)",
+      "page": "social-uikit",
+      "selector": "section.main-hero",
+      "variant": "Title, text, one button; image right",
+      "comment": "hero (product): two columns; the right column holds an image here, a video on other pages."
+    },
+    {
+      "id": "01-hero-product--video",
+      "number": "01",
+      "title": "Hero / Product (video right)",
+      "page": "chat",
+      "selector": "section.main-hero",
+      "variant": "Title, text, one button; product video right",
+      "comment": "hero (product, video variant): the right column is a looping product video (poster shown when the video does not play)."
+    },
+    {
+      "id": "01-hero-product--two-buttons",
+      "number": "01",
+      "title": "Hero / Product (two buttons)",
+      "page": "chat-sdk-ios",
+      "selector": "header.main-hero",
+      "variant": "Title, text, primary + secondary button; video right (SDK pages)",
+      "comment": "hero (product, two-buttons variant): as on the SDK pages, with a second grey button (Documentation)."
+    },
+    {
+      "id": "02-hero-simple",
+      "number": "02",
+      "title": "Hero / Simple (title, text, buttons)",
+      "page": "ai-mcp-server",
+      "selector": "header.section.padding_y.background-color_dark",
+      "selectorIndex": 0,
+      "variant": "Eyebrow, title, text, two buttons, small logos row",
+      "comment": "hero (simple): centred text with two buttons and a row of small tool logos. The page adds its own <style> embeds (kept below)."
+    },
+    {
+      "id": "02-hero-simple--illustration",
+      "number": "02",
+      "title": "Hero / Simple (with illustration)",
+      "page": "chat-sdk",
+      "selector": "section#main-content",
+      "variant": "Title, text, two buttons, platform icons and an illustration slider",
+      "staticCss": "/* static state: the illustration slider shows its first slide */",
+      "comment": "hero (simple, illustration variant): the right side is an image slider (script); the first image shows here."
+    },
+    {
+      "id": "03-hero-industry",
+      "number": "03",
+      "title": "Hero / Industry",
+      "page": "industry-gaming",
+      "selector": "section.industry-hero",
+      "variant": "Title, enlarged paragraph, one button, centred image",
+      "comment": "hero (industry): title and text left, large image right; the title uses the page's own .industry-title size."
+    },
+    {
+      "id": "04-article-title-header",
+      "number": "04",
+      "title": "Article / Title header (breadcrumb + H1)",
+      "page": "glossary-activity-feed",
+      "selector": "header.section.c-glossary",
+      "variant": "Glossary: breadcrumb and H1",
+      "comment": "article title header: breadcrumb line and the H1; used on glossary, FAQ and resource pages."
+    },
+    {
+      "id": "05-hero-vs",
+      "number": "05",
+      "title": "Hero / vs",
+      "page": "vs-circle",
+      "selector": "section.vs-hero",
+      "variant": "Two brand tiles with glows",
+      "comment": "hero (vs): entrance animation and glow breathing live in the <style> embed below; with reduced motion they are off."
+    },
+    {
+      "id": "10-logo-wall",
+      "number": "10",
+      "title": "Logo wall (grid)",
+      "page": "vs-circle",
+      "selector": "section.c-hmpg_wall",
+      "variant": "Divider heading, 12 logos on desktop, 6 on mobile, hover chips",
+      "comment": "logo wall: the CMS list holds 24 logos; the <style> embed shows the first 12 on desktop and 6 picked ones on phones. Each logo links to its customer story."
+    },
+    {
+      "id": "10-logo-wall--marquee",
+      "number": "10",
+      "title": "Logo wall (marquee)",
+      "page": "chat",
+      "selector": "section.logo-row",
+      "variant": "Fade divider line, one scrolling row of logos",
+      "staticCss": "/* static state: the marquee does not move */\n.logo-row [class*='marquee'] { animation: none !important; }",
+      "comment": "logo marquee: the logos scroll sideways on the live site (CSS animation); here the row stands still."
+    },
+    {
+      "id": "11-two-column",
+      "number": "11",
+      "title": "Two-column / Text + image",
+      "page": "why-social",
+      "selector": "section#main-content",
+      "variant": "Text left, image right, first section of the page",
+      "comment": "two-column: heading and text on one side, image on the other."
+    },
+    {
+      "id": "11-two-column--checklist",
+      "number": "11",
+      "title": "Two-column (checklist)",
+      "page": "chat-sdk-ios",
+      "headingText": "Easily integrate chat in your iOS app",
+      "variant": "Text with checklist left, image right",
+      "comment": "two-column (checklist variant): the text column has a checklist."
+    },
+    {
+      "id": "11-two-column--image-left",
+      "number": "11",
+      "title": "Two-column (image left, gradient)",
+      "page": "chat-sdk-ios",
+      "headingText": "Open Source iOS Chat UI Kit",
+      "variant": "Image left, text with a grey button right, radial-gradient background",
+      "comment": "two-column (image-left variant): the grid is reversed; on phones the image stays above the text."
+    },
+    {
+      "id": "11-two-column--video-cta",
+      "number": "11",
+      "title": "Two-column (video, CTA)",
+      "page": "chat-sdk-ios",
+      "headingText": "Build social media features with social.plus",
+      "closest": "aside, section",
+      "variant": "Eyebrow, text with a grey button left, product video right",
+      "comment": "two-column (video variant): the media column is a looping product video; a poster shows when it does not play."
+    },
+    {
+      "id": "11-two-column--three-rows",
+      "number": "11",
+      "title": "Two-column (three alternating rows)",
+      "page": "chat",
+      "headingText": "Harness the power of communication",
+      "variant": "Eyebrow + heading, then three alternating text/image rows",
+      "comment": "two-column (three-rows variant): one section with three grid rows, image side alternating."
+    },
+    {
+      "id": "12-feature-grid",
+      "number": "12",
+      "title": "Feature grid (3 columns, icon + text)",
+      "page": "chat",
+      "headingText": "All the messaging features your app needs",
+      "variant": "Heading, 3 columns of CMS features with icon, title, text; one button",
+      "comment": "feature grid: the features come from the CMS (Features collection)."
+    },
+    {
+      "id": "13-card-grid-icons",
+      "number": "13",
+      "title": "Card grid / Feature icons (v2)",
+      "page": "industry-gaming",
+      "headingText": "Everything you need to make your app",
+      "variant": "4 columns of small icon cards (card-v2), 16 cards",
+      "comment": "card grid (v2): compact cards with a 72 px icon, title and one line."
+    },
+    {
+      "id": "13-card-grid-icons--v3-link-cards",
+      "number": "13",
+      "title": "Card grid / Icon cards (v3)",
+      "page": "use-case-1-1-chat",
+      "headingText": "What you get with social.plus",
+      "variant": "3 columns of card-v3 with icon, title, text",
+      "comment": "card grid (v3 variant): larger padding and heading than v2."
+    },
+    {
+      "id": "13-card-grid-icons--v3-docs",
+      "number": "13",
+      "title": "Card grid / Documentation cards (v3)",
+      "page": "release-note",
+      "headingText": "Explore our documentation",
+      "variant": "3 card-v3 link cards with checklist, radial-gradient background",
+      "comment": "card grid (docs variant): three link cards with a checklist each; ends every release note and tutorial."
+    },
+    {
+      "id": "14-card-grid-bordered",
+      "number": "14",
+      "title": "Card grid / Bordered (v1)",
+      "page": "social-uikit",
+      "headingText": "Open Source Social UIKits",
+      "variant": "3 columns of card-v1 (bordered gradient cards) with image, title, text, text link",
+      "comment": "card grid (v1): bordered gradient cards; the card is the style guide's card."
+    },
+    {
+      "id": "15-card-grid-plain",
+      "number": "15",
+      "title": "Card grid / Plain",
+      "page": "industry-gaming",
+      "headingText": "Players start strong",
+      "variant": "Heading + 4 plain cards in 2 columns",
+      "comment": "card grid (plain): flat #1a1a1a cards with title and text, no icon."
+    },
+    {
+      "id": "15-card-grid-plain--three-columns",
+      "number": "15",
+      "title": "Card grid / Plain (3 columns)",
+      "page": "use-case-1-1-chat",
+      "headingText": "Why use 1-1 Chat?",
+      "variant": "Heading + plain cards in 3 columns",
+      "comment": "card grid (plain, 3-column variant)."
+    },
+    {
+      "id": "16-image-card-grid",
+      "number": "16",
+      "title": "Image-card grid (use cases, industries)",
+      "page": "industry-gaming",
+      "headingText": "Use cases that keep players coming back",
+      "variant": "3 columns of image cards, static",
+      "comment": "image-card grid: cards with an image, title and text linking to a use case or industry."
+    },
+    {
+      "id": "16-image-card-grid--four-columns-cms",
+      "number": "16",
+      "title": "Image-card grid (4 columns, CMS)",
+      "page": "white-label-social-network",
+      "headingText": "Bring the most popular features",
+      "variant": "4 columns from the CMS, radial-gradient background",
+      "comment": "image-card grid (4-column CMS variant)."
+    },
+    {
+      "id": "17-accordion-with-image",
+      "number": "17",
+      "title": "Accordion with image (features)",
+      "page": "industry-gaming",
+      "headingText": "From sessions to seasons",
+      "variant": "Heading, 3 accordion items with a timeline, image on the left (reversed)",
+      "staticCss": "/* static state: the first accordion item is open, its image shows */",
+      "comment": "accordion with image: opening an item swaps the image (script); the first item is open here."
+    },
+    {
+      "id": "17-accordion-with-image--square-image",
+      "number": "17",
+      "title": "Accordion with image (square image right)",
+      "page": "use-case-1-1-chat",
+      "headingText": "Examples of 1-1 Chats you can build",
+      "variant": "4 items, square image on the right",
+      "staticCss": "/* static state: the first accordion item is open, its image shows */",
+      "comment": "accordion with image (square variant): the image column is square and on the right."
+    },
+    {
+      "id": "18-faq",
+      "number": "18",
+      "title": "FAQ accordion",
+      "page": "vs-circle",
+      "headingText": "FAQ",
+      "variant": "Dark, radial-gradient background, CMS questions, first answer open",
+      "staticCss": "/* static state: the live page opens an answer on click; here the first answer is open and the others closed */\n.accordion_item:not(:first-child) .accordion_bottom { height: 0; }",
+      "comment": "accordion: clicking a question opens its answer (Webflow interaction animates height); all answers are in the HTML, the first one is open.",
+      "knownDifference": "first answer open (live: all closed)"
+    },
+    {
+      "id": "18-faq--border-top",
+      "number": "18",
+      "title": "FAQ accordion (border top)",
+      "page": "ai-mcp-server",
+      "headingText": "FAQ",
+      "variant": "Dark, 1 px top border, CMS questions",
+      "staticCss": "/* static state: the first answer is open and the others closed */\n.accordion_item:not(:first-child) .accordion_bottom { height: 0; }",
+      "comment": "faq (border-top variant): the same accordion on the plain dark background with a top border.",
+      "knownDifference": "first answer open (live: all closed)"
+    },
+    {
+      "id": "19-customer-story-strip",
+      "number": "19",
+      "title": "Customer story strip",
+      "page": "chat",
+      "headingText": "Leading brands grow with social.plus",
+      "variant": "Heading + 5 story cards with photo, gradient overlay, logo and metric; one button",
+      "comment": "customer story strip: CMS list of customer stories; each card links to the story."
+    },
+    {
+      "id": "19-customer-story-strip--six-stories",
+      "number": "19",
+      "title": "Customer story strip (6, aside)",
+      "page": "customer-story-activerse",
+      "headingText": "More in-app communities powered by social.plus",
+      "closest": "aside, section",
+      "variant": "6 story cards under a customer story",
+      "comment": "customer story strip (6-card variant): used as the related list at the end of a customer story."
+    },
+    {
+      "id": "20-why-social-plus",
+      "number": "20",
+      "title": "Why social.plus grid",
+      "page": "industry-gaming",
+      "headingText": "Why social.plus",
+      "variant": "Heading + 5 reasons in a vertical grid with icons",
+      "comment": "why social.plus grid: a fixed set of reasons with small icons."
+    },
+    {
+      "id": "20-why-social-plus--no-heading",
+      "number": "20",
+      "title": "Why social.plus grid (no heading)",
+      "page": "chat",
+      "selector": "section.section.padding_y.background-color_dark",
+      "containsText": "All-in-one platform",
+      "variant": "4 reasons (platform, enterprise, SDKs, data), no heading; badges and SDK icons",
+      "comment": "why social.plus grid (no-heading variant): the product-page form with compliance badges and SDK icons."
+    },
+    {
+      "id": "21-product-details",
+      "number": "21",
+      "title": "Feature grid / Product details",
+      "page": "product",
+      "headingText": "White-label social features",
+      "variant": "Tile grid with text and images (product overview)",
+      "comment": "product details: tiles with a title, text and an image."
+    },
+    {
+      "id": "22-explore-more",
+      "number": "22",
+      "title": "Explore more (links with images)",
+      "page": "chat",
+      "headingText": "Explore more of social.plus",
+      "variant": "Heading + 2 link tiles with image, radial-gradient background",
+      "comment": "explore more: two large link tiles to other products."
+    },
+    {
+      "id": "23-cta-band-inline",
+      "number": "23",
+      "title": "CTA band (inline)",
+      "page": "pricing",
+      "selector": "section#support-packages",
+      "variant": "Centred heading, one paragraph, one grey button",
+      "comment": "cta band (inline): a short centred call to action between sections."
+    },
+    {
+      "id": "23-cta-band-inline--two-buttons",
+      "number": "23",
+      "title": "CTA band (inline, two buttons)",
+      "page": "ai-mcp-server",
+      "headingText": "Start building",
+      "variant": "Centred heading, one line, primary + grey button",
+      "comment": "cta band (two-buttons variant)."
+    },
+    {
+      "id": "24-form-section",
+      "number": "24",
+      "title": "Form section",
+      "page": "contact-sales",
+      "selector": "section#main-content",
+      "variant": "Contact: heading and text left, form right",
+      "comment": "form section: the contact form posts to the site's form endpoint; action, hidden fields and the anti-bot attributes are removed here."
+    },
+    {
+      "id": "24-form-section--with-image",
+      "number": "24",
+      "title": "Form section (download, with image)",
+      "page": "social-uikit",
+      "selector": "section#figma",
+      "variant": "Download form: text and form left, image right",
+      "comment": "form section (download variant): the Figma UI kit download form."
+    },
+    {
+      "id": "25-numbers-band",
+      "number": "25",
+      "title": "Numbers band",
+      "page": "home",
+      "headingText": "Built to move the numbers",
+      "variant": "Heading + 4 big numbers with descriptions and a footnote",
+      "comment": "numbers band: four metrics in a row; the count-up is a script, the numbers are static here."
+    },
+    {
+      "id": "26-quote-carousel",
+      "number": "26",
+      "title": "Quote / Carousel",
+      "page": "home",
+      "selector": "section.section.padding_y.overflow-hidden",
+      "selectorIndex": 0,
+      "variant": "One large quote with author and logo; logo tabs switch the quote",
+      "staticCss": "/* static state: one quote visible at a time; the first is shown here */\n.hmpg-quote_slider-wrapper > [role=listitem]:not(:first-child), .hmpg-quote_slide:not(:first-child) { display: none; }",
+      "comment": "quote carousel: the logos switch the quote (script); here the first quote shows."
+    },
+    {
+      "id": "30-thumbnail-grid",
+      "number": "30",
+      "title": "Thumbnail grid (blog)",
+      "page": "blog",
+      "selector": "section#blogs-all",
+      "variant": "3 columns of thumbnail cards (image, tags, title, author), radial-gradient background",
+      "comment": "thumbnail grid: CMS list; load-more and filters are scripts and are not in source.html."
+    },
+    {
+      "id": "30-thumbnail-grid--related-aside",
+      "number": "30",
+      "title": "Thumbnail grid (related, aside)",
+      "page": "blog-post",
+      "selector": "aside.section",
+      "variant": "Heading + 3 related posts, at the end of an article",
+      "comment": "thumbnail grid (related variant): three related items under an article."
+    },
+    {
+      "id": "31-featured-item",
+      "number": "31",
+      "title": "Featured item",
+      "page": "blog",
+      "selector": "section.blog-overview",
+      "variant": "One featured post: large image left, tags, title, excerpt right",
+      "comment": "featured item: the newest post at the top of the blog overview."
+    },
+    {
+      "id": "32-updates-list",
+      "number": "32",
+      "title": "Updates list (with tags)",
+      "page": "release-note",
+      "headingText": "Latest Releases",
+      "variant": "Heading + date-ordered list of release notes with tags",
+      "comment": "updates list: CMS list of the latest release notes."
+    },
+    {
+      "id": "40-article",
+      "number": "40",
+      "title": "Article (blog post)",
+      "page": "blog-post",
+      "selector": "section#main-content",
+      "variant": "Blog post: title, meta, share buttons, rich text, aside",
+      "comment": "article (blog): title block, author and share row, .rich-text body and the aside. The table of contents and share scripts are not in source.html."
+    },
+    {
+      "id": "40-article--answer",
+      "number": "40",
+      "title": "Article (answer)",
+      "page": "answer",
+      "selector": "section#main-content",
+      "variant": "Answer page: title, image, rich text; dark",
+      "comment": "article (answer variant): one column, title, image and .answers_rich-text body."
+    },
+    {
+      "id": "40-article--release-note",
+      "number": "40",
+      "title": "Article (release note)",
+      "page": "release-note",
+      "selector": "section#main-content",
+      "variant": "Release note: title, tags, product-update rich text",
+      "comment": "article (release-note variant): .product-update_rich-text body with tags."
+    },
+    {
+      "id": "41-customer-story-hero",
+      "number": "41",
+      "title": "Customer story hero",
+      "page": "customer-story-activerse",
+      "selector": "section.cs-story_hero",
+      "variant": "Logo, title, intro, metrics; image right",
+      "comment": "customer story hero: the opening of a customer story with the key metrics."
+    },
+    {
+      "id": "42-customer-story-body",
+      "number": "42",
+      "title": "Customer story body",
+      "page": "customer-story-activerse",
+      "selector": "section#watch-video",
+      "variant": "Aside with facts and tags left, rich text right",
+      "comment": "customer story body: two columns, the aside is sticky on the live site."
+    },
+    {
+      "id": "43-article-glossary",
+      "number": "43",
+      "title": "Glossary entry",
+      "page": "glossary-activity-feed",
+      "selector": "section.section",
+      "variant": "Table of contents left, rich text right",
+      "comment": "glossary entry: the table of contents is built by a script on the live site (Finsweet); the links are in the HTML."
+    },
+    {
+      "id": "50-vs-statement-band",
+      "number": "50",
+      "title": "vs / Statement band",
+      "page": "vs-circle",
+      "headingText": "Build and monetize",
+      "variant": "Dark, two columns: heading left, paragraph right"
+    },
+    {
+      "id": "51-vs-side-by-side",
+      "number": "51",
+      "title": "vs / Side-by-side (sticky)",
+      "page": "vs-circle",
+      "headingText": "What social.plus delivers beyond",
+      "variant": "5 blocks, dark, sticky illustration on desktop",
+      "staticCss": "/* static state: on the live site the 5 illustrations share one sticky spot on desktop and the script swaps them while the matching text block scrolls through the middle of the viewport. Without the script that leaves one illustration and four blanks, so here each illustration sits in the row of its own text block. On tablet and phone the live layout already stacks illustration above text. */\n@media (min-width: 992px) {\n  .vs-sticky > .vs-visual { position: relative; top: auto; height: auto; align-self: center; grid-column: 2 / 3; }\n  .vs-sticky > :nth-child(1), .vs-sticky > :nth-child(2) { grid-row: 1; }\n  .vs-sticky > :nth-child(3), .vs-sticky > :nth-child(4) { grid-row: 2; }\n  .vs-sticky > :nth-child(5), .vs-sticky > :nth-child(6) { grid-row: 3; }\n  .vs-sticky > :nth-child(7), .vs-sticky > :nth-child(8) { grid-row: 4; }\n  .vs-sticky > :nth-child(9), .vs-sticky > :nth-child(10) { grid-row: 5; }\n}",
+      "comment": "side-by-side: 5 text blocks (.vs-sticky_item), each with a layered illustration (.vs-visual). Live: on desktop the illustration is sticky and swaps as the matching text block reaches the middle of the viewport (GSAP ScrollTrigger). Here the static-state CSS at the end of the <style> puts each illustration next to its text. The data-build, data-motion and data-depth attributes describe the GSAP build steps.",
+      "knownDifference": "static state: each illustration next to its text (live: one sticky illustration, inactive text dimmed)"
+    },
+    {
+      "id": "52-vs-comparison-table",
+      "number": "52",
+      "title": "vs / Comparison table",
+      "page": "vs-circle",
+      "headingText": "The full comparison",
+      "variant": "5 category pills + table with 2 value columns",
+      "unhideInHtml": [
+        "tbody"
+      ],
+      "comment": "tabs: the pills switch which <tbody> shows; without JS all categories show.",
+      "knownDifference": "all 5 categories show (the live page shows one at a time, a script switches)"
+    },
+    {
+      "id": "53-vs-customer-stories-form",
+      "number": "53",
+      "title": "vs / Customer stories (tabbed) + form",
+      "page": "vs-circle",
+      "headingText": "Trusted by today",
+      "variant": "4 stories (logo tabs + photo slide) and the contact form",
+      "staticCss": "/* static state: one story visible at a time; the first is shown here */\n.vs-story_list > [role=listitem]:not(:first-child) .vs-story_slide { visibility: hidden; opacity: 0; }\n.vs-story_list > [role=listitem]:first-child .vs-story_logo { opacity: 1; }\n.vs-story_list > [role=listitem]:first-child .vs-story_fill { transform: scaleX(1); }",
+      "comment": "slider: one story visible at a time; logos switch stories (autoplay 6 s per story unless reduced motion)."
+    },
+    {
+      "id": "60-pricing-plan-cards",
+      "number": "60",
+      "title": "Pricing / Plan cards",
+      "page": "pricing",
+      "selector": "section.pricing-hero",
+      "variant": "Title, text and the plan cards",
+      "comment": "pricing plan cards: the hero of the pricing page with the plan cards; the monthly/yearly switch is a script."
+    },
+    {
+      "id": "61-pricing-compare-table",
+      "number": "61",
+      "title": "Pricing / Compare table",
+      "page": "pricing",
+      "selector": "section.pricing-slider-section",
+      "variant": "Usage sliders and the feature comparison table",
+      "comment": "pricing compare table: the sliders and tooltips are scripts; the table rows come from the CMS."
+    },
+    {
+      "id": "62-pricing-additional-fees",
+      "number": "62",
+      "title": "Pricing / Additional fees",
+      "page": "pricing",
+      "selector": "section#payment-information",
+      "variant": "Heading + two-column fee rows",
+      "comment": "pricing additional fees: fee rows in two columns."
+    }
+  ],
+  "snippets": [
+    {
+      "id": "sg-buttons",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 0,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-card",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 1,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-heading-tags",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 3,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-heading-classes",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 4,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-other-tags",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 5,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-text-classes",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 6,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-text-weights",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 7,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-text-alignments",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 8,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-text-colors",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 9,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-backgrounds",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 10,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-divider",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 11,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-containers",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 12,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-padding",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 13,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-margin",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 14,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "sg-images",
+      "page": "styleguide",
+      "selector": ".styleguide_parent",
+      "index": 15,
+      "inner": ".styleguide_right"
+    },
+    {
+      "id": "card-v2",
+      "page": "industry-gaming",
+      "selector": ".card-v2",
+      "index": 0
+    },
+    {
+      "id": "card-v3",
+      "page": "use-case-1-1-chat",
+      "selector": ".card-v3",
+      "index": 0
+    },
+    {
+      "id": "card-v3-docs",
+      "page": "release-note",
+      "selector": ".card-v3",
+      "index": 0
+    },
+    {
+      "id": "card-plain",
+      "page": "industry-gaming",
+      "selector": ".card-plain",
+      "index": 0
+    },
+    {
+      "id": "card-v1-page",
+      "page": "social-uikit",
+      "selector": ".card-v1",
+      "index": 0
+    },
+    {
+      "id": "thumbnail-card",
+      "page": "blog",
+      "selector": "#blogs-all [role=listitem]",
+      "index": 0
+    },
+    {
+      "id": "story-card",
+      "page": "chat",
+      "selector": ".cs-cta_link-block",
+      "index": 0
+    },
+    {
+      "id": "tag-blog",
+      "page": "blog",
+      "selector": "#blogs-all .tag",
+      "index": 0
+    },
+    {
+      "id": "tag-dark",
+      "page": "release-note",
+      "selector": ".tag.c-dark",
+      "index": 0
+    },
+    {
+      "id": "tag-new",
+      "page": "release-note",
+      "selector": ".tag.c-new",
+      "index": 0
+    },
+    {
+      "id": "tag-nav",
+      "page": "vs-circle",
+      "selector": ".nav-hiring-alert.c-footer",
+      "index": 0
+    },
+    {
+      "id": "superscript-divider",
+      "page": "vs-circle",
+      "selector": ".text-divider",
+      "index": 0
+    },
+    {
+      "id": "accordion-faq",
+      "page": "vs-circle",
+      "selector": ".accordion_item",
+      "index": 0
+    },
+    {
+      "id": "accordion-addons",
+      "page": "industry-gaming",
+      "selector": ".add-ons_accordion-item",
+      "index": 0
+    },
+    {
+      "id": "form-contact",
+      "page": "contact-sales",
+      "selector": "form",
+      "index": 0
+    },
+    {
+      "id": "form-newsletter",
+      "page": "vs-circle",
+      "selector": "footer form",
+      "index": 0
+    },
+    {
+      "id": "rich-text-blog",
+      "page": "blog-post",
+      "selector": ".rich-text",
+      "index": 0
+    },
+    {
+      "id": "rich-text-answer",
+      "page": "answer",
+      "selector": ".answers_rich-text",
+      "index": 0
+    },
+    {
+      "id": "rich-text-product-update",
+      "page": "release-note",
+      "selector": ".product-update_rich-text",
+      "index": 0
+    },
+    {
+      "id": "rich-text-glossary",
+      "page": "glossary-activity-feed",
+      "selector": ".rich-text",
+      "index": 0
+    },
+    {
+      "id": "sg-rich-text",
+      "page": "styleguide",
+      "selector": ".rich-text.w-richtext",
+      "index": 0
+    },
+    {
+      "id": "sg-rich-text-product-update",
+      "page": "styleguide",
+      "selector": ".product-update_rich-text",
+      "index": 0
+    },
+    {
+      "id": "button-primary",
+      "page": "vs-circle",
+      "selector": "section.footer .cta-button",
+      "index": 0
+    },
+    {
+      "id": "button-secondary",
+      "page": "chat-sdk-ios",
+      "selector": ".cta-button.c-grey",
+      "index": 0
+    },
+    {
+      "id": "button-text-link",
+      "page": "social-uikit",
+      "selector": ".text-link",
+      "index": 0
+    },
+    {
+      "id": "button-submit",
+      "page": "contact-sales",
+      "selector": "input.button",
+      "index": 0
+    },
+    {
+      "id": "button-submit-newsletter",
+      "page": "vs-circle",
+      "selector": "footer input.button",
+      "index": 0
+    }
+  ]
+}
