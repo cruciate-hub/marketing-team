@@ -1,106 +1,66 @@
-# social.plus Design System Router
+# social.plus design system: router
 
-Source: canonical design system HTML
+The entry point for every visual task. The design system is built from the live website (captured 7 October 2026): `tokens.css` holds the 44 live Webflow variables, `foundations/` the building blocks with their rules, `sections/` the 41 section types a page is made of, with recipes per page type. Read [`README.md`](README.md) once for the structure; this file tells you what to load for a task.
 
-This file is the entry point for all social.plus visual design tasks. It tells you which files to load based on what you're creating.
+Files are read from the clone the canonical fetch block makes (`$MT_REPO`, default `/tmp/cruciate-hub-marketing-team`). Paths below are relative to `design-system/`: `cat "$MT_REPO/design-system/<path>"`. Load `brain.md` at the repo root first (cross-domain routing, precedence, the compliance check); when the output contains text, also `messaging/brain.md`.
 
-Reference files live in the public `cruciate-hub/marketing-team` repo. Skills load them via the canonical fetch block at the top of each SKILL.md, which shallow-clones the repo to `$MT_REPO` (default `/tmp/cruciate-hub-marketing-team`). Paths in this file are relative to the design-system folder.
+## Routing
 
-## How to use this file
+| Task | Load |
+|---|---|
+| **Any visual task** (always) | `tokens.css` (the values), `foundations/colors/foundation.md`, `foundations/typography/foundation.md`, `foundations/spacing/foundation.md` |
+| **A website page or section** (Webflow build, landing page, section mockup, Claude Design prompt, marketing HTML that must match the site) | the always-load files + `sections/README.md` (the rule and the index) + `sections/recipes/<page>.md` for the page type + for every section you use: `sections/<folder>/section.md` and its `source.html` (the live HTML and CSS) + the foundations the section needs (`buttons`, `cards`, `rich-text`, `form-inputs`, `tags`, `accordion-row`, `dividers`, `imagery`) |
+| **Blog, answers, glossary and customer story visuals** (header images, in-article figures, thumbnails) | the always-load files + `foundations/imagery/foundation.md` (sizes, blog header rules) + `sections/recipes/blog-post.md`, `answer.md`, `glossary-entry.md` or `customer-story.md` |
+| **Emails and newsletters** | the always-load files (the "Brand extras" part of the colors foundation has the email palette and the gradients) + `foundations/logo/foundation.md` (inline SVG) + `foundations/accessibility/foundation.md` (the pairs on white). The email HTML itself comes from the newsletters skill and `emails/` |
+| **Social graphics, decks, one-off visuals** | the always-load files (brand extras: gradients) + `foundations/logo/foundation.md` + `foundations/imagery/foundation.md` + `foundations/icons/foundation.md` |
+| **Output with the logo** | `foundations/logo/foundation.md` (variants, clear space, backgrounds, SVG data; files in `assets/`) |
+| **Output with icons** | `foundations/icons/foundation.md` (the site's inline SVG icons, the two feature-glyph holders, sizes) |
+| **Output with images or illustrations** | `foundations/imagery/foundation.md` (ratios, product illustration and photography rules, blog headers) |
+| **Buttons, forms, cards, tags, accordions, dividers** | the matching `foundations/<name>/foundation.md` and its `preview.html` for the markup |
+| **Shadows, radius, elevation** | `foundations/shadows-and-radius/foundation.md` (measured values, the proposed set marked "to decide") |
+| **Accessibility question or check** | `foundations/accessibility/foundation.md` (contrast table of every token pair, focus, targets, motion, keyboard, the open items) |
+| **A quick question** ("what blue", "the heading sizes", "the hover colour") | `tokens.css` and the matching `foundation.md`; answer with the token name and the value |
+| **Design review or audit** | everything: `tokens.css`, every `foundations/*/foundation.md`, `sections/README.md` and the `section.md` of every section on the page under review. Compare against the measured values and the rules; list what differs |
 
-1. You loaded this file first. Good.
-2. Also load the main brain if you haven't already: `cat "$MT_REPO/brain.md"` for cross-domain routing, precedence rules, and the compliance check.
-3. Read the user's request.
-4. Match it against the routing table below.
-5. Read the listed files with `cat "$MT_REPO/design-system/<file>"`.
-6. Apply everything you load. Design tokens are non-negotiable.
-7. **If the output includes any text content** (headings, labels, descriptions, CTAs), you also need the messaging router: `cat "$MT_REPO/messaging/brain.md"`.
-
-## Routing table
-
-### Website output (load FIRST, overrides the files below on conflict)
-- `website.md` - Live Webflow tokens: colors (button hover `#272B9D`, orange `#FF6937`, text greys, borders, nav background), fluid heading scale, containers, pill buttons, nav/footer components.
-
-Website output = anything that appears on or must match social.plus the website: Webflow builds, landing pages and section mockups, blog/glossary/answers visuals, marketing HTML, emails, social graphics. For these tasks, load `website.md` plus the always-load files below, and skip the **Components** and **Patterns** groups: those describe the in-app product UI kit (app bars, bottom sheets, feeds), not the website. Where a value in the extended files conflicts with `website.md`, `website.md` wins; the conflicts are listed at the end of that file.
-
-### Any visual task (always load these)
-- `colors-palette.md` - Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status.
-- `colors-usage.md` - Semantic tokens (light + dark mode), 11 named gradients, usage principles.
-- `typography.md` - Figtree typeface, 9-step type scale, 5 weights, heading scale, line heights.
-
-### Visual output with layout
-- `spacing.md` - 11-token 4px-base spacing scale with usage annotations.
-- `border-radius.md` - 9-token radius scale with component context.
-- `shadows.md` - Shadow scale, background layering (light + dark), z-index (8 layers).
-- `layout.md` - Motion system (durations, easing curves), z-index cross-reference.
-
-### Interactive or web output
-- `buttons.md` - 6 variants, 5 sizes, all states, icon buttons, component tokens.
-- `inputs.md` - Text inputs, textarea, search bar, toggles, checkboxes, radios, chips.
-- `accessibility.md` - WCAG AA contrast, action-accent auto-switch, touch targets, reduced motion, focus rings.
-
-### Components
-- `avatars.md` - 5 sizes, 6 states/decorators, avatar stacks, community avatars.
-- `badges-tags.md` - Notification badges, status badges, tags (filled, outlined, with icon, dismissible).
-- `cards.md` - Community cards, post/feed cards, compact/list view, card states.
-- `list-items.md` - List item anatomy, 8 variants, grouped section lists.
-- `navigation.md` - App bar variants, bottom tab bar, tab states.
-- `overlays.md` - Bottom sheets, modals, context menus, tooltips.
-- `feedback.md` - Toasts, progress indicators, skeleton loaders.
-
-### Patterns
-- `states.md` - Component x state matrix (6 components, 8 states), screen-level states.
-- `empty-states.md` - Full-page empty states (6 screens), inline empty state variant.
-
-### Output containing icons
-- `iconography.md` - Material Symbols Outlined, variable axes, sizes, colour rules.
-
-### Output containing images or illustrations
-- `imagery.md` - Illustration style, photography treatment, decorative rules.
-
-### Output containing or referencing the logo
-- `logo.md` - SVG data, variants, clearspace, background rules, do/don'ts.
-
-### Design review or audit
-- Load ALL files. Compare the design under review against every guideline.
+How to read a foundation: `foundation.md` has the status line (draft until Stefan or Amadeus approves), the values as measured, the rules, and "Known inconsistencies" (true today, not a licence to copy). `preview.html` is the markup to build from; `styles.css` the site's own rules for it; `desktop.png` and `mobile.png` what it looks like.
 
 ## Rules
 
-- **Design tokens are law.** Use the exact values from these files. Never approximate colours, spacing, or border-radius.
-- **Dark-first.** `#111111` is the default background. Design on dark unless a specific light context is needed.
-- **Ultramarine leads.** When you need one brand colour, reach for `#3B41EC` (as background fill). For text/icons on dark, use `#7B94FE` (action-accent).
-- **Website values beat extended values.** On website output, button hover is `#272B9D` (not `#3133D1`), pressed `#27265E`, orange `#FF6937` (not `#F66005`). See `website.md`.
-- **No gradient text.** `background-clip: text` is forbidden. Text is always a solid colour.
-- **One primary button per section.** Never stack two primary CTAs.
-- **12px minimum.** No UI text below 12px. Ever.
-- **44px touch targets.** All interactive elements hit 44px minimum.
-- **If a load fails** (clone error, missing file, or wrong format), follow the canonical fetch block's hard-fail rule. Do not proceed with stale or memorized tokens.
-- **Run the compliance check** from `brain.md` (the main brain) before delivering your output.
+- **Tokens are law.** Use the exact names and values in `tokens.css` (`var(--social--main-blue)` in CSS, `#3B41EC` where a hex is needed, as in emails). Never approximate. A colour that is not a token is listed in the colors foundation as "not a token" and is not used for new work.
+- **Dark-first.** `--social--dark` #111 is the page; raised blocks are `--social--dark-gray-background` #1a1a1a; depth comes from lighter surfaces, not shadows. Light sections use `--social--grey-background` #f9f9f9 or white.
+- **One blue for actions.** `--social--main-blue` fills buttons, tags and icon holders; hover `--social--button-hover` #272B9D, pressed `--social--button-pressed` #27265E. The secondary colours decorate and signal status; they never make a call to action.
+- **Blue is never text on dark.** `--social--main-blue` on #111 is 2.84:1. Blue text goes on white; on dark the label is white on a blue fill.
+- **Only these sections, only these tokens.** Build pages from `sections/` with the recipes. Anything the set does not have is proposed first (name, purpose, one example, marked "proposed") and used only after Stefan or Amadeus approves; then it joins the set. The rule in full is in `sections/README.md`.
+- **No new text effects.** Text is one solid colour; no gradient fills, no glows, no new icon style, no new shadow (the measured ones are in the shadows-and-radius foundation).
+- **12px is the floor; 44px is the target.** No text under 12px; every interactive element is at least 44px.
+- **One primary button per section.**
+- **Say what is undecided.** "TO CHECK" in a note means nobody decided yet; "Known inconsistencies" means the site does it today. Neither is a rule to follow; say which you applied.
+- **If a load fails** (clone error, missing file, wrong format), follow the fetch block's hard-fail rule. Never work from memorised values.
+- **Run the compliance check** from the root `brain.md` before delivering.
 
-## Available files
+## Files
 
-| File | Contains |
+| Path | Contains |
 |---|---|
-| `website.md` | Live Webflow tokens for website output; overrides the extended files on conflict |
-| `colors-palette.md` | Primitive colour tokens: Ultramarine, Slate, Picton Blue, accents, status |
-| `colors-usage.md` | Semantic tokens (light + dark), gradients, usage principles |
-| `typography.md` | Figtree type scale, weights, heading scale, line heights |
-| `spacing.md` | 11-token 4px-base spacing scale |
-| `border-radius.md` | 9-token radius scale with component context |
-| `shadows.md` | Shadow scale, background layering, z-index |
-| `layout.md` | Motion system, durations, easing curves |
-| `buttons.md` | 6 variants, 5 sizes, all states, icon buttons |
-| `inputs.md` | Text inputs, textarea, search, toggles, checkboxes, radios, chips |
-| `avatars.md` | 5 sizes, states, stacks, community avatars |
-| `badges-tags.md` | Notification badges, status badges, tags |
-| `cards.md` | Community cards, post cards, card states |
-| `list-items.md` | List item anatomy, variants, grouped sections |
-| `navigation.md` | App bar, bottom tab bar, tab states |
-| `overlays.md` | Bottom sheets, modals, context menus, tooltips |
-| `feedback.md` | Toasts, progress indicators, skeleton loaders |
-| `states.md` | Component x state matrix, screen-level states |
-| `empty-states.md` | Full-page and inline empty states |
-| `accessibility.md` | WCAG AA, contrast, touch targets, reduced motion, focus, ARIA |
-| `iconography.md` | Material Symbols Outlined, sizes, weights, colour rules |
-| `imagery.md` | Illustration style, photography, decorative rules |
-| `logo.md` | SVG paths, variants, clearspace, usage rules |
+| `README.md` | What the design system is, how it is organised, how to update it |
+| `tokens.css`, `tokens.json` | The 44 live Webflow variables (+ Figtree `@font-face`); the JSON adds a one-line use per token |
+| `foundations/colors/` | Every token as a swatch with its use; non-token colours regular sections depend on; brand extras for emails and graphics (gradients, light palette) |
+| `foundations/typography/` | Figtree, the six heading tokens, body and text classes measured at 1440 and 390, weights |
+| `foundations/spacing/` | The five spacing steps, four containers, section rhythm, page gutter, grids |
+| `foundations/buttons/` | Primary, secondary, text link, form submit with hover and pressed states |
+| `foundations/cards/` | Card v1, v2, v3, plain, thumbnail and story cards |
+| `foundations/rich-text/` | Article body styles (blog, answers, glossary, product updates) |
+| `foundations/form-inputs/` | Text fields, selects, textarea, checkbox, submit |
+| `foundations/tags/` | The `.tag` pill and its variants |
+| `foundations/accordion-row/` | FAQ row and feature accordion |
+| `foundations/dividers/` | Line and text dividers |
+| `foundations/imagery/` | Image ratio classes and the rules for illustrations, photography, blog headers |
+| `foundations/logo/` | Logo variants, clear space, backgrounds, inline SVG |
+| `foundations/icons/` | The site's icons: inline SVG interface icons, feature glyph holders, sizes |
+| `foundations/accessibility/` | Contrast of every token pair, focus, touch targets, motion, keyboard and structure, open items |
+| `foundations/shadows-and-radius/` | Radii and shadows the site uses, the proposed set to decide |
+| `sections/README.md` | The rule, the index of the 41 section types, the recipes |
+| `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
+| `sections/recipes/` | Section order per page type: vs, product page, SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |
+| `capture/` | The scripts that build all of this from the live site (`capture/README.md`) |
