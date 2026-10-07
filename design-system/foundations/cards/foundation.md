@@ -3,7 +3,7 @@
 The four card styles as they are today (v1, v2, v3, plain), the thumbnail card of every listing and the customer story card.
 
 - Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
-- Source: https://www.social.plus/styleguide (card-v1) and live cards from /social/uikit (card-v1), /industry/gaming (card-v2, card-plain), /use-case/1-1-chat (card-v3), the release-note template (card-v3 docs), /blog (thumbnail), /chat (story card)
+- Source (the style guide's card-v1 sample shows a Webflow placeholder in the icon circle, which the CDN does not serve; the preview shows the iOS glyph of the SDK cards there instead): https://www.social.plus/styleguide (card-v1) and live cards from /social/uikit (card-v1), /industry/gaming (card-v2, card-plain), /use-case/1-1-chat (card-v3), the release-note template (card-v3 docs), /blog (thumbnail), /chat (story card)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)
 

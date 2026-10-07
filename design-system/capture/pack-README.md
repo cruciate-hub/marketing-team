@@ -17,6 +17,7 @@ README.md                 this file
 tokens.css                the 44 live Webflow variables as CSS custom properties (+ the Figtree @font-face)
 tokens.json               the same tokens with their use, machine-readable
 figtree.woff2             the only font file (social.plus Figtree build)
+assets/media/             the images the previews use, copied as served from the site (plus one first-frame still per video; videos are not included)
 foundations/<name>/       preview.html (self-contained), styles.css, foundation.md (values, rules, inconsistencies), desktop.png, mobile.png
 sections/README.md        the rule and the index of all sections
 sections/<nn-name>/       section.md (use it when, don't, content slots, allowed variations, not allowed, accessibility and mobile),
@@ -31,7 +32,7 @@ Numbers group the sections by family: G global chrome, 01 to 05 heroes, 10 to 26
 
 ## Reading the files
 
-- Every `source.html` and `preview.html` opens in a browser as it is. Images and videos load from the site's CDN; the CSS is the site's own (Webflow class names kept so the rules work; they are not a concern).
+- Every `source.html` and `preview.html` opens in a browser as it is, with no network: images come from `assets/media/`; the video sections show the video's first frame as poster (the videos are not in the pack); the CSS is the site's own (Webflow class names kept so the rules work; they are not a concern).
 - Where the live section depends on a script (tabs, sliders, sticky swaps, accordions, marquees, count-ups), the file shows one static state and says so in a comment at the top.
 - Screenshots are 1x (1440 and 390 CSS pixels wide) with a 256-colour palette to keep the pack small; the repository holds the 2x originals.
 - "TO CHECK" in a note marks something nobody has decided yet.

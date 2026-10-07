@@ -66,6 +66,6 @@ Fixed section order and content slots per page type, in `recipes/`: [`vs.md`](re
 
 ## Reading the files
 
-- `source.html` opens in any browser from this folder (it links `../../tokens.css`, or `../../../tokens.css` for the global ones). Images and videos load from the site's CDN.
+- `source.html` opens in any browser from this folder (it links `../../tokens.css`, or `../../../tokens.css` for the global ones). Images load from `../../assets/media/` (copies of the site's own files, so nothing comes from the network). Videos are not in the repo: the two video variants (01 `--video`, `--two-buttons`; 11 `--video-cta`) show the video's first frame as poster.
 - Where a section is driven by a script on the live site (tabs, slider, sticky swap, accordion, marquee, count-up), `source.html` shows one static state and says so in an HTML comment at the top and in a "static state" block at the end of its `<style>`.
 - Class names come from Webflow and are not a concern; the copied CSS needs them. Page `<style>` embeds that the section depends on are kept inside the section.

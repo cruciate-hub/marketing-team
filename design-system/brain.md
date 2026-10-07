@@ -47,6 +47,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 |---|---|
 | `README.md` | What the design system is, how it is organised, how to update it |
 | `tokens.css`, `tokens.json` | The 44 live Webflow variables (+ Figtree `@font-face`); the JSON adds a one-line use per token |
+| `assets/media/` | The images the previews and sources use (WebP, SVG, JPG, PNG, one Lottie JSON), copied as served from the site, plus one first-frame still per video (the videos themselves are not in the repo); every `preview.html` and `source.html` loads from here and nothing from the network. `capture/media.json` says where each file came from |
 | `foundations/colors/` | Every token as a swatch with its use; non-token colours regular sections depend on; brand extras for emails and graphics (gradients, light palette) |
 | `foundations/typography/` | Figtree, the six heading tokens, body and text classes measured at 1440 and 390, weights |
 | `foundations/spacing/` | The five spacing steps, four containers, section rhythm, page gutter, grids |

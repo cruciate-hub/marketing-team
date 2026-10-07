@@ -31,4 +31,4 @@ Industry pages (03), /vs/ pages (05), pages without a product image or video (02
 - Section height about 620px at 1440
 
 ## Webflow note
-- Webflow components "Page / Chat SDK" and "Page / Social SDK" (hero part). The video `src` is the site's CDN mp4; `autoplay` is removed in source.html so the copy shows the first frame.
+- Webflow components "Page / Chat SDK" and "Page / Social SDK" (hero part). The live video is an mp4 on the site's CDN (`capture/media.json` has the URL); videos are not copied into the repo (team decision, 7 October 2026), so `source--video.html` and `source--two-buttons.html` hold no video `src` and the `<video>` shows the first frame as poster (`assets/media/672ddc68bc3d014e1b61da0a_chat-transcode-still.jpg`, the same dark frame the live page shows before it plays).
