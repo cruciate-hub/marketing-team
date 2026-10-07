@@ -2,17 +2,29 @@
 
 The section set for website pages. Each folder holds one section type as it is on the live site: `section.md` (when to use it, content slots, allowed variations, what is not allowed, accessibility and mobile; uncertain items are marked TO CHECK), `source.html` (self-contained HTML with the site's own CSS rules, tokens kept as `var(--…)`, see `../tokens.css`), `styles.css` (the same rules alone), `desktop.png` (1440 wide) and `mobile.png` (390 wide). Variants of a section sit in the same folder with a `--<variant>` suffix (`source--video.html`, `desktop--video.png`, …). `index.html` is a gallery of every foundation and section for a quick review.
 
-Captured from the live site by `../capture/capture.mjs` (see `../capture/README.md`; re-run it after a site change). The screenshots, HTML and CSS are regenerated; `section.md` is written by hand and never overwritten. Foundations (colours with the brand extras, typography, spacing and containers, buttons, cards, rich text, form inputs, tags, accordion rows, dividers, imagery, logo, icons, accessibility, shadows and radius) are in `../foundations/`; `../README.md` explains the whole structure.
+Captured from the live site by `../capture/capture.mjs` (see `../capture/README.md`; re-run it after a site change). The screenshots, HTML and CSS are regenerated; `section.md` is written by hand and never overwritten. Foundations (colours with the brand extras, typography, spacing and containers, buttons, cards, rich text, form inputs, tags, accordion rows, dividers, imagery, logo, icons, accessibility, shadows and radius) are in `../foundations/`; `../taste.md` says how to combine the sections; `../README.md` explains the whole structure.
 
 ## The rule
 
 Paste this into the design system's instructions and into every website project in Claude Design:
 
-> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif; emails are the exception and follow the email spec), one blue for actions (`--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed" in the conversation. A proposed section may be used on the page only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order. Facts about the product come from `messaging/product-capabilities.md`.
+> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif; emails are the exception and follow the email spec), one blue for actions (`--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed" in the conversation. A proposed section may be used on the page only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order. Facts about the product come from `messaging/product-capabilities.md`. Combine the sections as `taste.md` says.
+>
+> **Definition of done.** Before saying a page is finished, check each point and report it in the reply:
+> 1. The page follows a recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
+> 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
+> 3. Every section is one from the set, used as its `section.md` allows. Anything else is marked "proposed" on the page itself and in the reply.
+> 4. Only values from `tokens.css`; Figtree from `figtree.woff2`; no new text effect, icon style, shadow or colour.
+> 5. One primary (blue) button per section; two actions of equal weight only with approval.
+> 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
+> 7. No third-party logo unless its approved file is in `assets/media/` or supplied by the team; otherwise the name as text.
+> 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
+> 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
+> 10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
 
 ## Index
 
-Numbers group the sections by family: G global chrome, 01 to 05 heroes, 10 to 26 content sections, 30 to 32 listings, 40 to 43 articles, 50 to 53 the /vs/ family, 60 to 62 the pricing family. "Draft" means captured and described, waiting for approval by Stefan or Amadeus (then the status line in `section.md` changes to "approved"). New sections wait in `proposals/` as `YYYY-MM-DD-<name>.md` until approved.
+Numbers group the sections by family: G global chrome, 01 to 05 heroes, 10 to 26 content sections, 30 to 32 listings, 40 to 43 articles, 50 to 53 the /vs/ family, 60 to 62 the pricing family. "Draft" means captured and described, waiting for approval by Stefan or Amadeus (then the status line in `section.md` changes to "approved"). New sections wait in `proposals/` as `YYYY-MM-DD-<name>.md` until approved; today: [use-case tabs](proposals/2026-10-07-use-case-tabs.md) (question + answer, 2026-10-07). Until a proposal is approved, a page uses the closest section from the set and the reply says so.
 
 | # | Section | Folder | Variants captured | Source pages | Status |
 |---|---|---|---|---|---|
@@ -62,7 +74,7 @@ Not in the set (audit section 7, "outside the set"): the home-only sections (her
 
 ## Recipes
 
-Fixed section order and content slots per page type, in `recipes/`: [`vs.md`](recipes/vs.md), [`product-page.md`](recipes/product-page.md), [`sdk-page.md`](recipes/sdk-page.md), [`industry-page.md`](recipes/industry-page.md), [`blog-post.md`](recipes/blog-post.md), [`answer.md`](recipes/answer.md), [`glossary-entry.md`](recipes/glossary-entry.md), [`customer-story.md`](recipes/customer-story.md).
+Fixed section order and content slots per page type, in `recipes/` (9): [`vs.md`](recipes/vs.md), [`product-page.md`](recipes/product-page.md), [`product-landing.md`](recipes/product-landing.md) (a product or feature landing page: Agentry, MCP server, Vise), [`sdk-page.md`](recipes/sdk-page.md), [`industry-page.md`](recipes/industry-page.md), [`blog-post.md`](recipes/blog-post.md), [`answer.md`](recipes/answer.md), [`glossary-entry.md`](recipes/glossary-entry.md), [`customer-story.md`](recipes/customer-story.md).
 
 ## Reading the files
 

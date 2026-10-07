@@ -1,6 +1,6 @@
 # social.plus design system: router
 
-The entry point for every visual task. The design system is built from the live website (captured 7 October 2026): `tokens.css` holds the 44 live Webflow variables, `foundations/` the building blocks with their rules, `sections/` the 41 section types a page is made of, with recipes per page type. Read [`README.md`](README.md) once for the structure; this file tells you what to load for a task.
+The entry point for every visual task. The design system is built from the live website (captured 7 October 2026): `tokens.css` holds the 44 live Webflow variables, `foundations/` the building blocks with their rules, `sections/` the 41 section types a page is made of, with recipes per page type, `taste.md` how to combine them. Read [`README.md`](README.md) once for the structure; this file tells you what to load for a task.
 
 Files are read from the clone the canonical fetch block makes (`$MT_REPO`, default `/tmp/cruciate-hub-marketing-team`). Paths below are relative to `design-system/`: `cat "$MT_REPO/design-system/<path>"`. Load `brain.md` at the repo root first (cross-domain routing, precedence, the compliance check); when the output contains text, also `messaging/brain.md`.
 
@@ -9,7 +9,7 @@ Files are read from the clone the canonical fetch block makes (`$MT_REPO`, defau
 | Task | Load |
 |---|---|
 | **Any visual task** (always) | `tokens.css` (the values), `foundations/colors/foundation.md`, `foundations/typography/foundation.md`, `foundations/spacing/foundation.md` |
-| **A website page or section** (Webflow build, landing page, section mockup, Claude Design prompt, marketing HTML that must match the site) | the always-load files + `sections/README.md` (the rule and the index) + `sections/recipes/<page>.md` for the page type + for every section you use: `sections/<folder>/section.md` and its `source.html` (the live HTML and CSS) + the foundations the section needs (`buttons`, `cards`, `rich-text`, `form-inputs`, `tags`, `accordion-row`, `dividers`, `imagery`) |
+| **A website page or section** (Webflow build, landing page, section mockup, Claude Design prompt, marketing HTML that must match the site) | the always-load files + `sections/README.md` (the rule, the definition of done and the index) + `taste.md` (how to combine the sections) + `sections/recipes/<page>.md` for the page type (a product or feature landing page: `product-landing.md`) + for every section you use: `sections/<folder>/section.md` and its `source.html` (the live HTML and CSS) + the foundations the section needs (`buttons`, `cards`, `rich-text`, `form-inputs`, `tags`, `accordion-row`, `dividers`, `imagery`) |
 | **Blog, answers, glossary and customer story visuals** (header images, in-article figures, thumbnails) | the always-load files + `foundations/imagery/foundation.md` (sizes, blog header rules) + `sections/recipes/blog-post.md`, `answer.md`, `glossary-entry.md` or `customer-story.md` |
 | **Emails and newsletters** | `tokens.css` and `foundations/colors/foundation.md` (the "Brand extras" part has the email palette and the gradients) + `foundations/logo/foundation.md` (variants and clear space; the email itself uses the PNG logo pair from the spec, inline SVG is stripped by Gmail) + `foundations/accessibility/foundation.md` (the pairs on white and whitesmoke). Not the typography foundation: the email font is Inter, set by `emails/product-update-newsletter-spec.md`. The email HTML itself comes from the newsletters skill and `emails/` |
 | **Social graphics, decks, one-off visuals** | the always-load files (brand extras: gradients) + `foundations/logo/foundation.md` + `foundations/imagery/foundation.md` + `foundations/icons/foundation.md` |
@@ -20,7 +20,7 @@ Files are read from the clone the canonical fetch block makes (`$MT_REPO`, defau
 | **Shadows, radius, elevation** | `foundations/shadows-and-radius/foundation.md` (measured values, the proposed set marked "to decide") |
 | **Accessibility question or check** | `foundations/accessibility/foundation.md` (contrast table of the text and background token pairs, with every surface token, focus, targets, motion, keyboard, the open items) |
 | **A quick question** ("what blue", "the heading sizes", "the hover colour") | `tokens.css` and the matching `foundation.md`; answer with the token name and the value |
-| **Design review or audit** | everything: `tokens.css`, every `foundations/*/foundation.md`, `sections/README.md` and the `section.md` of every section on the page under review. Compare against the measured values and the rules; list what differs |
+| **Design review or audit** | everything: `tokens.css`, every `foundations/*/foundation.md`, `sections/README.md`, `taste.md` and the `section.md` of every section on the page under review. Compare against the measured values, the rules, the recipe and the taste guide; go through the definition of done; list what differs |
 
 How to read a foundation: `foundation.md` has the status line (draft until Stefan or Amadeus approves), the values as measured, the rules, and "Known inconsistencies" (true today, not a licence to copy). `preview.html` is the markup to build from; `styles.css` the site's own rules for it; `desktop.png` and `mobile.png` what it looks like.
 
@@ -36,7 +36,19 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 - **Only these sections, only these tokens.** Build pages from `sections/` with the recipes. Anything the set does not have is proposed first (name, purpose, one example, marked "proposed") and used only after Stefan or Amadeus approves; then it joins the set. The rule in full is in `sections/README.md`.
 - **No new text effects.** Text is one solid colour; no gradient fills, no glows, no new icon style, no new shadow (the measured ones are in the shadows-and-radius foundation).
 - **12px is the floor; 44px is the target.** No text under 12px; every interactive element is at least 44px.
-- **One primary button per section.**
+- **One primary button per section.** Two actions of equal weight need approval from Stefan or Amadeus.
+- **Combine the sections as `taste.md` says:** calm pages, one focal point per screen, dense and airy sections alternating, real product visuals, blue as the one accent, dark first.
+- **Definition of done.** Before saying a page is finished, check each point and report it in the reply:
+  1. The page follows a recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
+  2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
+  3. Every section is one from the set, used as its `section.md` allows. Anything else is marked "proposed" on the page itself and in the reply.
+  4. Only values from `tokens.css`; Figtree from `figtree.woff2`; no new text effect, icon style, shadow or colour.
+  5. One primary (blue) button per section; two actions of equal weight only with approval.
+  6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
+  7. No third-party logo unless its approved file is in `assets/media/` or supplied by the team; otherwise the name as text.
+  8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
+  9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
+  10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
 - **Say what is undecided.** "TO CHECK" in a note means nobody decided yet; "Known inconsistencies" means the site does it today. Neither is a rule to follow; say which you applied.
 - **If a load fails** (clone error, missing file, wrong format), follow the fetch block's hard-fail rule. Never work from memorised values.
 - **Run the compliance check** from the root `brain.md` before delivering.
@@ -46,6 +58,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | Path | Contains |
 |---|---|
 | `README.md` | What the design system is, how it is organised, how to update it |
+| `taste.md` | How to combine the sections so a page feels like social.plus: 12 rules with a do and a don't each (draft, Amadeus to refine) |
 | `tokens.css`, `tokens.json` | The 44 live Webflow variables (+ Figtree `@font-face`); the JSON adds a one-line use per token |
 | `assets/media/` | The images the previews and sources use (WebP, SVG, JPG, PNG, one Lottie JSON), copied as served from the site, plus one first-frame still per video (the videos themselves are not in the repo); every `preview.html` and `source.html` loads from here and nothing from the network. `capture/media.json` says where each file came from |
 | `foundations/colors/` | Every token as a swatch with its use; non-token colours regular sections depend on; brand extras for emails and graphics (gradients, light palette) |
@@ -63,8 +76,9 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `foundations/icons/` | The site's icons: inline SVG interface icons, feature glyph holders, sizes |
 | `foundations/accessibility/` | Contrast of the text and background token pairs, focus, touch targets, motion, keyboard and structure, open items |
 | `foundations/shadows-and-radius/` | Radii and shadows the site uses, the proposed set to decide |
-| `sections/README.md` | The rule, the index of the 41 section types, the recipes |
+| `sections/README.md` | The rule with the definition of done, the index of the 41 section types, the recipes |
 | `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
-| `sections/recipes/` | Section order per page type: vs, product page, SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/recipes/` | Section order per page type (9): vs, product page, product landing, SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/proposals/` | Sections that wait for approval by Stefan or Amadeus (`YYYY-MM-DD-<name>.md`); today: use-case tabs. Until approved, build on the closest set section and say so |
 | `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |
 | `capture/` | The scripts that build all of this from the live site (`capture/README.md`) |
