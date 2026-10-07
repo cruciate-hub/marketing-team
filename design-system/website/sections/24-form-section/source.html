@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>24 · Form section · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      h1 {
+        margin: 0.67em 0;
+        font-size: 2em;
+      }
+      img {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        color: inherit;
+        font: inherit;
+        margin: 0;
+      }
+      button,
+      select {
+        text-transform: none;
+      }
+      button[disabled],
+      html input[disabled] {
+        cursor: default;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+      }
+      input {
+        line-height: normal;
+      }
+      input[type="checkbox"],
+      input[type="radio"] {
+        box-sizing: border-box;
+        padding: 0;
+      }
+      textarea {
+        overflow: auto;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-button {
+        color: #fff;
+        line-height: inherit;
+        cursor: pointer;
+        background-color: #3898ec;
+        border: 0;
+        border-radius: 0;
+        padding: 9px 15px;
+        text-decoration: none;
+        display: inline-block;
+      }
+      input.w-button {
+        -webkit-appearance: button;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        line-height: 44px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-form {
+        margin: 0 0 15px;
+      }
+      label {
+        margin-bottom: 5px;
+        font-weight: 700;
+        display: block;
+      }
+      .w-input,
+      .w-select {
+        color: #333;
+        vertical-align: middle;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 100%;
+        height: 38px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.42857;
+        display: block;
+      }
+      .w-input::placeholder,
+      .w-select::placeholder {
+        color: #999;
+      }
+      .w-input:focus,
+      .w-select:focus {
+        border-color: #3898ec;
+        outline: 0;
+      }
+      textarea.w-input,
+      textarea.w-select {
+        height: auto;
+      }
+      .w-select {
+        background-color: #f3f3f3;
+      }
+      .w-form-label {
+        cursor: pointer;
+        margin-bottom: 0;
+        font-weight: 400;
+        display: inline-block;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db68e.8ef7ffdfc.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h1 {
+        z-index: 2;
+        background-image: radial-gradient(
+          circle farthest-corner at 50% 50%,
+          white 33%,
+          var(--text--text-color-grey-lighter)
+        );
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-checkbox {
+        margin-bottom: 5px;
+        padding-left: 20px;
+        display: block;
+      }
+      .w-checkbox:before {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-checkbox:after {
+        content: " ";
+        clear: both;
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-checkbox-input {
+        float: left;
+        margin: 4px 0 0 -20px;
+        line-height: normal;
+      }
+      .w-checkbox-input--inputType-custom {
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        width: 12px;
+        height: 12px;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .form__html-hidden {
+        display: none;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-size-tiny {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .full-width {
+        width: 100%;
+      }
+      .margin-top_m {
+        margin-top: 1.5rem;
+      }
+      .text-field_child {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .text-fields_wrapper {
+        grid-column-gap: 1.25rem;
+        grid-row-gap: 1.25rem;
+        flex-wrap: wrap;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1.25rem;
+        display: grid;
+      }
+      .form-checkbox-field {
+        align-items: flex-start;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+        display: flex;
+        position: relative;
+      }
+      .button {
+        border: 0.125rem solid var(--social--main-blue);
+        background-color: var(--social--main-blue);
+        min-height: 3rem;
+        color: var(--main--white);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 25rem;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transition:
+          border-color 0.15s,
+          color 0.15s,
+          background-color 0.15s;
+        display: inline-flex;
+      }
+      .button:hover {
+        border-color: var(--social--button-hover);
+        background-color: var(--social--button-hover);
+      }
+      .button:active {
+        border-color: var(--social--button-pressed);
+        background-color: var(--social--button-pressed);
+      }
+      .button.is-full-width {
+        width: 100%;
+        max-width: 100%;
+      }
+      .icon-small {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        display: flex;
+      }
+      .contact-form {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+      .link-no-color {
+        color: var(--text--text-color-grey-medium);
+        text-decoration: underline;
+      }
+      .enlarged-paragraph {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      .max-ch-46 {
+        max-width: 46ch;
+      }
+      .text-color-grey-dark {
+        color: var(--text--text-color-grey-dark);
+      }
+      .text-field_wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1.25rem;
+      }
+      .contact-sales_aside {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+      }
+      .contact-sales_main {
+        background-color: var(--social--dark-gray-background);
+        border-radius: 0.5rem;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 3rem 2.5rem 2rem;
+      }
+      .contact-sales-form {
+        z-index: 2;
+        grid-column-gap: 2.5rem;
+        grid-row-gap: 2.5rem;
+        flex-wrap: wrap;
+        flex: 1;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        align-items: flex-start;
+        width: 100%;
+        padding-top: 1rem;
+        display: grid;
+        position: relative;
+      }
+      .c-checkbox-icon {
+        border: 0.0625rem solid var(--border--border-dark-grey);
+        background-color: var(--social--grey);
+        cursor: pointer;
+        border-radius: 0.25rem;
+        flex: none;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.15rem;
+        margin-left: 0;
+        margin-right: 0.5rem;
+      }
+      .input-label {
+        pointer-events: none;
+        color: var(--text--text-color-grey-light);
+        border-radius: 0.25rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 1rem;
+        padding: 0;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transition: all 0.15s;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .input-label.cc-area {
+        top: 25%;
+      }
+      .input-field {
+        border: 0.0625rem solid var(--border--border-dark-grey);
+        background-color: var(--social--grey);
+        border-radius: 0.25rem;
+        width: 100%;
+        max-width: 100%;
+        min-height: 3.25rem;
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+      .input-field:hover,
+      .input-field:focus {
+        border-color: var(--social--main-blue);
+      }
+      .input-field.c-area {
+        height: 6.5rem;
+      }
+      .input-field_select {
+        border: 0.0625rem solid var(--border--border-dark-grey);
+        background-color: var(--social--grey);
+        width: 100%;
+        max-width: 100%;
+        min-height: 3.25rem;
+        color: var(--text--text-color-grey-light);
+        border-radius: 0.25rem;
+        flex: 1;
+        margin-bottom: 0;
+        padding: 0.6rem 0.75rem;
+        font-size: 1rem;
+      }
+      .input-field_select:hover {
+        border-color: var(--social--main-blue);
+        background-color: var(--social--grey);
+      }
+      .input-field_select:active {
+        background-color: var(--social--grey);
+      }
+      .input-field_select:focus {
+        border-color: var(--social--main-blue);
+        background-color: var(--social--grey);
+      }
+      .form-step {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+      .contact-sales_wrapper {
+        position: relative;
+      }
+      .contact-sales_h1 {
+        max-width: 12ch;
+        margin-bottom: 0.75rem;
+        font-size: clamp(2.75rem, 1.5rem + 4svw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      .contact-sales_logo-wrapper {
+        align-items: stretch;
+        margin-bottom: 1.5rem;
+        display: flex;
+      }
+      .contact-sales_logo {
+        aspect-ratio: 1;
+        border: 1px solid var(--border--border-dark);
+        border-radius: 0.5rem;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        overflow: hidden;
+      }
+      .contact-sales_logo-img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+      .contact-sales_logo-x {
+        justify-content: center;
+        align-items: center;
+        height: 5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        display: flex;
+      }
+      .contact-sales_cs-logo {
+        opacity: 0;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .company-size-field-wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1.25rem;
+        display: none;
+      }
+      .form_pricing-announcement {
+        border-left: 2px solid var(--border--border-light-grey);
+        background-color: var(--social--grey);
+        width: 100%;
+        max-width: 100%;
+        color: var(--border--border-light-grey);
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0;
+        padding: 0;
+        display: none;
+      }
+      @media screen and (max-width: 991px) {
+        .contact-form {
+          padding-top: 0;
+        }
+        .contact-sales_aside {
+          width: 100%;
+        }
+        .contact-sales-form {
+          grid-column-gap: 2.5rem;
+          grid-row-gap: 2.5rem;
+          grid-template-columns: 1fr;
+          padding-top: 0;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .contact-sales_main {
+          justify-content: flex-start;
+        }
+        .input-field_select {
+          flex: none;
+        }
+        .contact-sales_h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        h1 {
+          margin-bottom: 0.75rem;
+        }
+        .form__html-hidden {
+          display: none;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .margin-top_m {
+          align-items: center;
+        }
+        .text-field_child {
+          width: 100%;
+          padding-right: 0;
+        }
+        .text-fields_wrapper {
+          grid-template-columns: 1fr;
+        }
+        .enlarged-paragraph {
+          font-size: 1.1rem;
+        }
+        .contact-sales_main {
+          padding: 2rem 1rem 1rem;
+        }
+        .contact-sales-form {
+          grid-column-gap: 1.5rem;
+          grid-row-gap: 1.5rem;
+        }
+        .input-label.cc-area {
+          top: 35%;
+        }
+        .contact-sales_logo-wrapper {
+          display: none;
+        }
+        .company-size-field-wrapper {
+          padding-bottom: 1rem;
+        }
+      }
+      #w-node-e70d5491-cfeb-21c0-f88a-6c4973fc5629-a89db68e {
+        grid-area: span 1 / span 2 / span 1 / span 2;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 24 Form section. Captured 2026-10-07 from https://www.social.plus/contact/contact-sales by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- form section: the contact form posts to the site's form endpoint; action, hidden fields and the anti-bot attributes are removed here. -->
+    <section id="main-content" class="section padding_y">
+      <div class="page-padding">
+        <div class="container-large">
+          <main class="contact-sales_wrapper">
+            <div class="contact-sales-form">
+              <div class="contact-sales_aside">
+                <div class="contact-sales_logo-wrapper">
+                  <div class="contact-sales_logo">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/691f113e7150a7a333f936d9_socia-plus_icon.webp"
+                      alt=""
+                      class="contact-sales_logo-img"
+                    />
+                  </div>
+                </div>
+                <h1 class="contact-sales_h1">Get in touch with our team</h1>
+                <p class="enlarged-paragraph max-ch-46">
+                  Curious to discover how social.plus can help your app grow faster? Book a meeting with our team to
+                  learn more.
+                </p>
+              </div>
+              <div class="contact-sales_main">
+                <div class="contact-form w-form">
+                  <div class="hide w-embed">
+                    <style>
+                      select {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        background-image: url("https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6747fc3b9703169ffb86c79a_arrow-down.svg");
+                        background-repeat: no-repeat;
+                        background-position: right 1rem center;
+                        background-size: 0.75rem 0.75rem;
+                      }
+                      select::-ms-expand {
+                        display: none;
+                      }
+                      input:-webkit-autofill,
+                      input:-webkit-autofill:hover,
+                      input:-webkit-autofill:focus,
+                      select:-webkit-autofill,
+                      select:-webkit-autofill:hover,
+                      select:-webkit-autofill:focus,
+                      textarea:-webkit-autofill,
+                      textarea:-webkit-autofill:hover,
+                      textarea:-webkit-autofill:focus {
+                        background-color: #1b1b1b !important;
+                        box-shadow: 0 0 0px 1000px #1b1b1b inset !important;
+                        color: #fff !important;
+                        -webkit-text-fill-color: white !important;
+                      }
+                      input:-webkit-autofill::first-line,
+                      select:-webkit-autofill::first-line,
+                      textarea:-webkit-autofill::first-line {
+                        color: #fff !important;
+                      }
+                      /* Hover and focus states for all form elements */
+                      input:hover,
+                      input:focus,
+                      select:hover,
+                      select:focus,
+                      textarea:hover,
+                      textarea:focus {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                      }
+                      /* Label positioning for all filled inputs - NO COLOR CHANGE */
+                      .input-field:focus + .input-label,
+                      .input-field:not(:placeholder-shown) + .input-label,
+                      .input-field:-webkit-autofill + .input-label {
+                        top: 0%;
+                        margin-left: 0.75rem;
+                        background-color: #1b1b1b;
+                        padding: 0.35rem;
+                        font-size: 0.875rem;
+                      }
+                      /* Filled state for text inputs and textareas */
+                      .input-field:not(:placeholder-shown) {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                      }
+                      /* Specific for textarea with c-area class */
+                      .input-field.c-area:not(:placeholder-shown),
+                      .input-field.c-area:valid,
+                      .input-field.c-area:focus {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                        -webkit-text-fill-color: white !important;
+                      }
+                      /* Filled state for select dropdowns - only when valid */
+                      .input-field_select:valid {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                        -webkit-text-fill-color: white !important;
+                      }
+                      /* Keep style during focus regardless of validity */
+                      .input-field_select:focus {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                      }
+                      /* Force select background even with inline styles */
+                      select.input-field_select.valid {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                      }
+                      /* Force all form elements with .valid class */
+                      .input-field.valid,
+                      .input-field_select.valid,
+                      textarea.valid {
+                        background-color: #1b1b1b !important;
+                        color: white !important;
+                      }
+                      /* Ensure select text stays white when filled */
+                      .input-field_select option {
+                        background-color: #1b1b1b;
+                        color: white;
+                      }
+                      .input-field_select option[value=""] {
+                        color: #999;
+                      }
+                      /* Checkbox styles */
+                      .w-checkbox-input--inputType-custom,
+                      .w-checkbox-input--inputType-custom:hover,
+                      .w-checkbox-input--inputType-custom:focus,
+                      .w-checkbox-input--inputType-custom:active,
+                      .w-checkbox-input--inputType-custom:not(:checked),
+                      .w-checkbox-input--inputType-custom:not(:checked):hover,
+                      .w-checkbox-input--inputType-custom:not(:checked):focus,
+                      .w-checkbox-input--inputType-custom:not(:checked):active {
+                        box-shadow: none !important;
+                      }
+                      .preload-checkbox-checked-icon {
+                        background-image: url("https://d3e54v103j8qbb.cloudfront.net/static/custom-checkbox-checkmark.589d534424.svg");
+                        position: absolute;
+                        width: 0px;
+                        height: 0px;
+                        opacity: 0;
+                        pointer-events: none;
+                      }
+                    </style>
+                  </div>
+                  <form
+                    method="post"
+                    name="wf-form-Contact-Sales-Form"
+                    id="wf-form-Contact-Sales-Form"
+                    class="full-width"
+                    aria-label="Contact Sales Form"
+                  >
+                    <div class="form-step">
+                      <div class="text-field_wrapper">
+                        <div class="text-field_child">
+                          <input
+                            spellcheck="false"
+                            class="input-field w-input"
+                            autofocus="true"
+                            maxlength="256"
+                            name="full-name"
+                            placeholder="  "
+                            type="text"
+                            id="full-name"
+                            required=""
+                          /><label for="name" aria-label="Full Name" class="input-label">First and Last name</label>
+                        </div>
+                      </div>
+                      <div class="text-field_wrapper">
+                        <div class="text-field_child">
+                          <input
+                            spellcheck="false"
+                            class="input-field w-input"
+                            maxlength="256"
+                            name="business-email"
+                            placeholder="  "
+                            type="email"
+                            id="business-email"
+                            required=""
+                          /><label for="name" aria-label="Business email" class="input-label">Business email</label>
+                        </div>
+                      </div>
+                      <div class="text-fields_wrapper">
+                        <div class="text-field_child">
+                          <input
+                            spellcheck="false"
+                            class="input-field w-input"
+                            maxlength="256"
+                            name="company"
+                            placeholder="  "
+                            type="text"
+                            id="company"
+                            required=""
+                          /><label for="name" aria-label="Company" class="input-label">Company</label>
+                        </div>
+                        <div class="text-field_child">
+                          <select
+                            id="monthly-active-users"
+                            name="monthly-active-users"
+                            required=""
+                            class="input-field_select w-select"
+                          >
+                            <option value="">Monthly Active Users</option>
+                            <option value="Less than 25k">Less than 25k</option>
+                            <option value="25k - 50k">25k - 50k</option>
+                            <option value="50k - 100k">50k - 100k</option>
+                            <option value="100k - 250k">100k - 250k</option>
+                            <option value="250k - 500k">250k - 500k</option>
+                            <option value="500k - 1M">500k - 1M</option>
+                            <option value="More than 1M">More than 1M</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="company-size-field-wrapper">
+                        <div class="text-field_child">
+                          <select id="company-size" name="Company-size" class="input-field_select w-select">
+                            <option value="">Company size</option>
+                            <option value="1 to 50">1 to 50</option>
+                            <option value="51 to 250">51 to 250</option>
+                            <option value="251 to 500">251 to 500</option>
+                            <option value="501 to 5000">501 to 5000</option>
+                            <option value="5000+">5000+</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="text-field_wrapper">
+                        <div class="text-field_child">
+                          <textarea
+                            class="input-field c-area w-input"
+                            autocomplete="off"
+                            maxlength="5000"
+                            name="use-case"
+                            placeholder=" "
+                            id="use-case"
+                            required=""
+                          ></textarea
+                          ><label
+                            for="name"
+                            aria-label="Tell us more about your use case and needs"
+                            class="input-label cc-area"
+                            >Tell us more about your use case and needs</label
+                          >
+                        </div>
+                      </div>
+                      <div class="text-field_wrapper">
+                        <div class="text-field_child">
+                          <input
+                            class="input-field w-input"
+                            autocomplete="off"
+                            maxlength="256"
+                            name="self-reported-attribution"
+                            placeholder="  "
+                            type="text"
+                            id="self-reported-attribution"
+                            required=""
+                          /><label for="name" aria-label="How did you first hear about Social+?" class="input-label"
+                            >How did you first hear about social.plus?</label
+                          >
+                        </div>
+                      </div>
+                      <label class="w-checkbox form-checkbox-field"
+                        ><div class="w-checkbox-input w-checkbox-input--inputType-custom c-checkbox-icon"></div>
+                        <input
+                          type="checkbox"
+                          name="Marketing"
+                          id="Marketing"
+                          style="opacity: 0; position: absolute; z-index: -1"
+                        /><span class="w-form-label" for="Marketing"
+                          >Yes, I'd like to receive occasional updates about social.plus</span
+                        ></label
+                      >
+                      <div class="form_pricing-announcement"></div>
+                      <div class="margin-top_m">
+                        <input type="submit" class="button is-full-width w-button" value="Submit" />
+                      </div>
+                    </div>
+                    <p class="text-size-tiny text-color-grey-dark">
+                      By clicking Submit, you agree to allow social.plus to process and store the provided information
+                      for contact purposes and agree to the
+                      <a href="https://www.social.plus/legal" target="_blank" class="link-no-color text-color-grey-dark"
+                        >Privacy Policy</a
+                      >.
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

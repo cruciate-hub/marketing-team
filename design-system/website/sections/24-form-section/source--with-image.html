@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>24 · Form section (download, with image) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      img {
+        border: 0;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        color: inherit;
+        font: inherit;
+        margin: 0;
+      }
+      button[disabled],
+      html input[disabled] {
+        cursor: default;
+      }
+      button::-moz-focus-inner,
+      input::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+      }
+      input {
+        line-height: normal;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-button {
+        color: #fff;
+        line-height: inherit;
+        cursor: pointer;
+        background-color: #3898ec;
+        border: 0;
+        border-radius: 0;
+        padding: 9px 15px;
+        text-decoration: none;
+        display: inline-block;
+      }
+      input.w-button {
+        -webkit-appearance: button;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-form {
+        margin: 0 0 15px;
+      }
+      label {
+        margin-bottom: 5px;
+        font-weight: 700;
+        display: block;
+      }
+      .w-input,
+      .w-select {
+        color: #333;
+        vertical-align: middle;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 100%;
+        height: 38px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 1.42857;
+        display: block;
+      }
+      .w-input::placeholder,
+      .w-select::placeholder {
+        color: #999;
+      }
+      .w-input:focus,
+      .w-select:focus {
+        border-color: #3898ec;
+        outline: 0;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db80f.b74c80e63.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .form__html-hidden {
+        display: none;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-size-tiny {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .full-width {
+        width: 100%;
+      }
+      .text-color-grey-4 {
+        color: var(--text--text-color-grey-medium);
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .margin-top_m {
+        margin-top: 1.5rem;
+      }
+      .text-field_child {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .text-fields_wrapper {
+        grid-column-gap: 1.25rem;
+        grid-row-gap: 1.25rem;
+        flex-wrap: wrap;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1.25rem;
+        display: grid;
+      }
+      .button {
+        border: 0.125rem solid var(--social--main-blue);
+        background-color: var(--social--main-blue);
+        min-height: 3rem;
+        color: var(--main--white);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 25rem;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transition:
+          border-color 0.15s,
+          color 0.15s,
+          background-color 0.15s;
+        display: inline-flex;
+      }
+      .button:hover {
+        border-color: var(--social--button-hover);
+        background-color: var(--social--button-hover);
+      }
+      .button:active {
+        border-color: var(--social--button-pressed);
+        background-color: var(--social--button-pressed);
+      }
+      .button.is-full-width {
+        width: 100%;
+        max-width: 100%;
+      }
+      .link-no-color {
+        color: var(--text--text-color-grey-medium);
+        text-decoration: underline;
+      }
+      .figma-download {
+        grid-column-gap: 5rem;
+        grid-row-gap: 5rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1.25fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 3rem;
+        display: grid;
+      }
+      .text-field_wrapper {
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: 1.25rem;
+      }
+      .input-label {
+        pointer-events: none;
+        color: var(--text--text-color-grey-light);
+        border-radius: 0.25rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 1rem;
+        padding: 0;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.2;
+        transition: all 0.15s;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .input-field {
+        border: 0.0625rem solid var(--border--border-dark-grey);
+        background-color: var(--social--grey);
+        border-radius: 0.25rem;
+        width: 100%;
+        max-width: 100%;
+        min-height: 3.25rem;
+        margin-bottom: 0;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+      .input-field:hover,
+      .input-field:focus {
+        border-color: var(--social--main-blue);
+      }
+      @media screen and (max-width: 991px) {
+        .figma-download {
+          grid-column-gap: 1rem;
+          grid-row-gap: 1rem;
+          grid-template-columns: 1.25fr;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .form__html-hidden {
+          display: none;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .margin-top_m {
+          align-items: center;
+        }
+        .text-field_child {
+          width: 100%;
+          padding-right: 0;
+        }
+        .text-fields_wrapper {
+          grid-template-columns: 1fr;
+        }
+        .figma-download {
+          grid-template-columns: 1fr;
+          padding-top: 0;
+        }
+      }
+      #w-node-fb615ae0-df7a-7b5d-5418-c80cf6f9d965-a89db80f {
+        grid-area: span 1 / span 2 / span 1 / span 2;
+      }
+      #submit-button-id.w-node-fb615ae0-df7a-7b5d-5418-c80cf6f9d964-a89db80f {
+        grid-area: span 1 / span 2 / span 1 / span 2;
+        justify-self: center;
+      }
+      @media screen and (max-width: 479px) {
+        #submit-button-id.w-node-fb615ae0-df7a-7b5d-5418-c80cf6f9d964-a89db80f {
+          grid-area: span 1 / span 1 / span 1 / span 1;
+          justify-self: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 24 Form section (download, with image). Captured 2026-10-07 from https://www.social.plus/social/uikit by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- form section (download variant): the Figma UI kit download form. -->
+    <section id="figma" class="section padding_y background-color_dark">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="figma-download">
+            <div>
+              <img
+                src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/675bfadd41ccc9d02753d054_social-media-ui-kit.webp"
+                alt="White-label Figma social network UI Kit"
+                class="full-width"
+              />
+            </div>
+            <div>
+              <h2>Figma Social UI&nbsp;Kit</h2>
+              <p class="margin-bottom_m">
+                Access the white-label Figma social media UI Kit for iOS, Android and Web. Modify all components,
+                colors, fonts, icons, and layouts with ease, ensuring the UI perfectly complements your app's style and
+                functionality.
+              </p>
+              <div class="w-form">
+                <form
+                  id="wf-form-uikit-download"
+                  name="wf-form-uikit-download"
+                  method="post"
+                  aria-label="uikit-download"
+                >
+                  <div class="full-width">
+                    <div class="hide w-embed">
+                      <style>
+                        select {
+                          -webkit-appearance: none;
+                          -moz-appearance: none;
+                          appearance: none;
+                          background-image: url("https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6747fc3b9703169ffb86c79a_arrow-down.svg");
+                          background-repeat: no-repeat;
+                          background-position: right 1rem center;
+                          background-size: 0.75rem 0.75rem;
+                        }
+                        select::-ms-expand {
+                          display: none;
+                        }
+                        input:-webkit-autofill,
+                        input:-webkit-autofill:hover,
+                        input:-webkit-autofill:focus,
+                        select:-webkit-autofill,
+                        select:-webkit-autofill:hover,
+                        select:-webkit-autofill:focus {
+                          background-color: #111 !important;
+                          color: #fff !important;
+                          box-shadow: 0 0 0px 1000px #111 inset !important;
+                        }
+                        input:-webkit-autofill::first-line,
+                        select:-webkit-autofill::first-line {
+                          color: #fff !important;
+                        }
+                        /* Hover and focus states to apply a consistent look */
+                        input:hover,
+                        input:focus,
+                        select:hover,
+                        select:focus {
+                          background-color: #111;
+                          color: white;
+                        }
+                        .input-field:focus + .input-label,
+                        .input-field:not(:placeholder-shown) + .input-label {
+                          top: 0%;
+                          margin-left: 1rem;
+                          background-color: #111;
+                          padding: 0.35rem;
+                          font-size: 0.875rem;
+                          color: white;
+                        }
+                        .input-field:not(:placeholder-shown) {
+                          background-color: #111;
+                          color: white;
+                        }
+                        .w-checkbox-input--inputType-custom,
+                        .w-checkbox-input--inputType-custom:hover,
+                        .w-checkbox-input--inputType-custom:focus,
+                        .w-checkbox-input--inputType-custom:active,
+                        .w-checkbox-input--inputType-custom:not(:checked),
+                        .w-checkbox-input--inputType-custom:not(:checked):hover,
+                        .w-checkbox-input--inputType-custom:not(:checked):focus,
+                        .w-checkbox-input--inputType-custom:not(:checked):active {
+                          box-shadow: none !important;
+                        }
+                      </style>
+
+                      <div></div>
+                    </div>
+                    <div class="text-fields_wrapper">
+                      <div class="text-field_child">
+                        <input
+                          spellcheck="false"
+                          class="input-field w-input"
+                          maxlength="256"
+                          name="First-name"
+                          placeholder="  "
+                          type="text"
+                          id="first-name"
+                          required=""
+                        /><label for="name" class="input-label">First name</label>
+                      </div>
+                      <div class="text-field_child">
+                        <input
+                          spellcheck="false"
+                          class="input-field w-input"
+                          maxlength="256"
+                          name="Last-name"
+                          placeholder="  "
+                          type="text"
+                          id="last-name"
+                          required=""
+                        /><label for="name" class="input-label">Last name</label>
+                      </div>
+                    </div>
+                    <div class="text-field_wrapper">
+                      <div class="text-field_child">
+                        <input
+                          spellcheck=""
+                          class="input-field w-input"
+                          maxlength="256"
+                          name="Business-email"
+                          placeholder="  "
+                          type="email"
+                          id="email"
+                          required=""
+                        /><label for="name" class="input-label">Business email</label>
+                      </div>
+                    </div>
+                    <input
+                      id="submit-button-id"
+                      type="submit"
+                      class="button is-full-width w-node-fb615ae0-df7a-7b5d-5418-c80cf6f9d964-a89db80f w-button"
+                      value="Access Figma UI Kit"
+                    />
+                  </div>
+                  <div class="margin-top_m">
+                    <p class="text-size-tiny text-color-grey-4">
+                      By clicking 'Access Figma UI Kit,' you allow social.plus to process and store your information for
+                      contact purposes and agree to the
+                      <a
+                        href="https://www.social.plus/legal/privacy-policy-website"
+                        target="_blank"
+                        class="link-no-color"
+                        >Privacy Policy</a
+                      >.
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

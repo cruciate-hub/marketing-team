@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>51 · vs / Side-by-side (sticky) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      img {
+        border: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.6ac30c228a3f1a4ad38a4cf7.7003fb5fe.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .section.padding_y.background-color_dark.c-vs {
+        padding-bottom: 0;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .max-ch-23 {
+        max-width: 23ch;
+      }
+      .vs-sticky {
+        grid-column-gap: 12.5%;
+        grid-row-gap: 0px;
+        grid-template-columns: 1.24fr 1fr;
+        display: grid;
+        position: relative;
+      }
+      .vs-sticky_item {
+        flex-direction: column;
+        grid-column: 1/2;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 80vh;
+        display: flex;
+      }
+      .vs-sticky_title {
+        color: var(--main--white);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .vs-sticky_text {
+        color: var(--text--text-color-grey-lighter);
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1.125rem;
+        line-height: 1.4;
+      }
+      .vs-visual {
+        grid-area: 1/2/6/3;
+        justify-content: center;
+        align-self: start;
+        align-items: center;
+        height: 80vh;
+        display: flex;
+        position: sticky;
+        top: 10vh;
+      }
+      .vs-visual_card {
+        aspect-ratio: 1;
+        background-color: var(--social--dark-card);
+        border-radius: 0.75rem;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      .vs-layer {
+        pointer-events: none;
+        -webkit-user-select: none;
+        user-select: none;
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      @media screen and (max-width: 991px) {
+        .vs-sticky {
+          flex-direction: column;
+          align-items: flex-start;
+          display: flex;
+        }
+        .vs-sticky_item {
+          max-width: 38.75rem;
+          min-height: 0;
+          margin-bottom: 4rem;
+        }
+        .vs-sticky_item:last-child {
+          margin-bottom: 0;
+        }
+        .vs-sticky_title {
+          font-size: 2.5rem;
+        }
+        .vs-visual {
+          width: 100%;
+          max-width: 31.25rem;
+          height: auto;
+          margin-bottom: 2rem;
+          display: block;
+          position: relative;
+          top: auto;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .vs-sticky_title {
+          margin-bottom: 1rem;
+          font-size: 2rem;
+        }
+        .vs-sticky_text {
+          font-size: 1rem;
+        }
+        .vs-visual {
+          margin-bottom: 1.5rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      /* static state, added by the capture */
+      /* static state: on the live site the 5 illustrations share one sticky spot on desktop and the script swaps them while the matching text block scrolls through the middle of the viewport. Without the script that leaves one illustration and four blanks, so here each illustration sits in the row of its own text block. On tablet and phone the live layout already stacks illustration above text. */
+      @media (min-width: 992px) {
+        .vs-sticky > .vs-visual {
+          position: relative;
+          top: auto;
+          height: auto;
+          align-self: center;
+          grid-column: 2 / 3;
+        }
+        .vs-sticky > :nth-child(1),
+        .vs-sticky > :nth-child(2) {
+          grid-row: 1;
+        }
+        .vs-sticky > :nth-child(3),
+        .vs-sticky > :nth-child(4) {
+          grid-row: 2;
+        }
+        .vs-sticky > :nth-child(5),
+        .vs-sticky > :nth-child(6) {
+          grid-row: 3;
+        }
+        .vs-sticky > :nth-child(7),
+        .vs-sticky > :nth-child(8) {
+          grid-row: 4;
+        }
+        .vs-sticky > :nth-child(9),
+        .vs-sticky > :nth-child(10) {
+          grid-row: 5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 51 vs / Side-by-side (sticky). Captured 2026-10-07 from https://www.social.plus/vs/circle by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- side-by-side: 5 text blocks (.vs-sticky_item), each with a layered illustration (.vs-visual). Live: on desktop the illustration is sticky and swaps as the matching text block reaches the middle of the viewport (GSAP ScrollTrigger). Here the static-state CSS at the end of the <style> puts each illustration next to its text. The data-build, data-motion and data-depth attributes describe the GSAP build steps. -->
+    <section class="section padding_y background-color_dark c-vs">
+      <div class="page-padding">
+        <div class="container-large">
+          <div><h2 class="max-ch-23">What social.plus delivers beyond the community platform</h2></div>
+          <div class="vs-main-grid_wrapper">
+            <div class="vs-sticky">
+              <div aria-label="A social feed embedded inside a branded mobile app" role="img" class="vs-visual">
+                <div class="vs-visual_card">
+                  <div class="vs-layer">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3413a53638e533cc14_vs-card-c1-phone-base.webp"
+                      alt=""
+                      class="vs-layer"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d35b80b746ad4cd2f2c_vs-card-c1-story-1.webp"
+                      alt=""
+                      data-origin="30.5% 29.3%"
+                      data-build="pop"
+                      data-at="0.55"
+                      data-duration="0.55"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d35bcd95867e58e9ee9_vs-card-c1-story-2.webp"
+                      alt=""
+                      data-origin="42.7% 29.33%"
+                      data-build="pop"
+                      data-at="0.67"
+                      data-duration="0.55"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d35b80b746ad4cd2fb9_vs-card-c1-story-3.webp"
+                      alt=""
+                      data-origin="54.9% 29.33%"
+                      data-build="pop"
+                      data-at="0.79"
+                      data-duration="0.55"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d35a6b8524d084c3989_vs-card-c1-story-4.webp"
+                      alt=""
+                      data-origin="67.1% 29.3%"
+                      data-build="pop"
+                      data-at="0.91"
+                      data-duration="0.55"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d35ac75f9108e16edc3_vs-card-c1-story-5.webp"
+                      alt=""
+                      data-origin="79.3% 29.3%"
+                      data-build="pop"
+                      data-at="1.03"
+                      data-duration="0.55"
+                    />
+                  </div>
+                  <img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3373040a6145ca9c65c82_vs-card-c1-ring-outer-p-500.webp"
+                    alt=""
+                    data-origin="50.4% 60.8%"
+                    data-motion="pulse"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33730196c73536797fdb4_vs-card-c1-ring-inner-p-500.webp"
+                    alt=""
+                    data-origin="50.1% 60.8%"
+                    data-motion="pulse"
+                  />
+                  <div data-motion="float" class="vs-layer">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3640a6145ca9c7fa81_vs-card-c1-post-base.webp"
+                      alt=""
+                      class="vs-layer"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3635a88fc338f2e02e_vs-card-c1-post-reactions.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 71.3% 0% 0%)"
+                      data-at="1.35"
+                      data-duration="0.8"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="vs-sticky_item">
+                <h3 class="vs-sticky_title">Social and community layer built inside your app</h3>
+                <p class="vs-sticky_text">
+                  Circle creates a standalone community site, a place members visit separately. social.plus activity
+                  feeds, chat, communities, and events integrate as components inside your existing product, where your
+                  users already are. You keep your app as the destination and add the social layer to it, rather than
+                  sending users somewhere else. Your brand retains full control of the experience, the data, and the
+                  user journey.
+                </p>
+              </div>
+              <div
+                aria-label="Stacked SDK layers connected to iOS, Android, React Native and Flutter"
+                role="img"
+                class="vs-visual"
+              >
+                <div class="vs-visual_card">
+                  <img
+                    data-depth="3"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337305726f56b4509b62d_vs-card-c2-glow-p-500.webp"
+                    alt=""
+                    data-origin="49.9% 97.1%"
+                    data-motion="pulse"
+                  /><img
+                    data-depth="5"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33730cf829f15265b5b88_vs-card-c2-orbit.webp"
+                    alt=""
+                    data-build="clip"
+                    data-from="inset(0% 98% 0% 0%)"
+                    data-at="0.75"
+                    data-duration="0.9"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33730bb9d4aea3b13c48b_vs-card-c2-slab-4.webp"
+                    alt=""
+                    data-build="move"
+                    data-at="0.10"
+                    data-y="-36"
+                    data-duration="0.7"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33731b3ba37594ada830b_vs-card-c2-slab-3.webp"
+                    alt=""
+                    data-build="move"
+                    data-at="0.25"
+                    data-y="-36"
+                    data-duration="0.7"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33731b80b746ad4cc5c0b_vs-card-c2-slab-2.webp"
+                    alt=""
+                    data-build="move"
+                    data-at="0.40"
+                    data-y="-36"
+                    data-duration="0.7"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33731b80b746ad4cc5c21_vs-card-c2-slab-1.webp"
+                    alt=""
+                    data-build="move"
+                    data-at="0.55"
+                    data-y="-36"
+                    data-duration="0.7"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375a19f5e3ff16e6cbe8_vs-card-c2-ios.webp"
+                    alt=""
+                    data-origin="14.57% 42.3%"
+                    data-build="pop"
+                    data-at="1.15"
+                    data-duration="0.6"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375a5b0a642075324bf7_vs-card-c2-react.webp"
+                    alt=""
+                    data-origin="35.5% 20.3%"
+                    data-build="pop"
+                    data-at="1.30"
+                    data-duration="0.6"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375a5b0a642075324c0d_vs-card-c2-android.webp"
+                    alt=""
+                    data-origin="85.23% 42.3%"
+                    data-build="pop"
+                    data-at="1.60"
+                    data-duration="0.6"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375a9a3f9120e10609d7_vs-card-c2-flutter.webp"
+                    alt=""
+                    data-origin="67.7% 20.3%"
+                    data-build="pop"
+                    data-at="1.45"
+                    data-duration="0.6"
+                    data-motion="float"
+                  />
+                </div>
+              </div>
+              <div class="vs-sticky_item">
+                <h3 class="vs-sticky_title">Full-stack SDKs with complete white-label customization</h3>
+                <p class="vs-sticky_text">
+                  Built for fast and stable integration, social.plus offers pre-built SDK and UIKit components for iOS,
+                  Android, Flutter, React Native, and Web, so your brand can ship social experiences without starting
+                  from scratch. Every component is fully customizable from colors to complete white-label control.
+                  Circle Headless offers a REST API that requires custom front-end development on every surface, which
+                  suits teams wanting total control over their UI.
+                </p>
+              </div>
+              <div aria-label="A shoppable product card inside a mobile app" role="img" class="vs-visual">
+                <div class="vs-visual_card">
+                  <div class="vs-layer">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3b40a6145ca9c7fdd2_vs-card-c3-phone-base.webp"
+                      alt=""
+                      class="vs-layer"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3c5806b130134c2e09_vs-card-c3-badge.webp"
+                      alt=""
+                      data-origin="71.3% 23.21%"
+                      data-build="pop"
+                      data-at="1.5"
+                      data-duration="0.6"
+                    />
+                  </div>
+                  <img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375bf42e5048d31359f4_vs-card-c3-ring-outer-p-500.webp"
+                    alt=""
+                    data-origin="68.7% 25.8%"
+                    data-motion="pulse"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375bf42e5048d3135a11_vs-card-c3-ring-inner-p-500.webp"
+                    alt=""
+                    data-origin="68.7% 25.8%"
+                    data-motion="pulse"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375b9966a7a3192d85b1_vs-card-c3-card-left.webp"
+                    alt=""
+                    data-build="move"
+                    data-x="-48"
+                    data-at="0.35"
+                    data-duration="0.8"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375c8f38166c72402952_vs-card-c3-card-right.webp"
+                    alt=""
+                    data-build="move"
+                    data-x="48"
+                    data-at="0.35"
+                    data-duration="0.8"
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3375c8f38166c7240298c_vs-card-c3-product.webp"
+                    alt=""
+                    data-motion="float"
+                  /><img
+                    data-depth="0"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33782997d720e7f6474ef_vs-card-c3-edge-left.webp"
+                    alt=""
+                  /><img
+                    data-depth="0"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33782671499cfc73aa8f3_vs-card-c3-edge-right.webp"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="vs-sticky_item">
+                <h3 class="vs-sticky_title">Monetization built into every surface</h3>
+                <p class="vs-sticky_text">
+                  Every part of your app becomes a storefront with social.plus. Product catalogues, cross-surface
+                  tagging, shoppable livestreams, and sponsored content capture high-intent signals right where users
+                  are already engaged. Circle monetizes through paid memberships, courses, and gated content, with
+                  revenue tied to those specific areas and a per-transaction fee on every plan.
+                </p>
+              </div>
+              <div
+                aria-label="AI analytics with a sales chart building up, connected to visitor reports"
+                role="img"
+                class="vs-visual"
+              >
+                <div class="vs-visual_card">
+                  <div data-depth="8" data-motion="float" class="vs-layer">
+                    <img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33782d6ce3ccc086a1848_vs-card-c4-sales-base.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(72.8% 0% 0% 0%)"
+                      data-at="0"
+                      data-duration="0.8"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3378235a88fc338f231de_vs-card-c4-sales-row-0.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 54.6% 0% 0%)"
+                      data-at="0.50"
+                      data-duration="0.6"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33782b3ba37594adaa9d6_vs-card-c4-sales-row-250.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 54.6% 0% 0%)"
+                      data-at="0.62"
+                      data-duration="0.6"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac3378240a6145ca9c6756e_vs-card-c4-sales-row-500.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 54.6% 0% 0%)"
+                      data-at="0.74"
+                      data-duration="0.6"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33782943f889e28655f65_vs-card-c4-sales-row-750.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 54.6% 0% 0%)"
+                      data-at="0.86"
+                      data-duration="0.6"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33783943f889e28655f7b_vs-card-c4-sales-row-1k.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 54.6% 0% 0%)"
+                      data-at="0.98"
+                      data-duration="0.6"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33783943f889e28655f91_vs-card-c4-sales-bar-01.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.15"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33783b3ba37594adaaa3e_vs-card-c4-sales-bar-02.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.25"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a6eca99b370bf882fd_vs-card-c4-sales-bar-03.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.35"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a796b3a2265044fb24_vs-card-c4-sales-bar-04.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.45"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a739eda1caf3b8ae1f_vs-card-c4-sales-bar-05.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.55"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a7ac75f9108e1560c9_vs-card-c4-sales-bar-06.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.65"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a7c58b4ab9cd3f8136_vs-card-c4-sales-bar-07.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.75"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a7943f889e286566a8_vs-card-c4-sales-bar-08.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.85"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a7e734372f89288de8_vs-card-c4-sales-bar-09.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="1.95"
+                      data-duration="0.7"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a819f5e3ff16e6e6f5_vs-card-c4-sales-bar-10.webp"
+                      alt=""
+                      data-origin="50% 62.38%"
+                      data-build="grow"
+                      data-at="2.05"
+                      data-duration="0.7"
+                    />
+                  </div>
+                  <img
+                    data-depth="8"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a8d6ce3ccc086a2f42_vs-card-c4-visitors.webp"
+                    alt=""
+                    data-motion="float"
+                  /><img
+                    data-depth="8"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337a8d6ce3ccc086a2f66_vs-card-c4-ai.webp"
+                    alt=""
+                    data-origin="23.2% 50%"
+                    data-motion="pulse"
+                  /><img
+                    data-depth="8"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337c7bcd95867e58d3b5d_vs-card-c4-line-bottom.webp"
+                    alt=""
+                  /><img
+                    data-depth="8"
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337c719f5e3ff16e6f39d_vs-card-c4-line-top.webp"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="vs-sticky_item">
+                <h3 class="vs-sticky_title">AI-powered analytics and insights on data you fully own</h3>
+                <p class="vs-sticky_text">
+                  social.plus provides real-time, AI-powered analytics on what drives engagement, growth, and retention.
+                  Agentry lets teams query their data in plain language inside Claude, ChatGPT, and other AI assistants,
+                  and your brand owns every data point. Circle keeps analytics in its own ecosystem, covering high-level
+                  engagement and relying on integrations for custom reporting, plus an MCP server for plain-language
+                  queries.
+                </p>
+              </div>
+              <div aria-label="Posts, events and growth charts in a community feed" role="img" class="vs-visual">
+                <div class="vs-visual_card">
+                  <div data-motion="float" class="vs-layer">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3ce734372f89297417_vs-card-c5-growth-base.webp"
+                      alt=""
+                      class="vs-layer"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3c943f889e286676fe_vs-card-c5-growth-line.webp"
+                      alt=""
+                      data-build="clip"
+                      data-from="inset(0% 85.1% 0% 0%)"
+                      data-at="0.6"
+                      data-duration="2.8"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3cac75f9108e16f14d_vs-card-c5-growth-dot.webp"
+                      alt=""
+                      data-origin="50.68% 70.87%"
+                      data-build="pop"
+                      data-at="3.25"
+                      data-duration="0.5"
+                    />
+                  </div>
+                  <div data-motion="float" class="vs-layer">
+                    <img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3cac75f9108e16f171_vs-card-c5-events-base.webp"
+                      alt=""
+                      class="vs-layer"
+                    /><img
+                      class="vs-layer"
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac33d3e5806b130134c2ee9_vs-card-c5-rsvp.webp"
+                      alt=""
+                      data-origin="81.56% 57.26%"
+                      data-build="pop"
+                      data-at="1.4"
+                      data-duration="0.6"
+                    />
+                  </div>
+                  <img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337c7d87ed4b30df8356a_vs-card-c5-product-bar.webp"
+                    alt=""
+                    data-motion="float"
+                  /><img
+                    class="vs-layer"
+                    src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6ac337c8b3ba37594adad3ee_vs-card-c5-post.webp"
+                    alt=""
+                    data-motion="float"
+                  />
+                </div>
+              </div>
+              <div class="vs-sticky_item">
+                <h3 class="vs-sticky_title">Social engagement infrastructure that scales with you</h3>
+                <p class="vs-sticky_text">
+                  social.plus offers modular components so your team can start with what you need and grow from there.
+                  Powering global brands with millions of MAUs, the infrastructure scales as your user base expands. It
+                  also includes an operational layer for every stakeholder running live community experiences. Circle
+                  excels for creator-led or mid-sized communities, but scaling to high volumes can bring significant
+                  cost and overhead.
+                </p>
+              </div>
+            </div>
+            <div class="hide w-embed w-script"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

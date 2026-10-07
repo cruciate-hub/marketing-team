@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>40 · Article (release note) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      h1 {
+        margin: 0.67em 0;
+        font-size: 2em;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        line-height: 44px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.697713f21a4cfd3f4db2769c.3098290c4.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h1 {
+        z-index: 2;
+        background-image: radial-gradient(
+          circle farthest-corner at 50% 50%,
+          white 33%,
+          var(--text--text-color-grey-lighter)
+        );
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-color-grey-medium {
+        color: var(--text--text-color-grey-medium);
+      }
+      .h4-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h4-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .flexbox-parent {
+        flex-wrap: wrap;
+        flex: 1;
+        display: flex;
+      }
+      .flexbox-parent.relative {
+        position: relative;
+      }
+      .tag {
+        background-color: var(--social--main-blue);
+        color: var(--main--whitesmoke);
+        letter-spacing: 0.025rem;
+        text-transform: uppercase;
+        border-radius: 0.36rem;
+        margin-bottom: 0.25rem;
+        margin-right: 0.25rem;
+        padding: 0.15rem 0.65rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+      .tag.c-dark {
+        background-color: var(--social--grey);
+        color: var(--text--text-color-grey-light);
+      }
+      .padding-top_m {
+        padding-top: 1.5rem;
+      }
+      .padding-bottom_m {
+        padding-bottom: 1.5rem;
+      }
+      .margin-bottom_xs {
+        margin-bottom: 0.3rem;
+      }
+      .text-size-small {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .blog-share-button {
+        color: var(--main--white);
+        flex: none;
+        align-items: center;
+        transition: all 0.2s;
+        position: relative;
+      }
+      .blog-share-button:hover {
+        transform: translateY(-0.125rem);
+      }
+      .blog-share_wrapper {
+        background-color: var(--social--main-blue);
+        border-bottom: 0.125rem solid #0000;
+        border-radius: 0.25rem;
+        justify-content: center;
+        align-items: center;
+        padding: 0.45rem;
+        display: flex;
+        position: relative;
+      }
+      .blog-share_wrapper.is--linkedin {
+        background-color: #0077b5;
+      }
+      .blog-share_wrapper.is--facebook {
+        background-color: #1877f2;
+      }
+      .blog-share_wrapper.is--x {
+        background-color: #000;
+      }
+      .blog-share_wrapper.is--whatsapp {
+        background-color: #25d366;
+      }
+      .blog-share-wrapper {
+        grid-column-gap: 0.25rem;
+        grid-row-gap: 0.25rem;
+        align-items: center;
+        display: flex;
+      }
+      .blog-share-bottom {
+        border-top: 0.03125rem #e5e5e5;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        display: flex;
+      }
+      .blog-share-button-embed {
+        flex: none;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      .product-update_main {
+        width: 72%;
+        padding-top: 1.5rem;
+        padding-right: 2.5rem;
+      }
+      .product-update_main.c-pr-pg {
+        padding-top: 0;
+      }
+      .product-update_rich-text {
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 1.1rem;
+      }
+      .product-update_rich-text p {
+        line-height: 1.8;
+      }
+      .arrow-social {
+        width: var(--cta-button_icon-size);
+        height: var(--cta-button_icon-size);
+        flex: none;
+        padding: 0.25rem;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-content.c-small-gap {
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+      }
+      .button-icon_wrapper {
+        background-color: var(--social--main-blue);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: -1rem;
+        display: flex;
+      }
+      .button-icon_wrapper.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-button.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .cta-button.c-grey:active {
+        color: var(--main--white);
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-border_rotate.c-white {
+        min-height: 16rem;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      .cta-button_bg.c-subscribe {
+        background-color: var(--social--dark-gray-background);
+        background-image: none;
+        padding-left: 1rem;
+      }
+      .product-feature-update_aside {
+        width: 28%;
+        padding-bottom: 4rem;
+      }
+      .product-feature_rss-cta {
+        background-color: var(--social--grey);
+        color: var(--main--white);
+        border-radius: 0.75rem;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 2rem;
+        display: flex;
+      }
+      .tags-list_wrapper {
+        flex-flow: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        display: flex;
+      }
+      .release-notes_subheader {
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        flex-flow: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        display: flex;
+      }
+      .rss-icon {
+        border: 1px solid var(--social--dark-gray-background);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        padding: 0.25rem;
+        display: flex;
+      }
+      .release-note_eyebrow {
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 0.625rem;
+        display: flex;
+      }
+      .release-note_video-wrapper {
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        justify-content: space-between;
+        align-items: stretch;
+        padding-top: 1.5rem;
+        display: flex;
+      }
+      .release-note_doc-cta {
+        border: 0.0625rem solid var(--border--border-dark);
+        background-image: radial-gradient(
+          circle farthest-corner at 100% 100%,
+          var(--social--grey) 55%,
+          var(--social--dark-gray-background)
+        );
+        width: 35%;
+        min-height: 12rem;
+        color: var(--main--white);
+        text-align: left;
+        border-radius: 1rem;
+        flex-flow: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 1.5rem;
+        transition: transform 0.2s;
+        display: flex;
+        position: relative;
+      }
+      .release-note_doc-cta:hover {
+        transform: translateY(-2px);
+      }
+      .release-note_doc-cta_arrow-wrapper {
+        justify-content: flex-end;
+        align-items: flex-start;
+        margin-top: 0.75rem;
+        margin-right: 0.75rem;
+        display: flex;
+        position: absolute;
+        inset: 0% 0% auto auto;
+        transform: scale(1.25) rotate(-45deg);
+      }
+      .release-note_doc-cta_text {
+        max-width: 13rem;
+        color: var(--main--white);
+        font-size: var(--_typography---h4-font-size);
+        margin-bottom: 0;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      @media screen and (max-width: 991px) {
+        .product-update_main {
+          width: 70%;
+          padding-right: 1.5rem;
+        }
+        .product-feature-update_aside {
+          width: 30%;
+        }
+        .release-note_video-wrapper {
+          grid-column-gap: 1.5rem;
+          grid-row-gap: 1.5rem;
+          flex-flow: column;
+        }
+        .release-note_doc-cta {
+          flex-flow: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          min-height: auto;
+        }
+        .release-note_doc-cta_arrow-wrapper {
+          margin-top: 0;
+          margin-right: 0;
+          position: static;
+        }
+        .release-note_doc-cta_text {
+          max-width: 100rem;
+          font-size: var(--_typography---h5-font-size);
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .h4-font-size {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .blog-share-bottom {
+          margin-top: 0.75rem;
+          margin-bottom: 2.5rem;
+          position: static;
+        }
+        .product-update_main {
+          width: 100%;
+          padding-bottom: 0;
+          padding-right: 0;
+        }
+        .cta-button {
+          left: auto;
+        }
+        .product-feature-update_aside {
+          flex-direction: column-reverse;
+          width: 100%;
+          padding-top: 0;
+          padding-bottom: 0;
+          display: flex;
+        }
+        .product-feature_rss-cta {
+          margin-bottom: 2rem;
+        }
+        .release-note_doc-cta {
+          border-radius: 0.75rem;
+        }
+        .release-note_doc-cta_text {
+          line-height: 1.1;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        h1 {
+          margin-bottom: 0.75rem;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .tag {
+          margin-bottom: 0.5rem;
+        }
+        .blog-share-wrapper {
+          grid-column-gap: 0.75rem;
+          grid-row-gap: 0.75rem;
+        }
+        .blog-share-bottom {
+          flex-direction: column;
+        }
+        .product-update_main {
+          padding-top: 1.5rem;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+        .product-feature_rss-cta {
+          padding: 1.5rem;
+        }
+        .rss-icon {
+          width: 1.65rem;
+          height: 1.65rem;
+        }
+        .release-note_doc-cta {
+          padding: 1rem;
+          font-size: 0.75rem;
+        }
+        .release-note_doc-cta_text {
+          font-size: var(--_typography---h6-font-size);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 40 Article (release note). Captured 2026-10-07 from https://www.social.plus/release-note/1-1-chat-support-for-ios-and-android-uikit by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- article (release-note variant): .product-update_rich-text body with tags. -->
+    <section id="main-content" class="section padding_y">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="flexbox-parent relative">
+            <main class="product-update_main c-pr-pg">
+              <div class="release-note_eyebrow"><div class="text-size-small">July 2026</div></div>
+              <h1>1:1 Chat Support for iOS and Android UIKit</h1>
+              <div class="release-notes_subheader">
+                <div class="w-dyn-list">
+                  <div role="list" class="tags-list_wrapper w-dyn-items">
+                    <div role="listitem" class="tag c-dark w-dyn-item"><div>Chat</div></div>
+                    <div role="listitem" class="tag c-dark w-dyn-item"><div>UIKit</div></div>
+                  </div>
+                </div>
+              </div>
+              <div id="content" fs-richtext-element="rich-text" class="product-update_rich-text w-richtext">
+                <p>
+                  The iOS and Android UIKit now supports 1:1 chat, allowing users to start direct conversations without
+                  creating a group chat.
+                </p>
+                <p>‍</p>
+              </div>
+              <div class="release-note_video-wrapper">
+                <a
+                  role="button"
+                  href="https://learn.social.plus/uikit/components/chat"
+                  target="_blank"
+                  class="release-note_doc-cta w-inline-block"
+                  ><div class="release-note_doc-cta_text">View on documentation</div>
+                  <div class="release-note_doc-cta_arrow-wrapper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 25"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      class="arrow-social"
+                    >
+                      <path
+                        d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                        fill="currentColor"
+                      ></path>
+                    </svg></div
+                ></a>
+              </div>
+            </main>
+            <aside class="product-feature-update_aside">
+              <section class="product-feature_rss-cta">
+                <div class="h4-font-size">Stay up-to-date</div>
+                <p class="text-size-small text-color-grey-medium">
+                  Never miss out on the latest updates, subscribe today:
+                </p>
+                <a
+                  role="button"
+                  aria-label="Subscribe to RSS feed"
+                  href="https://www.social.plus/release-note/rss.xml"
+                  target="_blank"
+                  class="cta-button c-grey w-inline-block"
+                  ><div class="cta-button_bg c-subscribe">
+                    <div class="button-content c-small-gap">
+                      <div class="button-text">Get updates via RSS</div>
+                      <div class="button-icon_wrapper c-grey">
+                        <div class="rss-icon w-embed">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="6.18" cy="17.82" r="2.18" fill="currentColor"></circle>
+                            <path
+                              d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83C19.56 11.41 12.59 4.44 4 4.44zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"
+                              fill="currentColor"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cta-border_rotate c-white"></div
+                ></a>
+              </section>
+              <section class="blog-share-bottom padding-top_m padding-bottom_m">
+                <div class="text-size-small margin-bottom_xs">Share this Release Note</div>
+                <div class="blog-share-wrapper">
+                  <a
+                    data-share-linkedin="true"
+                    href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.social.plus%2Frelease-note%2F1-1-chat-support-for-ios-and-android-uikit%2F&amp;title=1%3A1%20Chat%20Support%20for%20iOS%20and%20Android%20UIKit%20-%20Release%20Notes&amp;summary="
+                    class="blog-share-button w-inline-block"
+                    target="_blank"
+                    ><div class="blog-share_wrapper is--linkedin">
+                      <div class="blog-share-button-embed w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          viewBox="0 0 448 512"
+                          aria-labelledby="linkedin-title linkedin-desc"
+                          role="img"
+                          focusable="false"
+                        >
+                          <title id="linkedin-title">Share on LinkedIn</title>
+                          <desc id="linkedin-desc">Icon to share article on LinkedIn</desc>
+                          <path
+                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div></div></a
+                  ><a
+                    data-share-facebook="true"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.social.plus%2Frelease-note%2F1-1-chat-support-for-ios-and-android-uikit%2F&amp;title=1%3A1%20Chat%20Support%20for%20iOS%20and%20Android%20UIKit%20-%20Release%20Notes%3F"
+                    class="blog-share-button w-inline-block"
+                    target="_blank"
+                    ><div class="blog-share_wrapper is--facebook">
+                      <div class="blog-share-button-embed w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="100%"
+                          width="100%"
+                          viewBox="0 0 512 512"
+                          aria-labelledby="facebook-title facebook-desc"
+                          role="img"
+                          focusable="false"
+                        >
+                          <title id="facebook-title">Share on Facebook</title>
+                          <desc id="facebook-desc">Icon to share article on Facebook.</desc>
+                          <path
+                            d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div></div></a
+                  ><a
+                    data-share-twitter="true"
+                    href="https://x.com/share?url=https%3A%2F%2Fwww.social.plus%2Frelease-note%2F1-1-chat-support-for-ios-and-android-uikit%2F&amp;title=1%3A1%20Chat%20Support%20for%20iOS%20and%20Android%20UIKit%20-%20Release%20Notes&amp;summary="
+                    class="blog-share-button w-inline-block"
+                    target="_blank"
+                    ><div class="blog-share_wrapper is--x">
+                      <div class="blog-share-button-embed w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          viewBox="0 0 512 512"
+                          aria-labelledby="twitter-title twitter-desc"
+                          role="img"
+                          focusable="false"
+                        >
+                          <title id="twitter-title">Share on X (Twitter)</title>
+                          <desc id="twitter-desc">Icon to share article on X (Twitter).</desc>
+                          <path
+                            d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div></div></a
+                  ><a
+                    data-share-whatsapp="true"
+                    href="https://wa.me/?text=https%3A%2F%2Fwww.social.plus%2Frelease-note%2F1-1-chat-support-for-ios-and-android-uikit"
+                    class="blog-share-button w-inline-block"
+                    target="_blank"
+                    ><div class="blog-share_wrapper is--whatsapp">
+                      <div class="blog-share-button-embed w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          viewBox="0 0 448 512"
+                          aria-labelledby="whatsapp-title whatsapp-desc"
+                          role="img"
+                          focusable="false"
+                        >
+                          <title id="whatsapp-title">Share on WhatsApp</title>
+                          <desc id="whatsapp-desc">Icon to share article on WhatsApp.</desc>
+                          <path
+                            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div></div></a
+                  ><a
+                    data-share-email="true"
+                    href="mailto:?subject=1%3A1%20Chat%20Support%20for%20iOS%20and%20Android%20UIKit%20-%20Release%20Notes&amp;body=Check out this link: https%3A%2F%2Fwww.social.plus%2Frelease-note%2F1-1-chat-support-for-ios-and-android-uikit"
+                    class="blog-share-button w-inline-block"
+                    ><div class="blog-share_wrapper">
+                      <div class="blog-share-button-embed w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          viewBox="0 0 512 512"
+                          aria-labelledby="email-title email-desc"
+                          role="img"
+                          focusable="false"
+                        >
+                          <title id="email-title">Share via Email</title>
+                          <desc id="email-desc">Icon to share article via Email.</desc>
+                          <path
+                            d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z "
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div></div
+                  ></a>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

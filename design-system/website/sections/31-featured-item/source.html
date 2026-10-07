@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>31 · Featured item · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      h1 {
+        margin: 0.67em 0;
+        font-size: 2em;
+      }
+      img {
+        border: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        line-height: 44px;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-dyn-hide,
+      .w-dyn-bind-empty,
+      .w-condition-invisible {
+        display: none !important;
+      }
+      .w-layout-grid {
+        grid-row-gap: 16px;
+        grid-column-gap: 16px;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        display: grid;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db640.d23b4210c.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h1 {
+        z-index: 2;
+        background-image: radial-gradient(
+          circle farthest-corner at 50% 50%,
+          white 33%,
+          var(--text--text-color-grey-lighter)
+        );
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-layout-grid {
+        grid-row-gap: 16px;
+        grid-column-gap: 16px;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        display: grid;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.blog-overview {
+        padding-top: 2.5rem;
+        padding-bottom: 4rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-color-grey-medium {
+        color: var(--text--text-color-grey-medium);
+      }
+      .tag {
+        background-color: var(--social--main-blue);
+        color: var(--main--whitesmoke);
+        letter-spacing: 0.025rem;
+        text-transform: uppercase;
+        border-radius: 0.36rem;
+        margin-bottom: 0.25rem;
+        margin-right: 0.25rem;
+        padding: 0.15rem 0.65rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+      .author_thumbnail-image {
+        background-image: linear-gradient(#f7c506, #f568f0 50%, #3b41ec);
+        border-radius: 100rem;
+        flex: none;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: 0.125rem;
+        margin-right: 0.5rem;
+        padding: 0.125rem;
+        overflow: hidden;
+      }
+      .author_image {
+        object-fit: cover;
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+      }
+      .blog_top {
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+        display: flex;
+      }
+      .author_thumbnail-wrapper {
+        align-items: center;
+        display: flex;
+      }
+      .blog_featured-tags-wrapper {
+        flex-wrap: wrap;
+        width: 100%;
+        display: flex;
+      }
+      .margin-right_s {
+        margin-right: 0.625rem;
+      }
+      .text-size-small {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+      .blog-overview_grid {
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1.25fr 1fr;
+      }
+      .blog-featured_text-wrapper {
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 1rem;
+        display: flex;
+      }
+      .blog-thumbnail_bottom {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        display: flex;
+      }
+      .blog-featured_collection-list {
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 1.5rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr;
+        grid-auto-columns: 1fr;
+        display: grid;
+      }
+      .blog_featured-image {
+        aspect-ratio: 16/9;
+        border-radius: 0 1.5rem 1.5rem;
+        width: 100%;
+      }
+      .blog-featured_image {
+        aspect-ratio: 16/9;
+        border-radius: 0 1rem 1rem;
+        width: 40%;
+      }
+      .blog-featured_collection-item {
+        color: var(--main--white);
+        align-items: center;
+        transition: color 0.15s;
+        display: flex;
+      }
+      .blog-featured_collection-item:hover {
+        color: var(--text--text-color-grey-dark);
+      }
+      .blog-main-featured_bottom {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        align-items: center;
+        display: flex;
+      }
+      .blog-featured-heading {
+        font-size: 1.25rem;
+        line-height: 1.25;
+      }
+      .blog-overview_featured {
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+        margin-top: -0.35rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      .blog-tag {
+        background-color: var(--social--main-blue);
+        color: var(--main--whitesmoke);
+        letter-spacing: 0.025rem;
+        text-transform: uppercase;
+        border-radius: 0.36rem;
+        margin-right: 0.25rem;
+        padding: 0.15rem 0.65rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+      .blog_featured-image_link-wrapper {
+        width: 100%;
+        color: var(--secondary--menu-bg);
+        margin-bottom: 1rem;
+      }
+      .text-wrap {
+        grid-column-gap: 0.2rem;
+        grid-row-gap: 0.2rem;
+        white-space: nowrap;
+        display: flex;
+      }
+      .blog-featured {
+        color: var(--text--text-color-grey-light);
+      }
+      .blog-featured:hover {
+        color: var(--main--white);
+      }
+      .blog-title {
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+        margin-bottom: 0.75rem;
+        font-size: clamp(2.75rem, 1.5rem + 2svw, 3rem);
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .blog-featured_description {
+        padding-right: 3rem;
+      }
+      @media screen and (max-width: 991px) {
+        .blog-overview_grid {
+          grid-template-columns: 1fr;
+        }
+        .blog-main-featured_bottom {
+          padding-bottom: 1rem;
+        }
+        .blog-overview_featured {
+          margin-top: 0;
+          margin-bottom: 2rem;
+        }
+        .blog-featured_description {
+          padding-right: 0;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .blog-main-featured_bottom {
+          grid-column-gap: 0.25rem;
+          grid-row-gap: 0.25rem;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          max-width: 100%;
+          padding-bottom: 0;
+        }
+        .blog-main-featured_bottom.c-bog {
+          justify-content: flex-start;
+        }
+        .blog-overview_featured {
+          font-size: 1.5rem;
+        }
+        .h1-font-size,
+        .blog-title {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        h1 {
+          margin-bottom: 0.75rem;
+        }
+        .section.blog-overview {
+          padding-top: 1.5rem;
+          padding-bottom: 2.5rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .tag {
+          margin-bottom: 0.5rem;
+        }
+        .author_thumbnail-image {
+          margin-bottom: 0.1rem;
+        }
+        .blog_top {
+          padding-bottom: 0.25rem;
+        }
+        .author_thumbnail-wrapper {
+          width: 100%;
+          margin-right: 0;
+        }
+        .blog_featured-tags-wrapper {
+          margin-bottom: 0.5rem;
+        }
+        .blog-featured_text-wrapper {
+          padding-top: 0.75rem;
+          padding-left: 0;
+        }
+        .blog-featured_collection-list {
+          grid-column-gap: 2.5rem;
+          grid-row-gap: 2.5rem;
+        }
+        .blog_featured-image {
+          border-top-right-radius: 1rem;
+          border-bottom-right-radius: 1rem;
+          border-bottom-left-radius: 1rem;
+        }
+        .blog-featured_image {
+          width: 100%;
+        }
+        .blog-featured_collection-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .blog-main-featured_bottom {
+          border-bottom-style: none;
+          flex-flow: wrap;
+          grid-template-rows: auto;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-auto-columns: 1fr;
+          justify-content: space-between;
+          place-items: flex-end stretch;
+        }
+        .blog-main-featured_bottom.c-bog {
+          grid-column-gap: 1rem;
+          grid-row-gap: 1rem;
+          grid-column-gap: 1rem;
+          grid-row-gap: 1rem;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
+        .blog-featured-heading {
+          font-size: 1.5rem;
+        }
+        .blog-overview_featured {
+          display: none;
+        }
+        .blog-tag {
+          padding-left: 0.4rem;
+          padding-right: 0.4rem;
+          font-size: 0.65rem;
+        }
+        .blog_featured-image_link-wrapper {
+          margin-bottom: 0.5rem;
+        }
+        .blog-title {
+          font-size: 1.75rem;
+        }
+        .blog-featured_description {
+          display: none;
+        }
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      @media (min-width: 47.9375em) {
+        .text-style-3lines {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 31 Featured item. Captured 2026-10-07 from https://www.social.plus/blog by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- featured item: the newest post at the top of the blog overview. -->
+    <section class="section blog-overview">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="w-layout-grid blog-overview_grid">
+            <div class="w-dyn-list">
+              <div role="list" class="w-dyn-items">
+                <div role="listitem" class="w-dyn-item">
+                  <a
+                    href="https://www.social.plus/blog/how-to-ask-better-questions-about-your-first-party-data"
+                    class="blog_featured-image_link-wrapper w-inline-block"
+                    ><img
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6ac32f8c51759a00cf1ca4c2_How%20to%20Ask%20Better%20Questions%20About%20Your%20First-Party%20Data_page-header.webp"
+                      alt=""
+                      class="blog_featured-image"
+                  /></a>
+                  <div class="blog_top">
+                    <div class="w-dyn-list">
+                      <div role="list" class="blog_featured-tags-wrapper w-dyn-items">
+                        <div role="listitem" class="w-dyn-item"><div class="blog-tag">Product</div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <a
+                    href="https://www.social.plus/blog/how-to-ask-better-questions-about-your-first-party-data"
+                    class="blog-featured w-inline-block"
+                    ><h2 class="blog-title">How to Ask Better Questions About Your First-Party Data</h2>
+                    <div class="blog-featured_description">
+                      <p class="text-style-3lines">
+                        The connector is live. The data is accessible. But the difference between a number you glance at
+                        and a number you act on comes down to how you asked for it.
+                      </p>
+                    </div>
+                    <div class="blog-main-featured_bottom c-bog">
+                      <div class="tag">Oct 5, 2026</div>
+                      <div class="text-wrap">
+                        <div class="text-size-small text-color-grey-medium">5</div>
+                        <div class="text-size-small text-color-grey-medium">min</div>
+                        <div class="text-size-small text-color-grey-medium">read</div>
+                      </div>
+                    </div></a
+                  ><link
+                    rel="prefetch"
+                    href="https://www.social.plus/blog/how-to-ask-better-questions-about-your-first-party-data"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h1 class="blog-overview_featured">Latest Blogs</h1>
+              <div class="w-dyn-list">
+                <div role="list" class="blog-featured_collection-list w-dyn-items">
+                  <div role="listitem" class="w-dyn-item">
+                    <a
+                      href="https://www.social.plus/blog/five-questions-every-team-should-ask-their-data"
+                      class="blog-featured_collection-item w-inline-block"
+                      ><img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6aba491e52ab5083aa96bb3b_Five%20Questions%201st%20Party%20Data_thumbnail.webp"
+                        alt=""
+                        class="blog-featured_image"
+                      />
+                      <div class="blog-featured_text-wrapper">
+                        <h2 class="blog-featured-heading text-style-3lines">
+                          Five Questions Every Team Should Ask Their Data
+                        </h2>
+                        <div class="blog-thumbnail_bottom">
+                          <div class="tag">Sep 28, 2026</div>
+                          <div class="text-wrap">
+                            <div class="text-size-small text-color-grey-medium">5</div>
+                            <div class="text-size-small text-color-grey-medium">min</div>
+                            <div class="text-size-small text-color-grey-medium">read</div>
+                          </div>
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                  <div role="listitem" class="w-dyn-item">
+                    <a
+                      href="https://www.social.plus/blog/how-smart-fit-uses-in-app-engagement-to-drive-retention"
+                      class="blog-featured_collection-item w-inline-block"
+                      ><img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a88264426591d806f51b4c3_How%20Smart%20Fit%20Turned%20Physical%20Loyalty%20into%20Digital%20Community_thumbnail.webp"
+                        alt="social.plus on stage at AGS São Paulo"
+                        class="blog-featured_image"
+                      />
+                      <div class="blog-featured_text-wrapper">
+                        <h2 class="blog-featured-heading text-style-3lines">
+                          From the Stage: How Smart Fit Uses In App Engagement to Drive Retention
+                        </h2>
+                        <div class="blog-thumbnail_bottom">
+                          <div class="tag">Aug 21, 2026</div>
+                          <div class="text-wrap">
+                            <div class="text-size-small text-color-grey-medium">8</div>
+                            <div class="text-size-small text-color-grey-medium">min</div>
+                            <div class="text-size-small text-color-grey-medium">read</div>
+                          </div>
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                  <div role="listitem" class="w-dyn-item">
+                    <a
+                      href="https://www.social.plus/blog/plausible-code-is-not-an-integration-why-we-built-vise"
+                      class="blog-featured_collection-item w-inline-block"
+                      ><img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a75b5664b0f629d62f8884e_Plausible%20Code%20Is%20Not%20an%20Integration%20-%20Why%20We%20Built%20Vise_thumbnail.webp"
+                        alt=""
+                        class="blog-featured_image"
+                      />
+                      <div class="blog-featured_text-wrapper">
+                        <h2 class="blog-featured-heading text-style-3lines">
+                          Plausible Code Is Not an Integration: Why We Built Vise
+                        </h2>
+                        <div class="blog-thumbnail_bottom">
+                          <div class="tag">Aug 7, 2026</div>
+                          <div class="text-wrap">
+                            <div class="text-size-small text-color-grey-medium">6</div>
+                            <div class="text-size-small text-color-grey-medium">min</div>
+                            <div class="text-size-small text-color-grey-medium">read</div>
+                          </div>
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                  <div role="listitem" class="w-dyn-item">
+                    <a
+                      href="https://www.social.plus/blog/best-social-sdks-for-engagement-retention"
+                      class="blog-featured_collection-item w-inline-block"
+                      ><img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a451c8a4a340be614f308da_6a451b21e51eff650d587124_best-social-sdks-for-engagement-retention_thumbnail_724x408.webp"
+                        alt="Comparison of six social SDKs for engagement and retention showing feature coverage, analytics capabilities, and monetization options"
+                        class="blog-featured_image"
+                      />
+                      <div class="blog-featured_text-wrapper">
+                        <h2 class="blog-featured-heading text-style-3lines">
+                          5 Best Social SDKs for Engagement &amp; Retention (2026)
+                        </h2>
+                        <div class="blog-thumbnail_bottom">
+                          <div class="tag">Jul 1, 2026</div>
+                          <div class="text-wrap">
+                            <div class="text-size-small text-color-grey-medium">12</div>
+                            <div class="text-size-small text-color-grey-medium">min</div>
+                            <div class="text-size-small text-color-grey-medium">read</div>
+                          </div>
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                  <div role="listitem" class="w-dyn-item">
+                    <a
+                      href="https://www.social.plus/blog/best-alternatives-to-discord-and-facebook-groups-for-brands"
+                      class="blog-featured_collection-item w-inline-block"
+                      ><img
+                        src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4e3/6a450dcf02192d9fae4b4d06_6a4504eabd27bc8f52bf0eec_best-alternatives-to-discord-and-facebook-groups-for-brands_thumbnail_724x408.webp"
+                        alt="Comparison of five alternatives to Discord and Facebook Groups for brands showing platform type, where the community lives, and data ownership"
+                        class="blog-featured_image"
+                      />
+                      <div class="blog-featured_text-wrapper">
+                        <h2 class="blog-featured-heading text-style-3lines">
+                          5 Best Alternatives to Discord and Facebook Groups for Brands (2026)
+                        </h2>
+                        <div class="blog-thumbnail_bottom">
+                          <div class="tag">Jul 1, 2026</div>
+                          <div class="text-wrap">
+                            <div class="text-size-small text-color-grey-medium">11</div>
+                            <div class="text-size-small text-color-grey-medium">min</div>
+                            <div class="text-size-small text-color-grey-medium">read</div>
+                          </div>
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>20 · Why social.plus grid · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      img {
+        border: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      /* copied from social-plus.webflow.6967a17797ca92d62e76b73e.0c09241d7.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .h5-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h5-font-size);
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .margin-bottom_xs {
+        margin-bottom: 0.3rem;
+      }
+      .margin-bottom_l {
+        margin-bottom: 3.125rem;
+      }
+      .z-index_3 {
+        z-index: 3;
+        position: relative;
+      }
+      .container-heading {
+        z-index: 3;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: relative;
+      }
+      .enlarged-paragraph {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      .product-details-grid_child {
+        border: 1px solid var(--border--border-hover);
+        background-color: var(--social--dark-gray-background);
+        border-radius: 0.75rem;
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        position: relative;
+        overflow: hidden;
+      }
+      .product-details-grid_child.c-small {
+        padding-top: 8rem;
+      }
+      .product-details_grid {
+        grid-template: "."/0.5fr 0.5fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 32rem;
+        display: flex;
+      }
+      .hmpg-grid_wrapper {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+      }
+      .product-details_enterprise-text {
+        width: 100%;
+        height: 100%;
+      }
+      .hmpg-grid_middle_content-below {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        display: flex;
+      }
+      .product-details-grid_middle {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        flex-flow: column;
+        width: 50%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: flex;
+      }
+      .product-details_content {
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 1.5rem;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+      .product-details-grid_vertical_content {
+        border: 1px solid var(--border--border-hover);
+        background-color: var(--social--dark-gray-background);
+        border-radius: 0.75rem;
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        position: relative;
+        overflow: hidden;
+      }
+      .product-details-grid_vertical_content.c-bottom-aligned {
+        flex-flow: column;
+        justify-content: flex-end;
+        display: flex;
+      }
+      .product-details-grid_vertical {
+        width: 25%;
+      }
+      .product-details-grid_data {
+        z-index: 3;
+        position: relative;
+      }
+      .product-details_enterpirse_text-content {
+        z-index: 3;
+        flex-flow: column;
+        justify-content: center;
+        align-items: flex-start;
+        max-width: 12rem;
+        height: 100%;
+        display: flex;
+        position: relative;
+      }
+      .product-details_img-2 {
+        z-index: 1;
+        object-fit: cover;
+        width: 60%;
+        height: 100%;
+        position: absolute;
+        inset: 0% 0% 0% auto;
+      }
+      .product-details_img-1 {
+        z-index: 1;
+        object-fit: cover;
+        width: 100%;
+        position: absolute;
+        inset: auto 0% 0%;
+      }
+      .product-details_img-3 {
+        object-fit: contain;
+        width: 100%;
+        position: absolute;
+        inset: 0.5rem 0% auto;
+      }
+      .product-details_img-4 {
+        z-index: 1;
+        object-fit: contain;
+        width: 100%;
+        position: absolute;
+        inset: 0% 0% auto;
+      }
+      @media screen and (max-width: 991px) {
+        .product-details-grid_child.c-small {
+          padding-top: 1rem;
+        }
+        .product-details_grid {
+          flex-flow: wrap;
+          min-height: auto;
+        }
+        .product-details_enterprise-text {
+          width: 100%;
+        }
+        .hmpg-grid_middle_content-below {
+          flex-flow: column;
+        }
+        .product-details-grid_middle {
+          width: 50%;
+          padding-left: 0;
+          padding-right: 0;
+        }
+        .product-details_content {
+          grid-column-gap: 0rem;
+          grid-row-gap: 0rem;
+          flex-flow: column;
+        }
+        .product-details-grid_vertical_content.c-bottom-aligned {
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+        }
+        .product-details-grid_vertical {
+          width: 50%;
+        }
+        .product-details-grid_vertical.c-right {
+          width: 100%;
+          min-height: 16rem;
+          margin-top: 1rem;
+        }
+        .product-details-grid_vertical.c-left {
+          padding-right: 1rem;
+        }
+        .product-details-grid_data {
+          width: 46%;
+        }
+        .product-details_enterpirse_text-content {
+          justify-content: flex-start;
+          align-items: flex-start;
+          max-width: 100%;
+        }
+        .product-details_img-2 {
+          right: -3rem;
+        }
+        .product-details_img-3 {
+          position: static;
+        }
+        .product-details_img-4 {
+          width: 50%;
+          height: 100%;
+          inset: 0% 0% 0% auto;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .h5-font-size {
+          font-size: 1.4rem;
+          line-height: 1.1;
+        }
+        .container-heading.margin-bottom_l.c-resp_less {
+          margin-bottom: 1rem;
+        }
+        .product-details-grid_child {
+          padding: 1.5rem;
+        }
+        .product-details_grid {
+          grid-template-columns: 1fr;
+        }
+        .product-details-grid_vertical_content {
+          padding: 1.5rem;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .enlarged-paragraph {
+          font-size: 1.1rem;
+        }
+        .product-details-grid_child {
+          min-height: auto;
+        }
+        .hmpg-grid_wrapper {
+          width: 100%;
+          max-width: 100%;
+        }
+        .product-details_enterprise-text {
+          padding-right: 0;
+        }
+        .product-details-grid_middle,
+        .product-details-grid_vertical_content {
+          width: 100%;
+        }
+        .product-details-grid_vertical_content.c-bottom-aligned {
+          justify-content: flex-end;
+          align-items: flex-start;
+        }
+        .product-details-grid_vertical.c-right {
+          min-height: auto;
+        }
+        .product-details-grid_vertical.c-left {
+          width: 100%;
+          padding-bottom: 1rem;
+          padding-right: 0;
+        }
+        .product-details-grid_data {
+          width: 100%;
+        }
+        .product-details_img-2,
+        .product-details_img-1,
+        .product-details_img-4 {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 20 Why social.plus grid. Captured 2026-10-07 from https://www.social.plus/industry/gaming by design-system/website/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- why social.plus grid: a fixed set of reasons with small icons. -->
+    <section class="section padding_y">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="container-heading margin-bottom_l c-resp_less">
+            <h2>Why social.plus</h2>
+            <div class="enlarged-paragraph">An all in-one community solution built for modern retail apps</div>
+          </div>
+          <div class="product-details_grid">
+            <div class="product-details-grid_vertical c-left">
+              <div class="product-details-grid_vertical_content">
+                <div class="z-index_3">
+                  <div class="h5-font-size margin-bottom_xs">Fully white-label</div>
+                  <div>Your brand. Your app. Your community.</div>
+                </div>
+                <img
+                  alt=""
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6942236510e2fdaa849aee5c_Fully%20white-label.webp"
+                  class="product-details_img-1"
+                />
+              </div>
+            </div>
+            <div class="product-details-grid_middle">
+              <div class="hmpg-grid_wrapper">
+                <div class="hmpg-grid_wrapper">
+                  <div class="product-details-grid_child">
+                    <div class="product-details_enterprise-text">
+                      <div class="product-details_content">
+                        <div class="product-details_enterpirse_text-content">
+                          <div class="h5-font-size margin-bottom_xs">Fast to launch</div>
+                          <div>Modular components, flexible UIKits and APIs.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      alt=""
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/69422365ea3cd5e0b96ea0eb_Fast%20to%20launch.webp"
+                      class="product-details_img-2"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="hmpg-grid_middle_content-below">
+                <div class="hmpg-grid_wrapper">
+                  <div class="product-details-grid_child c-small">
+                    <img
+                      alt=""
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6941493cf80d8a3e2abb65d7_Developer-friendly%20SDKs.webp"
+                      class="product-details_img-3"
+                    />
+                    <div class="h5-font-size margin-bottom_xs">Developer-friendly SDKs</div>
+                    <div>React Native, Swift, Kotlin, Flutter, Web.</div>
+                  </div>
+                </div>
+                <div class="hmpg-grid_wrapper">
+                  <div class="product-details-grid_child c-small">
+                    <img
+                      alt=""
+                      src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6941493ca48dc423b60eeb6d_In-app%20engagement%20not%20external%20groups.webp"
+                      class="product-details_img-3"
+                    />
+                    <div class="h5-font-size margin-bottom_xs">In-app engagement, not external groups</div>
+                    <div>Built in your app, no need to send users to external platforms.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product-details-grid_vertical c-right">
+              <div class="product-details-grid_vertical_content c-bottom-aligned">
+                <img
+                  alt=""
+                  src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6941493dd2c7300375ebb312_Fully%20white-label-1.webp"
+                  class="product-details_img-4"
+                />
+                <div class="product-details-grid_data">
+                  <div class="h5-font-size margin-bottom_xs">Privacy-first with zero-party data</div>
+                  <div>First-hand insights that fuel personalization.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
