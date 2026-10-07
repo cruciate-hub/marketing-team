@@ -18,7 +18,7 @@ There are more than three ideas in a row (use the feature grid 12 or a card grid
 - Paragraph: 30 to 60 words, line length capped with `.max-ch-44` to `.max-ch-56`
 - Optional checklist `ul.list` with `.list-item.is-checkmark`, 3 to 5 items
 - Optional buttons: grey `.cta-button.c-grey` (one or two, live: "1:1 Chat", "Group Chat", "UI Kit"); the primary button is for heroes and CTA bands
-- Media: one image (rounded, `.image-square_radius` or the page's own class) or a looping product video in the dark frame
+- Media: one image (rounded, `.image-square_radius` or the page's own class) or a looping product video in the dark frame (the video is not in the repo: `source--video-cta.html` shows its first frame as poster, `assets/media/672de7af791a6a9d62b8a090_social-sdk-transcode-still.jpg`; the CDN URL is in `capture/media.json`)
 - Three-rows variant: one heading block, then up to 3 `.grid-2` rows; the image side alternates (`.is-resp-reversed` flips a row)
 
 ## Allowed variations

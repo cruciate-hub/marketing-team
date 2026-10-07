@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.55
+
+The design system carries its own images: every picture a section or foundation shows is in `design-system/assets/media/`, so the previews open with no network, in Claude Design's preview frame included.
+
+**Why:** the design system was synced into Claude Design, and its previews referenced 234 images and videos on the Webflow CDN. Claude Design's preview frame cannot load external URLs, so hero images, feature glyphs and customer logos showed as broken there. The repo must hold the files itself so a re-sync can upload them (7 October 2026).
+
+**Changes:**
+- [`design-system/assets/media/`](design-system/assets/media/): 234 files, 6.65 MB: 232 images copied as served from the site (163 WebP, 66 SVG, 1 JPG, 1 PNG, 1 Lottie JSON; original Webflow file names, URL-decoded; 233 from the Webflow CDN, Webflow's custom-checkbox checkmark from its static host) plus one first-frame still per product video (2 JPG). **Videos are not copied** (Stefan, 7 October 2026): the three video sections (01 `--video`, `--two-buttons`, 11 `--video-cta`) hold no video `src` and show the still as poster, which is the dark frame the live page shows before the video plays. [`capture/media.json`](design-system/capture/media.json) records the source URL of every file. The Webflow placeholder in the style guide's card-v1 sample is not served by the CDN (403); the cards preview shows the iOS glyph of the SDK cards instead.
+- Every `source.html`, `styles.css`, `preview.html` and foundation `styles.css` (86 files) references the local files by relative path (`src`, `data-src`, inline styles, CSS `url()`); alt text and markup unchanged; Webflow's `<link rel=prefetch>` elements (two sections) removed. `git grep cdn.prod.website-files.com -- design-system` finds only the capture tooling and `tokens.json` (the stylesheet the tokens were read from).
+- New [`capture/localize-media.mjs`](design-system/capture/localize-media.mjs): copies what the written files reference, rewrites the references, makes the video stills with `ffmpeg`, prunes unreferenced files, writes `media.json`; `capture.mjs` and `foundations.mjs` run it at the end, so a re-capture keeps the repo self-contained. `capture.config.json` gained `output.mediaDir`, `output.mediaManifest`, a `media` block (hosts, video extensions, pause, user agent) and `link[rel=prefetch]` in `clean.removeSelectors`. `verify.mjs` now blocks every request that is not a `file:` URL and flags remote or missing media. `pack.py` includes `assets/media/`. `compact-screenshots.py` unchanged.
+- Docs: [`design-system/README.md`](design-system/README.md) (tree, "Images", how to update), [`capture/README.md`](design-system/capture/README.md) (how to run, step 9, deviations, quality check re-run offline), [`brain.md`](design-system/brain.md) (files table), [`sections/README.md`](design-system/sections/README.md), `pack-README.md`, the section notes of 01 and 11, the icons and cards foundations.
+- Checked: all 80 `source.html` and `preview.html` rendered with every http(s) request blocked: 0 failed image, video or font loads, 0 console errors beyond the pre-existing SVG attribute noise; `verify.mjs` on all 80 items: 80 items, 65 OK, 15 minor (anti-aliasing noise near the 4% line, as before), 0 broken.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.54 -> 13.55. No brand-kit bump: no symlinked skill file changed.
+
 ## marketing-team 13.54 / brand-kit 3.10
 
 One design system: the website system of 13.53 is now `design-system/` itself, the old generic design system and app UI kit files are gone, and what was still true from them lives in the foundations.

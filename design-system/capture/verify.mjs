@@ -3,12 +3,15 @@
 // with the live screenshots (desktop[--variant].png, mobile[--variant].png). Also opens every foundations/<name>/preview.html,
 // checks it and writes its desktop.png and mobile.png (there is no live screenshot to compare a preview with).
 // Writes the comparison images to raw/verify/ and a markdown table (raw/verify/report.md) for capture/README.md.
-// Checks: file loads, no sideways scroll, no broken images, no leftover <script>/tracking attributes, size and pixel difference.
+// Checks: file loads with every network request blocked (the files must be self-contained: images from ../assets/media/,
+// the font from ../figtree.woff2), no sideways scroll, no broken images, no missing local file, no remote image or video
+// source, no leftover <script>/tracking attributes, size and pixel difference.
 // No AI calls. Run after capture.mjs and foundations.mjs: node verify.mjs [--only <id>[,<id>…]]
 // With --only the report table is merged into the previous raw/verify/report.md (rows replaced by id).
 
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
+import fsSync from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { PNG } from 'pngjs';
@@ -49,7 +52,7 @@ function compare(liveBuf, ownBuf) {
   return { pct: ((n / (w * h)) * 100).toFixed(1), heightDelta: b.height - a.height, widthDelta: b.width - a.width, diffPng: PNG.sync.write(diff) };
 }
 
-function leftoversIn(html) {
+function leftoversIn(html, file) {
   const leftovers = [];
   if (/<script\b/i.test(html)) leftovers.push('<script>');
   if (/<iframe\b/i.test(html)) leftovers.push('<iframe>');
@@ -57,8 +60,18 @@ function leftoversIn(html) {
     if (html.toLowerCase().includes(bad)) leftovers.push(bad);
   }
   if (/\sdata-wf-[\w-]*=/.test(html)) leftovers.push('data-wf-* attribute');
-  const imgNotCdn = [...html.matchAll(/<img[^>]*\ssrc="([^"]+)"/g)].map((m) => m[1]).filter((u) => !/^https:\/\//.test(u));
-  if (imgNotCdn.length) leftovers.push(`${imgNotCdn.length} non-absolute img src`);
+  // media must be local: no http(s) image, video or poster source, and every relative reference must exist on disk
+  const refs = [
+    ...[...html.matchAll(/<(?:img|video|source|audio)\b[^>]*?\s(?:src|poster|data-src)="([^"]+)"/g)].map((m) => m[1]),
+    ...[...html.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)].map((m) => m[1]),
+  ];
+  const remote = refs.filter((u) => /^(https?:)?\/\//.test(u));
+  if (remote.length) leftovers.push(`${remote.length} remote media src: ${[...new Set(remote)].slice(0, 2).join(', ')}`);
+  const missing = refs
+    .filter((u) => !/^(https?:|data:|#|blob:)/.test(u) && !u.startsWith('//'))
+    .map((u) => decodeURIComponent(u.split('#')[0].split('?')[0]))
+    .filter((u) => !fsSync.existsSync(path.resolve(path.dirname(file), u)));
+  if (missing.length) leftovers.push(`${missing.length} missing local file: ${[...new Set(missing)].slice(0, 2).join(', ')}`);
   return leftovers;
 }
 
@@ -74,8 +87,16 @@ async function openAndCheck(file, kind, shotPath, screenshotSelector) {
   });
   const page = await ctx.newPage();
   const errors = [];
+  const blocked = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  page.on('requestfailed', (r) => errors.push('request failed: ' + r.url().slice(0, 80)));
+  page.on('requestfailed', (r) => (r.url().startsWith('file:') ? errors.push('request failed: ' + r.url().slice(0, 80)) : null));
+  // self-contained or nothing: every request that is not a local file is blocked and counted
+  await page.route('**/*', (route) => {
+    const url = route.request().url();
+    if (url.startsWith('file:') || url.startsWith('data:')) return route.continue();
+    blocked.push(url.slice(0, 80));
+    return route.abort();
+  });
   await page.goto(pathToFileURL(file).href, { waitUntil: 'networkidle', timeout: 90000 }).catch(() => page.waitForLoadState('load'));
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(400);
@@ -83,12 +104,15 @@ async function openAndCheck(file, kind, shotPath, screenshotSelector) {
     scrollW: document.documentElement.scrollWidth,
     innerW: window.innerWidth,
     font: getComputedStyle(document.body).fontFamily,
-    brokenImgs: [...document.images].filter((i) => !(i.complete && (i.naturalWidth > 0 || /\.svg(\?|$)/.test(i.src)))).map((i) => i.src.slice(0, 80)),
+    brokenImgs: [
+      ...[...document.images].filter((i) => !(i.complete && i.naturalWidth > 0)).map((i) => i.src.slice(-80)),
+      ...[...document.querySelectorAll('video[poster]')].filter((v) => !v.poster || v.error).map((v) => v.poster.slice(-80)),
+    ],
   }));
   const target = page.locator(screenshotSelector || 'body > *:not(style):not(script)').first();
   const own = await target.screenshot({ path: shotPath, type: 'png', animations: 'disabled', timeout: 90000 });
   await ctx.close();
-  return { own, sideways: info.scrollW > info.innerW ? `${info.scrollW}>${info.innerW}` : 'no', brokenImgs: info.brokenImgs, errors: errors.filter((e) => !/request failed/.test(e)), font: info.font };
+  return { own, sideways: info.scrollW > info.innerW ? `${info.scrollW}>${info.innerW}` : 'no', brokenImgs: [...info.brokenImgs, ...errors.filter((e) => /request failed/.test(e)), ...blocked.map((u) => 'blocked: ' + u)], errors: errors.filter((e) => !/request failed/.test(e)), font: info.font };
 }
 
 function verdict(row) {
@@ -118,7 +142,7 @@ for (const section of config.sections) {
     console.log(`${section.id}: no source${suffix}.html (not captured)`);
     continue;
   }
-  const row = { id: section.id, kind: 'section', knownDifference: section.knownDifference, title: `${section.number} ${section.title}${suffix ? ` (${suffix.slice(2)})` : ''}`, leftovers: leftoversIn(html), viewports: {} };
+  const row = { id: section.id, kind: 'section', knownDifference: section.knownDifference, title: `${section.number} ${section.title}${suffix ? ` (${suffix.slice(2)})` : ''}`, leftovers: leftoversIn(html, file), viewports: {} };
   for (const kind of ['desktop', 'mobile']) {
     const shotPath = path.join(verifyDir, `${section.id.replace(/\//g, '-')}-${kind}.png`);
     const r = await openAndCheck(file, kind, shotPath, section.screenshotSelector);
@@ -162,7 +186,7 @@ for (const name of foundationNames) {
   } catch {
     continue;
   }
-  const row = { id: `foundations/${name}`, kind: 'foundation', title: `Foundation: ${name}`, leftovers: leftoversIn(html), viewports: {} };
+  const row = { id: `foundations/${name}`, kind: 'foundation', title: `Foundation: ${name}`, leftovers: leftoversIn(html, file), viewports: {} };
   for (const kind of ['desktop', 'mobile']) {
     const r = await openAndCheck(file, kind, path.join(dir, `${kind}.png`), 'main.fx-page');
     row.viewports[kind] = { sideways: r.sideways, pct: '–', heightDelta: 0, widthDelta: 0, brokenImgs: r.brokenImgs, errors: r.errors, font: r.font };

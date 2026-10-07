@@ -11,7 +11,8 @@
 //                            (otherwise section.generated.md, for comparison; default variant only)
 // For every snippet it writes raw/snippets/<id>.html and .css (input for foundations.mjs).
 // Plus tokens.css, tokens.json (the "use" text of each token survives re-runs), sections/index.html (gallery, see
-// gallery.mjs) and a tokens diff against the previous tokens.json in README.md.
+// gallery.mjs) and a tokens diff against the previous tokens.json in README.md. At the end localize-media.mjs copies
+// every image the written files reference into ../assets/media/ and rewrites the references (videos are not copied).
 //
 // Read-only towards the live site. Analytics and consent requests are blocked. No AI calls.
 // Run: node capture.mjs [--only <section id>] [--page <page id>] [--config capture.config.json]
@@ -30,6 +31,7 @@ import {
   parseRootVariables,
 } from './css-rules.mjs';
 import { writeGallery } from './gallery.mjs';
+import { localizeMedia, MEDIA_COMMENT } from './localize-media.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -697,7 +699,7 @@ for (const pageCfg of config.pages) {
 
     const tokensRel = path.relative(dir, path.resolve(here, out.tokensCss)).split(path.sep).join('/');
     const comments = [
-      `<!-- ${section.number} ${section.title}. Captured ${today} from ${pageCfg.url} by design-system/capture/capture.mjs. Images are the site's own CDN files. -->`,
+      `<!-- ${section.number} ${section.title}. Captured ${today} from ${pageCfg.url} by design-system/capture/capture.mjs. ${MEDIA_COMMENT} -->`,
       section.comment ? `<!-- ${section.comment} -->` : '',
     ]
       .filter(Boolean)
@@ -790,6 +792,11 @@ if (!only && !onlyPage) {
   const gallery = await writeGallery(config, here);
   log(`gallery: ${gallery}`);
 }
+
+// Images into the repo: copy what the written files reference, rewrite the references (a full run also prunes
+// files nothing references any more)
+log('\nmedia:');
+await localizeMedia({ prune: !only && !onlyPage });
 
 await browser.close();
 log('\nDone.');

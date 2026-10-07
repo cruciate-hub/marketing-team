@@ -7,7 +7,8 @@
 // Screenshots (desktop.png, mobile.png) are taken by verify.mjs.
 //
 // No AI calls. Headless Chromium is used only to assemble the DOM and to measure computed sizes
-// (nothing is fetched from the live site; images in the previews point to the site's CDN).
+// (nothing is fetched from the live site while assembling; the snippets still point to the site's CDN, and at the end
+// localize-media.mjs copies those images into ../assets/media/ and rewrites the previews to the local files).
 // Run after capture.mjs: node foundations.mjs [--only <foundation id>]
 
 import { chromium } from 'playwright';
@@ -16,6 +17,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import prettier from 'prettier';
 import { parseCss, serialize, splitSelectorList } from './css-rules.mjs';
+import { localizeMedia, MEDIA_COMMENT } from './localize-media.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -163,7 +165,7 @@ ${css}
 </style>
 </head>
 <body>
-<!-- Foundation preview built ${today} by design-system/capture/foundations.mjs from live site snippets (see foundation.md). Images are the site's own CDN files. -->
+<!-- Foundation preview built ${today} by design-system/capture/foundations.mjs from live site snippets (see foundation.md). ${MEDIA_COMMENT} -->
 <main class="fx-page">
   <header class="fx-head"><h1>${esc(title)}</h1><p>${lead}</p></header>
 ${bodyHtml}
@@ -363,7 +365,13 @@ const defs = [
         title: 'Cards',
         lead: 'The four card styles as they are today: card-v1 (bordered gradient, the style guide card), card-v2 (compact icon card), card-v3 (icon card with more padding and a larger heading) and card-plain, plus the thumbnail card of every listing and the customer story card.',
         blocks: [
-          { snippet: 'sg-card', label: 'card-v1 (style guide sample)', note: '1px --border--border-dark border, radial gradient --social--grey to --social--dark-gray-background, radius .5rem, padding 2.5rem; icon 48px blue circle; h3.h5-font-size; p.text-size-small; text link footer.' },
+          {
+            snippet: 'sg-card',
+            label: 'card-v1 (style guide sample)',
+            note: '1px --border--border-dark border, radial gradient --social--grey to --social--dark-gray-background, radius .5rem, padding 2.5rem; icon 48px blue circle; h3.h5-font-size; p.text-size-small; text link footer. The style guide shows a Webflow placeholder in the icon circle; here the iOS glyph of the SDK cards.',
+            // the Webflow placeholder image is not served (403); use one feature glyph the site's card-v1 sections use
+            wrap: (h) => h.replace(/src="[^"]*placeholder[^"]*"/g, 'src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6745768673dd01e74469f7af_ios.svg"'),
+          },
           { snippet: 'card-v1-page', label: 'card-v1 on a page (/social/uikit)', wrap: (h) => `<div class="fx-grid-3">${h}</div>` },
           { snippet: 'card-v2', label: 'card-v2 (/industry/gaming)', note: 'bg #1a1a1a, no border, radius .5rem, padding 1rem; icon 72px; heading 20px.', wrap: (h) => `<div class="fx-grid-3">${h}</div>` },
           { snippet: 'card-v3', label: 'card-v3 (/use-case/1-1-chat)', note: 'bg #1a1a1a, radius .5rem, padding 2rem; heading 28px.', wrap: (h) => `<div class="fx-grid-3">${h}</div>` },
@@ -598,4 +606,8 @@ for (const def of defs) {
   await writeFoundation(def);
 }
 await browser.close();
+
+// images into the repo: copy what the previews reference, rewrite the references
+console.log('media:');
+await localizeMedia();
 console.log('Done.');

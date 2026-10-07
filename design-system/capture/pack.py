@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Assembles the upload pack for Claude Design from design-system/ (the parent folder) and zips it.
 
-Copies tokens.css, tokens.json, figtree.woff2, foundations/ and sections/ (without the gallery index.html,
-.gitignore, proposals and generated comparison files), writes README.md from pack-README.md, and scales every
+Copies tokens.css, tokens.json, figtree.woff2, assets/media/ (the site images the previews use), foundations/ and
+sections/ (without the gallery index.html, .gitignore, proposals and generated comparison files), writes README.md
+from pack-README.md, and scales every
 screenshot to 1x (half of the captured 2x) and a 256-colour palette so the zip stays small. No AI calls, no network.
 
 Run: python3 pack.py [--out /path/to/folder] [--scale 0.5]
@@ -49,6 +50,7 @@ def copy_tree(src: Path, dst: Path):
 
 for name in ['tokens.css', 'tokens.json', 'figtree.woff2']:
     shutil.copy2(root / name, out / name)
+copy_tree(root / 'assets', out / 'assets')  # assets/media: the images as served by the site's CDN, copied as-is
 copy_tree(root / 'foundations', out / 'foundations')
 copy_tree(root / 'sections', out / 'sections')
 shutil.copy2(here / 'pack-README.md', out / 'README.md')
