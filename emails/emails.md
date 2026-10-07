@@ -3,7 +3,7 @@
 Read this file before creating any email — marketing campaigns, newsletters, or
 transactional messages — for social.plus.
 
-Also read: `website.md` (email colors match the site; it wins on conflict), `colors-palette.md`, `colors-usage.md`, `typography.md`, `tone.md`
+Also read: `design-system/tokens.css` (email colors match the site), `design-system/foundations/colors/foundation.md` (token uses and the brand extras for emails), `design-system/foundations/typography/foundation.md`, `messaging/tone.md`
 
 ---
 

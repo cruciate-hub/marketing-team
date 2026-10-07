@@ -1,21 +1,24 @@
 ---
 name: design-system
 description: >
-  Reference for the social.plus design system — colors, typography, spacing, buttons,
-  inputs, layout, shadows, icons, imagery, accessibility, and logo usage.
-  Use this skill for: writing CSS, styling components, building Webflow elements,
-  creating HTML mockups, designing visual layouts, or any output where visual accuracy
-  matters for social.plus. Also trigger when someone asks about brand colors, the
-  color palette, button states, dark mode colors, design tokens, spacing, border
-  radius, typography, or layout. Trigger even for quick questions like "what blue
-  do we use" or "what's the hover color for buttons."
+  Reference for the social.plus design system, built from the live website: the live
+  Webflow tokens, the foundations (colors, typography, spacing, buttons, cards, rich text,
+  form inputs, tags, accordions, dividers, imagery, logo, icons, accessibility, shadows
+  and radius) and the 41 section types with page recipes.
+  Use this skill for: writing CSS, styling components, building Webflow elements or
+  Claude Design pages, creating HTML mockups, designing visual layouts, or any output
+  where visual accuracy matters for social.plus. Also trigger when someone asks about
+  brand colors, the color palette, button states, dark mode colors, design tokens,
+  spacing, border radius, typography, layout, which section to use for a page, the logo
+  or icons. Trigger even for quick questions like "what blue do we use" or "what's the
+  hover color for buttons."
   Do NOT trigger for written content only (use brand-messaging skill) — this skill
   is for visual output and design token reference.
 ---
 
 # social.plus Design System
 
-This skill provides the full social.plus design system reference. The source of truth lives on GitHub and must be fetched fresh every time.
+This skill provides the social.plus design system reference: the live website's tokens, foundations and section set in `design-system/` of the repo (one structure, captured from the site). The source of truth lives on GitHub and must be fetched fresh every time.
 
 ## How to fetch reference files
 
@@ -117,7 +120,7 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 2. Fetch `design-system/brain.md` (the design system router).
 
-3. Follow the design system router's instructions — it tells you which additional files to fetch based on the user's task.
+3. Follow the design system router's instructions — it tells you which files to fetch for the task: `design-system/tokens.css` and the foundations for any visual output, plus `design-system/sections/README.md`, the recipes and the `section.md` and `source.html` of each section for website pages. Read `design-system/README.md` when you need the structure.
 
 4. If the output includes any text content (headings, labels, CTAs, descriptions), also fetch `messaging/brain.md`.
 

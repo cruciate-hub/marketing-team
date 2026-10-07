@@ -7,7 +7,7 @@ The minimum on-brand kit for social.plus — two skills only. Install this if yo
 | Skill | Triggers on | What it does |
 |---|---|---|
 | [brand-messaging](./skills/brand-messaging/SKILL.md) | "review this for brand voice", "is this on-brand?", "write copy for…" | Applies social.plus voice, terminology, tone, and approved phrasings. Catches things like accidentally capitalizing "social.plus" or using forbidden terms. |
-| [design-system](./skills/design-system/SKILL.md) | "what blue do we use?", "give me the heading sizes", any CSS/visual question | Returns the canonical color palette, type scale, spacing tokens, button states, etc. Don't approximate — get the real values. |
+| [design-system](./skills/design-system/SKILL.md) | "what blue do we use?", "give me the heading sizes", any CSS/visual question | Returns the live website's tokens, the foundations (colors, type scale, spacing, buttons, logo, icons, and more) and the section set for pages. Don't approximate — get the real values. |
 
 Both skills above are **symlinks** in the source repo, pointing to the canonical SKILL.md files in the sibling `marketing-team` plugin — one source of truth for skill logic. At runtime, the skills fetch their reference content (brand voice, terminology, design tokens) directly from this GitHub repo on every session, so both plugins always show the same up-to-date content.
 

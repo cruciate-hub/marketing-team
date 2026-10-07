@@ -14,7 +14,7 @@ Most tasks need references from more than one domain. Use this table to determin
 | Visual output (HTML, CSS, components, decks) | `messaging/brain.md` + `design-system/brain.md` |
 | Blog posts for social.plus/blog (any topic — product features, industry trends, opinion, listicles) | `marketing-team/skills/blog-seo-content/SKILL.md` + `messaging/brain.md` |
 | Customer stories / case studies | `marketing-team/skills/case-study/SKILL.md` + `messaging/brain.md` |
-| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/website.md`, `design-system/colors-palette.md`, `design-system/colors-usage.md`, and all email template files automatically. |
+| HTML emails / newsletters | **Use the newsletters skill** (see Available Skills below). It loads `messaging/brain.md`, `design-system/tokens.css`, `design-system/foundations/colors/foundation.md`, `design-system/foundations/accessibility/foundation.md`, and all email template files automatically. |
 | UI copy (buttons, errors, tooltips, empty states) | `messaging/brain.md` — brain.md routes to `ui-micro-copy.md` |
 | Website audit or content analysis (what pages say, messaging consistency, content gaps) | `marketing-team/skills/site-intelligence/SKILL.md` + `messaging/brain.md` |
 | Competitive content (comparisons, differentiators) | `messaging/brain.md` — ensure both `positioning.md` and `value-story.md` are loaded |
@@ -59,7 +59,7 @@ When two reference files give guidance on the same topic, the more specific file
 
 - **UI copy tasks:** `ui-micro-copy.md` overrides `tone.md` for voice, style, and capitalisation.
 - **Email tasks:** `emails/emails.md` overrides `tone.md` for email-specific structure, subject lines, and CTAs.
-- **Design tokens always win.** If `colors-palette.md` or `colors-usage.md` specifies a hex value, use it exactly — never approximate or substitute.
+- **Design tokens always win.** If `design-system/tokens.css` (or a `foundation.md`) specifies a value, use it exactly — never approximate or substitute.
 - **Terminology is always law.** `terminology.md` is never overridden by any file. Approved terms and forbidden terms apply everywhere, in every context, no exceptions.
 - **Dedicated skills win over brand-messaging.** When a request matches both `brand-messaging` and a more specific skill — `blog-seo-content`, `aeo-content`, `press-release`, `case-study`, `newsletters`, or `legal-docs-formatter` — route to the dedicated skill. brand-messaging is the fallback for content types without a dedicated skill.
 
