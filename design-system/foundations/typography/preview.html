@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Typography · social.plus website foundations</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      h1 {
+        margin: 0.67em 0;
+        font-size: 2em;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h1 {
+        margin-top: 20px;
+        font-size: 38px;
+        line-height: 44px;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      h4 {
+        margin-top: 10px;
+        font-size: 18px;
+        line-height: 24px;
+      }
+      h5 {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h6 {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 18px;
+      }
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h1 {
+        z-index: 2;
+        background-image: radial-gradient(
+          circle farthest-corner at 50% 50%,
+          white 33%,
+          var(--text--text-color-grey-lighter)
+        );
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h4 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h4-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h5 {
+        color: var(--main--white);
+        font-size: var(--_typography---h5-font-size);
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h6 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h6-font-size);
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .styleguide_right {
+        border-top: 0.0625rem solid var(--border--border-dark);
+        flex-direction: column;
+        align-items: flex-start;
+        width: 75%;
+        padding: 4.5em;
+        display: flex;
+        position: relative;
+      }
+      @media screen and (max-width: 767px) {
+        h1 {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        h4 {
+          font-size: 1.4rem;
+          line-height: 1.1;
+        }
+        h5,
+        h6 {
+          line-height: 1.1;
+        }
+        .h2-font-size {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+        .h4-font-size {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .heading-xsmall {
+          line-height: 1.1;
+        }
+        .heading-small {
+          font-size: 1.125rem;
+          line-height: 1.1;
+        }
+        .h3-font-size {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .h5-font-size {
+          font-size: 1.4rem;
+          line-height: 1.1;
+        }
+        .h6-font-size {
+          font-size: 1.25rem;
+          line-height: 1.1;
+        }
+        .h1-font-size,
+        .blog-title {
+          font-size: 2.25rem;
+          line-height: 1.1;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        h1 {
+          margin-bottom: 0.75rem;
+        }
+        .styleguide_right {
+          width: 100%;
+          padding: 1.5em;
+        }
+        blockquote {
+          font-size: 1.4rem;
+        }
+        .enlarged-paragraph {
+          font-size: 1.1rem;
+        }
+        .rich-text {
+          font-size: 1rem;
+        }
+        .rich-text h2 {
+          font-size: 1.8rem;
+        }
+        .rich-text h3 {
+          font-size: 1.4rem;
+        }
+        .ps-rich-text li,
+        .ps-static {
+          background-position: 4%;
+          padding-left: 17%;
+        }
+        .ps-tag_add-on {
+          display: none;
+        }
+        .product-update_rich-text h2 {
+          font-size: 1.8rem;
+        }
+        .product-update_rich-text h3 {
+          font-size: 1.4rem;
+        }
+        .text-align-center {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+      .h2-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .h4-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h4-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .heading-xsmall {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .heading-small {
+        color: var(--main--white);
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .h3-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .h5-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h5-font-size);
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .h6-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h6-font-size);
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .h1-font-size {
+        font-size: var(--_typography---h1-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      b,
+      strong {
+        font-weight: 700;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      blockquote {
+        border-left: 5px solid #e2e2e2;
+        margin: 0 0 10px;
+        padding: 10px 20px;
+        font-size: 18px;
+        line-height: 22px;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      strong {
+        font-weight: 600;
+      }
+      blockquote {
+        border-style: solid;
+        border-width: 0 0 0 0.0625rem;
+        border-color: black black black var(--main--white);
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .enlarged-paragraph {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      sub,
+      sup {
+        vertical-align: baseline;
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+      }
+      sup {
+        top: -0.5em;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      ul,
+      ol {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 40px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      .w-richtext ol,
+      .w-richtext ul {
+        overflow: hidden;
+      }
+      ul {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      ol {
+        margin-top: 0;
+        margin-bottom: 0.625rem;
+      }
+      li {
+        -webkit-text-stroke-color: var(--text--text-color-grey-dark);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 6px;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .superscript {
+        color: var(--gradient--medium-blue);
+        letter-spacing: 0.044rem;
+        -webkit-text-stroke-color: var(--gradient--medium-blue);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1rem;
+      }
+      .list {
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      .list-item {
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 0.25rem;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+      }
+      .list-item.is-checkmark {
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66e2765d540e1939a89dbcbe_checkmark-circle-grey.svg);
+      }
+      .text-size-tiny {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .rich-text {
+        font-size: 1.2rem;
+      }
+      .rich-text li {
+        list-style-type: disc;
+      }
+      .rich-text ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.25rem;
+        overflow: visible;
+      }
+      .rich-text ul {
+        list-style-type: none;
+      }
+      .rich-text a {
+        color: var(--gradient--medium-blue);
+        font-weight: 500;
+      }
+      .rich-text a:hover {
+        text-decoration: underline;
+      }
+      .rich-text p {
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+      .rich-text h2 {
+        margin-top: 3rem;
+        margin-bottom: 0.5rem;
+        font-size: 2.2rem;
+        font-weight: 700;
+      }
+      .rich-text h3 {
+        margin-top: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .rich-text h4 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.25rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .rich-text h6,
+      .rich-text h5 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.25rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .ps-rich-text {
+        border: 1px solid var(--border--border-hover);
+        border-radius: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .ps-rich-text li {
+        border-bottom: 0.0625rem solid var(--border--border-hover);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037d4ee782748b7464dcc9_checkmark-circle.svg);
+        background-position: 2%;
+        background-size: 1.5rem 1.5rem;
+        margin-bottom: 0;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 8%;
+        font-size: 1rem;
+      }
+      .ps-rich-text ul {
+        margin-bottom: 0;
+      }
+      .ps-static {
+        border-bottom: 0.0625rem solid var(--border--border-hover);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66e2765d540e1939a89dbcbe_checkmark-circle-grey.svg);
+        background-position: 2%;
+        background-repeat: no-repeat;
+        background-size: 1.5rem 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 8%;
+        font-size: 1rem;
+      }
+      .ps-static-parent {
+        border-style: solid;
+        border-width: 0.0625rem 0.0625rem 0;
+        border-color: var(--border--border-hover);
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      .ps-static-child {
+        position: relative;
+      }
+      .ps-tag_add-on {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        border-radius: 1rem;
+        padding: 0.4rem 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.2;
+        display: inline-block;
+        position: absolute;
+        inset: 0.85rem 1rem auto auto;
+      }
+      .product-update_rich-text {
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 1.1rem;
+      }
+      .product-update_rich-text h2 {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+      .product-update_rich-text h3 {
+        margin-top: 1rem;
+        font-size: 1.7rem;
+        font-weight: 700;
+      }
+      .product-update_rich-text h4 {
+        font-weight: 700;
+      }
+      .product-update_rich-text a {
+        font-weight: 500;
+      }
+      .product-update_rich-text a:hover {
+        text-decoration: underline;
+      }
+      .product-update_rich-text p {
+        line-height: 1.8;
+      }
+      .product-update_rich-text h1 {
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+      @media screen and (max-width: 991px) {
+        .ps-rich-text li,
+        .ps-static {
+          padding-left: 12%;
+        }
+      }
+      .text-weight-bold {
+        font-weight: 700;
+      }
+      .text-weight-medium {
+        font-weight: 500;
+      }
+      .text-align-center {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .text-align-left {
+        text-align: left;
+      }
+      .full-width {
+        width: 100%;
+      }
+      .text-color-grey-medium {
+        color: var(--text--text-color-grey-medium);
+      }
+      .text-color-grey-light {
+        color: var(--text--text-color-grey-light);
+      }
+      .text-color-white {
+        color: var(--main--white);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+      .bg-color_grey {
+        background-color: var(--social--grey-background);
+      }
+      .text-color-grey-dark {
+        color: var(--text--text-color-grey-dark);
+      }
+      .text-color-dark {
+        color: var(--text--text-color-dark);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+
+      /* preview chrome (not part of the site) */
+      body {
+        margin: 0;
+        background: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+        font-family: var(--font--figtree);
+      }
+      .fx-page {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 2.5rem 5rem;
+      }
+      .fx-sample .add-ons_image-wrapper {
+        display: none;
+      } /* preview: the accordion item's image column is shown in section 17 */
+      .fx-head {
+        border-bottom: 1px solid var(--border--border-dark);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+      .fx-head h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--main--white);
+        color: var(--main--white);
+        letter-spacing: 0;
+      }
+      .fx-head p {
+        margin: 0;
+        color: var(--text--text-color-grey-light);
+        font-size: 0.95rem;
+        max-width: 60rem;
+      }
+      .fx-block {
+        margin: 0 0 2.5rem;
+      }
+      .fx-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text--text-color-grey-medium);
+        margin: 0 0 0.5rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-note {
+        font-size: 0.875rem;
+        color: var(--text--text-color-grey-light);
+        margin: 0 0 1rem;
+        max-width: 60rem;
+      }
+      .fx-sample {
+        border: 1px dashed var(--border--border-hover);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        overflow: hidden;
+      }
+      .fx-sample.fx-tight {
+        padding: 1rem;
+      }
+      .fx-sample.fx-light {
+        background: var(--main--white);
+        color: var(--text--text-color-dark);
+      }
+      .fx-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        align-items: center;
+      }
+      .fx-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .fx-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+      .fx-cap {
+        font-size: 0.75rem;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .fx-measure {
+        display: block;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        margin: 1.25rem 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-measure:first-child {
+        margin-top: 0;
+      }
+      .fx-swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        gap: 1rem;
+      }
+      .fx-swatch {
+        border: 1px solid var(--border--border-dark);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background: var(--social--dark-gray-background);
+      }
+      .fx-swatch-color {
+        height: 4.5rem;
+        border-bottom: 1px solid var(--border--border-dark);
+      }
+      .fx-swatch-text {
+        padding: 0.6rem 0.75rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+      .fx-swatch-text code {
+        display: block;
+        color: var(--main--white);
+        font-size: 0.78rem;
+        word-break: break-all;
+      }
+      .fx-swatch-text .fx-val {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-swatch-text .fx-use {
+        color: var(--text--text-color-grey-medium);
+      }
+      .fx-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-max-m {
+        max-width: 47.5rem;
+      }
+      .fx-box {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+      }
+      .fx-box-inner {
+        background: var(--social--dark-gray-background);
+        border: 1px solid var(--border--border-hover);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-container-demo {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table {
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 60rem;
+      }
+      .fx-table th,
+      .fx-table td {
+        text-align: left;
+        padding: 0.4rem 0.6rem;
+        border-bottom: 1px solid var(--border--border-dark);
+        vertical-align: top;
+      }
+      .fx-table th {
+        color: var(--text--text-color-grey-medium);
+        font-weight: 600;
+      }
+      .fx-table td {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table code {
+        color: var(--main--white);
+      }
+      @media (max-width: 991px) {
+        .fx-grid-3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 767px) {
+        .fx-page {
+          padding: 1.5rem 1rem 3rem;
+        }
+        .fx-grid-3,
+        .fx-grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .fx-sample {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Foundation preview built 2026-10-07 by design-system/capture/foundations.mjs from live site snippets (see foundation.md). Images are the site's own CDN files. -->
+    <main class="fx-page">
+      <header class="fx-head">
+        <h1>Typography</h1>
+        <p>
+          Figtree (variable font, 300 to 900). Samples are the style guide's own markup; the grey labels show the
+          computed size, line height, weight and letter spacing measured at 1440 and at 390 px wide.
+        </p>
+      </header>
+      <section class="fx-block">
+        <h2 class="fx-label">Heading tags h1 to h6</h2>
+        <p class="fx-note">
+          Sizes come from the six typography tokens (clamp() for h1 to h4). h1 carries a radial gradient text fill.
+          Note: h1 and h2 are the same size on desktop.
+        </p>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <div>H1</div>
+              <span class="fx-measure"
+                >h1 — 1440: 52.8px / 63.4px · 600 · -1.32px · rgb(255, 255, 255) — 390: 36px / 39.6px · 600 · -0.90px ·
+                rgb(255, 255, 255)</span
+              >
+              <h1>Sample text is being used</h1>
+              <div>H2</div>
+              <span class="fx-measure"
+                >h2 — 1440: 52px / 65px · 600 · -1.30px · rgb(255, 255, 255) — 390: 30.4px / 33.4px · 600 · -0.76px ·
+                rgb(255, 255, 255)</span
+              >
+              <h2>Sample text is being used as a placeholder</h2>
+              <div>H3</div>
+              <span class="fx-measure"
+                >h3 — 1440: 36px / 45px · 600 · -0.90px · rgb(255, 255, 255) — 390: 25.6px / 28.2px · 600 · -0.64px ·
+                rgb(255, 255, 255)</span
+              >
+              <h3>Sample text helps you understand how real text may look on your website</h3>
+              <div>H4</div>
+              <span class="fx-measure"
+                >h4 — 1440: 28px / 35px · 600 · -0.70px · rgb(255, 255, 255) — 390: 22.4px / 24.6px · 600 · -0.56px ·
+                rgb(255, 255, 255)</span
+              >
+              <h4>Sample text is being used as a placeholder for real text that is normally present</h4>
+              <div>H5</div>
+              <span class="fx-measure"
+                >h5 — 1440: 20px / 25px · 600 · 0 · rgb(255, 255, 255) — 390: 20px / 22px · 600 · 0 · rgb(255, 255,
+                255)</span
+              >
+              <h5>
+                Sample text is being used as a placeholder for real text that is normally present. Sample text helps you
+                understand.
+              </h5>
+              <div>H6</div>
+              <span class="fx-measure"
+                >h6 — 1440: 18px / 22.5px · 600 · 0 · rgb(255, 255, 255) — 390: 18px / 19.8px · 600 · 0 · rgb(255, 255,
+                255)</span
+              >
+              <h6>
+                Sample text is being used as a placeholder for real text that is normally present. Sample text helps you
+                understand.
+              </h6>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Heading classes .h1-font-size to .h6-font-size, .heading-small, .heading-xsmall</h2>
+        <p class="fx-note">
+          Same tokens on a div. The mobile sizes of the classes differ from the tags (see foundation.md).
+        </p>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <div>h1-font-size</div>
+              <span class="fx-measure"
+                >.h1-font-size — 1440: 52.8px / 63.4px · 600 · -1.32px · rgb(255, 255, 255) — 390: 44px / 52.8px · 600 ·
+                -1.10px · rgb(255, 255, 255)</span
+              >
+              <h1 class="h1-font-size">h1-font-size</h1>
+              <div class="h1-font-size">h1-font-size</div>
+              <div>h2-font-size</div>
+              <span class="fx-measure"
+                >.h2-font-size — 1440: 52px / 65px · 600 · -1.30px · rgb(255, 255, 255) — 390: 36px / 45px · 600 ·
+                -0.90px · rgb(255, 255, 255)</span
+              >
+              <h2 class="h2-font-size">h2-font-size</h2>
+              <div class="h2-font-size">h2-font-size</div>
+              <div>h3-font-size</div>
+              <span class="fx-measure"
+                >.h3-font-size — 1440: 36px / 45px · 600 · -0.90px · rgb(255, 255, 255) — 390: 28px / 35px · 600 ·
+                -0.70px · rgb(255, 255, 255)</span
+              >
+              <h3 class="h3-font-size">h3-font-size</h3>
+              <div class="h3-font-size">h3-font-size</div>
+              <div>heading-medium - 2REM / 32PX</div>
+              <span class="fx-measure"
+                >.h4-font-size — 1440: 28px / 35px · 600 · -0.70px · rgb(255, 255, 255) — 390: 24px / 30px · 600 ·
+                -0.60px · rgb(255, 255, 255)</span
+              >
+              <h4 class="h4-font-size">h4-font-size</h4>
+              <div class="h4-font-size">h4-font-size</div>
+              <div>h5-font-size</div>
+              <span class="fx-measure"
+                >.h5-font-size — 1440: 20px / 25px · 600 · 0 · rgb(255, 255, 255) — 390: same</span
+              >
+              <h5 class="h5-font-size">h5-font-size</h5>
+              <div class="h5-font-size">h5-font-size</div>
+              <div>h6-font-size</div>
+              <span class="fx-measure"
+                >.h6-font-size — 1440: 18px / 22.5px · 600 · 0 · rgb(255, 255, 255) — 390: same</span
+              >
+              <h6 class="h6-font-size">h6-font-size</h6>
+              <div class="h6-font-size">h6-font-size</div>
+              <div>heading-small - 1.25REM / 20PX</div>
+              <span class="fx-measure"
+                >.heading-small — 1440: 20px / 25px · 600 · 0 · rgb(255, 255, 255) — 390: same</span
+              >
+              <h6 class="heading-small">heading-small</h6>
+              <div class="heading-small">heading-xsmall</div>
+              <div>heading-xsmall - 0.875REM / 14PX</div>
+              <span class="fx-measure"
+                >.heading-xsmall — 1440: 14.4px / 18px · 600 · 0 · rgb(255, 255, 255) — 390: same</span
+              >
+              <h6 class="heading-xsmall">heading-xsmall</h6>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Body, paragraph, link, blockquote, lists</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <span class="fx-measure">p — 1440: 17.6px / 28.2px · 400 · 0 · rgb(179, 179, 179) — 390: same</span>
+              <p>
+                <strong>HTML tag All Paragraphs</strong><br />Sample text is being used as a placeholder for real text
+                that is normally present. Sample text helps you understand how real text may look on your website.
+                Sample text is being used as a placeholder for real text.<br />
+              </p>
+              <span class="fx-measure"
+                >.enlarged-paragraph — 1440: 19.2px / 30.7px · 400 · 0 · rgb(179, 179, 179) — 390: same</span
+              >
+              <p class="enlarged-paragraph">
+                <strong>enlarged-paragraph</strong><br />Sample text is being used as a placeholder for real text that
+                is normally present. Sample text helps you understand how real text may look on your website. Sample
+                text is being used as a placeholder for real text.<br />
+              </p>
+              <span class="fx-measure">a — 1440: 17.6px / 28.2px · 400 · 0 · rgb(55, 105, 236) — 390: same</span
+              ><a href="#">All Links</a
+              ><span class="fx-measure">blockquote — 1440: 24px / 30px · 600 · 0 · rgb(255, 255, 255) — 390: same</span>
+              <blockquote>
+                Sample text is being used as a placeholder for real text that is normally present. Sample text helps you
+                understand how real text may look on your website. Sample text is being used as a placeholder for real
+                text.
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Text classes: .enlarged-paragraph, .text-size-tiny, .superscript and more</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <p>
+                <strong>Body Main Class 1.1REM<br /></strong>Sample text is being used as a placeholder for real text
+                that is normally present. Sample text helps you understand how real text may look on your website.
+                Sample text is being used as a placeholder for real text.
+              </p>
+              <span class="fx-measure"
+                >.text-size-tiny — 1440: 14.4px / 20.2px · 400 · 0 · rgb(179, 179, 179) — 390: same</span
+              >
+              <p class="text-size-tiny">
+                <strong>text-size-tiny</strong><br />Sample text is being used as a placeholder for real text that is
+                normally present. Sample text helps you understand how real text may look on your website. Sample text
+                is being used as a placeholder for real text.
+              </p>
+              <div>
+                <span class="fx-measure"
+                  >.superscript — 1440: 14px / 16px · 600 · 0.70px · rgb(55, 105, 236) — 390: same</span
+                >
+                <p class="superscript">Powering social experiences for 10M+ end users</p>
+                <h4>List</h4>
+                <ul role="list">
+                  <span class="fx-measure">li — 1440: 17.6px / 28.2px · 400 · 0 · rgb(179, 179, 179) — 390: same</span>
+                  <li>Sample text is being used as a placeholder for real text that is normally present.</li>
+                  <li>Sample text is being used as a placeholder for real text that is normally present.</li>
+                  <li>Sample text is being used as a placeholder for real text that is normally present.</li>
+                </ul>
+                <h4>List</h4>
+                <ul role="list" class="list">
+                  <li class="list-item">Easy &amp; quick integration</li>
+                  <li class="list-item">Activity &amp; social feeds</li>
+                  <li class="list-item">Profiles that users can follow</li>
+                  <li class="list-item">Groups &amp; forums</li>
+                </ul>
+              </div>
+              <div class="hide w-embed">
+                <style>
+                  .w-richtext ol li {
+                    background-image: none;
+                    padding-left: 0;
+                  }
+                  @media screen and (max-width: 25em) {
+                    .blog_featured-tags-wrapper > :nth-child(2) {
+                      display: none;
+                    }
+                  }
+                  .w-richtext-figure-type-video,
+                  .w-richtext-figure-type-video > div {
+                    border-radius: 1rem !important;
+                    overflow: hidden !important;
+                  }
+                  .w-richtext-figure-type-video iframe {
+                    display: block;
+                  }
+                </style>
+              </div>
+              <div class="rich-text w-richtext">
+                <h1>H1 - .rich-text</h1>
+                <p>
+                  The rich <a href="https://www.social.plus/chat/sdk">chat sdk</a> allows you to create and format
+                  headings, paragraphs, blockquotes.
+                </p>
+                <p>Orderd list <strong>(HTML&nbsp;code below!)</strong></p>
+                <ol start="" role="list">
+                  <li>item</li>
+                  <li>item</li>
+                  <li>item</li>
+                </ol>
+                <p>Unordered list</p>
+                <ul role="list">
+                  <li>dfsfdsfdsdsfdfs</li>
+                  <li>ghfhfghgf</li>
+                </ul>
+                <h2>H2 - The standard Lorem</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+                <h2>H2 - Finibus Bonorum et Malorum</h2>
+                <h3>H3 - Finibus Bonorum et Malorum</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+                <h4>H4 - Finibus Bonorum et Malorum Finibus Bonorum et Malorum</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+                <h5>H5 - Finibus Bonorum et Malorum Finibus Bonorum et Malorum</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+                <h6>H6 - Finibus Bonorum et Malorum Finibus Bonorum et Malorum</h6>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam.
+                </p>
+              </div>
+              <a href="#">Text Link</a>
+              <div class="ps-rich-text w-richtext">
+                <ul role="list">
+                  <li>
+                    <strong>Create channel page</strong><br />Users can create 1:1 channels, public group chat channels,
+                    and add or edit avatars and members in group channels.
+                  </li>
+                  <li>
+                    <strong>Channel list page</strong><br />Users can view a list of chat channels and see unread
+                    counts.
+                  </li>
+                  <li>
+                    <strong>Message page</strong><br />Users can view messages, send text, image, and voice messages,
+                    and report other users' messages.
+                  </li>
+                </ul>
+              </div>
+              <div class="ps-static-parent">
+                <div class="ps-static-child">
+                  <div class="ps-static"><strong>UI customization</strong></div>
+                  <div class="ps-tag_add-on">Add-on</div>
+                </div>
+                <div class="ps-static-child">
+                  <div class="ps-static"><strong>Use case customization</strong></div>
+                  <div class="ps-tag_add-on">Add-on</div>
+                </div>
+                <div class="ps-static-child">
+                  <div class="ps-static"><strong>Third-party integrations</strong></div>
+                  <div class="ps-tag_add-on">Add-on</div>
+                </div>
+              </div>
+              <div class="product-update_rich-text w-richtext">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <h4>Heading 4</h4>
+                <h5>Heading 5</h5>
+                <h6>Heading 6</h6>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.
+                </p>
+                <blockquote>Block quote</blockquote>
+                <p>Ordered list</p>
+                <ol role="list">
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                  <li>Item 3</li>
+                </ol>
+                <p>Unordered list</p>
+                <ul role="list">
+                  <li class="list-item">Item A</li>
+                  <li class="list-item is-checkmark">Item B</li>
+                  <li class="list-item">Item C</li>
+                </ul>
+                <p><a href="https://university.webflow.com/lesson/add-and-nest-text-links-in-webflow">Text link</a></p>
+                <p><strong>Bold text</strong></p>
+                <p><em>Emphasis</em></p>
+                <p><sup>Superscript</sup></p>
+                <p><sub>Subscript</sub></p>
+              </div>
+              <div class="w-richtext">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <h4>Heading 4</h4>
+                <h5>Heading 5</h5>
+                <h6>Heading 6</h6>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur.
+                </p>
+                <blockquote>Block quote</blockquote>
+                <p>Ordered list</p>
+                <ol role="list">
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                  <li>Item 3</li>
+                </ol>
+                <p>Unordered list</p>
+                <ul role="list">
+                  <li>Item A</li>
+                  <li>Item B</li>
+                  <li>Item C</li>
+                </ul>
+                <p><a href="https://university.webflow.com/lesson/add-and-nest-text-links-in-webflow">Text link</a></p>
+                <p><strong>Bold text</strong></p>
+                <p><em>Emphasis</em></p>
+                <p><sup>Superscript</sup></p>
+                <p><sub>Subscript</sub></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Weights: .text-weight-medium, .text-weight-bold</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <div class="text-weight-medium">text-weight-medium</div>
+              <div class="text-weight-bold">text-weight-bold</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Alignment: .text-align-left, .text-align-center</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div class="full-width">
+              <div class="text-align-left">text-align-left</div>
+              <div class="text-align-center">text-align-center</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Text colours: .text-color-dark, -grey-dark, -grey-medium, -grey-light, -white</h2>
+        <div class="fx-sample">
+          <div class="styleguide_right">
+            <div>
+              <div class="bg-color_grey"><div class="text-color-dark">text-color-dark</div></div>
+              <div class="text-color-grey-dark">text-color-grey-dark</div>
+              <div class="text-color-grey-medium">text-color-grey-medium</div>
+              <div class="text-color-grey-light">text-color-grey-light</div>
+              <div class="text-color-white">text-color-white</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

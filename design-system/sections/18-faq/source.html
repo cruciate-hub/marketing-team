@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>18 · FAQ accordion · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.6ac30c228a3f1a4ad38a4cf7.7003fb5fe.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      .container-medium {
+        width: 100%;
+        max-width: 47.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .section.padding_y.background-color_dark.c-radial-gradient {
+        background-image: radial-gradient(circle farthest-corner at 50% 0%, #141414, var(--social--dark));
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .h3-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .margin-top_m {
+        margin-top: 1.5rem;
+      }
+      .accordion-icon {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        position: relative;
+      }
+      .faq-icon_content {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      .accodrion-icon {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .accordion_top {
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.75rem;
+        padding-bottom: 0.5rem;
+        display: flex;
+      }
+      .accordion_item {
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        flex-direction: column;
+        width: 100%;
+        display: flex;
+      }
+      .accordion_bottom {
+        height: auto;
+        overflow: hidden;
+      }
+      .container-heading {
+        z-index: 3;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: relative;
+      }
+      .faq-question {
+        color: var(--main--white);
+        margin-bottom: 0.25rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .h3-font-size {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .faq-question {
+          line-height: 1.2;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .margin-top_m {
+          align-items: center;
+        }
+      }
+      /* copied from the page's own <style> embeds outside the section, 2026-10-07 (rules that match this section) */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .rich-text,
+      .w-richtext {
+        overflow-wrap: break-word;
+      }
+      ::-moz-selection {
+        /* Firefox */
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      ::selection {
+        color: #ffffff;
+        background: #3b41ec;
+      }
+      /* static state, added by the capture */
+      /* static state: the live page opens an answer on click; here the first answer is open and the others closed */
+      .accordion_item:not(:first-child) .accordion_bottom {
+        height: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 18 FAQ accordion. Captured 2026-10-07 from https://www.social.plus/vs/circle by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- accordion: clicking a question opens its answer (Webflow interaction animates height); all answers are in the HTML, the first one is open. -->
+    <section class="section padding_y background-color_dark c-radial-gradient">
+      <div class="page-padding">
+        <div class="container-medium">
+          <div class="container-heading margin-top_m"><h2 class="h3-font-size">FAQ</h2></div>
+          <div class="w-dyn-list">
+            <div itemscope="itemscope" itemtype="https://schema.org/FAQPage" role="list" class="w-dyn-items">
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">What is the difference between social.plus and Circle?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      Circle is a community platform that gives you a branded site with discussions, events, courses and
+                      payments. social.plus is infrastructure you build into your own app: SDKs, fully customizable
+                      UIKit components and APIs for feeds, groups and forums, chat, live streaming, monetization and
+                      moderation. The core difference is where the experience lives. With Circle, your community is a
+                      separate destination. With social.plus, social and community features are embedded inside your
+                      product, under your brand.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">What does social.plus offer that Circle doesn't?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      social.plus gives your team native client SDKs for iOS, Android, TypeScript, Flutter and React
+                      Native, with fully customizable, white-label UIKit components across iOS, Android, Web (React),
+                      React Native and Flutter, so every social feature lives inside your app and matches your product's
+                      look and feel. social.plus also includes a commerce layer with product catalogues, product tagging
+                      across posts and live streams, and sponsored content placement for native ads in feeds, comments
+                      and stories. Short-form video clips and stories are built in. And your team gets comprehensive
+                      real-time analytics and insights with sentiment analysis and natural-language querying through
+                      Agentry, on data you fully own. Each social.plus application runs in the US, EU or Singapore
+                      region, chosen when you create it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">What does Circle offer that social.plus doesn't?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      Circle offers built-in courses, paid memberships and subscriptions, email broadcasts and
+                      automations, a hosted website, workflows and gamification. social.plus does not offer these. With
+                      social.plus, billing, email and course delivery stay in the systems you already use, and private
+                      groups and forums, roles and user tags can control who sees what content.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">
+                    Can I use just one part, or do I need the whole platform?
+                  </h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      You can use the parts you need. social.plus is modular: you can start with chat alone, add feeds
+                      or groups and forums later, and expand into monetization or analytics when your product is ready.
+                      The documentation includes setup paths for specific use cases like direct messages, group chat and
+                      live chat. You can use the UIKit components or build your own interface on the SDKs and APIs.
+                      Circle bundles its features by pricing tier, with more capabilities available on higher plans.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">Which platforms do the SDKs support?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      social.plus has client SDKs for iOS (Swift), Android (Kotlin and Java), TypeScript/JavaScript and
+                      Flutter. React Native has its own package built on the TypeScript SDK, and the TypeScript SDK
+                      works with React, Next.js (client-side), Vue, Angular and Svelte. UIKit is available for iOS,
+                      Android, Web (React), React Native and Flutter, and server-to-server APIs cover administration,
+                      moderation and automation. Feature availability differs by platform, so check the Feature Matrix
+                      for specifics. Circle offers an Admin API and a Headless API with a server-side auth SDK, suited
+                      for teams extending the Circle platform rather than building a custom front end.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">Who owns the data, and where is it stored?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      You own the data your app generates through social.plus. Your app identifies each user with its
+                      own user ID, and social.plus recommends keeping credentials, email addresses and private profile
+                      data in your own system while social.plus stores social profile and moderation fields. Each
+                      application runs in the US, EU or Singapore region, chosen when you create it. A data export API
+                      delivers reports of recent data, and webhooks (in private beta) send events to your server. Circle
+                      hosts data in the US and offers member exports and API access for retrieving community content.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">How does moderation compare?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      social.plus includes user reports, a moderation feed in the Console for reviewing flagged content,
+                      blocklists and allowlists, PII detection, bans, mutes and custom roles. AI moderation covers
+                      images for pre-moderation and text, images and video for post-moderation, and live streams can be
+                      checked by AI while they run. Circle includes moderation tools across its plans, with AI-powered
+                      moderation available on higher tiers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">
+                    How would we move a community from Circle to social.plus?
+                  </h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      Circle supports member exports and API access for community content. On social.plus, the
+                      server-to-server APIs handle data import and administration. Because your app supplies the user
+                      ID, user profiles attach to the accounts your users already have, so there is no separate account
+                      migration step. Talk to our team to plan a migration path.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                itemtype="https://schema.org/Question"
+                itemscope="itemscope"
+                itemprop="mainEntity"
+                role="listitem"
+                class="accordion_item w-dyn-item"
+              >
+                <div class="accordion_top">
+                  <h3 itemprop="name" class="faq-question">What is Vise?</h3>
+                  <div class="accordion-icon">
+                    <div class="faq-icon_content">
+                      <div class="accodrion-icon w-embed">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true"
+                          role="img"
+                          width="1em"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  itemtype="https://schema.org/Answer"
+                  itemscope="itemscope"
+                  itemprop="acceptedAnswer"
+                  class="accordion_bottom"
+                >
+                  <div itemprop="text" class="w-richtext">
+                    <p>
+                      Vise is a local CLI and installable coding-agent skill that gives AI agents a repeatable workflow
+                      for social.plus SDK integrations. Developers using Claude Code, Cursor, Copilot, Codex, or VS Code
+                      install Vise, ask for a social.plus feature, and let Vise drive the loop. Vise clarifies the ask,
+                      offers product experience candidates, grounds the plan in current SDK facts, checks the
+                      implementation against 400+ platform-specific rules, and produces runtime evidence when requested.
+                      Vise runs on the developer's machine and never uploads source code, file contents, or queries.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,2217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>18 · FAQ accordion (border top) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      b,
+      strong {
+        font-weight: 700;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      pre {
+        overflow: auto;
+      }
+      code,
+      kbd,
+      pre,
+      samp {
+        font-family: monospace;
+        font-size: 1em;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      h3 {
+        margin-top: 20px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      ul,
+      ol {
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-left: 40px;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      .w-richtext:before,
+      .w-richtext:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-richtext:after {
+        clear: both;
+      }
+      .w-richtext ol,
+      .w-richtext ul {
+        overflow: hidden;
+      }
+      /* copied from social-plus.webflow.6a0b06b5103959a1312db057.5d04c2dab.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      h3 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      ul {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style-type: none;
+      }
+      li {
+        -webkit-text-stroke-color: var(--text--text-color-grey-dark);
+        background-image: url(https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/67037da5f3d399bda4c28aca_5134387816dd015bbdc3051023e12907_list-item__icon-social.svg);
+        background-position: 0 6px;
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+      strong {
+        font-weight: 600;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .container-medium {
+        width: 100%;
+        max-width: 47.5rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hide {
+        pointer-events: none;
+        display: none;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .section.padding_y.background-color_dark.border-top {
+        border-top: 1px solid var(--border--border-dark);
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .h3-font-size {
+        color: var(--main--white);
+        font-size: var(--_typography---h3-font-size);
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .text-color-white {
+        color: var(--main--white);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+      .margin-bottom_m {
+        margin-bottom: 1.5rem;
+      }
+      .accordion-icon {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        margin-right: 0.5rem;
+        position: relative;
+      }
+      .faq-icon_content {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      .accodrion-icon {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .accordion_top {
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.75rem;
+        padding-bottom: 0.5rem;
+        display: flex;
+      }
+      .accordion_item {
+        border-bottom: 0.0625rem solid var(--border--border-dark);
+        flex-direction: column;
+        width: 100%;
+        display: flex;
+      }
+      .accordion_bottom {
+        height: auto;
+        overflow: hidden;
+      }
+      .z-index_3 {
+        z-index: 3;
+        position: relative;
+      }
+      .container-heading {
+        z-index: 3;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        position: relative;
+      }
+      .faq-question {
+        color: var(--main--white);
+        margin-bottom: 0.25rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-button.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .cta-button.c-grey:active {
+        color: var(--main--white);
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-border_rotate.c-white {
+        min-height: 16rem;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      .cta-button_bg.c-white {
+        background-color: var(--social--dark-gray-background);
+        background-image: none;
+      }
+      .faq-long_wrapper {
+        width: 100%;
+        max-height: 30rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .faq-long_overlay-background {
+        z-index: 2;
+        background-image: linear-gradient(
+          180deg,
+          #1110,
+          #11111180 50%,
+          var(--social--dark) 90%,
+          #111 100%,
+          #1a1a1a 100%,
+          #1a1a1a
+        );
+        pointer-events: none;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 15rem;
+        display: flex;
+        position: absolute;
+        inset: auto 0% 0%;
+      }
+      .faq-long_overlay {
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        height: 17.5rem;
+        padding-bottom: 2.5rem;
+        display: flex;
+        position: absolute;
+        inset: auto 0% 0%;
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        h3 {
+          font-size: 1.6rem;
+          line-height: 1.1;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .h3-font-size {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .faq-question {
+          line-height: 1.2;
+        }
+        .cta-button {
+          left: auto;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+      }
+      /* static state, added by the capture */
+      /* static state: the first answer is open and the others closed */
+      .accordion_item:not(:first-child) .accordion_bottom {
+        height: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 18 FAQ accordion (border top). Captured 2026-10-07 from https://www.social.plus/ai/mcp-server by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- faq (border-top variant): the same accordion on the plain dark background with a top border. -->
+    <section class="section padding_y background-color_dark border-top">
+      <div class="page-padding">
+        <div class="container-large">
+          <div class="faq-long_wrapper">
+            <div class="hide w-embed">
+              <style>
+                /* Block code (pre + code) */
+                .faq-long_wrapper .w-richtext pre {
+                  background: #0f0f12;
+                  border: 1px solid rgba(255, 255, 255, 0.08);
+                  border-radius: 0.625rem;
+                  padding: 1rem 1.25rem;
+                  margin: 1rem 0;
+                  overflow-x: auto;
+                  font-size: 0.8125rem;
+                  line-height: 1.6;
+                }
+                .faq-long_wrapper .w-richtext pre code {
+                  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+                  color: #e8e8ea;
+                  background: transparent;
+                  padding: 0;
+                  border: 0;
+                  white-space: pre;
+                  display: block;
+                }
+                /* Inline code (code not inside pre) */
+                .faq-long_wrapper .w-richtext :not(pre) > code {
+                  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+                  font-size: 0.875em;
+                  background: rgba(255, 255, 255, 0.08);
+                  color: #f0f0f0;
+                  padding: 0.125rem 0.375rem;
+                  border-radius: 0.25rem;
+                  border: 1px solid rgba(255, 255, 255, 0.06);
+                  white-space: nowrap;
+                }
+                /* Thin scrollbar for long lines */
+                .faq-long_wrapper .w-richtext pre::-webkit-scrollbar {
+                  height: 6px;
+                }
+                .faq-long_wrapper .w-richtext pre::-webkit-scrollbar-thumb {
+                  background: rgba(255, 255, 255, 0.15);
+                  border-radius: 3px;
+                }
+                .faq-long_wrapper .w-richtext pre::-webkit-scrollbar-thumb:hover {
+                  background: rgba(255, 255, 255, 0.25);
+                }
+              </style>
+            </div>
+            <div class="container-medium">
+              <div class="container-heading margin-bottom_m"><h2 class="h3-font-size text-color-white">FAQ</h2></div>
+              <div class="w-dyn-list">
+                <div itemscope="itemscope" itemtype="https://schema.org/FAQPage" role="list" class="w-dyn-items">
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">What is the Model Context Protocol (MCP)?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The Model Context Protocol (MCP) is an open standard, introduced by Anthropic in late 2024,
+                          that lets AI assistants connect to external tools, data, and workflows through one shared
+                          interface. It works like a universal plug: once a platform exposes an MCP endpoint, any
+                          MCP-compatible client (Claude, Cursor, VS Code, GitHub Copilot, ChatGPT, Windsurf, and others)
+                          can read from it without a custom integration.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">What is the social.plus MCP server?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server is a hosted endpoint that exposes the social.plus knowledge base to
+                          any MCP-compatible AI assistant. It serves the documentation, API reference, OpenAPI specs,
+                          SDK guides, and UIKit reference in real time, so your AI tool can answer questions, generate
+                          code, and reason about social.plus integrations using the same source material our engineering
+                          team writes against.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">Which AI tools work with the social.plus MCP server?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          social.plus officially documents setup for Claude Desktop, Claude Web, VS Code (with GitHub
+                          Copilot, version 1.99 or later), and Cursor. Because the Model Context Protocol is an open
+                          standard, any other MCP-compatible client (Windsurf, Claude Code, ChatGPT through the Apps
+                          SDK, agentic frameworks like LangChain) should also connect. New clients are added by their
+                          vendors, not by us.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">How do I connect the social.plus MCP server?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Paste <code>https://learn.social.plus/mcp</code> into your AI client's MCP configuration. The
+                          setup is officially documented for Claude Desktop, Claude Web, VS Code (with GitHub Copilot,
+                          version 1.99 or later), and Cursor, each with a short JSON snippet or in-app form. Restart the
+                          client and the social.plus tools appear in your assistant. Full per-client guides at
+                          <a href="https://learn.social.plus/ai-mcp/overview">learn.social.plus/ai-mcp/overview</a>. No
+                          keys, no local server, no auth.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">Do I need a social.plus account to use the MCP?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          No. Connecting to the social.plus MCP server requires no account, no API key, and no
+                          configuration beyond pasting the URL into your AI client. You are free to explore social.plus
+                          capabilities through your assistant immediately. When you are ready to build and ship
+                          social.plus in your own application, that production setup is a separate step. Talk to our
+                          team to get started.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">Is the MCP secure? What does it have access to?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server is read-only and exposes only the public knowledge base:
+                          documentation, API reference, OpenAPI specs, SDK and UIKit guides. It never touches customer
+                          data, application traffic, end-user information, or live network state. Your data remains
+                          exactly where it always has, inside your own social.plus environment.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">What can I build with the social.plus MCP server?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Use the MCP to build, debug, and explore social.plus integrations faster. Your AI assistant
+                          can scaffold a chat feature, generate UIKit code, look up the correct API endpoint for a
+                          moderation rule, debug a webhook, or compare SDK methods, all without leaving your editor. It
+                          supports every stage of work: evaluating social.plus, integrating it for the first time, or
+                          maintaining a production deployment.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        How is this different from a social media MCP server?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server is for in-app community infrastructure, not social media
+                          management. It exposes the APIs, SDKs, and UIKit you use to embed chat, feeds, communities,
+                          and live streaming inside your own application. Social media MCP servers, by contrast,
+                          automate posting on platforms like X, Instagram, or TikTok. social.plus is the layer beneath
+                          your product, not a destination network.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        What is the difference between the MCP server and your developer documentation?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The documentation requires you to stop, search, copy, and adapt snippets into your AI tool by
+                          hand. The MCP server eliminates that hop. Your AI assistant queries the same documentation,
+                          API reference, OpenAPI specs, and SDK guides directly in the middle of your coding task, then
+                          produces the answer or generates the code in place. Less context-switching, and every
+                          reference your assistant uses is the current one.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">Is the MCP open source?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The Model Context Protocol itself is an open standard, maintained by Anthropic with reference
+                          implementations and SDKs published on
+                          <a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>. The social.plus MCP
+                          server is operated by social.plus and provides curated, current platform context to any
+                          compatible client. The protocol is open; the server is hosted by us so the content stays
+                          accurate.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can my AI assistant help me pick the right social.plus SDKs for my app?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server exposes the full product catalog, including Chat, Social, Live
+                          Stream, Communities, Moderation, and UIKit, with the capabilities, limits, and configuration
+                          of each documented inline. Describe your use case to your AI assistant, whether that is a
+                          fitness app with group challenges, a marketplace with buyer-seller messaging, or a creator
+                          platform with live shopping, and it maps your scenario to the right combination of social.plus
+                          SDKs and surfaces the methods you should start with.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can my AI assistant generate working social.plus SDK code for iOS, Android, React Native,
+                        Flutter, or web?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server exposes the full SDK reference for every supported platform,
+                          including Swift for iOS, Kotlin for Android, React Native, Flutter, JavaScript, and
+                          TypeScript. When you ask your AI assistant to add chat, feeds, live streaming, or moderation,
+                          it selects the correct SDK for your stack, generates the right initialization sequence, and
+                          follows the established integration patterns from the docs. No copy-pasting between
+                          language-specific docs.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can I prototype a chat, feed, or community feature in an afternoon with AI plus MCP?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. That is one of the main reasons the MCP server exists. With your AI assistant connected,
+                          you describe the feature in plain language, the assistant generates the initialization code,
+                          scaffolds the UIKit components, and points you at the social.plus sandbox to test against. A
+                          working prototype in a single session is realistic, and the same loop continues into
+                          production once you decide to commit.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can I debug or extend an existing social.plus integration with my AI assistant?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. With the MCP server connected, your AI assistant can read your existing social.plus
+                          integration code, cross-reference it against the current API and SDK reference, and flag
+                          deprecated calls, missing webhook handlers, or misconfigured parameters. The same workflow
+                          extends to adding capabilities later, whether that is adding live streaming on top of an
+                          existing chat integration, layering moderation on a community feed, or migrating from an older
+                          SDK version.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Which MCP server should I use to add community, chat, or live streaming to my app?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server is purpose-built for this. It exposes the social.plus SDKs, APIs,
+                          and UIKit components for chat (1:1, group, channel), communities (activity feeds, posts,
+                          comments, reactions), and live streaming (broadcasting, viewer playback, embedded chat), all
+                          designed for embedding inside your own application. Ask your AI assistant to add any of these
+                          features, and it pulls the correct integration code and configuration from the live
+                          social.plus knowledge base, no matter which client you connect from.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Is there a community MCP server for building in-app communities?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server is the community MCP for in-app community infrastructure. It
+                          exposes the SDKs, APIs, and UIKit components for activity feeds, posts, comments, reactions,
+                          communities, group memberships, and roles. When connected to your AI assistant, it takes you
+                          from "add a community space to this screen" to working integration code without manually
+                          navigating the docs. social.plus communities power consumer apps at scale, including
+                          <a href="https://www.social.plus/customer-story/noom">Noom</a>,
+                          <a href="https://www.social.plus/customer-story/smart-fit">Smart Fit</a>, and
+                          <a href="https://www.social.plus/customer-story/harley-davidson">Harley-Davidson</a>.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can MCP help me build social features like feeds, profiles, comments, and reactions?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server is the social features MCP for in-app development. It exposes
+                          the SDKs and UIKit components for the building blocks of social experiences: activity feeds,
+                          user profiles, posts, comments, reactions, likes, shares, follows, mentions, and
+                          notifications. With the MCP connected, your AI assistant generates the right initialization,
+                          the correct field shapes, and the UI components that match your design system, all drawn from
+                          the live social.plus reference.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Is there a live streaming MCP server I can use with my AI assistant?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server doubles as a live streaming MCP for AI-assisted development.
+                          It exposes the social.plus Live Stream SDK and UIKit reference, covering broadcasting, viewer
+                          playback, low-latency ingest, embedded chat overlay, reactions, and recording. Ask your AI
+                          assistant to add a live commerce stream, a live event broadcast, or a live coaching session,
+                          and it generates the integration code against the current SDK methods, ready to test against
+                          the social.plus sandbox.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">Is the social.plus MCP a social network MCP?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server is for adding social-network-style features to your own
+                          application, not for connecting AI to an external social network. Searches for 'social network
+                          MCP' today return two distinct categories. The first is MCP servers that integrate AI with
+                          platforms like Discord, Bluesky, or X for posting and analytics. The second is the social.plus
+                          MCP, which exposes the in-app community infrastructure (feeds, follows, profiles, communities,
+                          and chat) needed to embed those experiences inside your own product, with full data ownership
+                          and brand control.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can the social.plus MCP help with content moderation and trust and safety?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server includes the moderation and trust and safety surfaces of the
+                          platform: AI-assisted content review, profanity and image filters, role-based permissions,
+                          automated rules, and the admin Console workflows for human review. Ask your AI assistant to
+                          configure moderation for your use case, whether that is a teen-focused app, a regulated
+                          industry, or a global community with multilingual content, and it surfaces the correct API
+                          endpoints, rule structures, and Console steps from the social.plus knowledge base.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Is there an activity feed MCP server for building social feeds in apps?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server is the activity feed MCP for AI-assisted development. It
+                          exposes the Social SDK and UIKit components for activity feeds, posts, comments, reactions,
+                          custom post types, and ranking logic. Ask your AI assistant to add a curated feed, a community
+                          wall, or a personalized timeline to your app, and it generates the integration against the
+                          current SDK methods, ready to test against the social.plus sandbox.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can I use the MCP to add Stories or short-form clips to my app?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server covers the Stories and Clips features alongside the rest of
+                          the platform, including upload, ephemeral expiry, replies, view tracking, and the UIKit
+                          components used to render the story tray and full-screen viewer. Ask your AI assistant to add
+                          stories to your home screen, and it generates the integration code, the lifecycle handlers,
+                          and the moderation hooks in one pass.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can I use the MCP to build live commerce or social commerce features?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server includes the live commerce and social commerce surfaces of the
+                          platform, where product cards, checkout actions, and shoppable interactions attach directly to
+                          the live stream overlay, activity feed, or stories layer. Ask your AI assistant to add a
+                          shoppable live stream or a feed post with a buy action, and it generates the integration
+                          against the current SDK and UIKit components.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Does the MCP cover smaller engagement features like polls, events, group chat, and custom posts?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server exposes the full feature set, including polls (single-vote,
+                          multi-vote, real-time results), events (scheduling, RSVPs, attendance), groups (topic-based
+                          spaces, member roles, permissions), group chat (multi-participant real-time conversations),
+                          and custom posts (structured content types beyond standard posts). When you describe the
+                          engagement pattern you want, your AI assistant pulls the correct API endpoints and UIKit
+                          components for it.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Can the MCP help with industry-specific patterns like fitness, retail, or fintech apps?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Yes. The social.plus MCP server includes implementation patterns documented for the verticals
+                          social.plus serves: retail (live commerce, post-purchase communities), fitness (challenges,
+                          group goals, community feeds), travel (group itineraries, traveler chat), sports and betting
+                          (live chat overlays, real-time reactions), health and wellness (gated communities,
+                          accountability groups), fintech (verified profiles, secure DMs), media and news (comments,
+                          reactions, audience polls), edtech, and gaming. Ask your AI assistant for the pattern that
+                          fits your vertical, and it returns the right combination of SDKs and configuration.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">What is the social.plus MCP server URL?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server endpoint is <code>https://learn.social.plus/mcp</code>. Paste this
+                          URL into your AI client's MCP configuration to connect. One endpoint serves everything:
+                          documentation, API reference, SDK guides, UIKit, and the eight skill domains (admin, chat,
+                          server, setup-validator, social, troubleshoot, uikit, video). The transport is SSE
+                          (Server-Sent Events), and no API key or account is required.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">What MCP tools does the social.plus server expose?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The social.plus MCP server exposes two tools and eight skill domains. The tools are
+                          <code>search_social_plus</code> for natural-language search across the knowledge base, and
+                          <code>query_docs_filesystem_social_plus</code> for sandboxed, read-only filesystem queries
+                          that support rg, grep, find, cat, jq, awk, sed, and other Unix-style commands against the docs
+                          and OpenAPI specs (stateless, with a 30KB output cap per call). The skill domains are admin,
+                          chat, server, setup-validator, social, troubleshoot, uikit, and video, organized so your AI
+                          assistant scopes its lookups to the right area without scanning the entire knowledge base.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        How do I set up the social.plus MCP in Claude Desktop?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Open the Claude Desktop config file at
+                          <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> on macOS, or
+                          <code>%APPDATA%\Claude\claude_desktop_config.json</code> on Windows (create the file if it
+                          does not exist), then add this entry:
+                        </p>
+                        <pre><code>{
+  "mcpServers": {
+    "social-plus": {
+      "url": "https://learn.social.plus/mcp",
+      "transport": "sse"
+    }
+  }
+}</code></pre>
+                        <p>
+                          Quit and reopen Claude Desktop, and <strong>social-plus</strong> appears under MCP servers in
+                          the toolbar. No API key, no local server, no further configuration.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">How do I set up the social.plus MCP in VS Code?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          VS Code requires version 1.99 or later and the GitHub Copilot extension. Open the user
+                          settings JSON (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows or Linux, then run
+                          <strong>Preferences: Open User Settings (JSON)</strong>) and add this configuration at the top
+                          level:
+                        </p>
+                        <pre><code>{
+  "mcp": {
+    "servers": {
+      "social-plus": {
+        "type": "sse",
+        "url": "https://learn.social.plus/mcp"
+      }
+    }
+  }
+}</code></pre>
+                        <p>
+                          Open Copilot Chat with Cmd+I, switch to <strong>Agent</strong> mode, and run
+                          <code>@social-plus</code> to confirm the tool list appears.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">How do I set up the social.plus MCP in Cursor?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Open Cursor settings with Cmd+, on macOS or Ctrl+, on Windows or Linux, navigate to
+                          <strong>Features → MCP</strong>, select <strong>Add new MCP server</strong>, and enter:
+                        </p>
+                        <ul>
+                          <li>Name: <code>social-plus</code></li>
+                          <li>Type: <code>SSE</code></li>
+                          <li>URL: <code>https://learn.social.plus/mcp</code></li>
+                        </ul>
+                        <p>
+                          The server displays as <strong>Enabled</strong> in the MCP list once saved. Alternatively, add
+                          the same configuration directly to <code>.cursor/mcp.json</code> in your project root.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">How do I verify the social.plus MCP is connected?</h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          Verification depends on the client. In <strong>Claude Desktop</strong>, look for
+                          <code>social-plus</code> listed under MCP servers in the toolbar after the restart. In
+                          <strong>VS Code</strong>, open Copilot Chat in Agent mode and type
+                          <code>@social-plus</code> to see the tool list. In <strong>Cursor</strong>, open Settings →
+                          Features → MCP and confirm <code>social-plus</code> shows as <strong>Enabled</strong>. If any
+                          of these are missing, the configuration was not picked up or the client was not restarted.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    itemtype="https://schema.org/Question"
+                    itemscope="itemscope"
+                    itemprop="mainEntity"
+                    role="listitem"
+                    class="accordion_item w-dyn-item"
+                  >
+                    <div class="accordion_top">
+                      <h3 itemprop="name" class="faq-question">
+                        Why isn't my AI assistant seeing the social.plus MCP server?
+                      </h3>
+                      <div class="accordion-icon">
+                        <div class="faq-icon_content">
+                          <div class="accodrion-icon w-embed">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              aria-hidden="true"
+                              role="img"
+                              width="1em"
+                              height="1em"
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                d="M16.939 7.939L12 12.879l-4.939-4.94l-2.122 2.122L12 17.121l7.061-7.06z"
+                                fill="currentColor"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      itemtype="https://schema.org/Answer"
+                      itemscope="itemscope"
+                      itemprop="acceptedAnswer"
+                      class="accordion_bottom"
+                    >
+                      <div itemprop="text" class="w-richtext">
+                        <p>
+                          The most common causes are: forgetting to restart the AI client after editing the config
+                          (required in every client), running VS Code older than version 1.99 (the minimum for MCP), the
+                          GitHub Copilot extension not installed in VS Code, a typo in the URL (must be exactly
+                          <code>https://learn.social.plus/mcp</code>), or pasting the JSON in the wrong location inside
+                          the config file. The social.plus MCP server itself includes a
+                          <code>setup-validator</code> skill that your AI assistant can use to walk through the
+                          diagnosis once any MCP connection is live.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="faq-long_overlay">
+              <div class="z-index_3">
+                <div id="view-all-faqs" aria-label="Expand" role="button" class="cta-button c-grey">
+                  <div class="cta-button_bg c-white">
+                    <div class="button-content"><div class="button-text">Expand</div></div>
+                  </div>
+                  <div class="cta-border_rotate c-white"></div>
+                </div>
+              </div>
+              <div class="faq-long_overlay-background"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

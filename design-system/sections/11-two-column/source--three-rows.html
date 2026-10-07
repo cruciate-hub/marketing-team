@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>11 · Two-column (three alternating rows) · social.plus website section</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      img {
+        border: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 32px;
+        line-height: 36px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db644.b6ae40d9f.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      h2 {
+        font-family: var(--font--figtree);
+        color: var(--main--white);
+        font-size: var(--_typography---h2-font-size);
+        letter-spacing: -0.025em;
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      p {
+        margin-bottom: 1rem;
+        font-weight: 400;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      img {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .button-text {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .superscript {
+        color: var(--gradient--medium-blue);
+        letter-spacing: 0.044rem;
+        -webkit-text-stroke-color: var(--gradient--medium-blue);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1rem;
+      }
+      .superscript.c-white-top {
+        color: var(--main--white);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+        margin-bottom: 1rem;
+        padding-left: 0.15rem;
+      }
+      .section {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+      }
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.background-color_dark {
+        background-color: var(--social--dark);
+      }
+      .section.c-demo,
+      .section.padding_y {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+      .section.padding_y.background-color_dark {
+        background-color: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+      }
+      .container-large {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .page-padding {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .text-color-white {
+        color: var(--main--white);
+        -webkit-text-fill-color: inherit;
+        background-image: none;
+        background-clip: border-box;
+      }
+      .margin-bottom_l {
+        margin-bottom: 3.125rem;
+      }
+      .max-ch-44 {
+        max-width: 44ch;
+      }
+      .button-group {
+        z-index: 3;
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        display: flex;
+      }
+      .grid-2 {
+        grid-column-gap: 4rem;
+        grid-row-gap: 4rem;
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        place-items: start center;
+        width: 100%;
+        max-width: 100%;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        display: grid;
+      }
+      .image-square_radius {
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+      }
+      .arrow-social {
+        width: var(--cta-button_icon-size);
+        height: var(--cta-button_icon-size);
+        flex: none;
+        padding: 0.25rem;
+      }
+      .button-content {
+        grid-column-gap: 0.75rem;
+        grid-row-gap: 0.75rem;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+      }
+      .button-icon_wrapper {
+        background-color: var(--social--main-blue);
+        border-radius: 100%;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        margin-right: -1rem;
+        display: flex;
+      }
+      .button-icon_wrapper.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .grid-child {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+      }
+      .grid-child.c-centered {
+        flex-flow: column;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100%;
+        display: flex;
+      }
+      .no-wrap {
+        white-space: nowrap;
+      }
+      .cta-button {
+        background-color: var(--social--main-blue);
+        color: var(--main--white);
+        cursor: pointer;
+        border-radius: 10em;
+        flex-direction: column;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem;
+        text-decoration: none;
+        display: inline-flex;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta-button.c-grey {
+        background-color: var(--border--border-dark-grey);
+      }
+      .cta-button.c-grey:active {
+        color: var(--main--white);
+      }
+      .cta-border_rotate {
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        pointer-events: none;
+        cursor: auto;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-columns: 1fr;
+        width: 100%;
+        min-height: 12rem;
+        position: absolute;
+      }
+      .cta-border_rotate.c-white {
+        min-height: 16rem;
+      }
+      .cta-button_bg {
+        z-index: 1;
+        background-image: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+        white-space: nowrap;
+        border-radius: 25em;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 2.8rem;
+        max-height: 100%;
+        padding: 0.5rem 1.5rem;
+        display: flex;
+      }
+      .cta-button_bg.c-white {
+        background-color: var(--social--dark-gray-background);
+        background-image: none;
+      }
+      @media screen and (max-width: 991px) {
+        .grid-2,
+        .grid-3.c-large-gap,
+        .grid-3.c-large-gap {
+          grid-column-gap: 2rem;
+          grid-row-gap: 2rem;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        h2 {
+          font-size: 1.9rem;
+          line-height: 1.1;
+        }
+        .section.padding_y.background-color_dark.is-first {
+          padding-top: 1.5rem;
+        }
+        .page-padding {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .grid-2 {
+          flex-flow: column;
+          grid-template-columns: 1fr;
+          display: flex;
+        }
+        .grid-2.is-resp-reversed {
+          flex-flow: column-reverse;
+        }
+        .grid-child.c-centered {
+          justify-content: flex-start;
+          align-items: flex-start;
+          height: auto;
+        }
+        .cta-button {
+          left: auto;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .section.padding_y {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+        .section.padding_y.background-color_dark.is-first {
+          padding-top: 0;
+        }
+        .page-padding {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .button-group {
+          grid-column-gap: 0.75rem;
+          grid-row-gap: 0.75rem;
+          justify-content: center;
+          align-items: flex-start;
+          width: 100%;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .grid-2.margin-bottom_l {
+          margin-bottom: 1rem;
+        }
+        .button-content {
+          grid-column-gap: 0.5rem;
+          grid-row-gap: 0.5rem;
+        }
+        .cta-button_bg {
+          min-height: 2.5rem;
+          padding: 0.4rem 1.4rem 0.4rem 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 11 Two-column (three alternating rows). Captured 2026-10-07 from https://www.social.plus/chat by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- two-column (three-rows variant): one section with three grid rows, image side alternating. -->
+    <section class="section padding_y background-color_dark is-first">
+      <div class="page-padding">
+        <main class="container-large">
+          <div class="grid-2 margin-bottom_l">
+            <img
+              alt="In-app chat conversation"
+              src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/672dd08d2e3bec3621d5a4f5_in-app-chat.webp"
+              class="image-square_radius"
+            />
+            <div class="grid-child c-centered">
+              <div class="superscript c-white-top">Social Chat</div>
+              <h2 class="text-color-white">
+                Harness the power of communication with <span class="no-wrap">in-app</span> chats
+              </h2>
+              <p class="max-ch-44">
+                Effortlessly embed messaging and connect your users with social.plus Chat SDK to power your messaging
+                services and increase real-time engagement.
+              </p>
+              <div class="button-group">
+                <a
+                  aria-label="1:1 Chat"
+                  href="https://www.social.plus/use-case/1-1-chat"
+                  class="cta-button c-grey w-inline-block"
+                  ><div class="cta-button_bg c-white">
+                    <div class="button-content">
+                      <div class="button-text">1:1 Chat</div>
+                      <div class="button-icon_wrapper c-grey">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 25"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          class="arrow-social"
+                        >
+                          <path
+                            d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cta-border_rotate c-white"></div></a
+                ><a
+                  aria-label="Group Chat"
+                  href="https://www.social.plus/use-case/group-chat"
+                  class="cta-button c-grey w-inline-block"
+                  ><div class="cta-button_bg c-white">
+                    <div class="button-content">
+                      <div class="button-text">Group Chat</div>
+                      <div class="button-icon_wrapper c-grey">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 25"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          class="arrow-social"
+                        >
+                          <path
+                            d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cta-border_rotate c-white"></div
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="grid-2 is-resp-reversed margin-bottom_l">
+            <div class="grid-child c-centered">
+              <div class="superscript c-white-top">Live Chat</div>
+              <h2 class="text-color-white">Increase user engagement in real-time with live chat</h2>
+              <p class="max-ch-44">
+                Our ready-to-use SDK and Chat API provide everything you need to create a Live Chat Overlay for live
+                streams in your app so that you can focus on creating great user experience.
+              </p>
+              <a
+                aria-label="Live Chat"
+                href="https://www.social.plus/use-case/live-chat"
+                class="cta-button c-grey w-inline-block"
+                ><div class="cta-button_bg c-white">
+                  <div class="button-content">
+                    <div class="button-text">Live Chat</div>
+                    <div class="button-icon_wrapper c-grey">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 25"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        class="arrow-social"
+                      >
+                        <path
+                          d="M10.8047 5.83325L11.5781 5.05981C11.9297 4.74341 12.457 4.74341 12.7734 5.05981L19.6289 11.8801C19.9453 12.2317 19.9453 12.759 19.6289 13.0754L12.7734 19.9309C12.457 20.2473 11.9297 20.2473 11.5781 19.9309L10.8047 19.1575C10.4883 18.8059 10.4883 18.2786 10.8047 17.927L15.0586 13.884H4.96875C4.47656 13.884 4.125 13.5325 4.125 13.0403V11.9153C4.125 11.4583 4.47656 11.0715 4.96875 11.0715H15.0586L10.8047 7.06372C10.4883 6.71216 10.4531 6.18481 10.8047 5.83325Z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="cta-border_rotate c-white"></div
+              ></a>
+            </div>
+            <img
+              alt="Live video stream with live chat"
+              src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/672df19b9817882636161e76_live-streaming-with-live-chat.webp"
+              class="image-square_radius"
+            />
+          </div>
+          <div class="grid-2">
+            <img
+              alt="Social network profile"
+              src="https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/672dd08df67187c1bd284fe9_broadcast-chat.webp"
+              class="image-square_radius"
+            />
+            <div class="grid-child c-centered">
+              <div class="superscript c-white-top">BROADCAST CHAT</div>
+              <h2 class="text-color-white">Deliver vital messages to all users with broadcasts</h2>
+              <p class="max-ch-44">
+                Easily reach your entire user base with important updates such as announcements and promotions through
+                broadcast chat channels.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>G2 · Sub-nav · social.plus website section</title>
+    <link rel="stylesheet" href="../../../tokens.css" />
+    <style>
+      /* copied from social-plus.webflow.shared.497d9ff2a.min.css, 2026-10-07 (Webflow base styles that this section uses) */
+      html {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-family: sans-serif;
+      }
+      body {
+        margin: 0;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section,
+      summary {
+        display: block;
+      }
+      a {
+        background-color: #0000;
+      }
+      a:active,
+      a:hover {
+        outline: 0;
+      }
+      svg:not(:root) {
+        overflow: hidden;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        color: #333;
+        background-color: #fff;
+        min-height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .w-inline-block {
+        max-width: 100%;
+        display: inline-block;
+      }
+      .w-clearfix:before,
+      .w-clearfix:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-clearfix:after {
+        clear: both;
+      }
+      .w-embed:before,
+      .w-embed:after {
+        content: " ";
+        grid-area: 1/1/2/2;
+        display: table;
+      }
+      .w-embed:after {
+        clear: both;
+      }
+      /* copied from social-plus.webflow.66e2765d540e1939a89db644.b6ae40d9f.opt.min.css, 2026-10-07 (site styles that match this section; tokens kept as var(--…), see tokens.css) */
+      body {
+        background-color: var(--social--dark);
+        font-family: var(--font--figtree);
+        color: var(--text--text-color-grey-light);
+        overscroll-behavior: none;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      a {
+        color: var(--gradient--medium-blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      a:focus-visible,
+      a[data-wf-focus-visible] {
+        outline-offset: 0.125rem;
+        outline-width: 0.125rem;
+        outline-style: solid;
+      }
+      .margin-right_xs {
+        margin-right: 0.3rem;
+      }
+      .sub-navbar {
+        z-index: 998;
+        white-space: nowrap;
+        width: 100%;
+        padding-bottom: 1rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .sub-navbar_links-wrapper {
+        display: flex;
+      }
+      .sub-navbar_content {
+        border: 1px solid var(--border--border-hover);
+        background-color: var(--secondary--menu-bg);
+        border-radius: 0 0 0.25rem 0.25rem;
+        align-items: stretch;
+        width: 100%;
+        max-width: 80rem;
+        height: 3.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        display: flex;
+      }
+      .sub-nav_link-text {
+        font-size: 1rem;
+      }
+      .product-nav_dropdown-toggle {
+        border-bottom: 0.2rem solid var(--main--transparant);
+        height: 100%;
+        color: var(--text--text-color-grey-light);
+        justify-content: flex-start;
+        align-items: center;
+        transition: color 0.15s;
+        display: flex;
+      }
+      .product-nav_dropdown-toggle:hover {
+        color: var(--main--white);
+      }
+      .product-nav_dropdown-toggle.w--current {
+        border-bottom-color: var(--main--white);
+        color: var(--main--white);
+      }
+      .product-nav_dropdown-toggle.is-responsive {
+        display: none;
+      }
+      .subnav-dropdown-link {
+        border-bottom: 0.0625rem solid var(--border--border-hover);
+        width: 100%;
+        color: var(--text--text-color-grey-light);
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 3rem 0.5rem 1rem;
+        transition: color 0.15s;
+        display: flex;
+      }
+      .subnav-dropdown-link:hover {
+        color: var(--main--white);
+      }
+      .subnav-dropdown-link.c-last {
+        border-bottom-style: none;
+      }
+      .product-nav_dropdown-list_desktop {
+        z-index: 998;
+        border: 0.0625rem solid var(--border--border-hover);
+        background-color: var(--secondary--menu-bg);
+        border-radius: 0.25rem;
+        flex-direction: column;
+        margin-top: -0.35rem;
+        margin-left: -1rem;
+        display: none;
+        position: absolute;
+        overflow: hidden;
+      }
+      .subnav-docs-icon {
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+        display: flex;
+      }
+      .product-nav_dropdown {
+        height: 100%;
+        color: var(--main--white);
+        margin-right: 1.5rem;
+        font-weight: 500;
+        position: relative;
+      }
+      .submenu-nav_link {
+        color: var(--text--text-color-grey-light);
+        border-bottom: 0.2rem solid #0000;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 1.5rem;
+        font-weight: 500;
+        transition: color 0.15s;
+        display: flex;
+        position: static;
+      }
+      .submenu-nav_link:hover {
+        color: var(--main--white);
+      }
+      .submenu-nav_link-content {
+        align-items: center;
+        height: 100%;
+        display: flex;
+      }
+      .css {
+        pointer-events: none;
+      }
+      .js {
+        pointer-events: none;
+        display: none;
+      }
+      .nav-icon-embed {
+        aspect-ratio: 1;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        height: 1rem;
+        font-size: 1rem;
+        line-height: 1;
+        display: flex;
+      }
+      .nav_dropdown-icon {
+        float: right;
+        aspect-ratio: 1;
+        flex: none;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        height: 1rem;
+        margin-left: 0.375rem;
+        display: flex;
+      }
+      @media screen and (max-width: 991px) {
+        .sub-navbar {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+        .sub-navbar_content {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+        .sub-nav_link-text {
+          font-size: 0.9rem;
+        }
+        .product-nav_dropdown-toggle:hover {
+          color: var(--text--text-color-grey-medium);
+        }
+        .product-nav_dropdown-toggle.is-desktop {
+          display: none;
+        }
+        .product-nav_dropdown-toggle.is-responsive {
+          display: flex;
+        }
+        .product-nav_dropdown-list_desktop {
+          margin-top: 0;
+        }
+        .product-nav_dropdown {
+          margin-left: 0;
+          margin-right: 1.5rem;
+        }
+        .submenu-nav_link {
+          width: 100%;
+          height: auto;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        .sub-navbar {
+          -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+          background-color: #0000;
+          display: block;
+        }
+        .sub-navbar_content {
+          border-width: 1px;
+          border-bottom-right-radius: 0.25rem;
+          border-bottom-left-radius: 0.25rem;
+          max-width: none;
+          overflow-x: auto;
+        }
+        .subnav-docs-icon {
+          margin-right: 2rem;
+        }
+        .nav_dropdown-icon {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 479px) {
+        body {
+          --social--dark: #111;
+          --font--figtree: Figtree, Arial, sans-serif;
+          --text--text-color-grey-light: #b3b3b3;
+          --social--grey-200\<deleted\|variable-6124ee1a-63c1-fdca-5109-39a6a3c13398\>: #d1d1d1;
+          --main--white: white;
+          --gradient--medium-blue: #3769ec;
+          --text--text-color-grey-dark: #414347;
+          --secondary--green: #1dc497;
+          --social--grey: #222;
+          --secondary--red: #ff305a;
+          --main--transparant: #0000;
+          --social--main-blue: #3b41ec;
+          --gradient--light-blue: #45a5ed;
+          --gradient--dark-blue: var(--social--main-blue);
+          --text--text-color-grey-medium: #717275;
+          --border--border-dark: #232324;
+          --social--dark\<deleted\|variable-591b4d6d\>: #111;
+          --social--grey-background: #f9f9f9;
+          --background--dark-background\<deleted\|variable-443a6f48-9037-619a-2e90-77b8f0dc944e\>: var(--social--dark);
+          --social--dark-gray-background: #1a1a1a;
+          --amity-green-hover\<deleted\|variable-fb797fb7\>: #04be8c;
+          --border--border-light-grey: #e7e7e7;
+          --main--whitesmoke: whitesmoke;
+          --border--border-hover: #39393a;
+          --secondary--menu-bg: #181818;
+          --social--blue-transparent: #2a31e91a;
+          --grey--grey-2\<deleted\|variable-0c337080\>: #f7f8f9;
+          --border--border-med-grey: #d0d0d1;
+          --grey--grey-1\<deleted\|variable-fa51eaba\>: whitesmoke;
+          --text--text-color-dark: #111;
+          --social--light-grey: #444;
+          --grey--grey-4\<deleted\|variable-49c758bc\>: #a0a1a3;
+          --social--button-hover: #272b9d;
+          --social--button-pressed: #27265e;
+          --grey--grey-3\<deleted\|variable-24ac1da7\>: #e7e7e7;
+          --border--border-dark-grey: #666;
+          --secondary--yellow: #f7c506;
+          --secondary--amity-blue\<deleted\|variable-5dd610c8\>: #2865e1;
+          --secondary--red\<deleted\|variable-a37f100e\>: #ff456b;
+          --secondary--purple: #9f72ff;
+          --dark-2\<deleted\|variable-531863cd\>: #1c1c21;
+          --light-blue-bg\<deleted\|variable-c0137aee\>: #f0f3f8;
+          --social--button-pressed\<deleted\|variable-7b19c18b-86da-e810-ed1a-629a5343ac7a\>: #272b9d;
+          --background--blue-background\<deleted\|variable-24653b6a-937c-04c7-3016-8cd4c2f11a56\>: #e5ecfb;
+          --background--red-background\<deleted\|variable-b760875e-115c-89f6-e9bb-381765128887\>: #ffe9ed;
+          --background--purple-background\<deleted\|variable-7146a2d8-f23c-d30b-062a-0bd5125a7ca1\>: #ece3ff;
+          --background--yellow-background\<deleted\|variable-1410e92d-19a9-745f-757d-da447ff905f3\>: #fff4d9;
+          --secondary--pink: #f568f0;
+          --cta-button_icon-size: 1.65rem;
+          --secondary--orange: #ff6937;
+          --text--text-color-grey-lighter: #d1d1d1;
+          --social--dark-card: #161616;
+          --text--text-color-grey-mid: #a4a4a4;
+          --social--dark-pill: #2e2e2e;
+          --text--text-color-grey-muted: #929292;
+        }
+        .sub-navbar {
+          width: 100%;
+          padding-bottom: 0.5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          top: 4.25rem;
+        }
+        .product-nav_dropdown {
+          margin-left: 0.15rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- G2 Sub-nav. Captured 2026-10-07 from https://www.social.plus/chat by design-system/capture/capture.mjs. Images are the site's own CDN files. -->
+    <!-- sub-nav: the product sub-navigation under the main nav; dropdowns open on hover (script). Captured closed. -->
+    <header class="sub-navbar">
+      <div class="css w-embed">
+        <style>
+          .sub-navbar {
+            position: sticky !important;
+            z-index: 998 !important;
+          }
+          /* Geen blauwe browser-tap-highlight (rgba(51,181,229,.4)) over de subnav-knoppen
+     bij het tikken op mobiel — anders "flitst" de grijze pill blauw. */
+          .sub-navbar a,
+          .sub-navbar .product-nav_dropdown-toggle {
+            -webkit-tap-highlight-color: transparent !important;
+          }
+          /* De hoofdbalk verliest zijn onderrand/onderhoeken zodat de sub-navbar
+     er naadloos op aansluit. */
+          .nav_mega-menu_wrapper {
+            border-bottom: none !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+          }
+          /* ...maar als het MOBIELE menu open is, staat de hoofdbalk weer los. */
+          body.sp-mnav-open .nav_mega-menu_wrapper {
+            border-bottom: 1px solid var(--border--border-hover) !important;
+            border-bottom-left-radius: 0.25rem !important;
+            border-bottom-right-radius: 0.25rem !important;
+          }
+          @media (max-width: 47.9375em) {
+            /* scrollbar verbergen; uniforme tussenruimte via één gap */
+            .sub-navbar_content {
+              scrollbar-width: none;
+              -ms-overflow-style: none;
+              -webkit-overflow-scrolling: touch;
+              align-items: center;
+              gap: 0.5rem;
+            }
+            .sub-navbar_content::-webkit-scrollbar {
+              display: none;
+              width: 0;
+              height: 0;
+            }
+            .sub-navbar_links-wrapper {
+              gap: 0.5rem;
+              align-items: center;
+            }
+            /* Tabs als menu-pills — beide tab-classes + dropdown-items en -parents. */
+            .sub-nav_link,
+            .submenu-nav_link,
+            .subnav-dropdown-link,
+            .product-nav_dropdown-toggle {
+              flex: 0 0 auto !important;
+              width: auto !important;
+              min-width: 0 !important;
+              margin: 0 !important;
+              border: 0 !important;
+              background-color: var(--social--grey) !important;
+              border-radius: 999px !important;
+              padding: 0.5rem 1rem !important;
+              align-self: center !important;
+            }
+            .sub-nav_link .sub-nav_link-text,
+            .submenu-nav_link .sub-nav_link-text,
+            .subnav-dropdown-link .sub-nav_link-text,
+            .product-nav_dropdown-toggle .sub-nav_link-text {
+              color: #fff !important;
+            }
+            /* Product-icoon in de toggle wit maken (de SVG gebruikt currentColor). */
+            .product-nav_dropdown-toggle .nav-icon-embed {
+              color: #fff !important;
+            }
+            /* Actief = blauw: reguliere tabs én de dropdown-parent-toggle die w--current is. */
+            .sub-nav_link.w--current,
+            .submenu-nav_link.w--current,
+            .subnav-dropdown-link.w--current,
+            .product-nav_dropdown-toggle.w--current {
+              background-color: var(--social--main-blue) !important;
+            }
+            /* Chevron in de toggle verbergen (beide varianten). */
+            .product-nav_dropdown-toggle .nav_dropdown-icon {
+              display: none !important;
+            }
+            /* Product-icoon links op de dropdown-parent-pill (Social/Chat/Video):
+       toon op mobiel de DESKTOP-variant (heeft icoon + echte link + native w--current). */
+            .product-nav_dropdown-toggle.is-desktop {
+              display: flex !important;
+              align-items: center;
+            }
+            .product-nav_dropdown-toggle.is-responsive {
+              display: none !important;
+            }
+            /* Dropdown-wrappers: geen marge/padding zodat de tussenruimte uniform blijft. */
+            .product-nav_dropdown {
+              display: flex !important;
+              align-items: center;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+            /* "Docs" (externe link): 32px rechtermarge op het externe-link-icoon weghalen. */
+            .subnav-docs-icon {
+              margin-right: 0 !important;
+            }
+            /* "Modules"-dropdown op /product platslaan tot directe Social/Chat/Video-pills. */
+            .product-nav_dropdown.is-module .product-nav_dropdown-toggle {
+              display: none !important;
+            }
+            .product-nav_dropdown.is-module {
+              gap: 0.5rem;
+            }
+            .product-nav_dropdown.is-module .product-nav_dropdown-list_desktop {
+              display: flex !important;
+              position: static !important;
+              inset: auto !important;
+              flex-direction: row;
+              gap: 0.5rem;
+              background: transparent !important;
+              border: 0 !important;
+              box-shadow: none !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              min-width: 0 !important;
+              width: auto !important;
+              transform: none !important;
+              opacity: 1 !important;
+              visibility: visible !important;
+            }
+          }
+        </style>
+      </div>
+      <div class="sub-navbar_content">
+        <div class="sub-navbar_links-wrapper">
+          <a href="https://www.social.plus/product" class="submenu-nav_link w-inline-block"
+            ><div class="submenu-nav_link-content"><div class="sub-nav_link-text">Overview</div></div></a
+          >
+          <div class="product-nav_dropdown">
+            <div class="product-nav_dropdown-toggle is-responsive w-clearfix">
+              <div class="sub-nav_link-text">Chat</div>
+              <div class="nav_dropdown-icon w-embed">
+                <span class="spdd-ico" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      class="spdd-ico__head"
+                      d="M6 8 L12 14 L18 8"
+                      stroke-width="2.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      class="spdd-ico__shaft"
+                      d="M12 14 L3 5"
+                      stroke-width="2.6"
+                      stroke-linecap="butt"
+                      pathLength="16"
+                    ></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <a
+              href="https://www.social.plus/chat"
+              aria-current="page"
+              class="product-nav_dropdown-toggle is-desktop w-inline-block w-clearfix w--current"
+              ><div class="nav-icon-embed margin-right_xs w-embed">
+                <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="m20.808 10.012c-0.4154-1.9547-1.5171-3.7338-3.1025-5.0095-1.6214-1.2972-3.6362-2.0035-5.7126-2.0025-2.4477 0-4.7338 0.94299-6.443 2.6554-1.6517 1.657-2.557 3.8447-2.5497 6.1586 6e-5 1.6964 0.4981 3.3556 1.4324 4.7716l0.17477 0.2431-0.59684 2.5818c-0.16815 0.7274 0.49121 1.3759 1.2157 1.1956l3.0293-0.7536s0.09241 0.0309 0.16071 0.0571c0.06831 0.0261 0.65612 0.2515 1.2797 0.4258 0.51831 0.1447 1.5967 0.3617 2.4416 0.3617 2.3967 0 4.6346-0.9282 6.3012-2.6141 1.6518-1.6726 2.5614-3.8965 2.5614-6.2642 1e-4 -0.6074-0.0642-1.2131-0.1921-1.8068zm-12.665 3.2737c-0.25429 0-0.50287-0.0754-0.7143-0.2167-0.21144-0.1412-0.37623-0.342-0.47354-0.577-0.09732-0.2349-0.12278-0.4934-0.07317-0.7428s0.17206-0.4785 0.35187-0.6583 0.4089-0.3023 0.65831-0.3519c0.2494-0.0496 0.50792-0.0242 0.74285 0.0732 0.23493 0.0973 0.43573 0.2621 0.57701 0.4735 0.14127 0.2114 0.21668 0.46 0.21668 0.7143 0 0.341-0.13546 0.668-0.37658 0.9091-0.24111 0.2412-0.56814 0.3766-0.90913 0.3766zm3.8571 0c-0.2543 0-0.5028-0.0754-0.7143-0.2167-0.2114-0.1412-0.3762-0.342-0.4735-0.577-0.0973-0.2349-0.1228-0.4934-0.0732-0.7428s0.1721-0.4785 0.3519-0.6583 0.4089-0.3023 0.6583-0.3519 0.5079-0.0242 0.7428 0.0732c0.235 0.0973 0.4358 0.2621 0.5771 0.4735 0.1412 0.2114 0.2166 0.46 0.2166 0.7143 0 0.341-0.1354 0.668-0.3765 0.9091-0.2412 0.2412-0.5682 0.3766-0.9092 0.3766zm3.8572 0c-0.2543 0-0.5029-0.0754-0.7143-0.2167-0.2115-0.1412-0.3763-0.342-0.4736-0.577-0.0973-0.2349-0.1228-0.4934-0.0732-0.7428 0.0497-0.2494 0.1721-0.4785 0.3519-0.6583s0.4089-0.3023 0.6583-0.3519 0.5079-0.0242 0.7429 0.0732c0.2349 0.0973 0.4357 0.2621 0.577 0.4735s0.2167 0.46 0.2167 0.7143c0 0.341-0.1355 0.668-0.3766 0.9091-0.2411 0.2412-0.5682 0.3766-0.9091 0.3766z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <div class="sub-nav_link-text">Chat</div>
+              <div class="nav_dropdown-icon w-embed">
+                <span class="spdd-ico" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      class="spdd-ico__head"
+                      d="M6 8 L12 14 L18 8"
+                      stroke-width="2.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      class="spdd-ico__shaft"
+                      d="M12 14 L3 5"
+                      stroke-width="2.6"
+                      stroke-linecap="butt"
+                      pathLength="16"
+                    ></path>
+                  </svg>
+                </span></div
+            ></a>
+            <div class="product-nav_dropdown-list_desktop">
+              <a href="https://www.social.plus/social" class="subnav-dropdown-link w-inline-block"
+                ><div class="nav-icon-embed margin-right_xs w-embed">
+                  <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path
+                      d="m10.8 7.2c0 1.9882-1.6118 3.6-3.6 3.6s-3.6-1.6118-3.6-3.6c0-1.9882 1.6118-3.6 3.6-3.6s3.6 1.6118 3.6 3.6z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="m20.4 7.2c0 1.9882-1.6118 3.6-3.6 3.6s-3.6-1.6118-3.6-3.6c0-1.9882 1.6118-3.6 3.6-3.6s3.6 1.6118 3.6 3.6z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="m15.515 20.4c0.056-0.3919 0.085-0.7926 0.085-1.2 0-1.9622-0.6728-3.7673-1.8003-5.1971 0.8826-0.5106 1.9073-0.8029 3.0003-0.8029 3.3137 0 6 2.6863 6 6v1.2h-7.285z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="m7.2 13.2c3.3137 0 6 2.6863 6 6v1.2h-12v-1.2c0-3.3137 2.6863-6 6-6z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="sub-nav_link-text">Social</div></a
+              ><a href="https://www.social.plus/video" class="subnav-dropdown-link c-last w-inline-block"
+                ><div class="nav-icon-embed margin-right_xs w-embed">
+                  <svg aria-hidden="true" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path
+                      d="m2.4 7.2c0-1.3255 1.0745-2.4 2.4-2.4h7.2c1.3255 0 2.4 1.0745 2.4 2.4v9.6c0 1.3255-1.0745 2.4-2.4 2.4h-7.2c-1.3255 0-2.4-1.0745-2.4-2.4v-9.6z"
+                      fill="currentColor"
+                    ></path>
+                    <path
+                      d="m16.463 8.5267c-0.4065 0.20327-0.6633 0.61878-0.6633 1.0733v4.8c0 0.4545 0.2568 0.87 0.6633 1.0733l3.4 1.2c0.372 0.186 0.8138 0.1661 1.1676-0.0525 0.3538-0.2187 0.5691-0.6049 0.5691-1.0208v-7.2c0-0.41589-0.2153-0.80213-0.5691-1.0208s-0.7956-0.23853-1.1676-0.05253l-3.4 1.2z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="sub-nav_link-text">Video</div></a
+              >
+            </div>
+          </div>
+          <a href="https://www.social.plus/chat/features" class="submenu-nav_link w-inline-block"
+            ><div class="submenu-nav_link-content"><div class="sub-nav_link-text">Features</div></div></a
+          ><a href="https://www.social.plus/chat/sdk" class="submenu-nav_link w-inline-block"
+            ><div class="submenu-nav_link-content"><div class="sub-nav_link-text">SDK</div></div></a
+          ><a href="https://www.social.plus/chat/uikit" class="submenu-nav_link w-inline-block"
+            ><div class="submenu-nav_link-content"><div class="sub-nav_link-text">UIKit</div></div></a
+          ><a href="https://learn.social.plus/" target="_blank" class="submenu-nav_link w-inline-block"
+            ><div class="submenu-nav_link-content">
+              <div class="sub-nav_link-text">Docs</div>
+              <div aria-label="Open in new tab icon" class="subnav-docs-icon w-embed">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  width="100%"
+                  height="100%"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <g fill="none">
+                    <path
+                      d="M17.001 20h-11a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4v2h-4v11h11v-4h2v4a2 2 0 0 1-2 2zm-5.3-6.293l-1.41-1.414L16.584 6h-3.583V4h7v7h-2V7.415l-6.3 6.292z"
+                      fill="currentColor"
+                    ></path>
+                  </g>
+                </svg>
+              </div></div
+          ></a>
+        </div>
+      </div>
+      <div class="js w-embed w-script"></div>
+    </header>
+  </body>
+</html>

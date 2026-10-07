@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Colors · social.plus website foundations</title>
+    <link rel="stylesheet" href="../../tokens.css" />
+    <style>
+      /* preview chrome (not part of the site) */
+      body {
+        margin: 0;
+        background: var(--social--dark);
+        color: var(--text--text-color-grey-light);
+        font-family: var(--font--figtree);
+      }
+      .fx-page {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem 2.5rem 5rem;
+      }
+      .fx-sample .add-ons_image-wrapper {
+        display: none;
+      } /* preview: the accordion item's image column is shown in section 17 */
+      .fx-head {
+        border-bottom: 1px solid var(--border--border-dark);
+        padding-bottom: 1rem;
+        margin-bottom: 2rem;
+      }
+      .fx-head h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--main--white);
+        color: var(--main--white);
+        letter-spacing: 0;
+      }
+      .fx-head p {
+        margin: 0;
+        color: var(--text--text-color-grey-light);
+        font-size: 0.95rem;
+        max-width: 60rem;
+      }
+      .fx-block {
+        margin: 0 0 2.5rem;
+      }
+      .fx-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text--text-color-grey-medium);
+        margin: 0 0 0.5rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-note {
+        font-size: 0.875rem;
+        color: var(--text--text-color-grey-light);
+        margin: 0 0 1rem;
+        max-width: 60rem;
+      }
+      .fx-sample {
+        border: 1px dashed var(--border--border-hover);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        overflow: hidden;
+      }
+      .fx-sample.fx-tight {
+        padding: 1rem;
+      }
+      .fx-sample.fx-light {
+        background: var(--main--white);
+        color: var(--text--text-color-dark);
+      }
+      .fx-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem 2rem;
+        align-items: center;
+      }
+      .fx-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .fx-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+      .fx-cap {
+        font-size: 0.75rem;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      .fx-measure {
+        display: block;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        color: var(--text--text-color-grey-medium);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        margin: 1.25rem 0 0.25rem;
+        background: none;
+        -webkit-text-fill-color: var(--text--text-color-grey-medium);
+      }
+      .fx-measure:first-child {
+        margin-top: 0;
+      }
+      .fx-swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        gap: 1rem;
+      }
+      .fx-swatch {
+        border: 1px solid var(--border--border-dark);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        background: var(--social--dark-gray-background);
+      }
+      .fx-swatch-color {
+        height: 4.5rem;
+        border-bottom: 1px solid var(--border--border-dark);
+      }
+      .fx-swatch-text {
+        padding: 0.6rem 0.75rem 0.75rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+      .fx-swatch-text code {
+        display: block;
+        color: var(--main--white);
+        font-size: 0.78rem;
+        word-break: break-all;
+      }
+      .fx-swatch-text .fx-val {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-swatch-text .fx-use {
+        color: var(--text--text-color-grey-medium);
+      }
+      .fx-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .fx-max-m {
+        max-width: 47.5rem;
+      }
+      .fx-box {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+      }
+      .fx-box-inner {
+        background: var(--social--dark-gray-background);
+        border: 1px solid var(--border--border-hover);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-container-demo {
+        background: var(--social--blue-transparent);
+        outline: 1px dashed var(--social--main-blue);
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table {
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        width: 100%;
+        max-width: 60rem;
+      }
+      .fx-table th,
+      .fx-table td {
+        text-align: left;
+        padding: 0.4rem 0.6rem;
+        border-bottom: 1px solid var(--border--border-dark);
+        vertical-align: top;
+      }
+      .fx-table th {
+        color: var(--text--text-color-grey-medium);
+        font-weight: 600;
+      }
+      .fx-table td {
+        color: var(--text--text-color-grey-light);
+      }
+      .fx-table code {
+        color: var(--main--white);
+      }
+      @media (max-width: 991px) {
+        .fx-grid-3 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 767px) {
+        .fx-page {
+          padding: 1.5rem 1rem 3rem;
+        }
+        .fx-grid-3,
+        .fx-grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .fx-sample {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Foundation preview built 2026-10-07 by design-system/capture/foundations.mjs from live site snippets (see foundation.md). Images are the site's own CDN files. -->
+    <main class="fx-page">
+      <header class="fx-head">
+        <h1>Colors</h1>
+        <p>
+          The 44 live Webflow variables (General and Typography collections) as captured 2026-10-07; swatches read their
+          colour from tokens.css. Inline style on the swatches is the preview's own.
+        </p>
+      </header>
+      <section class="fx-block">
+        <h2 class="fx-label">Surfaces</h2>
+        <div class="fx-swatches">
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--dark)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--dark</code><span class="fx-val">#111</span><br /><span class="fx-use"
+                >page background; same value as --text--text-color-dark</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--dark-gray-background)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--dark-gray-background</code><span class="fx-val">#1a1a1a</span><br /><span class="fx-use"
+                >raised dark surface: cards v2/v3/plain, secondary button fill</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--dark-card)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--dark-card</code><span class="fx-val">#161616</span><br /><span class="fx-use"
+                >dark card (3 rules)</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--menu-bg)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--menu-bg</code><span class="fx-val">#181818</span><br /><span class="fx-use"
+                >nav bar and nav sheet background</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--grey)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--grey</code><span class="fx-val">#222</span><br /><span class="fx-use"
+                >dark card / panel; card-v1 gradient start</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--light-grey)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--light-grey</code><span class="fx-val">#444</span><br /><span class="fx-use"
+                >dark subtle fill</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--dark-pill)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--dark-pill</code><span class="fx-val">#2e2e2e</span><br /><span class="fx-use"
+                >dark pill (1 rule)</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--grey-background)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--grey-background</code><span class="fx-val">#f9f9f9</span><br /><span class="fx-use"
+                >light section background (.bg-color_grey, .background-color_grey-6)</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--main--whitesmoke)"></div>
+            <div class="fx-swatch-text">
+              <code>--main--whitesmoke</code><span class="fx-val">whitesmoke</span><br /><span class="fx-use"
+                >tag background</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--main--white)"></div>
+            <div class="fx-swatch-text">
+              <code>--main--white</code><span class="fx-val">white</span><br /><span class="fx-use"
+                >headings and white text on dark; light surfaces</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--main--transparant)"></div>
+            <div class="fx-swatch-text">
+              <code>--main--transparant</code><span class="fx-val">#0000</span><br /><span class="fx-use"
+                >transparent (spelled "transparant" on the site)</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Blue (actions, links, gradients)</h2>
+        <div class="fx-swatches">
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--main-blue)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--main-blue</code><span class="fx-val">#3b41ec</span><br /><span class="fx-use"
+                >the action blue: primary button, tags, icons; --gradient--dark-blue aliases it</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--button-hover)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--button-hover</code><span class="fx-val">#272b9d</span><br /><span class="fx-use"
+                >primary button hover; second stop of the button gradient</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--button-pressed)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--button-pressed</code><span class="fx-val">#27265e</span><br /><span class="fx-use"
+                >primary button pressed</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--social--blue-transparent)"></div>
+            <div class="fx-swatch-text">
+              <code>--social--blue-transparent</code><span class="fx-val">#2a31e91a</span><br /><span class="fx-use"
+                >tinted blue background</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--gradient--light-blue)"></div>
+            <div class="fx-swatch-text">
+              <code>--gradient--light-blue</code><span class="fx-val">#45a5ed</span><br /><span class="fx-use"
+                >gradient stop (announcement bar, heroes)</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--gradient--medium-blue)"></div>
+            <div class="fx-swatch-text">
+              <code>--gradient--medium-blue</code><span class="fx-val">#3769ec</span><br /><span class="fx-use"
+                >links and superscripts: the second blue next to --social--main-blue</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--gradient--dark-blue)"></div>
+            <div class="fx-swatch-text">
+              <code>--gradient--dark-blue</code><span class="fx-val">var(--social--main-blue)</span><br /><span
+                class="fx-use"
+                >alias of --social--main-blue</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Text</h2>
+        <div class="fx-swatches">
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--main--white)"></div>
+            <div class="fx-swatch-text">
+              <code>--main--white</code><span class="fx-val">white</span><br /><span class="fx-use"
+                >headings and white text on dark; light surfaces</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-light)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-light</code><span class="fx-val">#b3b3b3</span><br /><span class="fx-use"
+                >body copy on dark</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-lighter)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-lighter</code><span class="fx-val">#d1d1d1</span><br /><span class="fx-use"
+                >h1 gradient end (1 rule)</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-mid)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-mid</code><span class="fx-val">#a4a4a4</span><br /><span class="fx-use"
+                >1 rule only</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-medium)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-medium</code><span class="fx-val">#717275</span><br /><span class="fx-use"
+                >muted text (nav, footer, captions); 3.9:1 on #111</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-muted)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-muted</code><span class="fx-val">#929292</span><br /><span class="fx-use"
+                >defined, unused on the live site</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-grey-dark)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-grey-dark</code><span class="fx-val">#414347</span><br /><span class="fx-use"
+                >secondary text on light</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--text--text-color-dark)"></div>
+            <div class="fx-swatch-text">
+              <code>--text--text-color-dark</code><span class="fx-val">#111</span><br /><span class="fx-use"
+                >text on light; same value as --social--dark</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Borders</h2>
+        <div class="fx-swatches">
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--border--border-dark)"></div>
+            <div class="fx-swatch-text">
+              <code>--border--border-dark</code><span class="fx-val">#232324</span><br /><span class="fx-use"
+                >dark divider and card border</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--border--border-hover)"></div>
+            <div class="fx-swatch-text">
+              <code>--border--border-hover</code><span class="fx-val">#39393a</span><br /><span class="fx-use"
+                >hover border, sub-nav border</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--border--border-dark-grey)"></div>
+            <div class="fx-swatch-text">
+              <code>--border--border-dark-grey</code><span class="fx-val">#666</span><br /><span class="fx-use"
+                >secondary button outline</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--border--border-med-grey)"></div>
+            <div class="fx-swatch-text">
+              <code>--border--border-med-grey</code><span class="fx-val">#d0d0d1</span><br /><span class="fx-use"
+                >light-mode input and card border</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--border--border-light-grey)"></div>
+            <div class="fx-swatch-text">
+              <code>--border--border-light-grey</code><span class="fx-val">#e7e7e7</span><br /><span class="fx-use"
+                >the .divider line (light grey on a dark site)</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Secondary accents</h2>
+        <div class="fx-swatches">
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--green)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--green</code><span class="fx-val">#1dc497</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--yellow)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--yellow</code><span class="fx-val">#f7c506</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--red)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--red</code><span class="fx-val">#ff305a</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--orange)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--orange</code><span class="fx-val">#ff6937</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--purple)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--purple</code><span class="fx-val">#9f72ff</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+          <div class="fx-swatch">
+            <div class="fx-swatch-color" style="background: var(--secondary--pink)"></div>
+            <div class="fx-swatch-text">
+              <code>--secondary--pink</code><span class="fx-val">#f568f0</span><br /><span class="fx-use"
+                >accent and status, never a CTA</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Non-colour tokens</h2>
+        <table class="fx-table">
+          <tbody>
+            <tr>
+              <th>Token</th>
+              <th>Value</th>
+              <th>Use</th>
+            </tr>
+            <tr>
+              <td><code>--font--figtree</code></td>
+              <td>Figtree,Arial,sans-serif</td>
+              <td>the font stack</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h1-font-size</code></td>
+              <td>clamp(2.75rem,1.5rem + 2svw,5rem)</td>
+              <td>h1 and .h1-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h2-font-size</code></td>
+              <td>clamp(2.25rem,1.5rem + 2svw,3.25rem)</td>
+              <td>h2 and .h2-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h3-font-size</code></td>
+              <td>clamp(1.75rem,1rem + 2svw,2.25rem)</td>
+              <td>h3 and .h3-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h4-font-size</code></td>
+              <td>clamp(1.5rem,.875rem + 2svw,1.75rem)</td>
+              <td>h4 and .h4-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h5-font-size</code></td>
+              <td>1.25rem</td>
+              <td>h5 and .h5-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--_typography---h6-font-size</code></td>
+              <td>1.125rem</td>
+              <td>h6 and .h6-font-size</td>
+            </tr>
+            <tr>
+              <td><code>--cta-button_icon-size</code></td>
+              <td>1.75rem</td>
+              <td>size of the button arrow</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="fx-block">
+        <h2 class="fx-label">Colours regular sections use that are not tokens (as-is today)</h2>
+        <p class="fx-note">
+          Listed so nobody mistakes them for tokens. The audit counted 192 off-token colour values in the stylesheets;
+          these are the ones recurring sections depend on.
+        </p>
+        <table class="fx-table">
+          <tbody>
+            <tr>
+              <th>Value</th>
+              <th>Where</th>
+            </tr>
+            <tr>
+              <td><code>#141414</code></td>
+              <td>radial-gradient start of .c-radial-gradient sections</td>
+            </tr>
+            <tr>
+              <td><code>#1b1b1b</code></td>
+              <td>input field background (.input-field, page embeds)</td>
+            </tr>
+            <tr>
+              <td><code>#dc3545</code></td>
+              <td>form error text</td>
+            </tr>
+            <tr>
+              <td><code>#3ccb7f on #093a20</code></td>
+              <td>.tag.c-new</td>
+            </tr>
+            <tr>
+              <td><code>#14152c</code></td>
+              <td>industry hero</td>
+            </tr>
+            <tr>
+              <td><code>#12141914 / #12141929</code></td>
+              <td>the recurring card shadow (0 16px 2rem)</td>
+            </tr>
+            <tr>
+              <td><code>#3b41ec73 / #3b41ec2e / #3b41ec1a</code></td>
+              <td>blue glows on the AI pages</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
