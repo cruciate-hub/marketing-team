@@ -33,6 +33,10 @@ Intersecting rounded shapes reveal a plus sign and a chat bubble: connection at 
 - Co-branding: full logo next to the partner's full logo, or mark next to mark; equal visual weight, clear separation, no overlap. The partnership templates are in Figma.
 - In writing the name is always `social.plus`, lowercase, also at the start of a sentence and in title-case headings; never Social.Plus, Social Plus, social plus or SocialPlus (see `messaging/terminology.md`).
 
+## On the website
+
+The website (dark) uses the full logo in colour with the **white** wordmark: `assets/media/66fe6169153dc88a03557da6_29a5aaff9e31043f2175762ac854a9e5_logo.svg`, as the nav (G1) and the footer (G5) show it. Use that file as it is; never the `#111` wordmark on a dark page. A logo that renders black on a dark page is a bug: the file lost its colours (see Known inconsistencies).
+
 ## Inline SVG
 
 Full logo, colour. The wordmark paths use `fill="#111"` (light backgrounds); use `fill="#ffffff"` on dark backgrounds. Rename the gradient ids when two logos share a page.
@@ -97,3 +101,4 @@ For the white mono version replace every `fill="url(#…)"`, `fill="#27265e"` an
 ## Known inconsistencies (as-is, no decision applied)
 - The live nav shows the logo as a raster CDN image, not the SVG; the footer uses a second copy with alt text "SocialPlus logo" (the name is written social.plus)
 - The X (Twitter) footer icon title still says "Social+" (see the icons foundation)
+- The site's logo file set its colours in a `<style>` block. Claude Design strips `<style>` from uploaded SVGs, so the first page built there (7 October 2026) showed the logo all black. Since 13.57 the copy in `assets/media/` carries its colours on the shapes (`capture/localize-media.mjs` does this on every capture run)

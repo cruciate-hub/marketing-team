@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.57
+
+The social.plus logo and six icons keep their colours in Claude Design.
+
+**Why:** the second Claude Design test (7 October 2026, the Agentry landing page after the 13.56 re-sync) showed the logo in the nav and footer all black. Claude Design strips the `<style>` block from every SVG it uploads; the site's logo file (and six icons) set their colours there through classes, so every shape fell back to black.
+
+**Changes:**
+- [`capture/localize-media.mjs`](design-system/capture/localize-media.mjs): new step `inlineSvgStyles`, run on every capture: an SVG in `assets/media/` with a `<style>` block gets each class rule moved onto its shapes as attributes (`fill`, `stroke`, `opacity` …; anything else in `style="…"`) and the block removed. Only plain class selectors are handled; any other selector leaves the file as it is, is reported, and fails the run.
+- Applied to the 7 SVGs that had a `<style>` block: the logo (`66fe…_logo.svg`, white wordmark), the two checkmark circles, the social list-item icon, the arrow-down, the implementation-app and the push-notification icons. Shapes and colours are unchanged; [`capture/media.json`](design-system/capture/media.json) has their new sizes and `coloursInlined: true`.
+- [`foundations/logo/foundation.md`](design-system/foundations/logo/foundation.md): new "On the website" part (the dark site uses the colour logo with the white wordmark, this file, never the `#111` wordmark on dark) and the cause under Known inconsistencies. [`design-system/README.md`](design-system/README.md) names the one exception to "same bytes as served".
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.56 -> 13.57. No brand-kit bump: no symlinked skill file changed.
+
 ## marketing-team 13.56
 
 The design system now says how to combine its sections (a taste guide), when a page is finished (a definition of done), how a product or feature landing page is built (a ninth recipe), and holds its first proposed section (use-case tabs).
