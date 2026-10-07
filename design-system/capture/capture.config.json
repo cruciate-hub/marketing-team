@@ -8,7 +8,24 @@
     "rawDir": "raw",
     "galleryFile": "../sections/index.html",
     "readmeDiffFile": "README.md",
-    "fontFile": "figtree.woff2"
+    "fontFile": "figtree.woff2",
+    "mediaDir": "../assets/media",
+    "mediaManifest": "media.json"
+  },
+  "media": {
+    "hosts": [
+      "cdn.prod.website-files.com",
+      "d3e54v103j8qbb.cloudfront.net"
+    ],
+    "videoExtensions": [
+      ".mp4",
+      ".webm",
+      ".mov",
+      ".m4v",
+      ".ogv"
+    ],
+    "pauseBetweenDownloadsMs": 150,
+    "userAgent": "marketing-team design-system capture (read-only; https://github.com/cruciate-hub/marketing-team)"
   },
   "viewports": {
     "desktop": {
@@ -100,7 +117,8 @@
       ".w-form-fail",
       ".contact-form_popup",
       "video source[src^='blob:']",
-      ".contact-sales_cs-logo"
+      ".contact-sales_cs-logo",
+      "link[rel=prefetch]"
     ],
     "removeAttributes": [
       "data-w-id",
