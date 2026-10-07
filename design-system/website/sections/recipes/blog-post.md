@@ -13,4 +13,4 @@ Rules for the page:
 
 - The body uses the rich-text style of the template as it is today (`.rich-text.c-blog`); no inline styling, no custom blocks beyond h2, h3, p, lists, blockquote, images, tables and links.
 - Images in the body have alt text; one image at the top, the rest where the text needs them.
-- No CTA band and no form on a blog post (as-is today; TO CHECK with Amadeus whether the footer CTA band should be added to the template).
+- No CTA band and no form on a blog post (as-is today; TO CHECK with Stefan or Amadeus whether the footer CTA band should be added to the template).

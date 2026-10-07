@@ -1,6 +1,6 @@
 # 26 · Quote / Carousel
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/, section with the customer quotes (first `section.section.padding_y.overflow-hidden`)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (one large quote with name, role, company logo and a "Read the story" text link; the logo tabs under it switch the quote)

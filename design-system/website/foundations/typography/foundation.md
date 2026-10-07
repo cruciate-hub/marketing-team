@@ -2,7 +2,7 @@
 
 Figtree (variable font 300 to 900; Inter is loaded but unused). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide (the style guide's own heading, text, weight, alignment and colour samples)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

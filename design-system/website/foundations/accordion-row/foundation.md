@@ -2,7 +2,7 @@
 
 The FAQ row (`.accordion_item`) and the feature accordion item (`.add-ons_accordion-item`) as single rows, open.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: Live rows from the FAQ on /vs/circle and the feature accordion on /industry/gaming
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

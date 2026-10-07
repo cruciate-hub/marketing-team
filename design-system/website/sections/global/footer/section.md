@@ -1,6 +1,6 @@
 # G5 · Footer
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, `footer.footer-wrapper` (the same footer is on every page)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variants captured: default (dark, newsletter form, 4 link columns); `--no-newsletter` (https://www.social.plus/contact/contact-sales: the same footer without the newsletter form, as on the contact pages)

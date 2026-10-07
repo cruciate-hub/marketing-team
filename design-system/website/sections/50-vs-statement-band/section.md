@@ -1,6 +1,6 @@
 # 50 · vs / Statement band
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, section "Build and monetize in-app community experiences you fully own"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: dark, two columns: heading left, paragraph right

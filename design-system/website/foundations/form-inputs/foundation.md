@@ -2,7 +2,7 @@
 
 The contact form (text fields, selects, textarea, custom checkbox, submit) and the footer newsletter form, with the site's own markup and rules. Success and error states are not captured.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/contact/contact-sales (`form`) and the footer form on /vs/circle
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

@@ -1,6 +1,6 @@
 # G1 · Nav
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, `header.nav` (the same nav is on every page)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: dark, mega menu closed
@@ -10,7 +10,7 @@
 Every website page. It is the only nav.
 
 ## Don't use it when
-Never leave it out. Landing pages without navigation are not part of the set (TO CHECK: Amadeus).
+Never leave it out. Landing pages without navigation are not part of the set (TO CHECK: Stefan or Amadeus).
 
 ## Content slots
 - Logo (social.plus wordmark, links to /)

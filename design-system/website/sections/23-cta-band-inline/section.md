@@ -1,6 +1,6 @@
 # 23 · CTA band (inline)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/pricing, `section#support-packages`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (centred heading, one paragraph, one grey button); `--two-buttons` (https://www.social.plus/ai/mcp-server, section "Start building": centred heading, one line, primary + grey button)

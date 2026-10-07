@@ -2,7 +2,7 @@
 
 The rich-text styles as they are today: `.rich-text` (blog with `.c-blog`, glossary, tutorials, news, legal with `.c-legal`), `.answers_rich-text`, `.product-update_rich-text` (product updates, release notes) and the plain `.w-richtext`. Long bodies are trimmed in the preview to the first elements of each kind.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide (rich text samples) and live bodies from a blog post, a glossary entry, an answer and a release note
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

@@ -1,6 +1,6 @@
 # G3 · Breadcrumb bar
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/customer-story/activerse, `div.breadcrumb-bar` (`.c-dark`)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (dark, `.c-dark`); `--light` (https://www.social.plus/tutorials/add-a-vector-database-to-your-gpt-custom-content-bot: the plain class without `.c-dark`)

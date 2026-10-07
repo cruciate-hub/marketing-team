@@ -1,6 +1,6 @@
 # 05 · Hero / vs
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, `section.vs-hero`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: two brand tiles with glows (the only variant)

@@ -1,6 +1,6 @@
 # 03 · Hero / Industry
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/industry/gaming, `section.industry-hero`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (title, enlarged paragraph, one button, centred image right)

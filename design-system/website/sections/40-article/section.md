@@ -1,6 +1,6 @@
 # 40 · Article (blog post, answer, release note)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/blog/10-common-online-community-challenges-and-how-to-overcome-them, `section#main-content`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (blog post: tags, title, author and date, share buttons, intro, image, `.rich-text.c-blog` body, aside, bottom share row); `--answer` (https://www.social.plus/answers/api-for-…: title, image, `.answers_rich-text` body, one column); `--release-note` (https://www.social.plus/release-note/1-1-chat-…: title, tags, `.product-update_rich-text` body)

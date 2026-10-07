@@ -1,6 +1,6 @@
 # 51 · vs / Side-by-side (sticky)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, section "What social.plus delivers beyond the community platform"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: 5 blocks, dark, sticky illustration on desktop

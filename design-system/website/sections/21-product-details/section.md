@@ -1,6 +1,6 @@
 # 21 · Feature grid / Product details
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/product, section "White-label social features"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (tile grid: text tiles with title and paragraph, image tiles)
@@ -17,7 +17,7 @@ Any single-product page (use 11, 12 or 13).
 - Tiles: title `h3`, 1 to 2 sentences, an image; 6 to 10 tiles in a 2-column tile grid
 
 ## Allowed variations
-- Number of tiles. TO CHECK with Amadeus whether this section stays in the set or becomes product-page only (it exists on one page)
+- Number of tiles. TO CHECK with Stefan or Amadeus whether this section stays in the set or becomes product-page only (it exists on one page)
 
 ## Not allowed
 - Tiles without an image, links inside tiles, a 3-column version

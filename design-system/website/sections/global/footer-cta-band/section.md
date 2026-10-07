@@ -1,6 +1,6 @@
 # G4 · Footer CTA band
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, `section.footer` (the CTA part above the site footer)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: heading, one line, one primary button

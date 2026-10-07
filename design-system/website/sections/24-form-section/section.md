@@ -1,6 +1,6 @@
 # 24 · Form section
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/contact/contact-sales, `section#main-content`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (contact: heading, text and customer logos left; the contact form right); `--with-image` (https://www.social.plus/social/uikit, `section#figma`: download form left, image right)

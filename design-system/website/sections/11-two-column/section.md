@@ -1,6 +1,6 @@
 # 11 · Two-column / Text + image
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/why-social, `section#main-content` (first section of the page)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading + paragraph left, image right); `--checklist` (https://www.social.plus/chat/sdk/ios: text with a 3-item checklist left, image right); `--image-left` (same page: image left, text with a grey button right, radial-gradient background); `--video-cta` (same page, `<aside>`: eyebrow, text, grey button left, product video right); `--three-rows` (https://www.social.plus/chat: eyebrow + heading, then three alternating text/image rows with grey buttons)

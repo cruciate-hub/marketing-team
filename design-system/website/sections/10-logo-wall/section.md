@@ -1,6 +1,6 @@
 # 10 · Logo wall
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, `section.c-hmpg_wall`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variants captured: default (grid: divider heading, 12 logos on desktop, 6 on phones, hover chips); `--marquee` (https://www.social.plus/chat, `section.logo-row`: one scrolling row of logos under a fade divider, as on product pages)

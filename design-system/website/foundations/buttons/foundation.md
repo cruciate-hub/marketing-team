@@ -2,7 +2,7 @@
 
 Primary, secondary and text link from the style guide, plus the form submit button. States are shown statically: the live `:hover` and `:active` rules are copied onto `.sim-hover` and `.sim-active` classes in the preview.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide (buttons block) and live buttons from /vs/circle (primary), /chat/sdk/ios (secondary), /social/uikit (text link), /contact/contact-sales and the footer (submit)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

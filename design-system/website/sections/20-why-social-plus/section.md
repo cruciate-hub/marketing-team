@@ -1,6 +1,6 @@
 # 20 · Why social.plus grid
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/industry/gaming, section "Why social.plus"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading, one line; 5 reasons in a vertical grid with small icons); `--no-heading` (https://www.social.plus/chat: 4 reasons without a heading, with compliance badges and SDK icons)

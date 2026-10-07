@@ -524,7 +524,7 @@ function sectionMdHeader(section, page) {
   return [
     `# ${title}`,
     '',
-    `- Status: draft (${today}) · Owner: Stefan · Approved by: TO CHECK (Amadeus)`,
+    `- Status: draft (${today}) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)`,
     `- Source: ${page.url}, ${section.headingText ? `section "${section.headingText}…"` : `\`${section.selector}\``}`,
     `- Screenshots: desktop.png, mobile.png · Code: source.html, styles.css`,
     `- Variant captured: ${section.variant || 'TO CHECK'}`,

@@ -1,6 +1,6 @@
 # 18 · FAQ accordion
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, section "FAQ"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variants captured: default (dark, radial-gradient background, CMS questions, first answer open); `--border-top` (https://www.social.plus/ai/mcp-server: the same accordion on the plain dark background with a 1px top border; a long list collapsed to 30rem with an "Expand" overlay, as live; the script expands it). The pricing FAQ is rich text, not this section

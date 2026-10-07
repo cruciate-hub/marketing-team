@@ -1,6 +1,6 @@
 # 17 · Accordion with image (features)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/industry/gaming, section "From sessions to seasons"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading; 3 accordion items with a timeline line, image on the left `.c-reversed`); `--square-image` (https://www.social.plus/use-case/1-1-chat: 4 items, square image on the right)

@@ -1,6 +1,6 @@
 # 12 · Feature grid (3 columns, icon + text)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/chat, section "All the messaging features your app needs"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading, intro, grey button; 6 CMS features in 3 columns with icon, title, one line; the button repeats below)

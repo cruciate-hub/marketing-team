@@ -1,6 +1,6 @@
 # 30 · Thumbnail grid
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/blog, `section#blogs-all`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (blog overview: 3 columns of thumbnail cards, radial-gradient background); `--related-aside` (https://www.social.plus/blog/10-common-…, `aside.section`: heading + 3 related posts at the end of an article)

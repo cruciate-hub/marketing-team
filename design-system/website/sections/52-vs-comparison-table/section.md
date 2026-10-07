@@ -1,6 +1,6 @@
 # 52 · vs / Comparison table
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, section "The full comparison"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: 5 category pills plus a table with two value columns

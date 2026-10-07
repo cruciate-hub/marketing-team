@@ -1,6 +1,6 @@
 # 19 · Customer story strip
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/chat, section "Leading brands grow with social.plus"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading, intro; 5 story cards with photo, gradient overlay, logo and headline; one button); `--six-stories` (https://www.social.plus/customer-story/activerse, `<aside>`: 6 cards under a customer story, "More in-app communities powered by social.plus")

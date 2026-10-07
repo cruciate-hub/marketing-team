@@ -1,6 +1,6 @@
 # G2 · Sub-nav
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/chat, `header.sub-navbar`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (product: Chat); `--blog` (https://www.social.plus/blog, `div.sub-navbar`: the blog categories)

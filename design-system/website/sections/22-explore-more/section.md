@@ -1,6 +1,6 @@
 # 22 · Explore more (links with images)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/chat, section "Explore more of social.plus"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading, intro; 2 link tiles with image, title `.h3-font-size`, text and a grey button; radial-gradient background)

@@ -6,7 +6,7 @@ Everything is as the site is today. No team decision from the 7 October audit ha
 
 ## The rule
 
-> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark` #111), Figtree, one blue for actions (`--social--main-blue` #3B41EC). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
+> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Use only the values in `tokens.css`: dark background (`--social--dark` #111), Figtree, one blue for actions (`--social--main-blue` #3B41EC). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed". A proposed section may be used only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order.
 
 Short form for a project's instructions: dark background, Figtree, one blue for actions; only these sections, only these tokens; anything new is proposed and marked "proposed".
 

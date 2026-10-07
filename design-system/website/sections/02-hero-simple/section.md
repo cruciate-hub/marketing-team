@@ -1,6 +1,6 @@
 # 02 · Hero / Simple (title, text, buttons)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/ai/mcp-server, `header.section.padding_y.background-color_dark` (first)
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (eyebrow, H1, text, primary + grey button, small logos row "Works in …"); `--illustration` (https://www.social.plus/chat/sdk, `section#main-content`: H1, text, two buttons, platform icons row, image slider right)

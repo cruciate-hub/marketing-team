@@ -12,4 +12,4 @@ A page on https://www.social.plus/glossary/…, like https://www.social.plus/glo
 Rules for the page:
 
 - The body follows the glossary format of the content skills (`glossary-content`): 7 fixed sections, 500 to 900 words, answer-first definition.
-- No images, no form, no CTA band (as-is today; TO CHECK with Amadeus whether the footer CTA band should be added).
+- No images, no form, no CTA band (as-is today; TO CHECK with Stefan or Amadeus whether the footer CTA band should be added).

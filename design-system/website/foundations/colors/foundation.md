@@ -2,7 +2,7 @@
 
 The 44 live Webflow variables (General and Typography collections) as swatches with name, value and use. The page is dark-first: `--social--dark` #111 is the page background and `--social--main-blue` #3B41EC is the only action colour.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide and the `:root` block of the live stylesheet (tokens.css, tokens.json)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)

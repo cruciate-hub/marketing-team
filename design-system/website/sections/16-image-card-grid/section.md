@@ -1,6 +1,6 @@
 # 16 · Image-card grid (use cases, industries)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/industry/gaming, section "Use cases that keep players coming back"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading + 6 static image cards in 3 columns: image, title, one line); `--four-columns-cms` (https://www.social.plus/white-label/social-network: 8 CMS cards in 4 columns, radial-gradient background)

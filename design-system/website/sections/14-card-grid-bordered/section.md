@@ -1,6 +1,6 @@
 # 14 · Card grid / Bordered (v1)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/social/uikit, section "Open Source Social UIKits"
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading, intro; 5 card-v1 cards in 3 columns with image, title, text and a "Docs" text link; radial-gradient background)

@@ -1,6 +1,6 @@
 # 53 · vs / Customer stories (tabbed) + form
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/vs/circle, section "Trusted by today's leading consumer apps. Yours could be next."
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css
 - Variant captured: 4 stories (logo tabs plus photo slide) and the contact form

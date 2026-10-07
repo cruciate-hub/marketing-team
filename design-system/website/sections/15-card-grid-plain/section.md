@@ -1,6 +1,6 @@
 # 15 · Card grid / Plain
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/industry/gaming, section "Players start strong, but churn hits fast."
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (heading + 4 plain cards in 2 columns: problem statements); `--three-columns` (https://www.social.plus/use-case/1-1-chat: heading + plain cards in 3 columns)

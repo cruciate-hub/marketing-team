@@ -1,6 +1,6 @@
 # 01 · Hero / Product (two-column)
 
-- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Amadeus)
+- Status: draft (2026-10-07) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/social/uikit, `section.main-hero`
 - Screenshots: desktop.png, mobile.png · Code: source.html, styles.css (variants: the same files with a `--<variant>` suffix)
 - Variants captured: default (image right, primary + secondary button); `--video` (https://www.social.plus/chat: looping product video right, one button); `--two-buttons` (https://www.social.plus/chat/sdk/ios: `header.main-hero`, video right, Contact Sales + Documentation)
