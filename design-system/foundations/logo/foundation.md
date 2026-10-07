@@ -1,9 +1,9 @@
 # Logo
 
-The social.plus logo: full logo (icon mark + wordmark) and icon mark, in colour and in monochrome, with the clear-space rule and the backgrounds it may sit on. The vector data is below so emails and HTML can embed it inline; the files are in `assets/`.
+The social.plus logo: full logo (icon mark + wordmark) and icon mark, in colour and in monochrome, with the clear-space rule and the backgrounds it may sit on. The vector data is below so HTML can embed it inline; the colour files are `assets/social-plus-logo.svg` and `assets/social-plus-icon.svg` at the repository root (`$MT_REPO/assets/`, not under `design-system/`). The white and black mono sets are not in the repository (TO CHECK: Figma or the brand kit); until then make them from the inline SVG as described below.
 
 - Status: draft (2026-10-07), moved from the former `design-system/logo.md` (brand guidelines) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
-- Source: the official logo files (`assets/social-plus-logo.svg`, `assets/social-plus-icon.svg`) and the brand guidelines; on the live site the nav and footer show the logo as a CDN image (`.nav-logo_img`, `.logo-footer`, 24px high in the nav)
+- Source: the official logo files (`$MT_REPO/assets/social-plus-logo.svg`, `assets/social-plus-icon.svg`) and the brand guidelines; on the live site the nav and footer show the logo as a CDN image in a `.nav-logo_img` box of 10.5rem × 2.5rem (9.5rem wide on phones) and a `.logo-footer` box of 10rem × 2.5rem (captured CSS, G1 and G5)
 - Preview: preview.html (hand-made, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Not produced by capture/: the preview is written by hand and survives re-runs
 
@@ -15,21 +15,23 @@ Intersecting rounded shapes reveal a plus sign and a chat bubble: connection at 
 
 | Variant | Use |
 |---|---|
-| Full logo, colour, white wordmark | Default on dark pages, dark sections, dark photography |
+| Full logo, colour, white wordmark | Default on dark pages and dark sections |
 | Full logo, colour, dark wordmark (`#111`) | Light backgrounds: white, `--main--whitesmoke`, `--social--grey-background` |
-| Full logo, white mono | Gradients, busy or saturated backgrounds, single-ink print |
-| Full logo, black mono | Light single-ink print, embossing, watermarks |
+| Full logo, white mono | Dark photography, gradients, busy or saturated backgrounds, single-ink print |
+| Full logo, black mono | Light photography (or the colour logo, tested for legibility), light single-ink print, embossing, watermarks |
 | Icon mark (colour, white, black) | Favicons, profile pictures, app icons, layouts too tight for the full logo |
 
 ## Rules
 
 - Clear space: the height of the icon mark (x) on all four sides. Nothing enters that zone.
-- Minimum size: full logo 24px high (the nav bar size); icon mark 16px.
+- Minimum size: TO CHECK (the former brand file set none; the smallest live use is the 2.5rem = 40px nav box). Until decided, do not set the full logo smaller than the nav shows it.
 - When the layout is tight, switch to the icon mark; never shrink the full logo below its minimum.
 - Never on `--social--main-blue` (#3B41EC): the blue arm disappears and the navy centre loses its shape. Approved backgrounds: `--social--dark` and the dark surfaces, white and the light greys, photography with the mono logo.
-- Never stretch, rotate, recolour, redraw, add a shadow or a glow, or change the colour arrangement. Use the files.
-- Co-branding: full logo next to the partner's full logo, or mark next to mark; equal visual weight, clear separation, no overlap.
-- In writing the name is always `social.plus`, lowercase, also at the start of a sentence and in title-case headings (see `messaging/terminology.md`).
+- Light photography: black mono or the colour logo, tested for legibility; dark photography: white mono. On any dark or saturated background, the white mono logo.
+- Monochrome is for single-ink print, embossing and engraving, watermarks, and wherever colour reproduction is not reliable.
+- Never stretch, rotate, recolour, redraw, add a shadow or a glow, or change the colour arrangement. Use the files, never a low-resolution copy (the live nav does, see Known inconsistencies).
+- Co-branding: full logo next to the partner's full logo, or mark next to mark; equal visual weight, clear separation, no overlap. The partnership templates are in Figma.
+- In writing the name is always `social.plus`, lowercase, also at the start of a sentence and in title-case headings; never Social.Plus, Social Plus, social plus or SocialPlus (see `messaging/terminology.md`).
 
 ## Inline SVG
 

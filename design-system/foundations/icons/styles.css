@@ -1,23 +1,34 @@
-/* Icons: holder rules copied from the captured sections (tokens as var(--…), see ../../tokens.css); the glyphs are inline SVG. */
+/* Icons: the site's own rules for the interface icons and the feature-glyph holders, copied from the captured sections (tokens as var(--…), see ../../tokens.css); the glyphs are inline SVG or image files. Preview-only classes are marked at the end. */
 
-/* the site's own rules for the icon holders (copied from the captured sections; tokens as var(--…)) */
-.button-icon_wrapper { background-color: var(--social--main-blue); border-radius: 100%; flex: none; justify-content: center; align-items: center; width: var(--cta-button_icon-size); height: var(--cta-button_icon-size); display: flex; color: var(--main--white); }
+/* the site's own rules (copied from the captured sections; tokens as var(--…)) */
+.arrow-social { width: var(--cta-button_icon-size); height: var(--cta-button_icon-size); flex: none; padding: 0.25rem; } /* 01 hero product */
+.arrow-social.c-small { width: 1rem; height: 1rem; padding: 0; } /* 10 logo wall */
+.button-icon_wrapper { background-color: var(--social--main-blue); border-radius: 100%; flex: none; justify-content: center; align-items: center; margin-right: -1rem; display: flex; } /* 01 hero product */
 .button-icon_wrapper.c-grey { background-color: var(--border--border-dark-grey); }
-.arrow-social { width: 1.25rem; height: 1.25rem; display: block; }
-.arrow-social.c-small { width: 1rem; height: 1rem; }
-.icon-small { flex: none; justify-content: center; align-items: center; width: 1rem; height: 1rem; margin: 0 .25rem; display: flex; color: var(--main--white); }
-.checkmark-icon { width: 1.25rem; height: 1.25rem; color: var(--social--main-blue); display: flex; }
-.accordion-icon { width: 1.5rem; height: 1.5rem; font-size: 1.5rem; color: var(--main--white); display: flex; }
-.pricing_icon-info { width: 1rem; height: 1rem; color: var(--text--text-color-grey-light); display: flex; }
-.nav-icon_wrapper { width: 1.5rem; height: 1.5rem; color: var(--main--white); display: flex; }
-.social-icon_wrapper { width: 1.25rem; height: 1.25rem; color: var(--main--white); display: flex; }
-.card-icon-v1 { background-color: var(--social--main-blue); width: 3rem; height: 3rem; color: var(--main--whitesmoke); border-radius: 99rem; flex: none; justify-content: center; align-items: center; padding: .75rem; display: flex; }
-.card-icon-v2 { width: 4.5rem; height: 4.5rem; color: var(--main--whitesmoke); background-color: #2b2b2b; border-radius: .5rem; flex: none; justify-content: center; align-items: center; padding: 1rem; display: flex; }
+.icon-small { flex: none; justify-content: center; align-items: center; width: 1rem; margin-left: 0.25rem; margin-right: 0.25rem; display: flex; } /* 14 card grid bordered */
+.checkmark-icon { width: 1rem; height: 1rem; color: var(--social--main-blue); text-align: center; cursor: default; flex: none; justify-content: center; align-items: center; font-size: 1rem; } /* 60 pricing plan cards, 61 pricing compare table */
+.checkmark-icon.c-pricing-top { color: var(--main--white); margin-right: 0.5rem; position: relative; bottom: -0.25rem; }
+.accordion-icon { justify-content: center; align-items: center; margin-bottom: 0.5rem; margin-right: 0.5rem; position: relative; } /* 18 FAQ: wrapper */
+.faq-icon_content { justify-content: center; align-items: center; display: flex; position: relative; }
+.accodrion-icon { flex: none; justify-content: center; align-items: center; display: flex; } /* 18 FAQ: the chevron embed (width="1em" of the inherited 1.1rem body size) */
+.pricing_icon-info { width: 1.15rem; height: 1.15rem; color: var(--main--white); text-align: center; flex: none; justify-content: center; align-items: center; font-size: 1rem; display: flex; } /* 61 pricing compare table */
+.pricing_icon-info:hover { color: var(--text--text-color-grey-medium); }
+.nav-icon-embed { aspect-ratio: 1; flex: none; justify-content: center; align-items: center; width: 1rem; height: 1rem; font-size: 1rem; line-height: 1; display: flex; } /* G1 nav, G2 sub-nav */
+.footer-social-link { color: #d0d0d1; flex: none; width: 1.5rem; height: 1.5rem; margin-left: 1.25rem; } /* G5 footer */
+.footer-social-link:hover { color: var(--social--main-blue); }
+.social-icon-embed { width: 100%; height: 100%; }
+.card-icon-v1 { background-color: var(--social--main-blue); width: 3rem; height: 3rem; color: var(--main--whitesmoke); border-radius: 99rem; flex: none; justify-content: center; align-items: center; margin-right: 0.5rem; padding: 0.125rem; font-size: 0.75rem; display: flex; position: relative; top: -0.125rem; } /* 14 card grid bordered */
+.card-icon-v2 { width: 4.5rem; height: 4.5rem; color: var(--main--whitesmoke); background-color: #2b2b2b; border-radius: 0.5rem; flex: none; justify-content: center; align-items: center; margin-bottom: 1rem; font-size: 0.75rem; display: flex; overflow: hidden; } /* 13 card grid icons */
+@media screen and (max-width: 479px) { .card-icon-v2 { width: 3rem; height: 3rem; top: -0.4rem; } }
 .icon-full { flex: none; width: 100%; height: 100%; max-height: 100%; position: relative; }
-.why-icon { width: 2.5rem; height: 2.5rem; object-fit: contain; }
-/* preview only */
+/* preview only (not on the site): the cells, the sample button and text link, and the holders shown without their section context */
 .ic-cell { display: flex; flex-direction: column; align-items: center; gap: .5rem; text-align: center; min-width: 7rem; }
 .ic-cell .fx-cap { max-width: 9rem; }
+.ic-cell .button-icon_wrapper, .ic-cell .card-icon-v1, .ic-cell .card-icon-v2, .ic-cell .footer-social-link { margin: 0; top: 0; }
+.ic-cell .footer-social-link { display: block; }
 .ic-text-link { display: inline-flex; align-items: center; gap: .5rem; color: var(--main--white); font-weight: 500; text-decoration: none; }
 .ic-btn { display: inline-flex; align-items: center; gap: .75rem; background: var(--social--main-blue); color: var(--main--white); border-radius: 10em; padding: .5rem .5rem .5rem 1.5rem; font-weight: 500; text-decoration: none; min-height: 2.8rem; }
+.ic-btn .button-icon_wrapper { margin-right: 0; }
 .ic-btn.c-grey { background: var(--social--dark-gray-background); box-shadow: inset 0 0 0 2px var(--border--border-dark-grey); }
+.ic-tile { width: 7rem; height: 7rem; background: var(--social--dark-gray-background); border-radius: .5rem; position: relative; overflow: hidden; }
+.ic-tile img { width: 100%; position: absolute; inset: auto 0 0; object-fit: cover; }
