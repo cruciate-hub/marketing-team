@@ -1,5 +1,18 @@
 # Changelog
 
+## marketing-team 13.53
+
+A website design system built from the live site, ready for Claude Design: `design-system/website/` now holds the site's tokens, 11 foundations and 41 section types as working code, with page recipes and a re-runnable capture.
+
+**Why:** pages made in Claude Design invented new layouts, text effects and icons on every page, because no website design system existed in a form Claude Design can build from. The team will make pages together in a shared Claude Design project, so it needs one source that matches the live site exactly (7 October 2026).
+
+**Changes:**
+- [`design-system/website/tokens.css`](design-system/website/tokens.css) and `tokens.json`: the 44 live Webflow variables (deleted leftovers removed) and Figtree.
+- [`design-system/website/foundations/`](design-system/website/foundations/): colors, typography, spacing and containers, buttons, cards, rich text, form inputs, tags, accordion row, dividers, images. Each with a preview, notes and screenshots. Captured as-is; known inconsistencies are listed for the team's decisions.
+- [`design-system/website/sections/`](design-system/website/sections/): 41 section types (56 captures with variants) from their best example pages, each with `section.md` (when to use it, content slots, allowed variations), `source.html`, `styles.css` and desktop and mobile screenshots; the rule for Claude Design; recipes for /vs/, product, SDK, industry, blog post, answer, glossary entry and customer story; a gallery (`sections/index.html`).
+- [`design-system/website/capture/`](design-system/website/capture/): the Playwright capture, check, gallery and pack scripts (no AI calls). Checked against the live site: 64 OK, 12 minor, 0 broken. Podcast and Community Corner pages are out of scope.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.52 -> 13.53. No kit upload needed: no skill reads these files yet; pointing the design-system skill at them is a follow-up.
+
 ## marketing-team 13.52
 
 The claims check no longer reads a competitor's feature as a social.plus claim when the next sentence starts with "social.plus".
