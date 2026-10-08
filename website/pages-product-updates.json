@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-28T10:22:15.243Z",
-    "itemCount": 69,
+    "generatedAt": "2026-10-08T11:47:45.165Z",
+    "itemCount": 70,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/whats-new-in-social-plus-september-2026",
+      "metaTitle": "What's new in social.plus | September 2026",
+      "metaDescription": "This month we pushed social.plus into new territory. From querying your first-party data inside an AI assistant to surfacing real user content on any page of your app, September is about making engagement visible in places it never reached before. Here is what shipped.",
+      "content": "# What's new in social.plus | September 2026\n## Ask Your First-Party Data Anything with Agentry\n## Surface Real User Posts Anywhere with Discovery Widget\n## Multi-Media Posts Now Display as a Carousel\n## Configurable Live Stream Viewer Count Threshold\n## Livestream Picture-in-Picture Support for Uninterrupted Viewing\n## Comment Approval Across User Conversations\n## Global Mute for Proportionate Moderation\n## Direct Profile Reset for Admins on Console\n## We also added"
+    },
     {
       "url": "https://www.social.plus/product-update/introducing-agentry-ask-your-first-party-data-anything",
       "metaTitle": "Introducing Agentry: Ask Your First-Party Data Anything",
