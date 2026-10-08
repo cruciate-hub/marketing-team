@@ -21,7 +21,7 @@ The 44 live Webflow variables (General and Typography collections) as swatches w
 - 17 deleted Webflow variables are still emitted; 13 of them are referenced by 27 live rules; the capture rewrites them to live equivalents (`deletedVariableMap` in capture.config.json) and tokens.css leaves them out
 - Unused or single-use tokens: `--text--text-color-grey-muted` (no rule), grey-lighter, grey-mid, `--social--dark-pill` (one rule each)
 - `--text--text-color-grey-medium` #717275 on #111 is 3.9:1, below 4.5:1; used on 114 pages (nav, footer)
-- No light-surface pair, no radius or shadow tokens (radii in use: .5rem, 1rem, .75rem, .25rem, 1.5rem, 16px, 12px, pill 999px/99rem/100rem/20rem; the recurring shadow is `0 16px 2rem #12141914`)
+- No light-surface pair, no radius or shadow tokens (the design system page holds the measured values as tokens, see shadows-and-radius; radii in use: .5rem, 1rem, .75rem, .25rem, 1.5rem, 16px, 12px, pill 999px/99rem/100rem/20rem; the recurring shadow is `0 16px 2rem #12141914`)
 - `--main--transparant` is spelled with an "a" on the site
 - The site has one blue gradient on text: `linear-gradient(145deg, var(--gradient--light-blue), var(--gradient--dark-blue))` as a `background-clip: text` fill on superscripts (sections 42 and 60), next to the `h1` radial fill (typography foundation). Neither is a licence: see "No gradient on text" below
 

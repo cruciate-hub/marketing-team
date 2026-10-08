@@ -59,6 +59,8 @@ From the audit, open question 9 ("add radius and shadow tokens"):
 | shadow card | `0 16px 2rem #12141914` (hover `#12141929`) | the four `#121419` variants |
 | shadow glow | `0 0 24px #3b41ec2e` | the four blue glows |
 
+The design system page (Claude Design) lists the measured radii and shadows as tokens (`radius-4` to `radius-circle`, `shadow-card` to `shadow-focus-field`) so pages built there can name them; they are not Webflow variables and are written as literals in Webflow until this set is decided.
+
 The former `shadows.md` scale (`--shadow-sm` to `--shadow-xl`, light and dark values, eight z-index layers) and the former `border-radius.md` nine-step scale were not on the site; the values above are what the site has. Until the team decides, use the measured value of the section you are building from, and the proposed set for anything new.
 
 ## Known inconsistencies (as-is, no decision applied)
