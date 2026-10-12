@@ -2102,3 +2102,66 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .mock_stat b.is-up { color: var(--green-300); }
 .theme-light .mock_stat b.is-up { color: var(--green-700); }
 .mock_stat span { display: block; margin-top: var(--space-3xs); font-size: var(--text-small); }
+
+/* AI chat mockup (.mk_ai), Stefan 12 October 2026: an AI assistant answering in a chat, for AI product pages
+   (Agentry, the MCP server, Vise) in a feature tab or feature row. Header with the assistant's mark and name; the
+   person's question as a blue bubble on the right; the answer on the left as a card with one visual: numbers
+   (.mock_stats), a table (.mk_ai_table), bars (.mk_ai_bars), rows (.mk_ai_rows) or topics (.mk_ai_pills); a
+   follow-up input at the bottom. Rises are success green (.is-up), bars one colour (color-link). The "Illustrative
+   example" tag sits in the header row. Grows with its content (no fixed ratio). */
+.feature-tabs_media:has(.mk_ai), .feature-row_media:has(.mk_ai) { aspect-ratio: auto; }
+.feature-tabs_panel:has(.mk_ai), .feature-tabs_media:has(.mk_ai), .feature-row_media:has(.mk_ai) { min-width: 0; }
+.mk_ai .mock_stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mk_ai { position: relative; display: flex; flex-direction: column; gap: var(--space-m); height: 100%; padding: var(--space-m); text-align: left; font-size: var(--text-small); line-height: 1.45; color: var(--color-text); }
+.mk_ai ~ .mock_tag, .feature-tabs_media:has(.mk_ai) .mock_tag, .feature-row_media:has(.mk_ai) .mock_tag { top: calc(var(--space-m) + .1875rem); left: auto; right: var(--space-m); }
+.mk_ai_head { display: flex; align-items: center; gap: var(--space-xs); padding-bottom: var(--space-s); padding-right: 11rem; border-bottom: 1px solid var(--color-border); }
+.mk_ai_head b { font-weight: 600; }
+.mk_ai_head span { font-size: var(--text-caption); color: var(--color-text-subtle); }
+.mk_ai_mark, .mk_ai_user { display: grid; place-items: center; flex: none; width: 2rem; height: 2rem; border-radius: 50%; }
+.mk_ai_mark { background: var(--color-accent-fill); color: var(--color-on-accent); }
+.mk_ai_user { background: var(--color-surface-raised); color: var(--color-text-muted); }
+.mk_ai_mark svg, .mk_ai_user svg { width: 1.125rem; height: 1.125rem; }
+.mk_ai_q { display: flex; justify-content: flex-end; align-items: flex-end; gap: var(--space-xs); }
+.mk_ai_q p { margin: 0; max-width: 80%; padding: .625rem 1rem; border-radius: 1.25rem 1.25rem .25rem 1.25rem; background: var(--color-accent-fill); color: var(--color-on-accent); font-weight: 500; }
+.mk_ai_a { display: flex; align-items: flex-start; gap: var(--space-xs); }
+.mk_ai_card { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-s); padding: var(--space-s); border: 1px solid var(--color-border); border-radius: .25rem 1.25rem 1.25rem 1.25rem; background: var(--color-surface); }
+.mk_ai_card > p { margin: 0; color: var(--color-text-muted); }
+.mk_ai .mock_stat { background: var(--color-bg); }
+.mk_ai .is-up { color: var(--green-300); }
+.theme-light .mk_ai .is-up { color: var(--green-700); }
+.mk_ai_table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.mk_ai_table th { padding: 0 0 var(--space-2xs); border-bottom: 1px solid var(--color-border-strong); font-family: var(--font-mono); font-size: .6875rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-subtle); text-align: left; }
+.mk_ai_table td { padding: var(--space-xs) 0; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); }
+.mk_ai_table tr:last-child td { border-bottom: 0; }
+.mk_ai_table td:first-child { color: var(--color-text); font-weight: 500; }
+.mk_ai_table th:last-child, .mk_ai_table td:last-child { text-align: right; font-weight: 600; }
+.mk_ai_bars { display: flex; flex-direction: column; gap: var(--space-xs); }
+.mk_ai_bar { display: grid; grid-template-columns: 4.5rem 1fr 2.75rem; gap: var(--space-xs); align-items: center; }
+.mk_ai_bar span { color: var(--color-text); font-weight: 500; }
+.mk_ai_bar i { display: block; height: .75rem; border-radius: 999px; background: var(--color-surface-raised); overflow: hidden; }
+.mk_ai_bar i b { display: block; height: 100%; border-radius: inherit; background: var(--color-link); }
+.mk_ai_bar em { font-style: normal; text-align: right; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.mk_ai_rows { display: flex; flex-direction: column; }
+.mk_ai_rows div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-s); padding: var(--space-xs) 0; border-bottom: 1px solid var(--color-border); }
+.mk_ai_rows div:last-child { border-bottom: 0; padding-bottom: 0; }
+.mk_ai_rows div:first-child { padding-top: 0; }
+.mk_ai_rows span { color: var(--color-text-muted); }
+.mk_ai_rows b { font-size: var(--text-h4); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text); }
+.mk_ai_rows small { margin-left: var(--space-2xs); font-size: var(--text-small); font-weight: 600; }
+.mk_ai_pills { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.mk_ai_pills span { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: .375rem .875rem; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface-raised); font-weight: 500; }
+.mk_ai_pills small { font-family: var(--font-mono); font-size: .75rem; color: var(--color-text-subtle); }
+.mk_ai_input { margin-top: auto; display: flex; align-items: center; gap: var(--space-xs); padding: .375rem .375rem .375rem 1rem; border: 1px solid var(--color-border-strong); border-radius: 999px; color: var(--color-text-subtle); }
+.mk_ai_input span:last-child { margin-left: auto; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-accent-fill); color: var(--color-on-accent); }
+.mk_ai_input svg { width: 1rem; height: 1rem; transform: rotate(-90deg); }
+@media (max-width: 479px) {
+  .mk_ai { padding: var(--space-s); gap: var(--space-s); }
+  .mk_ai_head { padding-right: 0; flex-wrap: wrap; }
+  .feature-tabs_media:has(.mk_ai) .mock_tag, .feature-row_media:has(.mk_ai) .mock_tag { position: static; display: inline-block; margin: var(--space-s) var(--space-s) 0; }
+  .mk_ai .mock_stats { grid-template-columns: 1fr; gap: var(--space-2xs); }
+  .mk_ai .mock_stat { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-xs) var(--space-s); }
+  .mk_ai .mock_stat b { font-size: var(--text-h4); }
+  .mk_ai .mock_stat span { margin: 0; }
+  .mk_ai_q .mk_ai_user, .mk_ai_a .mk_ai_mark { display: none; }
+  .mk_ai_q p { max-width: 90%; }
+}
