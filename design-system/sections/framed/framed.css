@@ -2060,3 +2060,37 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 /* Comparison table (F21) on phones: the sticky feature column made the whole page scroll sideways although the
    table scrolls in its own box. Containing its paint keeps the sideways scroll inside the table (12 October 2026). */
 .comparison { contain: paint; }
+
+/* Buttons as on the live site (Stefan, 12 October 2026): the framed sections use the site's own buttons, not the
+   library's flat ones. Primary = .cta-button (2px blue rim, blue gradient fill, 16px/500, arrow in a blue circle);
+   secondary = .cta-button.c-grey (2px #666 rim, #1a1a1a fill, arrow in a #666 circle); tertiary = .text-link (white,
+   arrow, hover grey-light). Same markup as before; the arrow (.button_icon.is-arrow or .button_circle) becomes the
+   circle. The live hover (a rotating light on the rim) is not copied: hover darkens the arrow circle, pressed turns it
+   white. Values from foundations/buttons/styles.css. */
+.button, .button.is-large, .button.is-small {
+  min-height: calc(2.8rem + .25rem); padding: .5rem 1.5rem; gap: .75rem;
+  border: .125rem solid var(--social--main-blue); border-radius: 999px;
+  background: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+  color: var(--main--white); font-size: 1rem; font-weight: 500; line-height: 1.2;
+}
+.button:hover, .button:active { background: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover)); }
+.button.is-secondary, .button.is-secondary:hover, .button.is-secondary:active {
+  border-color: var(--border--border-dark-grey); background: var(--social--dark-gray-background); color: var(--main--white);
+}
+.button .button_icon.is-arrow, .button .button_circle {
+  display: inline-grid; place-items: center; box-sizing: border-box;
+  width: 1.75rem; height: 1.75rem; padding: .3rem; margin-right: -1rem;
+  border-radius: 50%; background: var(--social--main-blue); color: var(--main--white);
+  transition: background-color .3s ease, color .3s ease;
+}
+.button .button_circle svg { width: 100%; height: 100%; transform: none; }
+.button.is-secondary .button_icon.is-arrow, .button.is-secondary .button_circle { background: var(--border--border-dark-grey); }
+.button:hover .button_icon.is-arrow, .button:hover .button_circle { background: var(--social--button-hover); transform: none; }
+.button:hover .button_circle svg { transform: none; }
+.button:active .button_icon.is-arrow, .button:active .button_circle { background: var(--main--white); color: var(--social--main-blue); }
+.button.is-tertiary, .button.is-tertiary:hover, .button.is-tertiary:active {
+  min-height: 2.75rem; padding: 0; gap: .25rem; border: 0; border-radius: 0; background: none;
+  color: var(--main--white); font-size: 1rem; font-weight: 500;
+}
+.button.is-tertiary:hover { color: var(--text--text-color-grey-light); }
+.button.is-tertiary .button_icon.is-arrow { width: 1.75rem; height: 1.75rem; padding: .25rem; margin-right: 0; background: none; color: currentColor; }

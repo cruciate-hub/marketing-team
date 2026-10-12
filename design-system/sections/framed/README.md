@@ -12,6 +12,7 @@ The section set on the web library's frame (Amadeus, decision 8 October 2026): 2
 A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Framed or current (captured) is chosen per page by the person who asks for it; when the request does not say, ask before building: "Current Webflow look or the new framed design?" (decision: Stefan, 12 October 2026). Framed recipes exist today for `../recipes/product-landing-framed.md`, `../recipes/industry-page-framed.md` and `../recipes/vs-framed.md`, next to their current versions; other page types exist only in the current look.
 
 - The framed navigation (F01) and footer (F16) keep the live site's content (`../global/nav/`, `../global/footer/`): the same links, labels, legal text and social links. Only the layout is new. Content the library added on its own does not ship (`../../feedback.md` item 10).
+- Buttons are the live site's (`../../foundations/buttons/`), not the library's: `framed.css` restyles `.button`, `.is-secondary` and `.is-tertiary` with the same markup (`../../feedback.md` item 14).
 - A Figma hand-off of a framed page follows `../../figma/README.md`.
 
 ## The set

@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.69
+
+Buttons in the framed sections now look like the live site's (Stefan, 12 October 2026: "the buttons do not look at all like our design system").
+
+**Changes:**
+- [`sections/framed/framed.css`](design-system/sections/framed/framed.css): new block "Buttons as on the live site". Primary = the site's `.cta-button` (2px blue rim, blue gradient fill, 16px/500, arrow in a blue circle), secondary = `.cta-button.c-grey` (2px #666 rim, #1a1a1a fill, arrow in a #666 circle), tertiary = `.text-link` (white with arrow). Same markup; values from `foundations/buttons/`. The live rotating hover light is not copied.
+- [`sections/framed/README.md`](design-system/sections/framed/README.md) and [`feedback.md`](design-system/feedback.md) item 14.
+- On the Claude Design page (version 48): `components/framed.css`, `13-feedback.md`, `design-system.json`; checked 229 match, 0 differ. On the Agentry canvas (version 9): its `framed.css`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.68 -> 13.69.
+
 ## marketing-team 13.68
 
 The Claude Design page "social.plus" synced to 13.67.
