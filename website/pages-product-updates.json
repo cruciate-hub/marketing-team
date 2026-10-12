@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-08T11:47:45.165Z",
-    "itemCount": 70,
+    "generatedAt": "2026-10-12T10:11:57.917Z",
+    "itemCount": 71,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-the-discovery-widget-real-conversations-on-every-surface-that-matters",
+      "metaTitle": "Introducing the Discovery Widget: Real Conversations on Every Surface That Matters",
+      "metaDescription": "The Discovery Widget surfaces real user posts on any page of your app. Configure what to show, choose where it appears, and the conversations your users are already having show up wherever they matter most.",
+      "content": "# Introducing the Discovery Widget: Real Conversations on Every Surface That Matters\n## Why discovery matters\n## What is the Discovery Widget\n## What it looks like in practice\n## Real engagement as a trust signal\n## Real conversations on every surface that matters"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-september-2026",
       "metaTitle": "What's new in social.plus | September 2026",
