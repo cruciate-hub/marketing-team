@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.66
+
+The Claude Design page "social.plus" synced to 13.65.
+
+**Changes:**
+- [`claude-design/tokens.json`](design-system/claude-design/tokens.json): `meta.ref` main@0c5bc9c (13.65), synced 2026-10-12; the same on the page. Checked before the sync (page = main@f35f1b0, 229 match, 0 differ) and after it (page = main, 0 differ).
+- On the page only (`design-system.json`, which the page writes): "Feedback from tests" (`13-feedback.md`) added to the brand book's section list, where it was missing since 13.63.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.65 -> 13.66.
+
 ## marketing-team 13.65
 
 Stefan's review of the first Figma hand-off (Agentry, 12 October 2026): every point fixed at its source in the design system, not only in the file.
