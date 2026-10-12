@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T06:36:19.677Z",
-    "itemCount": 79,
+    "generatedAt": "2026-10-12T06:37:43.938Z",
+    "itemCount": 80,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/numeric-summary-of-user-moderation-history",
+      "metaTitle": "Numeric Summary of User Moderation History",
+      "metaDescription": "The User Moderation History tab now displays a numeric summary of a user’s moderation record",
+      "content": "# Numeric Summary of User Moderation History"
+    },
     {
       "url": "https://www.social.plus/release-note/sort-and-filter-in-the-user-moderation-feed",
       "metaTitle": "Sort and Filter in the User Moderation Feed",
