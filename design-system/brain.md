@@ -78,8 +78,8 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `foundations/shadows-and-radius/` | Radii and shadows the site uses, the proposed set to decide |
 | `sections/README.md` | The rule with the definition of done, the index of the 41 section types, the recipes |
 | `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
-| `sections/recipes/` | Section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story |
-| `sections/framed/` | The web library's framed sections (F01 to F16, approved 12 October 2026) with `framed.css` and their rule: a framed page uses only these, on one frame; the product landing page is built framed |
+| `sections/recipes/` | Section order per page type (12): vs, product page, product landing, industry page and /vs/ each with a framed version, SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/framed/` | The web library's framed sections (F01 to F23, approved 12 October 2026) with `framed.css` and their rule: a framed page uses only these, on one frame; product landing, industry and /vs/ pages are built framed |
 | `feedback.md` | Details already corrected once in tests (Works in row, logo colours, card icons, approved logos, cells not cards, the two-button exception): check every page against it before calling it done |
 | `sections/proposals/` | Sections that wait for approval by Stefan or Amadeus (`YYYY-MM-DD-<name>.md`); today: use-case tabs. Until approved, build on the closest set section and say so |
 | `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |
