@@ -11,7 +11,7 @@ One big statement with an optional wide visual in an art panel.
 Homepage, product overview and hub pages: one promise for the whole page.
 
 ## Variants and behaviour
-Variants: dark with the display title and a visual; light with an H1 and no visual. The line under the buttons holds a short proof or the "Works in" row (text or the approved AI-tool icons).
+Variants: dark with the display title and a visual; light with an H1 and no visual. The line under the buttons holds a short proof (`.hero_note`). Variant "Works in" (social.plus addition, 12 October 2026, not in the library; the second hero in source.html): for a product that works inside AI tools (Agentry, the MCP server), no visual, and under the buttons the "Works in" row (`.hero_works`): the label "Works in", then one link per tool, the approved icon from `assets/third-party/ai-tools/` in a 40px tile with the name beside it, then "+ Any MCP-capable AI app" as plain text. Only tools the product supports today (`messaging/product-capabilities.md`); never a lettered or redrawn icon, never names alone when an approved icon exists.
 
 ## Rules
 - A framed section sits on the frame: framed sections only on that page, never a captured section and never a captured section wrapped in the frame (Grid and frame section).

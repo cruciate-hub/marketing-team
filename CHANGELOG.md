@@ -1,5 +1,18 @@
 # Changelog
 
+## marketing-team 13.63
+
+The framed Hero / Centered gets a "Works in" variant with the approved AI-tool icons.
+
+**Why:** Test 3 (12 October 2026, the Agentry page built in Claude Design from the framed recipe) wrote the "Works in" tools as plain text, because the framed hero had no style for an icon row, while the recipe asks for the row and the approved icons exist.
+
+**Changes:**
+- [`sections/framed/F02-hero-centered/`](design-system/sections/framed/F02-hero-centered/section.md): a second hero in `source.html`, the "Works in" variant (eyebrow, H1, lead, two buttons, then the label "Works in", the approved icons from `assets/third-party/ai-tools/` in 40px tiles with their names, and "+ Any MCP-capable AI app"); `section.md` says when to use it and that only tools the product supports today are named.
+- [`framed.css`](design-system/sections/framed/framed.css): a marked block "social.plus additions (not in the web library)" with the `.hero_works` styles, all on role, type and spacing tokens. Rendered at 1440 and 390: no sideways scroll, icons load.
+- [`recipes/product-landing-framed.md`](design-system/sections/recipes/product-landing-framed.md): F02 names the variant.
+- The same files on the Claude Design page; card height in `cards.json`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.62 -> 13.63.
+
 ## marketing-team 13.62
 
 The web library's framed sections join the design system: 16 sections on the frame, a framed recipe for the product landing page (Agentry, MCP server, Vise), and the rule that a page is framed or captured, never both.

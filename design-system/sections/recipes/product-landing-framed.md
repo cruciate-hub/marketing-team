@@ -5,7 +5,7 @@ The framed version of the product landing recipe (`product-landing.md`): the sam
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
 | F01 | Navigation | none (shared) | always |
-| F02 | Hero / Centered | eyebrow (the product name, Geist Mono), H1 6 to 9 words, lead 20 to 40 words, primary + secondary button, the "Works in" row under the buttons | when there is no product visual; the art-panel visual is left out |
+| F02 | Hero / Centered | eyebrow (the product name, Geist Mono), H1 6 to 9 words, lead 20 to 40 words, primary + secondary button, the "Works in" row under the buttons | the "Works in" variant (the second hero in F02's source.html): approved icons in tiles, only tools the product supports today; when there is no product visual |
 | F03 | Hero / Split | eyebrow, H1 5 to 9 words, lead 25 to 45 words, primary + secondary, product visual in the art panel | instead of F02 when a real product visual exists. Never both |
 | F04 | Logo wall (inline) | customers | optional; only with F03. With F02 the "Works in" row is the logo row |
 | F07 | Feature grid | section header (eyebrow optional, H2 4 to 8 words: the value in one claim, optional lead); 3 or 6 cells, each an icon tile, a title of 3 to 6 words and 1 to 2 sentences | the value cells ("Your team asks. Your first-party data answers."): cells divided by frame lines, never cards |
