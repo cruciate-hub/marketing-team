@@ -12,7 +12,7 @@ The web library's framed sections join the design system: 16 sections on the fra
 - The rule in [`sections/README.md`](design-system/sections/README.md), the brand book ([`claude-design/README.md`](design-system/claude-design/README.md), "Building a page") and the [grid-and-frame foundation](design-system/foundations/grid-and-frame/foundation.md): a page is framed or captured, never both; a page type with a framed recipe is built framed; a captured section is never wrapped in the frame. Index, `brain.md` and the file lists name the framed set; recipes count 10.
 - Claude Design: 16 cards in the "Framed · …" groups (`cards.json`), `components/framed.css`, the map in `claude-design/tokens.json` (`meta.components`, `meta.paths`) and `SYNC.md`; the check knows `framed.css`. Page and branch checked: 214 match, 0 differ.
 - Still in the library only: page header, use case cards, industry list, stats, comparison, pricing, contact form. TO CHECK: Phosphor and Simple Icons in the library versus the icons foundation; weight 700 in the library hero.
-- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.61 -> 13.62. Built on 13.61 (#61): merge that first.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.61 -> 13.62.
 
 ## marketing-team 13.61
 
