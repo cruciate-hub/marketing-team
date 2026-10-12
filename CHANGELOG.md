@@ -1,5 +1,13 @@
 # Changelog
 
+## marketing-team 13.68
+
+The Claude Design page "social.plus" synced to 13.67.
+
+**Changes:**
+- [`claude-design/tokens.json`](design-system/claude-design/tokens.json): `meta.ref` main@6b8f58c (13.67), synced 2026-10-12; the same on the page (version 47). Checked: page = main, 229 match, 0 differ.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.67 -> 13.68.
+
 ## marketing-team 13.67
 
 Two looks, chosen per page: the person who asks for a page chooses the current Webflow look (the captured sections) or the framed design (the web library). When the request does not say, Claude asks first: "Current Webflow look or the new framed design?" Until now product landing, industry and /vs/ pages were always built framed. Decision: Stefan, 12 October 2026.
