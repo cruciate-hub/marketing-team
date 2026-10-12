@@ -14,6 +14,7 @@ One structure, built from the live website (https://www.social.plus) and kept in
 design-system/
   README.md               this file
   brain.md                router: what to load for which task (every skill reads it)
+  feedback.md             details already corrected once in tests: each must hold on every page (definition of done point 10)
   taste.md                the taste guide: how to combine sections so a page feels like social.plus (with a do and a don't per rule)
   tokens.css, tokens.json the 44 live Webflow variables (+ the Figtree and Geist Mono @font-face and `--font-mono`); the JSON adds a use per token
   figtree.woff2           the main font file (social.plus Figtree build; see "Font" below)
@@ -29,7 +30,7 @@ design-system/
   sections/<nn-name>/     section.md (use it when, content slots, allowed variations, accessibility), source.html, styles.css, screenshots;
                           variants with a --<variant> suffix; global/ holds nav, sub-nav, breadcrumb bar, footer CTA band, footer
   sections/recipes/       fixed section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story
-  sections/framed/       the web library's framed sections (F01 to F16, draft, decision 8 October 2026) with framed.css and their own rule (README.md)
+  sections/framed/       the web library's framed sections (F01 to F16, decision 8 October 2026, approved 12 October 2026) with framed.css and their own rule (README.md)
   sections/proposals/     new sections wait here (YYYY-MM-DD-<name>.md) until approved; today: use-case tabs (2026-10-07)
   sections/index.html     the gallery
   capture/                Playwright capture, foundations builder, localize-media (images into assets/media/), verify, gallery, compact-screenshots.py, pack.py (no AI calls)
@@ -49,12 +50,12 @@ The sections and the measured values are as the site is today. Since 8 October 2
 > 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
 > 3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
 > 4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-> 5. One primary (blue) button per section; two actions of equal weight only with approval.
+> 5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
 > 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 > 7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
 > 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
 > 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
-> 10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
+> 10. Render the page at 1440 and 390, check it against the design system, `taste.md` and `feedback.md` (the details already corrected once), and list every mismatch in the reply ("none found" counts as a check).
 
 The same text, for pasting into Claude Design, is in `sections/README.md`. The definition of done is the last thing to go through before a page is called finished; `taste.md` is what to check the rendered page against.
 

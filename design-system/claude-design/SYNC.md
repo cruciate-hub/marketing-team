@@ -15,6 +15,7 @@ The design system lives in two places: this folder on GitHub and the "social.plu
 | `01-colors.md` to `08-accessibility.md`, `03b-grid-and-frame.md` | `foundations/<name>/foundation.md` | the same file |
 | `09-sections.md` | `sections/README.md` | the same file |
 | `11-taste.md` | `taste.md` | the same file |
+| `13-feedback.md` | `feedback.md` | the same file |
 | `10-recipes.md`, `12-proposals.md` | `claude-design/` (they gather `sections/recipes/*.md` and `sections/proposals/*.md` under a short intro) | the same file |
 | `README.md` (the brand book) | `claude-design/README.md` | the same text; the page appends its generated "Consuming this system" and "Index" |
 | `tokens.json` | `claude-design/tokens.json` | the same file. It holds the live Webflow variables (from `tokens.json` here, which the capture writes) and the tokens decided but not yet in Webflow (role colours and scales, type scale, spacing steps, layout, radius, shadow, containers, heading sizes, Geist Mono). A new live value goes into both files |

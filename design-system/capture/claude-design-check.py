@@ -32,6 +32,7 @@ DOCS = {
     '09-sections.md': 'sections/README.md',
     '10-recipes.md': 'claude-design/10-recipes.md',
     '11-taste.md': 'taste.md',
+    '13-feedback.md': 'feedback.md',
     '12-proposals.md': 'claude-design/12-proposals.md',
     'tokens.json': 'claude-design/tokens.json',
     'components/bundle.css': 'claude-design/components/bundle.css',

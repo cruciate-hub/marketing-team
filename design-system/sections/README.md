@@ -15,12 +15,12 @@ Paste this into the design system's instructions and into every website project 
 > 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
 > 3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
 > 4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-> 5. One primary (blue) button per section; two actions of equal weight only with approval.
+> 5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
 > 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 > 7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
 > 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
 > 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
-> 10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
+> 10. Render the page at 1440 and 390, check it against the design system, `taste.md` and `feedback.md` (the details already corrected once), and list every mismatch in the reply ("none found" counts as a check).
 
 ## Index
 
@@ -74,7 +74,7 @@ Not in the set (audit section 7, "outside the set"): the home-only sections (her
 
 ## Framed sections
 
-The web library's sections on the frame (Amadeus, decision 8 October 2026; draft, not yet in Webflow), in `framed/` with their own index and rule (`framed/README.md`): F01 Navigation, F02 Hero / Centered, F03 Hero / Split, F04 Logo wall, F05 Feature row, F06 Feature tabs, F07 Feature grid, F08 Platform row, F09 Bento grid, F10 Video, F11 Testimonial, F12 Customer stories, F13 Resource cards, F14 FAQ, F15 CTA band, F16 Footer. A framed page uses only these; the captured sections above stay the record of the live site.
+The web library's sections on the frame (Amadeus, decision 8 October 2026; approved by Stefan 12 October 2026, not yet in Webflow), in `framed/` with their own index and rule (`framed/README.md`): F01 Navigation, F02 Hero / Centered, F03 Hero / Split, F04 Logo wall, F05 Feature row, F06 Feature tabs, F07 Feature grid, F08 Platform row, F09 Bento grid, F10 Video, F11 Testimonial, F12 Customer stories, F13 Resource cards, F14 FAQ, F15 CTA band, F16 Footer. A framed page uses only these; the captured sections above stay the record of the live site.
 
 ## Recipes
 

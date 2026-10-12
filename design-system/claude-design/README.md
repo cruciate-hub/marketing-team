@@ -97,12 +97,12 @@ Before saying a page is finished, check each point and report it in the reply. "
 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
 3. Every section is one from the set, used as its guidelines allow, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
 4. Only values from the tokens, colours through the role tokens; Figtree from `fonts/figtree.woff2`, Geist Mono from `fonts/geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the role and scale colours until the merge, and the Type scale, Spacing, Layout, Radius, Shadows, Container, Size and Heading sizes sections) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-5. One primary (blue) button per section; two actions of equal weight only with approval.
+5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 7. Third-party logos only from the approved set in the `third-party` asset group (listed in the Logo section, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
-10. Render the page at 1440 and 390, check it against the design system and the Taste section, and list every mismatch in the reply ("none found" counts as a check).
+10. Render the page at 1440 and 390, check it against the design system, the Taste section and the Feedback from tests section (the details already corrected once), and list every mismatch in the reply ("none found" counts as a check).
 
 ## Not synced
 

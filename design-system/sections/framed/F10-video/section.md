@@ -1,6 +1,6 @@
 # F10 · Video (framed)
 
-- Status: draft (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); not yet in Webflow · Owner: Amadeus · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: approved (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); not yet in Webflow · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library's page demo (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), read 12 October 2026; Webflow name in the library: "Section / Video"
 - Code: source.html (links `../../../tokens.css` and `../framed.css`) · Screenshot: none yet (render source.html)
 - Captured section it replaces on a framed page: 11 Two-column (video CTA variant)

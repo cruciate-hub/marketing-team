@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.63
+
+The framed sections are approved, the framed hero gets the live site's "Works in" row, two primary buttons are allowed for a product that connects to two AI apps on equal terms, and a new `feedback.md` keeps details the team has corrected once.
+
+**Why:** Test 3 (12 October 2026, the Agentry page built in Claude Design from the framed recipe) wrote the "Works in" tools as plain text: the framed hero had no icon row, so a detail that Test 2 got right was lost. Stefan asked for one place where such feedback lives so it is not lost again. He approved the framed sections and decided the two-button question for Agentry.
+
+**Changes:**
+- New [`feedback.md`](design-system/feedback.md): details already corrected once in tests (the "Works in" row, logo colours, card icons above the title, approved third-party logos, cells not cards inside the frame, the two-button exception), each with where it lives and how to check it. Definition of done point 10 now checks the page against it, in [`README.md`](design-system/README.md), [`sections/README.md`](design-system/sections/README.md), [`brain.md`](design-system/brain.md), `capture/pack-README.md` and the brand book; on the Claude Design page it is the section "Feedback from tests".
+- [`sections/framed/F02-hero-centered/`](design-system/sections/framed/F02-hero-centered/section.md): a second hero, the "Works in" variant, built as the live row (captured section 02): the label "Works in" centred between two fading hairlines, the approved icons in 40px tiles with their names, "+ Any MCP-compatible tool". Styles in a marked block "social.plus additions (not in the web library)" of [`framed.css`](design-system/sections/framed/framed.css), on role, type and spacing tokens. Rendered at 1440 and 390: no sideways scroll, label on one line, icons load. The framed recipe names the variant.
+- Framed sections approved (Stefan, 12 October 2026): status lines in the 16 `section.md`, `framed/README.md`, the framed recipe, the index, `brain.md` and the file list; card subtitles without "draft".
+- Two primary buttons (Stefan, 12 October 2026): for a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT), one per app, in the hero and the CTA band; everywhere else one primary. Definition of done point 5, [`taste.md`](design-system/taste.md), both product landing recipes.
+- The same files on the Claude Design page; `feedback.md` mapped in `SYNC.md`, the check and `claude-design/tokens.json`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.62 -> 13.63.
+
 ## marketing-team 13.62
 
 The web library's framed sections join the design system: 16 sections on the frame, a framed recipe for the product landing page (Agentry, MCP server, Vise), and the rule that a page is framed or captured, never both.

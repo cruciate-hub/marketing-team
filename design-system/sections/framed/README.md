@@ -1,8 +1,8 @@
 # Framed sections
 
-The section set on the web library's frame (Amadeus, decision 8 October 2026): 16 sections taken unchanged from the library's page demo on 12 October 2026. They replace the captured sections on a framed page; the captured sections stay as the record of the live site. Not yet in Webflow.
+The section set on the web library's frame (Amadeus, decision 8 October 2026): 16 sections taken unchanged from the library's page demo on 12 October 2026 (one social.plus addition: the "Works in" variant of F02, `feedback.md` item 5). They replace the captured sections on a framed page; the captured sections stay as the record of the live site. Not yet in Webflow.
 
-- Status: draft (2026-10-12) · Owner: Amadeus · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: approved (2026-10-12) · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), its page demo
 - Files: `framed.css` (the library's stylesheet, one copy for all sections), and per section `source.html` (links `../../../tokens.css` and `../framed.css`; no scripts, interactive parts in their first state) and `section.md`
 - On the Claude Design page: the groups "Framed · …"; `framed.css` is `components/framed.css` there
