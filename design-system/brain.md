@@ -20,6 +20,7 @@ Files are read from the clone the canonical fetch block makes (`$MT_REPO`, defau
 | **Shadows, radius, elevation** | `foundations/shadows-and-radius/foundation.md` (measured values, the proposed set marked "to decide") |
 | **Accessibility question or check** | `foundations/accessibility/foundation.md` (contrast table of the text and background token pairs, with every surface token, focus, targets, motion, keyboard, the open items) |
 | **A quick question** ("what blue", "the heading sizes", "the hover colour") | `tokens.css` and the matching `foundation.md`; answer with the token name and the value |
+| **A Figma hand-off** (a page rebuilt in Figma for the designer) | `figma/README.md` (the method: colour variables, no components sheet, hidden tab panels and the open FAQ to the right of the page frame, mockups as layers) + `feedback.md` + everything the page itself needed (row above) |
 | **Design review or audit** | everything: `tokens.css`, every `foundations/*/foundation.md`, `sections/README.md`, `taste.md` and the `section.md` of every section on the page under review. Compare against the measured values, the rules, the recipe and the taste guide; go through the definition of done; list what differs |
 
 How to read a foundation: `foundation.md` has the status line (draft until Stefan or Amadeus approves), the values as measured, the rules, and "Known inconsistencies" (true today, not a licence to copy). `preview.html` is the markup to build from; `styles.css` the site's own rules for it; `desktop.png` and `mobile.png` what it looks like.
@@ -43,7 +44,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
   2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
   3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
   4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-  5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
+  5. One primary (blue) button per section: the first button in a group is blue, every button after it is secondary (grey border), then at most one text link. Never two blue buttons, also not for a product that connects to two AI apps (Agentry: "Connect on Claude" blue, "Connect on ChatGPT" grey border). Decision: Stefan, 12 October 2026 (replaces the two-primary exception of the same day).
   6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
   7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
   8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
@@ -58,6 +59,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | Path | Contains |
 |---|---|
 | `README.md` | What the design system is, how it is organised, how to update it |
+| `figma/README.md` | The Figma hand-off: how Claude rebuilds a page in Figma for the designer, and the way back |
 | `taste.md` | How to combine the sections so a page feels like social.plus: 12 rules with a do and a don't each (draft, Amadeus to refine) |
 | `tokens.css`, `tokens.json` | The 44 live Webflow variables (+ Figtree `@font-face`); the JSON adds a one-line use per token |
 | `assets/media/` | The images the previews and sources use (WebP, SVG, JPG, PNG, one Lottie JSON), copied as served from the site, plus one first-frame still per video (the videos themselves are not in the repo); every `preview.html` and `source.html` loads from here and nothing from the network. `capture/media.json` says where each file came from |

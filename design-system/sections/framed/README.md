@@ -11,6 +11,9 @@ The section set on the web library's frame (Amadeus, decision 8 October 2026): 2
 
 A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Build framed where the page type has a framed recipe (today: `../recipes/product-landing-framed.md`, `../recipes/industry-page-framed.md`, `../recipes/vs-framed.md`); other page types stay captured until their framed sections are here.
 
+- The framed navigation (F01) and footer (F16) keep the live site's content (`../global/nav/`, `../global/footer/`): the same links, labels, legal text and social links. Only the layout is new. Content the library added on its own does not ship (`../../feedback.md` item 10).
+- A Figma hand-off of a framed page follows `../../figma/README.md`.
+
 ## The set
 
 | # | Section | Group | Replaces on a framed page |

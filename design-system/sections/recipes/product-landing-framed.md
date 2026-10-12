@@ -5,7 +5,7 @@ The framed version of the product landing recipe (`product-landing.md`): the sam
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
 | F01 | Navigation | none (shared) | always |
-| F02 | Hero / Centered | eyebrow (the product name, Geist Mono), H1 6 to 9 words, lead 20 to 40 words, primary + secondary button, the "Works in" row under the buttons | the "Works in" variant (the second hero in F02's source.html): approved icons in tiles, only tools the product supports today; when there is no product visual |
+| F02 | Hero / Centered | eyebrow (the product name, Geist Mono), H1 6 to 9 words, lead 20 to 40 words, primary + secondary button, the "Works in" row under the buttons | the "Works in" variant (the second hero in F02's source.html): approved icons in tiles, every client in the product's "Works in" row in `messaging/product-capabilities.md` (from the docs' setup pages), never fewer; when there is no product visual |
 | F03 | Hero / Split | eyebrow, H1 5 to 9 words, lead 25 to 45 words, primary + secondary, product visual in the art panel | instead of F02 when a real product visual exists. Never both |
 | F04 | Logo wall (inline) | customers | optional; only with F03. With F02 the "Works in" row is the logo row |
 | F07 | Feature grid | section header (eyebrow optional, H2 4 to 8 words: the value in one claim, optional lead); 3 or 6 cells, each an icon tile, a title of 3 to 6 words and 1 to 2 sentences | the value cells ("Your team asks. Your first-party data answers."): cells divided by frame lines, never cards |
@@ -20,7 +20,7 @@ Rules for the page:
 - One frame from the nav to the footer: every section is framed, none is a captured section, and no captured section is wrapped in the frame (the Grid and frame foundation).
 - Inside the frame, content sits in cells divided by frame lines: no card fill, no radius, no gap between cells. Cards exist only outside the frame (a pop-up, a floating panel).
 - Colours through the role tokens, type on the type scale, spacing on the steps and section paddings; eyebrows in Geist Mono. The art panel is the only gradient surface and sits only behind a product visual.
-- One primary button per section: hero and CTA band with the same primary action. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band. Any other pair of equal actions needs approval from Stefan or Amadeus.
-- Numbers in a visual carry the visible label "Illustrative example"; product facts come from `messaging/product-capabilities.md`; the "Works in" row uses the approved icons in `../../assets/third-party/ai-tools/` and names only what the product supports today.
+- One primary button per section: hero and CTA band with the same primary action. The first button is blue, every button after it secondary (grey border, `.button.is-secondary`), then at most one text link; never two blue buttons (Agentry: "Connect on Claude" blue, "Connect on ChatGPT" grey border). Decision: Stefan, 12 October 2026.
+- Numbers in a visual carry the visible label "Illustrative example"; product facts come from `messaging/product-capabilities.md`; the "Works in" row uses the approved icons in `../../assets/third-party/ai-tools/` and names every client in the product's row there ("Works in", from the docs' setup pages: Agentry has ChatGPT, Claude, Claude Code and Cursor), never fewer.
 - Links that do not exist yet are `href="#"` with a note of the intended path. A visual that does not exist yet is the library's placeholder in the art panel, marked "placeholder" in the reply.
 - Before delivery, go through the definition of done in `../README.md`.

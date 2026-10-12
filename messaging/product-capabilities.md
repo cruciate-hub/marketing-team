@@ -11,6 +11,7 @@ Source of truth for what social.plus offers, for everyone who writes about the p
 - **Check "Platforms / limits" before you generalise.** Many features are missing on one SDK or UIKit platform (most often Flutter). "Enabled on request" means social.plus support switches the feature on: say "available", not "included by default".
 - **Anything not in a table is not claimable**, including claims that appear only on the website or the pricing page, until the product owner confirms them and they move into a table.
 - **The check.** `scripts/product_claims.py` (compliance check `product_claims`, FAIL) flags any paragraph that names social.plus or links a product page and contains a word from the second column of the "Outside social.plus scope" table, unless that sentence is negated ("social.plus does not process payments"). It cannot see a claim that is simply not in the tables; the reviewer's "Claims about social.plus" list in the review Doc covers that.
+- **AI products: the "Works in" list is every client the docs give setup steps for** (Agentry: https://learn.social.plus/ai/agentry/connect). The row names all of them; never shorten the list to the ones a sentence happens to mention, because pages and the design system copy the "Works in" row from here.
 - **No prices.** Plan names and allowances only as written in a row.
 - **Names:** APIs, SDKs, UIKit (code components), UI Kit (Figma design files), Console, Portal, Dashboard. "Community" is fine for the product feature (communities, community management), not as the category.
 
@@ -211,9 +212,9 @@ Pre-hook events (custom server-side checks before content is accepted) are liste
 
 | Capability | What it does (one plain line) | Platforms / limits worth knowing | Source (docs URL) | Checked |
 |---|---|---|---|---|
-| Agentry | Lets authorized team members ask questions about their network's engagement data in plain language from ChatGPT, Claude or another MCP-capable AI app. | Preview, enabled on request. Read-only, limited to the customer's own network, roughly the last 90 days. | https://learn.social.plus/ai/agentry/overview | 2026-10-05 |
-| Documentation MCP server | Gives AI coding tools direct access to the public social.plus docs. | Public endpoint, no authentication. | https://learn.social.plus/ai/docs-mcp-server | 2026-10-05 |
-| Vise | Local CLI and coding-agent skill that plans, checks and documents social.plus SDK integrations built by AI coding agents. | Runs on the developer's machine; needs Node.js 20 or newer. | https://learn.social.plus/ai/vise/overview | 2026-10-05 |
+| Agentry | Lets authorized team members ask questions about their network's engagement data in plain language from ChatGPT, Claude, Claude Code, Cursor or another MCP-capable AI app. | Preview, enabled on request. Read-only, limited to the customer's own network, roughly the last 90 days. Works in (setup steps in the docs): ChatGPT, Claude, Claude Code, Cursor, any other MCP client. | https://learn.social.plus/ai/agentry/overview, https://learn.social.plus/ai/agentry/connect | 2026-10-12 |
+| Documentation MCP server | Gives AI coding tools direct access to the public social.plus docs. | Public endpoint, no authentication. Works in (setup steps in the docs): Claude, VS Code, Cursor; the live /ai/mcp-server row also shows GitHub Copilot and OpenAI, check the docs' installation page for the full list before writing it. | https://learn.social.plus/ai/docs-mcp-server | 2026-10-12 |
+| Vise | Local CLI and coding-agent skill that plans, checks and documents social.plus SDK integrations built by AI coding agents. | Runs on the developer's machine; needs Node.js 20 or newer. Works in (install command in the docs): Claude Code, Cursor, VS Code, GitHub Copilot, OpenAI Codex. | https://learn.social.plus/ai/vise/overview | 2026-10-12 |
 
 ## Security, data and hosting
 
