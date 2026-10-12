@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T06:23:44.683Z",
-    "itemCount": 77,
+    "generatedAt": "2026-10-12T06:24:01.230Z",
+    "itemCount": 78,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/per-type-flag-status-for-user-reports",
+      "metaTitle": "Per-Type Flag Status for User Reports",
+      "metaDescription": "The SDK now returns flag status per report type, allowing apps to track which aspects of a user profile have already been reported independently.",
+      "content": "# Per-Type Flag Status for User Reports"
+    },
     {
       "url": "https://www.social.plus/release-note/full-report-details-in-the-moderation-feed",
       "metaTitle": "Full Report Details in the Moderation Feed",
