@@ -51,7 +51,7 @@
       kbd,
       pre,
       samp {
-        font-family: monospace;
+        font-family: var(--font-mono);
         font-size: 1em;
       }
       * {
@@ -513,7 +513,8 @@
         height: 0;
       }
     </style>
-  </head>
+  <style>/* Code, kbd, pre and samp in Geist Mono (decision 8 October 2026) */ code, kbd, pre, samp { font-family: var(--font-mono); }</style>
+</head>
   <body>
     <!-- 18 FAQ accordion (border top). Captured 2026-10-07 from https://www.social.plus/ai/mcp-server by design-system/capture/capture.mjs. Images are copies of the site's own files in design-system/assets/media/ (capture/localize-media.mjs); videos are not copied, a <video> shows its first frame as poster. -->
     <!-- faq (border-top variant): the same accordion on the plain dark background with a top border. -->
@@ -535,7 +536,7 @@
                   line-height: 1.6;
                 }
                 .faq-long_wrapper .w-richtext pre code {
-                  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+                  font-family: var(--font-mono);
                   color: #e8e8ea;
                   background: transparent;
                   padding: 0;
@@ -545,7 +546,7 @@
                 }
                 /* Inline code (code not inside pre) */
                 .faq-long_wrapper .w-richtext :not(pre) > code {
-                  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Courier New", monospace;
+                  font-family: var(--font-mono);
                   font-size: 0.875em;
                   background: rgba(255, 255, 255, 0.08);
                   color: #f0f0f0;

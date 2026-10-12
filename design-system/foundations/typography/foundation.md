@@ -1,11 +1,37 @@
 # Typography
 
-Figtree (variable font 300 to 900; Inter is loaded on the live site but unused). **Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`). Emails are the exception: they follow the email spec (`emails/product-update-newsletter-spec.md`, Inter with system fallbacks). `html` 16px; `body` 1.1rem = 17.6px / 1.6 on `--text--text-color-grey-light`. Heading sizes live on six typography tokens; the preview measures every sample at 1440 and 390 px.
+Two fonts. **Figtree** for everything (`fonts/figtree.woff2`: social.plus's own variable build, weights 300 to 900; Inter is loaded on the live site but unused). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`). **Geist Mono** for eyebrows, code, SDK snippets, API paths and token names only (`fonts/geist-mono.woff2`, variable 100 to 900, SIL Open Font License; stack `"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace`, token family `mono`). Decision 8 October 2026 (Amadeus), not yet in Webflow. Emails are the exception: they follow the email spec (`emails/product-update-newsletter-spec.md`, Inter with system fallbacks). `html` 16px. The type scale is the web library's (decision below); the live site's own scale is measured further down.
 
-- Status: draft (2026-10-07), as-is: current live values, no team decision applied · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: draft (2026-10-08): the measured values are as-is; the two-font rule, the type scale, the eyebrow and the code styles are decisions (Amadeus, 8 October 2026) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: https://www.social.plus/styleguide (the style guide's own heading, text, weight, alignment and colour samples)
 - Preview: preview.html (self-contained, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Built on 2026-10-07 by capture/foundations.mjs from live-site snippets (capture/capture.config.json, `snippets`)
+
+## Decisions (8 October 2026, Amadeus; not yet in Webflow)
+
+- **Type scale**: the web library's. Fluid from a 360px to a 1440px screen (Type scale tokens `fluid-*`); headings weight 600 (the library hero's 700 is not taken).
+
+| Style | 390px | 1440px | Line height | Letter spacing | Live today (1440) |
+|---|---|---|---|---|---|
+| display | 45px | 80px | 1.05 | -0.025em | (none) |
+| h1 | 36.7px | 60px | 1.1 | -0.025em | 52.8px / 1.2 |
+| h2 | 30.4px | 46px | 1.1 | -0.015em | 52px / 1.25 |
+| h3 | 24.2px | 32px | 1.1 | -0.015em | 36px / 1.25 |
+| h4 | 20.1px | 24px | 1.3 | 0 | 28px / 1.25 |
+| h5 | 18px | 18px | 1.3 | 0 | 20px / 1.25 |
+| (h6) | | | | | 18px: maps to h5 |
+| lead | 18.1px | 22px | 1.6 | 0 | enlarged-paragraph 19.2px |
+| body | 18px | 18px | 1.6 | 0 | 17.6px |
+| small | 16px | 16px | 1.6 | 0 | text-size-small 16px / 1.4 |
+| caption | 14px | 14px | 1.6 | 0 | text-size-tiny 14.4px / 1.4 |
+| stat-xl | 44.6px | 64px | 1.05 | -0.03em | numbers band (own sizes) |
+| stat-lg | 32.2px | 40px | 1.05 | -0.03em | |
+
+  Line lengths: `measure-body` 65ch, `measure-lead` 52ch, `measure-title` 20ch. What it fixes: h1 and h2 are no longer the same size on desktop, the phone sizes no longer differ between tags and classes, and one scale replaces the three "small" sizes.
+
+- **Eyebrow** (the short label above a heading; Webflow class `.superscript`): Geist Mono 13px (.8125rem), weight 500, UPPERCASE, letter spacing .08em, line height 1rem, colour `color-link` (blue-400 #6F89FC on dark, 5.99:1 on #111; blue-600 on light). Replaces the live Figtree 14px 600, .044rem, #3769EC (3.95:1, fails). Use it only when it adds information: the label is the eyebrow, the claim is the heading. Type style `superscript`.
+- **Code**: Geist Mono. Blocks and SDK snippets `code` (15px / 1.6, 400); API paths, token names and captions `code-small` (13px / 1.6). Inline code in running text takes 0.875em of the surrounding size.
+- The table below is still what the live site renders; the captured section previews keep showing the live eyebrow until Webflow is updated.
 
 ## Values as measured (1440 / 390)
 | Item | Size | Line height | Weight | Letter spacing | Colour |

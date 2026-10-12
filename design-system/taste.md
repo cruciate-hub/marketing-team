@@ -15,7 +15,7 @@ A social.plus page is quiet. Each screen (what fits in the viewport at 1440 and 
 
 ## 2. Section rhythm
 
-Alternate dense and airy. A grid of cards (12, 13, 14, 15, 16) is dense; a two-column (11), a CTA band (23, G4) or a statement is airy. Put an airy section between two dense ones. Never stack three card grids. Every section is `.section.padding_y` (5rem top and bottom at 1440, 3rem under 480px, measured in `foundations/spacing/`); do not add extra padding or a spacer section to "give it air", change the order instead.
+Alternate dense and airy. A grid of cards (12, 13, 14, 15, 16) is dense; a two-column (11), a CTA band (23, G4) or a statement is airy. Put an airy section between two dense ones. Never stack three card grids. Every section takes one of the three section paddings (the Spacing section): `section-pad-m` by default (112px at 1440), `section-pad-s` for logo walls and bands, `section-pad-l` for heroes and the closing CTA. Do not add extra padding or a spacer section to "give it air"; pick the padding size or change the order instead.
 
 - Do: /chat: hero (airy) → logo marquee (thin) → three two-column rows (airy) → feature grid (dense) → customer story strip (dense, but pictures) → Why social.plus (dense) → Explore more (airy) → CTA band.
 - Don't: problem cards → feature icon cards → bordered cards in a row. If a page wants three sets of cards, one of them is a two-column or an accordion with image (17).
@@ -38,28 +38,28 @@ When there is no product visual yet: use the simple hero (02) with text and butt
 
 ## 5. Colour: blue is the accent
 
-The page is dark (`--social--dark`), text is white and grey-light, and blue is the one accent: button fills, tags, icon holders. The secondary colours (green, yellow, red, orange, purple, pink) signal status or decorate one small thing; they never colour a section, a heading or a call to action. Blue is never text or an icon colour on dark (2.84:1; the rule for links on dark is in `brain.md`). One highlighted card per set at most; the rest are greyscale (`foundations/cards/`).
+The page is dark (`--social--dark`), text is white and grey-light, and blue is the one accent: button fills, tags, icon holders. The secondary colours (green, yellow, red, orange, purple, pink) signal status or decorate one small thing; they never colour a section, a heading or a call to action. Blue is never text or an icon colour on dark (2.84:1; the rule for links on dark is in `brain.md`). One highlighted card per set at most; the rest are greyscale (`foundations/cards/`). Inside the frame there are no cards at all: content sits in cells divided by frame lines (the Grid and frame section).
 
 - Do: /vs/circle: dark throughout, blue only on the buttons and the comparison highlight.
 - Don't: a green "live" badge in the hero, a purple feature card, a yellow heading. Status colours stay in tags and inline markers.
 
 ## 6. Typography: one H1, headings are claims
 
-One `<h1>` per page, 5 to 9 words, the product's promise. Every section heading is a claim in plain words (what the reader gets), not a label ("Features", "Benefits") and not a question, unless the section is the FAQ. Headings are short: H2 5 to 12 words, card titles 3 to 6, one line where it can be one line. Body copy stays in the measured sizes (`foundations/typography/`): no custom sizes, no bold runs inside paragraphs, no all-caps outside tags and the `.superscript` eyebrow.
+One `<h1>` per page, 5 to 9 words, the product's promise. Every section heading is a claim in plain words (what the reader gets), not a label ("Features", "Benefits") and not a question, unless the section is the FAQ. Headings are short: H2 5 to 12 words, card titles 3 to 6, one line where it can be one line. Type stays on the type scale (the Typography section: `display`, `h1` to `h5`, `lead`, `body`, `small`, `caption`, `stat-*`): no custom sizes, no bold runs inside paragraphs, no all-caps outside tags and the Geist Mono eyebrow (`.superscript`).
 
 - Do: "Build in-app messaging faster with a Chat SDK" (H1), "All the messaging features your app needs" (H2), "Reactions" (card title).
 - Don't: a label ("Features", "Why Agentry") as the H2 with the real claim under it as a second heading. The label is the `.superscript` eyebrow; the claim is the H2.
 
 ## 7. Spacing: be generous, use the steps
 
-Space is the way a dark page shows structure. Use the containers and steps that exist (`.container-large` 1280px, `.container-medium` 760px for text-only sections, the five spacing steps and `.section.padding_y`), and the measured grid gaps (`.grid-2` 4rem). Let a paragraph stop at 44 to 56 characters (`.max-ch-NN`). When a section feels crowded, cut content; do not shrink the type or the gaps.
+Space is the way a dark page shows structure. Use the containers and steps that exist (`container-l` 1280px, `container-m` 1024px for tables and text-heavy sections, `container-s` 768px for centred heroes, FAQ and articles; the nine spacing steps `space-3xs` to `space-3xl`; the section paddings), and `grid-gap` between cards outside the frame; inside the frame, cells on whole columns with every text edge on a column inset. Let text stop at its measure: `measure-body` 65 characters for running text, `measure-lead` 52 for a lead, `measure-title` 20 for a heading. When a section feels crowded, cut content; do not shrink the type or the gaps.
 
-- Do: the FAQ (18) sits in `.container-medium`; the two-column rows keep the 4rem gap.
+- Do: the FAQ (18) sits in `container-s`; a heading block sits `space-xl` above its grid.
 - Don't: six cards squeezed into three columns at a smaller font to fit one screen. Six cards are two rows.
 
 ## 8. No one-off effects
 
-No gradient text, no glow behind a card, no new animation, no parallax, no glassmorphism panels, no custom icon style, no new shadow. What moves on the live site (marquee, count-up, carousel) is in the captured sections; anything else is still. The live `h1` gradient text fill and the blue glows on the AI pages are known inconsistencies, not a licence (`foundations/colors/`, `foundations/shadows-and-radius/`). An effect the page seems to need is proposed first, like a section.
+No gradient text, no glow behind a card, no new animation, no parallax, no glassmorphism panels, no custom icon style, no new shadow. What moves on the live site (marquee, count-up, carousel) is in the captured sections; anything else is still. The live `h1` gradient text fill and the blue glows on the AI pages are known inconsistencies, not a licence (`foundations/colors/`, `foundations/shadows-and-radius/`). An effect the page seems to need is proposed first, like a section. The frame is structure, not an effect: its lines, section rules, plus markers, hatched bands (at most two per page) and the art panel behind a product visual are allowed as the Grid and frame section describes them, and nothing beyond that.
 
 - Do: depth from lighter surfaces (`--social--dark-gray-background` cards on the `--social--dark` page), one `--border--border-dark` line between layers.
 - Don't: a blue glow behind every card, a shimmering border on the hero, icons from an icon font.

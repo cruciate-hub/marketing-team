@@ -1,8 +1,23 @@
 # Shadows and radius
 
-The border radii and shadows the live site uses, with rule counts from the 7 October 2026 audit of the two Webflow stylesheets, and the reduced set the audit proposes. Neither has a token today; the proposal waits for the team's decision.
+The radius set and the one shadow new work uses (web library, decision 8 October 2026, Amadeus; not yet in Webflow), then the border radii and shadows the live site uses, with rule counts from the 7 October 2026 audit of the two Webflow stylesheets.
 
-- Status: draft (2026-10-07), as-is: values as the stylesheet has them, no team decision applied; replaces the former `design-system/shadows.md` and `border-radius.md` · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
+## Radius and shadow (use these)
+
+Radius grows with the element, so cards, panels and buttons read as different things.
+
+| Token | Value | Use | Replaces (live) |
+|---|---|---|---|
+| `radius-s` | 8px | Icon tiles, inputs, small controls | `.5rem`; `.25rem` on inputs and checkboxes |
+| `radius-m` | 16px | Free-standing cards, thumbnails, images | `1rem`, `.75rem`; cards move up from `.5rem` |
+| `radius-l` | 24px | Panels, large visuals | `1.5rem`, `1.25rem`, `2rem` |
+| `radius-pill` | 999px | Buttons, badges and tags, tabs, chips | the six pill spellings, `10em`, `25em`; the `.36rem` tag |
+| `radius-circle` | 50% | Avatars, dots, round icon holders | `100%`, `999rem` |
+| `shadow-float` | `0 12px 32px -8px #0000002e, 0 2px 6px #0000000f` | Floating layers only: menus, dropdowns, popovers, the nav sheet | the card shadows and blue glows (retired for new work) |
+
+Frame cells have no radius: inside the frame, content is divided by lines, not by rounded cards. Depth comes from tonal surfaces (`color-surface`, `color-surface-raised`) and `color-border`, never from a shadow or a glow.
+
+- Status: draft (2026-10-08): the radius set and shadow-float are decisions (Amadeus, 8 October 2026); the measured values are as-is; replaces the former `design-system/shadows.md` and `border-radius.md` · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: rule counts over the two live Webflow stylesheets, measured on 7 October 2026 by the site audit (the counts are reproduced in the tables below), and the captured sections' CSS
 - Preview: preview.html (hand-made, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Not produced by capture/: the preview is written by hand and survives re-runs
@@ -45,9 +60,9 @@ Of the 41 captured section types only the hero illustration variant (02 `--illus
 
 Depth comes from lighter surfaces, not from shadows: page `--social--dark` #111, nav `--secondary--menu-bg` #181818, raised block `--social--dark-gray-background` #1a1a1a (cards v2, v3, plain; secondary button fill), panel `--social--grey` #222 (card-v1 gradient start, product tiles), icon holder #2b2b2b (not a token), chip `--social--light-grey` #444. Same-colour layers are separated by `--border--border-dark` #232324 or `--border--border-hover` #39393a. The card shadow is for light tiles (forms, logo boxes, pop-ups) where a border would look heavy. A glow is interactive feedback or a single highlight, never a resting state on every card.
 
-## Proposed set (to decide: Stefan or Amadeus)
+## The audit's proposed set (decided 8 October 2026)
 
-From the audit, open question 9 ("add radius and shadow tokens"):
+From the audit, open question 9 ("add radius and shadow tokens"). Decided with the web library: the radii as proposed, pill written 999px; the card shadow and the glow are not taken (one `shadow-float` instead).
 
 | Token (proposed) | Value | Replaces |
 |---|---|---|
@@ -59,9 +74,9 @@ From the audit, open question 9 ("add radius and shadow tokens"):
 | shadow card | `0 16px 2rem #12141914` (hover `#12141929`) | the four `#121419` variants |
 | shadow glow | `0 0 24px #3b41ec2e` | the four blue glows |
 
-The design system page (Claude Design) lists the measured radii and shadows as tokens (`radius-4` to `radius-circle`, `shadow-card` to `shadow-focus-field`) so pages built there can name them; they are not Webflow variables and are written as literals in Webflow until this set is decided.
+The design system page (Claude Design) lists the measured radii and shadows as tokens (`radius-4` to `radius-circle`, `shadow-card` to `shadow-focus-field`) so pages built there can name them; they are not Webflow variables and are written as literals in Webflow.
 
-The former `shadows.md` scale (`--shadow-sm` to `--shadow-xl`, light and dark values, eight z-index layers) and the former `border-radius.md` nine-step scale were not on the site; the values above are what the site has. Until the team decides, use the measured value of the section you are building from, and the proposed set for anything new.
+The former `shadows.md` scale (`--shadow-sm` to `--shadow-xl`, light and dark values, eight z-index layers) and the former `border-radius.md` nine-step scale were not on the site; the values above are what the site has. New work uses the set at the top of this page.
 
 ## Known inconsistencies (as-is, no decision applied)
 - Four radii on one card family (8px cards, 16px thumbnails, 24px rich-text images, pill icons) and six spellings of "pill"

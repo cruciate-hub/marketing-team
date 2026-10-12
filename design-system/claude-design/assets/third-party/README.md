@@ -1,0 +1,5 @@
+The approved third-party logos, from `design-system/assets/third-party/` in the repository (copied as they are). Other companies' logos appear on a page only from this set or as files the team supplies; a tool or company without a file here is written as text (definition of done, point 7).
+
+`ai-tools/`: Claude (also for Claude Code), Cursor, VS Code, GitHub Copilot (the site's label is "Copilot"), OpenAI (for Codex and ChatGPT). Single-colour marks with `text--text-color-grey-light` (#b3b3b3) set on the shapes, no `<style>` block, taken from the live "Works in" row on /ai/mcp-server (7 October 2026). They belong in the 40px "Works in" tile of Hero / Simple (`.mcp-logo`, 1px `border--border-hover` border) with the tool name beside them; never redrawn, recoloured beyond the grey, cropped, or set in our colours.
+
+Adding one: the official single-colour mark from the company's brand or press page, set to #b3b3b3, into `assets/third-party/<group>/` in the repository, listed in the Logo section of the brand book, approved by Stefan or Amadeus, then re-synced here. Check the company's brand guidelines before it goes live.

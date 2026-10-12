@@ -400,6 +400,21 @@ function filterInlineStyleBlocks(html, dropContaining, deletedMap) {
   });
 }
 
+// Geist Mono for code (decision 8 October 2026, Amadeus): every monospace font stack in a captured section becomes
+// var(--font-mono), and a section that had one gets the code rule before </head>, so code, kbd, pre and samp use it too.
+function monoCode(html) {
+  let n = 0;
+  const res = html.replace(/font-family:\s*[^;{}]*\bmonospace\s*;/g, () => {
+    n++;
+    return 'font-family: var(--font-mono);';
+  });
+  if (!n) return res;
+  return res.replace(
+    /\n {2}<\/head>/,
+    '\n  <style>/* Code, kbd, pre and samp in Geist Mono (decision 8 October 2026) */ code, kbd, pre, samp { font-family: var(--font-mono); }</style>\n</head>',
+  );
+}
+
 // ---------------------------------------------------------------------------------------------
 // Tokens (step F5)
 // ---------------------------------------------------------------------------------------------
@@ -412,7 +427,10 @@ function buildTokens(optCss, sharedCss) {
   // and without font-feature-settings. Anything outside basic Latin falls back to Arial, sans-serif.
   const fontFaceCss =
     `@font-face { font-family: "Figtree"; src: url(${out.fontFile}) format("woff2"); ` +
-    `font-weight: 300 900; font-style: normal; font-display: swap; }`;
+    `font-weight: 300 900; font-style: normal; font-display: swap; }\n` +
+    // Geist Mono, for eyebrows and code only (decision 8 October 2026, Amadeus; SIL Open Font License, embedded in the file).
+    `@font-face { font-family: "Geist Mono"; src: url(${out.monoFontFile}) format("woff2"); ` +
+    `font-weight: 100 900; font-style: normal; font-display: swap; }`;
   const extra = Object.entries(config.tokens.extraRootDeclarations || {})
     .map(([k, v]) => `  ${k}: ${v};`)
     .join('\n');
@@ -727,6 +745,7 @@ ${html}
     } catch (e) {
       log(`  prettier failed for ${section.id}: ${e.message.split('\n')[0]}; writing unformatted`);
     }
+    pretty = monoCode(pretty);
     await fs.writeFile(path.join(dir, `source${suffix}.html`), pretty);
     let prettyCss = sectionCss;
     try {

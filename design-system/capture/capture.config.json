@@ -9,6 +9,7 @@
     "galleryFile": "../sections/index.html",
     "readmeDiffFile": "README.md",
     "fontFile": "figtree.woff2",
+    "monoFontFile": "geist-mono.woff2",
     "mediaDir": "../assets/media",
     "mediaManifest": "media.json"
   },
@@ -202,7 +203,8 @@
   "tokens": {
     "fontFamily": "Figtree",
     "extraRootDeclarations": {
-      "color-scheme": "dark"
+      "color-scheme": "dark",
+      "--font-mono": "\"Geist Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
     }
   },
   "pages": [

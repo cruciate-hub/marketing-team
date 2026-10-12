@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.60
+
+The web library's decisions (Amadeus, 8 and 9 October 2026), made directly on the Claude Design page "social.plus", are now in GitHub too, so a re-sync from GitHub can no longer overwrite them. Geist Mono for eyebrows and code and the 112px default section padding are confirmed (Stefan, 12 October 2026).
+
+**Why:** Amadeus changed the design system on the Claude Design page (9 October 2026, through Claude in Cowork): role colour tokens with a light theme, the type scale with Geist Mono, spacing steps and section paddings, the radius set and one shadow, and the new grid and frame. None of it was in GitHub, and the next re-sync from GitHub would have replaced it with the older files.
+
+**Changes:**
+- Foundations, copied from the page as they are: [`colors`](design-system/foundations/colors/foundation.md) (role tokens, 11-step scales, legibility fixes, the live variables and their replacement), [`typography`](design-system/foundations/typography/foundation.md) (two fonts, the fluid type scale, eyebrow and code styles), [`spacing`](design-system/foundations/spacing/foundation.md) (nine steps, section paddings, gutter, containers), [`shadows-and-radius`](design-system/foundations/shadows-and-radius/foundation.md) (radius set, `shadow-float`), [`accessibility`](design-system/foundations/accessibility/foundation.md); new [`grid-and-frame`](design-system/foundations/grid-and-frame/foundation.md) with the Frame card as `preview.html`. [`taste.md`](design-system/taste.md) and [`sections/README.md`](design-system/sections/README.md) as on the page.
+- Geist Mono: [`geist-mono.woff2`](design-system/geist-mono.woff2) (SIL Open Font License 1.1, embedded in the file), `@font-face` and `--font-mono` in `tokens.css` and in the capture (`capture.mjs`, `capture.config.json`), so a re-capture keeps them. Code and caption text in eleven foundation previews and the FAQ (border top) section use `var(--font-mono)`; the capture rewrites a section's monospace font stacks the same way, and `foundations.mjs` writes the captions with it. The rule, definition of done point 4, the "Font" paragraph and the file list in [`README.md`](design-system/README.md), [`brain.md`](design-system/brain.md) and `capture/pack-README.md` now name both fonts and the role tokens; `pack.py` packs the new font.
+- New [`claude-design/`](design-system/claude-design/SYNC.md): the page's own files that had no source here (the brand-book README, `tokens.json` with every token the page shows, each card's first line in `cards.json`, page-written card notes, the cover, `bundle.css`, the recipes and proposals intros, the asset-group notes). `SYNC.md` maps every page file to its source and sets the rule: a change made on the page comes back here the same day; re-sync only when the check finds no difference.
+- New `capture/claude-design-check.py`: compares a copy of the page with this folder, file by file. On the page as it was on 12 October 2026: 181 match, 0 differ.
+- The Colors, Typography, Spacing and Shadows and radius cards are off the page since 9 October 2026 (the token views show the values); `cards.json` records it, their previews stay here.
+- 13.59 (pull request #59, 8 October 2026: brand logos keep their colours, non-Webflow tokens in the definition of done) went in without a changelog entry or version bump; this entry covers both. Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.58 -> 13.60. No brand-kit bump: no symlinked skill file changed.
+
 ## marketing-team 13.58
 
 Pages built in Claude Design show the AI tools as their icons in the "Works in" row, and cards keep the site's layout (icon above the title).

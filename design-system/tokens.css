@@ -3,8 +3,10 @@
    61 variables in the stylesheet; 17 Webflow "deleted" leftovers dropped; 44 kept.
    Change values in Webflow, then re-run the capture. Do not edit by hand. */
 @font-face { font-family: "Figtree"; src: url(figtree.woff2) format("woff2"); font-weight: 300 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url(geist-mono.woff2) format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 :root {
   color-scheme: dark;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --social--dark: #111;
   --font--figtree: Figtree,Arial,sans-serif;
   --text--text-color-grey-light: #b3b3b3;
