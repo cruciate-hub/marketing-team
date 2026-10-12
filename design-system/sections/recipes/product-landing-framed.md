@@ -1,6 +1,6 @@
 # Recipe: a product or feature landing page, framed
 
-The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build since 12 October 2026; the captured version stays for reading the live AI pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). Use it when the person chose the framed look; for the current Webflow look use `product-landing.md` (when the request does not say, ask first: "Current Webflow look or the new framed design?"). Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
