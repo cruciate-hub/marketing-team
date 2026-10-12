@@ -22,6 +22,7 @@ The design system lives in two places: this folder on GitHub and the "social.plu
 | `components/<Card>/preview.html` | the source named in `claude-design/cards.json` (`sources`) | line 1 is the card line from `cards.json` (`cards`); then the source without its `tokens.css` link, with images from the page's asset store instead of `../../assets/` |
 | `components/PricingCompareTable/preview.html` | `claude-design/components/PricingCompareTable/preview.html` | the same file (a shortened version of the captured table) |
 | `components/Cover/preview.html`, `components/bundle.css` | `claude-design/components/` | the same file |
+| `components/framed.css` | `sections/framed/framed.css` | the same file; the framed cards' previews link it as `../framed.css` |
 | `components/<Card>/README.md` | `claude-design/components/<Card>/README.md` where it exists; otherwise the section's `section.md` or the foundation's `foundation.md` without its title line, under a one-line summary | as said |
 | `assets/<group>/README.md` | `claude-design/assets/<group>/README.md` | the same file |
 | images in `assets/` | `assets/media/`, `assets/third-party/`, the logo files in the repository root `assets/` | uploaded to the page's asset store |

@@ -4,7 +4,7 @@ One grid and a visible frame, from the web library: hairlines on the container e
 
 - Status: decision (8 October 2026, Amadeus), not yet in Webflow and not yet used by any captured section · Owner: Amadeus
 - Source: the web library (Foundations > Layout: grid and frame; Sections > Structure: frame)
-- Not yet the rule for building pages: the captured sections do not use the frame. The rule in "Building a page" changes when the web library's framed sections join the set; until then the frame is the target for new sections, not a wrapper for the captured ones
+- Since 12 October 2026 the web library's framed sections are in the set (`sections/framed/`, the "Framed · …" groups): a page type with a framed recipe (today the product landing page) is built framed, on one frame from the navigation to the footer. The captured sections do not use the frame and are never wrapped in it
 
 ## The grid
 
