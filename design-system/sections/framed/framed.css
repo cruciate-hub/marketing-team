@@ -2199,3 +2199,10 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 @media (prefers-reduced-motion: reduce) {
   .mk_ai *, .mk_ai *::before { animation: none !important; }
 }
+
+/* AI chat mockup, start in view (Stefan, 12 October 2026): on a page with a script, the section gets .is-armed and
+   the chat waits, hidden, until the tab stage is about a third in view; the script then adds .is-inview and the chat
+   plays (later tab clicks play it as before). Without a script nothing is armed and it plays as soon as a tab is active. */
+.is-armed:not(.is-inview) .mk_ai :is(.mk_ai_q, .mk_ai_a, .mk_ai_input) { opacity: 0; animation: none !important; }
+.is-armed:not(.is-inview) .mk_ai_card::before, .is-armed:not(.is-inview) .mk_ai_card * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .is-armed:not(.is-inview) .mk_ai :is(.mk_ai_q, .mk_ai_a, .mk_ai_input) { opacity: 1; } }
