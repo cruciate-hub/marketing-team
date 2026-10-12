@@ -16,7 +16,7 @@ A product image or video exists (01); industry pages (03); articles (04).
 - Eyebrow: a short `.superscript` line above the title (live: "social.plus MCP Server"); optional
 - H1: 6 to 9 words; paragraph: 20 to 40 words (`.max-ch-50` caps the line length)
 - Buttons: primary + grey secondary (live: "Connect your AI tool" + "Documentation"; "Contact Sales" + "Documentation")
-- Default: the "Works in" row: the label "Works in" between two divider lines, then one link per tool: the icon in a 40px tile with a 1px `--border--border-hover` border (`.mcp-logo`), the name beside it, and "+ Any MCP-compatible tool" as plain text at the end. The icons are the approved files in `../../assets/third-party/ai-tools/` (Claude, Cursor, VS Code, Copilot, OpenAI for Codex and ChatGPT; the Claude mark for Claude Code); only tools the product supports today. The label is always "Works in"
+- Default: the "Works in" row: the label "Works in" between two divider lines, then one link per tool: the icon in a 40px tile with a 1px `--border--border-hover` border (`.mcp-logo`), the name beside it, and "+ Any MCP-compatible tool" as plain text at the end. The icons are the approved files in `../../assets/third-party/ai-tools/` (Claude, Cursor, VS Code, Copilot, OpenAI for Codex and ChatGPT; the Claude mark for Claude Code); every client in the product's "Works in" row in `messaging/product-capabilities.md` (from the docs' setup pages), never fewer. The label is always "Works in"
 - Illustration variant: a row of platform icons (iOS, Android, Web, …) and an image slider on the right (`.bf-slider`; the first image shows, the rest is script)
 
 ## Allowed variations

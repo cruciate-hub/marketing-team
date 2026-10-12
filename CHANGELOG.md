@@ -1,5 +1,20 @@
 # Changelog
 
+## marketing-team 13.65
+
+Stefan's review of the first Figma hand-off (Agentry, 12 October 2026): every point fixed at its source in the design system, not only in the file.
+
+**Why:** the Figma file showed two blue buttons, lost Cursor and Claude Code from "Works in", had lines between the feature tabs, an empty "IMAGE HERE" box where the page has a chat mockup, other icons than the page, no frames for what the page hides, and a footer that differed from the live site.
+
+**Changes:**
+- Buttons: the first button in a group is blue, every button after it grey (secondary), then at most a text link; never two blue buttons. Replaces the Agentry two-primary exception of the same day. Definition of done point 5 in every copy (`README.md`, `brain.md`, `sections/README.md`, `capture/pack-README.md`, the brand book on the page), [`taste.md`](design-system/taste.md), both product landing recipes.
+- "Works in", root cause: the Agentry row in [`messaging/product-capabilities.md`](messaging/product-capabilities.md) named only ChatGPT and Claude, and the recipes made that row the only allowed list, so the Agentry page and its Figma file dropped Cursor and Claude Code. The Agentry, documentation MCP server and Vise rows now list the clients the docs give setup steps for, a new rule says the list is never shortened, and the recipes and the hero section say "every client in the row, never fewer".
+- Feature tabs ([`framed.css`](design-system/sections/framed/framed.css), [`F06`](design-system/sections/framed/F06-feature-tabs/section.md)): no line between the tabs; icons grey, link blue on the active tab; panels show a mockup, never an empty image box.
+- Footer ([`F16`](design-system/sections/framed/F16-footer/source.html)): the live footer's content back (newsletter "Join" with the consent line and Privacy Policy link, X among the social links, Search, "© 2026 Social Plus Holdings Ltd. All rights reserved."); the library's tagline and newsletter note, which were never on the site, are gone. New rule in [`framed/README.md`](design-system/sections/framed/README.md): framed navigation and footer keep the live content.
+- New [`figma/README.md`](design-system/figma/README.md): the Figma hand-off method (variables, components, the page's own icons, mockups as layers, everything the page hides laid out to the right of the page frame, the check, the way back). Routed from `brain.md`.
+- [`feedback.md`](design-system/feedback.md) items 7 to 11; item 6 marked replaced.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.64 -> 13.65.
+
 ## marketing-team 13.64
 
 The seven remaining framed sections from the web library join the set, and the industry and /vs/ pages get framed recipes.

@@ -19,6 +19,9 @@ Click or the arrow keys switch the tab (script); the preview shows the first tab
 - Colours, type and spacing come from the role, type-scale and layout tokens (`framed.css` and the design system's tokens); in a Webflow build write their values (none is a Webflow variable yet).
 - Text stays on the type scale; eyebrows in Geist Mono; one primary button per section.
 
+- No line between the tabs (only the frame line on the right of the list). Tab icons are grey (`--color-text-muted`); the active tab's icon is link blue (`--color-link`), with the blue bar on the frame. Decision: Stefan, 12 October 2026 (`../../../feedback.md` item 9).
+- Each panel shows a mockup built from the library's mockup parts (chat, app screen, stats), labelled "Illustrative example" when the numbers are made up. Never an empty image box where a mockup can show the feature.
+
 ## Accessibility and mobile
 - Headings in order (one `<h1>` per page, in the hero); frame lines, markers and hatched bands are decorative.
 - Cells collapse to two columns under 992px and one under 480px; splits stack with a frame line between. Rendered at 390px: no sideways scroll.

@@ -15,6 +15,7 @@ design-system/
   README.md               this file
   brain.md                router: what to load for which task (every skill reads it)
   feedback.md             details already corrected once in tests: each must hold on every page (definition of done point 10)
+  figma/README.md         the Figma hand-off: how Claude rebuilds a page in Figma for the designer (hidden states to the right, mockups as layers)
   taste.md                the taste guide: how to combine sections so a page feels like social.plus (with a do and a don't per rule)
   tokens.css, tokens.json the 44 live Webflow variables (+ the Figtree and Geist Mono @font-face and `--font-mono`); the JSON adds a use per token
   figtree.woff2           the main font file (social.plus Figtree build; see "Font" below)
@@ -50,7 +51,7 @@ The sections and the measured values are as the site is today. Since 8 October 2
 > 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
 > 3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
 > 4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-> 5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
+> 5. One primary (blue) button per section: the first button in a group is blue, every button after it is secondary (grey border), then at most one text link. Never two blue buttons, also not for a product that connects to two AI apps (Agentry: "Connect on Claude" blue, "Connect on ChatGPT" grey border). Decision: Stefan, 12 October 2026 (replaces the two-primary exception of the same day).
 > 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 > 7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
 > 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.

@@ -1604,15 +1604,16 @@ a.platform_cell:hover { color: var(--color-text); background: var(--color-bg-alt
    ========================================================================== */
 .feature-tabs { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-top: 1px solid var(--color-frame); }
 .feature-tabs_list { grid-column: 1 / span 4; display: flex; flex-direction: column; border-right: 1px solid var(--color-frame); }
-.feature-tab { position: relative; display: flex; flex-direction: column; gap: var(--space-2xs); width: 100%; padding: var(--space-m) var(--column-inset); border: 0; border-bottom: 1px solid var(--color-frame);
+.feature-tab { position: relative; display: flex; flex-direction: column; gap: var(--space-2xs); width: 100%; padding: var(--space-m) var(--column-inset); border: 0;
   background: none; color: var(--color-text-muted); font: inherit; text-align: left; cursor: pointer; transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out); }
-.feature-tab:last-child { border-bottom: 0; }
 .feature-tab:hover { color: var(--color-text); }
 .feature-tab::before { content: ""; position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: var(--color-link); transform: scaleY(0); transform-origin: top; transition: transform var(--duration-base) var(--ease-out); }
 .feature-tab[aria-selected="true"] { color: var(--color-text); background: var(--color-bg-alt); }
 .feature-tab[aria-selected="true"]::before { transform: scaleY(1); }
 .feature-tab_head { display: flex; align-items: center; gap: var(--space-xs); font-size: var(--text-h5); font-weight: var(--weight-semibold); }
-.feature-tab_head svg { color: var(--color-link); flex: none; }
+/* No line between the tabs; the icon is grey and turns link blue on the active tab (Stefan, 12 October 2026; feedback.md item 9). */
+.feature-tab_head svg { color: var(--color-text-muted); flex: none; transition: color var(--duration-fast) var(--ease-out); }
+.feature-tab[aria-selected="true"] .feature-tab_head svg { color: var(--color-link); }
 .feature-tab_desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-base) var(--ease-out); }
 .feature-tab_desc > span { overflow: hidden; font-size: var(--text-small); line-height: var(--leading-body); color: var(--color-text-muted); }
 .feature-tab[aria-selected="true"] .feature-tab_desc { grid-template-rows: 1fr; }
@@ -1624,13 +1625,12 @@ a.platform_cell:hover { color: var(--color-text); background: var(--color-bg-alt
 @media (max-width: 991px) {
   .feature-tabs_list { grid-column: 1 / -1; flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--color-frame); padding: var(--space-s) var(--column-inset); gap: var(--space-2xs); scrollbar-width: none; }
   .feature-tab { flex: none; width: auto; padding: 0 var(--space-s); min-height: 2.5rem; flex-direction: row; align-items: center; border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); }
-  .feature-tab:last-child { border-bottom: 1px solid var(--color-border-strong); }
   .feature-tab::before, .feature-tab_desc { display: none; }
   .feature-tab_head { font-size: var(--text-small); }
   .feature-tab[aria-selected="true"] { border-color: var(--color-text); background: var(--color-surface); }
   .feature-tabs_stage { grid-column: 1 / -1; min-height: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .feature-tabs_panel, .feature-tab::before, .feature-tab_desc { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .feature-tabs_panel, .feature-tab::before, .feature-tab_desc, .feature-tab_head svg { transition: none; } }
 /* Live video placeholder visual */
 .mk_live { position: absolute; inset: 0; background: radial-gradient(60% 70% at 40% 40%, #6b4a3d, #1b1412 75%); }
 .mk_live_badge { position: absolute; top: calc(var(--space-s) + 2rem); left: var(--space-s); display: inline-flex; gap: 6px; align-items: center; padding: 3px 8px; border-radius: 4px; background: var(--red-500); color: #fff; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: var(--tracking-label); }
@@ -2040,6 +2040,11 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
    link per tool (the approved icon from assets/third-party/ai-tools/ in a 40px tile, its name
    beside it) and a plain-text end ("+ Any MCP-compatible tool"). It takes the place of .hero_note.
    ========================================================================== */
+/* F16 footer: the live footer's own content (consent line with the Privacy Policy link, Search link), 12 October 2026, feedback.md item 10. */
+.footer_newsletter-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.footer_newsletter-note a:hover { color: var(--color-text); }
+.footer_legal a svg { vertical-align: -3px; margin-right: 4px; }
+
 .hero_works { display: flex; flex-direction: column; align-items: center; gap: var(--space-l); margin-top: var(--space-2xl); width: 100%; }
 .hero_works_label { display: flex; align-items: center; white-space: nowrap; margin: 0; justify-content: center; gap: var(--space-xs); width: 100%; font-family: var(--font-mono); font-size: .8125rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-subtle); }
 .hero_works_label::before, .hero_works_label::after { content: ""; flex: 0 1 10rem; height: 1px; background: linear-gradient(90deg, transparent, var(--color-border-strong)); }

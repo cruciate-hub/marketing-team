@@ -22,10 +22,10 @@ Alternate dense and airy. A grid of cards (12, 13, 14, 15, 16) is dense; a two-c
 
 ## 3. One primary action per section, one per screen region
 
-One blue button (`--social--main-blue`) per section, and never two blue buttons side by side. The primary action is the same ask across the page (Contact Sales on product pages, "Connect …" on an AI page) in the hero, the inline CTA band and the footer CTA band. A section that is not a hero or a CTA band uses grey buttons (`.cta-button.c-grey`) or text links. A second action next to the primary is a grey button; a third is a text link. Two actions of equal weight need approval from Stefan or Amadeus; approved (Stefan, 12 October 2026) for a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT): two primary buttons, one per app, in the hero and the CTA band.
+One blue button (`--social--main-blue`) per section, and never two blue buttons side by side. The primary action is the same ask across the page (Contact Sales on product pages, "Connect …" on an AI page) in the hero, the inline CTA band and the footer CTA band. A section that is not a hero or a CTA band uses grey buttons (`.cta-button.c-grey`) or text links. A second action next to the primary is a grey button; a third is a text link. The first button in a group is always the blue one, every button after it grey, also when the two actions weigh the same (Agentry: "Connect on Claude" blue, "Connect on ChatGPT" grey). Decision: Stefan, 12 October 2026.
 
 - Do: https://www.social.plus/ai/mcp-server: "Connect your AI tool" (blue) + "Documentation" (grey) in the hero; the same pair in the "Start building" band; Contact Sales in the footer band.
-- Don't: "Connect on Claude" and "Connect on ChatGPT" as two blue buttons (the open question from the test). Pick one as primary, or make the choice a step inside the destination page.
+- Don't: "Connect on Claude" and "Connect on ChatGPT" as two blue buttons. Claude first in blue, ChatGPT second in grey.
 
 ## 4. Real product visuals, not abstract art
 
