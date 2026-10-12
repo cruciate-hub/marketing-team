@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T06:37:43.938Z",
-    "itemCount": 80,
+    "generatedAt": "2026-10-12T06:38:54.163Z",
+    "itemCount": 81,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/sort-channel-list-by-last-message",
+      "metaTitle": "Sort Channel List by Last Message",
+      "metaDescription": "A new sortBy=lastMessage option is now available for channel list queries",
+      "content": "# Sort Channel List by Last Message"
+    },
     {
       "url": "https://www.social.plus/release-note/numeric-summary-of-user-moderation-history",
       "metaTitle": "Numeric Summary of User Moderation History",
