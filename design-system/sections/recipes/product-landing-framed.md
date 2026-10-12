@@ -1,6 +1,6 @@
 # Recipe: a product or feature landing page, framed
 
-The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame. This is the version to build since 12 October 2026; the captured version stays for reading the live AI pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build since 12 October 2026; the captured version stays for reading the live AI pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -20,7 +20,7 @@ Rules for the page:
 - One frame from the nav to the footer: every section is framed, none is a captured section, and no captured section is wrapped in the frame (the Grid and frame foundation).
 - Inside the frame, content sits in cells divided by frame lines: no card fill, no radius, no gap between cells. Cards exist only outside the frame (a pop-up, a floating panel).
 - Colours through the role tokens, type on the type scale, spacing on the steps and section paddings; eyebrows in Geist Mono. The art panel is the only gradient surface and sits only behind a product visual.
-- One primary button per section: hero and CTA band with the same primary action. Two actions of equal weight need approval from Stefan or Amadeus.
+- One primary button per section: hero and CTA band with the same primary action. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band. Any other pair of equal actions needs approval from Stefan or Amadeus.
 - Numbers in a visual carry the visible label "Illustrative example"; product facts come from `messaging/product-capabilities.md`; the "Works in" row uses the approved icons in `../../assets/third-party/ai-tools/` and names only what the product supports today.
 - Links that do not exist yet are `href="#"` with a note of the intended path. A visual that does not exist yet is the library's placeholder in the art panel, marked "placeholder" in the reply.
 - Before delivery, go through the definition of done in `../README.md`.

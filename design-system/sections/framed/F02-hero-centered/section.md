@@ -1,6 +1,6 @@
 # F02 · Hero / Centered (framed)
 
-- Status: draft (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); not yet in Webflow · Owner: Amadeus · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: approved (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); not yet in Webflow · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library's page demo (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), read 12 October 2026; Webflow name in the library: "Section / Hero"
 - Code: source.html (links `../../../tokens.css` and `../framed.css`) · Screenshot: none yet (render source.html)
 - Captured section it replaces on a framed page: 02 Hero / Simple
@@ -11,7 +11,7 @@ One big statement with an optional wide visual in an art panel.
 Homepage, product overview and hub pages: one promise for the whole page.
 
 ## Variants and behaviour
-Variants: dark with the display title and a visual; light with an H1 and no visual. The line under the buttons holds a short proof (`.hero_note`). Variant "Works in" (social.plus addition, 12 October 2026, not in the library; the second hero in source.html): for a product that works inside AI tools (Agentry, the MCP server), no visual, and under the buttons the "Works in" row (`.hero_works`): the label "Works in", then one link per tool, the approved icon from `assets/third-party/ai-tools/` in a 40px tile with the name beside it, then "+ Any MCP-capable AI app" as plain text. Only tools the product supports today (`messaging/product-capabilities.md`); never a lettered or redrawn icon, never names alone when an approved icon exists.
+Variants: dark with the display title and a visual; light with an H1 and no visual. The line under the buttons holds a short proof (`.hero_note`). Variant "Works in" (social.plus addition, 12 October 2026, not in the library; the second hero in source.html; `../../../feedback.md` item 5): for a product that works inside AI tools (Agentry, the MCP server), no visual, and under the buttons the "Works in" block (`.hero_works`), the live site's pattern: the label "Works in" centred between two fading hairlines, then one link per tool, the approved icon from `assets/third-party/ai-tools/` in a 40px tile with the name beside it, then "+ Any MCP-compatible tool" (or the product's own wording). Only tools the product supports today (`messaging/product-capabilities.md`); never a lettered or redrawn icon, never names alone when an approved icon exists.
 
 ## Rules
 - A framed section sits on the frame: framed sections only on that page, never a captured section and never a captured section wrapped in the frame (Grid and frame section).

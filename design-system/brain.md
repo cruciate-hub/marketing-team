@@ -43,12 +43,12 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
   2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
   3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
   4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
-  5. One primary (blue) button per section; two actions of equal weight only with approval.
+  5. One primary (blue) button per section. Exception (Stefan, 12 October 2026): a product that connects to two AI apps on equal terms (Agentry: Claude and ChatGPT) has two primary buttons, one per app, in the hero and the CTA band; any other pair of equal actions needs approval.
   6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
   7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
   8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
   9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
-  10. Render the page at 1440 and 390, check it against the design system and `taste.md`, and list every mismatch in the reply ("none found" counts as a check).
+  10. Render the page at 1440 and 390, check it against the design system, `taste.md` and `feedback.md` (the details already corrected once), and list every mismatch in the reply ("none found" counts as a check).
 - **Say what is undecided.** "TO CHECK" in a note means nobody decided yet; "Known inconsistencies" means the site does it today. Neither is a rule to follow; say which you applied.
 - **If a load fails** (clone error, missing file, wrong format), follow the fetch block's hard-fail rule. Never work from memorised values.
 - **Run the compliance check** from the root `brain.md` before delivering.
@@ -79,7 +79,8 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `sections/README.md` | The rule with the definition of done, the index of the 41 section types, the recipes |
 | `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
 | `sections/recipes/` | Section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story |
-| `sections/framed/` | The web library's framed sections (F01 to F16, draft) with `framed.css` and their rule: a framed page uses only these, on one frame; the product landing page is built framed |
+| `sections/framed/` | The web library's framed sections (F01 to F16, approved 12 October 2026) with `framed.css` and their rule: a framed page uses only these, on one frame; the product landing page is built framed |
+| `feedback.md` | Details already corrected once in tests (Works in row, logo colours, card icons, approved logos, cells not cards, the two-button exception): check every page against it before calling it done |
 | `sections/proposals/` | Sections that wait for approval by Stefan or Amadeus (`YYYY-MM-DD-<name>.md`); today: use-case tabs. Until approved, build on the closest set section and say so |
 | `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |
 | `capture/` | The scripts that build all of this from the live site (`capture/README.md`) |
