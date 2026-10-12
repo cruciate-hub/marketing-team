@@ -36,3 +36,4 @@ The Frame card (`foundations/grid-and-frame/preview.html`) uses the role and lay
 1. Read the page's files with Claude into a folder outside this repository: `SKILL.md`, `index.html` and everything under `project/`.
 2. Run `python3 capture/claude-design-check.py <that folder>/project`. It prints MATCH or DIFF for every page file and exits with 1 when anything differs.
 3. For each DIFF, copy the page's version to the source the table names (for a card body: make the same edit in its source), then run the check again until it reports no difference.
+4. After a sync, set `meta.ref` (`main@<commit>`) and `meta.synced` (the date) in `claude-design/tokens.json` to the commit the page now matches, here and on the page in the same change.

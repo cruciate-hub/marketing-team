@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.61
+
+Two leftover texts from the 13.60 sync, fixed here and on the Claude Design page "social.plus" in the same change, so the sync check stays at 0 differences.
+
+**Changes:**
+- [`claude-design/tokens.json`](design-system/claude-design/tokens.json): `meta.ref` main@c8da2f1 -> main@92e623c and `meta.synced` 2026-10-07 -> 2026-10-12, the commit and date the page matches since the 13.60 re-sync. [`SYNC.md`](design-system/claude-design/SYNC.md) step 4: update both after every sync.
+- The notes of the four cards taken off the page on 9 October 2026 (Colors, Typography, Spacing, Shadows and radius) no longer say the card is "rendered from" its preview: they say the card is not shown and the preview stays in the repository. The Typography note now calls the clamp() heading sizes the live site's sizes and points new work at the web library's type scale (`fluid-*`), instead of calling them the source of truth.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.60 -> 13.61.
+
 ## marketing-team 13.60
 
 The web library's decisions (Amadeus, 8 and 9 October 2026), made directly on the Claude Design page "social.plus", are now in GitHub too, so a re-sync from GitHub can no longer overwrite them. Geist Mono for eyebrows and code and the 112px default section padding are confirmed (Stefan, 12 October 2026).
