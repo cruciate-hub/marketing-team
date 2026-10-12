@@ -15,14 +15,16 @@ design-system/
   README.md               this file
   brain.md                router: what to load for which task (every skill reads it)
   taste.md                the taste guide: how to combine sections so a page feels like social.plus (with a do and a don't per rule)
-  tokens.css, tokens.json the 44 live Webflow variables (+ Figtree @font-face); the JSON adds a use per token
-  figtree.woff2           the only font file (social.plus Figtree build; see "Font" below)
+  tokens.css, tokens.json the 44 live Webflow variables (+ the Figtree and Geist Mono @font-face and `--font-mono`); the JSON adds a use per token
+  figtree.woff2           the main font file (social.plus Figtree build; see "Font" below)
+  geist-mono.woff2        Geist Mono, for eyebrows and code only (see "Font" below)
   assets/media/           the 232 images the previews use (WebP, SVG, JPG, PNG and one Lottie JSON), copied as served from the site, original
                           Webflow file names, plus one first-frame still per video (videos are not copied; see "Images" below); capture/media.json says where each came from
   foundations/<name>/     foundation.md (values as measured, rules, known inconsistencies), preview.html (self-contained markup),
                           styles.css (the site's own rules), desktop.png (1440), mobile.png (390)
     colors, typography, spacing, buttons, cards, rich-text, form-inputs, tags, accordion-row, dividers, imagery   captured from the site
     logo, icons, accessibility, shadows-and-radius   written by hand (brand rules and measured values), same files
+    grid-and-frame   written by hand: the web library's 12-column grid and frame (decision 8 October 2026), foundation.md and preview.html only
   sections/README.md      the rule for building pages with the definition of done, the index of the 41 section types, the recipes
   sections/<nn-name>/     section.md (use it when, content slots, allowed variations, accessibility), source.html, styles.css, screenshots;
                           variants with a --<variant> suffix; global/ holds nav, sub-nav, breadcrumb bar, footer CTA band, footer
@@ -30,21 +32,22 @@ design-system/
   sections/proposals/     new sections wait here (YYYY-MM-DD-<name>.md) until approved; today: use-case tabs (2026-10-07)
   sections/index.html     the gallery
   capture/                Playwright capture, foundations builder, localize-media (images into assets/media/), verify, gallery, compact-screenshots.py, pack.py (no AI calls)
+  claude-design/          the Claude Design page's own files that have no other source here (brand-book README, tokens.json, card lines, cover, bundle.css); SYNC.md says how the page and this folder stay the same
   brand-guidelines.html   redirect to the gallery (keeps the old public link alive)
   website/                two more redirect stubs (style-guide.html, sections/index.html) for the old public URLs
 ```
 
-Everything is as the site is today. No team decision from the 7 October 2026 audit has been applied; each `foundation.md` and `section.md` lists its "Known inconsistencies" and marks undecided points "TO CHECK". The logo, icons, imagery, accessibility and shadows-and-radius foundations also carry the brand rules (what to do), separate from the measured values.
+The sections and the measured values are as the site is today. Since 8 October 2026 the colours, typography, spacing, shadows and radius foundations and the new grid and frame foundation also carry the web library's decisions (Amadeus): role colour tokens with a light theme, the type scale with Geist Mono for eyebrows and code, the spacing steps and section paddings, the radius set and one shadow, the grid and frame. They are marked as decisions, are not yet in Webflow, and the captured sections do not use them yet. Each `foundation.md` and `section.md` lists its "Known inconsistencies" and marks undecided points "TO CHECK". The logo, icons, imagery, accessibility and shadows-and-radius foundations also carry the brand rules (what to do), separate from the measured values.
 
 ## The rule
 
-> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Keep its inner layout as its screenshots and `source.html` show it (in the card grids the icon sits top-left above the title, never beside the text); a different inner layout is a proposal. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree from `figtree.woff2` only (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif; emails are the exception and follow the email spec), one blue for actions (`--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed" in the conversation. A proposed section may be used on the page only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order. Facts about the product come from `messaging/product-capabilities.md`. Combine the sections as `taste.md` says.
+> Build pages only from the social.plus section set in `sections/` and the foundations in `foundations/`. Use each section as written there: its structure, its content slots and only its allowed variations. Keep its inner layout as its screenshots and `source.html` show it (in the card grids the icon sits top-left above the title, never beside the text); a different inner layout is a proposal. Use only the values in `tokens.css`: dark background (`--social--dark`), Figtree from `figtree.woff2` (never Google Fonts or another source, no `font-feature-settings`; fallback Arial, sans-serif) and Geist Mono from `geist-mono.woff2` for eyebrows and code only (emails are the exception and follow the email spec), colours through the role tokens (`color-*`), one blue for actions (`color-accent-fill`, = `--social--main-blue`). Do not invent a new section, text effect, icon style, shadow or colour. If the page needs something the set does not have, stop and propose it: name the section, say what it is for, show one example, and mark it "proposed" in the conversation. A proposed section may be used on the page only after Stefan or Amadeus approves it; then it is added to the set. Follow the page recipes in `sections/recipes/` for the section order. Facts about the product come from `messaging/product-capabilities.md`. Combine the sections as `taste.md` says.
 >
 > **Definition of done.** Before saying a page is finished, check each point and report it in the reply:
 > 1. The page follows a recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
 > 2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
 > 3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
-> 4. Only values from `tokens.css`; Figtree from `figtree.woff2`; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
+> 4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
 > 5. One primary (blue) button per section; two actions of equal weight only with approval.
 > 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 > 7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
@@ -56,7 +59,7 @@ The same text, for pasting into Claude Design, is in `sections/README.md`. The d
 
 ## Font
 
-**Font:** the only font is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`). Emails are the exception: they follow the email spec (`emails/product-update-newsletter-spec.md`, Inter with system fallbacks); the Figtree-only rule covers the website and every other visual output.
+**Font:** two fonts. Figtree is `figtree.woff2` in this folder: social.plus's own build of Figtree (variable, weights 300 to 900). The single-storey "a" is already the default glyph, so never load Figtree from Google Fonts, the Webflow CDN or any other source, and never add `font-feature-settings`. The file holds basic Latin only; anything else falls back to Arial, sans-serif (`font-family: "Figtree", Arial, sans-serif`). **Geist Mono** is `geist-mono.woff2`, for eyebrows and code only (code blocks, SDK snippets, API paths, token names): variable, weights 100 to 900, SIL Open Font License 1.1 (the licence is embedded in the file), stack `"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace`, `--font-mono` in `tokens.css`. Decision 8 October 2026 (Amadeus), not yet in Webflow. Emails are the exception: they follow the email spec (`emails/product-update-newsletter-spec.md`, Inter with system fallbacks); the two-font rule covers the website and every other visual output.
 
 ## Images
 
@@ -73,6 +76,7 @@ Changes to the design system (a new section, a changed rule, a decided inconsist
 3. **A new section**: write `sections/proposals/YYYY-MM-DD-<name>.md` (name, purpose, one example); after approval add it to `capture/capture.config.json`, capture it, write its `section.md`, add it to the index in `sections/README.md`.
 4. **A new hand-made foundation**: a folder with `foundation.md`, `preview.html` (link `../../tokens.css`, wrap the content in `<main class="fx-page">`, no scripts, images from `../../assets/media/`, never from a URL), `styles.css`; run `node verify.mjs --only foundations/<name>` for the screenshots and `node gallery.mjs` for the gallery, then `python3 compact-screenshots.py`.
 5. **For Claude Design**: `python3 capture/pack.py` assembles the upload pack (tokens, `assets/media/`, foundations, sections, recipes) in `~/Downloads/socialplus-website-design-system` and zips it.
+6. **Changed in Claude Design** (someone edited the "social.plus" page directly): bring it here the same day. Read the page's files into a folder outside the repository, run `python3 capture/claude-design-check.py <folder>/project`, copy each file it reports as different to the source [`claude-design/SYNC.md`](claude-design/SYNC.md) names, run it again until nothing differs, then open a pull request. Re-sync the page from GitHub only when the check reports no difference.
 
 Commit the regenerated files together with the notes. The capture is read-only towards the site and makes no AI calls.
 

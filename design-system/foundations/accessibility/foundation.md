@@ -2,12 +2,40 @@
 
 WCAG 2.1 AA is the target for every page, email and graphic. This foundation holds the contrast of the text and background token pairs the site and the emails use (computed from tokens.css; every surface token has its rows), the site's focus rules, touch targets, text sizes, motion, keyboard and structure rules, and the open items the section notes marked TO CHECK.
 
-- Status: draft (2026-10-07), as-is: ratios computed from the live tokens, rules from the brand guidelines (formerly `design-system/accessibility.md`) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
+- Status: draft (2026-10-08): role-token ratios computed from the web library colours (decision 8 October 2026), live ratios from the live tokens, rules from the brand guidelines (formerly `design-system/accessibility.md`) · Owner: Stefan · Approved by: TO CHECK (Stefan or Amadeus)
 - Source: tokens.css (WCAG 2.1 relative luminance), the captured sections' CSS (`a:focus-visible`, `.text-field:focus`), the section notes
 - Preview: preview.html (hand-made, links ../../tokens.css) · Code: styles.css · Screenshots: desktop.png (1440), mobile.png (390)
 - Not produced by capture/: the preview is written by hand and survives re-runs. Re-compute the table when tokens.css changes
 
-## Contrast of the token pairs (computed 2026-10-07)
+## Contrast of the role tokens (computed 2026-10-08)
+
+The colours new work uses: every text role on every ground of its theme (WCAG 2.1 relative luminance). Body text needs 4.5:1; large text, control borders, icons and focus rings 3:1.
+
+| Theme | Token | Value | on `color-bg` | on `color-bg-alt` | on `color-surface` | on `color-surface-raised` | Needs |
+|---|---|---|---|---|---|---|---|
+| dark | `color-text` | #ffffff | 18.88 | 17.40 | 16.26 | 14.52 | 4.5:1 (text) |
+| dark | `color-text-muted` | #b3b3b3 | 9.01 | 8.30 | 7.76 | 6.92 | 4.5:1 (text) |
+| dark | `color-text-subtle` | #939497 | 6.23 | 5.74 | 5.36 | 4.79 | 4.5:1 (text) |
+| dark | `color-link` | #6f89fc | 5.99 | 5.52 | 5.16 | 4.60 | 4.5:1 (text) |
+| dark | `color-error` | #fc9198 | 8.67 | 7.99 | 7.47 | 6.67 | 4.5:1 (text) |
+| dark | `color-frame-marker` | #939497 | 6.23 | 5.74 | 5.36 | 4.79 | decorative |
+| dark | `color-border-strong` | #343437 | 1.52 | 1.40 | 1.31 | 1.17 | 3:1 (control border) |
+| light | `color-text` | #111111 | 18.88 | 17.32 | 17.94 | 18.88 | 4.5:1 (text) |
+| light | `color-text-muted` | #414347 | 9.91 | 9.09 | 9.41 | 9.91 | 4.5:1 (text) |
+| light | `color-text-subtle` | #666666 | 5.74 | 5.27 | 5.45 | 5.74 | 4.5:1 (text) |
+| light | `color-link` | #3b41ec | 6.66 | 6.11 | 6.33 | 6.66 | 4.5:1 (text) |
+| light | `color-error` | #b70e39 | 6.70 | 6.14 | 6.36 | 6.70 | 4.5:1 (text) |
+| light | `color-frame-marker` | #b3b3b3 | 2.10 | 1.92 | 1.99 | 2.10 | decorative |
+| light | `color-border-strong` | #d0d0d1 | 1.54 | 1.41 | 1.46 | 1.54 | 3:1 (control border) |
+| both | `color-on-accent` #ffffff on `color-accent-fill` | #3b41ec | 6.66 | | | | 4.5:1 (button label) |
+| both | `color-on-accent` #ffffff on `color-accent-fill-hover` | #3235cf | 8.25 | | | | 4.5:1 (button label) |
+| both | `color-on-accent` #ffffff on `color-accent-fill-press` | #282bad | 10.30 | | | | 4.5:1 (button label) |
+
+- Every text role passes 4.5:1 on every ground in both themes; the tightest is `color-link` on `color-surface-raised` in dark (4.60:1): keep links off raised surfaces at small sizes where you can.
+- `color-border-strong` is 1.52:1 (dark) and 1.54:1 (light): fine for a button that also has a text label, but TO CHECK for inputs, where the border is the only cue (WCAG 1.4.11 asks 3:1). Until decided, give inputs a visible label above them and the `color-focus` ring, or use neutral-600 (3.29:1 on #111) for the input border.
+- `color-frame-marker` and `color-border` are decorative and carry no meaning.
+
+## Contrast of the live Webflow variables (computed 2026-10-07)
 
 Body text needs 4.5:1; large text (24px, or 19px bold) and interface parts (borders of controls, icons) 3:1.
 
@@ -39,7 +67,7 @@ Body text needs 4.5:1; large text (24px, or 19px bold) and interface parts (bord
 | `--main--white` | `--social--button-hover` #272b9d | 10.95:1 | AA | primary button hover |
 | `--main--white` | `--social--button-pressed` #27265e | 13.77:1 | AA | primary button pressed |
 | `--social--main-blue` #3b41ec | `--social--dark` | 2.84:1 | fails | blue as text or icon colour on dark: never. Blue is a fill (button, circle, tag background), not a text colour on dark |
-| `--gradient--medium-blue` #3769ec | `--social--dark` | 3.95:1 | large text and UI only | plain links and superscripts on the live site: TO CHECK (underline or a lighter blue such as #7b94fe, 6.75:1, which the page embeds and three AI-page rules already use; until decided follow the rule in `brain.md`: white, or #7b94fe) |
+| `--gradient--medium-blue` #3769ec | `--social--dark` | 3.95:1 | large text and UI only | plain links and superscripts on the live site. Decided 8 October 2026: links and eyebrows on dark use `color-link` (blue-400 #6F89FC, 5.99:1) |
 | `--social--main-blue` | `--main--whitesmoke` #f5f5f5 | 6.11:1 | AA | `.tag` text |
 | `--social--main-blue` | `--main--white` | 6.66:1 | AA | blue text and outlined buttons on white (emails) |
 | `--gradient--medium-blue` | `--main--white` | 4.78:1 | AA | links on white |
@@ -80,8 +108,8 @@ Values regular sections use that are not tokens: `#dc3545` form error on #111 is
 ## Touch targets and text size
 
 - 44px minimum for every interactive element (the brand keeps 44 although WCAG 2.2 criterion 2.5.8 asks 24). The primary and secondary buttons are 2.8rem = 44.8px; the form submit `.button` is 48px (min-height 3rem) and the input fields 52px (3.25rem); text links and footer links are a text line of about 22px and need padding or spacing (TO CHECK); FAQ accordion rows are about 48px (`.accordion_top` padding .75rem and .5rem around a 1.2rem question line at 1.25 with its .25rem margin).
-- 12px is the floor. Smallest live sizes: `.tag` .8rem = 12.8px, `.superscript` 14px, `.text-size-tiny` and `.heading-xsmall` 14.4px. The blog grid overrides the tag to 10.8px (TO CHECK: below the floor).
-- Uppercase only at tag and superscript size, with letter spacing (.025rem on tags, .044rem on superscripts).
+- 12px is the floor. Smallest live sizes: `.tag` .8rem = 12.8px, `.superscript` 14px (13px Geist Mono once the eyebrow decision is in Webflow), `.text-size-tiny` and `.heading-xsmall` 14.4px. The blog grid overrides the tag to 10.8px (TO CHECK: below the floor).
+- Uppercase only on tags and eyebrows, with letter spacing (.025rem on tags; .08em on the Geist Mono eyebrow, live .044rem).
 
 ## Motion
 

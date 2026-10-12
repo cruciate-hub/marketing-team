@@ -1,0 +1,1 @@
+The icons foundation of the social.plus website, rendered from `foundations/icons/preview.html` as the live site has it. The measured values, the rules and the known inconsistencies are in the "Icons" section of the brand book; the values themselves are tokens.

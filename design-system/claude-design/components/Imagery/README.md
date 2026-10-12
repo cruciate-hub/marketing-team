@@ -1,0 +1,1 @@
+The imagery foundation of the social.plus website, rendered from `foundations/imagery/preview.html` as the live site has it. The measured values, the rules and the known inconsistencies are in the "Imagery" section of the brand book; the values themselves are tokens.

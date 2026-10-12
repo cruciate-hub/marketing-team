@@ -1,0 +1,14 @@
+/* social.plus — the site's values that tokens.json cannot hold, kept here so the captured
+   previews resolve them: the six heading clamp() sizes (tokens.json carries their measured px
+   values as type styles) and the site's own name for the font stack. Source: design-system/tokens.css
+   at cruciate-hub/marketing-team@c8da2f1. Change values in Webflow, re-run the capture, re-sync. */
+:root {
+  color-scheme: dark;
+  --font--figtree: var(--font-figtree);
+  --_typography---h1-font-size: clamp(2.75rem,1.5rem + 2svw,5rem);
+  --_typography---h2-font-size: clamp(2.25rem,1.5rem + 2svw,3.25rem);
+  --_typography---h3-font-size: clamp(1.75rem,1rem + 2svw,2.25rem);
+  --_typography---h4-font-size: clamp(1.5rem,.875rem + 2svw,1.75rem);
+  --_typography---h5-font-size: 1.25rem;
+  --_typography---h6-font-size: 1.125rem;
+}

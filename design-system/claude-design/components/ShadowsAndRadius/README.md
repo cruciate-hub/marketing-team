@@ -1,0 +1,1 @@
+The shadows and radius foundation of the social.plus website, rendered from `foundations/shadows-and-radius/preview.html` as the live site has it. The measured values, the rules and the known inconsistencies are in the "Shadows and radius" section of the brand book; the values themselves are tokens.
