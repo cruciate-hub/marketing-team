@@ -13,6 +13,7 @@ A page is framed or captured, never both. A framed page uses only framed section
 
 - The framed navigation (F01) and footer (F16) keep the live site's content (`../global/nav/`, `../global/footer/`): the same links, labels, legal text and social links. Only the layout is new. Content the library added on its own does not ship (`../../feedback.md` item 10).
 - A Figma hand-off of a framed page follows `../../figma/README.md`.
+- A framed page in Webflow follows `../../webflow/README.md` (classes with the `fr-` prefix, values written out, page head code for what classes cannot hold).
 
 ## The set
 
