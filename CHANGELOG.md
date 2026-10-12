@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.64
+
+The seven remaining framed sections from the web library join the set, and the industry and /vs/ pages get framed recipes.
+
+**Why:** Stefan asked to finish the framed set so more page types can be built on the frame (12 October 2026).
+
+**Changes:**
+- [`sections/framed/`](design-system/sections/framed/README.md): F17 Page header, F18 Use case cards, F19 Industry list, F20 Stats, F21 Comparison table, F22 Pricing, F23 Contact form, taken unchanged from the library's section pages (dark and light variants as the library shows them), each with `source.html` and `section.md` (approved, as the rest of the framed set). Rendered at 1440 and 390; one fix in the marked additions block of `framed.css`: the comparison table's sticky feature column made the whole page scroll sideways on phones, `contain: paint` keeps the scroll inside the table. Numbers (F20), customer logos (F19) and pricing tiers (F22) are the library's placeholders and say so.
+- New recipes [`industry-page-framed.md`](design-system/sections/recipes/industry-page-framed.md) and [`vs-framed.md`](design-system/sections/recipes/vs-framed.md). The rule now names product landing, industry and /vs/ pages as framed page types. Product and SDK pages (no framed sub-nav), articles, answers, glossary entries and customer stories (no framed article body) and the pricing compare table stay captured; listed in `framed/README.md`.
+- Index, `brain.md`, file lists (recipes 12), the brand book, the grid-and-frame foundation; the same files on the Claude Design page (`cards.json`, `claude-design/tokens.json`).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.63 -> 13.64.
+
 ## marketing-team 13.63
 
 The framed sections are approved, the framed hero gets the live site's "Works in" row, two primary buttons are allowed for a product that connects to two AI apps on equal terms, and a new `feedback.md` keeps details the team has corrected once.

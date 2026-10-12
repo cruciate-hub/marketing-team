@@ -2052,3 +2052,6 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .hero_works_tile img { width: 100%; height: 100%; display: block; }
 .hero_works_more { font-size: var(--text-body); color: var(--color-text-muted); }
 @media (max-width: 479px) { .hero_works_list { gap: var(--space-s) var(--space-m); } .hero_works_item, .hero_works_more { font-size: var(--text-small); } }
+/* Comparison table (F21) on phones: the sticky feature column made the whole page scroll sideways although the
+   table scrolls in its own box. Containing its paint keeps the sideways scroll inside the table (12 October 2026). */
+.comparison { contain: paint; }

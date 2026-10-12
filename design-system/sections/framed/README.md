@@ -1,6 +1,6 @@
 # Framed sections
 
-The section set on the web library's frame (Amadeus, decision 8 October 2026): 16 sections taken unchanged from the library's page demo on 12 October 2026 (one social.plus addition: the "Works in" variant of F02, `feedback.md` item 5). They replace the captured sections on a framed page; the captured sections stay as the record of the live site. Not yet in Webflow.
+The section set on the web library's frame (Amadeus, decision 8 October 2026): 23 sections taken unchanged from the library on 12 October 2026 (F01 to F16 from its page demo, F17 to F23 from its section pages) (one social.plus addition: the "Works in" variant of F02, `feedback.md` item 5). They replace the captured sections on a framed page; the captured sections stay as the record of the live site. Not yet in Webflow.
 
 - Status: approved (2026-10-12) · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), its page demo
@@ -9,7 +9,7 @@ The section set on the web library's frame (Amadeus, decision 8 October 2026): 1
 
 ## The rule
 
-A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Build framed where the page type has a framed recipe (today: `../recipes/product-landing-framed.md`); other page types stay captured until their framed sections are here.
+A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Build framed where the page type has a framed recipe (today: `../recipes/product-landing-framed.md`, `../recipes/industry-page-framed.md`, `../recipes/vs-framed.md`); other page types stay captured until their framed sections are here.
 
 ## The set
 
@@ -31,11 +31,18 @@ A page is framed or captured, never both. A framed page uses only framed section
 | F14 | FAQ | Conversion | 18 FAQ |
 | F15 | CTA band | Conversion | G4 Footer CTA band, 23 CTA band (inline) |
 | F16 | Footer | Global | G5 Footer |
+| F17 | Page header | Heroes | 04 Article / Title header |
+| F18 | Use case cards | Features | 16 Image-card grid |
+| F19 | Industry list | Features | (none) |
+| F20 | Stats | Proof | 25 Numbers band |
+| F21 | Comparison table | Conversion | 52 vs / Comparison table |
+| F22 | Pricing | Conversion | 60 Plan cards, 62 Additional fees |
+| F23 | Contact form | Conversion | 24 Form section, the form of 53 |
 
-Still only in the library (next): page header, use case cards, industry list, stats, comparison table, pricing, contact form. Until they are here, the blog, answer, glossary, customer story, /vs/ and pricing pages stay captured.
+Not framed yet, so these page types stay captured: product and SDK pages (no framed sub-nav, G2), blog posts, answers, glossary entries and customer stories (no framed article body, 40 to 43; F17 covers only their header), and the pricing compare table (61). A framed version of these is proposed first, like any new section.
 
 ## Known points (TO CHECK)
 
 - The library's icons are Phosphor (duotone in the icon tiles) and the platform marks are Simple Icons; the icons foundation still describes the live site's icons. Decide which set new pages use.
 - The library hero uses weight 700 in places where the typography foundation took 600.
-- Visuals, photos and customer logos in the previews are the library's placeholders.
+- Visuals, photos, customer logos, numbers (F20) and pricing tiers (F22) in the previews are the library's placeholders.
