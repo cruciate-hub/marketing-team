@@ -9,13 +9,9 @@ How Claude turns a page built with the design system into a Figma file a designe
 
 1. **Source.** The page as published (the Claude Design canvas), the sections' `source.html` and `sections/framed/framed.css`. Never memory or a screenshot. Texts, icons, buttons and the "Works in" list are copied from the page; a fact the page lacks is not added in Figma.
 2. **Variables.** One collection, "social.plus · roles (dark)", with the role colours from `claude-design/tokens.json` under their token names (`color-bg`, `color-text`, `color-link` …). Every fill, stroke and text colour is bound to a variable.
-3. **Components.** `Button/Primary`, `Button/Secondary`, `Button/Text link`, `Works in/Tool` (icon swap), `Feature grid/Cell`, `Feature tab` (property Active: grey icon, or blue icon with the bar), `FAQ/Item` (property Open), the mockup parts the page uses (chat head, message, stat, row, "Illustrative example" tag), `Image slot` (properties Brief and Size). Texts are component properties.
-4. **Page frame.** 1440 wide; one auto-layout frame per section, named like the section ("F06 Feature tabs"). Buttons follow definition of done point 5: in each group the first is `Button/Primary`, every one after it `Button/Secondary`.
-5. **What the page hides goes to the right.** Every state a visitor can open but the page does not show at first gets its own frame to the right of the page frame (160 px gap), level with its section, as wide as the section and named after the state:
-   - Feature tabs: one frame per other tab, that tab active and its panel showing ("F06 Feature tabs · Audience understanding").
-   - FAQ: the questions with their answers open ("F14 FAQ · answers open").
-   - Navigation: each menu open; the phone menu ("F01 Navigation · Product menu").
-   - Forms: the error and success states, when the page has a form.
+3. **No components sheet.** The file holds the page frame and, to its right, the hidden tab panels; nothing else. Never build a sheet of components ("Components · …") in a hand-off file: parts stay plain, editable layers with the colour variables. Shared components come only from a published social.plus Figma library, once it exists. Decision: Stefan, 12 October 2026.
+4. **Page frame.** 1440 wide; one auto-layout frame per section, named like the section ("F06 Feature tabs"). Buttons follow definition of done point 5: in each group the first is blue, every one after it grey (secondary).
+5. **Hidden tab panels go to the right.** Content a visitor reaches only by switching a tab (Feature tabs: the other tabs, each active with its panel showing) gets its own frame to the right of the page frame (160 px gap), level with its section, as wide as the section and named after the tab ("F06 Feature tabs · Audience understanding (tab 2 active)"). Nothing else: no open menus, no form states, no extra variants. Anything beyond what the page shows right away is added only when Stefan asks for it. Decision: Stefan, 12 October 2026.
 6. **Visuals.** A mockup the section shows (chat, app screen, stats) is rebuilt as editable layers with its "Illustrative example" tag. An `Image slot` only where the page itself has an image placeholder; its brief says what goes there and the size.
 7. **Icons and logos.** The page's own SVGs, copied from its markup; never chosen again in Figma. The social.plus logo and third-party logos only from the approved files (`../foundations/logo/foundation.md`).
 8. **Fonts.** Figtree for everything, Geist Mono for eyebrows and code. Figma's Figtree is Google's version; install our build (`../figtree.woff2`) on the designer's machine so the letters match the site.
@@ -28,5 +24,5 @@ The designer changes the Figma file. Claude reads the changed frames (screenshot
 
 ## Known limits
 
-- No published social.plus Figma library yet: the variables and components live in each file. Next step: one library file built from this design system that every hand-off uses.
+- No published social.plus Figma library yet: the colour variables live in each file and the parts are plain layers. A library is a separate decision for Stefan.
 - The way back is not tested yet (first test: Victoria places one visual in the Agentry file).
