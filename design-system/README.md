@@ -15,7 +15,7 @@ design-system/
   README.md               this file
   brain.md                router: what to load for which task (every skill reads it)
   feedback.md             details already corrected once in tests: each must hold on every page (definition of done point 10)
-  figma/README.md         the Figma hand-off: how Claude rebuilds a page in Figma for the designer (hidden tab panels to the right, mockups as layers, no components sheet)
+  figma/README.md         the Figma hand-off: how Claude rebuilds a page in Figma for the designer (hidden tab panels and the open FAQ to the right, mockups as layers, no components sheet)
   taste.md                the taste guide: how to combine sections so a page feels like social.plus (with a do and a don't per rule)
   tokens.css, tokens.json the 44 live Webflow variables (+ the Figtree and Geist Mono @font-face and `--font-mono`); the JSON adds a use per token
   figtree.woff2           the main font file (social.plus Figtree build; see "Font" below)
