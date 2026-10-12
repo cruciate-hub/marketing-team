@@ -1,6 +1,6 @@
 # Recipe: a /vs/ page, framed
 
-The framed version of the /vs/ recipe (`vs.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build; the captured version stays for reading the live /vs/ pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the /vs/ recipe (`vs.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). Use it when the person chose the framed look; for the current Webflow look use `vs.md` (when the request does not say, ask first: "Current Webflow look or the new framed design?"). Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|

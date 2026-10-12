@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.67
+
+Two looks, chosen per page: the person who asks for a page chooses the current Webflow look (the captured sections) or the framed design (the web library). When the request does not say, Claude asks first: "Current Webflow look or the new framed design?" Until now product landing, industry and /vs/ pages were always built framed. Decision: Stefan, 12 October 2026.
+
+**Changes:**
+- The rule in the build prompt and the brand book: [`sections/README.md`](design-system/sections/README.md), [`README.md`](design-system/README.md), [`capture/pack-README.md`](design-system/capture/pack-README.md), [`claude-design/README.md`](design-system/claude-design/README.md) ("Building a page"); definition of done point 1 (the page is in the look the person chose) there and in [`brain.md`](design-system/brain.md).
+- [`sections/framed/README.md`](design-system/sections/framed/README.md), [`foundations/grid-and-frame/foundation.md`](design-system/foundations/grid-and-frame/foundation.md), [`claude-design/components/Frame/README.md`](design-system/claude-design/components/Frame/README.md): framed is a choice, not the default for any page type.
+- Recipes: the three framed recipes are no longer "the version to build"; each names its current version and the current ones name their framed version ([`sections/recipes/`](design-system/sections/recipes/), the same in [`claude-design/10-recipes.md`](design-system/claude-design/10-recipes.md)).
+- [`feedback.md`](design-system/feedback.md) item 13.
+- On the Claude Design page (version 46): the same six files and `design-system.json` (`lastChange`). Checked: page = this branch, 229 match, 0 differ. Backup of the page before the change kept outside the repository.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.66 -> 13.67.
+
 ## marketing-team 13.66
 
 The Claude Design page "social.plus" synced to 13.65.

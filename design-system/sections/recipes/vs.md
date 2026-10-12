@@ -1,6 +1,6 @@
 # Recipe: a /vs/ page
 
-A page that compares social.plus with one named competitor, like https://www.social.plus/vs/circle. Fixed order, no extra sections. Nav (G1) above, footer CTA band (G4) and footer (G5) below.
+A page that compares social.plus with one named competitor, like https://www.social.plus/vs/circle. Fixed order, no extra sections. Nav (G1) above, footer CTA band (G4) and footer (G5) below. This is the current Webflow look; the framed look is `vs-framed.md`, and the person chooses (ask when the request does not say).
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|

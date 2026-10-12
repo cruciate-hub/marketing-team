@@ -1,6 +1,6 @@
 # Recipe: an industry page
 
-A page for one industry (gaming, fintech, retail, sports, …), like https://www.social.plus/industry/gaming. Fixed order. Nav (G1) above (no sub-nav), footer CTA band (G4) and footer (G5) below.
+A page for one industry (gaming, fintech, retail, sports, …), like https://www.social.plus/industry/gaming. Fixed order. Nav (G1) above (no sub-nav), footer CTA band (G4) and footer (G5) below. This is the current Webflow look; the framed look is `industry-page-framed.md`, and the person chooses (ask when the request does not say).
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|

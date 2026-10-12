@@ -40,7 +40,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 - **One primary button per section.** Two actions of equal weight need approval from Stefan or Amadeus.
 - **Combine the sections as `taste.md` says:** calm pages, one focal point per screen, dense and airy sections alternating, real product visuals, blue as the one accent, dark first.
 - **Definition of done.** Before saying a page is finished, check each point and report it in the reply:
-  1. The page follows a recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
+  1. The page is in one look, the one the person chose (current or framed; asked before building when the request did not say), and follows that look's recipe in `sections/recipes/`; if none fits, the reply names the closest recipe and where and why the page departs from it.
   2. The global nav (G1) and the footer (G5) are on the page, and the footer CTA band (G4) where the recipe has it.
   3. Every section is one from the set, used as its `section.md` allows, with its inner layout as captured (where the icon, image and text sit, their alignment and order; only the content changes). Anything else is marked "proposed" on the page itself and in the reply.
   4. Only values from `tokens.css`, colours through the role tokens; Figtree from `figtree.woff2`, Geist Mono from `geist-mono.woff2` for eyebrows and code only; no new text effect, icon style, shadow or colour. A token that is not a Webflow variable (the design system page's spacing, radius, shadow, container, size and heading-size tokens) is written as its literal value or class in a Webflow build, never as `var(--<token>)`.
@@ -81,7 +81,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `sections/README.md` | The rule with the definition of done, the index of the 41 section types, the recipes |
 | `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
 | `sections/recipes/` | Section order per page type (12): vs, product page, product landing, industry page and /vs/ each with a framed version, SDK page, industry page, blog post, answer, glossary entry, customer story |
-| `sections/framed/` | The web library's framed sections (F01 to F23, approved 12 October 2026) with `framed.css` and their rule: a framed page uses only these, on one frame; product landing, industry and /vs/ pages are built framed |
+| `sections/framed/` | The web library's framed sections (F01 to F23, approved 12 October 2026) with `framed.css` and their rule: a framed page uses only these, on one frame; framed or current is the person's choice per page (asked when the request does not say); product landing, industry and /vs/ pages have a recipe in both looks |
 | `feedback.md` | Details already corrected once in tests (Works in row, logo colours, card icons, approved logos, cells not cards, the two-button exception): check every page against it before calling it done |
 | `sections/proposals/` | Sections that wait for approval by Stefan or Amadeus (`YYYY-MM-DD-<name>.md`); today: use-case tabs. Until approved, build on the closest set section and say so |
 | `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |

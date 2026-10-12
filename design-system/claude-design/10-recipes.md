@@ -1,6 +1,6 @@
 # Page recipes
 
-Fixed section order and content slots per page type, from `sections/recipes/` (12). Nav (G1) above, footer CTA band (G4) and footer (G5) below every page. A product or feature that is not a product family of its own (Agentry, the MCP server, Vise, an add-on) uses the product landing recipe.
+Fixed section order and content slots per page type, from `sections/recipes/` (12). Nav (G1) above, footer CTA band (G4) and footer (G5) below every page. A product or feature that is not a product family of its own (Agentry, the MCP server, Vise, an add-on) uses the product landing recipe. Product landing, industry and /vs/ pages have a recipe in two looks, current (as on Webflow today) and framed; the person who asks for the page chooses, and when the request does not say, ask first: "Current Webflow look or the new framed design?" The other page types are current only.
 
 ## Recipe: a product page
 
@@ -28,7 +28,7 @@ Rules for the page:
 
 ## Recipe: a product or feature landing page
 
-A page for one product or feature that is not a product family of its own: Agentry, the MCP server (https://www.social.plus/ai/mcp-server), Vise (https://www.social.plus/ai/vise), an add-on. Derived from the live AI pages and the product pages (/chat, /analytics): the AI pages open with the simple hero and a "Works in" row, show the value in link cards, explain how it works in steps, close with a CTA band, a FAQ and the footer band. Fixed order; a section may be left out only where the table says "optional". Nav (G1) above, footer CTA band (G4) and footer (G5) below. Where the live AI pages use a section outside the set (steps timeline, showcase), this recipe names the set section that does the job.
+A page for one product or feature that is not a product family of its own: Agentry, the MCP server (https://www.social.plus/ai/mcp-server), Vise (https://www.social.plus/ai/vise), an add-on. Derived from the live AI pages and the product pages (/chat, /analytics): the AI pages open with the simple hero and a "Works in" row, show the value in link cards, explain how it works in steps, close with a CTA band, a FAQ and the footer band. Fixed order; a section may be left out only where the table says "optional". Nav (G1) above, footer CTA band (G4) and footer (G5) below. This is the current Webflow look; the framed look is `product-landing-framed.md`, and the person chooses (ask when the request does not say). Where the live AI pages use a section outside the set (steps timeline, showcase), this recipe names the set section that does the job.
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -80,7 +80,7 @@ Rules for the page:
 
 ## Recipe: an industry page
 
-A page for one industry (gaming, fintech, retail, sports, …), like https://www.social.plus/industry/gaming. Fixed order. Nav (G1) above (no sub-nav), footer CTA band (G4) and footer (G5) below.
+A page for one industry (gaming, fintech, retail, sports, …), like https://www.social.plus/industry/gaming. Fixed order. Nav (G1) above (no sub-nav), footer CTA band (G4) and footer (G5) below. This is the current Webflow look; the framed look is `industry-page-framed.md`, and the person chooses (ask when the request does not say).
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -105,7 +105,7 @@ Rules for the page:
 
 ## Recipe: a /vs/ page
 
-A page that compares social.plus with one named competitor, like https://www.social.plus/vs/circle. Fixed order, no extra sections. Nav (G1) above, footer CTA band (G4) and footer (G5) below.
+A page that compares social.plus with one named competitor, like https://www.social.plus/vs/circle. Fixed order, no extra sections. Nav (G1) above, footer CTA band (G4) and footer (G5) below. This is the current Webflow look; the framed look is `vs-framed.md`, and the person chooses (ask when the request does not say).
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -197,7 +197,7 @@ Rules for the page:
 
 ## Recipe: a product or feature landing page, framed
 
-The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build since 12 October 2026; the captured version stays for reading the live AI pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the product landing recipe (`product-landing.md`): the same page type (Agentry, the MCP server, Vise, an add-on), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). Use it when the person chose the framed look; for the current Webflow look use `product-landing.md` (when the request does not say, ask first: "Current Webflow look or the new framed design?"). Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -224,7 +224,7 @@ Rules for the page:
 
 ## Recipe: an industry page, framed
 
-The framed version of the industry page recipe (`industry-page.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build; the captured version stays for reading the live industry pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the industry page recipe (`industry-page.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). Use it when the person chose the framed look; for the current Webflow look use `industry-page.md` (when the request does not say, ask first: "Current Webflow look or the new framed design?"). Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
@@ -250,7 +250,7 @@ Rules for the page:
 
 ## Recipe: a /vs/ page, framed
 
-The framed version of the /vs/ recipe (`vs.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). This is the version to build; the captured version stays for reading the live /vs/ pages. Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
+The framed version of the /vs/ recipe (`vs.md`), built from the framed sections in `../framed/` on the web library's frame (approved by Stefan, 12 October 2026). Use it when the person chose the framed look; for the current Webflow look use `vs.md` (when the request does not say, ask first: "Current Webflow look or the new framed design?"). Never mix the two on one page. Fixed order; a section may be left out only where the table says "optional".
 
 | Order | Section | Content slots to fill | Notes |
 |---|---|---|---|
