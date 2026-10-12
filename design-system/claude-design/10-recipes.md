@@ -206,7 +206,7 @@ The framed version of the product landing recipe (`product-landing.md`): the sam
 | F03 | Hero / Split | eyebrow, H1 5 to 9 words, lead 25 to 45 words, primary + secondary, product visual in the art panel | instead of F02 when a real product visual exists. Never both |
 | F04 | Logo wall (inline) | customers | optional; only with F03. With F02 the "Works in" row is the logo row |
 | F07 | Feature grid | section header (eyebrow optional, H2 4 to 8 words: the value in one claim, optional lead); 3 or 6 cells, each an icon tile, a title of 3 to 6 words and 1 to 2 sentences | the value cells ("Your team asks. Your first-party data answers."): cells divided by frame lines, never cards |
-| F06 | Feature tabs | section header (H2 3 to 6 words); 3 to 5 tabs, each a title, one or two sentences and its own visual | the use cases or how it works ("Every team's question, answered in seconds") |
+| F06 | Feature tabs | section header (H2 3 to 6 words); 3 to 5 tabs, each a title, one or two sentences and its own visual | the use cases or how it works ("Every team's question, answered in seconds"); for an AI product each panel is the AI chat mockup (`.mk_ai`): the question, then the assistant's answer as one visual |
 | F12 | Customer stories (grid) | 3 stories from the CMS | optional: only when stories for this product exist; never invented |
 | F14 | FAQ | 5 to 10 questions with one-paragraph answers | at least: what it is, what it works with, what data it reads or changes, who controls access, how to get started |
 | F15 | CTA band | heading 2 to 6 words, one line, one primary button (the page's primary action) | always, last before the footer |

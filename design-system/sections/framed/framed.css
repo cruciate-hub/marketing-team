@@ -2060,3 +2060,142 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 /* Comparison table (F21) on phones: the sticky feature column made the whole page scroll sideways although the
    table scrolls in its own box. Containing its paint keeps the sideways scroll inside the table (12 October 2026). */
 .comparison { contain: paint; }
+
+/* Buttons as on the live site (Stefan, 12 October 2026): the framed sections use the site's own buttons, not the
+   library's flat ones. Primary = .cta-button (2px blue rim, blue gradient fill, 16px/500, arrow in a blue circle);
+   secondary = .cta-button.c-grey (2px #666 rim, #1a1a1a fill, arrow in a #666 circle); tertiary = .text-link (white,
+   arrow, hover grey-light). Same markup as before; the arrow (.button_icon.is-arrow or .button_circle) becomes the
+   circle. The live hover (a rotating light on the rim) is not copied: hover darkens the arrow circle, pressed turns it
+   white. Values from foundations/buttons/styles.css. */
+.button, .button.is-large, .button.is-small {
+  min-height: calc(2.8rem + .25rem); padding: .5rem 1.5rem; gap: .75rem;
+  border: .125rem solid var(--social--main-blue); border-radius: 999px;
+  background: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover));
+  color: var(--main--white); font-size: 1rem; font-weight: 500; line-height: 1.2;
+}
+.button:hover, .button:active { background: linear-gradient(90deg, var(--social--main-blue), var(--social--button-hover)); }
+.button.is-secondary, .button.is-secondary:hover, .button.is-secondary:active {
+  border-color: var(--border--border-dark-grey); background: var(--social--dark-gray-background); color: var(--main--white);
+}
+.button .button_icon.is-arrow, .button .button_circle {
+  display: inline-grid; place-items: center; box-sizing: border-box;
+  width: 1.75rem; height: 1.75rem; padding: .3rem; margin-right: -1rem;
+  border-radius: 50%; background: var(--social--main-blue); color: var(--main--white);
+  transition: background-color .3s ease, color .3s ease;
+}
+.button .button_circle svg { width: 100%; height: 100%; transform: none; }
+.button.is-secondary .button_icon.is-arrow, .button.is-secondary .button_circle { background: var(--border--border-dark-grey); }
+.button:hover .button_icon.is-arrow, .button:hover .button_circle { background: var(--social--button-hover); transform: none; }
+.button:hover .button_circle svg { transform: none; }
+.button:active .button_icon.is-arrow, .button:active .button_circle { background: var(--main--white); color: var(--social--main-blue); }
+.button.is-tertiary, .button.is-tertiary:hover, .button.is-tertiary:active {
+  min-height: 2.75rem; padding: 0; gap: .25rem; border: 0; border-radius: 0; background: none;
+  color: var(--main--white); font-size: 1rem; font-weight: 500;
+}
+.button.is-tertiary:hover { color: var(--text--text-color-grey-light); }
+.button.is-tertiary .button_icon.is-arrow { width: 1.75rem; height: 1.75rem; padding: .25rem; margin-right: 0; background: none; color: currentColor; }
+
+/* Stat mockup (.mock_stats), Stefan 12 October 2026: "more engaging, larger font, colour the +24%". The number is
+   h3 size; a rise (.is-up) is success green (green-300 on dark, 7.6:1 on color-surface; green-700 on light). */
+.mock_stat { padding: var(--space-m) var(--space-s); }
+.mock_stat b { font-size: var(--text-h3); font-weight: 600; line-height: 1.1; letter-spacing: -.015em; color: var(--color-text); }
+.mock_stat b.is-up { color: var(--green-300); }
+.theme-light .mock_stat b.is-up { color: var(--green-700); }
+.mock_stat span { display: block; margin-top: var(--space-3xs); font-size: var(--text-small); }
+
+/* AI chat mockup (.mk_ai), Stefan 12 October 2026: an AI assistant answering in a chat, for AI product pages
+   (Agentry, the MCP server, Vise) in a feature tab or feature row. Header with the assistant's mark and name; the
+   person's question as a blue bubble on the right; the answer on the left as a card with one visual: numbers
+   (.mock_stats), a table (.mk_ai_table), bars (.mk_ai_bars), rows (.mk_ai_rows) or topics (.mk_ai_pills); a
+   follow-up input at the bottom. Rises are success green (.is-up), bars one colour (color-link). The "Illustrative
+   example" tag sits in the header row. Grows with its content (no fixed ratio). */
+.feature-tabs_media:has(.mk_ai), .feature-row_media:has(.mk_ai) { aspect-ratio: auto; }
+.feature-tabs_panel:has(.mk_ai), .feature-tabs_media:has(.mk_ai), .feature-row_media:has(.mk_ai) { min-width: 0; }
+.mk_ai .mock_stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mk_ai { position: relative; display: flex; flex-direction: column; gap: var(--space-m); height: 100%; padding: var(--space-m); text-align: left; font-size: var(--text-small); line-height: 1.45; color: var(--color-text); }
+.mk_ai ~ .mock_tag, .feature-tabs_media:has(.mk_ai) .mock_tag, .feature-row_media:has(.mk_ai) .mock_tag { top: calc(var(--space-m) + .1875rem); left: auto; right: var(--space-m); }
+.mk_ai_head { display: flex; align-items: center; gap: var(--space-xs); padding-bottom: var(--space-s); padding-right: 11rem; border-bottom: 1px solid var(--color-border); }
+.mk_ai_head b { font-weight: 600; }
+.mk_ai_head span { font-size: var(--text-caption); color: var(--color-text-subtle); }
+.mk_ai_mark, .mk_ai_user { display: grid; place-items: center; flex: none; width: 2rem; height: 2rem; border-radius: 50%; }
+.mk_ai_mark { background: var(--color-accent-fill); color: var(--color-on-accent); }
+.mk_ai_user { background: var(--color-surface-raised); color: var(--color-text-muted); }
+.mk_ai_mark svg, .mk_ai_user svg { width: 1.125rem; height: 1.125rem; }
+.mk_ai_q { display: flex; justify-content: flex-end; align-items: flex-end; gap: var(--space-xs); }
+.mk_ai_q p { margin: 0; max-width: 80%; padding: .625rem 1rem; border-radius: 1.25rem 1.25rem .25rem 1.25rem; background: var(--color-accent-fill); color: var(--color-on-accent); font-weight: 500; }
+.mk_ai_a { display: flex; align-items: flex-start; gap: var(--space-xs); }
+.mk_ai_card { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-s); padding: var(--space-s); border: 1px solid var(--color-border); border-radius: .25rem 1.25rem 1.25rem 1.25rem; background: var(--color-surface); }
+.mk_ai_card > p { margin: 0; color: var(--color-text-muted); }
+.mk_ai .mock_stat { background: var(--color-bg); }
+.mk_ai .is-up { color: var(--green-300); }
+.theme-light .mk_ai .is-up { color: var(--green-700); }
+.mk_ai_table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.mk_ai_table th { padding: 0 0 var(--space-2xs); border-bottom: 1px solid var(--color-border-strong); font-family: var(--font-mono); font-size: .6875rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-subtle); text-align: left; }
+.mk_ai_table td { padding: var(--space-xs) 0; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); }
+.mk_ai_table tr:last-child td { border-bottom: 0; }
+.mk_ai_table td:first-child { color: var(--color-text); font-weight: 500; }
+.mk_ai_table th:last-child, .mk_ai_table td:last-child { text-align: right; font-weight: 600; }
+.mk_ai_bars { display: flex; flex-direction: column; gap: var(--space-xs); }
+.mk_ai_bar { display: grid; grid-template-columns: 4.5rem 1fr 2.75rem; gap: var(--space-xs); align-items: center; }
+.mk_ai_bar span { color: var(--color-text); font-weight: 500; }
+.mk_ai_bar i { display: block; height: .75rem; border-radius: 999px; background: var(--color-surface-raised); overflow: hidden; }
+.mk_ai_bar i b { display: block; height: 100%; border-radius: inherit; background: var(--color-link); }
+.mk_ai_bar em { font-style: normal; text-align: right; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.mk_ai_rows { display: flex; flex-direction: column; }
+.mk_ai_rows div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-s); padding: var(--space-xs) 0; border-bottom: 1px solid var(--color-border); }
+.mk_ai_rows div:last-child { border-bottom: 0; padding-bottom: 0; }
+.mk_ai_rows div:first-child { padding-top: 0; }
+.mk_ai_rows span { color: var(--color-text-muted); }
+.mk_ai_rows b { font-size: var(--text-h4); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text); }
+.mk_ai_rows small { margin-left: var(--space-2xs); font-size: var(--text-small); font-weight: 600; }
+.mk_ai_pills { display: flex; flex-wrap: wrap; gap: var(--space-2xs); }
+.mk_ai_pills span { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: .375rem .875rem; border: 1px solid var(--color-border); border-radius: 999px; background: var(--color-surface-raised); font-weight: 500; }
+.mk_ai_pills small { font-family: var(--font-mono); font-size: .75rem; color: var(--color-text-subtle); }
+.mk_ai_input { margin-top: auto; display: flex; align-items: center; gap: var(--space-xs); padding: .375rem .375rem .375rem 1rem; border: 1px solid var(--color-border-strong); border-radius: 999px; color: var(--color-text-subtle); }
+.mk_ai_input span:last-child { margin-left: auto; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-accent-fill); color: var(--color-on-accent); }
+.mk_ai_input svg { width: 1rem; height: 1rem; transform: rotate(-90deg); }
+@media (max-width: 479px) {
+  .mk_ai { padding: var(--space-s); gap: var(--space-s); }
+  .mk_ai_head { padding-right: 0; flex-wrap: wrap; }
+  .feature-tabs_media:has(.mk_ai) .mock_tag, .feature-row_media:has(.mk_ai) .mock_tag { position: static; display: inline-block; margin: var(--space-s) var(--space-s) 0; }
+  .mk_ai .mock_stats { grid-template-columns: 1fr; gap: var(--space-2xs); }
+  .mk_ai .mock_stat { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-xs) var(--space-s); }
+  .mk_ai .mock_stat b { font-size: var(--text-h4); }
+  .mk_ai .mock_stat span { margin: 0; }
+  .mk_ai_q .mk_ai_user, .mk_ai_a .mk_ai_mark { display: none; }
+  .mk_ai_q p { max-width: 90%; }
+}
+
+/* AI chat mockup motion (Stefan, 12 October 2026): each time a tab becomes active the chat plays once. The question
+   slides in from the right, Agentry "types" (three dots) for half a second, then the answer card rises and its
+   visual builds: numbers, rows and topics one after another, bars grow from the left. Off with reduced motion. */
+@keyframes mkAiIn { from { opacity: 0; transform: translateY(.75rem); } to { opacity: 1; transform: none; } }
+@keyframes mkAiFromRight { from { opacity: 0; transform: translateX(1.5rem) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes mkAiPop { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+@keyframes mkAiGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes mkAiTyping { 0%, 100% { opacity: 0; } 15%, 80% { opacity: 1; } }
+@keyframes mkAiDot { 0%, 100% { transform: none; } 50% { transform: translateY(-3px); } }
+.mk_ai_card { position: relative; }
+.mk_ai_card::before { content: ""; position: absolute; left: var(--space-s); top: var(--space-s); width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-text-subtle); box-shadow: .625rem 0 0 var(--color-text-subtle), 1.25rem 0 0 var(--color-text-subtle); opacity: 0; pointer-events: none; }
+.is-active .mk_ai_q { animation: mkAiFromRight .5s cubic-bezier(.2, .8, .2, 1) both; }
+.is-active .mk_ai_a .mk_ai_mark { animation: mkAiPop .35s .3s cubic-bezier(.3, 1.4, .5, 1) both; }
+.is-active .mk_ai_card { animation: mkAiIn .45s .35s cubic-bezier(.2, .8, .2, 1) both; }
+.is-active .mk_ai_card::before { animation: mkAiTyping .6s .4s both, mkAiDot .3s .4s ease-in-out 2; }
+.is-active .mk_ai_card > * { animation: mkAiIn .5s 1s cubic-bezier(.2, .8, .2, 1) both; }
+.is-active .mk_ai .mock_stat, .is-active .mk_ai_rows > div, .is-active .mk_ai_table tbody tr, .is-active .mk_ai_bar, .is-active .mk_ai_pills span { animation: mkAiIn .45s cubic-bezier(.2, .8, .2, 1) both; }
+.is-active .mk_ai_pills span { animation-name: mkAiPop; animation-timing-function: cubic-bezier(.3, 1.4, .5, 1); }
+.is-active .mk_ai :is(.mock_stat, .mk_ai_bar, .mk_ai_pills span, .mk_ai_rows > div, .mk_ai_table tbody tr):nth-child(1) { animation-delay: 1s; }
+.is-active .mk_ai :is(.mock_stat, .mk_ai_bar, .mk_ai_pills span, .mk_ai_rows > div, .mk_ai_table tbody tr):nth-child(2) { animation-delay: 1.1s; }
+.is-active .mk_ai :is(.mock_stat, .mk_ai_bar, .mk_ai_pills span, .mk_ai_rows > div, .mk_ai_table tbody tr):nth-child(3) { animation-delay: 1.2s; }
+.is-active .mk_ai :is(.mock_stat, .mk_ai_bar, .mk_ai_pills span, .mk_ai_rows > div, .mk_ai_table tbody tr):nth-child(4) { animation-delay: 1.3s; }
+.is-active .mk_ai :is(.mock_stat, .mk_ai_bar, .mk_ai_pills span, .mk_ai_rows > div, .mk_ai_table tbody tr):nth-child(5) { animation-delay: 1.4s; }
+.mk_ai_bar i b { transform-origin: left center; }
+.is-active .mk_ai_bar i b { animation: mkAiGrow .9s cubic-bezier(.2, .8, .2, 1) both; }
+.is-active .mk_ai_bar:nth-child(1) i b { animation-delay: 1.1s; }
+.is-active .mk_ai_bar:nth-child(2) i b { animation-delay: 1.2s; }
+.is-active .mk_ai_bar:nth-child(3) i b { animation-delay: 1.3s; }
+.is-active .mk_ai_bar:nth-child(4) i b { animation-delay: 1.4s; }
+.is-active .mk_ai_input { animation: mkAiIn .4s 1.5s cubic-bezier(.2, .8, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .mk_ai *, .mk_ai *::before { animation: none !important; }
+}
