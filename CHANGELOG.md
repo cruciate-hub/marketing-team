@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.70
+
+The AI chat mockup in the feature tabs starts when it is in view (Stefan, 12 October 2026).
+
+**Changes:**
+- [`sections/framed/framed.css`](design-system/sections/framed/framed.css): "start in view". With a script, the section carries `.is-armed` and the chat waits, hidden, until an IntersectionObserver (threshold 0.35 on the tab stage) adds `.is-inview`; then it plays, and tab clicks replay it as before. Without a script nothing changes. Described in [`F06 section.md`](design-system/sections/framed/F06-feature-tabs/section.md).
+- [`claude-design/tokens.json`](design-system/claude-design/tokens.json): `meta.ref` main@51688f2 (13.69), the sync point recorded with this change instead of its own PR; the same on the page.
+- On the Claude Design page: `components/framed.css`, `components/FramedFeatureTabs/README.md`, `tokens.json`, `design-system.json`; on the Agentry canvas: the observer in its logic and `framed.css`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.69 -> 13.70.
+
 ## marketing-team 13.69
 
 Buttons in the framed sections now look like the live site's (Stefan, 12 October 2026: "the buttons do not look at all like our design system").
