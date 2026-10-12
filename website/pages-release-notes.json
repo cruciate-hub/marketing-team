@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T06:24:01.230Z",
-    "itemCount": 78,
+    "generatedAt": "2026-10-12T06:36:19.677Z",
+    "itemCount": 79,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/sort-and-filter-in-the-user-moderation-feed",
+      "metaTitle": "Sort and Filter in the User Moderation Feed",
+      "metaDescription": "Moderators can now sort and filter the user moderation feed by report type, such as AI-flagged or user-reported",
+      "content": "# Sort and Filter in the User Moderation Feed"
+    },
     {
       "url": "https://www.social.plus/release-note/per-type-flag-status-for-user-reports",
       "metaTitle": "Per-Type Flag Status for User Reports",
