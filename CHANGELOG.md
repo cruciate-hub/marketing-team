@@ -12,7 +12,8 @@ Stefan's review of the first Figma hand-off (Agentry, 12 October 2026): every po
 - Feature tabs ([`framed.css`](design-system/sections/framed/framed.css), [`F06`](design-system/sections/framed/F06-feature-tabs/section.md)): no line between the tabs; icons grey, link blue on the active tab; panels show a mockup, never an empty image box.
 - Footer ([`F16`](design-system/sections/framed/F16-footer/source.html)): the live footer's content back (newsletter "Join" with the consent line and Privacy Policy link, X among the social links, Search, "© 2026 Social Plus Holdings Ltd. All rights reserved."); the library's tagline and newsletter note, which were never on the site, are gone. Navigation ([`F01`](design-system/sections/framed/F01-nav/source.html)): the live menu headings and descriptions back ("Product Updates", "By Feature", "More Information" …). New rule in [`framed/README.md`](design-system/sections/framed/README.md): framed navigation and footer keep the live content.
 - New [`figma/README.md`](design-system/figma/README.md): the Figma hand-off method (colour variables, plain layers and no components sheet, the page's own icons, mockups as layers, only the hidden tab panels to the right of the page frame, the check, the way back). Routed from `brain.md`.
-- [`feedback.md`](design-system/feedback.md) items 7 to 11; item 6 marked replaced.
+- Frame markers: the Figma method now builds the details `framed.css` draws without markup (the + markers on the frame lines); `feedback.md` item 12.
+- [`feedback.md`](design-system/feedback.md) items 7 to 12; item 6 marked replaced.
 - Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.64 -> 13.65.
 
 ## marketing-team 13.64
