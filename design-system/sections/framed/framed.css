@@ -2094,3 +2094,11 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 }
 .button.is-tertiary:hover { color: var(--text--text-color-grey-light); }
 .button.is-tertiary .button_icon.is-arrow { width: 1.75rem; height: 1.75rem; padding: .25rem; margin-right: 0; background: none; color: currentColor; }
+
+/* Stat mockup (.mock_stats), Stefan 12 October 2026: "more engaging, larger font, colour the +24%". The number is
+   h3 size; a rise (.is-up) is success green (green-300 on dark, 7.6:1 on color-surface; green-700 on light). */
+.mock_stat { padding: var(--space-m) var(--space-s); }
+.mock_stat b { font-size: var(--text-h3); font-weight: 600; line-height: 1.1; letter-spacing: -.015em; color: var(--color-text); }
+.mock_stat b.is-up { color: var(--green-300); }
+.theme-light .mock_stat b.is-up { color: var(--green-700); }
+.mock_stat span { display: block; margin-top: var(--space-3xs); font-size: var(--text-small); }
