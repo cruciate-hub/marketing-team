@@ -39,7 +39,7 @@ sections/<nn-name>/       section.md (use it when, don't, content slots, allowed
                           styles.css, desktop.png (1440 wide), mobile.png (390 wide);
                           variants: the same files with a --<variant> suffix (source--video.html, desktop--video.png, …)
 sections/global/<name>/   nav, sub-nav, breadcrumb bar, footer CTA band, footer
-sections/recipes/<page>.md  the fixed section order per page type (9): vs, product page, product landing, SDK page, industry page, blog post, answer, glossary entry, customer story
+sections/recipes/<page>.md  the fixed section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story
 ```
 
 Numbers group the sections by family: G global chrome, 01 to 05 heroes, 10 to 26 content sections, 30 to 32 listings, 40 to 43 articles, 50 to 53 the /vs/ family, 60 to 62 the pricing family. Start with `sections/README.md`.

@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.62
+
+The web library's framed sections join the design system: 16 sections on the frame, a framed recipe for the product landing page (Agentry, MCP server, Vise), and the rule that a page is framed or captured, never both.
+
+**Why:** Amadeus's Agentry test (9 October 2026) wrapped the captured sections in the frame; the cards in "Your team asks. Your first-party data answers." looked off because they are floating, filled, rounded cards inside the frame lines, where the frame calls for cells divided by lines. The grid-and-frame foundation said the rule for building pages changes when the library's framed sections join the set; they join now, so Claude Design can build the Agentry page on the frame.
+
+**Changes:**
+- New [`sections/framed/`](design-system/sections/framed/README.md): F01 Navigation to F16 Footer, taken unchanged from the web library's page demo (12 October 2026), each with `source.html` (no scripts, first state) and `section.md` (use, variants, rules, the captured section it replaces); one shared `framed.css` (the library's stylesheet, its embedded Figtree removed: `tokens.css` loads the fonts). Rendered at 1440 and 390: no sideways scroll, Figtree and Geist Mono load.
+- New recipe [`recipes/product-landing-framed.md`](design-system/sections/recipes/product-landing-framed.md): the product landing page on the frame (F02 or F03 hero, F07 feature grid for the value cells, F06 feature tabs for the use cases, F14 FAQ, F15 CTA band). The captured recipe stays for reading the live pages.
+- The rule in [`sections/README.md`](design-system/sections/README.md), the brand book ([`claude-design/README.md`](design-system/claude-design/README.md), "Building a page") and the [grid-and-frame foundation](design-system/foundations/grid-and-frame/foundation.md): a page is framed or captured, never both; a page type with a framed recipe is built framed; a captured section is never wrapped in the frame. Index, `brain.md` and the file lists name the framed set; recipes count 10.
+- Claude Design: 16 cards in the "Framed · …" groups (`cards.json`), `components/framed.css`, the map in `claude-design/tokens.json` (`meta.components`, `meta.paths`) and `SYNC.md`; the check knows `framed.css`. Page and branch checked: 214 match, 0 differ.
+- Still in the library only: page header, use case cards, industry list, stats, comparison, pricing, contact form. TO CHECK: Phosphor and Simple Icons in the library versus the icons foundation; weight 700 in the library hero.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.61 -> 13.62. Built on 13.61 (#61): merge that first.
+
 ## marketing-team 13.61
 
 Two leftover texts from the 13.60 sync, fixed here and on the Claude Design page "social.plus" in the same change, so the sync check stays at 0 differences.

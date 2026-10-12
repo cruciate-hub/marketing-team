@@ -78,7 +78,8 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `foundations/shadows-and-radius/` | Radii and shadows the site uses, the proposed set to decide |
 | `sections/README.md` | The rule with the definition of done, the index of the 41 section types, the recipes |
 | `sections/<nn-name>/` | `section.md`, `source.html`, `styles.css`, screenshots per section type (variants with a `--<variant>` suffix); `global/` for nav, sub-nav, breadcrumb bar, footer CTA band, footer |
-| `sections/recipes/` | Section order per page type (9): vs, product page, product landing, SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/recipes/` | Section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story |
+| `sections/framed/` | The web library's framed sections (F01 to F16, draft) with `framed.css` and their rule: a framed page uses only these, on one frame; the product landing page is built framed |
 | `sections/proposals/` | Sections that wait for approval by Stefan or Amadeus (`YYYY-MM-DD-<name>.md`); today: use-case tabs. Until approved, build on the closest set section and say so |
 | `sections/index.html` | The gallery of every foundation and section (also on GitHub Pages) |
 | `capture/` | The scripts that build all of this from the live site (`capture/README.md`) |

@@ -28,7 +28,8 @@ design-system/
   sections/README.md      the rule for building pages with the definition of done, the index of the 41 section types, the recipes
   sections/<nn-name>/     section.md (use it when, content slots, allowed variations, accessibility), source.html, styles.css, screenshots;
                           variants with a --<variant> suffix; global/ holds nav, sub-nav, breadcrumb bar, footer CTA band, footer
-  sections/recipes/       fixed section order per page type (9): vs, product page, product landing, SDK page, industry page, blog post, answer, glossary entry, customer story
+  sections/recipes/       fixed section order per page type (10): vs, product page, product landing (and its framed version), SDK page, industry page, blog post, answer, glossary entry, customer story
+  sections/framed/       the web library's framed sections (F01 to F16, draft, decision 8 October 2026) with framed.css and their own rule (README.md)
   sections/proposals/     new sections wait here (YYYY-MM-DD-<name>.md) until approved; today: use-case tabs (2026-10-07)
   sections/index.html     the gallery
   capture/                Playwright capture, foundations builder, localize-media (images into assets/media/), verify, gallery, compact-screenshots.py, pack.py (no AI calls)

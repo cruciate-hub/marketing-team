@@ -35,6 +35,7 @@ DOCS = {
     '12-proposals.md': 'claude-design/12-proposals.md',
     'tokens.json': 'claude-design/tokens.json',
     'components/bundle.css': 'claude-design/components/bundle.css',
+    'components/framed.css': 'sections/framed/framed.css',
     'fonts/figtree.woff2': 'figtree.woff2',
     'fonts/geist-mono.woff2': 'geist-mono.woff2',
     'assets/Logos/README.md': 'claude-design/assets/Logos/README.md',
