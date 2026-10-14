@@ -2,7 +2,7 @@
 
 Shared plugin for the marketing team. Ensures all content Claude produces aligns with the latest brand messaging, design system, and website content.
 
-## Skills (20)
+## Skills (23)
 
 ### Content creation
 
@@ -33,6 +33,14 @@ Shared plugin for the marketing team. Ensures all content Claude produces aligns
 | [internal-linking-strategist](../docs/internal-linking-strategist.md) | 668 | 41.8 KB | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`), runs site-wide link audits with Structure Score + Anchor Score, and proposes inbound edits when a new page ships (Reverse mode). Uses a canonical anchor map, cannibalization warnings, link budgets for 14 article types, and authority-flow rules from `link-strategy.md`, with live page-fetch to verify insertion points. | [SKILL.md →](./skills/internal-linking-strategist/SKILL.md) |
 | [link-building-vetter](../docs/link-building-vetter.md) | 161 | 9.3 KB | Vets incoming ABC link exchange requests, scores them 1-10, and drafts response emails. | [SKILL.md →](./skills/link-building-vetter/SKILL.md) |
 | [backlink-placement-finder](../docs/backlink-placement-finder.md) | 934 | 97.1 KB | Finds contextually relevant backlink placement opportunities on partner sites and drafts request emails. | [SKILL.md →](./skills/backlink-placement-finder/SKILL.md) |
+
+### Illustration & motion
+
+| Skill | Lines | Size | What it does | SKILL.md |
+|---|---:|---:|---|---|
+| [social-plus-illustration](../docs/illustration-skills.md) | 42 | 4.7 KB | The social.plus illustration system: dark, abstract, UI-led illustrations built in HTML/SVG from the design-system tokens for any surface (website, social, ads, decks, email). One accent per image chosen by meaning, grain only for editorial work, official third-party logos, a 10-idea ideation method and a review checklist. Foundation for blog-thumbnails and social-plus-motion. Built on claude.ai Design canvases. By Amadeus. | [SKILL.md →](./skills/social-plus-illustration/SKILL.md) |
+| [blog-thumbnails](../docs/illustration-skills.md) | 40 | 5.0 KB | Blog headers and thumbnails (exact Webflow sizes, WebP), in-blog charts, flows and diagrams from the article's own data, answer-page and glossary images, in the illustration system with grain. Two concepts per image after a variety check against recent thumbnails; `export_blog_images.py` writes the files webflow-publisher uploads (needs Playwright and Pillow). By Amadeus. | [SKILL.md →](./skills/blog-thumbnails/SKILL.md) |
+| [social-plus-motion](../docs/illustration-skills.md) | 42 | 3.2 KB | Motion in the illustration system: seamless 4 to 8 second loops of a finished static (animated WebP/GIF) and 15 to 60 second explainers (Reels, TikTok, LinkedIn) from a blog post, with script, camera moves, kinetic type and subtle sound. Built with the Motion artifact type; `render_webp.py` and `contact_sheet.py` render and check frames (Playwright, ffmpeg). By Amadeus. | [SKILL.md →](./skills/social-plus-motion/SKILL.md) |
 
 ### Formatting & conversion
 

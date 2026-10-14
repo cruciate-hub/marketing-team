@@ -1,5 +1,19 @@
 # Changelog
 
+## marketing-team 13.71
+
+Amadeus's illustration skills join the kit, and they replace the Figma image process for blog, answers and glossary images (Stefan, 14 October 2026).
+
+**Changes:**
+- New skills, copied unchanged from Amadeus's export (`social-plus-illustration-skills.zip`, 14 October 2026): [`social-plus-illustration`](marketing-team/skills/social-plus-illustration/SKILL.md) (the visual language for every surface), [`blog-thumbnails`](marketing-team/skills/blog-thumbnails/SKILL.md) (blog headers and thumbnails, in-blog images, answer and glossary images) and [`social-plus-motion`](marketing-team/skills/social-plus-motion/SKILL.md) (loops and explainer videos). Checked before adding: every colour is a design-system token with the right name (22 named tokens match `sections/framed/framed.css`), the two fonts are byte-identical to `design-system/`, the blog sizes and field slugs match `blog-seo-content/webflow-fields.json` and the answers size matches `aeo-content/webflow-fields.json`.
+- New [`scripts/illustration_skills_check.py`](scripts/illustration_skills_check.py), run in CI: the skills are self-contained (they also run as claude.ai skills), so this fails when their fonts or colour values drift from the design system. Four non-token values (chart grid lines, tick labels, logo tiles) are listed in the script.
+- New [`scripts/import_skills.py`](scripts/import_skills.py): imports a `.skill` file or bundle exported from claude.ai over the repo copy, shows what changed and runs the check, for when the skills are edited on claude.ai rather than here.
+- [`design-system/foundations/imagery/foundation.md`](design-system/foundations/imagery/foundation.md): new top section on the illustration system; the skills win where the foundation differs. Marked superseded: the product-illustration "blue only, no pink, orange or yellow" rule and the blog-header rules (one photographic element, no readable text, built in the Figma image file).
+- [`design-system/brain.md`](design-system/brain.md): visuals route to the skills (blog, answers and glossary images to `blog-thumbnails`; illustrations to `social-plus-illustration`; motion to `social-plus-motion`).
+- [`blog-seo-content/SKILL.md`](marketing-team/skills/blog-seo-content/SKILL.md): header images are made with `blog-thumbnails`.
+- [`scripts/audit-skills.sh`](scripts/audit-skills.sh): the three skills listed as non-fetching. New [`docs/illustration-skills.md`](docs/illustration-skills.md); skill tables and counts (20 -> 23) in the READMEs, `marketplace.json` and `brand-kit/README.md`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.70 -> 13.71.
+
 ## marketing-team 13.70
 
 The AI chat mockup in the feature tabs starts when it is in view (Stefan, 12 October 2026).

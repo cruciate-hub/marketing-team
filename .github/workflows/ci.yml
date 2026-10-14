@@ -42,6 +42,9 @@ jobs:
         # Stdlib only; image-dimension assertions self-skip when Pillow is absent.
         run: python3 marketing-team/skills/webflow-publisher/tests/run_tests.py
 
+      - name: Illustration skills match the design system (fonts, colour tokens)
+        run: python3 scripts/illustration_skills_check.py
+
       - name: Website inventory sanity
         run: |
           # Live inventories are committed to the site-data branch by the

@@ -58,6 +58,11 @@ NON_FETCHING_SKILLS=(
   "svg-icon-transformer"
   "claude-design-to-webflow"
   "video-to-gif-and-webp"
+  # Amadeus's illustration skills are self-contained (they also run as claude.ai
+  # skills); scripts/illustration_skills_check.py keeps them in step instead.
+  "social-plus-illustration"
+  "social-plus-motion"
+  "blog-thumbnails"
 )
 
 is_non_fetching() {
