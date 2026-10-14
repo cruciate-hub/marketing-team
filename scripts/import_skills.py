@@ -11,22 +11,31 @@ as claude.ai skills). Whichever copy was edited last, this makes the repo match 
 A .skill file is a zip with one folder <name>/ holding SKILL.md. A bundle .zip may hold
 .skill files and/or plain <name>/SKILL.md folders; when both exist for a name they must
 be identical, or the import stops. Only skills that already exist in the repo, or are
-named with --new, are written. Afterwards: git diff, run the checks, bump the plugin
-version and CHANGELOG as for any skill change.
+named with --new, are written. A skill is replaced as a whole: files that exist only in
+the repo copy are removed (git diff shows them). Exit code: 1 when the import stops or
+the illustration check fails, else 0. Afterwards: git diff, bump the plugin version and
+CHANGELOG as for any skill change.
 """
-import argparse, filecmp, io, pathlib, shutil, subprocess, sys, tempfile, zipfile
+import argparse, atexit, filecmp, io, pathlib, shutil, subprocess, sys, tempfile, zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "marketing-team/skills"
 JUNK = {".DS_Store", "__MACOSX"}
 
 def extract(zbytes, dest):
+    root = dest.resolve()
     with zipfile.ZipFile(io.BytesIO(zbytes)) as z:
         for info in z.infolist():
-            parts = pathlib.PurePosixPath(info.filename).parts
+            name = info.filename.replace("\\", "/")
+            parts = pathlib.PurePosixPath(name).parts
             if any(p in JUNK for p in parts) or info.is_dir():
                 continue
+            # zip-slip guard: no absolute paths, no "..", nothing outside dest
+            if name.startswith("/") or ".." in parts or (parts and ":" in parts[0]):
+                sys.exit(f"STOP: unsafe path in archive: {info.filename}")
             out = dest.joinpath(*parts)
+            if root not in out.resolve().parents:
+                sys.exit(f"STOP: unsafe path in archive: {info.filename}")
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_bytes(z.read(info))
 
@@ -50,6 +59,7 @@ def main():
     o = ap.parse_args()
     src = pathlib.Path(o.source).expanduser()
     work = pathlib.Path(tempfile.mkdtemp(prefix="skill_import_"))
+    atexit.register(shutil.rmtree, work, True)
     raw = work / "raw"; extract(src.read_bytes(), raw)
 
     # unpack nested .skill files next to the plain folders
@@ -81,10 +91,11 @@ def main():
         shutil.copytree(path, target, ignore=shutil.ignore_patterns(*JUNK))
         print(f"wrote {name}")
 
+    shutil.rmtree(work, ignore_errors=True)
     subprocess.run(["git", "-C", str(ROOT), "status", "--short", "--", "marketing-team/skills"])
     check = ROOT / "scripts/illustration_skills_check.py"
     if check.exists():
-        subprocess.run([sys.executable, str(check)])
+        sys.exit(subprocess.run([sys.executable, str(check)]).returncode)
 
 if __name__ == "__main__":
     main()
