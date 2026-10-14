@@ -23,14 +23,15 @@ Since 14 October 2026 these skills are how social.plus makes illustrations and b
 
 Unlike most skills in this kit, these three don't fetch the repo: they also run as claude.ai skills, so they carry their own copies of the fonts and write colour values out in full. Two scripts keep them current:
 
-- `scripts/illustration_skills_check.py` (runs in CI) fails when the copies drift from `design-system/`: the fonts must be byte-identical to `design-system/figtree.woff2` and `geist-mono.woff2`, every token named with its value (either order) must match `sections/framed/framed.css` (22 tokens today), and every colour in the references, the shell and the examples must be a design-system value or one of seven listed exceptions (chart grid lines, tick labels, logo tiles, three colours in the motion examples).
+- `scripts/illustration_skills_check.py` (runs in CI) fails when the copies drift from `design-system/`: the fonts must be byte-identical to `design-system/figtree.woff2` and `geist-mono.woff2`, every token named with its value (either order) must match `sections/framed/framed.css` (22 tokens today), every colour in the references, the shell and the examples must be a design-system value or one of seven listed exceptions (chart grid lines, tick labels, logo tiles, three colours in the motion examples), and every `assets/`, `references/` or `scripts/` path the text names must exist.
 - `scripts/import_skills.py <file.skill | bundle.zip>` brings in a new export from claude.ai: it replaces the repo copy of each skill it contains, shows what changed and runs the check. Then bump the plugin version and CHANGELOG as for any skill change. The skills can equally be edited here through a pull request.
 
 If the design system changes a token these skills use, the check fails until the skills are updated to match.
 
 ## Notes for Amadeus's next version
 
+Fixed here (14 October 2026), so a new export must keep it: `style-spec.md` pointed to `assets/figtree.woff2`; the file is `assets/fonts/figtree.woff2` (the check now fails on any file path that doesn't exist).
+
 Things in the skill text itself, left as exported:
 - `social-plus-illustration/SKILL.md` ends "until the imagery foundation is updated, say which rule you applied"; the foundation now defers to the skills (14 October 2026).
-- `style-spec.md` points to `assets/figtree.woff2`; the file is `assets/fonts/figtree.woff2`.
 - `blog-thumbnails` lists glossary images at 1578 × 888, but the Glossary collection has no image field (inline only), and its export script has no 1240 × 840 answers size.

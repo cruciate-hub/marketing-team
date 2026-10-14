@@ -29,7 +29,7 @@ The accent may be ultramarine or another brand color chosen by meaning — see `
 
 ## Typography
 
-- Figtree, social.plus's own build (`assets/figtree.woff2`, variable 300–900). Never Google Fonts, never `font-feature-settings`. Fallback `Arial, sans-serif`.
+- Figtree, social.plus's own build (`assets/fonts/figtree.woff2`, variable 300–900). Never Google Fonts, never `font-feature-settings`. Fallback `Arial, sans-serif`.
 - Name / key label: 52px, 600, letter-spacing -0.015em, `#FFFFFF`.
 - Button label: 34px, 500, `#FFFFFF` on ultramarine (text color on other accents: `color-accents.md`).
 - Pattern-wall labels (recognisable copy): 24px, 500, `#414347` — deliberately low contrast; they are texture, not reading matter.

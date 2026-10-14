@@ -13,6 +13,8 @@ drift from design-system/:
      round ("`#202022` (neutral-850)" too); a token name that framed.css doesn't define fails.
   3. Every hex colour (6- or 3-digit) in the skills' markdown, shell and examples must be
      a design-system value, or one of the few values listed in SKILL_ONLY below.
+  4. Every file path the markdown names in backticks under assets/, references/ or
+     scripts/ (e.g. `assets/fonts/figtree.woff2`) must exist in one of the three skills.
 
 Run from the repo root: python3 scripts/illustration_skills_check.py
 """
@@ -94,6 +96,16 @@ def main():
             if v not in ds_hex and v not in SKILL_ONLY:
                 fails.append(f"{rel}: {v} is not a design-system value (add it to the design system, "
                              f"or to SKILL_ONLY in this script with a reason)")
+
+    # 4. file paths named in the markdown exist
+    roots = [ROOT / "marketing-team/skills" / s for s in SKILLS]
+    for f in files:
+        if f.suffix != ".md":
+            continue
+        for m in re.finditer(r"`((?:assets|references|scripts)/[A-Za-z0-9_./-]+\.[a-z0-9]+)`", f.read_text()):
+            ref = m.group(1)
+            if not any((r / ref).is_file() for r in roots):
+                fails.append(f"{f.relative_to(ROOT)}: `{ref}` does not exist in any of the three skills")
 
     if fails:
         for f in sorted(set(fails)):
