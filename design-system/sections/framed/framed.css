@@ -2206,3 +2206,19 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .is-armed:not(.is-inview) .mk_ai :is(.mk_ai_q, .mk_ai_a, .mk_ai_input) { opacity: 0; animation: none !important; }
 .is-armed:not(.is-inview) .mk_ai_card::before, .is-armed:not(.is-inview) .mk_ai_card * { animation: none !important; }
 @media (prefers-reduced-motion: reduce) { .is-armed:not(.is-inview) .mk_ai :is(.mk_ai_q, .mk_ai_a, .mk_ai_input) { opacity: 1; } }
+
+/* ==========================================================================
+   Closing rule (Stefan, 12 October 2026; not yet in Webflow). The mirror of .is-ruled:
+   a full-width hairline at the bottom of a section, with plus markers where it crosses
+   the frame lines. Only where the frame ends: a framed section standing on its own, or the
+   last framed section before something that is not framed. Between two framed sections the
+   next section's .is-ruled already draws the line, so it is not used there.
+   Markup: .is-ruled-bottom on the section, <span class="frame_end" aria-hidden="true"></span>
+   as the last child of .container-l.frame (the markers sit on the frame's outer edges).
+   ========================================================================== */
+.is-ruled-bottom{border-bottom:1px solid var(--color-frame)}
+.frame_end{display:block;position:absolute;left:0;right:0;bottom:0;height:0;pointer-events:none}
+.frame_end::before,.frame_end::after{content:"";position:absolute;z-index:2;top:calc(var(--frame-marker) / -2 + .5px);width:var(--frame-marker);height:var(--frame-marker);color:var(--color-frame-marker);
+  background:linear-gradient(currentColor,currentColor) center / 1px 100% no-repeat,linear-gradient(currentColor,currentColor) center / 100% 1px no-repeat}
+.frame_end::before{left:calc(var(--frame-marker) / -2 - .5px)}
+.frame_end::after{right:calc(var(--frame-marker) / -2 - .5px)}

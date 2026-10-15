@@ -36,6 +36,13 @@ body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var
   radial-gradient(60% 70% at 85% 10%,color-mix(in srgb,var(--gradient-light-blue) 45%,transparent),transparent 70%),
   radial-gradient(70% 60% at 10% 100%,color-mix(in srgb,var(--purple-300) 50%,transparent),transparent 70%),
   linear-gradient(160deg,var(--blue-200),var(--blue-500) 80%)}
+/* closing rule (Stefan, 12 October 2026) */
+.is-ruled-bottom{border-bottom:1px solid var(--color-frame)}
+.frame_end{display:block;position:absolute;left:0;right:0;bottom:0;height:0;pointer-events:none}
+.frame_end::before,.frame_end::after{content:"";position:absolute;z-index:2;top:calc(var(--frame-marker) / -2 + .5px);width:var(--frame-marker);height:var(--frame-marker);color:var(--color-frame-marker);
+  background:linear-gradient(currentColor,currentColor) center / 1px 100% no-repeat,linear-gradient(currentColor,currentColor) center / 100% 1px no-repeat}
+.frame_end::before{left:calc(var(--frame-marker) / -2 - .5px)}
+.frame_end::after{right:calc(var(--frame-marker) / -2 - .5px)}
 @media (max-width:991px){
   .frame_split>*{grid-column:1 / -1 !important;border-left:0 !important}
   .frame_split>:last-child{border-top:1px solid var(--color-frame)}
@@ -128,16 +135,17 @@ body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var
 
   <div class="section_divider" aria-hidden="true"></div>
 
-  <section class="is-ruled">
+  <section class="is-ruled is-ruled-bottom">
     <div class="padding-global"><div class="container-l frame">
-      <span class="label">frame_cells · --cells: 6 (3 on tablet)</span>
+      <span class="label">frame_cells · --cells: 6 (3 on tablet) · is-ruled-bottom + frame_end</span>
       <div class="frame_cells" style="--cells:6;--cells-tablet:3;border-top:0">
         <div class="frame_cell logo-cell"><i></i></div><div class="frame_cell logo-cell"><i></i></div><div class="frame_cell logo-cell"><i></i></div>
         <div class="frame_cell logo-cell"><i></i></div><div class="frame_cell logo-cell"><i></i></div><div class="frame_cell logo-cell"><i></i></div>
       </div>
+      <span class="frame_end" aria-hidden="true"></span>
     </div></div>
   </section>
-  <div class="is-ruled" style="height:var(--space-xl)"></div>
+  <div style="height:var(--space-xl)"></div>
 </div>
 
 <!-- Light -->
