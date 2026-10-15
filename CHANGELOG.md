@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.72
+
+The Claude Design page is synced to 13.71 (the illustration skills), and the closing rule made on the page on 12 October comes back here (Stefan, 15 October 2026).
+
+**Changes:**
+- From the page to here (`claude-design/SYNC.md`: a change made on the page comes back as a pull request): the closing rule, `.is-ruled-bottom` with `<span class="frame_end">`, a bottom hairline with plus markers on both frame lines, only where the frame ends (Stefan, 12 October 2026; not yet in Webflow). In [`sections/framed/framed.css`](design-system/sections/framed/framed.css), [`foundations/grid-and-frame/foundation.md`](design-system/foundations/grid-and-frame/foundation.md) (a table row and a rule), its [`preview.html`](design-system/foundations/grid-and-frame/preview.html) (the Frame card shows it), [`claude-design/components/Frame/README.md`](design-system/claude-design/components/Frame/README.md) and the Frame card line in [`claude-design/cards.json`](design-system/claude-design/cards.json).
+- From here to the page (version 55): `07-imagery.md`, `11-taste.md` and the brand book `README.md` now point to the illustration skills; `design-system.json` records the change. `capture/claude-design-check.py`: 229 match, 0 differ.
+- [`claude-design/tokens.json`](design-system/claude-design/tokens.json): `meta.ref` main@5685187 (13.71), `meta.synced` 2026-10-15, here and on the page.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.71 -> 13.72.
+
 ## marketing-team 13.71
 
 Amadeus's illustration skills join the kit, and they replace the Figma image process for blog, answers and glossary images (Stefan, 14 October 2026).

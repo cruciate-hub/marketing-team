@@ -39,7 +39,7 @@
     "FormInputs": "<!-- @dsCard group=\"Foundations\" height=1324 width=1440 -->",
     "FormSection": "<!-- @dsCard group=\"Section · Content\" height=881 width=1440 -->",
     "FormSectionWithImage": "<!-- @dsCard group=\"Section · Content\" height=709 width=1440 -->",
-    "Frame": "<!-- @dsCard group=\"Foundations\" height=2700 width=1440 subtitle=\"Grid and frame: frame lines, cells, plus markers, hatched band, art panel\" -->",
+    "Frame": "<!-- @dsCard group=\"Foundations\" height=2700 width=1440 subtitle=\"Grid and frame: frame lines, cells, plus markers, closing rule, hatched band, art panel\" -->",
     "FramedBento": "<!-- @dsCard group=\"Framed · Features\" height=1065 width=1440 subtitle=\"F09 · framed (web library)\" -->",
     "FramedComparison": "<!-- @dsCard group=\"Framed · Conversion\" height=2777 width=1440 subtitle=\"F21 · framed (web library)\" -->",
     "FramedContact": "<!-- @dsCard group=\"Framed · Conversion\" height=2119 width=1440 subtitle=\"F23 · framed (web library)\" -->",

@@ -21,6 +21,7 @@ One grid and a visible frame, from the web library: hairlines on the container e
 | Inner padding | `.frame_inner` | `frame-inset` | Text inside the frame starts one column inset from the line |
 | Section rule | `.is-ruled` on the section | `color-frame` | A full-width hairline at the top of a section |
 | Plus markers | (drawn by `.is-ruled .frame`) | `frame-marker` 11px, `color-frame-marker` | Where a section rule crosses a frame line. Decorative |
+| Closing rule | `.is-ruled-bottom` on the section, `<span class="frame_end" aria-hidden="true"></span>` last in `.frame` | `color-frame`, `frame-marker`, `color-frame-marker` | The mirror of the section rule: a full-width hairline at the bottom with plus markers on both frame lines. Only where the frame ends (a framed section on its own, or the last framed section before something unframed); never between two framed sections. Stefan, 12 October 2026; not yet in Webflow |
 | Cells | `.frame_cells` > `.frame_cell` | `--cells` (3 by default), `--cells-tablet` (2), `cell-pad` | Content divided by 1px frame lines, no radius, no card fill. The cell count fills complete rows |
 | Split | `.frame_split` (`.is-wide-right`, `.is-reversed`) | | Two cells divided by one vertical frame line on the 6/7 edge (5/7 wide). Stacks under 992px with a line between |
 | Hatched band | `.section_divider` | `divider-band` 48px, `color-frame` | Between major parts of a page; at most two per page |
@@ -48,6 +49,7 @@ The class names are the web library's (Client-First: `section_[name]`, `padding-
 - One frame per page: the lines run unbroken from the nav to the footer. A section never draws its own vertical lines outside the container edges.
 - Every text edge sits on a column inset. Nothing starts between two insets.
 - Cells fill complete rows: 3, 6 or 9 cells in thirds; 4 or 8 in quarters; 6 or 12 in sixths.
+- A section closes with a bottom rule only where the frame ends. Between framed sections the next `.is-ruled` is the dividing line; a second rule there would double it.
 - Markers, rules and hatched bands are structure, not decoration: never coloured, never animated, never added inside a cell.
 - The art panel is the only gradient surface and sits only behind a product visual. No glow, no shadow on the visual inside it.
 - Frame lines, markers and bands are decorative (no contrast requirement, `aria-hidden` on the band); they carry no meaning.
