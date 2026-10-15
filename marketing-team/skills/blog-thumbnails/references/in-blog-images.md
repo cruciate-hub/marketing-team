@@ -36,7 +36,7 @@ Avoid purely atmospheric images here; if a section has nothing to explain visual
 More readable text than a thumbnail, still disciplined:
 - A short mono eyebrow naming what the image shows (`COST TO WIN A USER`) — optional.
 - Labels for every part a reader must identify: axis ticks, series names, step names, channel names, segment names.
-- Values printed on or next to bars and points, large (60–72px at 1578 wide).
+- Values printed on or next to bars and points, large (62–72px at 1578 wide).
 - No sentences or paragraphs — the article carries the explanation.
 - American conventions, fictional American names, USD (master's `content-and-locale.md`).
 
@@ -51,9 +51,9 @@ All in-blog images share one layout frame at 1578×888: **120px left and right, 
 
 ## Chart style
 
-- Ground #111, grain on, vignette as usual.
+- Ground #111, vignette as usual, grain on (topmost).
 - Bars and lines in neutrals (#343437 bars, #414347 lines); **one accent series or bar = the point** the section makes (e.g. the cheaper path, the highlighted segment). The accent is ultramarine unless the data's meaning calls for another brand color (growth → green, gaming → yellow, AI → purple…; master's `color-accents.md`), keeping the set ≥60% ultramarine. The accent never just decorates.
-- Axis and grid: thin #1E1E20 / #343437 lines; tick labels Geist Mono 28px #6B6C70; series labels Figtree 38px #B3B3B3; values Figtree 600 62–72px white.
+- Axis and grid: thin neutral-850 #202022 / neutral-750 #343437 lines; tick labels Geist Mono 28px neutral-500 #939497; series labels Figtree 38px #B3B3B3; values Figtree 600 62–72px white.
 - Rounded bar ends (radius = half the bar height), generous spacing, at most ~6 bars or 3 lines.
 - A trace of people where it helps the meaning: an avatar at the start of a row (dashed for "new/unknown", solid for "existing"), a small reaction chip — never as decoration that competes with the data.
 

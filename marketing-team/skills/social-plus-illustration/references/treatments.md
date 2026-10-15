@@ -5,7 +5,8 @@ Grain is not part of the core style. It is the **editorial treatment**: it signa
 | Surface | Treatment | Notes |
 |---|---|---|
 | Blog headers and thumbnails | **Grain** | blog-thumbnails skill |
-| Answer-page and glossary images | **Grain** | editorial content |
+| Answer-page images | **Grain** | editorial content; 1240×840, `{slug}_answer_1240x840.webp` (field `image-2`, optional) |
+| Glossary images | **Grain** | the Glossary collection has **no image field**: images go inside the article body only, as in-blog images (1578×888, export with `--inline`) |
 | Reels, shorts, carousels built from a blog post or in Vox/explainer style | **Grain** | social-plus-motion, explainer mode |
 | Social posts quoting or promoting an article | **Grain** | |
 | Website hero, feature and section illustrations | Clean | |
@@ -29,4 +30,4 @@ Same everything, grain off. Without grain, add depth with the single soft drop s
 
 ## Sizes by surface
 
-Blog: header 1578×888, grid thumbnail 724×408, mega-menu 502×283, all WebP with exact sizes (details in blog-thumbnails) · answer page 1240×840 · glossary 1578×888 · Instagram post 1080×1350 · Instagram/TikTok reel and story 1080×1920 · LinkedIn post 1200×1200 or 1200×627 · X/Twitter 1600×900 · OG image 1200×630. Website illustrations: ask for the slot size, or design at 2× of the container.
+Blog: header 1578×888, grid thumbnail 724×408, mega-menu 502×283, all WebP with exact sizes (details in blog-thumbnails) · answer page 1240×840 (design on a 1240×840 artboard) · glossary: inline only, 1578×888 · Instagram post 1080×1350 · Instagram/TikTok reel and story 1080×1920 · LinkedIn post 1200×1200 or 1200×627 · X/Twitter 1600×900 · OG image 1200×630. Website illustrations: ask for the slot size, or design at 2× of the container.

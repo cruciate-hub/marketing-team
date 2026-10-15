@@ -6,15 +6,17 @@ Every image still has **exactly one accent** — that is what keeps the style ca
 
 | Family | Fill (brand step) | Lines / text on dark | Glow (behind the accent) | Text on the fill |
 |---|---|---|---|---|
-| Ultramarine (primary) | blue-600 `#3B41EC` (gradient option `#45A5ED`→`#3769EC`) | blue-400 `#6F89FC` | `rgba(59,65,236,0.42)` | white |
+| Ultramarine (primary) | blue-600 `#3B41EC` (gradient option `#45A5ED`→`#3B41EC`) | blue-400 `#6F89FC` | `rgba(59,65,236,0.42)` | white |
 | Green | green-300 `#1DC497` | green-300 `#1DC497` / green-200 `#8DDFC0` | `rgba(29,196,151,0.30)` | `#111111` |
 | Purple | purple-400 `#9F72FF` | purple-300 `#BDA7FC` | `rgba(159,114,255,0.35)` | `#111111` (white only ≥32px bold) |
-| Pink | pink-400 `#DF18DC` | pink-300 `#F568F0` | `rgba(223,24,220,0.30)` | white |
+| Pink | pink-300 `#F568F0` (brand step) | pink-300 `#F568F0` | `rgba(245,104,240,0.28)` | `#111111` |
 | Orange | orange-400 `#FF6937` | orange-300 `#FCA58A` | `rgba(255,105,55,0.28)` | `#111111` (white only ≥32px bold) |
 | Yellow | yellow-400 `#F7C506` | yellow-300 `#FDD76A` | `rgba(247,197,6,0.22)` | `#111111` |
 | Red | red-400 `#FF305A` | red-300 `#FC9198` | `rgba(255,48,90,0.28)` | white only ≥32px bold, else `#111111` |
 
 Fills use the brand step; text and thin lines in that color on the dark ground use the step shown (contrast). The glow always matches the accent; never leave an ultramarine glow under a non-blue accent. Icons sitting on a dark part of a filled shape stay light.
+
+**Only ultramarine is ever an action.** In the design system every secondary color is "never a CTA". So a non-blue accent is a highlighted *thing* — a bar, a number, a ring, a badge, a line, a tag — never a button. If the image's focal element is a button, the accent is ultramarine.
 
 ## Choosing the accent — by meaning, not at random
 
@@ -23,7 +25,7 @@ Fills use the brand step; text and thin lines in that color on the dark ground u
 | **Ultramarine** (default) | product, social, engagement, community features — anything without a stronger fit |
 | **Green** | growth and positive outcomes: revenue up, retention gains, conversion, money earned |
 | **Purple** | AI, agents, automation, data and insights |
-| **Pink** | creators, community moments, live and social energy |
+| **Pink** | creators, community moments, live and social energy (decoration and highlights only) |
 | **Orange** | commerce and shopping, events |
 | **Yellow** | rewards, gaming, highlights, badges, achievements |
 | **Red** | only negative data or warnings — churn, a falling line, moderation flags. Never as a mood color. |

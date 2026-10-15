@@ -12,7 +12,7 @@ Image ratios as the site's style guide defines them, plus the style rules for pr
 Illustrations and editorial images are made with Amadeus's illustration skills, which carry the rules in full:
 
 - `marketing-team/skills/social-plus-illustration/` — the visual language for every surface: dark #111 ground, design-system neutrals, exactly one accent per image (ultramarine for about 70% of images, another brand colour when the topic calls for it), Figtree and Geist Mono, 2 to 4 big objects that leave the frame, a quiet grey social layer, official third-party logos when the content is about other companies. Grain is an editorial treatment: on for blog, answers and glossary images and anything built from an article, off for website, product and brand work.
-- `marketing-team/skills/blog-thumbnails/` — blog headers and thumbnails (1578 × 888, 724 × 408, 502 × 283 WebP), in-blog charts, flows and diagrams (1578 × 888), answer-page (1240 × 840) and glossary images. Built on claude.ai Design canvases, two concepts per image.
+- `marketing-team/skills/blog-thumbnails/` — blog headers and thumbnails (1578 × 888, 724 × 408, 502 × 283 WebP), in-blog charts, flows and diagrams (1578 × 888), answer-page images (1240 × 840) and glossary images (in the article body only, 1578 × 888: the Glossary collection has no image field). Built on claude.ai Design canvases, two concepts per image.
 - `marketing-team/skills/social-plus-motion/` — loops of a finished static and explainer videos (Reels, shorts).
 
 Where this foundation differs from those skills, the skills win. Superseded below: the product-illustration rule "blue is the only accent, no pink, orange or yellow", the blog-header rules (one photographic element, no readable text, built in the shared Figma image file) and the table row for blog, answer and glossary images. The ratios and the photography rules still apply.
@@ -21,7 +21,7 @@ Where this foundation differs from those skills, the skills win. Superseded belo
 - `.image-16-9`, `.image-2-1`, `.image-3-1`, `.image-3-2`: max-width 100%, `aspect-ratio`, 16px radius. The style guide shows Webflow placeholder images; the preview swaps in one site image per class (the gaming hero cover) so the ratio and radius show
 - `.image-4-3`: no radius (the only one)
 - Pages mostly use `.image-square_radius` (33 pages), `.image-fw-radius` (9), `.image-full-width_cover` (8) and `.image-3-2` (14); the other ratio classes are used on one or two pages
-- Fixed sizes the CMS templates expect (WebP): blog header 1578 × 888 and its thumbnails 724 × 408 and 502 × 283 (all 16:9); answer page image 1240 × 840; glossary concept image 1578 × 888; customer story and product update images have no fixed size on record (TO CHECK)
+- Fixed sizes the CMS templates expect (WebP): blog header 1578 × 888 and its thumbnails 724 × 408 and 502 × 283 (all 16:9); answer page image 1240 × 840 (field `image-2`, optional); glossary: no image field, images go in the article body at 1578 × 888; customer story and product update images have no fixed size on record (TO CHECK)
 
 ## Two modes, never mixed on one layout
 
@@ -44,7 +44,7 @@ Where this foundation differs from those skills, the skills win. Superseded belo
 |---|---|
 | Feature section, product page, documentation, empty state | Product illustration, in the social-plus-illustration system (clean, no grain) |
 | Marketing hero | Photography or gradient abstract |
-| Blog post header, answer page image, glossary concept image | blog-thumbnails skill (editorial, grain on) |
+| Blog post header, answer page image, glossary in-article image | blog-thumbnails skill (editorial, grain on) |
 | Customer story | TO CHECK (no rule in the former brand file) |
 | Section divider, background texture | Decorative visual |
 | Email header | Gradient abstract or product illustration |

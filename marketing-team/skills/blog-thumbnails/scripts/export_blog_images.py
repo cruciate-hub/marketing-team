@@ -6,6 +6,9 @@ the Webflow blog collection requires — exact sizes, exact names:
   {slug}_thumbnail_724x408.webp      (field grid-thumbnail)
   {slug}_mega-menu_502x283.webp      (field thumbnail-mega-menu)
 
+Also: --inline N -> {slug}_img-N_1578x888.webp (in-blog / glossary in-article images);
+      --answers   -> {slug}_answer_1240x840.webp (answers collection, field image-2; artboard designed at 1240x840).
+
 The CMS validates min=max on each field: any other size or format is rejected.
 
 Usage: python3 export_blog_images.py Concept2.dc.html --slug my-post-slug \
@@ -50,7 +53,7 @@ def build_html(src, fonts, grain, glow, assets=None):
             face += f'@font-face{{font-family:"{fam}";src:url(data:font/woff2;base64,{b64}) format("woff2");font-weight:100 900}}'
     return f'<!doctype html><html><head><meta charset="utf-8"><style>{face}html,body{{margin:0;background:#111}}</style></head><body>{body}</body></html>'
 
-async def shoot(jobs):
+async def shoot(jobs, base_w=1578):
     """Render each size natively (CSS zoom), so grain and type stay crisp instead of being
     averaged away by downscaling a 1578px render."""
     from playwright.async_api import async_playwright
@@ -59,7 +62,7 @@ async def shoot(jobs):
         for html_path, (w, h), png in jobs:
             pg = await b.new_page(viewport={'width': w, 'height': h})
             await pg.goto('file://' + os.path.abspath(html_path))
-            await pg.evaluate(f'document.body.style.zoom = "{w / 1578:.6f}"')
+            await pg.evaluate(f'document.body.style.zoom = "{w / base_w:.6f}"')
             await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(300)
             await pg.screenshot(path=png, clip={'x': 0, 'y': 0, 'width': w, 'height': h})
             await pg.close()
@@ -70,19 +73,23 @@ def main():
     a.add_argument('artboard'); a.add_argument('--slug', required=True); a.add_argument('--fonts', required=True)
     a.add_argument('--grain', type=float, default=0.9); a.add_argument('--glow', type=float, default=0.8)
     a.add_argument('--out', default='out'); a.add_argument('--quality', type=int, default=88)
+    a.add_argument('--answers', action='store_true', help='export an answer-page image: artboard designed at 1240x840, writes {slug}_answer_1240x840.webp')
     a.add_argument('--inline', type=int, help='export an in-blog image instead: writes {slug}_img-N_1578x888.webp only')
     a.add_argument('--assets', help='folder with uploaded assets (logos) named <blob id>.<ext>')
     a.add_argument('--grain-falloff', type=float, default=GRAIN_FALLOFF, help='0 = same grain at every size; higher = lighter grain on small sizes')
     o = a.parse_args()
     os.makedirs(o.out, exist_ok=True)
-    sizes = [(f'img-{o.inline}', 1578, 888)] if o.inline else SIZES
+    if o.answers: sizes = [('answer', 1240, 840)]
+    elif o.inline: sizes = [(f'img-{o.inline}', 1578, 888)]
+    else: sizes = SIZES
+    base_w = 1240 if o.answers else 1578
     jobs = []
     for variant, w, h in sizes:
-        g = o.grain * (w / 1578) ** o.grain_falloff
+        g = o.grain * (w / base_w) ** o.grain_falloff
         html = os.path.join(o.out, f'_{variant}.html')
         open(html, 'w', encoding='utf-8').write(build_html(o.artboard, o.fonts, g, o.glow, o.assets))
         jobs.append((html, (w, h), os.path.join(o.out, f'_{variant}.png')))
-    asyncio.run(shoot(jobs))
+    asyncio.run(shoot(jobs, base_w))
     for html, _, _ in jobs: os.remove(html)
     for (variant, w, h), (_, _, png) in zip(sizes, jobs):
         im = Image.open(png).convert('RGB')

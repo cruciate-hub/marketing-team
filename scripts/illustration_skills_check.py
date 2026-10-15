@@ -24,17 +24,10 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILLS = ["social-plus-illustration", "social-plus-motion", "blog-thumbnails"]
 DS = ROOT / "design-system"
 
-# Values the skills use that are not design-system tokens (chart grid lines, tick labels,
-# logo tiles). Listed so any NEW non-token value fails the check.
-SKILL_ONLY = {
-    "#1E1E20": "chart grid lines (blog-thumbnails in-blog-images.md)",
-    "#6B6C70": "chart tick labels (blog-thumbnails in-blog-images.md)",
-    "#1C1C1E": "alternative logo tile (social-plus-illustration third-party-logos.md)",
-    "#E6E6E6": "monochrome logo colour (social-plus-illustration third-party-logos.md)",
-    "#161617": "card fill in the explainer example (social-plus-motion explainer-reel-push-ceiling.js)",
-    "#232325": "card border in the explainer example (social-plus-motion explainer-reel-push-ceiling.js)",
-    "#4A4B50": "path dots in the loop example (social-plus-motion thumbnail-loop-flow-path.js)",
-}
+# Values the skills may use that are not design-system tokens, each with a reason.
+# Empty since Amadeus's 15 October 2026 export (every colour is a design-system value);
+# any NEW non-token value fails the check until it is listed here or replaced.
+SKILL_ONLY = {}
 
 def norm(h):
     h = h.upper()

@@ -31,12 +31,9 @@ Concept, composition archetype, objects, the position of the accent — and, by 
 1. **Brief** — what is the visual for, where does it live (surface + size, `references/treatments.md` has the table), what is the one point it must make. If a page or post is provided, read all of it, and list the companies and technologies it is about (`references/third-party-logos.md`); ask for their official logo files early.
 2. **Treatment and accent** — editorial (grain) or clean? Which accent color, by meaning and balance (`color-accents.md`)? Say both in one line.
 3. **Ideate** — `references/ideation.md`. Show the idea table compactly, pick 2 concepts that differ in lens, archetype, focal object and accent position.
-4. **Build** — on claude.ai, a Design canvas, one artboard per concept, social.plus design system installed. Start each artboard from `assets/shell.dc.html` (ground, glow, vignette, fonts, optional grain). Upload `assets/fonts/figtree.woff2` and `assets/fonts/geist-mono.woff2` as canvas assets and put their blob ids in the @font-face rules. Set the `grain` prop default to 0.9 for editorial, leave 0 for clean. Name artboards `Concept A — <archetype>: <focal object>`.
+4. **Build** — on claude.ai, a Design canvas, one artboard per concept, social.plus design system installed. Start each artboard from `assets/shell.dc.html` (ground, glow, vignette, fonts, optional grain). Upload `assets/fonts/figtree.woff2` and `assets/fonts/geist-mono.woff2` as canvas assets and put their blob ids in the @font-face rules. Set the `grain` prop default to 0.9 for editorial, leave 0 for clean. Name artboards `Concept A — <archetype>: <focal object>`. The shell is sized 1578×888; for another size (e.g. an answer page, 1240×840) change the root, the grain SVGs and the vignette centre to that size.
 5. **Review** — `references/review-checklist.md`, then present: one line per concept, a recommendation, the trade-off.
-6. **Deliver** — PNG/WebP from the canvas at the surface's sizes; motion via social-plus-motion.
+6. **Deliver** — PNG/WebP from the canvas at the surface's sizes, then present the files (with `present_files` on claude.ai; in Claude Code, give the output paths); motion via social-plus-motion.
 
 `assets/examples/` holds finished pieces for craft reference only — never copy their layouts.
 
-## Relationship to the design system
-
-This system extends the design system's imagery foundation. Where they differ (readable text allowed sparingly, grain only as an editorial treatment, photos optional), this skill reflects decisions Amadeus made in October 2026; until the imagery foundation is updated, say which rule you applied.

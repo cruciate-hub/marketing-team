@@ -80,7 +80,7 @@ window.CUT = {
       .mono{font-family:geist-mono,ui-monospace,monospace}
       .tx{position:absolute;font-weight:600;letter-spacing:-0.025em;line-height:1.02;white-space:nowrap}
       .w{display:inline-block;margin-right:.24em}
-      .ann{position:absolute;font-size:36px;color:#E6E6E6;white-space:nowrap;padding:8px 16px;border-radius:12px;background:rgba(17,17,17,.82);border:2px solid #29292B}
+      .ann{position:absolute;font-size:36px;color:#D0D0D1;white-space:nowrap;padding:8px 16px;border-radius:12px;background:rgba(17,17,17,.82);border:2px solid #29292B}
       .src{position:absolute;left:90px;top:1420px;font-size:28px;color:#B3B3B3;padding:14px 22px;border-radius:14px;background:rgba(17,17,17,.88);border:2px solid #343437;white-space:nowrap}
       .scrim{position:absolute;left:0;width:1080px;pointer-events:none}
     `);
@@ -88,19 +88,19 @@ window.CUT = {
     let pile = '';
     HTS.forEach((h, i) => {
       const lab = i === 7 ? '<span style="font-size:40px;font-weight:500;color:#939497">We miss you</span>' : i === 5 ? '<span style="font-size:36px;font-weight:500;color:#414347">Last chance</span>' : bars(240 + i * 12, 380);
-      pile += `<div id="p${i}" class="card" style="left:${PH.x + 70}px;top:${NTOP[i]}px;width:760px;height:${h}px;${h < 96 ? 'padding:0;background:#1C1C1E;border-radius:' + Math.min(44, h / 2) + 'px' : ''}">${h >= 96 ? brand(70) + lab : ''}</div>`;
+      pile += `<div id="p${i}" class="card" style="left:${PH.x + 70}px;top:${NTOP[i]}px;width:760px;height:${h}px;${h < 96 ? 'padding:0;background:#1A1A1A;border-radius:' + Math.min(44, h / 2) + 'px' : ''}">${h >= 96 ? brand(70) + lab : ''}</div>`;
     });
-    const phone = `<div style="${at(PH.x, PH.y, PH.w, PH.h, 'box-sizing:border-box;border-radius:130px;background:#161617;border:3px solid #343437')}"></div>
+    const phone = `<div style="${at(PH.x, PH.y, PH.w, PH.h, 'box-sizing:border-box;border-radius:130px;background:#1A1A1A;border:3px solid #343437')}"></div>
       <div style="${at(PH.x + 300, PH.y + 120, 300, 22, 'border-radius:999px;background:#29292B')}"></div>
-      <div style="${at(PH.x + 240, PH.y + 210, 420, 120, 'border-radius:28px;background:#1C1C1E')}"></div>
-      <div id="ceil" style="${at(0, CEIL, 1080, 0, 'border-top:5px dashed #6B6C70;transform-origin:0 0')}"></div>${pile}`;
+      <div style="${at(PH.x + 240, PH.y + 210, 420, 120, 'border-radius:28px;background:#1A1A1A')}"></div>
+      <div id="ceil" style="${at(0, CEIL, 1080, 0, 'border-top:5px dashed #666666;transform-origin:0 0')}"></div>${pile}`;
     // report document
     const para = (y, ws) => `<div style="position:absolute;left:70px;top:${y}px;display:flex;flex-direction:column;gap:18px">${ws.map(w => `<div class="bar" style="width:${w}px;height:16px;background:#343437"></div>`).join('')}</div>`;
     const hl = (id, y, txt) => `<div style="position:absolute;left:60px;top:${y - 10}px;height:76px;display:flex;align-items:center;padding:0 16px">
         <div id="${id}bg" style="position:absolute;inset:0;border-radius:10px;background:#3B41EC;transform-origin:0 50%"></div>
         <span id="${id}tx" style="position:relative;font-size:38px;font-weight:600;white-space:nowrap">${txt}</span></div>`;
-    const doc = `<div style="${at(DOC.x, DOC.y, DOC.w, DOC.h, 'box-sizing:border-box;border-radius:28px;background:#1C1C1E;border:2px solid #29292B;transform:rotate(-3deg)')}">
-      <div class="mono" style="position:absolute;left:70px;top:70px;font-size:26px;color:#6B6C70">PUSH NOTIFICATION BENCHMARKS · 2026</div>
+    const doc = `<div style="${at(DOC.x, DOC.y, DOC.w, DOC.h, 'box-sizing:border-box;border-radius:28px;background:#1A1A1A;border:2px solid #29292B;transform:rotate(-3deg)')}">
+      <div class="mono" style="position:absolute;left:70px;top:70px;font-size:26px;color:#939497">PUSH NOTIFICATION BENCHMARKS · 2026</div>
       <div class="bar" style="position:absolute;left:70px;top:140px;width:640px;height:34px;background:#939497"></div>
       ${para(240, [820, 780, 840, 520])}${hl('h1', 470, 'Median opt-in: 53.3% Android, 48.85% iOS')}
       ${para(600, [800, 840, 760, 820, 600, 810, 420])}${hl('h2', 1010, 'iOS opens: down 13.71% year over year')}
@@ -114,11 +114,11 @@ window.CUT = {
     }
     const plane = `<div id="planeWrap" style="${at(PL.x, PL.y, 1080, 1920, 'perspective:1700px')}">
       <div id="plane" style="${at(90, 340, 900, 1240, 'transform:rotateX(48deg) rotateZ(-10deg);transform-style:preserve-3d')}">
-        <div style="${at(470, 700, 430, 520, 'border-radius:40px;background:#161617;border:2px dashed #343437;box-sizing:border-box')}"></div>
-        <div class="mono" style="position:absolute;left:500px;top:640px;font-size:34px;color:#6B6C70">SILENCED</div>
+        <div style="${at(470, 700, 430, 520, 'border-radius:40px;background:#1A1A1A;border:2px dashed #343437;box-sizing:border-box')}"></div>
+        <div class="mono" style="position:absolute;left:500px;top:640px;font-size:34px;color:#939497">SILENCED</div>
         ${tiles}</div></div>`;
     // hero + follow-ups
-    const hero = `<div id="hero" class="card" style="left:${HERO.x}px;top:${HERO.y}px;width:${HERO.w}px;height:${HERO.h}px;border-color:#343437;background:#232325;transform-origin:50% 100%">
+    const hero = `<div id="hero" class="card" style="left:${HERO.x}px;top:${HERO.y}px;width:${HERO.w}px;height:${HERO.h}px;border-color:#343437;background:#202022;transform-origin:50% 100%">
         ${face(112)}<div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:48px;font-weight:600;white-space:nowrap">Ana <span style="font-weight:500;color:#B3B3B3">replied to</span></span><span id="yc" style="font-size:48px;font-weight:500;color:#B3B3B3">your comment</span></div>
         <div style="margin-left:auto;width:36px;height:36px;border-radius:999px;background:#3B41EC;flex:none"></div></div>
       <div id="ring" style="${at(HERO.x, HERO.y, HERO.w, HERO.h, 'box-sizing:border-box;border-radius:44px;border:5px solid #6F89FC;opacity:0')}"></div>
@@ -147,12 +147,12 @@ window.CUT = {
       <div id="T2a" class="tx" style="font-size:100px;line-height:1.06;white-space:normal;width:860px">Half your users never opt in.</div>
       <div id="T2b" class="tx" style="font-size:100px;line-height:1.06;white-space:normal;width:860px">The rest open less.</div>
       <div id="T3" class="tx" style="font-size:118px;line-height:1.02;text-align:right;white-space:normal;width:900px">The OS decides what gets through.</div>
-      <svg id="annsvg" width="${W}" height="${H}" style="position:absolute;left:0;top:0;overflow:visible"><path id="a1p" fill="none" stroke="#E6E6E6" stroke-width="3"/><path id="a2p" fill="none" stroke="#E6E6E6" stroke-width="3"/><circle id="a1c" r="9" fill="#E6E6E6"/><circle id="a2c" r="9" fill="#E6E6E6"/></svg>
+      <svg id="annsvg" width="${W}" height="${H}" style="position:absolute;left:0;top:0;overflow:visible"><path id="a1p" fill="none" stroke="#D0D0D1" stroke-width="3"/><path id="a2p" fill="none" stroke="#D0D0D1" stroke-width="3"/><circle id="a1c" r="9" fill="#D0D0D1"/><circle id="a2c" r="9" fill="#D0D0D1"/></svg>
       <div id="A1" class="ann mono">a person</div>
       <div id="A2" class="ann mono">about you</div>
       <div id="T4" class="tx" style="font-size:124px;line-height:1.02;white-space:normal;width:900px">People get through.</div>
       <div id="T5" class="tx" style="font-size:200px;transform-origin:0 100%">+10–35%</div>
-      <div id="T5c" class="tx" style="font-size:52px;font-weight:500;color:#E6E6E6">retention with community</div>
+      <div id="T5c" class="tx" style="font-size:52px;font-weight:500;color:#D0D0D1">retention with community</div>
       <div id="S1" class="mono src">Source: Airship push benchmarks 2026</div>
       <div id="S5" class="mono src">Source: social.plus platform data</div>
       <div id="end" style="position:absolute;inset:0">
@@ -213,7 +213,7 @@ window.CUT = {
     $.h1bg.style.transform = `scaleX(${h1.toFixed(3)})`; $.h1bg.style.background = h1off > 0 ? `rgba(52,52,55,${(.4 + .6 * h1off).toFixed(2)})` : '#3B41EC';
     $.h1bg.style.opacity = (1 - h1off * .3).toFixed(3);
     $.h2bg.style.transform = `scaleX(${h2.toFixed(3)})`;
-    $.h2tx.style.color = h2 > .5 ? '#FFFFFF' : '#6B6C70'; $.h1tx.style.color = h1 > .5 ? '#FFFFFF' : '#6B6C70';
+    $.h2tx.style.color = h2 > .5 ? '#FFFFFF' : '#666666'; $.h1tx.style.color = h1 > .5 ? '#FFFFFF' : '#666666';
     words($.T2a, 5.2, 7.4); place($.T2a, 90, 1160);
     words($.T2b, 7.9, 9.3); place($.T2b, 90, 1160);
     op($.S1, seg(t, 5.0, 5.4) * (1 - seg(t, 9.0, 9.3)));

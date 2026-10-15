@@ -7,8 +7,8 @@ Exact values for the social.plus illustration system, on every surface. All colo
 | Layer | Value |
 |---|---|
 | Ground | `#111111` (neutral-950, `color-bg`) |
-| Vignette (top layer, under grain) | `radial-gradient(ellipse 980px 620px at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)` — edges go near-black, centre stays #111 |
-| Glow (optional, one) | soft radial of blue-600 `rgba(59,65,236,0.45)` fading to 0 at 70%, placed under/behind the focal element; a violet `rgba(159,114,255,0.3)` second glow only if the scene needs depth. Never neon, never a full gradient wash |
+| Vignette (above the composition, under the grain — grain is always the topmost layer) | `radial-gradient(ellipse 980px 620px at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)` — edges go near-black, centre stays #111 |
+| Glow (optional, one) | soft radial of blue-600 `rgba(59,65,236,0.42)` fading to 0 at 70%, placed under/behind the focal element; a violet `rgba(159,114,255,0.3)` second glow only if the scene needs depth. Never neon, never a full gradient wash |
 | Darken behind focal element | radial `rgba(17,17,17,0.85)` → 0 so the pattern wall recedes where the focal UI sits |
 
 ## Neutrals (surfaces, from back to front)
@@ -31,7 +31,7 @@ The accent may be ultramarine or another brand color chosen by meaning — see `
 
 - Figtree, social.plus's own build (`assets/fonts/figtree.woff2`, variable 300–900). Never Google Fonts, never `font-feature-settings`. Fallback `Arial, sans-serif`.
 - Name / key label: 52px, 600, letter-spacing -0.015em, `#FFFFFF`.
-- Button label: 34px, 500, `#FFFFFF` on ultramarine (text color on other accents: `color-accents.md`).
+- Button labels — two named sizes, chosen by the button's height (see Buttons and pills): **in-card button** (80px tall) 34px / 500; **hero accent pill** (140px tall, the image's main action) 52px / 600. White on ultramarine; non-blue accents are never buttons (`color-accents.md`).
 - Pattern-wall labels (recognisable copy): 24px, 500, `#414347` — deliberately low contrast; they are texture, not reading matter.
 - Budget: max ~4 readable phrases in the background, max 2 in the foreground (e.g. a name + a button). Everything else is bars.
 
@@ -61,7 +61,7 @@ Add one quiet social layer to the main object when it fits the concept: a reacti
 
 ## Buttons and pills
 
-Content-sized: equal visual padding on both sides (e.g. 56px left with icon, 64px right). Primary accent pill 140px tall at thumbnail scale, label 52px/600 white; secondary grey pill #29292B with #B3B3B3 icon and label 32px/500 — only for a different action than the accent one.
+Content-sized: equal visual padding on both sides (e.g. 56px left with icon, 64px right). Hero accent pill 140px tall, label 52px / 600 white; in-card button 80px tall, label 34px / 500 white; secondary grey pill #29292B with #B3B3B3 icon and label 32px/500 — only for a different action than the accent one.
 
 ## Pattern wall (only for archetypes that use one)
 
@@ -77,4 +77,4 @@ Optional, one at most: an avatar portrait (head-and-shoulders, plain/dark backgr
 
 ## Never
 
-Light backgrounds · more than one accent · invented numbers or quotes · readable paragraphs · stock-illustration objects (hands, plants, rockets, 3D characters) · gradient text · competitor logos (unless the post is a named comparison) · fully visible "floating card" layouts.
+Light backgrounds · more than one accent · invented numbers or quotes · readable paragraphs · stock-illustration objects (hands, plants, rockets, 3D characters) · gradient text · other companies' logos unless the content is explicitly about them — named comparisons, listicles, integration or migration guides (`third-party-logos.md`) · fully visible "floating card" layouts.

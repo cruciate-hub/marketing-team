@@ -11,7 +11,7 @@ Typical cases:
 |---|---|
 | Tutorial for a technology (Flutter, React Native, Swift, Unity) | that technology's logo, as the hero |
 | Listicle / comparison of named products | all of them, equal size; social.plus included only if the article includes it |
-| Integration or migration guide | both sides (e.g. the source platform and social.plus) |
+| Integration or migration guide | both sides (e.g. the source platform and social.plus) — allowed for competitors too, on the same terms as a named comparison: official files, equal weight, monochrome, factual framing, nothing that implies endorsement or disparages them |
 | Industry or trend piece naming companies as examples | usually none — the point is the trend |
 
 ## 2. Get the official files — never draw a logo
@@ -25,7 +25,7 @@ Until the files arrive, build the composition with neutral placeholder tiles and
 
 ## 3. Treatment in the style
 
-- **Monochrome first**: use the official white or single-colour version on dark tiles (#202022 or #1C1C1E), at #E6E6E6/white. This keeps the one-blue rule intact.
+- **Monochrome first**: use the official white or single-colour version on dark tiles (neutral-850 #202022 or neutral-900 #1A1A1A), in white #FFFFFF. This keeps the one-blue rule intact.
 - **Full colour only when** the company provides no monochrome version, or the brand guidelines require colour. Then keep each logo small and on its own tile so the colours don't compete with the blue element; the blue element stays the only social.plus blue.
 - Never recolour a logo to social.plus blue, never stretch, crop, rotate (beyond the composition's own perspective), add effects to, or combine logos.
 - Equal visual weight for compared companies (same tile size, optically matched logo size); none highlighted unless the article ranks them — and then by position, not by recolouring.

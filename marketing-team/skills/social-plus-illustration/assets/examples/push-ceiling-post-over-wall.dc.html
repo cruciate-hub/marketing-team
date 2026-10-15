@@ -29,7 +29,7 @@ a{color:#6F89FC}a:hover{color:#B3B3B3}
 </sc-for>
 
 <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 900px 520px at 1050px 640px, rgba(17,17,17,0.85) 0%, rgba(17,17,17,0) 75%)"></div>
-<div style="position: absolute; inset: 0; opacity: {{glowOpacity}}; background: radial-gradient(ellipse 520px 360px at 820px 860px, rgba(59,65,236,0.45) 0%, rgba(59,65,236,0) 70%)"></div>
+<div style="position: absolute; inset: 0; opacity: {{glowOpacity}}; background: radial-gradient(ellipse 520px 360px at 820px 860px, rgba(59,65,236,0.42) 0%, rgba(59,65,236,0) 70%)"></div>
 
 <div style="position: absolute; left: 470px; top: 330px; width: 1300px; height: 720px; box-sizing: border-box; border-radius: 52px; background: #202022; border: 2px solid #343437; padding: 60px 64px; display: flex; flex-direction: column; gap: 40px; box-shadow: 0 40px 120px rgba(0,0,0,0.6)">
 <div style="display: flex; align-items: center; gap: 28px">
@@ -59,6 +59,7 @@ a{color:#6F89FC}a:hover{color:#B3B3B3}
 </div>
 </div>
 
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 980px 620px at 789px 444px, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)"></div>
 <svg aria-hidden="true" width="1578" height="888" style="position: absolute; left: 0; top: 0; mix-blend-mode: overlay; opacity: {{grainOpacity}}; pointer-events: none">
 <filter id="spGrainC1"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
 <rect width="1578" height="888" filter="url(#spGrainC1)"></rect>
@@ -67,7 +68,6 @@ a{color:#6F89FC}a:hover{color:#B3B3B3}
 <filter id="spGrainC2"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
 <rect width="1578" height="888" filter="url(#spGrainC2)"></rect>
 </svg>
-<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 980px 620px at 789px 444px, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)"></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"grain":{"editor":"range","default":0.9,"min":0,"max":1,"step":0.05},"glow":{"editor":"range","default":0.8,"min":0,"max":1,"step":0.05},"$preview":{"width":1578,"height":888}}'>

@@ -2,7 +2,7 @@
 
 Each line comes from real feedback on earlier work.
 
-- **Different?** Archetype, focal object and blue position differ from the recent visuals on the same surface and from the other concept.
+- **Different?** Archetype, focal object and accent position differ from the recent visuals on the same surface and from the other concept.
 - **Recognisable?** Every key object reads as what it is without the surrounding text: a product has a recognisable silhouette and a price; a post has an avatar, a name bar and reactions; a phone has a bezel. Abstract means simplified, not ambiguous — a grey circle is not a product.
 - **Social?** If a social signal fits, it's there: reactions, a comment preview, an avatar stack, a mention chip. Grey and secondary, never a second accent.
 - **Uncluttered?** Squint test at the smallest display size: one thing pops (the blue), 2–4 objects, at most one row of social detail per object. A card with image + title + price + social is full.
