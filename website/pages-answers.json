@@ -1,11 +1,149 @@
 {
   "_meta": {
-    "generatedAt": "2026-06-13T09:26:39.403Z",
-    "itemCount": 152,
+    "generatedAt": "2026-10-15T10:52:18.536Z",
+    "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/answers/in-app-community-use-cases",
+      "metaTitle": "In-App Community Use Cases: Scenarios That Drive Retention and Revenue",
+      "metaDescription": "Common in-app community use cases include drop launches, cohort kickoffs, live events, customer support, creator subscriptions, and member-only programs.",
+      "content": "# In-app community use cases\n## How to pick the right use case\n## Use cases at a glance\n## Drop launches with live chat\n## Cohort kickoffs and class moments\n## Customer-success forums\n## Creator subscription feeds\n## VIP and member-only programs\n## Peer-coaching threads\n## Product feedback panels\n## Live sports and game-day rooms\n## Local or chapter meetups\n## Why teams run these use cases on social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/in-app-community-strategy",
+      "metaTitle": "In-App Community Strategy: How to Plan One That Actually Works",
+      "metaDescription": "An in-app community strategy defines the audience, the social loop, the surfaces, the cadence, and the metrics that turn participation into retention and revenue.",
+      "content": "# In-app community strategy\n## How an in-app community strategy is structured\n## Strategy on one page\n## Define the audience and the loop\n## Choose the primary surface\n## Set the moderation policy before launch\n## Plan the cadence\n## Pick the success metrics\n## How social.plus supports this strategy\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/in-app-community-platforms-buyers-guide",
+      "metaTitle": "In-App Community Platforms: A Buyer's Guide for Product Teams",
+      "metaDescription": "An in-app community platform supplies SDKs, APIs, and UI components for feed, chat, livestream, events, moderation, and analytics under your own brand.",
+      "content": "# Buyer's guide to in-app community platforms\n## How to evaluate a platform\n## Evaluation criteria\n## Platform categories\n## How to validate a platform\n## How to read pricing\n## Why teams choose social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-moderate-an-in-app-community",
+      "metaTitle": "How to Moderate an In-App Community",
+      "metaDescription": "To moderate an in-app community, publish a code of conduct, run automated classifiers, staff a review queue, and document escalation. Healthy surfaces sustain participation.",
+      "content": "# How to moderate an in-app community\n## Prerequisites\n## Step-by-step guide\n## Moderation tooling stack\n## Common pitfalls\n## How social.plus supports moderation\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-grow-an-in-app-community",
+      "metaTitle": "How to Grow an In-App Community",
+      "metaDescription": "To grow an in-app community, seed it with content, lower the bar to first action, run a cadence of prompts and events, recognize contributors, and instrument growth.",
+      "content": "# How to grow an in-app community\n## Prerequisites\n## Step-by-step guide\n## Growth tactic matrix\n## Common pitfalls\n## How social.plus accelerates growth\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-engage-users-in-an-in-app-community",
+      "metaTitle": "How to Engage Users in an In-App Community",
+      "metaDescription": "To engage users in an in-app community, set a clear loop, run weekly prompts and live moments, reward low-effort actions, moderate consistently, and instrument every action.",
+      "content": "# How to engage users in an in-app community\n## Prerequisites\n## Step-by-step guide\n## Tactic effort vs impact\n## Common pitfalls\n## How social.plus supports these tactics\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-an-in-app-community-improves-app-retention",
+      "metaTitle": "How an In-App Community Improves App Retention",
+      "metaDescription": "An in-app community improves app retention by 10-35% by creating recurring reasons to return, building relationships, and turning engagement into first-party data.",
+      "content": "# How an in-app community improves app retention\n## Mechanism 1: appointment-based engagement\n## Mechanism 2: relationship accumulation\n## Mechanism 3: first-party data feedback\n## How the lift shows up\n## What \"consistent\" actually means\n## How teams realize the retention lift with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/in-app-community-vs-external-platform",
+      "metaTitle": "In-App Community vs External Social Platform",
+      "metaDescription": "An in-app community keeps retention, data, and brand inside your product; an external social platform reaches public audiences but cedes ownership of the relationship.",
+      "content": "# In-app community vs external social platform\n## At-a-glance comparison\n## What an in-app community is best for\n## What external social platforms are best for\n## Dimension-by-dimension breakdown\n### Data ownership\n### Algorithm and ranking\n### Brand control\n### Cost shape\n### Risk profile\n## Decision framework\n## Where social.plus fits\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-build-an-in-app-community",
+      "metaTitle": "How to Build an In-App Community",
+      "metaDescription": "To build an in-app community, define the audience and loop, integrate community SDKs, ship one surface, set moderation, and iterate weekly. A v1 takes 4-8 weeks.",
+      "content": "# How to build an in-app community\n## Prerequisites\n## Step-by-step guide\n## Approaches and trade-offs\n## Common pitfalls\n## How social.plus accelerates this work\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/benefits-of-an-in-app-community",
+      "metaTitle": "Benefits of an In-App Community for Your Business",
+      "metaDescription": "The benefits of an in-app community are higher retention, recurring engagement, first-party data, brand control, and a defensible product loop competitors cannot copy.",
+      "content": "# Benefits of an in-app community for your business\n## How the benefits compound\n## Benefits at a glance\n## Benefits in detail\n### Higher retention\n### Recurring engagement\n### First-party data ownership\n### Brand control\n### Defensible product loop\n### Recurring revenue opportunities\n### Customer insight\n## How teams realize these benefits with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/in-app-community-examples-by-industry",
+      "metaTitle": "In-App Community Examples by Industry",
+      "metaDescription": "In-app community examples by industry span fitness peer feeds, learning cohorts, retail drop livestreams, finance milestone communities, and creator fan groups.",
+      "content": "# In-app community examples by industry\n## What the examples have in common\n## Examples by industry\n## Fitness app examples\n## Learning app examples\n## Retail and e-commerce examples\n## Finance app examples\n## Creator and fandom app examples\n## Sports and gaming examples\n## Enterprise and B2B examples\n## Where social.plus fits\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/what-is-an-in-app-community",
+      "metaTitle": "What Is an In-App Community",
+      "metaDescription": "An in-app community is a branded social space embedded inside a product, where users connect, contribute, and return through feeds, chat, events, and groups.",
+      "content": "# What is an in-app community?\n## How an in-app community works\n## Core components\n## Why an in-app community matters\n## Common categories\n## Why teams build in-app communities with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/essential-community-features-for-app-engagement",
+      "metaTitle": "Essential Community Features for App Engagement",
+      "metaDescription": "The essential community features for app engagement are profiles, activity feed, chat, groups, events, livestream, reactions, and moderation tooling.",
+      "content": "# Essential community features for app engagement\n## Why these features matter together\n## At-a-glance feature list\n## Essential features in detail\n### User profiles\n### Activity feed\n### Reactions and follows\n### Chat (1:1 and group)\n### Groups and channels\n### Events and livestream\n### Notifications and presence\n### Moderation tooling\n## Why teams ship these features with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/what-are-community-features",
+      "metaTitle": "What Are Community Features",
+      "metaDescription": "Community features are in-product capabilities like feeds, chat, groups, events, and moderation that let users connect, contribute, and return together.",
+      "content": "# What are community features?\n## How community features work\n## Core components\n## Why community features matter\n## Examples by category\n## Why teams build community features with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-launch-a-white-label-social-network",
+      "metaTitle": "How to Launch a White Label Social Network for Your Brand",
+      "metaDescription": "To launch a white label social network, define the audience, pick a platform, theme the SDKs, embed feed and chat, set moderation, then iterate weekly.",
+      "content": "# How to launch a white label social network for your brand\n## Prerequisites\n## Step-by-step guide\n## Approaches and trade-offs\n## Common pitfalls\n## How social.plus accelerates the launch\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/what-is-a-white-label-social-network",
+      "metaTitle": "What Is a White Label Social Network?",
+      "metaDescription": "A white label social network is a branded community platform a company embeds inside its own product, with feed, chat, and moderation under its own brand.",
+      "content": "# What is a white label social network?\n## How a white label social network works\n## Core components\n## Why a white label social network matters\n## Common use cases\n## Why teams choose social.plus for white-label community\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/types-of-social-networks",
+      "metaTitle": "Types of Social Networks",
+      "metaDescription": "The main types of social networks are public, professional, niche, branded/private, and decentralized; each serves a different audience and engagement goal.",
+      "content": "# Types of social networks\n## How the types differ\n## Comparison of types\n## Public general-interest platforms\n## Professional networks\n## Niche-interest networks\n## Branded and private communities\n## Decentralized and federated networks\n## How teams build branded community products with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-create-a-private-social-network",
+      "metaTitle": "How to Create a Private Social Network for Your Brand or Community",
+      "metaDescription": "To create a private social network, choose an owned community platform, configure access rules, embed feed and chat, and set moderation before invitations.",
+      "content": "# How to create a private social network for your brand or community\n## Prerequisites\n## Step-by-step guide\n## Common pitfalls\n## How social.plus enables private communities\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/in-app-social-features-vs-third-party",
+      "metaTitle": "In-App Social Features vs Third-Party Social Platforms",
+      "metaDescription": "In-app social features keep engagement, data, and brand inside your product; third-party social platforms reach a wider audience but cede ownership.",
+      "content": "# In-app social features vs third-party social platforms\n## At-a-glance comparison\n## What in-app social features are best for\n## What third-party social platforms are best for\n## Dimension-by-dimension breakdown\n### Data ownership\n### Algorithm and ranking\n### Brand control\n### Cost profile\n### Risk\n## Decision framework\n## Where social.plus fits\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/social-features-mobile-apps",
+      "metaTitle": "What Are Social Features in Mobile Apps?",
+      "metaDescription": "Social features in mobile apps are in-product capabilities like feeds, chat, profiles, and reactions that let users connect, contribute, and return.",
+      "content": "# What are social features in mobile apps?\n## How social features work\n## Core components\n## Why social features matter\n## Examples of social features by category\n## Why teams build social features with social.plus\n## FAQs\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-create-a-social-network-app",
+      "metaTitle": "How to Create a Social Network App",
+      "metaDescription": "To create a social network app, scope the audience, pick the core surface, integrate community infrastructure SDKs, ship moderation, then iterate.",
+      "content": "# How to Create a Social Network App\n## Prerequisites\n## Step-by-step guide\n## Approaches and trade-offs\n## Common pitfalls\n## How social.plus accelerates this work\n## FAQs\n### How long does it take to create a social network app?\n### Do you need a separate app, or can social capabilities live inside an existing product?\n### What does the team look like?\n### Which capability should ship first?\n### How is success measured?\n### Can a community product be migrated off the chosen platform later?\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/what-are-social-features-in-mobile-apps",
+      "metaTitle": "What are social features in mobile apps?",
+      "metaDescription": "Social features in mobile apps are in-product capabilities like feeds, chat, profiles, and reactions that let users connect, contribute, and return.",
+      "content": "# What are social features in mobile apps?\n## How social features work\n## Core components\n## Why social features matter\n## Examples of social features by category\n## Why teams build social features with social.plus\n## FAQs\n### What counts as a social feature in an app?\n### Are social features the same as social media?\n### Do social features actually improve retention?\n### Which social features should a new app start with?\n### How do social features generate first-party data?\n### Can social features be added to an existing app without a rewrite?\n## Conclusion"
+    },
+    {
+      "url": "https://www.social.plus/answers/how-to-add-social-features-to-your-app",
+      "metaTitle": "How to Add Social Features to Your App",
+      "metaDescription": "To add social features to your app, integrate community SDKs for feed, chat, livestream, and moderation, then ship a single surface and iterate weekly.",
+      "content": "# How to Add Social Features to Your App\n## Prerequisites\n## Step-by-step guide\n## Approaches and trade-offs\n## Common pitfalls\n## How social.plus accelerates this procedure\n## FAQs\n### How long does it take to add social features to an app?\n### What is the right first social feature to add?\n### Do you need separate vendors for chat, feed, and livestream?\n### What does ongoing operation look like?\n### Will adding social features slow down the rest of the product?\n### How do you measure success for social features?\n## Conclusion"
+    },
     {
       "url": "https://www.social.plus/answers/how-to-add-events-to-a-mobile-app",
       "metaTitle": "How to Add Events to a Mobile App",
@@ -872,9 +1010,9 @@
     },
     {
       "url": "https://www.social.plus/answers/examples-of-apps-that-use-in-app-communities",
-      "metaTitle": "Examples of apps that use in-app communities",
-      "metaDescription": "Discover how top apps like Noom, Harley-Davidson, Strava, and Peloton use in-app communities to boost engagement and retention.",
-      "content": "# Examples of apps that use in-app communities\n### What is an in-app community?\n## 1. Noom\n#### Community features:\n#### Why It matters:\n#### Actionable insight:\n## 2. Strava\n#### Community features:\n#### Why it matters:\n#### Actionable insight:\n## 3. Harley-Davidson\n#### Community features:\n#### Why it matters:\n#### Actionable insight:\n## 4. Peloton\n#### Community features:\n#### Why it matters:\n#### Actionable insight:\n## 5. Amino\n#### Community features:\n#### Why it matters:\n#### Actionable insight:\n## 6. Peanut\n#### Community features:\n#### Why it matters:\n#### Actionable insight:\n## Summary table\n## Why these examples matter for app builders\n## FAQs\n### What makes an in-app community successful?\n### Can B2B or utility apps benefit from communities?\n### How should community success be measured?\n## Conclusion"
+      "metaTitle": "Which apps use in-app communities, and what do they get from them?",
+      "metaDescription": "Apps that use in-app communities, from Nike Run Club and Noom to Smart Fit, Ulta Beauty and Harley-Davidson: what each built and what it gets.",
+      "content": "# Which apps use in-app communities, and what do they get from them?\n## Which apps use in-app communities?\n## What do these apps get from their communities?\n### A reason to come back between transactions\n### Peer support that keeps people on track\n### Owned relationships instead of rented reach\n### Content and first-party data\n## What do the examples have in common?\n## When doesn't an in-app community pay off?\n## How social.plus helps apps build communities like these\n## FAQs\n### Can B2B or utility apps benefit from an in-app community?\n### Do you need a large audience to run an in-app community?\n### What do successful in-app communities have in common?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-build-a-user-to-user-interaction-system-in-your-app",
