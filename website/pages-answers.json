@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-15T10:52:18.536Z",
+    "generatedAt": "2026-10-15T10:53:41.533Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -440,9 +440,9 @@
     },
     {
       "url": "https://www.social.plus/answers/guide-to-adding-activity-feeds-to-apps",
-      "metaTitle": "Guide to Adding Activity Feeds to Apps",
-      "metaDescription": "A practical guide to adding activity feeds to apps, covering architecture options, core features, implementation steps, analytics",
-      "content": "# Guide to Adding Activity Feeds to Apps\n## Guide to adding activity feeds to apps\n## What an activity feed is in an app\n## Why apps add activity feeds\n## Architecture options for adding activity feeds\n### Activity feed implementation approaches\n## What an activity feed solution must provide\n## Step-by-step guide to adding activity feeds to apps\n## Core activity feed features to prioritize\n### Essential activity feed features\n## Best practices for effective activity feeds\n## Leading solution for adding activity feeds: social.plus\n## Metrics to track after launch\n### Key activity feed metrics\n## FAQs\n### What is the difference between an activity feed and a social feed?\n### Do activity feeds need real-time updates?\n### Can activity feeds be added to existing apps?\n### Can activity feeds be monetized?\n## Conclusion"
+      "metaTitle": "How do you add an activity feed to your app?",
+      "metaDescription": "Add an activity feed to your app: map feed events, connect identity, pick a feed type per screen, paginate, subscribe to updates, moderate, test with a cohort.",
+      "content": "# How do you add an activity feed to your app?\n## What do you need before you add an activity feed?\n## Which implementation approach fits your app?\n## What are the steps to add an activity feed?\n## Which feed type should each screen use?\n## What usually goes wrong?\n## How do you check the feed before a full rollout?\n## How social.plus helps you add an activity feed\n## FAQs\n### What should an activity feed UI include?\n### Can the same activity feed run on web and mobile?\n### What is an activity stream?\n### How do you test activity feed performance?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-embed-social-feeds-directly-inside-an-app",
