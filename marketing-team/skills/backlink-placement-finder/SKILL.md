@@ -123,8 +123,8 @@ The placement must feel organic to a reader. If a link would feel forced or out 
 Reciprocal link exchange is explicitly named in Google's link-spam policy ("excessive link exchanges"). The program is defensible only while it stays small, editorial, and capped — and this skill is where every new exchange ask originates, so program-size governance lives here. Concretely:
 
 - **The caps are hard limits.** Up to 3 placements per article, ≤5 per partner site. Never stretch them — not for a strong partner, not to round out a batch, not to hit a target.
-- **Report aggregate program size before any new ask.** At the Step 3.5 decision gate and in the Step 5 summary table, report the cumulative count of exchange-acquired referring domains and exchange-acquired links, so Stefan sees how big the program already is before approving anything new. Compute both figures from data already cached this session — the Step 0.0 referring-domains pull and the Anchor Diversity Check profile pull — no extra Ahrefs calls. Label every figure **Measured (Ahrefs)** or **Estimated**; never present an estimate as measured.
-- **Name growth as growth.** When the current batch grows aggregate program volume rather than replacing lost links, say so explicitly in the Step 3.5 gate prompt (e.g., "this batch adds N net-new exchange referring domains").
+- **Report aggregate program size before any new ask.** In the Step 3.5 summary (which Step 5 places above the email), report the cumulative count of exchange-acquired referring domains and exchange-acquired links, so Stefan sees how big the program already is before approving anything new. Compute both figures from data already cached this session — the Step 0.0 referring-domains pull and the Anchor Diversity Check profile pull — no extra Ahrefs calls. Label every figure **Measured (Ahrefs)** or **Estimated**; never present an estimate as measured.
+- **Name growth as growth.** When the current batch grows aggregate program volume rather than replacing lost links, say so explicitly in the Step 3.5 program-exposure line (e.g., "this batch adds N net-new exchange referring domains").
 - **Default against marginal placements.** Recommend against ⭐ Opportunity placements carrying the `[low-value]` flag — relationship-only links grow the program's footprint without adding value. Stefan can overrule, but the default recommendation is "skip."
 
 ## Placement Rules (from social.plus guidelines)
@@ -517,7 +517,7 @@ For each partner article opened in Step 2.5, scan body paragraphs for any of thr
 
    **Long-tail fallback — semantic-territory scan (only when >5 candidate articles per partner).** When the tier funnel returned more than 5 candidate articles for a partner (rare — usually means a thin or noisy Tier 3 filter on a large blog), reading every article end-to-end is impractical and editorial mode does not scale. Fall back to the cheaper mechanism: for each candidate article, list 3-5 candidate phrases per paragraph that could semantically map to ANY anchor family in `references/anchors.md` OR ANY topic in `website/pages-blog.json` / `website/pages-glossary.json` (match against `metaTitle`, `metaDescription`, or `content` heading hierarchy). Validate each candidate against the six guardrails in step 1. This is the 13.20 mechanism, retained so the skill still scales when reading every survivor isn't viable. Editorial mode remains the default whenever the candidate count makes it possible.
 
-1. **Identify Phase 1 candidates.** Three candidate types qualify. Treat B and C exactly like A during discovery. Under-flagging B and C is the most common reason this skill leaves strong placements on the table; over-flagging is recoverable in the Step 3.5 decision gate, under-flagging is not.
+1. **Identify Phase 1 candidates.** Three candidate types qualify. Treat B and C exactly like A during discovery. Under-flagging B and C is the most common reason this skill leaves strong placements on the table; over-flagging is recoverable when Stefan reviews the Step 3.5 summary, under-flagging is not.
 
    **Type A: Literal anchor match.** The exact phrase from `references/anchors.md` appears verbatim in the partner's body text.
 
@@ -554,8 +554,8 @@ For each partner article opened in Step 2.5, scan body paragraphs for any of thr
    - **Competitor overlap check:** If Tier 2 of Step 0 flagged that the partner already links to social.plus competitors (Bettermode, Mighty Networks, Discourse, Tribe, Circle, etc.), check whether THIS specific article already contains a competitor link. If yes, either pick a different article or note the conflict to Stefan so he can decide whether to ask the partner to swap rather than insert.
 
 5. **Capture traffic and authority signals:**
-   - Record the partner article's monthly organic traffic from the Ahrefs `sum_traffic` field already pulled in Step 0 Tier 3.
-   - Record the social.plus target page's URL Rating (UR). Pull from `site-explorer-url-rating-history` if not already cached. Each UR call costs ~7 Ahrefs units — budget ~21 units for a 3-placement session. Skip the UR call only if the target is a glossary entry and the partner is low-DR (< 30), where the marginal SEO weight isn't worth the call.
+   - Pull both numbers in ONE `batch-analysis` call in `exact` mode: every shortlisted partner article URL plus every proposed social.plus target URL as targets, `select: org_traffic,url_rating,refdomains` (~17 units per row, verified October 2026). `crawled-pages` has no traffic field, so Tier 3 never supplies article traffic; this call is the only source. Partner-article `org_traffic` is what Step 3.5 ranks on, so never skip it.
+   - Target UR: if a proposed target reads below 5, include the obvious alternatives in the same call. If every social.plus candidate reads below 5 (the site's page-level UR floor was 4.4–5.0 in October 2026), keep the best topical target and say so in a note under the table instead of swapping to a weaker topical fit.
    - These numbers are NOT shown to the partner. They appear only in the internal summary table for Stefan's decision.
 
 6. **Score the fit:**
@@ -610,7 +610,7 @@ For every article opened in Step 2.5 (including those that had no Phase 1 matche
      2. A **partial-match / contextual** phrase already present in the partner's paragraph that maps cleanly to a target.
      3. Only then an approved anchor text from `references/anchors.md` — and never a saturated commercial head term when a fresher option exists (see Anchor Diversity Check).
 
-   **Creative anchors in Phase 2 are tightly gated.** Phase 2 creative anchors are allowed ONLY on articles where Phase 1 returned zero matches across Types A, B, and C. When triggered, allow ONE Phase 2 creative-anchor placement per such article as a "save the article" option. The creative anchor must still satisfy the same six guardrails listed in Phase 1 step 1 (semantic-equivalent, clearly mapped, etc.). The only difference is that the surrounding sentence is being drafted by us, not extracted verbatim. Flag in the summary as `[creative-phase2-save]`. Fit score caps at ⭐ Opportunity. Stefan reviews each one in the Step 3.5 decision gate before drafting the email. Do NOT layer Phase 2 creative anchors on articles that already have a Phase 1 placement; that compounds two layers of synthesis and hurts partner relationships over time.
+   **Creative anchors in Phase 2 are tightly gated.** Phase 2 creative anchors are allowed ONLY on articles where Phase 1 returned zero matches across Types A, B, and C. When triggered, allow ONE Phase 2 creative-anchor placement per such article as a "save the article" option. The creative anchor must still satisfy the same six guardrails listed in Phase 1 step 1 (semantic-equivalent, clearly mapped, etc.). The only difference is that the surrounding sentence is being drafted by us, not extracted verbatim. Flag in the summary as `[creative-phase2-save]`. Fit score caps at ⭐ Opportunity. Stefan sees each one flagged `[creative-phase2-save]` in the Step 3.5 summary before he sends the email. Do NOT layer Phase 2 creative anchors on articles that already have a Phase 1 placement; that compounds two layers of synthesis and hurts partner relationships over time.
 
 3. **Match to the best social.plus page** — Same logic as Phase 1.
 
@@ -631,26 +631,22 @@ The summary table in Step 5 surfaces the distinction via the Phase column. The r
 
 If Phase 1 has zero results, say so explicitly when summarizing to Stefan. Never declare a site "no fit" without checking Phase 2 first. A site is only "no fit" when BOTH phases come up empty — meaning no exact matches AND no topically relevant paragraphs across any articles.
 
-### 3.5. Decision Gate (Before Drafting the Email)
+### 3.5. Rank and Recommend (No Packaging Question)
 
-**Gating precondition — run this gate ONLY when 2 or more viable placements exist across the batch.** If viable placements ≤ 1, skip the gate and proceed directly to Step 4 with the single-ask format. Never ask the user anything about existing-backlink partners: the action there is always "acknowledge the existing link, make no new ask." Default to deciding and proceeding; reserve questions for genuine 2+ way packaging choices.
+**Stacking is the fixed packaging.** Every email proposes every viable placement (within the ≤3 per article, ≤5 per partner caps) as one numbered list. Do not ask Stefan whether he wants a stacked list, alternatives framing or a single ask. Decided by Stefan, 15 October 2026, after the gate had asked the same question on every batch. If Stefan's message for this batch names a different packaging ("single ask", "give them two options"), use that for this batch only.
 
-Before writing any email, show Stefan the full internal summary table from Step 5 — every viable placement with its traffic, UR, phase, and fit score. Directly above the packaging question, include the program-exposure line required by the Program Exposure Guardrail: cumulative exchange-acquired referring domains and links (from the cached Step 0.0 and Anchor Diversity pulls, each labeled Measured (Ahrefs) or Estimated), plus an explicit note when this batch grows aggregate volume rather than replacing lost links. Then stop and ask which packaging he wants. Auto-drafting strips Stefan's control over how the request lands with the partner; the gate keeps him in the loop on relationship-side decisions that scoring alone can't make.
+**Rank the placements.** Sort by partner-article organic traffic (the exact-URL `org_traffic` from Phase 1 step 5), highest first. Ties, including a batch where every article reads 0, break in this order: higher target UR, then Type A before Type B before Type C, then `[fresh-anchor]` before the rest. In a multi-domain batch, order the domain sections by each domain's top-ranked placement, so the email's number 1 is the highest-traffic page in the whole batch. Existing-backlink and no-fit sections go last. The numbering runs continuously across domain sections.
 
-**The prompt to Stefan:**
+**Make two recommendations, always, as two lines directly above the summary table:**
 
-> I found [N] viable placements above. How do you want to package the email?
->
-> (a) Stacked list — propose all [N] to the partner in one email, partner picks what works
-> (b) Alternatives framing — propose top 2-3 as Option 1 / Option 2 / Option 3, partner picks one or more, "happy with either"
-> (c) Single ask — propose only the top-rated one, save the rest for future exchanges
+> **Highest traffic:** [article title] ([N]/mo) — [anchor] → [target]
+> **Top anchor pick:** [anchor] on [article title] → [target] — [one clause saying why]
 
-**Wait for Stefan's choice before drafting.** Then map his answer to the corresponding Step 4 template:
-- (a) Stacked list → Canonical Phase 1 or Phase 2 structure (numbered placements; mix Phase 1 + Phase 2 entries in the same list as needed)
-- (b) Alternatives framing → "Email structure when offering alternatives" (Option 1 / Option 2 / Option 3)
-- (c) Single ask → Same canonical structure, but with only the top-rated placement included
+The top anchor pick is the editorial best fit, not the traffic winner: the verbatim anchor reads as the focal phrase of its sentence, it maps one-to-one to a target that addresses exactly that topic, it is the lowest over-optimization type available (stat-citation or partial-match beats exact-match commercial), and its article carries no competitor link. When the same placement wins both, write both lines and say "same placement". Mark the two winners in the table's Pick column with `#1 traffic` and `★ top anchor`.
 
-See Edge Cases for behavior when only one placement is viable, or when more than 5 are viable.
+**Then, in the same response:** program-exposure line (see Program Exposure Guardrail), the summary table (Step 5), and the stacked email (Step 4). Never stop between the table and the email to wait for a choice. Stefan reviews the table and the draft together and edits before sending.
+
+**More than 5 viable placements on one partner:** keep the top 5 by rank in the email and list the dropped ones in one line under the table as "held for a future round".
 
 ### 4. Draft the Reply Email
 
@@ -664,7 +660,7 @@ When the user pastes multiple partner domains from one contact, produce ONE cons
 
 **Default assumption (Stefan's correction, 2026-07-06):** a flat pasted list of domains, with no other framing, IS one contact — treat it as one exchange conversation by default. This holds even when each domain's research was parallelized (e.g., separate research passes per domain) — parallelizing the *discovery* work doesn't change that the *output* is one email. Only split into separate per-domain emails when Stefan explicitly says the domains belong to different contacts.
 
-Structure: greeting → one framing line → one section per domain (header = domain name, content varies by outcome) → one closing line → sign-off.
+Structure: greeting → one framing line → one section per domain (header = domain name, content varies by outcome; sections and placements in Step 3.5 rank order, numbering continuous across sections) → one closing line → sign-off.
 
 Per-domain section content by outcome:
 - **Fresh partner with verified placements** → numbered placement blocks (same Phase 1/Phase 2 format as the single-partner templates below)
@@ -757,38 +753,6 @@ Stefan
 
 
 
-**Email structure when offering alternatives (partner has limited capacity or relationship calls for flexibility):**
-
-
-```
-Hi [Name if known, otherwise skip],
-
-Thanks for sharing these. I went through [the content / your articles] and found [N] solid placement opportunities on [partner site] — we're happy with either one, or both if it works for you.
-
-**[Partner Site Name/Domain]**
-
-Option 1
-Article: [Article Title]
-Add link from: [article URL]
-Add link to: [social.plus target URL]
-Anchor: [anchor text]
-Placement: [section name + verbatim sentence]
-
-Option 2
-Article: [Article Title]
-Add link from: [article URL]
-Add link to: [social.plus target URL]
-Anchor: [anchor text]
-Placement: [section name + verbatim sentence]
-
-Please let me know which one you'd like to go with, or if both work, and what we can do for you in return.
-
-Cheers,
-Stefan
-```
-
-
-
 **Format rules:**
 - **Never show the partner article's URL twice.** Don't print a standalone `URL:` line above `Add link from:` — `Add link from:` already states the article URL unambiguously, so a separate `URL:` line is pure repetition (Stefan's correction, 2026-07-06). Each placement block starts with `Article: [title]` and goes straight to `Add link from:` / `Add link to:` — see the templates below.
 - Every line in every placement block is flush-left — no indentation under the numbered/Option line. Indented sub-fields wrap weirdly in LinkedIn, Slack, and most chat boxes where markdown doesn't render
@@ -845,15 +809,22 @@ Stefan
 
 ### 5. Present Results
 
-After the draft email, provide a summary table for Stefan's reference:
+The response has four parts, in this order, all in one message:
 
-| Partner Article | Partner Traffic | Anchor | social.plus Target | Target UR | Phase | Fit Score |
-|----------------|----------------|--------|-------------------|-----------|-------|-----------|
-| [title] | [monthly traffic] | [anchor] | [URL] | [UR] | 1 or 2 | ⭐⭐⭐/⭐⭐/⭐ |
+1. The two recommendation lines from Step 3.5 (`Highest traffic`, `Top anchor pick`).
+2. The program-exposure line: cumulative exchange-acquired referring domains and links, computed from the cached Step 0.0 referring-domains pull and the Anchor Diversity profile pull, each labeled Measured (Ahrefs) or Estimated, plus "this batch adds N net-new exchange referring domains" when it grows the program.
+3. The summary table, rows in Step 3.5 rank order:
 
-This helps Stefan quickly see which placements are direct matches (Phase 1) vs. which require partner cooperation (Phase 2), and decide which to prioritize.
+| # | Pick | Partner Article | Partner Traffic | Anchor | social.plus Target | Target UR | Phase | Fit Score |
+|---|------|----------------|----------------|--------|-------------------|-----------|-------|-----------|
+| 1 | `#1 traffic` | [title] | [monthly traffic] | [anchor] | [URL] | [UR] | 1 or 2 | ⭐⭐⭐/⭐⭐/⭐ + flags |
+| 2 | `★ top anchor` | [title] | [monthly traffic] | [anchor] | [URL] | [UR] | 1 or 2 | ⭐⭐⭐/⭐⭐/⭐ + flags |
+| 3 | | … | | | | | | |
 
-Below the table, restate the program-exposure figures from the Program Exposure Guardrail: cumulative exchange-acquired referring domains and links (computed from the cached Step 0.0 referring-domains pull and the Anchor Diversity profile pull, each labeled Measured (Ahrefs) or Estimated), so the aggregate program size travels with the batch summary.
+   Under the table, one line each where relevant: the UR-floor note from Phase 1 step 5, competitor-link conflicts, and placements held for a future round.
+4. The stacked email (Step 4), numbered to match the table.
+
+The table is internal (traffic and UR are never shown to the partner). It lets Stefan see at a glance which placement carries the most traffic, which one reads best editorially, and which rows are direct matches (Phase 1) versus partner edits (Phase 2).
 
 ## Phase Classification — Important
 
@@ -888,8 +859,8 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **`get_page_text` returns garbage on ad-heavy sites**: Fall back to JavaScript DOM extraction using the text-to-script ratio pattern described in Step 2.5. This works reliably on most ad-heavy sites where `get_page_text` fails.
 - **No relevant content found**: Only declare "no fit" after both Phase 1 and Phase 2 come up empty. Report: "I checked all [X] articles on this site via their sitemap. None have existing anchor matches (Phase 1) or topically relevant sections for suggested placements (Phase 2). The blog covers [brief topic summary]. Skip this one."
 - **Multiple good placements on one article**: Include the best 2, max 3 per article. The cap is article-level only. There is no per-section cap. If three viable Phase 1 hits all sit in one section, ship all three.
-- **Single viable placement**: Skip the decision gate (Step 3.5) and proceed directly to Step 4 with the single-ask format. There's nothing for Stefan to choose between.
-- **More than 5 placements**: Default to recommending option (b) alternatives framing on the top 3 — proposing 6+ placements in one email reads as spam.
+- **Single viable placement**: Ranking is trivial; still write the two recommendation lines (both name the same placement) and the one-row table, then the email with one block.
+- **More than 5 placements on one partner**: Stack the top 5 by Step 3.5 rank; list the rest under the table as held for a future round. Never propose 6+ on one partner; it reads as spam.
 - **Partner site is low quality**: Flag it — "This site looks thin/spammy. Worth considering if the link value justifies the effort."
 - **Enterprise publishers return query-string variants**: Sites like HubSpot, Salesforce, Adobe, Atlassian crawl the same canonical article at dozens of tracking-link URL variants (e.g., `?hubs_content=...`). Always include `{ "not": { "field": "url", "is": ["isubstring", "?"] } }` in the Tier 3 `where` clause to exclude these at the API level. Verified on hubspot.com: dropped 96 raw rows to 14 clean editorial URLs.
 - **Partner sites with user-generated forums**: Some partners host both an editorial blog AND a user-generated community forum (e.g., intercom.com has `community.intercom.com` alongside `blog.intercom.com`). Substring filters pollute the result with forum threads we can't request placements in. The Layer A `prefix` operator scoped to the editorial blog path excludes forum content at the API level.
@@ -897,7 +868,7 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - **Ahrefs where-clause supports `not` wrapper but not `notsubstring` operator**: The grammar is `{ "not": { "field": "...", "is": [op, value] } }`. Trying `notsubstring` as an operator returns "bad where: invalid JSON syntax". Verified condition operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `substring`, `isubstring`, `phrase_match`, `iphrase_match`, `prefix`, `suffix`.
 - **Layer A prefix probe returns no candidates**: If none of the standard editorial-blog prefix patterns return rows, escalate immediately to Step 2 (sitemap / blog-index crawl). The partner has a non-standard path that Tier 3 substring-only fallback won't handle cleanly.
 - **Phase 1 fit-score ceilings**: Only Type A literal matches from `references/anchors.md` reach ⭐⭐⭐ Perfect — and only when the phrase is not a saturated commercial head term (≥10 non-spam refdomains in the live profile; those cap at ⭐⭐ and yield to a fresher co-located variant per the Anchor Diversity Check). Type B creative semantic-equivalent matches cap at ⭐⭐ Strong. Type C single-word glossary matches cap at ⭐⭐ Strong. The caps protect the relationship channel against AI over-reach in anchor identification; they do NOT signal lower discovery priority. Treat B and C as first-class Phase 1 candidates.
-- **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches across Types A, B, and C on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan reviews before email is drafted. Do not layer creative anchors onto articles that already have a Phase 1 placement.
+- **Phase 2 creative anchor is a last-resort save**: Allowed only when Phase 1 returned zero matches across Types A, B, and C on the article. Capped at one creative-anchor placement per zero-match article. Flagged as `[creative-phase2-save]` in the summary table. Stefan sees it flagged in the Step 3.5 summary before sending. Do not layer creative anchors onto articles that already have a Phase 1 placement.
 - **Type C single-word glossary anchors require glossary targets**: A single-word anchor (e.g., "personalization", "communities") is allowed when ALL of: the target is a glossary entry, the word reads as the focal noun in context, and the word is unambiguous. Single-word anchors pointing to blog posts remain disallowed because blog targets are strategic/long-form and a one-word link reads forced. Fit score caps at ⭐⭐ Strong.
 - **Proposed anchor is saturated in our live profile or duplicated in the batch**: Look for a verbatim variant in the same sentence first (see Anchor Diversity Check, Step 3), then consider a different anchor family on the same article. If no clean alternative exists and the placement is strong, keep it but flag `[anchor-reuse: N refdomains]` in the summary table — Stefan decides. Never silently ship two identical anchors in one email.
 - **Multiple partner domains in one request**: Produce a single consolidated email addressing all domains (see Step 4, "Consolidated multi-site email"). Never split into separate per-domain emails — the contact proposed a multi-site exchange and expects one reply.
@@ -925,7 +896,8 @@ Don't confuse "discovered via Phase 1 scan" with "Phase 1 placement." A scan tha
 - Don't skip Step 0 (Ahrefs pre-screen) on Mode A sites just because the partner "looks legit." DR + traffic + topical fit must be checked before crawling
 - Don't trust DR alone as a quality signal — DR 70+ with no traffic and no topical fit is a PBN, not a publisher
 - Don't propose a placement without checking both partner-article traffic and social.plus target URL Rating. The fit score is meaningless without these two numbers
-- Don't auto-draft the email when multiple viable placements exist. Always show the summary table first and let Stefan choose the packaging
+- Don't ask Stefan how to package the email. Stacking is fixed: rank by partner-article traffic, give the two recommendation lines, show the table, draft the stacked email, all in one response
+- Don't order placements by discovery order, domain order or fit score. Rank order (Step 3.5) decides the numbering, and number 1 is the highest-traffic page in the batch
 - Don't use `sum_traffic_merged` as an Ahrefs `order_by` value — it's select-only and the call will fail. Use `sum_traffic`
 - Don't skip the existing-backlink check (Step 0.0) on Mode B just because there's no live site to crawl — the domain is still known and the check is cheap
 - Don't expose internal quality analysis to the partner. PBN/content-farm rejections, DR concerns, Ahrefs unit budgets, Chrome access errors, and tier-2 vertical-fit verdicts are user-facing only. The partner-facing line is always a diplomatic "no strong fit this round" or equivalent

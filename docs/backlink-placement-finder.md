@@ -35,8 +35,9 @@ The skill is for outbound link prospecting only (see `link-building-vetter` for 
    Two procedural rules inside editorial mode (added in 13.22 to actively resist the lookup reflex): **(a)** write all 5-10 candidate angles BEFORE consulting any list — opening `anchors.md` or the pattern cache during the read contaminates editorial mode; **(b)** stop-check the candidate list against the six most-saturated heads ("brand loyalty", "customer engagement", "online community", "community features", "social features", "user-generated content") — if those dominate without a fresher co-occurring angle, redo the read. The skill also bakes in an inline worked-example library of 8 confirmed editorial-mode finds (social sellers, brand voice, fan engagement, super-fans, audience interaction, creator commerce, in-app social, community-led selling) to prime the agent's eye.
    - **Phase 1** — Anchor exists verbatim in a body paragraph and maps to a valid target (anchor family or inventory topic). Partner just adds the link, zero text changes.
    - **Phase 2** — Topically relevant paragraph; partner needs to add or modify a sentence to accommodate the link.
-6. **Draft the reply email** — Plain-text placement format, Phase 1 first, then Phase 2 with suggested text. When emitting via the Gmail draft tool (`create_draft`), an explicit `htmlBody` is also passed so visible anchor text stays clean (Gmail otherwise substitutes its outbound redirect as the visible link text).
-7. **Summary table** — Every evaluation ends with a table of partner article → anchor → target → phase → fit score.
+6. **Rank and recommend** — Placements are ranked by the partner article's organic traffic (ties: target UR, anchor type, freshness); number 1 is the highest-traffic page. Two lines name the highest-traffic placement and the top anchor pick (the editorial best fit). Stacking is the fixed packaging: the skill never asks how to package the email.
+7. **Draft the reply email** — Plain-text placement format in rank order, Phase 1 and Phase 2 blocks mixed in one numbered list. When emitting via the Gmail draft tool (`create_draft`), an explicit `htmlBody` is also passed so visible anchor text stays clean (Gmail otherwise substitutes its outbound redirect as the visible link text).
+8. **Summary table** — Every evaluation includes a ranked table (pick marker, partner article, traffic, anchor, target, UR, phase, fit score) above the email.
 
 ## Files
 
@@ -115,8 +116,9 @@ Hard rules enforced on every placement:
 
 Every run returns, in this order:
 
-1. A draft reply email in the plain-text "Add link from / Add link to / Anchor" format.
-2. A summary table of all placements with phase and fit score.
+1. Two recommendation lines: highest-traffic placement and top anchor pick.
+2. A program-exposure line and a ranked summary table of all placements with pick marker, traffic, UR, phase and fit score.
+3. A stacked draft reply email in the plain-text "Add link from / Add link to / Anchor" format, numbered to match the table.
 3. Any surfaced concerns (possible PBN, low-UR target, existing backlink, competitor conflict) with the specific metrics.
 
 No unsolicited next steps, no fluff, no additional analysis unless asked.
