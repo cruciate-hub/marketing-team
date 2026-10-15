@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.73
+
+backlink-placement-finder always stacks the placements, ranks them by partner-article traffic and names a top anchor pick; the packaging question is gone (Stefan, 15 October 2026).
+
+**Changes:**
+- [`backlink-placement-finder/SKILL.md`](marketing-team/skills/backlink-placement-finder/SKILL.md): Step 3.5 is now "Rank and Recommend". Stacking is the fixed packaging, so the skill no longer stops to ask for a stacked list, alternatives framing or a single ask (it had asked on every batch; Stefan chose "stack" each time). Placements are ranked by the partner article's exact-URL organic traffic, ties broken by target UR, anchor type and freshness; in a multi-domain batch the domain sections follow the same rank so number 1 in the email is the highest-traffic page. Two recommendation lines sit above the summary table on every run, `Highest traffic` and `Top anchor pick` (the editorial best fit), and the table gets a Pick column marking both. Step 5 is written as the output contract: recommendations, program-exposure line, ranked table, stacked email, all in one response.
+- Same file: Phase 1 step 5 names the one call that supplies partner-article traffic and target UR, `batch-analysis` in `exact` mode over the shortlisted article URLs and the proposed target URLs (`crawled-pages` has no traffic field, so the old "already pulled in Tier 3" instruction could never be followed). When every social.plus candidate reads below UR 5, the skill keeps the best topical target and notes the site-wide UR floor instead of swapping down.
+- Same file: the "alternatives framing" email template is removed; the edge cases for one placement and for more than five placements follow the rank order (top 5 stacked, the rest held for a future round). Tested on the 15 October batch (three market-research domains, nine placements): the old text stopped at the packaging question, the new text produced the ranked table, both picks and the stacked email in one pass.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.72 -> 13.73.
+
 ## marketing-team 13.72
 
 The Claude Design page is synced to 13.71 (the illustration skills), and the closing rule made on the page on 12 October comes back here (Stefan, 15 October 2026).
