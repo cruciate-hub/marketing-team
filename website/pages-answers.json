@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-15T10:53:41.533Z",
+    "generatedAt": "2026-10-15T10:59:18.841Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -800,9 +800,9 @@
     },
     {
       "url": "https://www.social.plus/answers/guide-to-building-social-features-in-apps",
-      "metaTitle": "Guide to Building Social Features in Apps",
-      "metaDescription": "A practical guide to building social features in apps with activity feeds, interactions, groups, and scalable infrastructure.",
-      "content": "# Guide to Building Social Features in Apps\n## Guide to building social features in apps\n## What social features in apps mean\n## Why apps invest in social features\n## Core building blocks of social features\n### Essential social components\n## Step-by-step guide to building social features\n### 1. Identify natural social moments\n### 2. Prioritize visibility before contribution\n### 3. Design for low-friction participation\n### 4. Segment interactions with groups\n### 5. Reinforce engagement with notifications\n## Build versus buy: choosing an approach\n### Comparison of approaches\n## Building social features with social.plus\n## Metrics to track after launch\n### Key social engagement metrics\n## FAQs\n### Do all apps need full social networks?\n### When should social features be introduced?\n### Can social features work in B2B or utility apps?\n### How long does it take to build social features?\n## Conclusion"
+      "metaTitle": "How do you add social features to an existing app?",
+      "metaDescription": "Add social features to an existing app without a rebuild: reuse your user accounts, pick a UI layer, ship one surface, moderate and roll out in stages.",
+      "content": "# How do you add social features to an existing app?\n## What do you need before you start?\n## Which integration approach fits your app?\n## How do you connect social features to your existing user accounts?\n## What are the steps?\n## What usually goes wrong?\n## How do you know it worked?\n## How social.plus helps teams add social features to an existing app\n## FAQs\n### Does adding a feed or chat require rebuilding the app?\n### How long does a first social release take?\n### Can social features use your app's existing user accounts?\n### Do social features work in B2B or utility apps?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-develop-your-own-social-network-inside-an-app",
