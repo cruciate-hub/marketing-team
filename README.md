@@ -8,7 +8,7 @@ This marketplace ships **two plugins** — install one, not both.
 
 | Plugin | Who it's for | Skills | Install command |
 |---|---|---|---|
-| **`marketing-team`** | The marketing team — full kit | 20 skills (content, design, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
+| **`marketing-team`** | The marketing team — full kit | 23 skills (content, design, illustration, SEO, linking, publishing, media, formatting) | `/plugin install marketing-team@cruciate-hub` |
 | **`brand-kit`** | Everyone else | 2 skills: `brand-messaging`, `design-system` | `/plugin install brand-kit@cruciate-hub` |
 
 Both plugins read from the same source files (`brand-kit`'s skills are symlinks into `marketing-team`), so brand voice, terminology, and design tokens are always consistent across the company. See the [`brand-kit/`](./brand-kit) folder for that plugin's README and full install walkthrough.
@@ -27,7 +27,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 
 **Skill logic** (SKILL.md files in `marketing-team/skills/`): A change requires a `version` bump in the plugin's `.claude-plugin/plugin.json` (versions are single-sourced there; `marketplace.json` entries deliberately carry no version field). Teammates with auto-sync on (Steps 7–10 of the [install guide](./docs/install.md)) pick it up automatically at next Claude desktop startup. Anyone without auto-sync needs to run `/plugin marketplace update cruciate-hub` and `/plugin update <plugin>@cruciate-hub` once.
 
-## Available skills (20)
+## Available skills (23)
 
 ### Content creation
 
@@ -58,6 +58,14 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**internal-linking-strategist**](./marketing-team/skills/internal-linking-strategist/SKILL.md) | Suggests SEO-grounded internal links for new content (invoked by `blog-seo-content` and `aeo-content`) and runs site-wide link audits. Uses a canonical anchor map and cannibalization warnings from `link-strategy.md`, with live page-fetch to verify insertion points. |
 | [**link-building-vetter**](./marketing-team/skills/link-building-vetter/SKILL.md) | Vets incoming ABC link exchange requests against social.plus guidelines, scores them 1-10, and drafts response emails. |
 | [**backlink-placement-finder**](./marketing-team/skills/backlink-placement-finder/SKILL.md) | Finds contextually relevant backlink placement opportunities on partner websites and drafts request emails. |
+
+### Illustration & motion
+
+| Skill | What it does |
+|---|---|
+| [**social-plus-illustration**](./marketing-team/skills/social-plus-illustration/SKILL.md) | The social.plus illustration system: dark, abstract, UI-led illustrations built in HTML/SVG from the design-system tokens for any surface (website, social, ads, decks, email). One accent per image chosen by meaning, grain only for editorial work, official third-party logos, a 10-idea ideation method and a review checklist. Foundation for blog-thumbnails and social-plus-motion. Built on claude.ai Design canvases. By Amadeus. |
+| [**blog-thumbnails**](./marketing-team/skills/blog-thumbnails/SKILL.md) | Blog headers and thumbnails (exact Webflow sizes, WebP), in-blog charts, flows and diagrams from the article's own data, answer-page and glossary images, in the illustration system with grain. Two concepts per image after a variety check against recent thumbnails; `export_blog_images.py` writes the files webflow-publisher uploads (needs Playwright and Pillow). By Amadeus. |
+| [**social-plus-motion**](./marketing-team/skills/social-plus-motion/SKILL.md) | Motion in the illustration system: seamless 4 to 8 second loops of a finished static (animated WebP/GIF) and 15 to 60 second explainers (Reels, TikTok, LinkedIn) from a blog post, with script, camera moves, kinetic type and subtle sound. Built with the Motion artifact type; `render_webp.py` and `contact_sheet.py` render and check frames (Playwright, Pillow, ffmpeg). By Amadeus. |
 
 ### Formatting & conversion
 

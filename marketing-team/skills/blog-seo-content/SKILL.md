@@ -356,7 +356,7 @@ The blog requires three image sizes, all 16:9 aspect ratio:
 **Image alt text** (`image-alt-text`, PlainText)
 Descriptive text that conveys the meaning and context of the visual. Not "decorative" — write a real description.
 
-Tell the user what images are needed and at what sizes. Suggest a descriptive concept for the featured image that matches the article topic.
+Tell the user what images are needed and at what sizes. The images themselves (the header set and any in-blog charts or diagrams) are made with the `blog-thumbnails` skill, which exports these three files with the exact names and sizes.
 
 ### Display controls
 

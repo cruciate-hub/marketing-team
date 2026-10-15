@@ -10,12 +10,12 @@ Files are read from the clone the canonical fetch block makes (`$MT_REPO`, defau
 |---|---|
 | **Any visual task** (always) | `tokens.css` (the values), `foundations/colors/foundation.md`, `foundations/typography/foundation.md`, `foundations/spacing/foundation.md` |
 | **A website page or section** (Webflow build, landing page, section mockup, Claude Design prompt, marketing HTML that must match the site) | the always-load files + `sections/README.md` (the rule, the definition of done and the index) + `taste.md` (how to combine the sections) + `sections/recipes/<page>.md` for the page type (a product or feature landing page: `product-landing.md`) + for every section you use: `sections/<folder>/section.md` and its `source.html` (the live HTML and CSS) + the foundations the section needs (`buttons`, `cards`, `rich-text`, `form-inputs`, `tags`, `accordion-row`, `dividers`, `imagery`) |
-| **Blog, answers, glossary and customer story visuals** (header images, in-article figures, thumbnails) | the always-load files + `foundations/imagery/foundation.md` (sizes, blog header rules) + `sections/recipes/blog-post.md`, `answer.md`, `glossary-entry.md` or `customer-story.md` |
+| **Blog, answers, glossary and customer story visuals** (header images, in-article figures, thumbnails) | the `blog-thumbnails` skill, which builds on `social-plus-illustration` (they win where the imagery foundation differs) + the always-load files + `foundations/imagery/foundation.md` (sizes) + `sections/recipes/blog-post.md`, `answer.md`, `glossary-entry.md` or `customer-story.md` |
 | **Emails and newsletters** | `tokens.css` and `foundations/colors/foundation.md` (the "Brand extras" part has the email palette and the gradients) + `foundations/logo/foundation.md` (variants and clear space; the email itself uses the PNG logo pair from the spec, inline SVG is stripped by Gmail) + `foundations/accessibility/foundation.md` (the pairs on white and whitesmoke). Not the typography foundation: the email font is Inter, set by `emails/product-update-newsletter-spec.md`. The email HTML itself comes from the newsletters skill and `emails/` |
-| **Social graphics, decks, one-off visuals** | the always-load files (brand extras: gradients) + `foundations/logo/foundation.md` + `foundations/imagery/foundation.md` + `foundations/icons/foundation.md` |
+| **Social graphics, decks, one-off visuals** | the `social-plus-illustration` skill for any illustration (`social-plus-motion` for loops, reels and explainers) + the always-load files (brand extras: gradients) + `foundations/logo/foundation.md` + `foundations/imagery/foundation.md` + `foundations/icons/foundation.md` |
 | **Output with the logo** | `foundations/logo/foundation.md` (variants, clear space, backgrounds, SVG data; the colour files are in `$MT_REPO/assets/`, at the repository root) |
 | **Output with icons** | `foundations/icons/foundation.md` (the site's inline SVG icons, the two feature-glyph holders, sizes) |
-| **Output with images or illustrations** | `foundations/imagery/foundation.md` (ratios, product illustration and photography rules, blog headers) |
+| **Output with images or illustrations** | the `social-plus-illustration` skill for illustrations (website, social, ads, decks, email) + `foundations/imagery/foundation.md` (ratios, photography rules) |
 | **Buttons, forms, cards, tags, accordions, dividers** | the matching `foundations/<name>/foundation.md` and its `preview.html` for the markup |
 | **Shadows, radius, elevation** | `foundations/shadows-and-radius/foundation.md` (measured values, the proposed set marked "to decide") |
 | **Accessibility question or check** | `foundations/accessibility/foundation.md` (contrast table of the text and background token pairs, with every surface token, focus, targets, motion, keyboard, the open items) |
@@ -73,7 +73,7 @@ How to read a foundation: `foundation.md` has the status line (draft until Stefa
 | `foundations/tags/` | The `.tag` pill and its variants |
 | `foundations/accordion-row/` | FAQ row and feature accordion |
 | `foundations/dividers/` | Line and text dividers |
-| `foundations/imagery/` | Image ratio classes and the rules for illustrations, photography, blog headers |
+| `foundations/imagery/` | Image ratio classes and photography rules; illustrations and blog images follow the `social-plus-illustration` and `blog-thumbnails` skills |
 | `foundations/logo/` | Logo variants, clear space, backgrounds, inline SVG |
 | `foundations/icons/` | The site's icons: inline SVG interface icons, feature glyph holders, sizes |
 | `foundations/accessibility/` | Contrast of the text and background token pairs, focus, touch targets, motion, keyboard and structure, open items |

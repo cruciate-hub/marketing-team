@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Concept C: social post over a wall of pushes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Figtree";src:url("/_blob/579498fe0298f9b0b98d08d62f24d0ce") format("woff2");font-weight:300 900;font-display:swap}
+body{margin:0;background:#111111}
+a{color:#6F89FC}a:hover{color:#B3B3B3}
+</style>
+</helmet>
+<div role="img" aria-label="A faded wall of repetitive push notifications fills the background; in front, a large cropped social post with a person's name and a blue Reply button." style="position: relative; width: 1578px; height: 888px; overflow: hidden; background: #111111; font-family: Figtree, Arial, sans-serif">
+
+<sc-for list="{{pills}}" as="p" hint-placeholder-count="40">
+<div style="position: absolute; left: {{p.x}}px; top: {{p.y}}px; width: {{p.w}}px; height: 64px; box-sizing: border-box; border-radius: 32px; background: #1A1A1A; border: 2px solid #202022; display: flex; align-items: center; gap: 16px; padding: 0 14px; opacity: {{p.o}}">
+<div style="width: 38px; height: 38px; border-radius: 12px; background: #29292B; flex: none"></div>
+<sc-if value="{{p.hasText}}" hint-placeholder-val="{{false}}">
+<span style="font-size: 24px; font-weight: 500; color: #414347; white-space: nowrap">{{p.text}}</span>
+</sc-if>
+<sc-if value="{{p.noText}}" hint-placeholder-val="{{true}}">
+<div style="width: {{p.bar}}px; height: 10px; border-radius: 5px; background: #29292B"></div>
+</sc-if>
+</div>
+</sc-for>
+
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse 900px 520px at 1050px 640px, rgba(17,17,17,0.85) 0%, rgba(17,17,17,0) 75%)"></div>
+<div style="position: absolute; inset: 0; opacity: {{glowOpacity}}; background: radial-gradient(ellipse 520px 360px at 820px 860px, rgba(59,65,236,0.42) 0%, rgba(59,65,236,0) 70%)"></div>
+
+<div style="position: absolute; left: 470px; top: 330px; width: 1300px; height: 720px; box-sizing: border-box; border-radius: 52px; background: #202022; border: 2px solid #343437; padding: 60px 64px; display: flex; flex-direction: column; gap: 40px; box-shadow: 0 40px 120px rgba(0,0,0,0.6)">
+<div style="display: flex; align-items: center; gap: 28px">
+<div style="width: 112px; height: 112px; border-radius: 999px; background: linear-gradient(160deg, #939497, #414347); border: 4px solid #29292B; box-sizing: border-box; flex: none"></div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 52px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.1; color: #FFFFFF">Emily Carter</span>
+<div style="width: 170px; height: 14px; border-radius: 7px; background: #414347"></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="width: 900px; height: 22px; border-radius: 11px; background: #939497"></div>
+<div style="width: 760px; height: 22px; border-radius: 11px; background: #939497"></div>
+<div style="width: 520px; height: 22px; border-radius: 11px; background: #414347"></div>
+</div>
+<div style="display: flex; align-items: center; gap: 16px; margin-top: 12px">
+<div style="height: 80px; padding: 0 40px 0 32px; border-radius: 999px; background: #3B41EC; display: flex; align-items: center; gap: 14px">
+<svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 21l2-5.6A8.4 8.4 0 1 1 21 11.5z"></path></svg>
+<span style="font-size: 34px; font-weight: 500; color: #FFFFFF">Reply</span>
+</div>
+<div style="height: 80px; width: 150px; border-radius: 999px; background: #29292B; display: flex; align-items: center; justify-content: center; gap: 14px">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B3B3B3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"></path></svg>
+<div style="width: 36px; height: 12px; border-radius: 6px; background: #414347"></div>
+</div>
+<div style="height: 80px; width: 80px; border-radius: 999px; background: #29292B; display: flex; align-items: center; justify-content: center">
+<svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#B3B3B3" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"></path></svg>
+</div>
+</div>
+</div>
+
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 980px 620px at 789px 444px, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)"></div>
+<svg aria-hidden="true" width="1578" height="888" style="position: absolute; left: 0; top: 0; mix-blend-mode: overlay; opacity: {{grainOpacity}}; pointer-events: none">
+<filter id="spGrainC1"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="1578" height="888" filter="url(#spGrainC1)"></rect>
+</svg>
+<svg aria-hidden="true" width="1578" height="888" style="position: absolute; left: 0; top: 0; mix-blend-mode: soft-light; opacity: {{grainFine}}; pointer-events: none">
+<filter id="spGrainC2"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="1578" height="888" filter="url(#spGrainC2)"></rect>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grain":{"editor":"range","default":0.9,"min":0,"max":1,"step":0.05},"glow":{"editor":"range","default":0.8,"min":0,"max":1,"step":0.05},"$preview":{"width":1578,"height":888}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var g = this.props.grain ?? 0.9;
+    var w = this.props.glow ?? 0.8;
+    var texts = {"1-1": "We miss you", "2-2": "Your cart is waiting", "0-3": "Don't miss out", "4-0": "Last chance"};
+    var widths = [380, 300, 440, 340, 400, 320];
+    var pills = [];
+    for (var r = 0; r < 10; r++) {
+      var x = (r % 2 === 0) ? -120 : -300;
+      for (var c = 0; x < 1700; c++) {
+        var wd = widths[(r * 3 + c) % widths.length];
+        var key = r + "-" + c;
+        var t = texts[key];
+        if (t) { wd = Math.max(wd, t.length * 13 + 90); }
+        var dy = Math.abs(r - 2.5);
+        var o = Math.max(0.25, 1 - dy * 0.12);
+        pills.push({ x: x, y: -30 + r * 92, w: wd, o: o, bar: Math.max(60, wd - 130), hasText: !!t, noText: !t, text: t || "" });
+        x += wd + 20;
+      }
+    }
+    return { pills: pills, grainOpacity: g, grainFine: Math.min(1, g * 0.85), glowOpacity: w };
+  }
+}
+</script>
+</body>
+</html>

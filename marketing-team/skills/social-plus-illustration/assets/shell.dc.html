@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Concept X: [archetype] — [post title]</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Figtree";src:url("/_blob/FIGTREE_BLOB_ID") format("woff2");font-weight:300 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url("/_blob/GEIST_MONO_BLOB_ID") format("woff2");font-weight:100 900;font-display:swap}
+body{margin:0;background:#111111}
+a{color:#6F89FC}a:hover{color:#B3B3B3}
+</style>
+</helmet>
+<!-- The SHELL holds only what never changes: ground, optional glow, grain, vignette, fonts.
+     Everything between COMPOSITION START/END is new for every concept.
+     Grain is the EDITORIAL treatment: default 0 here; editorial work (blog images, blog-derived social) sets the "grain" prop default to 0.9. -->
+<div role="img" aria-label="[describe the image]" style="position: relative; width: 1578px; height: 888px; overflow: hidden; background: #111111; font-family: Figtree, Arial, sans-serif">
+
+<!-- optional single glow: move it to wherever the blue element sits -->
+<div style="position: absolute; inset: 0; opacity: {{glowOpacity}}; background: radial-gradient(ellipse 520px 360px at 789px 444px, rgba(59,65,236,0.42) 0%, rgba(59,65,236,0) 70%)"></div>
+
+<!-- COMPOSITION START -->
+
+<!-- COMPOSITION END -->
+
+<div style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 980px 620px at 789px 444px, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%)"></div>
+<svg aria-hidden="true" width="1578" height="888" style="position: absolute; left: 0; top: 0; mix-blend-mode: overlay; opacity: {{grainOpacity}}; pointer-events: none">
+<filter id="spGrainA"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="1578" height="888" filter="url(#spGrainA)"></rect>
+</svg>
+<svg aria-hidden="true" width="1578" height="888" style="position: absolute; left: 0; top: 0; mix-blend-mode: soft-light; opacity: {{grainFine}}; pointer-events: none">
+<filter id="spGrainB"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+<rect width="1578" height="888" filter="url(#spGrainB)"></rect>
+</svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"grain":{"editor":"range","default":0,"min":0,"max":1,"step":0.05},"glow":{"editor":"range","default":0.8,"min":0,"max":1,"step":0.05},"$preview":{"width":1578,"height":888}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var g = this.props.grain ?? 0;
+    var w = this.props.glow ?? 0.8;
+    return { grainOpacity: g, grainFine: Math.min(1, g * 0.85), glowOpacity: w };
+  }
+}
+</script>
+</body>
+</html>
