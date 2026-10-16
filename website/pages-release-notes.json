@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T06:38:54.163Z",
-    "itemCount": 81,
+    "generatedAt": "2026-10-16T10:08:04.297Z",
+    "itemCount": 82,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/dedicated-report-category-for-child-safety-content",
+      "metaTitle": "Dedicated Report Category for Child Safety Content",
+      "metaDescription": "A dedicated report category for child safety is now available, allowing users to flag content that endangers a child, including suspected CSAM.",
+      "content": "# Dedicated Report Category for Child Safety Content"
+    },
     {
       "url": "https://www.social.plus/release-note/sort-channel-list-by-last-message",
       "metaTitle": "Sort Channel List by Last Message",
