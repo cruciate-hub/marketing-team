@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-15T10:59:18.841Z",
+    "generatedAt": "2026-10-16T10:46:53.267Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -44,9 +44,9 @@
     },
     {
       "url": "https://www.social.plus/answers/how-an-in-app-community-improves-app-retention",
-      "metaTitle": "How an In-App Community Improves App Retention",
-      "metaDescription": "An in-app community improves app retention by 10-35% by creating recurring reasons to return, building relationships, and turning engagement into first-party data.",
-      "content": "# How an in-app community improves app retention\n## Mechanism 1: appointment-based engagement\n## Mechanism 2: relationship accumulation\n## Mechanism 3: first-party data feedback\n## How the lift shows up\n## What \"consistent\" actually means\n## How teams realize the retention lift with social.plus\n## FAQs\n## Conclusion"
+      "metaTitle": "How does an in-app community improve app retention?",
+      "metaDescription": "An in-app community lifts retention through return triggers, group identity and feedback. See the evidence, the mechanism, the limits and how to measure it.",
+      "content": "# How does an in-app community improve app retention?\n## What does the evidence show about community and retention?\n## Why does an in-app community bring users back?\n## When does community not improve retention?\n## How do you know the community caused the lift?\n## What should product teams do with this evidence?\n## How social.plus helps apps turn community into retention\n## FAQs\n### What is a good retention rate for an app?\n### Do users who never post still benefit from an in-app community?\n### How long does it take for a community to affect retention?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/in-app-community-vs-external-platform",
@@ -1034,9 +1034,9 @@
     },
     {
       "url": "https://www.social.plus/answers/how-in-app-communities-increase-engagement",
-      "metaTitle": "How in-app communities increase engagement",
-      "metaDescription": "Discover how in-app communities drive higher user engagement through social interaction, gamified participation, and personalized experiences.",
-      "content": "# How in-app communities increase engagement\n## How in-app communities drive engagement\n### 1. Social interaction increases time spent in app\n### 2. Gamification and Recognition Reinforce Habits\n### 3. User-generated content (UGC) builds authentic engagement\n### 4. Data-driven personalization keeps users active\n## FAQs\n### What are the main benefits of adding an in-app community?\n### How can developers add community features efficiently?\n### Are in-app communities suitable for all app categories?\n### What metrics should teams track to measure engagement success?\n## Conclusion"
+      "metaTitle": "How do community features increase app engagement?",
+      "metaDescription": "Community features increase app engagement through feedback loops, social influence and content users create for each other. What the research shows.",
+      "content": "# How do community features increase app engagement?\n## What does the evidence show?\n## Why do community features change user behavior?\n## When don't community features increase engagement?\n## What should product teams do about it?\n## How social.plus helps apps build engagement loops with community features\n## FAQs\n### What is social proof?\n### Does social proof work?\n### What are some real-life examples of social proof?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/what-is-an-in-app-community-and-how-does-it-work",
