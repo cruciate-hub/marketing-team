@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-16T10:46:55.438Z",
+    "generatedAt": "2026-10-16T10:48:11.865Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -146,9 +146,9 @@
     },
     {
       "url": "https://www.social.plus/answers/how-to-add-events-to-a-mobile-app",
-      "metaTitle": "How to Add Events to a Mobile App",
-      "metaDescription": "Learn how to add events to a mobile app in 10 steps, from format selection and scheduling to RSVP, livestream, moderation, and analytics.",
-      "content": "# How to Add Events to a Mobile App\n## Prerequisites\n## Step-by-step guide\n## Approaches and trade-offs\n## Common pitfalls\n## Why social.plus powers in-app events\n## FAQs\n### What features should a mobile app events system include?\n### Can I add events to an existing app without rebuilding the product?\n### What is the difference between in-app events and an external event platform?\n### How long does it take to add an events feature to an existing app?\n### What analytics should I track after running an in-app event?\n## Conclusion"
+      "metaTitle": "How do you add community events to your app?",
+      "metaDescription": "How to add community events to your app: event setup, discovery, RSVP, reminders, the live session, follow-up and the metrics that show it works.",
+      "content": "# How do you add community events to your app?\n## What do you need before you add events?\n## Which event formats should you support first?\n## How do you set up event creation and discovery?\n## How do you build the RSVP and reminder flow?\n## How do you run the event and follow up afterwards?\n## Which approach fits your team?\n## What usually goes wrong?\n## How do you know it worked?\n## How social.plus helps teams add community events\n## FAQs\n### How do you increase attendance at in-app events?\n### How do you track event attendance in an app?\n### What should an event reminder include?\n### Can you add events to an existing app without rebuilding it?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/what-is-an-in-app-event-rsvp-system",
