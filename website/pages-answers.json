@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-19T11:17:59.578Z",
+    "generatedAt": "2026-10-19T12:01:09.415Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -116,9 +116,9 @@
     },
     {
       "url": "https://www.social.plus/answers/in-app-social-features-vs-third-party",
-      "metaTitle": "In-App Social Features vs Third-Party Social Platforms",
-      "metaDescription": "In-app social features keep engagement, data, and brand inside your product; third-party social platforms reach a wider audience but cede ownership.",
-      "content": "# In-app social features vs third-party social platforms\n## At-a-glance comparison\n## What in-app social features are best for\n## What third-party social platforms are best for\n## Dimension-by-dimension breakdown\n### Data ownership\n### Algorithm and ranking\n### Brand control\n### Cost profile\n### Risk\n## Decision framework\n## Where social.plus fits\n## FAQs\n## Conclusion"
+      "metaTitle": "Should you build your community inside your app or on an external social platform?",
+      "metaDescription": "Build your community in your app for retention, data and control; use an external social platform for reach. Compare cost, risk and ownership.",
+      "content": "# Should you build your community inside your app or on an external social platform?\n## What are the options?\n## How do the two options compare?\n## When is each option the right choice?\n## What do teams usually underestimate?\n## How social.plus helps apps build their community inside the app\n## FAQs\n### What is replacing Facebook groups for brands?\n### Why are brands moving away from social media for their communities?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/social-features-mobile-apps",
