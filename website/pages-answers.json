@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-19T12:01:09.415Z",
+    "generatedAt": "2026-10-21T00:49:10.551Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -578,9 +578,9 @@
     },
     {
       "url": "https://www.social.plus/answers/platform-for-creating-a-private-social-network-within-your-app",
-      "metaTitle": "Platform for Creating a Private Social Network Within Your App",
-      "metaDescription": "A practical guide to choosing a platform for creating a private social network within your app, including feeds, profiles, access control, moderation",
-      "content": "# Platform for Creating a Private Social Network Within Your App\n## Platform for creating a private social network within your app\n## What a private social network within an app is\n## Why apps create private social networks\n## What a private social network platform provides\n## Platform options for building private social networks\n### Platform category comparison\n## Core features to look for in a private social network platform\n### Essential feature checklist\n## How to create a private social network within your app\n## Leading platform for creating a private social network: social.plus\n## Metrics to track after launch\n### Key private network metrics\n## FAQs\n### What is the best platform for creating a private social network within an app?\n### Can a private social network be fully white-label?\n### How long does it take to launch a private social network?\n### Are private social networks suitable for B2B and consumer apps?\n## Conclusion"
+      "metaTitle": "How do you create a private social network inside your app?",
+      "metaDescription": "Create a private social network inside your app: gate it with your own accounts, set communities to private, close content leaks and moderate it.",
+      "content": "# How do you create a private social network inside your app?\n## What makes an in-app social network private?\n## What do you need before you start?\n## What are the steps?\n## How do you protect members' data?\n## What usually goes wrong?\n## How social.plus helps teams create a private social network inside their app\n## FAQs\n### Do members need a separate app to join?\n### How small can a private community be?\n### Does a private community still need moderation?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/platform-for-building-social-features-inside-apps",
