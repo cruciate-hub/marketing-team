@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-21T00:51:49.549Z",
+    "generatedAt": "2026-10-21T00:54:15.763Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -1046,9 +1046,9 @@
     },
     {
       "url": "https://www.social.plus/answers/what-is-a-social-layer-in-an-app",
-      "metaTitle": "What is a social layer in an app?",
-      "metaDescription": "A social layer is the in-app infrastructure that enables profiles, feeds, chat, and community features. Learn how social layers boost retention, engagement",
-      "content": "# What is a social layer in an app?\n## Core components of a social layer\n## Why the social layer matters\n## How to build a social layer\n## Use cases across industries\n## FAQs\n### How is a social layer different from a social network?\n### What tools are available to add a social layer to an app?\n### How does the social layer affect user retention?\n### Is data privacy a concern when adding social features?\n## Conclusion"
+      "metaTitle": "How does a social layer work in an app?",
+      "metaDescription": "A social layer ties actions to profiles, stores them as content and delivers them through feeds, alerts and chat. See its parts, the loop and the evidence.",
+      "content": "# How does a social layer work in an app?\n## What are the parts of a social layer?\n## How does one interaction move through the layer?\n## What does the evidence say about its effect?\n## When does a social layer not help?\n## What should you do with this?\n## How social.plus provides the social layer for your app\n## FAQs\n### What is a social graph?\n### How do companies monitor social graph misuse?\n### How is a social layer different from a social network?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/what-are-community-features-in-a-mobile-app",
