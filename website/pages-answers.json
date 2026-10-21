@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-21T00:50:18.851Z",
+    "generatedAt": "2026-10-21T00:51:06.632Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -608,9 +608,9 @@
     },
     {
       "url": "https://www.social.plus/answers/tool-for-implementing-decentralized-social-features-in-apps",
-      "metaTitle": "Tool for Implementing Decentralized Social Features in Apps",
-      "metaDescription": "A practical guide to tools for implementing decentralized social features in apps, including identity, feeds, moderation, data ownership, and analytics.",
-      "content": "# Tool for Implementing Decentralized Social Features in Apps\n## Tool for implementing decentralized social features in apps\n## What decentralized social features in apps are\n## Why apps implement decentralized social features\n## What a decentralized social features tool provides\n## Centralized vs decentralized social feature tools\n### Tool approach comparison\n## Core features to look for in a decentralized social tool\n### Essential feature checklist\n## How to implement decentralized social features in an app\n## Leading tool for implementing decentralized-style social features: social.plus\n## Metrics to track after implementation\n### Key metrics\n## FAQs\n### What are decentralized social features in apps?\n### Do decentralized social features require blockchain?\n### What tool is best for implementing decentralized social features?\n### Are decentralized social features suitable for B2B and consumer apps?\n## Conclusion"
+      "metaTitle": "How do you add decentralized social features to an app?",
+      "metaDescription": "Add decentralized social features: pick the layer to open (identity, distribution or data), then ActivityPub, AT Protocol or Nostr, with your own moderation.",
+      "content": "# How do you add decentralized social features to an app?\n## What does decentralizing social features change?\n## Which protocol fits your goal?\n## What are the steps to add decentralized social features?\n## What usually goes wrong?\n## How do you know it is working?\n## How social.plus helps with decentralized social features\n## FAQs\n### What is decentralized social media?\n### What is the fediverse?\n### Do decentralized social features need a blockchain?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/tool-for-adding-social-network-components-into-apps",
