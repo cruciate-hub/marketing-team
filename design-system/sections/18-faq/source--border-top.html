@@ -51,7 +51,7 @@
       kbd,
       pre,
       samp {
-        font-family: var(--font-mono);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 1em;
       }
       * {
@@ -513,7 +513,7 @@
         height: 0;
       }
     </style>
-  <style>/* Code, kbd, pre and samp in Geist Mono (decision 8 October 2026) */ code, kbd, pre, samp { font-family: var(--font-mono); }</style>
+  <style>/* Code, kbd, pre and samp in the system monospace (decision 16 October 2026; Geist Mono is for all-caps eyebrows and labels only). Written as the stack itself, the value of the `mono` family, so it shows before tokens.css is regenerated. */ code, kbd, pre, samp { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }</style>
 </head>
   <body>
     <!-- 18 FAQ accordion (border top). Captured 2026-10-07 from https://www.social.plus/ai/mcp-server by design-system/capture/capture.mjs. Images are copies of the site's own files in design-system/assets/media/ (capture/localize-media.mjs); videos are not copied, a <video> shows its first frame as poster. -->
@@ -536,7 +536,7 @@
                   line-height: 1.6;
                 }
                 .faq-long_wrapper .w-richtext pre code {
-                  font-family: var(--font-mono);
+                  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
                   color: #e8e8ea;
                   background: transparent;
                   padding: 0;
@@ -546,7 +546,7 @@
                 }
                 /* Inline code (code not inside pre) */
                 .faq-long_wrapper .w-richtext :not(pre) > code {
-                  font-family: var(--font-mono);
+                  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
                   font-size: 0.875em;
                   background: rgba(255, 255, 255, 0.08);
                   color: #f0f0f0;

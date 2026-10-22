@@ -20,7 +20,7 @@ Other skills build on this one:
 - `references/treatments.md` — **grain is a treatment, not the style.** Editorial work gets grain; product, website and brand work is clean. Decide before building.
 - `references/review-checklist.md` — run on every artboard before showing it.
 
-In one breath: #111 ground, design-system neutrals for every surface, exactly one accent element — ultramarine (#3B41EC fill / #6F89FC line) by default, another brand color when the topic calls for it (`color-accents.md`) — Figtree (Geist Mono for code and labels), words only where necessary, 2–4 big objects that leave the frame, recognisable objects with a quiet grey social layer, no duplicates of the blue action.
+In one breath: #111 ground, design-system neutrals for every surface, exactly one accent element — ultramarine (#3B41EC fill / #6F89FC line) by default, another brand color when the topic calls for it (`color-accents.md`) — Figtree (Geist Mono only for all-caps labels; code in the system monospace, captions and chips in Figtree: design-system feedback 17), words only where necessary, 2–4 big objects that leave the frame, recognisable objects with a quiet grey social layer, no duplicates of the blue action.
 
 ## What changes every time
 

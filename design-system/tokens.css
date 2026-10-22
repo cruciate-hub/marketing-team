@@ -6,7 +6,7 @@
 @font-face { font-family: "Geist Mono"; src: url(geist-mono.woff2) format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 :root {
   color-scheme: dark;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --social--dark: #111;
   --font--figtree: Figtree,Arial,sans-serif;
   --text--text-color-grey-light: #b3b3b3;

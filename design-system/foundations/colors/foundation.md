@@ -23,7 +23,7 @@ Components use role names, never scale steps. Every role has a dark and a light 
 | `color-link` | blue-400 #6F89FC | blue-600 #3B41EC | Links, eyebrows, link-coloured icons |
 | `color-focus` | blue-400 | blue-600 | Focus ring, focused input border |
 | `color-error` | red-300 #FC9198 | red-600 #B70E39 | Error text and border |
-| `color-frame`, `color-frame-marker` | neutral-800, neutral-500 | neutral-200, neutral-400 | The frame lines and plus markers (web library layout) |
+| `color-frame`, `color-frame-marker` | neutral-850 #202022, neutral-500 | neutral-200, neutral-400 | The frame lines and plus markers (web library layout). Dark lines one step quieter since 22 October 2026 (was neutral-800) |
 | `color-accent-fill` (`-hover`, `-press`) | `primary` blue-600 (blue-700, blue-800) | same | Primary button and blue fills |
 | `color-on-accent` | `on-primary` #FFFFFF | same | Text and icons on the blue fill |
 

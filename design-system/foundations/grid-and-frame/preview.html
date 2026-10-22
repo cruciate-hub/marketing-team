@@ -55,29 +55,40 @@ body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var
 .grid-demo span{position:relative;border-left:1px solid var(--color-frame);background:color-mix(in srgb,var(--color-link) 6%,transparent)}
 .grid-demo span:first-child{border-left:0}
 .grid-demo span::after{content:"";position:absolute;inset:0 var(--column-inset);border-left:1px dashed color-mix(in srgb,var(--color-link) 55%,transparent);border-right:1px dashed color-mix(in srgb,var(--color-link) 55%,transparent)}
-.grid-demo b{position:absolute;bottom:.5rem;left:0;right:0;text-align:center;font:500 .8125rem/1 var(--font-mono);color:var(--color-text-subtle)}
+.grid-demo b{position:absolute;bottom:.5rem;left:0;right:0;text-align:center;font:500 .8125rem/1 var(--font-figtree);color:var(--color-text-subtle)}
 .spans{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1px;background:var(--color-frame);border-top:1px solid var(--color-frame)}
-.spans div{background:var(--color-bg);padding:var(--space-s) var(--frame-inset);font:500 .8125rem/1.4 var(--font-mono);color:var(--color-text-subtle)}
+.spans div{background:var(--color-bg);padding:var(--space-s) var(--frame-inset);font:500 .8125rem/1.4 var(--font-figtree);color:var(--color-text-subtle)}
 
 /* ---------- content in the samples ---------- */
-.eyebrow{margin:0 0 var(--space-xs);font:500 .8125rem/1rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--color-link)}
+.eyebrow{margin:0 0 var(--space-xs);font:500 .8125rem/1rem var(--font-eyebrow, "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--color-link)}
 .h2{margin:0;font-size:var(--fluid-h2);font-weight:600;line-height:1.1;letter-spacing:-.015em;max-width:20ch}
 .h4{margin:0 0 var(--space-xs);font-size:var(--fluid-h4);font-weight:600;line-height:1.3}
 .lead{margin:var(--space-s) 0 0;font-size:var(--fluid-lead);color:var(--color-text-muted);max-width:52ch}
 .small{margin:0;font-size:1rem;color:var(--color-text-muted)}
-.note{font:400 .8125rem/1.6 var(--font-mono);color:var(--color-text-subtle);margin:0 0 var(--space-s)}
+.note{font:400 .8125rem/1.6 var(--font-figtree);color:var(--color-text-subtle);margin:0 0 var(--space-s)}
 .visual{min-height:22rem;display:grid;place-items:center;padding:var(--space-2xl) var(--space-xl)}
 .visual_ui{width:100%;max-width:24rem;background:var(--color-bg);border:1px solid var(--color-border-strong);border-radius:var(--radius-l);padding:var(--space-m);display:flex;flex-direction:column;gap:var(--space-s)}
 .bar{height:.5rem;border-radius:var(--radius-pill);background:var(--color-border-strong)}
 .bar.w60{width:60%}.bar.w80{width:80%}.bar.w40{width:40%}
 .logo-cell{display:grid;place-items:center;min-height:6.5rem}
 .logo-cell i{display:block;width:6rem;height:1rem;border-radius:var(--radius-pill);background:var(--color-border-strong)}
-.label{position:absolute;top:var(--space-s);right:var(--frame-inset);font:500 .75rem/1 var(--font-mono);color:var(--color-text-subtle);letter-spacing:.04em}
+.label{position:absolute;top:var(--space-s);right:var(--frame-inset);font:500 .75rem/1 var(--font-figtree);color:var(--color-text-subtle);letter-spacing:.04em}
 .ruled-wrap{position:relative}
 .theme-head{padding:var(--space-xl) 0 var(--space-m)}
 .theme-head h1{margin:0 0 var(--space-2xs);font-size:var(--fluid-h3);font-weight:600;line-height:1.1;letter-spacing:-.015em}
 .theme-head p{margin:0;color:var(--color-text-muted);max-width:65ch;font-size:1rem}
 @media (max-width:767px){.label{display:none}.spans{display:none}}
+
+/* Plus markers with rounded ends (decision 22 October 2026, Amadeus): 8px (frame-marker), drawn as one path with
+   round caps, 1.3px thick, used as a mask in color-frame-marker. The box is 1px larger than frame-marker (margin -.5px)
+   so the plus lands on whole pixels and stays centred on the line crossing. Replaces the two 1px gradient bars. */
+.is-ruled .frame::before,.is-ruled .frame::after,.frame_end::before,.frame_end::after{background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M4.5 1.25v6.5M1.25 4.5h6.5' stroke='%23000' stroke-width='1.3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center / 100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M4.5 1.25v6.5M1.25 4.5h6.5' stroke='%23000' stroke-width='1.3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  width:calc(var(--frame-marker) + 1px);height:calc(var(--frame-marker) + 1px);margin:-.5px}
+
+/* Until tokens.css is regenerated from tokens.json (it updates the next time the system is saved on the page), the card sets
+   the two frame values that changed on 22 October 2026 itself, so it shows the frame as decided. */
+:root,[data-theme="dark"]{--color-frame:var(--neutral-850);--frame-marker:.5rem}
+[data-theme="light"]{--color-frame:var(--neutral-200)}
 </style>
 </head>
 <body>

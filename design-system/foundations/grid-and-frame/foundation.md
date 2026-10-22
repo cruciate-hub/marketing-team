@@ -17,10 +17,10 @@ One grid and a visible frame, from the web library: hairlines on the container e
 
 | Part | Class | Tokens | Rule |
 |---|---|---|---|
-| Frame lines | `.frame` on `.container-l` | `color-frame` | Hairlines on both container edges, full height. Every framed section has them |
+| Frame lines | `.frame` on `.container-l` | `color-frame` (neutral-850 on dark, neutral-200 on light) | Hairlines on both container edges, full height. Every framed section has them. Kept quiet on purpose (22 October 2026) |
 | Inner padding | `.frame_inner` | `frame-inset` | Text inside the frame starts one column inset from the line |
 | Section rule | `.is-ruled` on the section | `color-frame` | A full-width hairline at the top of a section |
-| Plus markers | (drawn by `.is-ruled .frame`) | `frame-marker` 11px, `color-frame-marker` | Where a section rule crosses a frame line. Decorative |
+| Plus markers | (drawn by `.is-ruled .frame`) | `frame-marker` 8px, `color-frame-marker` | Where a section rule crosses a frame line. Rounded ends: one path with round caps, 1.3px thick, used as a mask, on a box 1px larger than `frame-marker` so it stays centred on the crossing (decision 22 October 2026, Amadeus; was 11px with square 1px arms). Decorative |
 | Closing rule | `.is-ruled-bottom` on the section, `<span class="frame_end" aria-hidden="true"></span>` last in `.frame` | `color-frame`, `frame-marker`, `color-frame-marker` | The mirror of the section rule: a full-width hairline at the bottom with plus markers on both frame lines. Only where the frame ends (a framed section on its own, or the last framed section before something unframed); never between two framed sections. Stefan, 12 October 2026; not yet in Webflow |
 | Cells | `.frame_cells` > `.frame_cell` | `--cells` (3 by default), `--cells-tablet` (2), `cell-pad` | Content divided by 1px frame lines, no radius, no card fill. The cell count fills complete rows |
 | Split | `.frame_split` (`.is-wide-right`, `.is-reversed`) | | Two cells divided by one vertical frame line on the 6/7 edge (5/7 wide). Stacks under 992px with a line between |
