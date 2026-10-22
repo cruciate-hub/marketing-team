@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-12T10:48:12.006Z",
-    "itemCount": 268,
+    "generatedAt": "2026-10-22T10:10:15.323Z",
+    "itemCount": 269,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-to-set-up-discovery-widget-topics-for-every-page-2",
+      "metaTitle": " How to Set Up Discovery Widget Topics for Every Page ",
+      "metaDescription": "Discovery Widget Topics decide which real conversations reach each page. Learn how to set filters, sentiment, and exclusions so every surface fits.",
+      "content": "#  How to Set Up Discovery Widget Topics for Every Page \n## Start with the page, then choose the filters\n## What each filter changes on the page\n## Treat manual exclusion as a permanent editorial call\n## How ranking and daily refresh handle the rest\n## Where to start"
+    },
     {
       "url": "https://www.social.plus/blog/how-to-ask-better-questions-about-your-first-party-data",
       "metaTitle": "How to Ask Better Questions About Your First-Party Data",
