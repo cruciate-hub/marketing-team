@@ -204,7 +204,7 @@
     "fontFamily": "Figtree",
     "extraRootDeclarations": {
       "color-scheme": "dark",
-      "--font-mono": "\"Geist Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
+      "--font-mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     }
   },
   "pages": [

@@ -1,5 +1,18 @@
 # Changelog
 
+## marketing-team 13.74
+
+Amadeus's two design-system changes made on the Claude Design page come back here, so a re-sync from GitHub can no longer undo them (Stefan, 22 October 2026; `claude-design/SYNC.md`: a change made on the page comes back as a pull request).
+
+**Changes:**
+- Feedback 17 (Amadeus, 16 October 2026): Geist Mono sets only all-caps text, the eyebrow and the short all-caps labels that do its job; code, kbd and API paths use the system monospace; captions, chips and pills use Figtree. Applies to illustrations too. From the page: [`foundations/typography/foundation.md`](design-system/foundations/typography/foundation.md), [`foundations/imagery/foundation.md`](design-system/foundations/imagery/foundation.md), [`sections/README.md`](design-system/sections/README.md), [`claude-design/README.md`](design-system/claude-design/README.md), [`claude-design/tokens.json`](design-system/claude-design/tokens.json) (families `eyebrow` and `mono`), [`sections/framed/framed.css`](design-system/sections/framed/framed.css) (`--font-eyebrow`, `--font-mono`), and the captions and code rule in 13 card previews (accessibility, accordion row, buttons, cards, dividers, form inputs, icons, imagery, logo, rich text, tags, the Frame card and the FAQ border-top section).
+- Feedback 18 (Amadeus, 22 October 2026): a quieter frame. Dark frame lines are neutral-850 (#202022, was neutral-800); the plus markers are 8px with rounded ends (one round-capped path, 1.3px thick), was 11px with square 1px arms. From the page: `claude-design/tokens.json` (`color-frame`, `frame-marker`), `framed.css`, [`foundations/grid-and-frame/foundation.md`](design-system/foundations/grid-and-frame/foundation.md), [`foundations/colors/foundation.md`](design-system/foundations/colors/foundation.md) and the Frame card.
+- [`feedback.md`](design-system/feedback.md): rows 17 and 18, as on the page.
+- Files the page does not show, brought in line with feedback 17 and 18: [`README.md`](design-system/README.md), [`brain.md`](design-system/brain.md), [`capture/pack-README.md`](design-system/capture/pack-README.md) and [`figma/README.md`](design-system/figma/README.md) (the font rule; the plus marker size); [`tokens.css`](design-system/tokens.css) and [`capture/capture.config.json`](design-system/capture/capture.config.json) (`--font-mono` is now the system monospace); [`capture/capture.mjs`](design-system/capture/capture.mjs) and [`capture/foundations.mjs`](design-system/capture/foundations.mjs) (a new capture writes code in the system monospace and captions in Figtree, as the page has them); the captions in the four foundation previews the page does not show (colours, spacing, typography, shadows and radius).
+- [`social-plus-illustration/SKILL.md`](marketing-team/skills/social-plus-illustration/SKILL.md): the one-line summary said "Geist Mono for code and labels"; it now gives the feedback 17 rule. The team gets it with the next kit upload.
+- `capture/claude-design-check.py` against the page (version 1792647354-3d24): 229 match, 0 differ. `claude-design/tokens.json` `meta` is unchanged: the page was not re-synced from here.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.73 -> 13.74.
+
 ## marketing-team 13.73
 
 backlink-placement-finder always stacks the placements, ranks them by partner-article traffic and names a top anchor pick; the packaging question is gone (Stefan, 15 October 2026).
