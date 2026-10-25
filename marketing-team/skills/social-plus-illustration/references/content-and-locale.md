@@ -12,7 +12,7 @@ Only what makes the image understandable: a person's name, a significant button 
 - **Surnames when needed**: Carter, Brooks, Rivera, Nguyen, Patel, Johnson, Kim, Walker, Garcia, Thompson, Lee, Bennett.
 - **Avoid** Scandinavian/Nordic names and spellings (no Lindqvist, Ek, Jonas, Ingrid, å/ä/ö), and real public figures.
 - Mix genders and backgrounds across an image and across posts; don't reuse the last image's name.
-- Names are fictional; say so when delivering.
+- Names are fictional; say so when delivering. Avatar photos come from the Untitled UI library (`avatar-library.md`); never show the library's own names or photographer credits.
 
 ## Conventions
 
