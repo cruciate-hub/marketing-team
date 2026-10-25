@@ -5,7 +5,7 @@ description: "The social.plus illustration system — dark, abstract, UI-led ill
 
 # social.plus illustration system
 
-One visual language for every surface. It shows social.plus's subject — people interacting inside apps — as simplified product UI: dark ground, neutral surfaces, one accent (ultramarine by default), big cropped objects, a trace of people. Surfaces differ in format and treatment, never in language.
+One visual language for every surface. It shows social.plus's subject — people interacting inside apps — as simplified product UI: dark ground, neutral surfaces, one accent (ultramarine by default), big cropped objects, a trace of people (real faces from the avatar library, graded dark). Surfaces differ in format and treatment, never in language.
 
 Other skills build on this one:
 - **blog-thumbnails** — editorial images for blog posts (grain on)
@@ -15,6 +15,7 @@ Other skills build on this one:
 
 - `references/style-spec.md` — palette, type, shapes, recognisable objects, social layer, buttons. Exact values.
 - `references/content-and-locale.md` — words on screen: what may be readable, American names and conventions, no invented facts.
+- `references/avatar-library.md` — **every avatar photo comes from the Untitled UI avatars library in Figma** (file `1u6Vs8rhhxBY3avtWCOjp5`, neutral-grey rows): which people, how to pull them with the Figma MCP, and `scripts/prepare_avatars.py` to cut them out and grade them dark.
 - `references/third-party-logos.md` — when the content is about other companies or technologies (Flutter, chat SDKs…), their official logos go in the image; how to get them and place them.
 - `references/color-accents.md` — **one accent per image, chosen by meaning**: ultramarine for ~70% of images, other brand colors (green, purple, pink, orange, yellow, red) when the topic calls for them, with exact fills, text colors and glows.
 - `references/treatments.md` — **grain is a treatment, not the style.** Editorial work gets grain; product, website and brand work is clean. Decide before building.
@@ -31,7 +32,7 @@ Concept, composition archetype, objects, the position of the accent — and, by 
 1. **Brief** — what is the visual for, where does it live (surface + size, `references/treatments.md` has the table), what is the one point it must make. If a page or post is provided, read all of it, and list the companies and technologies it is about (`references/third-party-logos.md`); ask for their official logo files early.
 2. **Treatment and accent** — editorial (grain) or clean? Which accent color, by meaning and balance (`color-accents.md`)? Say both in one line.
 3. **Ideate** — `references/ideation.md`. Show the idea table compactly, pick 2 concepts that differ in lens, archetype, focal object and accent position.
-4. **Build** — on claude.ai, a Design canvas, one artboard per concept, social.plus design system installed. Start each artboard from `assets/shell.dc.html` (ground, glow, vignette, fonts, optional grain). Upload `assets/fonts/figtree.woff2` and `assets/fonts/geist-mono.woff2` as canvas assets and put their blob ids in the @font-face rules. Set the `grain` prop default to 0.9 for editorial, leave 0 for clean. Name artboards `Concept A — <archetype>: <focal object>`. The shell is sized 1578×888; for another size (e.g. an answer page, 1240×840) change the root, the grain SVGs and the vignette centre to that size.
+4. **Build** — on claude.ai, a Design canvas, one artboard per concept, social.plus design system installed. Start each artboard from `assets/shell.dc.html` (ground, glow, vignette, fonts, optional grain). Upload `assets/fonts/figtree.woff2` and `assets/fonts/geist-mono.woff2` as canvas assets and put their blob ids in the @font-face rules. Set the `grain` prop default to 0.9 for editorial, leave 0 for clean. Avatar photos: pick, pull and prepare them from the library (`references/avatar-library.md`), then upload the JPGs as canvas assets too. Name artboards `Concept A — <archetype>: <focal object>`. The shell is sized 1578×888; for another size (e.g. an answer page, 1240×840) change the root, the grain SVGs and the vignette centre to that size.
 5. **Review** — `references/review-checklist.md`, then present: one line per concept, a recommendation, the trade-off.
 6. **Deliver** — PNG/WebP from the canvas at the surface's sizes, then present the files (with `present_files` on claude.ai; in Claude Code, give the output paths); motion via social-plus-motion.
 

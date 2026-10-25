@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.75
+
+Amadeus's avatar update to the illustration skill, which he uploaded straight to the organization library as marketing-team 14.13.0 on 22 October 2026, comes back here (Stefan, 25 October 2026).
+
+**Changes:**
+- New [`references/avatar-library.md`](marketing-team/skills/social-plus-illustration/references/avatar-library.md): every avatar photo comes from the Untitled UI avatars library in Figma (neutral-grey rows), with the node ids, how to pull faces with the Figma MCP, which avatars get photos (readable size) and which stay grey circles (texture size), at most one large portrait, casting, and that the library's names never appear.
+- New [`scripts/prepare_avatars.py`](marketing-team/skills/social-plus-illustration/scripts/prepare_avatars.py): cuts the person out of the grey background (`rembg`, `u2net_human_seg`) and grades them dark, cool and slightly desaturated onto a dark ground; writes a contact sheet to check them.
+- [`SKILL.md`](marketing-team/skills/social-plus-illustration/SKILL.md), [`style-spec.md`](marketing-team/skills/social-plus-illustration/references/style-spec.md), [`content-and-locale.md`](marketing-team/skills/social-plus-illustration/references/content-and-locale.md) and [`review-checklist.md`](marketing-team/skills/social-plus-illustration/references/review-checklist.md) point to the library (the former "ask the person to drop a photo in the chat" is gone).
+- The six files are byte-identical to the organization's 14.13.0, checked by hash against the version in Organization settings; the other 15 skills in that upload match GitHub (their SKILL.md bodies are identical; only the frontmatter is reformatted by the upload). One line differs on purpose: Amadeus's upload was built from 14.12.0, so `SKILL.md` keeps the feedback 17 font rule from 13.74 ("Geist Mono only for all-caps labels").
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.74 -> 13.75.
+
 ## marketing-team 13.74
 
 Amadeus's two design-system changes made on the Claude Design page come back here, so a re-sync from GitHub can no longer undo them (Stefan, 22 October 2026; `claude-design/SYNC.md`: a change made on the page comes back as a pull request).

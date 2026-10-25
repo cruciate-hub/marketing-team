@@ -57,7 +57,7 @@ Readable prices count as necessary words; use a plausible US placeholder (e.g. $
 
 ## Social layer
 
-Add one quiet social layer to the main object when it fits the concept: a reaction chip (heart filled #B3B3B3) and a comment chip with bar counts, an avatar stack (3 × 44px, -14px overlap, #202022 rings), or a one-line comment preview (36px avatar + two bars on #1A1A1A). All neutral. At most one row of chips plus one comment preview per object.
+Add one quiet social layer to the main object when it fits the concept: a reaction chip (heart filled #B3B3B3) and a comment chip with bar counts, an avatar stack (3 × 44px, -14px overlap, #202022 rings), or a one-line comment preview (36px avatar + two bars on #1A1A1A). Avatars that show a person at readable size are photos from the avatar library (`avatar-library.md`); everything else stays neutral. At most one row of chips plus one comment preview per object.
 
 ## Buttons and pills
 
@@ -73,7 +73,7 @@ Grain is a treatment, not part of the base style — see `treatments.md`.
 
 ## People
 
-Optional, one at most: an avatar portrait (head-and-shoulders, plain/dark background), graded dark, cool, slightly desaturated so it sits in the grain. Photos can't be pulled from Unsplash or similar sites from the chat (network allow-list); ask the person to drop the image in the chat, then upload it as a canvas or film asset. Until a photo is supplied, use a grey gradient circle placeholder (`linear-gradient(160deg, #939497, #414347)`). Placeholder names are fictional and American (see `content-and-locale.md`); say so when delivering.
+Every avatar photo comes from the Untitled UI avatars library in Figma: never stock sites, AI faces, public figures, staff or customers. `avatar-library.md` has the file, which rows to use, and how to pull, cut out and grade the photos (`scripts/prepare_avatars.py`): head-and-shoulders on a dark ground, graded dark, cool and slightly desaturated so they sit in the grain. Photos for every avatar that shows a person at readable size (authors, member rows, comment previews, stacks, cursor owners); at most one large portrait (about 160px or more) per image. Grey gradient circles (`linear-gradient(160deg, #939497, #414347)`) only for texture-level avatars (pattern walls, under ~40px) and as placeholders while photos are prepared. The library's names never appear: on-screen names are fictional and American (see `content-and-locale.md`); say so when delivering.
 
 ## Never
 
