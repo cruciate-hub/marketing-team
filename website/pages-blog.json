@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-22T10:10:15.323Z",
-    "itemCount": 269,
+    "generatedAt": "2026-10-26T05:12:43.406Z",
+    "itemCount": 270,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/in-app-social-proof-where-to-place-real-conversations-2",
+      "metaTitle": "In-App Social Proof: Where to Place Real Conversations ",
+      "metaDescription": "In-app social proof works when each page gets the right conversations. A page-by-page playbook for homepages, product pages, categories, and more.",
+      "content": "# In-App Social Proof: Where to Place Real Conversations \n## Homepage: show the app is active from the first screen\n## Product pages: put real experiences next to the product\n## Category pages: make browsing feel populated\n## Pages users return to: give them a reason to look again\n## Brand-curated surfaces: blend official voices with organic activity\n## Decide where every tap goes\n## Building on your own front end, and measuring what works\n## Choosing your first placement"
+    },
     {
       "url": "https://www.social.plus/blog/how-to-set-up-discovery-widget-topics-for-every-page-2",
       "metaTitle": " How to Set Up Discovery Widget Topics for Every Page ",
