@@ -9,7 +9,7 @@ Each line comes from real feedback on earlier work.
 - **Balanced?** The focal object sits near the optical centre unless the archetype says otherwise. Crop through shapes, not empty space.
 - **Tight?** Buttons and pills hug their content with even padding; a button leaving the frame is cut through its fill.
 - **One accent, the right one?** Exactly one accent element, in the color its meaning calls for (`color-accents.md`), glow matching; recent balance respected (≈70% ultramarine). No grey copy of the accent action elsewhere.
-- **People?** Avatars that show a person are photos from the Untitled UI library, cut out and graded with `scripts/prepare_avatars.py` (no grey halos or holes, dark cool grade), at most one large portrait, faces varied from the recent images; grey circles only at texture size (`avatar-library.md`).
+- **People?** Avatars that show a person are photos from the design system's Avatars group, used as they are (no extra filters, borders or glows), at most one large portrait, faces varied from the recent images; grey circles only at texture size (`avatar-library.md`).
 - **Words?** Only necessary words; names American and fictional; prices in USD; no invented numbers (`content-and-locale.md`).
 - **Logos?** Every company or technology the content is about is shown with its official logo (never redrawn), monochrome on a neutral tile where possible, equal weight when compared; missing logos are flagged, not faked.
 - **Treatment?** Grain on for editorial, off for everything else (`treatments.md`).

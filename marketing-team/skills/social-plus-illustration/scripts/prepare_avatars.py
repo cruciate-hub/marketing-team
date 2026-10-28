@@ -6,7 +6,7 @@ Input: PNG screenshots of `_Avatar image` instances from the library's neutral-g
 Output: avatars/<name>.jpg, 320x320 — the person cut out of the grey background and graded
 dark, cool and slightly desaturated onto a dark ground — plus avatars_sheet.png for a visual check.
 
-Usage: python3 prepare_avatars.py avatars_raw/ avatars/ [--hair-fix name1,name2]
+Usage: python3 prepare_avatars.py avatars_raw/ avatars/ [--hair-fix name1,name2] [--model birefnet-portrait]
 Needs: pip install rembg pillow numpy scipy  (rembg downloads the u2net_human_seg model on first run)
 See references/avatar-library.md.
 """
@@ -67,9 +67,10 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('src_dir'); p.add_argument('out_dir')
     p.add_argument('--hair-fix', default='', help='comma-separated names (file stems) with curly or loose hair')
+    p.add_argument('--model', default='u2net_human_seg', help='rembg model; birefnet-portrait for hair the default leaves grey in (about 14 GB of memory)')
     o = p.parse_args()
     from rembg import new_session
-    session = new_session('u2net_human_seg')
+    session = new_session(o.model)
     hair = {n.strip() for n in o.hair_fix.split(',') if n.strip()}
     os.makedirs(o.out_dir, exist_ok=True)
     names = sorted(os.path.splitext(f)[0] for f in os.listdir(o.src_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')))
