@@ -18,7 +18,7 @@ The faces live **only** in the design system. The marketing-team GitHub reposito
 
 ## How to use them
 
-1. **Read** the design system's Avatars card, `project/api/assets/Avatars.md`, and `project/assets/Avatars/README.md` (`Artifact` `read` with `path`, on the design system url).
+1. **Read** the design system's Avatars card, `project/api/assets/Avatars.md`, and `project/assets/Avatars/README.md` (`Artifact` `read` with `path`, on the design system url). If the card is not there yet (the page generates it), take the ids from the index, `project/design-system.json`, under `assetGroups.Avatars.files` (`<name>.jpg` → `blob`).
 2. **Pick** faces by the casting notes (mood, portrait OK, the notes column), mixing genders, ages and looks. Avoid the faces used in the most recent thumbnails (look at the avatars on the recent canvases during the variety check).
 3. **Copy** them into the canvas with the `Artifact` tool: `publish`, `asset: true`, `url` = the canvas, `from_url` = the design system url, `asset_ids` = the chosen ids from the card (up to 10 per call). Nothing is downloaded or re-uploaded.
 4. **Use** the returned `/_blob/<id>` urls in the markup (below). Never the design system's own ids: they only resolve on the design system.
