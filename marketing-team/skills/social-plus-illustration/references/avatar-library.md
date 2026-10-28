@@ -4,7 +4,7 @@ Every avatar photo in a social.plus illustration comes from one source, the grad
 
 ## The library
 
-The set lives in the social.plus design system (https://claude.ai/artifact/EtY7zLfKmoKRJVTpVjPAm7; `Artifact` `list` with `type` "Design System" finds it too), in its **Avatars** asset group: 37 people, each `<name>.jpg`, 320×320, already cut out of the grey background and graded dark, cool and slightly desaturated onto a dark ground. The group's card (`project/api/assets/Avatars.md`) lists every file with its asset id; `project/assets/Avatars/README.md` holds the rules and the casting notes (look, mood, which faces may be a large portrait). The file names are fictional first names, safe to use as on-screen names.
+The set lives in the social.plus design system (https://claude.ai/artifact/EtY7zLfKmoKRJVTpVjPAm7; `Artifact` `list` with `type` "Design System" finds it too), in its **Avatars** asset group: graded faces, each `<name>.jpg`, 320×320, already cut out of the grey background and graded dark, cool and slightly desaturated onto a dark ground. The group's card (`project/api/assets/Avatars.md`) lists every file with its asset id; `project/assets/Avatars/README.md` holds the rules and the casting notes (look, mood, which faces may be a large portrait). The file names are fictional first names, safe to use as on-screen names.
 
 The faces live **only** in the design system. The marketing-team GitHub repository is public: never commit the faces, the source photos or a contact sheet to it.
 
