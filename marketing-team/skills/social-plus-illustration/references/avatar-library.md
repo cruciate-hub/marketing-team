@@ -44,7 +44,7 @@ Only when the set needs more people. Not part of making an image.
 - Review every face on magenta at 3x inside the 132% circle crop: no grey halos, no holes, no cut-off hair or ears.
 - Settings may differ per face: `--hair-fix` for curly or loose hair, `--model birefnet-portrait` where the default model leaves grey in the hair (it needs about 14 GB of memory).
 - Never share, commit or back up the source photos.
-- New faces go **only** into the design system's Avatars group (upload, add the record to the index, add a casting row to `assets/Avatars/README.md`). Never into the marketing-team repository: it is public.
+- New faces go **only** into the design system's Avatars group (upload, add the record to the index, add a casting row to the design system's `project/assets/Avatars/README.md`). Never into the marketing-team repository: it is public.
 
 ### The source library
 
