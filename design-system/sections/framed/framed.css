@@ -2239,3 +2239,6 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .nav .nav_bar::before { left: calc(var(--frame-marker) / -2 - 0.5px); }
 .nav .nav_bar::after { right: calc(var(--frame-marker) / -2 - 0.5px); }
 @media (max-width: 991px) { .nav .nav_bar::before, .nav .nav_bar::after { top: calc(4rem - var(--frame-marker) / 2 + 0.5px); } }
+
+/* Platform marks are white (feedback 20, Amadeus 2026-10-27): the icon tile colours icons link blue, platform and language marks stay text colour. */
+.icon-tile .platform-mark, .icon-tile svg.platform-mark { color: var(--color-text); }

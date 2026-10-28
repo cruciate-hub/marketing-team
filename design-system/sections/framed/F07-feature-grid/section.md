@@ -11,7 +11,7 @@ Three, four, six or eight features in frame cells on whole columns, under a sect
 A set of short benefits or features with an icon each ("Your team asks. Your first-party data answers."). Use this, not a card grid, inside the frame.
 
 ## Variants and behaviour
-Variants: centred header with six features in three columns; split header with three linked features. 3 or 6 cells in thirds, 4 or 8 in quarters, complete rows only.
+Variants: centred header with six features in three columns; split header with three linked features. 3 or 6 cells in thirds, 4 or 8 in quarters, complete rows only. Linked cells end in one tertiary button with an arrow; SDK cards carry two, "Learn more →" and "Docs ↗", as on the live site (feedback 21).
 
 ## Rules
 - A framed section sits on the frame: framed sections only on that page, never a captured section and never a captured section wrapped in the frame (Grid and frame section).

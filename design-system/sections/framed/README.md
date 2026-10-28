@@ -9,7 +9,7 @@ The section set on the web library's frame (Amadeus, decision 8 October 2026): 2
 
 ## The rule
 
-A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Framed or current (captured) is chosen per page by the person who asks for it; when the request does not say, ask before building: "Current Webflow look or the new framed design?" (decision: Stefan, 12 October 2026). Framed recipes exist today for `../recipes/product-landing-framed.md`, `../recipes/industry-page-framed.md` and `../recipes/vs-framed.md`, next to their current versions; other page types exist only in the current look.
+A page is framed or captured, never both. A framed page uses only framed sections, on one frame from the navigation to the footer; a captured section is never wrapped in the frame. Framed or current (captured) is chosen per page by the person who asks for it; when the request does not say, ask before building: "Current Webflow look or the new framed design?" (decision: Stefan, 12 October 2026). Framed recipes exist today for `../recipes/product-landing-framed.md`, `../recipes/industry-page-framed.md`, `../recipes/vs-framed.md` and `../recipes/sdk-hub-framed.md` (interim: current nav, sub-nav and footer, hero outside the frame; feedback 22), next to their current versions; other page types exist only in the current look.
 
 - The framed navigation (F01) and footer (F16) keep the live site's content (`../global/nav/`, `../global/footer/`): the same links, labels, legal text and social links. Only the layout is new. Content the library added on its own does not ship (`../../feedback.md` item 10).
 - Buttons are the live site's (`../../foundations/buttons/`), not the library's: `framed.css` restyles `.button`, `.is-secondary` and `.is-tertiary` with the same markup (`../../feedback.md` item 14).
@@ -43,7 +43,7 @@ A page is framed or captured, never both. A framed page uses only framed section
 | F22 | Pricing | Conversion | 60 Plan cards, 62 Additional fees |
 | F23 | Contact form | Conversion | 24 Form section, the form of 53 |
 
-Not framed yet, so these page types exist only in the current look: product and SDK pages (no framed sub-nav, G2), blog posts, answers, glossary entries and customer stories (no framed article body, 40 to 43; F17 covers only their header), and the pricing compare table (61). A framed version of these is proposed first, like any new section.
+Not framed yet, so these page types exist only in the current look: product pages and single-platform SDK pages (no framed sub-nav, G2; the SDK hub has an interim framed recipe that keeps the current sub-nav), blog posts, answers, glossary entries and customer stories (no framed article body, 40 to 43; F17 covers only their header), and the pricing compare table (61). A framed version of these is proposed first, like any new section.
 
 ## Known points (TO CHECK)
 
