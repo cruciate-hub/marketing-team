@@ -122,6 +122,8 @@ If anything fails — clone error, missing file, empty content, or wrong format:
 
 3. Follow the design system router's instructions — it tells you which files to fetch for the task: `design-system/tokens.css` and the foundations for any visual output, plus `design-system/sections/README.md`, the recipes and the `section.md` and `source.html` of each section for website pages. Read `design-system/README.md` when you need the structure.
 
+   Photos of people (avatars) come only from the design system's Avatars asset group; read `marketing-team/skills/social-plus-illustration/references/avatar-library.md` before using any.
+
 4. If the output includes any text content (headings, labels, CTAs, descriptions), also fetch `messaging/brain.md`.
 
 5. Before delivering, run the compliance check from the main brain.
