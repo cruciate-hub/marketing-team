@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.77
+
+What the first redesign page (/social/sdk, the "Social SDK framed" Claude Design canvas, v6) taught the design system, with Amadeus's notes of 27 October and Stefan's of 27 and 28 October 2026.
+
+**Changes:**
+- New recipe [`sections/recipes/sdk-hub-framed.md`](design-system/sections/recipes/sdk-hub-framed.md): the SDK hub page framed, interim (current nav, sub-nav and footer; hero outside the frame), with the UI ↔ code slider visual and photos as editable slots. Also in [`claude-design/10-recipes.md`](design-system/claude-design/10-recipes.md); [`sections/framed/README.md`](design-system/sections/framed/README.md) lists it.
+- [`feedback.md`](design-system/feedback.md) items 19 to 22: buttons always carry the arrow circle; platform marks are white; SDK cards keep "Learn more" and "Docs"; current nav, sub-nav and footer with an unframed hero until the framed global sections ship.
+- [`sections/framed/framed.css`](design-system/sections/framed/framed.css): platform marks in icon tiles use the text colour, not link blue (feedback 20). [`F07-feature-grid/section.md`](design-system/sections/framed/F07-feature-grid/section.md) names the linked cells and the two-link SDK card.
+- Proposed section "CTA with routes" ([`sections/proposals/2026-10-27-cta-routes.md`](design-system/sections/proposals/2026-10-27-cta-routes.md), also in [`claude-design/12-proposals.md`](design-system/claude-design/12-proposals.md)): Amadeus asked for a better CTA for all pages; waits for approval.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.76 -> 13.77.
+
 ## marketing-team 13.76
 
 Avatar photos come from the design system instead of Figma, which is blocked in Design canvas sessions (Stefan, 28 October 2026, #76).
