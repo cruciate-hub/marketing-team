@@ -1,5 +1,15 @@
 # Changelog
 
+## marketing-team 13.76
+
+Avatar photos come from the design system instead of Figma, which is blocked in Design canvas sessions (Stefan, 28 October 2026, #76).
+
+**Changes:**
+- [`references/avatar-library.md`](marketing-team/skills/social-plus-illustration/references/avatar-library.md): faces are copied from the design system's Avatars asset group (37 graded faces) by asset id, with the index as fallback for the ids; read back one at a time for export. The Figma steps moved unchanged to "Adding new faces (maintenance only)". The faces are never stored in this public repo.
+- [`scripts/prepare_avatars.py`](marketing-team/skills/social-plus-illustration/scripts/prepare_avatars.py): `--model` option, default unchanged.
+- [`SKILL.md`](marketing-team/skills/social-plus-illustration/SKILL.md), [`style-spec.md`](marketing-team/skills/social-plus-illustration/references/style-spec.md), [`review-checklist.md`](marketing-team/skills/social-plus-illustration/references/review-checklist.md), [`content-and-locale.md`](marketing-team/skills/social-plus-illustration/references/content-and-locale.md), [`blog-thumbnails/SKILL.md`](marketing-team/skills/blog-thumbnails/SKILL.md), the [`design-system`](marketing-team/skills/design-system/SKILL.md) skill and [`foundations/imagery/foundation.md`](design-system/foundations/imagery/foundation.md) point to the Avatars group.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.75 -> 13.76.
+
 ## marketing-team 13.75
 
 Amadeus's avatar update to the illustration skill, which he uploaded straight to the organization library as marketing-team 14.13.0 on 22 October 2026, comes back here (Stefan, 25 October 2026).
