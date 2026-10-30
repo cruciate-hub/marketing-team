@@ -27,4 +27,4 @@ Every button and text link on the site is a component instance. A design (Claude
 - Grey secondary → `Button / Tertiary` (props: Text, Link, Show arrow icon)
 - Inline text link → `Buttons / Text Link` (variants White, Blue)
 - Arrow glyph → `Icon / Arrow`; external-link glyph → `Icon / External link`
-External links: open in a new tab with `rel="noopener"`, and an aria-label that says "(opens in a new tab)" when the visible text doesn't name the destination.
+External links: open in a new tab (in Webflow: "open in new tab" only, no `rel` value, which Webflow would publish as a stray `<link>` element; browsers apply noopener to new-tab links), and an aria-label that says "(opens in a new tab)" when the visible text doesn't name the destination.

@@ -398,7 +398,7 @@ Icon fonts are a legacy of the AI page family (page-level head code). The design
 
 ### 66. Links built by whtml keep raw `href` attributes and open in the same tab
 **Symptom:** after the build each link has both a `link` setting and a leftover `href` attribute; external links have no `target`/`rel`.
-**Fix:** per link, `set_settings` key `link` with `static_link {mode:"url", to, open_in_new_tab:true, rel:"noopener"}`, then `remove_attribute ["href","rel","target"]`, then `set_attributes` aria-label. Batch all links in one call.
+**Fix:** per link, `set_settings` key `link` with `static_link {mode:"url", to, open_in_new_tab:true}` (no `rel`, see Pitfall 74), then `remove_attribute ["href","rel","target"]`, then `set_attributes` aria-label. Batch all links in one call.
 
 ### 67. Hardcoded hex in new classes instead of variables
 A rebuild that looks right can still be rejected: every colour in the `fr-` classes was a hex literal. Bind with `update_style` + `variable_as_value`; create missing tokens first. `-webkit-text-fill-color` refuses variables ("does not support setting a variable of type color") — set it to `currentColor`. `update_font_family_variable` with `custom_value` (to add a monospace fallback) returns an internal error; the variable keeps Webflow's default `sans-serif` fallback.
@@ -420,3 +420,15 @@ Its root is a div; only the nested `Button / Tertiary` is a link, its text is bo
 
 ### 73. No existing grid does 4 → 2 columns on tablet
 `grid-4` is 4/4/2/1, `industry-grid-4` 4/3/2/2, `c-card_grid-4` is 2 columns. Stefan decides the tablet column count per page, by content (2 or 4). Don't override the shared class (site-wide blast radius, Pitfall 18) and don't add a combo silently: ask him.
+
+### 74. A `rel` on a Webflow link renders as a stray `<link>` element
+Setting `rel: "noopener"` in `static_link` or a link prop made Webflow publish `<a … target="_blank">…</a><link rel="noopener" href="…"/>` after every link (10 on the Developer Portal, 31 Oct 2026): invalid in the body and noise for crawlers. Set `open_in_new_tab: true` and no `rel`; browsers apply noopener to `target="_blank"` themselves. To clear an existing one, re-set the whole link without `rel`.
+
+### 75. Most social.plus pages have no `<main>` and two banner `<header>`s
+Only the homepage had a `<main>` (31 Oct 2026; /social/sdk, /pricing, /chat/sdk had none, plus a page `<header>` next to the nav's, which makes two banner landmarks). On every page you build, wrap the content between nav and footer in one `main` (`BY_CUSTOM_TAG` `main`, then `move_element`); a `header` inside `main` is no longer a banner. The other pages are a site-wide fix for Stefan to schedule, not a side task.
+
+### 76. `Icon / External link` shipped `width="currentWidth" height="currentHeight"`
+Invalid attribute values on a site-wide component (8 per SDK page). Removed on 31 Oct 2026; `.icon-small` sizes it. When reusing an icon component, read its attributes once.
+
+### 77. Headless screenshots of the staging page can capture it unstyled
+The first load sometimes paints before the Webflow CSS: wait for `load` plus ~2.5s (or for a styled computed value) before measuring; hide the sticky nav and the cookie banner before a crop.

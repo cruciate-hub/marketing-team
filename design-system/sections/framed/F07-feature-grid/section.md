@@ -22,3 +22,5 @@ Variants: centred header with six features in three columns; split header with t
 ## Accessibility and mobile
 - Headings in order (one `<h1>` per page, in the hero); frame lines, markers and hatched bands are decorative.
 - Cells collapse to two columns under 992px and one under 480px; splits stack with a frame line between. Rendered at 390px: no sideways scroll.
+
+In Webflow (Developer Portal, 31 Oct 2026): linked cells lighten one step on hover and show a focus ring; the cell grid is a list (`role="list"` / `role="listitem"`); the section closes with a full-width bottom rule and bottom + markers.
