@@ -28,7 +28,7 @@ A design board shows how a page LOOKS; the site's components and conventions dec
 **Existing first, native second, code last.** Reuse the site's classes, components and variables; where something genuinely new is needed, make it a native Style record; code only for what Webflow can't express. `data_whtml_builder` builds **structure only** (DOM, tags, text, existing class names) — styling happens with `data_style_tool`.
 
 ## Build gates (adopted from Webflow's official build skill, 30 Oct 2026 — fail one → stop and fix or ask)
-Decisions with their social.plus defaults (state them in one line at the start; ask Stefan only to deviate): **naming** = the site's existing classes (never FlowKit, never a new prefix); **variables** = existing variables, add a missing token only per rule 5; **units** = match the class you reuse (the site uses rem); **build mode** = headless Data API, Designer snapshots only if the tab is open.
+Decisions with their social.plus defaults (state them in one line at the start; ask Stefan only to deviate): **naming** = the site's existing classes (never FlowKit, never a new prefix); **variables** = existing variables, add a missing token only per rule 5; **units** = rem, always (Stefan: "we work in REM in Webflow"; convert design px at 16px = 1rem; px only for 1px hairlines and borders); **build mode** = headless Data API, Designer snapshots only if the tab is open.
 - **Native style gate:** no `css` param in `data_whtml_builder` for normal styling — it lands in Custom properties instead of Style-panel controls. Styles go through `data_style_tool` (`create_style`/`update_style`, longhand properties, `variable_as_value` for tokens).
 - **Class existence gate:** every class in whtml/`set_style` must already exist as a Style record (query it first); whtml can silently drop unknown class names. A new class is created with `create_style` before the whtml call — and only after Stefan approved it (rule 6).
 - **Visible element gate:** no `::before`/`::after` or embed `<style>` for layout or decoration — invisible in the Navigator and unselectable. Decorative lines/markers are real elements with native classes, or left out.
@@ -134,6 +134,7 @@ When "pixel-identical to the design reference" is the actual bar — not "a fait
 - [ ] No `css` param in any whtml call; styles via `data_style_tool`; every colour/font bound to a variable (no hex in a class).
 - [ ] Buttons, icons, nav/footer = component instances; cards/links per rule 2 (one Link Block, new tab + aria-label for external).
 - [ ] No raw `href` attribute; every inline SVG has `aria-hidden` + `focusable`; no `::before`/`::after`, no new HtmlEmbed.
+- [ ] Every size you wrote is in rem (px only for 1px borders).
 - [ ] Responsive checked at medium/small/tiny; framed grids close at the bottom.
 - [ ] Staging published, HTML/CSS verified, screenshot taken; or, when the task says no publish, every unverified visual listed (columns per breakpoint, card padding, hover, contrast). Production untouched.
 - [ ] Heading levels follow the page outline (one h1; section titles h2), not the design board's tags.
