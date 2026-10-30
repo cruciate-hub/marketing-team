@@ -57,4 +57,4 @@ The class names are the web library's (Client-First: `section_[name]`, `padding-
 
 ## In Webflow (social.plus site)
 
-Build with the site's existing layout classes (`section padding_Y > page-padding > container-large`, grids such as `developer-portal_grid`, cards from `Card / Button` / `card-v1`). Never add a parallel class set for the frame. Frame lines and markers are not in the site's class system yet: adding them is a decision for Stefan, proposed before any class is created.
+Build with the site's existing layout classes (`section padding_Y > page-padding > container-large`, grids such as `developer-portal_grid`, cards from `Card / Button` / `card-v1`). Never add a parallel class set for the frame. Frame lines and markers use the modifiers approved on the Developer Portal (31 Oct 2026): `c-framed` on the section, `container-large` and `grid-4`, `frame-marker` (+ `is-right`) for the plus markers, `c-cell` on `card-v1`, `c-tile` on `card-icon-v2`. Never add a parallel set; anything new is proposed to Stefan first.
