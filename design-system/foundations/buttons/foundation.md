@@ -19,3 +19,12 @@ Primary, secondary and text link from the style guide, plus the form submit butt
 - `.button_open-pop-up` (AWS and pricing pop-ups, 13 uses) is a fourth style and its `:active` uses a deleted variable (rewritten to #04be8c in the capture)
 - Secondary button class names (`.c-grey`, `.c-white`) do not describe what they render
 - The focus ring is the browser default on buttons (TO CHECK: the nav sets a 2px white ring)
+
+## In Webflow: use the components, never rebuild a button
+Every button and text link on the site is a component instance. A design (Claude Design board, Figma, framed library) only shows the look; the build always uses these:
+- Primary blue, any non-sales destination → `Button / Primary` (props: Button text, Link; aria-label bound to the text)
+- Primary blue, sales destination → `Button / Talk to Sales` (carries the `talk_to_sales_button_click` id the click tracking listens for, so only for sales CTAs)
+- Grey secondary → `Button / Tertiary` (props: Text, Link, Show arrow icon)
+- Inline text link → `Buttons / Text Link` (variants White, Blue)
+- Arrow glyph → `Icon / Arrow`; external-link glyph → `Icon / External link`
+External links: open in a new tab with `rel="noopener"`, and an aria-label that says "(opens in a new tab)" when the visible text doesn't name the destination.

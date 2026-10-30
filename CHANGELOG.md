@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.78
+
+Lessons from the Developer Portal rebuild in Webflow (30 October 2026): the build invented its own classes, buttons and card component instead of reusing the site's, and Stefan rejected it. Also sets which skills to use for website pages.
+
+**Changes:**
+- [`claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): new "Where this skill sits" (the only build skill for website pages; Claude Design → Webflow only, a Figma detour goes back into Claude Design first); "Site conventions first" rules (component mapping, link and SVG attributes, colours as variables, reuse the site's class system with Stefan's Developer Portal header as the reference pattern); build gates adopted from Webflow's official build skill (styles via `data_style_tool`, not the whtml `css` param; class existence; no `::before`/`::after` decoration; vector, CSS, capability, verification and publish gates); a checklist before declaring done. Old advice to style through the whtml `css` param and to invent per-page class sets removed.
+- [`references/pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): Part 12, pitfalls 64 to 70 (hand-built buttons, duplicated component ids, raw whtml hrefs, hex instead of variables, `:focus-visible` in whtml, image-prop values, inventing a parallel class system).
+- Design system: [`buttons`](design-system/foundations/buttons/foundation.md), [`icons`](design-system/foundations/icons/foundation.md), [`colors`](design-system/foundations/colors/foundation.md) and [`grid-and-frame`](design-system/foundations/grid-and-frame/foundation.md) foundations gain an "In Webflow" section (components, variables, existing layout classes).
+- [`CLAUDE.md`](CLAUDE.md): "Website pages: which skills to use".
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.77 -> 13.78. `claude-design-to-webflow` also ships in web-dev: bump `WD_VERSION` when building.
+
 ## marketing-team 13.77
 
 What the first redesign page (/social/sdk, the "Social SDK framed" Claude Design canvas, v6) taught the design system, with Amadeus's notes of 27 October and Stefan's of 27 and 28 October 2026.

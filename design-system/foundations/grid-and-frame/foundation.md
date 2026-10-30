@@ -54,3 +54,7 @@ The class names are the web library's (Client-First: `section_[name]`, `padding-
 - The art panel is the only gradient surface and sits only behind a product visual. No glow, no shadow on the visual inside it.
 - Frame lines, markers and bands are decorative (no contrast requirement, `aria-hidden` on the band); they carry no meaning.
 - Mobile: the frame lines stay on the gutter edges; cells collapse to 2 columns on tablets and 1 on phones; splits stack with a line between.
+
+## In Webflow (social.plus site)
+
+Build with the site's existing layout classes (`section padding_Y > page-padding > container-large`, grids such as `developer-portal_grid`, cards from `Card / Button` / `card-v1`). Never add a parallel class set for the frame. Frame lines and markers are not in the site's class system yet: adding them is a decision for Stefan, proposed before any class is created.
