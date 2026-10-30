@@ -416,7 +416,7 @@ The Developer Portal rebuild created `fr-hero`, `fr-padding`, `fr-container`, `f
 Its root is a div; only the nested `Button / Tertiary` is a link, its text is bound to the Title prop (the title shows twice) and its Aria-label prop is bound to nothing. For a whole-card link build a Link Block with `card-v1` + `c-outline` and the inner classes in SKILL.md rule 6. (Found by the skill test run, 30 Oct 2026.)
 
 ### 72. Class names go stale, and some exist several times
-`developer-portal_grid` existed in the morning of 30 Oct 2026 and was gone by the afternoon; a skill or memory that names a class is a hint, not proof. Confirm by exact-name `query_styles` before using it. `text-size-small` exists as FOUR global records with the same name (only `e87574c4…` has properties: 1rem / 1.4); don't create a fifth, and flag duplicates to Stefan.
+`developer-portal_grid` existed in the morning of 30 Oct 2026 and was gone by the afternoon: Webflow purges a class automatically once nothing uses it (removing a section or unregistering a component deleted all 19 `fr-` classes in one go, so `remove_style` afterwards reports "not found"); a skill or memory that names a class is a hint, not proof. Confirm by exact-name `query_styles` before using it. `text-size-small` exists as FOUR global records with the same name (only `e87574c4…` has properties: 1rem / 1.4); don't create a fifth, and flag duplicates to Stefan.
 
 ### 73. No existing grid does 4 → 2 columns on tablet
-`grid-4` is 4/4/2/1, `industry-grid-4` 4/3/2/2, `c-card_grid-4` is 2 columns. When the design wants 2 on tablet, don't override the shared class (site-wide blast radius, Pitfall 18) and don't add a combo silently: ask Stefan.
+`grid-4` is 4/4/2/1, `industry-grid-4` 4/3/2/2, `c-card_grid-4` is 2 columns. Stefan decides the tablet column count per page, by content (2 or 4). Don't override the shared class (site-wide blast radius, Pitfall 18) and don't add a combo silently: ask him.
