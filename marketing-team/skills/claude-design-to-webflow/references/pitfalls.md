@@ -410,4 +410,13 @@ Only `:hover`, `:focus`, `:active` are accepted. Build without it, then add the 
 `set_component_instance_prop_values` has no image type: pass `type: "string"`, `string_value: "<assetId>"`. SVG icons uploaded via `create_asset` + S3 POST bind fine; clear the asset alt (`update_asset alt_text: null`) for decorative icons. Webflow publishes link props with `target="_blank"` but drops the `rel` value — browsers imply `noopener` for `_blank`, so this is acceptable.
 
 ### 70. Inventing a parallel class system instead of reusing the site's
-The Developer Portal rebuild created `fr-hero`, `fr-padding`, `fr-container`, `fr-grid`, `fr-card`, … plus a new `Card / Resource` component, while the site already had `section padding_Y > page-padding > container-large > container-heading`, `superscript`, `button-group`, `developer-portal_grid`, `card-v1`/`Card / Button` and spacing/text utilities. Stefan rebuilt the header himself with the existing classes as the reference. Rule: the design board decides the look, the site's existing classes and components decide the build; map board → existing class first (SKILL.md rule 6), propose any genuinely new class to Stefan before creating it.
+The Developer Portal rebuild created `fr-hero`, `fr-padding`, `fr-container`, `fr-grid`, `fr-card`, … plus a new `Card / Resource` component, while the site already had `section padding_Y > page-padding > container-large > container-heading`, `superscript`, `button-group`, `grid-4`, `card-v1` and spacing/text utilities. Stefan rebuilt the header himself with the existing classes as the reference. Rule: the design board decides the look, the site's existing classes and components decide the build; map board → existing class first (SKILL.md rule 6), propose any genuinely new class to Stefan before creating it.
+
+### 71. `Card / Button` is not a clickable card
+Its root is a div; only the nested `Button / Tertiary` is a link, its text is bound to the Title prop (the title shows twice) and its Aria-label prop is bound to nothing. For a whole-card link build a Link Block with `card-v1` + `c-outline` and the inner classes in SKILL.md rule 6. (Found by the skill test run, 30 Oct 2026.)
+
+### 72. Class names go stale, and some exist several times
+`developer-portal_grid` existed in the morning of 30 Oct 2026 and was gone by the afternoon; a skill or memory that names a class is a hint, not proof. Confirm by exact-name `query_styles` before using it. `text-size-small` exists as FOUR global records with the same name (only `e87574c4…` has properties: 1rem / 1.4); don't create a fifth, and flag duplicates to Stefan.
+
+### 73. No existing grid does 4 → 2 columns on tablet
+`grid-4` is 4/4/2/1, `industry-grid-4` 4/3/2/2, `c-card_grid-4` is 2 columns. When the design wants 2 on tablet, don't override the shared class (site-wide blast radius, Pitfall 18) and don't add a combo silently: ask Stefan.
