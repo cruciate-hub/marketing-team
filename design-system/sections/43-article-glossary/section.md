@@ -13,7 +13,7 @@ The body of every glossary entry, after the title header (04).
 Answers, blog posts (40).
 
 ## Content slots
-- Table of contents: the entry's h2 headings as links (built by a script on the live site, Finsweet TOC; the links present in the HTML are kept)
+- Table of contents: the entry's h2 headings as links (built by a script on the live site, Finsweet TOC; the links present in the HTML are kept). Styled exactly like the blog article's table of contents (40-article), since 31 Oct 2026
 - Body `.rich-text`: definition first (h2 "What is …?"), then the fixed sections of the glossary format, tables allowed
 - Bottom: related terms (TO CHECK)
 

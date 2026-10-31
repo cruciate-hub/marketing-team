@@ -17,7 +17,7 @@ Customer stories (41 + 42), glossary entries (04 + 43), marketing pages.
 - Intro paragraph `.blog-intro-paragraph` (blog), hero image (blog, answers)
 - Body: `.rich-text.c-blog` (blog), `.rich-text` (tutorials, news), `.answers_rich-text` (answers), `.product-update_rich-text` (updates, release notes): h2, h3, p, lists, blockquote, images, tables, links
 - Aside (blog): table of contents and a webinar or CTA tile; the table of contents is built by a script on the live site and is empty in source.html (TO CHECK)
-- Table of contents reading-progress bar: white (#ffffff) on the grey track, never brand blue (Stefan, 31 Oct 2026; live on blog, Trust, glossary and product updates)
+- Table of contents, one style on every page (Stefan, 31 Oct 2026; the /trust board on the Claude Design canvas is the reference; live on blog, Trust, glossary and product updates): header 1rem 1.25rem padding, #232324 (`--border--border-dark`) with a 1px white left line, 14px bold uppercase, 1px letter-spacing; a 1px #232324 track beside the list with a white reading-progress bar (never brand blue); list on the page background, 1px #232324 lines between items and on the right and bottom, 8px bottom-right radius; links 14px white, 0.75rem 1.25rem 0.75rem 1rem padding, hover #B3B3B3, current item bold; h3 items indented 2.75rem with a ↳. The CSS is the same in every `toc-embed`; only the aside fade class differs (`blog-aside` or `product-update_aside`)
 - Bottom: share row (blog), tags
 
 ## Allowed variations
