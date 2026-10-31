@@ -438,3 +438,6 @@ The first load sometimes paints before the Webflow CSS: wait for `load` plus ~2.
 
 ### 79. The table of contents is Slater's "TableOfContents" script, page-gated
 The TOC markup and its CSS live in the `toc-embed` HtmlEmbed on the blog template (inside `.blog-aside > .toc-sticky`); the script is Slater file `https://slater.app/15116/45787.js`, which Slater only loads on detail_blog, detail_answers, detail_glossary and detail_product-update. On any other page copy the blog embed's code verbatim and add `<script src="https://slater.app/15116/45787.js" defer></script>` to it (`defer` matters: the embed sits before the article in the DOM). The script needs a real `.w-richtext` (Pitfall 78), `#toc-list`, and `.blog-aside` (it fades the aside in).
+
+### 80. A hover on a shared cell combo lights up cells that are not links
+The first framed grid put the hover on `c-cell` itself, which was fine while every cell was a link (Developer Portal). Reusing `c-cell` for the Trust certifications (plain divs) gave them a hover with nothing to click. Keep interaction states off a layout combo: `card-v1 c-cell` is the static cell, `card-v1 c-cell c-clickable` adds the hover and focus ring and goes only on Link Blocks. Before reusing any class, check its `:hover`/`:focus-visible` pseudos and whether the new elements are links.
