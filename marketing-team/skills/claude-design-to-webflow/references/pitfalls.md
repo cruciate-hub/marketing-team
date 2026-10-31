@@ -432,3 +432,9 @@ Invalid attribute values on a site-wide component (8 per SDK page). Removed on 3
 
 ### 77. Headless screenshots of the staging page can capture it unstyled
 The first load sometimes paints before the Webflow CSS: wait for `load` plus ~2.5s (or for a styled computed value) before measuring; hide the sticky nav and the cookie banner before a crop.
+
+### 78. whtml never creates Rich Text; a new Rich Text arrives with 17 placeholder children
+`<div class="w-richtext">` in `data_whtml_builder` becomes a plain Block (the `w-richtext` class is dropped), so anything that looks for `.w-richtext` (the site's TOC script) finds nothing. Build the content with whtml, then `data_element_builder` `type: "RichText"` (with the `rich-text c-blog` classes), `move_element` each heading/paragraph/list into it in order (moves work), remove the 17 placeholder elements Webflow puts in a new Rich Text (h1–h6, blockquote, sample lists and paragraphs), and remove the empty Block. (Trust page, 31 Oct 2026.)
+
+### 79. The table of contents is Slater's "TableOfContents" script, page-gated
+The TOC markup and its CSS live in the `toc-embed` HtmlEmbed on the blog template (inside `.blog-aside > .toc-sticky`); the script is Slater file `https://slater.app/15116/45787.js`, which Slater only loads on detail_blog, detail_answers, detail_glossary and detail_product-update. On any other page copy the blog embed's code verbatim and add `<script src="https://slater.app/15116/45787.js" defer></script>` to it (`defer` matters: the embed sits before the article in the DOM). The script needs a real `.w-richtext` (Pitfall 78), `#toc-list`, and `.blog-aside` (it fades the aside in).
