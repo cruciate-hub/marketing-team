@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-16T10:08:04.297Z",
-    "itemCount": 82,
+    "generatedAt": "2026-11-02T11:55:30.362Z",
+    "itemCount": 83,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/gif-support-in-comments-and-posts",
+      "metaTitle": "GIF Support in Comments and Posts",
+      "metaDescription": "Users can now comment and post with GIFs from any connected GIF provider. ",
+      "content": "# GIF Support in Comments and Posts"
+    },
     {
       "url": "https://www.social.plus/release-note/dedicated-report-category-for-child-safety-content",
       "metaTitle": "Dedicated Report Category for Child Safety Content",
