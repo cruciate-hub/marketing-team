@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.84
+
+The placeholder check is case-insensitive and covers the variants (Stefan, 5 November 2026): a search for "Runners" alone had missed eleven canvas boards with "Sunrise run club", "#trailrun" and "Trail runner".
+
+**Changes:**
+- [`feedback.md`](design-system/feedback.md) item 24, "How to check": search case-insensitively for `runner`, `run club`, `trailrun`, `long run` and `plants`.
+- [`references/content-and-locale.md`](marketing-team/skills/social-plus-illustration/references/content-and-locale.md): the same check before delivering.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.83 -> 13.84.
+
 ## marketing-team 13.83
 
 Glossary article: the table of contents as the live site has it (Stefan, 3 November 2026).
