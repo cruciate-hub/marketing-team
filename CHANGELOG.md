@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.85
+
+Illustrations in frame cells scale with the cell (Stefan, 5 November 2026). On the Social features board at a narrow width the feature illustrations were cropped fragments in rounded boxes.
+
+**Changes:**
+- [`feedback.md`](design-system/feedback.md) item 25 and [`taste.md`](design-system/taste.md) rule 4: an illustration in a frame cell sits flat (no border, no radius) and scales with the cell via a size container and `tan(atan2(100cqw, …))`, never a fixed scale; feature grids with illustrations keep two columns on phones.
+- Canvas: the 11 feature boards fixed the same way (Social, Chat, Video, Moderation, Analytics, Stories, Monetization).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.84 -> 13.85.
+
 ## marketing-team 13.84
 
 The placeholder check is case-insensitive and covers the variants (Stefan, 5 November 2026): a search for "Runners" alone had missed eleven canvas boards with "Sunrise run club", "#trailrun" and "Trail runner".
