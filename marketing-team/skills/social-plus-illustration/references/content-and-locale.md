@@ -19,7 +19,7 @@ Only what makes the image understandable: a person's name, a significant button 
 
 - Every community, group, channel, post, event or product name in mock UI is invented for the page or brief it sits on. Read the context (audience, industry, the story the section tells), decide what fits and what would be noise, and write it. There is no list to pick from, on purpose.
 - A page or brief without an industry (a product page, an ebook, the home page) takes its audience from what the section claims and one of the industries on social.plus/industries. Before naming, look at the other boards on the canvas and the live pages, so no industry or name repeats across the industry-free pieces. The habit to break is the same fitness club on every one of them.
-- Never reuse a name from another board or the last image, and never the stock defaults that used to come back ("Trail Runners Club", "All About Plants"). Before delivering, grep the output for "Runners" and "Plants".
+- Never reuse a name from another board or the last image, and never the stock defaults that used to come back ("Trail Runners Club", "All About Plants"). Before delivering, search the output case-insensitively for `runner`, `run club`, `trailrun`, `long run` and `plants`: on 5 November 2026 a check for "Runners" alone missed eleven boards ("Sunrise run club", "#trailrun", "Trail runner").
 - Names and post lines are readable content: short, US conventions (below), no digits (a figure in a post is an invented number, see Facts; a spelled-out small count is fine), fictional, no real clubs, brands or public communities.
 
 ## Conventions
