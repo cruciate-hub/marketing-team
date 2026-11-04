@@ -8,13 +8,19 @@ Only what makes the image understandable: a person's name, a significant button 
 
 ## Placeholder people
 
-- **American first names**, common and diverse: Emily, Jordan, Marcus, Ava, Tyler, Sofia, Ethan, Chloe, Malik, Hannah, Jayden, Olivia, Mia, Andre, Priya, Kevin, Grace, Luis, Nicole, Caleb.
-- **Surnames when needed**: Carter, Brooks, Rivera, Nguyen, Patel, Johnson, Kim, Walker, Garcia, Thompson, Lee, Bennett.
-- **Avoid** Scandinavian/Nordic names and spellings (no Lindqvist, Ek, Jonas, Ingrid, å/ä/ö), and real public figures.
-- Mix genders and backgrounds across an image and across posts; don't reuse the last image's name.
+- **American first names**, common and diverse, mixed genders and backgrounds across an image and across posts. Invent them for each piece: no fixed pool (a name list made every mock show the same two people), and never the names of the last image or of another board on the canvas.
+- A surname only when the UI needs one, in the same register.
+- **Avoid** Scandinavian/Nordic names and spellings (no å/ä/ö, no -qvist/-sen endings), real public figures, and names that read as a joke.
 - Names are fictional; say so when delivering. Avatar photos come from the design system's Avatars group (`avatar-library.md`); never show the source library's own names or photographer credits.
 - Never put an avatar photo next to a quote, rating or testimonial about social.plus: it could read as a real person endorsing the product.
 - The avatar set is internal: never publish it as a pack, kit or template, and never commit it to the marketing-team repository (it is public).
+
+## Placeholder communities, groups and content
+
+- Every community, group, channel, post, event or product name in mock UI is invented for the page or brief it sits on. Read the context (audience, industry, the story the section tells), decide what fits and what would be noise, and write it. There is no list to pick from, on purpose.
+- A page or brief without an industry (a product page, an ebook, the home page) takes its audience from what the section claims and one of the industries on social.plus/industries. Before naming, look at the other boards on the canvas and the live pages, so no industry or name repeats across the industry-free pieces. The habit to break is the same fitness club on every one of them.
+- Never reuse a name from another board or the last image, and never the stock defaults that used to come back ("Trail Runners Club", "All About Plants"). Before delivering, grep the output for "Runners" and "Plants".
+- Names and post lines are readable content: short, US conventions (below), no digits (a figure in a post is an invented number, see Facts; a spelled-out small count is fine), fictional, no real clubs, brands or public communities.
 
 ## Conventions
 
