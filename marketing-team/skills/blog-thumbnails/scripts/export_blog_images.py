@@ -8,6 +8,8 @@ the Webflow blog collection requires — exact sizes, exact names:
 
 Also: --inline N -> {slug}_img-N_1578x888.webp (in-blog / glossary in-article images);
       --answers   -> {slug}_answer_1240x840.webp (answers collection, field image-2; artboard designed at 1240x840).
+      --design-copy -> also {slug}_design-2x_<2w>x<2h>.png: the same image at 2x, for Figma and design review
+                       (zooming the 1x WebP in Figma pixelates avatars and type). Never upload it to Webflow.
 
 The CMS validates min=max on each field: any other size or format is rejected.
 
@@ -59,8 +61,8 @@ async def shoot(jobs, base_w=1578):
     from playwright.async_api import async_playwright
     async with async_playwright() as p:
         b = await p.chromium.launch()
-        for html_path, (w, h), png in jobs:
-            pg = await b.new_page(viewport={'width': w, 'height': h})
+        for html_path, (w, h), png, *dsf in jobs:
+            pg = await b.new_page(viewport={'width': w, 'height': h}, device_scale_factor=dsf[0] if dsf else 1)
             await pg.goto('file://' + os.path.abspath(html_path))
             await pg.evaluate(f'document.body.style.zoom = "{w / base_w:.6f}"')
             await pg.evaluate('document.fonts.ready'); await pg.wait_for_timeout(300)
@@ -76,6 +78,7 @@ def main():
     a.add_argument('--answers', action='store_true', help='export an answer-page image: artboard designed at 1240x840, writes {slug}_answer_1240x840.webp')
     a.add_argument('--inline', type=int, help='export an in-blog image instead: writes {slug}_img-N_1578x888.webp only')
     a.add_argument('--assets', help='folder with uploaded assets (logos) named <blob id>.<ext>')
+    a.add_argument('--design-copy', action='store_true', help='also write a 2x PNG for Figma and design review (not for Webflow)')
     a.add_argument('--grain-falloff', type=float, default=GRAIN_FALLOFF, help='0 = same grain at every size; higher = lighter grain on small sizes')
     o = a.parse_args()
     os.makedirs(o.out, exist_ok=True)
@@ -89,8 +92,16 @@ def main():
         html = os.path.join(o.out, f'_{variant}.html')
         open(html, 'w', encoding='utf-8').write(build_html(o.artboard, o.fonts, g, o.glow, o.assets))
         jobs.append((html, (w, h), os.path.join(o.out, f'_{variant}.png')))
-    asyncio.run(shoot(jobs, base_w))
-    for html, _, _ in jobs: os.remove(html)
+    if o.design_copy:   # the largest size again at device scale 2: same layout, twice the pixels
+        variant, w, h = sizes[0]
+        html = os.path.join(o.out, '_design-2x.html')
+        open(html, 'w', encoding='utf-8').write(build_html(o.artboard, o.fonts, o.grain * (w / base_w) ** o.grain_falloff, o.glow, o.assets))
+        design = (html, (w, h), os.path.join(o.out, f'{o.slug}_design-2x_{2 * w}x{2 * h}.png'), 2)
+    asyncio.run(shoot(jobs + ([design] if o.design_copy else []), base_w))
+    for html, *_ in jobs: os.remove(html)
+    if o.design_copy:
+        os.remove(design[0]); chk = Image.open(design[2]); assert chk.size == (2 * w, 2 * h)
+        print(f'{design[2]}  {chk.size[0]}x{chk.size[1]}  {os.path.getsize(design[2])//1024} KB  (design copy, not for Webflow)')
     for (variant, w, h), (_, _, png) in zip(sizes, jobs):
         im = Image.open(png).convert('RGB')
         if im.size != (w, h): im = ImageOps.fit(im, (w, h), Image.LANCZOS)
