@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.82
+
+Webflow build lessons from the About, /press/news and /partners/aws pages (Stefan, 3 and 4 November 2026).
+
+**Changes:**
+- [`references/pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): pitfalls 81 to 87: a framed CMS grid shows grey bands until the cells stretch; reused classes keep old breakpoint values that break framed sections on phones; anchor ids are set when the section is created; a frame never touches the nav and a framed section never ends with a margin; text in a static framed cell starts at the top; a framed component is transcribed from `framed.css` property by property, never approximated (the About logo wall); a row of cells is not done until it has been seen at 390px (the About investors row).
+- [`claude-design-to-webflow/SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): gotcha index 64 and 65, and a checklist line for cleared breakpoint values.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.81 -> 13.82.
+
 ## marketing-team 13.81
 
 Placeholder content in mockups is invented per page, never a stock name (Stefan, 4 November 2026). Every mock community had been "Trail Runners Club"; the name came from nowhere in the system, it was a habit copied from board to board. Tested before merging with eleven fresh agents: industry pages were fine already, pages without an industry (ebook, product page, home) defaulted to a fitness club, and the fixed first-name list did the same to people (Marcus and Priya in three of four runs).
