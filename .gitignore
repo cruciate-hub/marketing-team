@@ -26,6 +26,9 @@ workers/
 # lives outside this repo entirely, at ~/Downloads/competitive-analysis/skill-distribution/ — see RUNBOOK.md.
 skill-distribution/
 
+# --- Agent skills (installed via `npx skills add`, not part of the plugin) ---
+.agents/
+
 # --- OS / tooling noise ---
 .DS_Store
 __pycache__/

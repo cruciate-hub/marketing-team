@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.83
+
+Glossary article: the table of contents as the live site has it (Stefan, 3 November 2026).
+
+**Changes:**
+- [`sections/43-article-glossary/section.md`](design-system/sections/43-article-glossary/section.md): the measured TOC: sticky `nav.toc-wrapper`, the "Table of contents" header, the progress track and white indicator, the item lines and the active link.
+- [`.gitignore`](.gitignore): `.agents/` (skills installed with `npx skills add` are not part of the plugin).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.82 -> 13.83.
+
 ## marketing-team 13.82
 
 Webflow build lessons from the About, /press/news and /partners/aws pages (Stefan, 3 and 4 November 2026).
