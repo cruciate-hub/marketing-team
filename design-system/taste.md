@@ -35,6 +35,8 @@ When there is no product visual yet: use the simple hero (02) with text and butt
 
 Mock UI shows invented content that belongs to the page. Community, group, channel, post and product names are written for that page's audience, industry and story: read the context, decide what fits and what is noise, and write it. A page without an industry (a product page, an ebook, the home page) takes its audience from what the section claims and one of the industries on social.plus/industries; before naming, look at the other boards on the canvas (and the live pages) so no industry or name repeats across the industry-free pages. The habit to break is the same fitness club on every one of them. Never reuse a name from another page or an illustration, and never a stock default; there is no list to pick from, on purpose (people's names follow the locale rules of the illustration skill, `content-and-locale.md`). Names and post lines in a mockup are readable content: short, US conventions, and without digits, since a figure in a post is an invented number (drop it, spell a small count out, or label the visual as rule 11 says).
 
+An illustration placed in a frame cell (a feature grid) sits flat in the cell, no border or radius around it, and scales with the cell: its box is a size container and the scene's transform is `scale(calc(tan(atan2(100cqw, <cell width at 1440>px)) * <scale tuned at 1440>))`, never a fixed scale, so a phone shows the same composition small and complete instead of a crop. Feature grids with illustrations keep two columns on phones.
+
 - Do: /chat: the hero video is the product; the three two-column rows show screens of the product.
 - Don't: the test build drew a flow of boxes and arrows as the hero visual. That is a diagram, not the product.
 
