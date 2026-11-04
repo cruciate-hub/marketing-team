@@ -1,5 +1,17 @@
 # Changelog
 
+## marketing-team 13.81
+
+Placeholder content in mockups is invented per page, never a stock name (Stefan, 4 November 2026). Every mock community had been "Trail Runners Club"; the name came from nowhere in the system, it was a habit copied from board to board. Tested before merging with eleven fresh agents: industry pages were fine already, pages without an industry (ebook, product page, home) defaulted to a fitness club, and the fixed first-name list did the same to people (Marcus and Priya in three of four runs).
+
+**Changes:**
+- The rule text for Claude Design, in all four copies: [`sections/README.md`](design-system/sections/README.md), [`README.md`](design-system/README.md), [`claude-design/README.md`](design-system/claude-design/README.md) (the brand book on the page), [`capture/pack-README.md`](design-system/capture/pack-README.md): placeholder names are invented for the page from its audience, industry and story; a page without an industry takes one from social.plus/industries and checks the other canvas boards first; no stock names, no example list; no digits in placeholder posts.
+- [`taste.md`](design-system/taste.md) rule 4: the same, in full.
+- [`feedback.md`](design-system/feedback.md): item 24.
+- [`references/content-and-locale.md`](marketing-team/skills/social-plus-illustration/references/content-and-locale.md): new "Placeholder communities, groups and content"; "Placeholder people" is a principle (US, diverse, no Nordic names, invented per piece) instead of a name pool.
+- Claude Design page: `09-sections.md`, `11-taste.md`, `13-feedback.md` and the brand book need a re-sync (`claude-design/SYNC.md`).
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.80 -> 13.81.
+
 ## marketing-team 13.80
 
 Avatar library text matches the design system (Stefan, 4 November 2026).
