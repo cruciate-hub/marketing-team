@@ -385,3 +385,59 @@ Icon fonts are a legacy of the AI page family (page-level head code). The design
 ### 63. A session's scratch/temp directory can be wiped mid-session — copy one-off user inputs out immediately
 **Symptom:** a user-provided reference export or screenshot, needed later in the same session, is simply gone from the scratchpad — no error, just absent.
 **Fix:** the moment the user hands over a design reference, export, or any input meant to be used more than once, copy it to a durable path right away — don't leave the only copy sitting in scratch. This is agent hygiene, not a Webflow-specific bug, but it bit a real migration hard enough to note here: assets already uploaded to the Webflow CDN survive independently and don't need this treatment.
+
+## Part 12 — components, link/SVG attributes and duplicated components (added after the Developer Portal rebuild, 30 Oct 2026)
+
+### 64. Hand-building buttons and links from the design board instead of using the site's components
+**Symptom:** the page looks right, but its buttons are bespoke `fr-button` classes with inline SVGs, so they miss the site's hover border animation, the arrow component, the aria-label binding and the tracking ids, and every future button change skips them. The owner rejects the build.
+**Fix:** inventory components first (`query_components` for button, link, icon, card, section) and insert instances; whtml only for layout and text. The SKILL's "Site conventions first" list is the gate.
+
+### 65. A duplicated component keeps the source's DOM id — `remove_attribute` reports success but changes nothing
+**Symptom:** `duplicate_component` of `Button / Talk to Sales` gives a copy whose root still renders `id="talk_to_sales_button_click"`, so its clicks fire the sales trigger. `remove_attribute` on `id` returns "Attributes removed" and the id is still there.
+**Fix:** the id is the `domId` setting, not an attribute: `data_element_settings_tool set_settings` key `domId` with `clear: true` (and `scope_component_id`). Check with `get_settings all_raw_settings`.
+
+### 66. Links built by whtml keep raw `href` attributes and open in the same tab
+**Symptom:** after the build each link has both a `link` setting and a leftover `href` attribute; external links have no `target`/`rel`.
+**Fix:** per link, `set_settings` key `link` with `static_link {mode:"url", to, open_in_new_tab:true}` (no `rel`, see Pitfall 74), then `remove_attribute ["href","rel","target"]`, then `set_attributes` aria-label. Batch all links in one call.
+
+### 67. Hardcoded hex in new classes instead of variables
+A rebuild that looks right can still be rejected: every colour in the `fr-` classes was a hex literal. Bind with `update_style` + `variable_as_value`; create missing tokens first. `-webkit-text-fill-color` refuses variables ("does not support setting a variable of type color") — set it to `currentColor`. `update_font_family_variable` with `custom_value` (to add a monospace fallback) returns an internal error; the variable keeps Webflow's default `sans-serif` fallback.
+
+### 68. whtml rejects `:focus-visible` in its `css` param
+Only `:hover`, `:focus`, `:active` are accepted. Build without it, then add the focus ring with `update_style` `pseudo: "focus-visible"` (Webflow publishes it with a `[data-wf-focus-visible]` fallback).
+
+### 69. Image props take an asset id as a plain string
+`set_component_instance_prop_values` has no image type: pass `type: "string"`, `string_value: "<assetId>"`. SVG icons uploaded via `create_asset` + S3 POST bind fine; clear the asset alt (`update_asset alt_text: null`) for decorative icons. Webflow publishes link props with `target="_blank"` but drops the `rel` value — browsers imply `noopener` for `_blank`, so this is acceptable.
+
+### 70. Inventing a parallel class system instead of reusing the site's
+The Developer Portal rebuild created `fr-hero`, `fr-padding`, `fr-container`, `fr-grid`, `fr-card`, … plus a new `Card / Resource` component, while the site already had `section padding_Y > page-padding > container-large > container-heading`, `superscript`, `button-group`, `grid-4`, `card-v1` and spacing/text utilities. Stefan rebuilt the header himself with the existing classes as the reference. Rule: the design board decides the look, the site's existing classes and components decide the build; map board → existing class first (SKILL.md rule 6), propose any genuinely new class to Stefan before creating it.
+
+### 71. `Card / Button` is not a clickable card
+Its root is a div; only the nested `Button / Tertiary` is a link, its text is bound to the Title prop (the title shows twice) and its Aria-label prop is bound to nothing. For a whole-card link build a Link Block with `card-v1` + `c-outline` and the inner classes in SKILL.md rule 6. (Found by the skill test run, 30 Oct 2026.)
+
+### 72. Class names go stale, and some exist several times
+`developer-portal_grid` existed in the morning of 30 Oct 2026 and was gone by the afternoon: Webflow purges a class automatically once nothing uses it (removing a section or unregistering a component deleted all 19 `fr-` classes in one go, so `remove_style` afterwards reports "not found"); a skill or memory that names a class is a hint, not proof. Confirm by exact-name `query_styles` before using it. `text-size-small` exists as FOUR global records with the same name (only `e87574c4…` has properties: 1rem / 1.4); don't create a fifth, and flag duplicates to Stefan.
+
+### 73. No existing grid does 4 → 2 columns on tablet
+`grid-4` is 4/4/2/1, `industry-grid-4` 4/3/2/2, `c-card_grid-4` is 2 columns. Stefan decides the tablet column count per page, by content (2 or 4). Don't override the shared class (site-wide blast radius, Pitfall 18) and don't add a combo silently: ask him.
+
+### 74. A `rel` on a Webflow link renders as a stray `<link>` element
+Setting `rel: "noopener"` in `static_link` or a link prop made Webflow publish `<a … target="_blank">…</a><link rel="noopener" href="…"/>` after every link (10 on the Developer Portal, 31 Oct 2026): invalid in the body and noise for crawlers. Set `open_in_new_tab: true` and no `rel`; browsers apply noopener to `target="_blank"` themselves. To clear an existing one, re-set the whole link without `rel`.
+
+### 75. Most social.plus pages have no `<main>` and two banner `<header>`s
+Only the homepage had a `<main>` (31 Oct 2026; /social/sdk, /pricing, /chat/sdk had none, plus a page `<header>` next to the nav's, which makes two banner landmarks). On every page you build, wrap the content between nav and footer in one `main` (`BY_CUSTOM_TAG` `main`, then `move_element`); a `header` inside `main` is no longer a banner. The other pages are a site-wide fix for Stefan to schedule, not a side task.
+
+### 76. `Icon / External link` shipped `width="currentWidth" height="currentHeight"`
+Invalid attribute values on a site-wide component (8 per SDK page). Removed on 31 Oct 2026; `.icon-small` sizes it. When reusing an icon component, read its attributes once.
+
+### 77. Headless screenshots of the staging page can capture it unstyled
+The first load sometimes paints before the Webflow CSS: wait for `load` plus ~2.5s (or for a styled computed value) before measuring; hide the sticky nav and the cookie banner before a crop.
+
+### 78. whtml never creates Rich Text; a new Rich Text arrives with 17 placeholder children
+`<div class="w-richtext">` in `data_whtml_builder` becomes a plain Block (the `w-richtext` class is dropped), so anything that looks for `.w-richtext` (the site's TOC script) finds nothing. Build the content with whtml, then `data_element_builder` `type: "RichText"` (with the `rich-text c-blog` classes), `move_element` each heading/paragraph/list into it in order (moves work), remove the 17 placeholder elements Webflow puts in a new Rich Text (h1–h6, blockquote, sample lists and paragraphs), and remove the empty Block. (Trust page, 31 Oct 2026.)
+
+### 79. The table of contents is Slater's "TableOfContents" script, page-gated
+The TOC markup and its CSS live in the `toc-embed` HtmlEmbed on the blog template (inside `.blog-aside > .toc-sticky`); the script is Slater file `https://slater.app/15116/45787.js`, which Slater only loads on detail_blog, detail_answers, detail_glossary and detail_product-update. On any other page copy the blog embed's code verbatim and add `<script src="https://slater.app/15116/45787.js" defer></script>` to it (`defer` matters: the embed sits before the article in the DOM). The script needs a real `.w-richtext` (Pitfall 78), `#toc-list`, and `.blog-aside` (it fades the aside in).
+
+### 80. A hover on a shared cell combo lights up cells that are not links
+The first framed grid put the hover on `c-cell` itself, which was fine while every cell was a link (Developer Portal). Reusing `c-cell` for the Trust certifications (plain divs) gave them a hover with nothing to click. Keep interaction states off a layout combo: `card-v1 c-cell` is the static cell, `card-v1 c-cell c-clickable` adds the hover and focus ring and goes only on Link Blocks. Before reusing any class, check its `:hover`/`:focus-visible` pseudos and whether the new elements are links.

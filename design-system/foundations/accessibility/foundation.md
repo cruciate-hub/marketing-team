@@ -144,3 +144,13 @@ Values regular sections use that are not tokens: `#dc3545` form error on #111 is
 - [ ] Forms: visible labels, text errors linked to the field
 - [ ] Reduced motion: nothing keeps moving
 - [ ] Emails: the same pairs on white (`#414347` body, `#717275` small text on white only, `#414347` for small text on the `#f5f5f5` page background, `#3b41ec` links and buttons with white labels)
+
+## Page semantics (checked on every built page)
+
+Added 31 Oct 2026 after the Developer Portal check. Check the published HTML, not the canvas:
+- One `<main>` holding everything between the navigation and the footer; one banner `header` (the navigation). A page hero inside `main` may use `header`.
+- One `h1`; section titles `h2`, card titles below them; never skip a level. A section with no visible heading gets an `aria-label`.
+- Groups of cards or cells are lists (`ul`/`li`, or `role="list"`/`role="listitem"` in Webflow).
+- Links: one link per card (the whole card), a name that says where it goes, "(opens in a new tab)" when it does. No `<link>` elements in the body.
+- Decorative images `alt=""`; decorative SVG and frame markers `aria-hidden="true"` (SVG also `focusable="false"`); no invalid attribute values.
+- Every clickable element has a visible hover and `:focus-visible` state.

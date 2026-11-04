@@ -19,7 +19,7 @@ Paste this into the design system's instructions and into every website project 
 > 6. Example or illustrative numbers, charts and sample answers carry the visible label "Illustrative example"; real numbers carry their source.
 > 7. Third-party logos only from the approved set in `assets/third-party/` (listed in `foundations/logo/foundation.md`, "Third-party logos") or files supplied by the team; a tool or company without an approved file is written as text.
 > 8. Links that do not exist yet are clear placeholders (`href="#"` and a note of the intended path), never invented URLs.
-> 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used.
+> 9. Accessibility basics: one `<h1>`, headings in order, alt text on meaningful images, token pairs with AA contrast, interactive parts (tabs, accordions) are real buttons that work with the keyboard, or the static state is used. Page semantics as in `foundations/accessibility/foundation.md` ("Page semantics"): one `<main>`, groups of cards as lists, one link per card, decorative images and markers hidden, a visible hover and focus state on every clickable element.
 > 10. Render the page at 1440 and 390, check it against the design system, `taste.md` and `feedback.md` (the details already corrected once), and list every mismatch in the reply ("none found" counts as a check).
 
 ## Index

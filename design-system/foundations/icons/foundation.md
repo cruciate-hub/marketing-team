@@ -45,3 +45,8 @@ The icons the live site uses: inline SVG interface icons that take the text colo
 - The X (Twitter) footer glyph's `<title>` says "Social+'s Twitter Profile" and the Instagram one says "social.plus Instagram Profile" (no possessive); the wording differs per glyph
 - Chevron class is spelled `.accodrion-icon` on the site; `.accordion-icon` is the wrapper
 - The arrow glyph is 24x25, not square; it sits 0.5px low in a round holder
+
+## In Webflow
+- Where an icon has a component (Icon / Arrow, Icon / Checkmark, Icon / External link), place the instance; never paste the SVG again.
+- Any other inline SVG that is decorative carries `aria-hidden="true"` and `focusable="false"` and takes its colour from `currentColor` (no inline `style`).
+- No icon fonts and no embeds that load one (a Material Symbols embed was found copied onto /developer-portal on 30 Oct 2026; icons are SVG on this site).

@@ -17,6 +17,7 @@ Customer stories (41 + 42), glossary entries (04 + 43), marketing pages.
 - Intro paragraph `.blog-intro-paragraph` (blog), hero image (blog, answers)
 - Body: `.rich-text.c-blog` (blog), `.rich-text` (tutorials, news), `.answers_rich-text` (answers), `.product-update_rich-text` (updates, release notes): h2, h3, p, lists, blockquote, images, tables, links
 - Aside (blog): table of contents and a webinar or CTA tile; the table of contents is built by a script on the live site and is empty in source.html (TO CHECK)
+- Table of contents reading-progress bar: white (#ffffff) on the grey track, never brand blue (Stefan, 31 Oct 2026; live on blog, Trust, glossary and product updates)
 - Bottom: share row (blog), tags
 
 ## Allowed variations
