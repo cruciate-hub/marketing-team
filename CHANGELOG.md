@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.79
+
+Sharp blog images in Figma (Stefan, 4 November 2026).
+
+**Changes:**
+- [`blog-thumbnails/scripts/export_blog_images.py`](marketing-team/skills/blog-thumbnails/scripts/export_blog_images.py): new `--design-copy` option writes `{slug}_design-2x_3156x1776.png`, the same image rendered at 2x, for Figma and design review. Zooming the 1x WebP in Figma pixelated the avatars. The Webflow files are unchanged.
+- [`blog-thumbnails/SKILL.md`](marketing-team/skills/blog-thumbnails/SKILL.md) (Export): when to use it; never upload the PNG to Webflow.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.78 -> 13.79.
+
 ## marketing-team 13.78
 
 Lessons from the Developer Portal rebuild in Webflow (30 October 2026): the build invented its own classes, buttons and card component instead of reusing the site's, and Stefan rejected it. Also sets which skills to use for website pages.
