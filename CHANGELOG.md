@@ -1,5 +1,13 @@
 # Changelog
 
+## marketing-team 13.80
+
+Avatar library text matches the design system (Stefan, 4 November 2026).
+
+**Changes:**
+- [`references/avatar-library.md`](marketing-team/skills/social-plus-illustration/references/avatar-library.md): the Avatars group holds 35 faces at 640×640 (it said 37 at 320×320). This fix was pushed to the 13.76 branch after that PR had merged, so it never reached main.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.79 -> 13.80.
+
 ## marketing-team 13.79
 
 Sharp blog images in Figma (Stefan, 4 November 2026).
