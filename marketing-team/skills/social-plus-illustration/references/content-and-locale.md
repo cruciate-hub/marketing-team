@@ -16,6 +16,12 @@ Only what makes the image understandable: a person's name, a significant button 
 - Never put an avatar photo next to a quote, rating or testimonial about social.plus: it could read as a real person endorsing the product.
 - The avatar set is internal: never publish it as a pack, kit or template, and never commit it to the marketing-team repository (it is public).
 
+## Placeholder communities, groups and content
+
+- Every community, group, channel, post, event or product name in mock UI is invented for the page or brief it sits on. Read the context (audience, industry, the story the section tells), decide what fits and what would be noise, and write it. There is no list to pick from, on purpose.
+- Never reuse a name from another board or the last image, and never the stock defaults that used to come back ("Trail Runners Club", "All About Plants"). Before delivering, grep the output for "Runners" and "Plants".
+- Names stay fictional and American (see Conventions); no real clubs, brands or public communities.
+
 ## Conventions
 
 - **Currency**: US dollars, `$79`, `$1,299` (never €, kr, or comma decimals).
