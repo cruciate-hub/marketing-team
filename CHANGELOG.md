@@ -7,6 +7,7 @@ The three SDK pages built on Webflow staging from the canvas (5 November 2026) a
 **Changes:**
 - [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 88 and the gotcha index in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): a redesign restyles what the page already has (the SDK split hero and `bf-slider` fed with 2x canvas renders, a framed grid of static cells with the site's icon assets, the logo wall by unlinking the old Trusted section), and wraps the content in a `main`.
 - [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 89: a section with a CMS list becomes a component by duplicating a component that already holds the list; the logo wall is now `Section / Logo Wall` on the four redesigned pages that have one.
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 90 and a checklist line: never experiment on a shared component or a Collection List (an Empty State's removal deletes the list), test on a copy, snapshot in the Designer, measure the framed bottom rule on staging.
 - Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.85 -> 13.86.
 
 ## marketing-team 13.85
