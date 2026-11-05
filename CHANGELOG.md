@@ -1,5 +1,13 @@
 # Changelog
 
+## marketing-team 13.87
+
+Framed containers: spacing inside is padding, never margin (5 November 2026).
+
+**Changes:**
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 92, the gotcha index and the checklist in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): a top margin on the first child of `container-large c-framed` collapses through and opens a gap between two frames; use padding utilities and check the container's edges against the section's rules.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.86 -> 13.87.
+
 ## marketing-team 13.86
 
 The three SDK pages built on Webflow staging from the canvas (5 November 2026) and the lesson recorded.
