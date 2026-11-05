@@ -1,5 +1,13 @@
 # Changelog
 
+## marketing-team 13.88
+
+Framed grids carry their own top rule (5 November 2026).
+
+**Changes:**
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 93, the gotcha index and rule 4 in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): `grid-4.c-framed` and `grid-3.c-framed` now have `border-top` and `margin-top: -1px`, as `.frame_cells` in `framed.css`, so a grid under a heading has its top line and a grid under a section rule does not double it. Every border of a design-system component is transcribed, not only the ones the first page needed.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.87 -> 13.88.
+
 ## marketing-team 13.87
 
 Framed containers: spacing inside is padding, never margin (5 November 2026).
