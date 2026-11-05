@@ -5,6 +5,7 @@
 Framed grids carry their own top rule (5 November 2026).
 
 **Changes:**
+- Restored [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json), which the 13.87 and 13.88 bumps had emptied (a read-and-write of the same file in one expression), so the Quality gate passes again.
 - [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 93, the gotcha index and rule 4 in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): `grid-4.c-framed` and `grid-3.c-framed` now have `border-top` and `margin-top: -1px`, as `.frame_cells` in `framed.css`, so a grid under a heading has its top line and a grid under a section rule does not double it. Every border of a design-system component is transcribed, not only the ones the first page needed.
 - Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.87 -> 13.88.
 
