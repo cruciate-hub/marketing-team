@@ -1,5 +1,13 @@
 # Changelog
 
+## marketing-team 13.86
+
+The three SDK pages built on Webflow staging from the canvas (5 November 2026) and the lesson recorded.
+
+**Changes:**
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 88 and the gotcha index in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md): a redesign restyles what the page already has (the SDK split hero and `bf-slider` fed with 2x canvas renders, a framed grid of static cells with the site's icon assets, the logo wall by unlinking the old Trusted section), and wraps the content in a `main`.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.85 -> 13.86.
+
 ## marketing-team 13.85
 
 Illustrations in frame cells scale with the cell (Stefan, 5 November 2026). On the Social features board at a narrow width the feature illustrations were cropped fragments in rounded boxes.
