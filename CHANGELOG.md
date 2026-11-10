@@ -1,5 +1,14 @@
 # Changelog
 
+## marketing-team 13.89
+
+Frame "+" markers sit on their line crossings, and stacked framed sections share one line (9 November 2026).
+
+**Changes:**
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md) item 94, rule 4, the gate and the checklist in [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md). The `-1px` grid margin from item 93 collapsed through the framed container and pulled every top "+" 1px high, so `container-large.c-framed` is now `display: flow-root`. Bottom markers used `-0.34rem`; they now use `-0.28rem` like the top ones. Two framed sections stacked directly drew a 2px line; the framed section combo now has `margin-bottom: -1px`. Markers are measured against their line crossing (under 0.6px) at 1440 and 390 on every framed page.
+- [`framed.css`](design-system/sections/framed/framed.css) and the [grid and frame foundation](design-system/foundations/grid-and-frame/foundation.md): `.is-ruled-bottom + .is-ruled { margin-top: -1px }` gives stacked ruled sections one line, and the foundation records how Webflow does the same.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.88 -> 13.89.
+
 ## marketing-team 13.88
 
 Framed grids carry their own top rule (5 November 2026).
