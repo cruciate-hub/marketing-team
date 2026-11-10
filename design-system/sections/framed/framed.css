@@ -2242,3 +2242,8 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 
 /* Platform marks are white (feedback 20, Amadeus 2026-10-27): the icon tile colours icons link blue, platform and language marks stay text colour. */
 .icon-tile .platform-mark, .icon-tile svg.platform-mark { color: var(--color-text); }
+
+/* Stacked ruled sections share ONE line (9 Nov 2026). A section with a bottom rule followed directly by a
+   section with a top rule would draw 2px; the second slides up 1px so its rule (and its plus markers) sit on
+   the first one's bottom rule. Webflow mirrors this with margin-bottom:-1px on the framed section combo. */
+.is-ruled-bottom + .is-ruled { margin-top: -1px; }
