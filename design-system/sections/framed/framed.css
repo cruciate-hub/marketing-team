@@ -2089,6 +2089,7 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .button .button_circle svg { width: 100%; height: 100%; transform: none; }
 .button.is-secondary .button_icon.is-arrow, .button.is-secondary .button_circle { background: var(--border--border-dark-grey); }
 .button:hover .button_icon.is-arrow, .button:hover .button_circle { background: var(--social--button-hover); transform: none; }
+.button.is-secondary:hover .button_icon.is-arrow, .button.is-secondary:hover .button_circle { background: var(--border--border-hover); }
 .button:hover .button_circle svg { transform: none; }
 .button:active .button_icon.is-arrow, .button:active .button_circle { background: var(--main--white); color: var(--social--main-blue); }
 .button.is-tertiary, .button.is-tertiary:hover, .button.is-tertiary:active {
