@@ -23,6 +23,10 @@ Other skills build on this one:
 
 In one breath: #111 ground, design-system neutrals for every surface, exactly one accent element — ultramarine (#3B41EC fill / #6F89FC line) by default, another brand color when the topic calls for it (`color-accents.md`) — Figtree (Geist Mono only for all-caps labels; code in the system monospace, captions and chips in Figtree: design-system feedback 17), words only where necessary, 2–4 big objects that leave the frame, recognisable objects with a quiet grey social layer, no duplicates of the blue action.
 
+## Redrawing an existing image
+
+When the request is to redo or "put more effort in" an image that is already on the site, this is not a new concept. Download the live image first, then rebuild it element by element: the same objects, positions and labels (exact wording), on the same grid. Only the treatment changes: dark ground, one ultramarine glow, one accent element, design-system neutrals, Figtree, soft shadows instead of light-mode cards. A new concept for the same message was rejected on the Community Corner hero (11 Nov 2026); the faithful dark rebuild was approved. Website delivery: an inline SVG on the canvas board, a 2x WebP for Webflow under a new `-vN` file name (design-system feedback item 33).
+
 ## What changes every time
 
 Concept, composition archetype, objects, the position of the accent — and, by meaning, the accent color. `references/composition-library.md` lists 10 archetypes and the object vocabulary; `references/ideation.md` is how to get from a brief to two genuinely different concepts (10 ideas through 8 lenses, then converge). Never default to the last layout that worked.
