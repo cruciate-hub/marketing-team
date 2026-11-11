@@ -2248,3 +2248,11 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
    section with a top rule would draw 2px; the second slides up 1px so its rule (and its plus markers) sit on
    the first one's bottom rule. Webflow mirrors this with margin-bottom:-1px on the framed section combo. */
 .is-ruled-bottom + .is-ruled { margin-top: -1px; }
+
+/* Linked cards in a framed grid (blog, category, search, related posts…): the whole cell is the link and
+   lightens one step on hover, like every other framed grid. Feedback item 37. */
+.frame_cells > li.frame_cell:has(> a.resource-card) { padding: 0; }
+.frame_cells > li > a.resource-card { padding: var(--cell-pad); height: 100%; box-sizing: border-box; }
+.frame_cells > li > a.resource-card, a.frame_cell.resource-card, .resources_featured > a.resource-card, a.resource-row { transition: background-color 200ms ease; }
+.frame_cells > li > a.resource-card:hover, a.frame_cell.resource-card:hover, .resources_featured > a.resource-card:hover, a.resource-row:hover { background: var(--color-bg-alt); }
+.frame_cells > li > a.resource-card:focus-visible, a.frame_cell.resource-card:focus-visible, .resources_featured > a.resource-card:focus-visible, a.resource-row:focus-visible { outline: 2px solid var(--color-link); outline-offset: -2px; }
