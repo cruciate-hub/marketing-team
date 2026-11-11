@@ -27,6 +27,10 @@ In one breath: #111 ground, design-system neutrals for every surface, exactly on
 
 When the request is to redo or "put more effort in" an image that is already on the site, this is not a new concept. Download the live image first, then rebuild it element by element: the same objects, positions and labels (exact wording), on the same grid. Only the treatment changes: dark ground, one ultramarine glow, one accent element, design-system neutrals, Figtree, soft shadows instead of light-mode cards. A new concept for the same message was rejected on the Community Corner hero (11 Nov 2026); the faithful dark rebuild was approved. Website delivery: an inline SVG on the canvas board, a 2x WebP for Webflow under a new `-vN` file name (design-system feedback item 33).
 
+## Images inside an inline SVG on the canvas
+
+A Claude Design canvas resolves uploaded images (`/_blob/<id>`) only in `<img src>`, CSS `url()` in a style rule, `@font-face` and link/script tags. An SVG `<image href="/_blob/…">` stays empty. When an illustration is built as an inline SVG, put avatars and photos on top as HTML `<img>`: a `position: relative` wrapper, each img absolutely positioned in % of the viewBox, `border-radius: 50%` for faces. Inline logos as SVG paths. Before you publish, search the board for `<image` with `/_blob`: there should be none (design-system feedback item 35).
+
 ## What changes every time
 
 Concept, composition archetype, objects, the position of the accent — and, by meaning, the accent color. `references/composition-library.md` lists 10 archetypes and the object vocabulary; `references/ideation.md` is how to get from a brief to two genuinely different concepts (10 ideas through 8 lenses, then converge). Never default to the last layout that worked.
