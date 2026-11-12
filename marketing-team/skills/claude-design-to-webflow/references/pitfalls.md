@@ -533,3 +533,6 @@ The site's `li` tag style draws a bullet image. A `ul` of tabs or chips built wi
 
 ### 108. Icon-only share and social links need an `aria-label` (blog post template, 12 Nov 2026)
 Share links (`data-share-*`) and "Follow us" icons on the post template had no accessible name. Set `aria-label` with `set_attributes`: "Share on LinkedIn/Facebook/X/WhatsApp", "Share by email", and "social.plus on LinkedIn (opens in a new tab)" for external profiles. Check both share bars (top and bottom) and grep the published HTML for the labels.
+
+### 109. A horizontally scrolling row needs `min-width: 0` on every flex ancestor, including unclassed wrappers (blog category tabs, 12 Nov 2026)
+`blog-cats_list` had `overflow-x: auto` and `min-width: 0`, yet /blog was 800px wide on phones: its unclassed `<nav>` wrapper was a flex item with the default `min-width: auto`, so it grew to the full tab width and pushed the page sideways. Give the wrapper a class (`blog-cats_nav`: `min-width: 0`, `flex-shrink: 1`). Check at 390px by comparing `scrollWidth` to `clientWidth` on every page that uses the component.
