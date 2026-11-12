@@ -503,3 +503,33 @@ Changing `grid-4.c-framed.cc-fw-cells` to 3 columns would have changed both grid
 
 ### 98. `data_element_builder` can drop `set_link` and unknown-case class names silently (library breadcrumb, 11 Nov 2026)
 A TextLink built with `set_link` (page) came out as `href="#"`. Re-set it with `data_element_settings_tool set_settings` (key `link`, `static_link` mode `page`) and check the published href. Class names are matched case-sensitively: `margin-top_l` returned "style not found" while the class is `margin-top_L`, so query the exact name first (the Class existence gate).
+
+### 99. A whtml `<span>` can't take a CMS text binding; use a TextBlock (blog breadcrumbs, 12 Nov 2026)
+`set_settings` key `text` with a CMS binding on a whtml-built Span fails with "Setting text is not applicable". Build the bound crumb with `data_element_builder` type `TextBlock` (same class, `aria-current="page"`), bind it, then remove the span. Headings, Blocks and TextBlocks bind fine.
+
+### 100. `id` is a reserved attribute; set it as `domId` (post template main, 12 Nov 2026)
+`set_attributes` / `element_schema.set_attributes` with `name: "id"` errors with '"id" is a reserved attribute name', but the failed call can still leave an empty element behind (an empty second `<main>` shipped to staging). Use `settings: [{key: "domId", static_text: {value: "main-content"}}]`, and after any failed create, query for strays (`element_filter.tag`) before publishing.
+
+### 101. whtml drops `focusable` on inline SVG and writes a duplicate raw `class` attribute (blog meta icons, 12 Nov 2026)
+The published SVG came out as `class="blog-meta_icon blog-meta_icon"` without `focusable="false"`. After the build, query the SVGs by class and run `set_attributes` (`focusable: false`) + `remove_attribute` (`class`) on each. Gate on the published HTML, not on the whtml input.
+
+### 102. Reference-item links, collection-list "equals current item" filters and input placeholders are Designer-only (blog post template, 12 Nov 2026)
+`get_bindable_sources` for a link offers only URL fields, so a breadcrumb can't link to the post's referenced category page; collection-list `filters` take static values only; form placeholders aren't settable. Ship the bound text unlinked and list these as one-minute Designer steps in the report.
+
+### 103. Staging verification tooling on macOS (12 Nov 2026)
+macOS has no `timeout` command (`timeout 60 chrome …` fails instantly and silently with `2>/dev/null`), and headless Chrome `--screenshot` can hang on the live staging pages. Verify staging in the Chrome extension; for 390 px checks when the window won't resize, load the page into a same-origin 390 px iframe and measure `scrollWidth` and grid columns there.
+
+### 104. The Style API can't set the "Current" state; keep `w--current` in a tiny hidden embed (blog category tabs, 12 Nov 2026)
+`create_style` with `parent_style_names: ["blog-tab"]` and name `w--current` makes a class literally named `_w--current` (`.blog-tab._w--current`), which never matches. Delete it. Put the one rule (`.blog-tab.w--current{…}` bound to `var(--…)` variables) in an HtmlEmbed inside the component, and give the embed the `hide` class so it doesn't take a flex or grid slot. Everything else on the tab stays native.
+
+### 105. An HtmlEmbed's clearfix `::before`/`::after` become grid items (AI summary tiles, 12 Nov 2026)
+`.w-embed` ships the same clearfix as `.w-container` (Pitfall 35). When the embed itself is the grid (e.g. `display:grid` on the embed's class), the two pseudos take the first and last cells and shift every tile. Fix natively: on the embed's class, set `::before` and `::after` to `display: none` via `update_style` pseudo. No extra CSS needed.
+
+### 106. Put a frame or border on a bound Image, not its wrapper, so an empty image leaves nothing behind (blog heroes, 12 Nov 2026)
+A CMS-bound Image with no value gets `w-dyn-bind-empty` (`display:none`), but its wrapper stays, so a border, radius or background on the wrapper shows as an empty box. Move the frame class onto the Image and clear the wrapper's classes. Conditional visibility binds only to boolean fields, so this is the headless way to "show nothing when there's no image". For listing thumbnails, set a placeholder (e.g. `blog-thumb-placeholder-v1.svg`, `background-size: cover`) as the thumb wrapper's background instead, so empty cards still look designed.
+
+### 107. The global `li` style carries a bullet background; any nav list needs its own `_item` class (blog categories, 12 Nov 2026)
+The site's `li` tag style draws a bullet image. A `ul` of tabs or chips built with whtml inherits it. Give each `li` a dedicated class (`blog-cats_item`: no background, no padding) instead of editing the global `li`.
+
+### 108. Icon-only share and social links need an `aria-label` (blog post template, 12 Nov 2026)
+Share links (`data-share-*`) and "Follow us" icons on the post template had no accessible name. Set `aria-label` with `set_attributes`: "Share on LinkedIn/Facebook/X/WhatsApp", "Share by email", and "social.plus on LinkedIn (opens in a new tab)" for external profiles. Check both share bars (top and bottom) and grep the published HTML for the labels.
