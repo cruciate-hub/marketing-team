@@ -1,0 +1,9 @@
+/* 16:9 film (aspect "16:9"): appended after base.css. The reel's layout at 2/3 scale, centred (see SP.geo). */
+.label { left:360px; top:59px; width:1200px; gap:9px }
+.line { font-size:51px }
+.sub { font-size:28px }
+.hero { font-size:64px }
+.glow { width:1000px; height:1000px; margin:-500px 0 0 -500px }
+.phone { left:763px; top:190px; width:395px; height:831px; border-radius:46px }
+.screen { left:11px; top:11px; width:373px; height:809px; border-radius:35px }
+.screen video { width:373px; height:809px }
