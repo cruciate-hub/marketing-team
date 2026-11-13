@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.90
+
+Amadeus's customer-showcase-video skill comes back here, and into the organization kit as 14.21.0 (Stefan, 13 November 2026).
+
+**Why:** Amadeus uploaded the skill straight to the organization library as marketing-team 14.18.0 on 6 November 2026. It never reached GitHub, so the next kit build from GitHub (also numbered 14.18.0, 10 November) replaced his upload without it, and 14.19.0 and 14.20.0 kept it out.
+
+**Changes:**
+- New [`customer-showcase-video`](marketing-team/skills/customer-showcase-video/SKILL.md): the 9:16 or 16:9 customer showcase film (app icon into phone, two to five features with one highlight each, the social.plus x customer logo lockup, optional quote and ElevenLabs voiceover, built with the Motion artifact type). The 15 files are byte-identical to the organization's 14.18.0 of 6 November (checked by SHA-256), with one change for this public repo: the capitalisation example in `references/inputs.md` names South Sydney Rabbitohs (a published customer story) instead of a customer the site does not name.
+- Nothing else of Amadeus's 14.18.0 was missing: next to the new skill it changed only the kit description, and the two social-plus-illustration files that differ from 14.20.0 differ because of later GitHub changes.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.89 -> 13.90 (24 skills).
+
 ## marketing-team 13.89
 
 Frame "+" markers sit on their line crossings, and stacked framed sections share one line (9 November 2026).
