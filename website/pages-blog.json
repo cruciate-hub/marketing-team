@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-11T08:33:39.799Z",
-    "itemCount": 271,
+    "generatedAt": "2026-11-16T12:46:52.242Z",
+    "itemCount": 272,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/whoop-humans-why-whoop-built-its-own-social-graph",
+      "metaTitle": "Whoop Humans: Why Whoop Built Its Own Social Graph",
+      "metaDescription": "Whoop Humans isn’t just another feed. Why Whoop built a heartbeat-verified social layer, and what it tells consumer apps about owning the social graph.",
+      "content": "# Whoop Humans: Why Whoop Built Its Own Social Graph\n### What Whoop actually launched\n### The legacy feeds stopped being social\n### Verified human is becoming a premium feature\n### Owning the social graph\n### The strongest counter-argument\n### What this means for consumer app leaders"
+    },
     {
       "url": "https://www.social.plus/blog/in-app-social-proof-where-to-place-real-conversations-2",
       "metaTitle": "In-App Social Proof: Where to Place Real Conversations ",
