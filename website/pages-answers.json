@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-16T10:49:12.440Z",
+    "generatedAt": "2026-11-16T10:49:26.934Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -86,9 +86,9 @@
     },
     {
       "url": "https://www.social.plus/answers/what-are-community-features",
-      "metaTitle": "What Are Community Features",
-      "metaDescription": "Community features are in-product capabilities like feeds, chat, groups, events, and moderation that let users connect, contribute, and return together.",
-      "content": "# What are community features?\n## How community features work\n## Core components\n## Why community features matter\n## Examples by category\n## Why teams build community features with social.plus\n## FAQs\n## Conclusion"
+      "metaTitle": "Which features does an in-app community need?",
+      "metaDescription": "An in-app community needs profiles, a feed, reactions and comments, groups, notifications and moderation. Chat, events and livestreams can wait. Here is why.",
+      "content": "# Which features does an in-app community need?\n## What are the core features of an in-app community?\n## Why does each core feature matter?\n## Which features can wait until the community is active?\n## When does an in-app community need fewer features?\n## What should you do next?\n## How social.plus covers the features an in-app community needs\n## FAQs\n### What are the two types of online communities?\n### What is an online brand community?\n### What features make a community stable?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-launch-a-white-label-social-network",
@@ -956,9 +956,9 @@
     },
     {
       "url": "https://www.social.plus/answers/how-to-create-an-in-app-community-for-users",
-      "metaTitle": "How to Create an In-App Community for Users",
-      "metaDescription": "Learn how to create an in-app community for users using SDKs and APIs, including feeds, groups, profiles, moderation, and engagement analytics.",
-      "content": "# How to Create an In-App Community for Users\n## How to create an in-app community for users\n## What an in-app community is\n## Why apps create in-app communities\n## Core features needed for an in-app community\n### Essential community features\n## Build in-house vs using a community SDK\n### Approach comparison\n## How community SDKs work inside apps\n## Creating an in-app community with social.plus\n## Step-by-step guide to creating an in-app community\n## Metrics to track for in-app communities\n## FAQs\n### What is an in-app community?\n### Do I need to build an in-app community from scratch?\n### How long does it take to launch an in-app community?\n### Can in-app communities be monetized?\n## Conclusion"
+      "metaTitle": "How do you create an in-app community?",
+      "metaDescription": "How to create an in-app community: define who it serves, open a few spaces with rules and moderators, seed it with founding members, then open it up.",
+      "content": "# How do you create an in-app community?\n## What should you decide before you build anything?\n## How should you structure the community?\n## What rules and roles do you need at launch?\n## What are the steps?\n## What usually goes wrong?\n## How social.plus helps teams create an in-app community\n## FAQs\n### What makes an in-app community successful?\n### What should community guidelines include?\n### Do you need developers for an in-app community?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-build-community-features-inside-an-app",
