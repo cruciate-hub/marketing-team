@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-10-21T10:45:26.433Z",
+    "generatedAt": "2026-11-16T10:49:12.440Z",
     "itemCount": 175,
     "collectionId": "68f643838f7abffca74efbc1",
     "method": "webflow-data-api"
@@ -26,9 +26,9 @@
     },
     {
       "url": "https://www.social.plus/answers/how-to-moderate-an-in-app-community",
-      "metaTitle": "How to Moderate an In-App Community",
-      "metaDescription": "To moderate an in-app community, publish a code of conduct, run automated classifiers, staff a review queue, and document escalation. Healthy surfaces sustain participation.",
-      "content": "# How to moderate an in-app community\n## Prerequisites\n## Step-by-step guide\n## Moderation tooling stack\n## Common pitfalls\n## How social.plus supports moderation\n## FAQs\n## Conclusion"
+      "metaTitle": "How do you moderate an in-app community?",
+      "metaDescription": "How to moderate an in-app community: a public code of conduct, automated filters, reporting and blocking, a staffed review queue, and fair appeals.",
+      "content": "# How do you moderate an in-app community?\n## What makes moderating an in-app community different?\n## What should your moderation policy cover?\n## Which moderation tools work best?\n## How do you run moderation day to day?\n## What are the common pitfalls?\n## How social.plus supports in-app community moderation\n## FAQs\n### Can community moderation be fully automated?\n### What does a community moderator do?\n### Should community guidelines be public?\n### How should you handle appeals of moderation decisions?\n## Conclusion"
     },
     {
       "url": "https://www.social.plus/answers/how-to-grow-an-in-app-community",
