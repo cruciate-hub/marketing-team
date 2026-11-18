@@ -97,7 +97,10 @@ a[data-wf-focus-visible] {
   z-index: 997;
   background-color: var(--social--dark);
   width: 100%;
-  padding: 0.75rem 2.5rem;
+  padding: 2rem 2.5rem 0.75rem; /* 2rem below the floating nav (17 Nov 2026) */
+}
+@media screen and (max-width: 479px) {
+  .breadcrumb-bar { padding-top: 1.5rem; } /* 24px on phones, 18 Nov 2026 */
 }
 .breadcrumb-bar.c-dark {
   border-bottom-color: var(--border--border-dark);

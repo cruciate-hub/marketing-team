@@ -1,0 +1,16 @@
+#stage { --ground:#111111; --main:#0253F7; --second:#FFFFFF; --accent:#6E9BFF; color:var(--second); font-synthesis:style; font-family:"Figtree-500", var(--sans, system-ui, sans-serif) }
+.ground { position:absolute; inset:0; background:var(--ground) }
+.ground::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 75% 62% at 50% 50%, transparent 50%, rgba(0,0,0,.72) 100%); pointer-events:none }
+.words { position:absolute; margin:0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px } .words > * { margin:0 }
+.line { font-family:"Figtree-700", var(--display, var(--sans, system-ui, sans-serif)); font-size:76px; line-height:1.05; font-weight:700; letter-spacing:-0.015em }
+.sub { font-size:42px; line-height:1.2; color:color-mix(in srgb, var(--second) 68%, var(--ground)) }
+.hero { font-family:"Figtree-700", var(--sans, system-ui, sans-serif); font-size:96px; line-height:1.12; letter-spacing:-0.015em }
+.hl { color:var(--accent) }
+.label { left:90px; top:239px; width:900px }
+.glow { position:absolute; width:1500px; height:1500px; margin:-750px 0 0 -750px; border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--main) 42%, transparent) 0%, transparent 70%) }
+.ring { position:absolute; border:3px solid var(--accent); box-sizing:border-box }
+.phone { position:absolute; left:244px; top:435px; width:592px; height:1246px; border-radius:69px; background:color-mix(in srgb, var(--ground) 90%, var(--second)); box-shadow:0 0 0 2px color-mix(in srgb, var(--ground) 72%, var(--second)), 0 40px 120px rgba(0,0,0,.6); transform-origin:50% 50% }
+.screen { position:absolute; left:16px; top:16px; width:560px; height:1214px; border-radius:53px; overflow:hidden; background:#F9F5E5 }
+.screen video { position:absolute; left:0; top:0; width:560px; height:1214px; object-fit:cover; display:block }
+.tile { position:absolute; overflow:hidden; background:#FFFFFF }
+.small { font-size:30px; letter-spacing:.14em; text-transform:uppercase; color:color-mix(in srgb, var(--second) 38%, var(--ground)) }

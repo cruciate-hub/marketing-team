@@ -25,6 +25,7 @@ Blog posts, answers, release notes (their title is inside the article section, 4
 ## Accessibility and mobile
 - `<header>` with the page's only `<h1>`. The breadcrumb needs `<nav aria-label="Breadcrumb">` (TO CHECK)
 - Height about 250px at 1440; stacks on phones; no sideways scroll at 390px
+- Spacing (18 Nov 2026, feedback 38): the breadcrumb text starts 32px under the floating nav (24px at ≤479px); the gap lives on the breadcrumb classes, never on the hero or a spacer
 
 ## Webflow note
 - Glossaries template header. Class names are not a concern.
