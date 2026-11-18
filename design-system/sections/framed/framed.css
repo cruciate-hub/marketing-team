@@ -2250,7 +2250,7 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .is-ruled-bottom + .is-ruled { margin-top: -1px; }
 
 /* Linked cards in a framed grid (blog, category, search, related posts…): the whole cell is the link and
-   lightens one step on hover, like every other framed grid. Feedback item 40. *
+   lightens one step on hover, like every other framed grid. Feedback item 40. */
 .frame_cells > li.frame_cell:has(> a.resource-card) { padding: 0; }
 .frame_cells > li > a.resource-card { padding: var(--cell-pad); height: 100%; box-sizing: border-box; }
 .frame_cells > li > a.resource-card, a.frame_cell.resource-card, .resources_featured > a.resource-card, a.resource-row { transition: background-color 200ms ease; }
