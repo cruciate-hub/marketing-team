@@ -554,3 +554,24 @@ The section duplicating `<main id="main-content">` carried `id` in its settings 
 
 ### 115. Embedded icon SVGs with `<title id>` repeat their ids on every copy (share icons, 12 Nov 2026)
 Icon embeds written as `role="img" aria-labelledby="linkedin-title"` with `<title id="linkedin-title">` produce duplicate ids as soon as an icon appears twice (top and bottom share bars, Follow us). When the link has an `aria-label`, make the SVG decorative: `aria-hidden="true" focusable="false"`, no title or desc. Tracking ids are different: GTM triggers here match `gtm.elementId` exactly (`talk_to_sales_button_click`, `cta_footer_button_click`, `mobile-sticky-cta`, `announcement-bar_content`), so never rename or dedupe a tracking id without Stefan's decision (he kept the shared Talk to Sales id on 12 Nov 2026).
+
+### 116. Webflow hides empty bound rich text with `!important`; design the grid around it (customer story metrics, 18 Nov 2026)
+`.w-dyn-bind-empty{display:none!important}` removes an empty CMS rich text cell and cannot be overridden by a native style, so a framed grid with 1px gaps over the line colour shows a grey block where the cells were. Give the grid the dark background (combo, e.g. `cs-metrics`) and let each cell draw its own divider (`border-left`, `:first-child` none; `border-top` on phones). Hide a whole section with no content through a `:has()` rule in an existing style embed; conditional visibility via the API only binds booleans.
+
+### 117. Section padding and a pulled-up breadcrumb combo move together (customer story hero, 18 Nov 2026)
+`cc-fw-crumbs` / `cc-res-crumbs-flush` pull the breadcrumb up with a negative margin-top (-3rem, tiny -1.5rem) to cancel the section's top padding. Shrinking the container padding (5rem → 2rem) put the breadcrumb on top of the frame line. Measure frame line → breadcrumb text after any padding change on a template whose breadcrumb uses those combos.
+
+### 118. Attribute-driven sizing: name the attribute after the class and bind it to the CMS field (customer logos, 18 Nov 2026)
+Logo heights come from the CMS Number field via a custom attribute that a small script reads. A rebuild renamed the class (`cs-thumbnail_logo` → `cs-story-logo`) and added `cs-tile_logo` without the attribute, so the script silently did nothing. Bind it with `set_settings` key `attributes` and `value_binding {source_type:'cms', field_id}` (this replaces the whole attribute list: re-add `loading` and others), name the attribute after the class, and have one script loop over the class names.
+
+### 119. Layout rules that depend on content belong in CSS `:has()`, not a script (customer story sidebar, 18 Nov 2026)
+Hiding empty sidebar rows and stacking 3+ tags with JavaScript runs after paint and jumps the layout. `.row:has(.tags):not(:has(.tag:not(.w-condition-invisible)))` and `.row:has(.w-dyn-item:nth-child(3))` do it before paint. Only `<style>` may be written to an embed through the API (scripts 406, Pitfall 49).
+
+### 120. CMS rich text pasted from docs carries `<code>` wrappers and literal tags (CareVet, Sisal, Performance Golf, 18 Nov 2026)
+Pasted paragraphs arrived wrapped in `<code>` (monospace on the page), with literal `&lt;strong&gt;` / `&lt;/p&gt;` text and `&#8205;` zero-width joiners before headings. Audit `section-2-text` and metric fields for `<code>`, literal tags, empty `<p>` and h3-under-h1 before publishing a story; fix tags only, never wording, and compare the tag-stripped text before and after.
+
+### 121. A card list bound to an optional CMS field shows empty cards (More customer stories, 18 Nov 2026)
+The template's related-story cards bound their title to "Section | Text", which newer stories never filled, so their cards had only an image. Before binding a card title, check the field is filled on every live item (`list_collection_items`), or bind the required title field.
+
+### 122. `create_style` rejects `-webkit-box-orient`; reuse the site's clamp class instead (card titles, 18 Nov 2026)
+A native two-line clamp can't be built with the API. The site has a global `text-style-2lines` rule; create an empty combo on the target chain (e.g. `h5-font-size.cc-res-title.text-style-2lines`, `overflow: hidden`) so the class chain applies, then verify the ellipsis on the published page.
