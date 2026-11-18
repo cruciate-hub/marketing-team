@@ -575,3 +575,6 @@ The template's related-story cards bound their title to "Section | Text", which 
 
 ### 122. `create_style` rejects `-webkit-box-orient`; reuse the site's clamp class instead (card titles, 18 Nov 2026)
 A native two-line clamp can't be built with the API. The site has a global `text-style-2lines` rule; create an empty combo on the target chain (e.g. `h5-font-size.cc-res-title.text-style-2lines`, `overflow: hidden`) so the class chain applies, then verify the ellipsis on the published page.
+
+### 123. Inputs are one component: never add a radius combo to an input class (customer stories filter bar, 18 Nov 2026)
+A build added `c-rounded` combos (20rem radius) to `search-dropdown_toggle` and `input-field_select`, and the canvas board invented its own pill fields (`lp_select`, `sx-search`, `sx-reset`). Stefan: "we use the same input fields everywhere". Before styling any input, select, search or filter control, reuse the existing field classes unchanged (`input-field`, `input-field_select`, live form look) and take canvas fields from `forms.css`. Design-system feedback 49.
