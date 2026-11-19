@@ -578,3 +578,37 @@ A native two-line clamp can't be built with the API. The site has a global `text
 
 ### 123. Inputs are one component: never add a radius combo to an input class (customer stories filter bar, 18 Nov 2026)
 A build added `c-rounded` combos (20rem radius) to `search-dropdown_toggle` and `input-field_select`, and the canvas board invented its own pill fields (`lp_select`, `sx-search`, `sx-reset`). Stefan: "we use the same input fields everywhere". Before styling any input, select, search or filter control, reuse the existing field classes unchanged (`input-field`, `input-field_select`, live form look) and take canvas fields from `forms.css`. Design-system feedback 49.
+
+### 124. Re-read the board right before building, and build what it shows, not a nearby site section (pricing, 19 Nov 2026)
+The first pricing build reused the Talk to Sales framed hero, a 3×3 logo grid, a centred header and the Footer CTA band, from a board read hours earlier. Meanwhile the board had changed (unframed hero, single-row logo marquee, split header inside the frame, add-ons strip, no footer CTA). Stefan: "this is not the same as in Claude Design". Rule: fetch the board with `Artifact read` immediately before building and again before reporting; reuse site classes for **styling**, never swap in a different **layout** because a similar section exists.
+
+### 125. Prove parity with numbers: render the board locally and diff it against staging (pricing, 19 Nov 2026)
+A `*.dc.html` board renders in Playwright straight from `file://` (static HTML, sc-if blocks just show placeholders). `design-system/capture/compare-board-pricing.js` maps each board element to its Webflow counterpart and prints position, size and type differences at 1440/800/390, plus full-page screenshots for a side-by-side. Iterate until only the known site-wide differences remain (site gutter 40px vs board 28px at tablet; global footer).
+
+### 126. `ch` is not portable between the board and Webflow; convert to `em` (pricing headings, 19 Nov 2026)
+The board's `max-width: 14ch` / `22ch` / `52ch` resolved 15% wider on staging (the zero glyph differs), so headings broke on different words. Measure the board's computed max-width and divide by its font size: hero title 7.8em, section title 12.25em, lead about 29-30em. `text-wrap: balance` / `pretty` are accepted natively by `update_style`.
+
+### 127. whtml quirks on forms: empty `for=""`, nested labels, buttons become links, `focusable` dropped (pricing chat form, 19 Nov 2026)
+`<label><input type=radio>` becomes a FormBlockLabel with `for=""`, which detaches the label: clicking the chip does nothing. `<label><input type=checkbox>` nests a FormCheckboxWrapper (its own label) inside the label; restructure to the wrapper alone. `<button type=button>` becomes a Link without href; create a DOM `button` instead. Inline SVGs lose `focusable="false"`; re-add with `set_attributes` and check with a query.
+
+### 128. An explicit `grid-template-rows` on a shared grid disables `grid-auto-rows` (pricing cells, 19 Nov 2026)
+`grid-4` sets `grid-template-rows: auto`, so a `grid-auto-rows: minmax(13.5rem, auto)` combo never applied to the first row. Put a min-height on the cells instead (scoped in the page embed) and verify the computed height.
+
+### 129. Script-driven component sizes need `!important` overrides, scoped to the page (customer stories tiles, 19 Nov 2026)
+The Customer Stories tiles get inline `flex: 2.67 1 0%` from the site script. To match the board's 4:1 split on one page, unlink the instance, give its list a page combo, and override with `#section-cs-stories .cs-cta_link-block-wrapper.active{flex-grow:4!important}` in a page embed; hover still moves the active tile.
+
+### 130. Global type styles leak into new classes (pricing cells, 19 Nov 2026)
+Headings inherited the site h3 letter-spacing (-0.45px) and body colour. Set `letter-spacing: 0em` (and colour) explicitly on new heading classes, then diff computed styles rather than eyeballing.
+
+### 131. Search the component library before building any section; `query_styles` finding a class is not enough (pricing logo wall, 19 Nov 2026)
+I saw `logo-wall_inline` classes in Webflow, found no page using them, and hand-built a logo row. `Section / Logo Wall` (framed inline caption + CMS marquee, 9 instances) already existed. Before building a section, run `query_components` with its keywords (logo, section, card, stories, cta…) and insert the instance.
+
+### 132. Framed combos only apply on the full class chain (pricing, 19 Nov 2026)
+`section background-color_dark border-top c-framed` rendered with no top or bottom border; the site defines the combo on `section padding_Y background-color_dark border-top c-framed`. Copy class chains exactly from an existing section (query it with `children_depth`), never type them from memory.
+
+### 133. A numeric diff of positions and sizes misses 1px lines and + markers (pricing, 19 Nov 2026)
+Two missing frame lines passed the size comparison and a scaled-down side-by-side. `design-system/capture/compare-board-lines.py` scans full-resolution screenshots for full-width frame lines and frame lines down the page; compare the lists (offset by the nav height), then view 1:1 crops of every section seam.
+
+### 134. Webflow is king: reverse-engineer the board to Webflow, never change Webflow to match a board (Stefan, 19 Nov 2026)
+Site variables, type scale, page gutters, class chains and components are the system of record. Differences that come from them (gutter 40px vs the board's 28px, global footer) are expected and stay. Only page-level layout is matched to the board.
+
