@@ -1718,12 +1718,21 @@ a.platform_cell:hover { color: var(--color-text); background: var(--color-bg-alt
    ========================================================================== */
 .page-header { padding: var(--section-pad-m) var(--column-inset) var(--space-2xl); }
 .page-header_inner { max-width: calc(100% * 8 / 12); }
+/* Breadcrumb: global scoping rule (decided 8 Nov 2026). Breadcrumbs appear ONLY on Glossary
+   (/glossary, /glossary/[term]), Answers (/answers, /answers/[slug]), Legal (/legal, /legal/[doc])
+   and Community Corner resource pages (/community-corner/[slug]: Community Corner / Resources / title;
+   added 10 Nov 2026, not the overview pages). No other page gets one. Markup is always <nav aria-label="Breadcrumb"><ol class="breadcrumb">
+   with <li> items and the last item as <span aria-current="page">; never inline-styled crumbs. */
 .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2xs); margin: 0 0 var(--space-m); padding: 0; list-style: none;
   font-family: var(--font-eyebrow); font-size: var(--text-label-mono); font-weight: var(--weight-medium); letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--color-text-subtle); }
 .breadcrumb a { color: var(--color-text-subtle); text-decoration: none; transition: color var(--duration-fast) var(--ease-out); }
 .breadcrumb a:hover { color: var(--color-text); }
 .breadcrumb li + li::before { content: "/"; margin-right: var(--space-2xs); color: var(--color-border-strong); }
 .breadcrumb [aria-current] { color: var(--color-link); }
+/* Always one line: items never wrap; the current page truncates with an ellipsis. */
+.breadcrumb { flex-wrap: nowrap; min-width: 0; max-width: 100%; }
+.breadcrumb li { white-space: nowrap; flex: 0 0 auto; }
+.breadcrumb li:last-child { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .page-header_title { margin: 0; font-size: var(--text-h1); font-weight: var(--weight-bold); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); text-wrap: balance; }
 .page-header_lead { margin: var(--space-m) 0 0; font-size: var(--text-lead); line-height: var(--leading-body); color: var(--color-text-muted); max-width: var(--measure-lead); text-wrap: pretty; }
 /* Extra: category filters on a frame line */
