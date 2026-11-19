@@ -9,11 +9,13 @@ The only Webflow build skill for social.plus website pages. Before it: `brand-me
 
 ## Principles
 
+**Ground rule: native first.** Every look is built with native Webflow styles, classes, variables, states and assets before any custom code. When the API can't reach something Webflow does natively (the Checked state of a custom checkbox, Designer-only settings), the answer is a short Designer step for Stefan, not an embed. Code is the last resort, only for what Webflow cannot express at all, and it needs Stefan's OK (Stefan, 19 Nov 2026; checkbox example in Pitfall 138).
+
 1. **Webflow is king.** Webflow's components, class chains, variables, gutters and type scale are the source of truth. The board adapts to Webflow; never change a Webflow variable or shared class to match a board (Pitfall 134).
 2. **Reuse first.** Existing component → existing class chain → new native class (Stefan's OK first) → code last. Never hand-build what a component already does (Pitfalls 64, 70, 131).
 3. **Measured, not eyeballed.** `scripts/check-board.mjs` compares board and staging. "Done" means its report is in your message (Pitfalls 124, 125, 133).
 4. **"Publish" means staging** (`.webflow.io`). Production only when Stefan says "publish to the real website", after warning that it pushes every unpublished change on the site.
-5. **Style embeds sit next to what they style.** CSS that native styles can't express (`:has()`, checked states, keyframes) goes in a small `<style>` HtmlEmbed inside or beside its section, scoped to that section's classes. Several small embeds are fine; one page-wide embed or page head code is not. Never for layout a native class can do. List each embed in the report.
+5. **Style embeds sit next to what they style.** CSS that native styles truly can't express (`:has()`, keyframes; not checked states, which Webflow's custom checkbox has natively), with Stefan's OK, goes in a small `<style>` HtmlEmbed inside or beside its section, scoped to that section's classes. Several small embeds are fine; one page-wide embed or page head code is not. Never for layout a native class can do. List each embed in the report.
 6. **Raise every drift.** Wherever Webflow wins over the board, put it on a "Webflow won" list and ask Stefan for OK to update the Claude Design board(s) and the design system (`design-system/`, Claude Design card notes) to match. Never silently, never the reverse.
 
 ## The five gates

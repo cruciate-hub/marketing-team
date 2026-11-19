@@ -354,6 +354,10 @@ img {
   padding-left: 0;
   display: flex;
   position: relative;
+  color: var(--frame--frame-marker);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  cursor: pointer;
 }
 .button {
   border: 0.125rem solid var(--social--main-blue);
@@ -420,21 +424,30 @@ img {
   color: var(--text--text-color-grey-light);
 }
 .c-checkbox-icon {
-  border: 0.0625rem solid var(--border--border-dark-grey);
-  background-color: var(--social--grey);
+  border: 0.0625rem solid var(--text--text-color-grey-dark);
+  background-color: var(--social--dark);
+  background-image: url("https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/6afede775729e86367a76ad6_checkbox-check-white.svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 0;
   cursor: pointer;
-  border-radius: 0.25rem;
+  border-radius: 0.3125rem;
   flex: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-top: 0.15rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.0625rem;
   margin-left: 0;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
+}
+/* Checked (Webflow state "Checked"): checkmark preloaded at size 0 above, shown here (19 Nov 2026) */
+.c-checkbox-icon.w--redirected-checked {
+  border-color: var(--social--main-blue);
+  background-color: var(--social--main-blue);
+  background-size: 0.75rem;
 }
 .c-checkbox-icon.c-glass {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  background-color: #22222240;
 }
 .input-label {
   pointer-events: none;
