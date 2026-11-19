@@ -48,6 +48,8 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 ### 4. Check
 - [ ] Publish to staging, then confirm it landed (new class or text in the fetched page).
 - [ ] Run `node scripts/check-board.mjs` at 1440/800/390. No FAIL left unexplained; each Webflow-owned difference is a NOTE in `known` and on the "Webflow won" list.
+- [ ] The same check on every page the built page links to (its contact and form pages); `scrollWidth === innerWidth` at 1440 and 390 (Pitfalls 143, 144).
+- [ ] Every avatar, customer logo, pill, icon and small text matched to the newest page that has it, no legacy styling left (Pitfall 141).
 - [ ] Look at the side-by-side images yourself, section by section, including every line and "+" marker.
 - [ ] Accessibility: the script's axe check passes (no serious or critical). Webflow's `accessibility-audit` skill is an optional extra where installed.
 
@@ -81,7 +83,7 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 - **CMS:** 89, 99, 102, 111, 116-118, 120, 121
 - **Assets, icons and fonts:** 24, 48, 112, 115
 - **Accessibility and semantics:** 75, 76, 79, 108, 115
-- **Checking and verification:** 19, 21, 31, 32, 45, 57, 60, 63, 77, 87, 103, 125, 133
+- **Checking and verification:** 19, 21, 31, 32, 45, 57, 60, 63, 77, 87, 103, 125, 133, 141, 142, 143, 144
 - **Publishing:** 10, 21
 
 ## References
