@@ -17,7 +17,7 @@ The only Webflow build skill for social.plus website pages. Before it: `brand-me
 4. **"Publish" means staging** (`.webflow.io`). Production only when Stefan says "publish to the real website", after warning that it pushes every unpublished change on the site.
 5. **Style embeds sit next to what they style.** CSS that native styles truly can't express (`:has()`, keyframes; not checked states, which Webflow's custom checkbox has natively), with Stefan's OK, goes in a small `<style>` HtmlEmbed inside or beside its section, scoped to that section's classes. Several small embeds are fine; one page-wide embed or page head code is not. Never for layout a native class can do. List each embed in the report.
 6. **Raise every drift.** Wherever Webflow wins over the board, put it on a "Webflow won" list and ask Stefan for OK to update the Claude Design board(s) and the design system (`design-system/`, Claude Design card notes) to match. Never silently, never the reverse.
-7. **Ask, never decide alone.** Any choice with more than one reasonable answer that changes what Stefan gets is his to make: original page or copy, which pages, new class or component, replacing or keeping a section, where something lives. Ask in one line before acting, with your recommendation first. Deciding it yourself and mentioning it afterwards is a no-go (Stefan, 19 Nov 2026; Pitfall 139).
+7. **Ask, never decide alone.** Any choice with more than one reasonable answer that changes what Stefan gets is his to make: original page or copy, which pages, new class or component, replacing or keeping a section, where something lives. Copying an existing section means the same component with only the asked difference, never extra links, text or elements (Pitfall 140). Ask in one line before acting, with your recommendation first. Deciding it yourself and mentioning it afterwards is a no-go (Stefan, 19 Nov 2026; Pitfall 139).
 
 ## The five gates
 
@@ -72,7 +72,7 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 ## Pitfalls by topic (numbers in `references/pitfalls.md`, which never change)
 
 - **Board and design source:** 59-62, 86, 88, 124-126, 134, 135, 139
-- **Components, classes and variables:** 136, 137, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
+- **Components, classes and variables:** 140, 136, 137, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
 - **Framed sections and frame lines:** 80-87, 91-95, 132, 133
 - **whtml, element and API quirks:** 9, 23-29, 37, 42, 46, 47, 51, 54, 66, 68, 69, 74, 76, 78, 98-101, 114, 127
 - **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129
