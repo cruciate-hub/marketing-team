@@ -30,4 +30,5 @@ Blog posts and glossary entries do not carry it on the live templates (as-is; TO
 - Static section, no script
 
 ## Webflow note
-- Webflow component "Section / Footer CTA" (82 instances). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Section / Footer CTA" (96 instances). Reuse its classes as built (Webflow is king).

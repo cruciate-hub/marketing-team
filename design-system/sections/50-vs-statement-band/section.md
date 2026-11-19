@@ -29,4 +29,5 @@ There is more than one point to make (use the side-by-side, 04) or when the text
 - Plain text, nothing interactive
 
 ## Webflow note
-- Standard "Section / Grid 2" layout. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Standard "Section / Grid 2" layout. Reuse its classes as built (Webflow is king).

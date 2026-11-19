@@ -49,7 +49,7 @@ A click-by-click visual guide with annotated screenshots walks you through openi
 | [**design-system**](./marketing-team/skills/design-system/SKILL.md) | The design system built from the live website: tokens, foundations (colors, typography, spacing, buttons, cards, imagery, logo, icons, accessibility, shadows and radius, and more) and the 41 section types with page recipes. |
 | [**site-intelligence**](./marketing-team/skills/site-intelligence/SKILL.md) | Queries, audits, and analyzes the 10 website inventory files (marketing, industry, use cases, blog, glossary, answers, customer stories, release notes, product updates, webinars). |
 | [**product-update-vs-website**](./marketing-team/skills/product-update-vs-website/SKILL.md) | Compares product release notes against live website content to find pages that need updating. |
-| [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Migrates Claude-generated HTML/CSS/JS prototypes into native Webflow elements via the Webflow MCP — decision rule for native-vs-code, 10 anti-patterns, 45 pitfalls, worked before/after examples, and a pre-mapped social.plus variable-ID catalog. |
+| [**claude-design-to-webflow**](./marketing-team/skills/claude-design-to-webflow/SKILL.md) | Builds social.plus pages and sections in Webflow from Claude Design boards via the Webflow MCP: Webflow is king, five gates (brief, map, build, check, publish), a board-vs-staging check script (`scripts/check-board.mjs`), site conventions, 135 numbered pitfalls and a pre-mapped social.plus variable-ID catalog. |
 
 ### SEO & linking
 

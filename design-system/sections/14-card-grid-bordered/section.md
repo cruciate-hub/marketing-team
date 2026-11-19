@@ -29,4 +29,5 @@ Items are one-liners (13), have no link (15), or are customer stories (19).
 - 3 columns, 2 under 992px, 1 under 480px; card padding 2.5rem (1.5rem under 480px); no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Card / v1" (31 instances). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Card / v1" (10 instances). Reuse its classes as built (Webflow is king).

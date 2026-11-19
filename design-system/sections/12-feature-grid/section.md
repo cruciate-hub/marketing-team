@@ -29,4 +29,5 @@ Fewer than 6 features (use plain cards 15 or a two-column 11), features that nee
 - 3 columns, 2 under 992px, 1 under 480px; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Section / Community Features" (CMS list). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Section / Community Features" (CMS list). Reuse its classes as built (Webflow is king).

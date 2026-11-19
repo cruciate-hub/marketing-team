@@ -26,4 +26,5 @@ On article pages or product pages; never more than one.
 - Image above the text on phones; no sideways scroll at 390px
 
 ## Webflow note
-- CMS list limited to 1 item. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- CMS list limited to 1 item. Reuse its classes as built (Webflow is king).

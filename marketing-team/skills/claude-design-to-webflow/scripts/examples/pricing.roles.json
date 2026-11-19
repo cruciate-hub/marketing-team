@@ -1,0 +1,198 @@
+{
+ "_comment": "Roles for /pricing-conversational vs Pricing.dc.html (19 Nov 2026). Each role is [boardSelector, stagingSelector]. Start with one role per section in page order (sections without a heading, such as a logo wall, still get one); roles whose name starts with \"section\" also get the frame-line checks (top edge, bottom edge, vertical lines). known = accepted Webflow differences, reported as NOTE.",
+ "url": "https://social-plus.webflow.io/pricing-conversational",
+ "a11yScope": "main",
+ "newCss": [
+  ".pricing-chat",
+  ".pricing-contact_title",
+  ".c-pricing"
+ ],
+ "known": [
+  {
+   "widths": [
+    800,
+    390
+   ],
+   "roles": "*",
+   "props": [
+    "x",
+    "w",
+    "paddingLeft",
+    "paddingRight"
+   ],
+   "why": "Webflow page gutters (page-padding: 40px tablet, 16px phone) differ from the board (28px / 21px). Webflow is king: raised as a drift for the board, not a build fault."
+  }
+ ],
+ "roles": {
+  "section1_hero": [
+   "main > section:nth-of-type(1)",
+   "main > section:nth-of-type(1)"
+  ],
+  "section2_logoWall": [
+   "main > section:nth-of-type(2)",
+   "main > section:nth-of-type(2)"
+  ],
+  "section3_components": [
+   "main > section:nth-of-type(3)",
+   "main > section:nth-of-type(3)"
+  ],
+  "section4_stories": [
+   "main > section:nth-of-type(4)",
+   "main > section:nth-of-type(4)"
+  ],
+  "hero": [
+   "section.section_contact .contact",
+   ".pricing-contact"
+  ],
+  "title": [
+   ".contact_title",
+   ".pricing-contact_title"
+  ],
+  "lead": [
+   ".contact_lead",
+   ".pricing-contact_lead"
+  ],
+  "points": [
+   ".contact_points",
+   ".pricing-contact_points"
+  ],
+  "check": [
+   ".contact_points svg",
+   ".pricing-contact_check"
+  ],
+  "card": [
+   ".gpc",
+   ".pricing-chat"
+  ],
+  "cardHead": [
+   ".gpc_head",
+   ".pricing-chat_head"
+  ],
+  "cardName": [
+   ".gpc_name",
+   ".pricing-chat_name"
+  ],
+  "thread": [
+   ".gpc_thread",
+   ".pricing-chat_thread"
+  ],
+  "botMsg": [
+   ".gpc_msg.is-bot p",
+   ".pricing-chat_msg"
+  ],
+  "chip": [
+   ".gpc_chip",
+   ".pricing-chat_chip"
+  ],
+  "foot": [
+   ".gpc_foot",
+   ".pricing-chat_foot"
+  ],
+  "logoRow": [
+   ".logo-wall_inline",
+   ".logo-wall_inline"
+  ],
+  "caption": [
+   ".logo-wall_inline-caption",
+   ".logo-wall_inline-caption"
+  ],
+  "marquee": [
+   ".logo-wall_marquee",
+   ".logo-wall_marquee"
+  ],
+  "compHeader": [
+   ".section_plan .section-header",
+   "#whats-included .pricing-header"
+  ],
+  "eyebrow": [
+   ".section_plan .eyebrow",
+   "#whats-included .pricing-eyebrow"
+  ],
+  "h2": [
+   ".section_plan .section-header_title",
+   "#whats-included .pricing-header_title"
+  ],
+  "h2lead": [
+   ".section_plan .section-header_lead",
+   "#whats-included .pricing-header_lead"
+  ],
+  "cell": [
+   ".feature-grid_item",
+   ".grid-4.c-pricing > *"
+  ],
+  "tile": [
+   ".icon-tile",
+   ".pricing-icon-tile"
+  ],
+  "cellTitle": [
+   ".feature-grid_title",
+   ".pricing-cell_title"
+  ],
+  "cellText": [
+   ".feature-grid_text",
+   ".grid-4 .pricing-cell_text"
+  ],
+  "addLabel": [
+   ".plan-row.is-addons .plan-row_label",
+   ".c-full-row"
+  ],
+  "addLabelP": [
+   ".plan-row.is-addons .plan-row_label p",
+   ".pricing-addons-note"
+  ],
+  "addon": [
+   ".addon",
+   ".grid-3.c-pricing > .card-v1:not(.c-full-row)"
+  ],
+  "addonName": [
+   ".addon_name",
+   ".pricing-addon_name"
+  ],
+  "addonText": [
+   ".addon_text",
+   ".pricing-cell_text.is-addon"
+  ],
+  "storyHdr": [
+   "section[aria-label=\"Customer stories\"] .section-header",
+   "#section-cs-stories .pricing-header"
+  ],
+  "storyH2": [
+   "section[aria-label=\"Customer stories\"] .section-header_title",
+   "#section-cs-stories .pricing-header_title"
+  ],
+  "storyLead": [
+   "section[aria-label=\"Customer stories\"] .section-header_lead",
+   "#section-cs-stories .pricing-header_lead"
+  ],
+  "tileActive": [
+   ".story-tile.is-active",
+   ".cs-cta_link-block-wrapper:first-child .cs-cta_link-block"
+  ],
+  "tileOther": [
+   ".story-tile:not(.is-active)",
+   ".cs-cta_link-block-wrapper:nth-child(2) .cs-cta_link-block"
+  ]
+ },
+ "selftest": [
+  {
+   "name": "missing-frame-lines",
+   "inject": "#whats-included,#whats-included *,#section-cs-stories{border-color:transparent!important}#whats-included .grid-4,#whats-included .grid-3{background-color:transparent!important}",
+   "expect": "frame line|vertical frame"
+  },
+  {
+   "name": "wrong-font-size",
+   "inject": ".pricing-cell_title{font-size:28px!important}",
+   "expect": "role cellTitle"
+  },
+  {
+   "name": "missing-section",
+   "inject": "main > section:nth-of-type(2){display:none!important}",
+   "expect": "role (section2|logoRow|marquee|caption)"
+  },
+  {
+   "name": "horizontal-scroll",
+   "inject": ".pricing-contact_title{min-width:1700px}",
+   "expect": "horizontal scroll"
+  }
+ ]
+}

@@ -28,4 +28,5 @@ The items have no image (13, 15) or are customer stories (19).
 - 3 or 4 columns become 2 under 992px and 1 under 480px; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow components "Industry / Use Case" (60 instances) and "Industry / 4 Grid". Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow components "Industry / Use Case" (60 instances) and "Industry / 4 Grid". Reuse its classes as built (Webflow is king).

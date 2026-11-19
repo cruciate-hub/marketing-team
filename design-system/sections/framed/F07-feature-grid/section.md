@@ -1,6 +1,6 @@
 # F07 · Feature grid (framed)
 
-- Status: approved (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); not yet in Webflow · Owner: Amadeus · Approved by: Stefan, 12 October 2026
+- Status: approved (2026-10-12), from Amadeus's web library (v0.1, decision 8 October 2026); Webflow: see "Webflow note" (checked 19 Nov 2026) · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library's page demo (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), read 12 October 2026; Webflow name in the library: "Section / Feature Grid"
 - Code: source.html (links `../../../tokens.css` and `../framed.css`) · Screenshot: none yet (render source.html)
 - Captured section it replaces on a framed page: 12 Feature grid, 13 Card grid / Icon cards, 14 Bordered, 15 Plain
@@ -16,7 +16,7 @@ Variants: centred header with six features in three columns; split header with t
 ## Rules
 - A framed section sits on the frame: framed sections only on that page, never a captured section and never a captured section wrapped in the frame (Grid and frame section).
 - Keep the structure and inner layout as source.html shows it; change only the content. Inside the frame there are cells divided by lines, no floating cards.
-- Colours, type and spacing come from the role, type-scale and layout tokens (`framed.css` and the design system's tokens); in a Webflow build write their values (none is a Webflow variable yet).
+- Colours, type and spacing come from the role, type-scale and layout tokens (`framed.css` and the design system's tokens); in a Webflow build use the site's variables and classes (Webflow is king); a value with no Webflow equivalent is raised as a drift, never added on the fly.
 - Text stays on the type scale; eyebrows in Geist Mono; one primary button per section.
 
 ## Accessibility and mobile
@@ -24,3 +24,6 @@ Variants: centred header with six features in three columns; split header with t
 - Cells collapse to two columns under 992px and one under 480px; splits stack with a frame line between. Rendered at 390px: no sideways scroll.
 
 In Webflow (Developer Portal, 31 Oct 2026): linked cells lighten one step on hover and show a focus ring; the cell grid is a list (`role="list"` / `role="listitem"`); the section closes with a full-width bottom rule and bottom + markers.
+
+## Webflow note
+- Checked 19 Nov 2026 (read-only, `query_components`). No component. Built pattern: `section padding_Y background-color_dark border-top c-framed` > `page-padding` > `container-large c-framed` (with `frame-marker` divs) > cells as `grid-4 c-framed` / `grid-3 c-framed` > `card-v1 c-cell` (`c-clickable` when the cell is a link) with a `card-icon-v2 c-tile` icon tile (Developer Portal, /pricing-conversational `#whats-included`, 19 Nov 2026).

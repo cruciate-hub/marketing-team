@@ -2256,3 +2256,13 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 .frame_cells > li > a.resource-card, a.frame_cell.resource-card, .resources_featured > a.resource-card, a.resource-row { transition: background-color 200ms ease; }
 .frame_cells > li > a.resource-card:hover, a.frame_cell.resource-card:hover, .resources_featured > a.resource-card:hover, a.resource-row:hover { background: var(--color-bg-alt); }
 .frame_cells > li > a.resource-card:focus-visible, a.frame_cell.resource-card:focus-visible, .resources_featured > a.resource-card:focus-visible, a.resource-row:focus-visible { outline: 2px solid var(--color-link); outline-offset: -2px; }
+
+/* ---------- Unframed hero (.hero-noframe), Stefan 19 Nov 2026 ----------------------------
+   A hero without a frame sits on the container edges, like the live site (/customer-stories):
+   the frame's column inset only belongs inside frame cells. Zero it for the whole hero, then
+   keep a gap between the text and the visual of a split hero on desktop. */
+.hero-noframe, .hero-noframe * { --column-inset: 0px; --frame-inset: 0px; --cell-pad: 0px; }
+@media (min-width: 992px) {
+  .hero-noframe .frame_split > .hero-split_cell-content { padding-right: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
+  .hero-noframe .frame_split > .hero-split_cell-visual { padding-left: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
+}

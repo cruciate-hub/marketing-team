@@ -1,0 +1,9 @@
+{
+  "name": "claude-design-to-webflow-check",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Board-vs-staging check for Claude Design to Webflow builds: layout per role, frame lines, horizontal scroll, live CSS, axe accessibility, internal links.",
+  "scripts": { "check": "node check-board.mjs", "selftest": "node selftest.mjs" },
+  "dependencies": { "playwright": "^1.50.0", "pngjs": "^7.0.0", "axe-core": "^4.10.0" }
+}

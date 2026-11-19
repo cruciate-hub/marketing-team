@@ -1,6 +1,6 @@
 # Framed sections
 
-The section set on the web library's frame (Amadeus, decision 8 October 2026): 23 sections taken unchanged from the library on 12 October 2026 (F01 to F16 from its page demo, F17 to F23 from its section pages) (one social.plus addition: the "Works in" variant of F02, `feedback.md` item 5). They replace the captured sections on a framed page; the captured sections stay as the record of the live site. Not yet in Webflow.
+The section set on the web library's frame (Amadeus, decision 8 October 2026): 23 sections taken unchanged from the library on 12 October 2026 (F01 to F16 from its page demo, F17 to F23 from its section pages) (one social.plus addition: the "Works in" variant of F02, `feedback.md` item 5). They replace the captured sections on a framed page; the captured sections stay as the record of the live site. In Webflow: only F04 (`Section / Logo Wall`) is a component; the others are built in the framed class chain, see each section's "Webflow note" (checked 19 Nov 2026).
 
 - Status: approved (2026-10-12) · Owner: Amadeus · Approved by: Stefan, 12 October 2026
 - Source: the web library (https://claude.ai/artifact/PhSYGn8yxneLKrCxCgeWmd), its page demo

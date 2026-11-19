@@ -28,4 +28,5 @@ Blog posts, answers, release notes (their title is inside the article section, 4
 - Spacing (18 Nov 2026, feedback 38): the breadcrumb text starts 32px under the floating nav (24px at ≤479px); the gap lives on the breadcrumb classes, never on the hero or a spacer
 
 ## Webflow note
-- Glossaries template header. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Glossaries template header. Reuse its classes as built (Webflow is king).

@@ -33,4 +33,5 @@ Customer stories (41 + 42), glossary entries (04 + 43), marketing pages.
 - One column on phones, aside below the body; no sideways scroll at 390px
 
 ## Webflow note
-- CMS templates (Blog Posts, Answers, Release Notes, Monthly Product Updates, Tutorials, Company News). Scripts for the table of contents, share buttons and reading time are removed from source.html. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- CMS templates (Blog Posts, Answers, Release Notes, Monthly Product Updates, Tutorials, Company News). Scripts for the table of contents, share buttons and reading time are removed from source.html. Reuse its classes as built (Webflow is king).

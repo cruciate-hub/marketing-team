@@ -32,4 +32,5 @@ A product image or video exists (01); industry pages (03); articles (04).
 - Stacks on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Built as a plain section on the page; class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Built as a plain section on the page; reuse its classes as built (Webflow is king).

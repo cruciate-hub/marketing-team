@@ -27,4 +27,5 @@ Any other page type.
 - Aside above the body on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Customer Stories template with the "CC / Customer Stories - Rich Text Styler" embed (kept). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Customer Stories template with the "CC / Customer Stories - Rich Text Styler" embed (kept). Reuse its classes as built (Webflow is king).

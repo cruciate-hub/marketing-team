@@ -28,4 +28,5 @@ Any other page; product pages link to pricing instead.
 - Cards stack on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Pricing page section with its own `<style>` embeds (kept). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Pricing page section with its own `<style>` embeds (kept). Reuse its classes as built (Webflow is king).

@@ -31,4 +31,5 @@ Never leave it out.
 - Text sizes: headings 1 rem bold white, links `--text--text-color-grey-light`, bottom rows tiny `--text--text-color-grey-medium`
 
 ## Webflow note
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
 - Webflow component "Footer". The newsletter form posts to the site's form endpoint; `action`, hidden fields and the anti-bot attributes were removed from source.html.

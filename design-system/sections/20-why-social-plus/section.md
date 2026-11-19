@@ -28,4 +28,5 @@ The page already states the reasons in prose; never twice on a page.
 - The grid stacks to one column on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Industry / Why social.plus"; the product pages use the same `.product-details-grid_*` classes. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Industry / Why social.plus"; the product pages use the same `.product-details-grid_*` classes. Reuse its classes as built (Webflow is king).

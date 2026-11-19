@@ -32,4 +32,5 @@ Answers, blog posts (40).
 - One column on phones, contents above the body; no sideways scroll at 390px
 
 ## Webflow note
-- Glossaries template. The TOC script is removed from source.html. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Glossaries template. The TOC script is removed from source.html. Reuse its classes as built (Webflow is king).

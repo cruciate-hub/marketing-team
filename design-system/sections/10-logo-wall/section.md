@@ -31,4 +31,5 @@ The page already shows customer stories with logos right above or below (then ke
 - The hover chip is hidden on touch screens
 
 ## Webflow note
-- Webflow "Logo wall" CMS section; the hover chip and the responsive logo picks are a `<style>` embed inside the section (kept in source.html). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow "Logo wall" CMS section; the hover chip and the responsive logo picks are a `<style>` embed inside the section (kept in source.html). Reuse its classes as built (Webflow is king).

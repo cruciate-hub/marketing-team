@@ -28,4 +28,5 @@ Articles with images to show (30), customer stories (19).
 - Rows wrap on phones: date above the title, tags below; no sideways scroll at 390px
 
 ## Webflow note
-- CMS list with the "CC / Product Update Tags" embed. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- CMS list with the "CC / Product Update Tags" embed. Reuse its classes as built (Webflow is king).
