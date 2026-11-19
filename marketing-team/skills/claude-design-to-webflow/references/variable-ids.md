@@ -10,7 +10,7 @@ Pre-mapped so `data_style_tool` calls can pass `variable_as_value` **without** a
 |---|---|
 | Site ID | `66e2765d540e1939a89db4bb` |
 | Staging URL | `https://social-plus.webflow.io` (publish here: `publishToWebflowSubdomain: true`, `customDomains: []`) |
-| Production URLs | `https://social.plus`, `https://www.social.plus` (publish ONLY on explicit go-ahead) |
+| Production URLs | `https://social.plus`, `https://www.social.plus` (publish only when Stefan says "publish to the real website" (updated 19 Nov 2026)) |
 | Designer URL | `https://social-plus.design.webflow.com` (only needed for Designer-bridge tools) |
 | Read the current page ID from the live page | `document.documentElement.getAttribute('data-wf-page')` |
 
@@ -58,7 +58,9 @@ Pre-mapped so `data_style_tool` calls can pass `variable_as_value` **without** a
 |---|---|---|
 | Font / Figtree | `--font--figtree` | `variable-349b794c-a39f-b897-5ec6-dcc9abc79896` |
 
-*No monospace variable exists — use static `ui-monospace, monospace` for code-style fonts.*
+*`Font/Geist Mono` exists since 30 Oct 2026 (eyebrow labels): `variable-251f40f6-f789-f108-92da-70f53aeda558`. For code, static `ui-monospace, monospace`.*
+
+**Added 30 Oct 2026 (checked 19 Nov 2026):** `Frame/Frame - Line` #202022 `variable-39f9cd7a-7f17-f8af-bfe9-ec09b6ec047f` · `Frame/Frame - Marker` #939497 `variable-4a393da7-641b-cc1a-1271-91cfab090527` · `Text/Text Color - Link Blue` #6f89fc `variable-7ad0e763-85c7-c21a-9e30-24f639549b87` · `Border/Border - Tile` #29292b `variable-13e2a6d3-4841-e197-ae0a-1aa6cece1901`.
 
 ## Sizes
 

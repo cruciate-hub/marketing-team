@@ -95,6 +95,8 @@ const TEXT_KEYS = new Set(['fontSize', 'lineHeight', 'fontWeight', 'letterSpacin
 const rgb = v => (v.match(/[\d.]+/g) || []).map(Number);
 function differs(f, av, sv, a, s) {
   if (TEXT_KEYS.has(f) && !(a.hasText && s.hasText)) return false;
+  if (f === 'letterSpacing') { av = av === 'normal' ? '0px' : av; sv = sv === 'normal' ? '0px' : sv; }
+  if (/^border(Top|Bottom)Width$/.test(f)) return Math.abs(parseFloat(av) - parseFloat(sv)) > 0.5;   // a missing 1px line must fail
   if (f === 'gap') { if (!a.layout || !s.layout) return false; const g = v => Math.max(0, ...(v.match(/[\d.]+(?=px)/g) || ['0']).map(Number)); return Math.abs(g(av) - g(sv)) > (cfg.toleranceCss ?? 1.5); }
   if (/color/i.test(f)) {
     const x = rgb(av), y = rgb(sv); if (x.length < 3 || y.length < 3) return av !== sv;
@@ -123,7 +125,7 @@ function vlines(png, y0, y1) {
   for (let x = 0; x < w; x++) { let n = 0, t = 0; for (let y = Math.max(0, y0 + 4); y < Math.min(h, y1 - 4); y += 4) { t++; if (near(data, (y * w + x) * 4)) n++; } if (t && n > t * 0.8) cols.push(x); }
   return cols.filter((x, k) => k === 0 || x - cols[k - 1] > 1).length;
 }
-const near = (d, i) => Math.abs(d[i] - LINE[0]) <= 10 && Math.abs(d[i + 1] - LINE[1]) <= 10 && Math.abs(d[i + 2] - LINE[2]) <= 10;
+const near = (d, i) => Math.abs(d[i] - LINE[0]) <= 4 && Math.abs(d[i + 1] - LINE[1]) <= 4 && Math.abs(d[i + 2] - LINE[2]) <= 4;
 const SECTION_ROLES = cfg.sectionRoles || Object.keys(ROLES).filter(k => /^section/i.test(k));
 
 for (const W of widths) {
@@ -147,9 +149,11 @@ for (const W of widths) {
     const fails = [], notes = [];
     for (const f of ['x', 'w', 'h']) if (Math.abs(a[f] - s[f]) > (cfg.tolerancePx ?? 3)) (isKnown(W, k, f) ? notes : fails).push(`${f} ${a[f]}→${s[f]}`);
     for (const f of KEYS) {
+      if (/^border(Top|Bottom)Width$/.test(f) && SECTION_ROLES.includes(k)) continue;   // section lines: the frame-line checks own them (a shared line can sit on either section)
       const av = a[f], sv = s[f];
       if (differs(f, av, sv, a, s)) (isKnown(W, k, f) ? notes : fails).push(`${f} ${av}→${sv}`);
     }
+    if (a.hasText !== s.hasText) notes.push('text styles not compared: one side is a wrapper, point the role at the text element');
     if (fails.length) add('FAIL', `role ${k} @${W}`, fails.join(' | '));
     else add('PASS', `role ${k} @${W}`);
     if (notes.length) add('NOTE', `role ${k} @${W} (known Webflow difference)`, notes.join(' | '));
@@ -189,7 +193,7 @@ for (const W of widths) {
     const root = document.querySelector(scope) || document.body;
     const svgs = [...root.querySelectorAll('svg')].filter(s => s.getAttribute('role') !== 'img' && (s.getAttribute('aria-hidden') !== 'true' || s.getAttribute('focusable') !== 'false')).length;
     const ids = {}; let emptyIds = 0; document.querySelectorAll('[id]').forEach(e => { if (!e.id.trim()) { emptyIds++; return; } ids[e.id] = (ids[e.id] || 0) + 1; });
-    const raw = [...root.querySelectorAll('[href]')].filter(e => !['A', 'LINK'].includes(e.tagName)).length;
+    const raw = [...root.querySelectorAll('[href]')].filter(e => !['A', 'LINK'].includes(e.tagName) && !e.closest('svg')).length;
     const relLink = [...document.querySelectorAll('a + link[rel]')].length;
     return { emptyIds, mains: document.querySelectorAll('main').length, svgs, dup: Object.entries(ids).filter(([, n]) => n > 1).map(([k, n]) => `${k}×${n}`), raw, relLink };
   }, scope);
@@ -219,7 +223,9 @@ for (const W of widths) {
       for (const l of document.querySelectorAll('link[rel=stylesheet]')) { try { t += await (await fetch(l.href, { cache: 'no-store' })).text(); } catch { } }
       return t;
     });
-    const missing = newCss.filter(c => !css.includes(c));
+    const flat = css.replace(/\s+/g, '');
+    const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const missing = newCss.filter(c => { const n = c.replace(/\s+/g, ''); return /^\.[\w-]+$/.test(n) ? !new RegExp(esc(n) + '(?![\\w-])').test(flat) : !flat.includes(n); });
     add(missing.length ? 'FAIL' : 'PASS', 'new CSS is live on staging', missing.length ? `missing: ${missing.join(', ')} (stale CDN? republish and wait)` : `${newCss.length} found`);
   } else add('WARN', 'new CSS is live on staging', 'no --new-css given: list the classes or rules this build added');
   await p.close();

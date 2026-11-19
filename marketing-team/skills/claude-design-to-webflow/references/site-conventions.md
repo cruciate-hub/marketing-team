@@ -1,6 +1,6 @@
 # Site conventions (social.plus Webflow)
 
-How social.plus pages are built in Webflow. Moved here unchanged from SKILL.md on 19 Nov 2026 (move table in the PR), except where marked **(updated 19 Nov 2026)**. Webflow is king: these conventions win over a board.
+How social.plus pages are built in Webflow. Moved here unchanged from SKILL.md on 19 Nov 2026 (move table in PR #118), except where marked **(updated 19 Nov 2026)**. Webflow is king: these conventions win over a board.
 
 ## Site conventions first — non-negotiable, before writing a single element
 A design board shows how a page LOOKS; the site's components and conventions decide how it is BUILT. Rebuilding a button, link or icon by hand from the board's markup is the #1 failure of this skill (Developer Portal, 30 Oct 2026: hand-made buttons, missing link/SVG attributes, an open-bottomed frame grid — rejected outright). Before any `data_whtml_builder` call:
@@ -30,7 +30,7 @@ Decisions with their social.plus defaults (state them in one line at the start; 
 
 ## Native vs code decision
 **Native** (`data_style_tool` Style record): single-class rules; combo classes (`parent_style_names`); supported pseudos (`:hover :focus :focus-visible :active ::before ::after :nth-child(odd/even) :first/last-child :focus-within …`); responsive breakpoint values; variable bindings (`variable_as_value`).
-**Code** (freeform head/footer, or an HTML embed): `@keyframes`, `@property`; descendant (`.a .b`) + attribute (`[data-x]`) selectors; `:nth-child(N)`; custom / feature queries (`prefers-reduced-motion`); `color-mix()` (Designer corrupts it on save — keep in code, OR store it as a variable `custom_value` and bind the property to that variable); section-root `--var:` definitions descendants inherit; all JS behavior.
+**Code** (a `<style>` embed next to the section it styles, rule 7; freeform head/footer only where site-wide code already lives (updated 19 Nov 2026)): `@keyframes`, `@property`; descendant (`.a .b`) + attribute (`[data-x]`) selectors; `:nth-child(N)`; custom / feature queries (`prefers-reduced-motion`); `color-mix()` (Designer corrupts it on save — keep in code, OR store it as a variable `custom_value` and bind the property to that variable); section-root `--var:` definitions descendants inherit; all JS behavior.
 
 ## Breakpoints (authoritative)
 `main` = base/desktop (≥992) · `medium` ≤991 (`max-width:991px`) · `small` ≤767 (`max-width:767px`) · `tiny` ≤479 (`max-width:479px`) · up-scaling `large`≥1280 / `xl`≥1440 / `xxl`≥1920. **Styles cascade DOWN** (main→medium→small→tiny): set at `small` and it also applies at `tiny` unless overridden. In em: 48em=768, 47.9375em=767, 61.9375em=991, 29.9375em=479. Round Claude's odd breakpoints (1200/720/520) to these, or keep that `@media` block in code.
@@ -53,4 +53,4 @@ Decisions with their social.plus defaults (state them in one line at the start; 
 - [ ] Heading levels follow the page outline (one h1; section titles h2), not the design board's tags.
 - [ ] **Semantic HTML check on the published staging HTML** (curl it, don't eyeball): exactly one `<main>` holding the page content between nav and footer (add one with `data_element_builder` `BY_CUSTOM_TAG` `main` and `move_element` the sections in); one `h1`, no skipped levels; a section without a visible heading has an `aria-label`; a grid of cards is a list (`role="list"` on the grid, each card wrapped in a plain div with `role="listitem"`); no `<link>` elements in the body; no invalid attribute values (e.g. `width="currentWidth"`); decorative images `alt=""`, decorative SVG/markers `aria-hidden`; every link has a name.
 - [ ] Every clickable block has a visible hover and a `:focus-visible` state, and nothing that is not clickable has one.
-- [ ] Lessons from this build added to `references/pitfalls.md` (new number, plus its one-liner in the index at the top of that file) before you finish; every "Webflow won" drift raised with Stefan for the board and the design system.
+- [ ] Lessons from this build added to `references/pitfalls.md` (new number, plus its one-liner in the index at the end of that file) before you finish; every "Webflow won" drift raised with Stefan for the board and the design system.

@@ -28,7 +28,7 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 - [ ] Does the target page already hold a build? Then map and restyle what is there (Pitfall 88) and run the check against it first; never rebuild it blind.
 
 ### 2. Map
-- [ ] For each board section: the Webflow component or existing section it maps to, and its exact class chain. Sources: the section's `## Webflow note` in `design-system/sections/**/section.md` (public repo `cruciate-hub/marketing-team`: your checkout, or the shallow clone the `design-system` skill's fetch block makes at `/tmp/cruciate-hub-marketing-team`), then `data_component_tool query_components` (keywords: section, logo, card, button, icon, form), then an existing page's `query_elements children_depth:-1`. A note without a chain: take the chain from a page that uses it and add it to the note. Never a nearby site section because it looks similar (Pitfall 124).
+- [ ] For each board section: the Webflow component or existing section it maps to, and its exact class chain. Sources: the section's `## Webflow note` in `design-system/sections/**/section.md` (public repo: your checkout, or `git clone --depth 1 https://github.com/cruciate-hub/marketing-team.git /tmp/cruciate-hub-marketing-team`, or `git -C` that folder `pull` if it exists), then `data_component_tool query_components` (keywords: section, logo, card, button, icon, form), then an existing page's `query_elements children_depth:-1`. A note without a chain: take the chain from a page that uses it and add it to the note. Never a nearby site section because it looks similar (Pitfall 124).
 - [ ] Framed sections use the full chain `section padding_Y background-color_dark border-top c-framed` (Pitfall 132; `site-conventions.md` rule 4).
 - [ ] New classes, variables or components: none, or each named with its reason and approved by Stefan.
 - [ ] Roles file for the check written, starting from `scripts/examples/pricing.roles.json` as a template (one role per section, in order, plus the elements that carry the look; `references/check-board.md`).
@@ -52,7 +52,7 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 - [ ] Before any publish: compare the site's `lastUpdated` with `lastPublished`; name unpublished changes you didn't make.
 - [ ] Staging publish only. Production only on "publish to the real website".
 - [ ] "Webflow won" list raised with Stefan for the board and the design system.
-- [ ] Lessons added as new pitfall numbers (plus a one-liner in the index at the end of `pitfalls.md`), in `design-system/feedback.md` where it is a design rule, and in the vault.
+- [ ] Lessons added as new pitfall numbers (plus a one-liner in the index at the end of `pitfalls.md`), in `design-system/feedback.md` where it is a design rule (or, without the repo, sent to Stefan to add).
 
 ## Report format
 
@@ -69,7 +69,7 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 ## Pitfalls by topic (numbers in `references/pitfalls.md`, which never change)
 
 - **Board and design source:** 59-62, 86, 88, 124-126, 134, 135
-- **Components and classes:** 136, 2, 6, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
+- **Components, classes and variables:** 136, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
 - **Framed sections and frame lines:** 80-87, 91-95, 132, 133
 - **whtml, element and API quirks:** 9, 23-29, 37, 42, 46, 47, 51, 54, 66, 68, 69, 74, 76, 78, 98-101, 114, 127
 - **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129

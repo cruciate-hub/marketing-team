@@ -12,7 +12,7 @@ It uses the system Chrome when it finds one, otherwise Playwright's Chromium. No
 
 ## Inputs
 
-1. **The board**, fresh: `Artifact read` the canvas right before checking and use the saved `.dc.html` (note its version id in the report). A board read hours ago is not the board (Pitfall 124).
+1. **The board**, fresh: `Artifact read` the canvas with `path: "project/<Board>.dc.html"` right before checking; the result names the local file it saved, use that path (note the version id it reports). A board read hours ago is not the board (Pitfall 124).
 2. **The staging URL** (`https://<site>.webflow.io/<page>`), published after the last change.
 3. **A roles file**, written in the Map step. JSON:
    - `roles`: `{ "name": ["board selector", "staging selector"] }`. Start with one role per section in page order, named `section1_…`, `section2_…` (sections without a heading too, such as a logo wall: Pitfall 131). Then the elements that carry the look: titles, leads, cards, cells, tiles, chips. Roles named `section…` also get the frame-line checks.

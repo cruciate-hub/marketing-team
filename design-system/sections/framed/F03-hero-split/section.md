@@ -5,7 +5,7 @@
 - Code: source.html (links `../../../tokens.css` and `../framed.css`) · Screenshot: none yet (render source.html)
 - Captured section it replaces on a framed page: 01 Hero / Product, 03 Hero / Industry
 
-Text cell and visual cell divided by a frame line on the column 6/7 edge.
+Text cell and visual cell divided by a frame line on the column 6/7 edge. Without the frame (`.hero-noframe`, feedback 54) the text starts on the container's left edge and the visual ends on its right edge, with a column inset between them.
 
 ## Use it when
 Product, feature, industry and solution pages: one product, one promise, one visual.
