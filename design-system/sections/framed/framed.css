@@ -2274,4 +2274,6 @@ body{margin:0;font-family:var(--font-sans);font-size:var(--text-body);line-heigh
 @media (min-width: 992px) {
   .hero-noframe .frame_split > .hero-split_cell-content { padding-right: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
   .hero-noframe .frame_split > .hero-split_cell-visual { padding-left: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
+  .hero-noframe .contact_pitch { padding-right: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
+  .hero-noframe .contact_formwrap { padding-left: clamp(1.5rem, 1.333rem + 0.741vw, 2rem); }
 }

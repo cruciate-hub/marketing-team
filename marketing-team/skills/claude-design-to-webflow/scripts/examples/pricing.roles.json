@@ -208,6 +208,10 @@
   "tileOther": [
    ".story-tile:not(.is-active)",
    ".cs-cta_link-block-wrapper:nth-child(2) .cs-cta_link-block"
+  ],
+  "pitch": [
+   ".contact_pitch",
+   ".pricing-contact_pitch"
   ]
  },
  "selftest": [
@@ -228,7 +232,7 @@
   },
   {
    "name": "horizontal-scroll",
-   "inject": ".pricing-contact_title{min-width:1700px}",
+   "inject": "main h1{min-width:1700px}",
    "expect": "horizontal scroll"
   }
  ]
