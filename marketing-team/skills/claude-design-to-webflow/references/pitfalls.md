@@ -599,3 +599,16 @@ The Customer Stories tiles get inline `flex: 2.67 1 0%` from the site script. To
 
 ### 130. Global type styles leak into new classes (pricing cells, 19 Nov 2026)
 Headings inherited the site h3 letter-spacing (-0.45px) and body colour. Set `letter-spacing: 0em` (and colour) explicitly on new heading classes, then diff computed styles rather than eyeballing.
+
+### 131. Search the component library before building any section; `query_styles` finding a class is not enough (pricing logo wall, 19 Nov 2026)
+I saw `logo-wall_inline` classes in Webflow, found no page using them, and hand-built a logo row. `Section / Logo Wall` (framed inline caption + CMS marquee, 9 instances) already existed. Before building a section, run `query_components` with its keywords (logo, section, card, stories, cta…) and insert the instance.
+
+### 132. Framed combos only apply on the full class chain (pricing, 19 Nov 2026)
+`section background-color_dark border-top c-framed` rendered with no top or bottom border; the site defines the combo on `section padding_Y background-color_dark border-top c-framed`. Copy class chains exactly from an existing section (query it with `children_depth`), never type them from memory.
+
+### 133. A numeric diff of positions and sizes misses 1px lines and + markers (pricing, 19 Nov 2026)
+Two missing frame lines passed the size comparison and a scaled-down side-by-side. `design-system/capture/compare-board-lines.py` scans full-resolution screenshots for full-width frame lines and frame lines down the page; compare the lists (offset by the nav height), then view 1:1 crops of every section seam.
+
+### 134. Webflow is king: reverse-engineer the board to Webflow, never change Webflow to match a board (Stefan, 19 Nov 2026)
+Site variables, type scale, page gutters, class chains and components are the system of record. Differences that come from them (gutter 40px vs the board's 28px, global footer) are expected and stay. Only page-level layout is matched to the board.
+

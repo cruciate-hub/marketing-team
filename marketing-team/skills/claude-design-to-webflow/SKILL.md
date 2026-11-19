@@ -36,7 +36,7 @@ Decisions with their social.plus defaults (state them in one line at the start; 
 - **CSS gate:** longhand only; avoid `calc()`/`clamp()`/`min()`/`max()`, `@keyframes`, multi-layer shadows, logical props in native styles (they may be dropped); desktop-first breakpoints `main`→`medium`→`small`→`tiny`.
 - **Capability gate:** never claim "Webflow/MCP can't do X" until you've tried the tool path; otherwise say "untested".
 - **Verification gate:** done = rendered output checked (published staging HTML/CSS + a screenshot); say plainly what you couldn't verify.
-- **Board parity gate (19 Nov 2026):** before reporting a Claude Design build as done, re-read the board (`Artifact read`), render it locally and diff it against staging at 1440/800/390 with `design-system/capture/compare-board-*.js`; every difference is fixed or named (Pitfalls 124-130).
+- **Board parity gate (19 Nov 2026):** before reporting a Claude Design build as done, re-read the board (`Artifact read`), render it locally and diff it against staging at 1440/800/390 with `design-system/capture/compare-board-*.js`; every difference is fixed or named (Pitfalls 124-134). Also run `compare-board-lines.py` and view 1:1 crops of every section seam: lines and + markers don't show up in a size diff. Webflow is king: site tokens, gutters and components win over the board (Pitfall 134).
 - **Publish gate:** no publish by default; staging (`.webflow.io`) after the gate passes, production only on Stefan's go.
 
 ## The tool stack — what's headless, what needs the Designer
