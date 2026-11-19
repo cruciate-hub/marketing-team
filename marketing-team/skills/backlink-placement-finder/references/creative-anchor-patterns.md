@@ -21,4 +21,4 @@ Append new confirmed patterns as you discover them. The "Maps to" column capture
 | "community platform" (singular) | B | a | community-platforms family | `/glossary/community-platform` | 2026-06-10 batch |
 | "engagement rates" / "higher engagement rates" | B | a | engagement-rate family | `/glossary/engagement-rate` | 2026-06-10 batch |
 | "community" | C | a | online-community family | `/glossary/online-community` — focal-noun rule applies (e.g. "convert your audience into a close community") | 2026-06-10 batch |
-| "social sellers" | B | b | live commerce / social commerce topic (no matching anchor family in `anchors.md`) | `/blog/from-viewers-to-belonging-why-community-is-the-engine-of-live-commerce` | 2026-06-19 Pineable (worked-example for route b in SKILL.md) |
+| "social sellers" | B | b | live commerce / social commerce topic (no matching anchor family in `anchors.md`) | `/blog/from-viewers-to-belonging-why-community-is-the-engine-of-live-commerce` | 2026-06-19 batch (worked-example for route b in SKILL.md) |
