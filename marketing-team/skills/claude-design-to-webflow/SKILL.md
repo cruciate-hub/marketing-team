@@ -36,6 +36,7 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 ### 3. Build
 - [ ] Structure with `data_whtml_builder`, existing class names only, no `css` param; styles with `data_style_tool`, colours and fonts bound to variables, sizes in rem.
 - [ ] Buttons, links, icons, nav, footer, logo wall and other recurring sections are component instances.
+- [ ] Text uses the site's global tag styles: `h1`-`h6` and `p` get no class. Add a class to a text element only for something the tag style can't give (a utility like `text-size-small`, or layout such as a max-width), and name it in the report (Pitfall 136).
 - [ ] Before editing a shared class or component: list every page it reaches (`includeInstanceCount`, `query_styles`) and say so. Never experiment on a shared component or Collection List (Pitfall 90).
 - [ ] Before a large change: snapshot what you replace (element tree, embed code, freeform code) to a local file, as the rollback.
 - [ ] Images: uploaded to the asset library (WebP, sized for their slot, about 2x), bound by asset id; decorative images `alt=""`, content images a real alt.
@@ -68,7 +69,7 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 ## Pitfalls by topic (numbers in `references/pitfalls.md`, which never change)
 
 - **Board and design source:** 59-62, 86, 88, 124-126, 134, 135
-- **Components and classes:** 2, 6, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
+- **Components and classes:** 136, 2, 6, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
 - **Framed sections and frame lines:** 80-87, 91-95, 132, 133
 - **whtml, element and API quirks:** 9, 23-29, 37, 42, 46, 47, 51, 54, 66, 68, 69, 74, 76, 78, 98-101, 114, 127
 - **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129
