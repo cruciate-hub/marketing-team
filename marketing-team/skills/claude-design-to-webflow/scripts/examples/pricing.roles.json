@@ -4,7 +4,6 @@
  "a11yScope": "main",
  "newCss": [
   ".pricing-chat",
-  ".pricing-contact_title",
   ".c-pricing"
  ],
  "known": [
@@ -21,6 +20,44 @@
     "paddingRight"
    ],
    "why": "Webflow page gutters (page-padding: 40px tablet, 16px phone) differ from the board (28px / 21px). Webflow is king: raised as a drift for the board, not a build fault."
+  },
+  {
+   "widths": [
+    1440,
+    800,
+    390
+   ],
+   "roles": [
+    "title",
+    "lead"
+   ],
+   "props": [
+    "w",
+    "h",
+    "fontSize",
+    "lineHeight",
+    "fontWeight",
+    "letterSpacing",
+    "color"
+   ],
+   "why": "19 Nov 2026: the h1 and lead use the site's global H1 and paragraph styles (pitfall 136); the board keeps its own type. Webflow won, raised for the board."
+  },
+  {
+   "widths": [
+    1440
+   ],
+   "roles": [
+    "hero",
+    "section1_hero",
+    "pitch"
+   ],
+   "props": [
+    "x",
+    "w",
+    "paddingLeft",
+    "paddingRight"
+   ],
+   "why": "Unframed hero sits on the container edges (feedback 54)."
   }
  ],
  "roles": {
@@ -46,11 +83,11 @@
   ],
   "title": [
    ".contact_title",
-   ".pricing-contact_title"
+   ".pricing-contact_pitch h1"
   ],
   "lead": [
    ".contact_lead",
-   ".pricing-contact_lead"
+   ".pricing-contact_pitch > p"
   ],
   "points": [
    ".contact_points",
