@@ -31,4 +31,5 @@ There are more than 5 points or each point fits in one line (use the feature gri
 - Images are `alt=""` inside a labelled `role="img"` container; headings are real `<h3>`
 
 ## Webflow note
-- Custom section with a GSAP ScrollTrigger script (not in source.html). The `data-build`, `data-motion`, `data-depth` and `data-origin` attributes describe each layer's build step and are kept for reference. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Custom section with a GSAP ScrollTrigger script (not in source.html). The `data-build`, `data-motion`, `data-depth` and `data-origin` attributes describe each layer's build step and are kept for reference. Reuse its classes as built (Webflow is king).

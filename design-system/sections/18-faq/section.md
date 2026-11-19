@@ -31,4 +31,5 @@ There are fewer than 5 questions (put the answers in the copy) or the questions 
 - Full width on phones, questions wrap to two lines; no sideways scroll at 390 px
 
 ## Webflow note
-- Webflow "Accordion" with a FAQ CMS collection. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow "Accordion" with a FAQ CMS collection. Reuse its classes as built (Webflow is king).

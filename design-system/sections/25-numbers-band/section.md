@@ -28,4 +28,5 @@ The numbers are not sourced or are fewer than three; on pages that already show 
 - 4 across on desktop, 2 by 2 under 992px, stacked on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Home-page section with its own `<style>` embed (kept). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Home-page section with its own `<style>` embed (kept). Reuse its classes as built (Webflow is king).

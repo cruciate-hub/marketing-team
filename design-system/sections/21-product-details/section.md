@@ -27,4 +27,5 @@ Any single-product page (use 11, 12 or 13).
 - Tiles stack to one column under 480px; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Section / Product Overview" (1 instance). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Section / Product Overview" (1 instance). Reuse its classes as built (Webflow is king).

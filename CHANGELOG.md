@@ -1,5 +1,21 @@
 # Changelog
 
+## marketing-team 13.91
+
+`claude-design-to-webflow` restructured around five gates and a board-vs-staging check script (Stefan, 19 November 2026).
+
+**Why:** the /pricing-conversational build needed 43 corrections in one session (stale board read, unverified "done", wrong framed class chains, invented styles, a hand-built logo wall instead of `Section / Logo Wall`, missing frame lines). Most were already covered by rules in the 50 KB skill, which was too long to follow. Plan: [`docs/claude-design-to-webflow-rework.md`](docs/claude-design-to-webflow-rework.md).
+
+**Changes:**
+- [`SKILL.md`](marketing-team/skills/claude-design-to-webflow/SKILL.md) (50 KB → 9 KB): six principles (Webflow is king; reuse first; measured, not eyeballed; "publish" means staging; style embeds next to what they style; raise every drift for the board and the design system), five gates (brief, map, build, check, publish and record), a report format, pitfalls grouped by topic. Description under 1024 characters; no Figma as a page-design source.
+- Moved, not dropped: rules 1-8, core principle, build gates, native vs code, breakpoints, responsive and the detailed checklist to [`references/site-conventions.md`](marketing-team/skills/claude-design-to-webflow/references/site-conventions.md); tool stack, MCP capabilities, whtml, custom code, assets and fonts, third-party embeds, 1:1 baking, token-efficient workflow, staging verification, playbook and publishing to [`references/api-and-code.md`](marketing-team/skills/claude-design-to-webflow/references/api-and-code.md); the gotcha index to the end of `pitfalls.md`. Updated in place and marked: rule 7 and the gates (state-only `<style>` embeds next to their section), the publish wording, the board parity gate (now the script), Webflow's own skills as optional extras, `agent_id`/`session_id` on every call, unpublished-changes and publish-landed checks.
+- New [`scripts/check-board.mjs`](marketing-team/skills/claude-design-to-webflow/scripts/check-board.mjs) with `selftest.mjs` and `examples/pricing.roles.json`: board vs staging at 1440/800/390 per role (size, type, spacing), frame lines per section, horizontal scroll, axe WCAG A/AA, internal links, live CSS; loads Figtree for a local board. The self-test catches a removed frame line, a wrong font size, a hidden section and a forced overflow. Guide: [`references/check-board.md`](marketing-team/skills/claude-design-to-webflow/references/check-board.md).
+- New [`references/subagent-brief.md`](marketing-team/skills/claude-design-to-webflow/references/subagent-brief.md).
+- [`pitfalls.md`](marketing-team/skills/claude-design-to-webflow/references/pitfalls.md): numbers unchanged; 86 now builds framed components with Webflow's classes and variables (`framed.css` shows the look); 23 marked partly superseded by 74; 126 corrected; new 135 (a local board falls back to Arial: the pricing headings were tuned to the wrong font); back-references point to `site-conventions.md`.
+- [`design-system/sections`](design-system/sections/): every `section.md` has a dated "Webflow note" (component names and instance counts checked read-only); the 23 framed sections no longer say "not yet in Webflow" or "write their values", and name the component or framed class chain to reuse. READMEs updated.
+- [`docs/claude-design-to-webflow.md`](docs/claude-design-to-webflow.md), `brain.md`, `README.md`, `CLAUDE.md` updated.
+- Bumped [`marketing-team/.claude-plugin/plugin.json`](marketing-team/.claude-plugin/plugin.json) 13.90 -> 13.91. The web-dev kit goes to 1.9.0.
+
 ## marketing-team 13.90
 
 Amadeus's customer-showcase-video skill comes back here, and into the organization kit as 14.21.0 (Stefan, 13 November 2026).

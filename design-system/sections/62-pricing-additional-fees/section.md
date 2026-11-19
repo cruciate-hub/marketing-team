@@ -27,4 +27,5 @@ Any other page.
 - One column on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Pricing / Payment information". Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Pricing / Payment information". Reuse its classes as built (Webflow is king).

@@ -29,4 +29,5 @@ Product pages (01), overview pages (02), articles (04), /vs/ pages (05).
 - Background #14152c tint in the hero on the live page (not a token; as-is). Stacks on phones, image below the text; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Industry / Hero". Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Industry / Hero". Reuse its classes as built (Webflow is king).

@@ -32,6 +32,7 @@ Marketing pages, product pages, home, /vs/ pages. Blog posts, answers and glossa
 - Text full width on phones, no sideways scroll at 390px
 
 ## Webflow note
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
 - NOT a component: two hand-built copies, Customer Stories Template (`breadcrumb-bar c-dark` > `container-large` > `display-flex is-wrap`) and Tutorials Template (`breadcrumb-bar` > `container-large` > `breadcrumb-wrapper`). Styling lives on the shared classes so both stay identical; any new template copies this markup and these classes, never new ones.
 
 ## Site-wide gap rule (approved by Stefan 18 Nov 2026)

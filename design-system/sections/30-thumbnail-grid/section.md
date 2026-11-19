@@ -28,4 +28,5 @@ Listing customer stories (19), use cases (16) or release notes (32).
 - 3 columns, 2 under 992px, 1 under 480px; no sideways scroll at 390px
 
 ## Webflow note
-- CMS lists on the templates and overview pages; no component. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- CMS lists on the templates and overview pages; no component. Reuse its classes as built (Webflow is king).

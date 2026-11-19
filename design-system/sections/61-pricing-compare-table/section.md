@@ -27,4 +27,5 @@ Comparing with a competitor (that is 52).
 - The table scrolls sideways inside the section on phones (no page sideways scroll at 390px)
 
 ## Webflow note
-- Webflow components "Pricing / Features" and "CC / Table Styling" (8). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow components "Pricing / Features" and "CC / Table Styling" (8). Reuse its classes as built (Webflow is king).

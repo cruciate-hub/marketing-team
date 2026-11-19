@@ -49,7 +49,7 @@ Skills are pre-built instruction sets for recurring task types. When a task matc
 | **glossary-content** | Glossary entries for social.plus/glossary — six fixed sections, at least one table, answer-first definition, 500–900 words; rewrites of existing live entries are the common case. Publishes via webflow-publisher once the Glossary field map is confirmed. | `marketing-team/skills/glossary-content/SKILL.md` |
 | **svg-icon-transformer** | Transform raw SVG input into clean, accessible, inline-embed-ready icon markup; strips editor noise and applies accessibility defaults | `marketing-team/skills/svg-icon-transformer/SKILL.md` |
 | **video-to-gif-and-webp** | Create or optimize animated .webp and .gif files from video | `marketing-team/skills/video-to-gif-and-webp/SKILL.md` |
-| **claude-design-to-webflow** | Migrate a Claude-generated HTML/CSS/JS prototype to a native Webflow section via the Webflow MCP — decision rule for native-vs-code, anti-patterns, pitfalls, cascade-conflict resolution, worked before/after examples, and a pre-mapped social.plus variable-ID catalog | `marketing-team/skills/claude-design-to-webflow/SKILL.md` |
+| **claude-design-to-webflow** | Build social.plus pages and sections in Webflow from Claude Design boards via the Webflow MCP: Webflow is king, five gates (brief, map, build, check, publish), a board-vs-staging check script, site conventions, 135 numbered pitfalls and a social.plus variable-ID catalog | `marketing-team/skills/claude-design-to-webflow/SKILL.md` |
 
 Load skill files via the canonical fetch block, same as every other reference file.
 

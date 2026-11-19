@@ -28,4 +28,5 @@ Any other page type.
 - Image above or below the text on phones (TO CHECK in mobile.png); no sideways scroll at 390px
 
 ## Webflow note
-- Customer Stories template. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Customer Stories template. Reuse its classes as built (Webflow is king).

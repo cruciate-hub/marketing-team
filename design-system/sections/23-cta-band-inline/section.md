@@ -27,4 +27,5 @@ As the last section (that is the footer CTA band, G4), more than once per page, 
 - Height about 340px (default) to 580px (two-buttons); stacks on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "CTA / Features Pages" (3) and plain sections. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "CTA / Features Pages" (3) and plain sections. Reuse its classes as built (Webflow is king).

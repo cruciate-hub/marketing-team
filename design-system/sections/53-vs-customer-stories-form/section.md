@@ -31,4 +31,5 @@ The page has a dedicated form section already, or when stories without a form ar
 - `source.html` shows the first story (static-state CSS at the end of the `<style>`); the other three are in the HTML
 
 ## Webflow note
-- Custom section: Customer Stories CMS list plus Webflow form. The slider script, the form endpoint (`action`), hidden fields and anti-bot attributes were removed from source.html; the field styling `<style>` embed is kept. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Custom section: Customer Stories CMS list plus Webflow form. The slider script, the form endpoint (`action`), hidden fields and anti-bot attributes were removed from source.html; the field styling `<style>` embed is kept. Reuse its classes as built (Webflow is king).

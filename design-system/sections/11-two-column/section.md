@@ -35,4 +35,5 @@ There are more than three ideas in a row (use the feature grid 12 or a card grid
 - `.grid-2`: 2 columns with a 4rem gap, 1 column under 992px; the image goes above the text on phones in every variant; no sideways scroll at 390px
 
 ## Webflow note
-- Plain `.grid-2` sections on the pages, no component. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Plain `.grid-2` sections on the pages, no component. Reuse its classes as built (Webflow is king).

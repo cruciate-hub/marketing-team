@@ -28,4 +28,5 @@ The items have no picture of their own (15), or the questions are FAQs (18).
 - On phones the image sits above the list; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Industry / Accordion". Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Industry / Accordion". Reuse its classes as built (Webflow is king).

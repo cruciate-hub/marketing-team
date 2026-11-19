@@ -33,4 +33,5 @@ Never leave it out. Landing pages without navigation are not part of the set (TO
 - Open panels and hover states are script driven and not shown in the screenshots. TO CHECK: capture one open panel as a second screenshot
 
 ## Webflow note
-- Webflow component "Nav / Main". Captured from the live site; class names are not a concern. The dropdown script and the right-click logo menu were removed from source.html.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Nav / Main". Captured from the live site; reuse its classes as built (Webflow is king). The dropdown script and the right-click logo menu were removed from source.html.

@@ -28,4 +28,5 @@ Items need an icon (13), a link (14), or are more than 6.
 - Cards stack to one column under 480px; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow component "Cards / Plain" (43 instances). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow component "Cards / Plain" (43 instances). Reuse its classes as built (Webflow is king).

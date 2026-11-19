@@ -32,4 +32,5 @@ There is no second column to compare against. Use the feature grid (12) or the s
 - Reduced motion: instant category switch
 
 ## Webflow note
-- Custom section; the pill script is not in source.html. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Custom section; the pill script is not in source.html. Reuse its classes as built (Webflow is king).

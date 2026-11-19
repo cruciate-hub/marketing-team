@@ -30,4 +30,5 @@ A /vs/ page (the form is part of 53), a page that already has a form, a newslett
 - Two columns stack on phones, form below the text; no sideways scroll at 390px
 
 ## Webflow note
-- Webflow components "CC / Contact Form" (8), "CC / Form" (5), "Form Privacy Disclaimer" (6). The `.input-field` style comes from page `<style>` embeds on the live site (kept in source.html). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow components "CC / Contact Form" (9), "CC / Form" (5), "Form Privacy Disclaimer" (12). The `.input-field` style comes from page `<style>` embeds on the live site (kept in source.html). Reuse its classes as built (Webflow is king).

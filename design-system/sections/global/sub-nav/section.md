@@ -30,4 +30,5 @@ Home, industry pages, /vs/ pages, contact pages, articles (blog posts, answers, 
 - Bar height 4.5rem (72px); 1px bottom border `--border--border-hover`. On phones the links scroll sideways inside the bar (no page sideways scroll at 390px)
 
 ## Webflow note
-- Webflow components "Nav / Sub / CSS", "Nav / Sub / JS", "Nav / Chat", "Nav / Social", "Nav / Video", "Nav / Blog", "Nav / Product Updates": all render this one bar. The dropdown script is removed from source.html; class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow components "Nav / Sub / CSS", "Nav / Sub / JS", "Nav / Chat", "Nav / Social", "Nav / Video", "Nav / Blog", "Nav / Product Updates": all render this one bar. The dropdown script is removed from source.html; reuse its classes as built (Webflow is king).

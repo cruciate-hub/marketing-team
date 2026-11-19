@@ -18,6 +18,6 @@ For any new or redesigned social.plus website page (static Webflow pages, not CM
 2. **Design:** a Claude Design canvas built with the `design-system` skill (tokens, foundations, sections).
 3. **Visuals:** `social-plus-illustration` (images), `social-plus-motion` (loops/video), `svg-icon-transformer` (icons), `video-to-gif-and-webp` (animated files).
 4. **Build in Webflow:** `claude-design-to-webflow` is the only build skill. It reuses the site's existing classes, components and variables; Stefan's Developer Portal header is the reference pattern.
-5. **Checks and publish:** the build skill's gate, then Webflow's `accessibility-audit` and `safe-publish` where installed. Claude publishes to staging only; production is Stefan's call.
+5. **Checks and publish:** the build skill's five gates, including `scripts/check-board.mjs` (board vs staging, accessibility); Webflow's `accessibility-audit` and `safe-publish` are optional extras where installed. "Publish" means staging; production only when Stefan says "publish to the real website".
 
 Never use: Webflow's `figma-to-webflow`: the only flow is Claude Design → Webflow (a design that detours through Figma goes back into Claude Design before it is built), `webflow-publisher` and the blog/glossary/answers skills (CMS content only, not pages).

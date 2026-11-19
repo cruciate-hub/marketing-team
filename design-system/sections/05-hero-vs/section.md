@@ -30,4 +30,5 @@ Any other page. Product, home and landing pages use the product hero (01), the s
 - On phones the tiles shrink and the title stays on one row; section height about 320 px at 390 wide
 
 ## Webflow note
-- Built 5 Oct as a custom section on the /vs/ template. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Built 5 Oct as a custom section on the /vs/ template. Reuse its classes as built (Webflow is king).

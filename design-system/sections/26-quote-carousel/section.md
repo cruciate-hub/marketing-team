@@ -28,4 +28,5 @@ Only one quote exists (put it in the two-column 11 as text), or next to the cust
 - On phones the quote wraps and the logo row scrolls sideways inside the section; no page sideways scroll at 390px
 
 ## Webflow note
-- Home-page section (CMS list) with its own `<style>` embed (kept). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Home-page section (CMS list) with its own `<style>` embed (kept). Reuse its classes as built (Webflow is king).

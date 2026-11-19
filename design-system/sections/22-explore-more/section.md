@@ -27,4 +27,5 @@ Industry pages, articles, /vs/ pages; never more than two tiles.
 - The two tiles stack on phones; no sideways scroll at 390px
 
 ## Webflow note
-- Plain section repeated on the product pages (7 pages). Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Plain section repeated on the product pages (7 pages). Reuse its classes as built (Webflow is king).

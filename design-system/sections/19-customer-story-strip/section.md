@@ -28,4 +28,5 @@ The page already has the tabbed customer stories (53) or a quote carousel (26) r
 - The row scrolls sideways inside the section on phones (no page sideways scroll at 390px)
 
 ## Webflow note
-- Webflow components "Section / Customer Stories" (12) and "CC / Customer Stories Section" (26) render the same cards. Class names are not a concern.
+- Checked 19 Nov 2026 (component names and instance counts, read-only).
+- Webflow components "Section / Customer Stories" (12) and "CC / Customer Stories Section" (27) render the same cards. Reuse its classes as built (Webflow is king).
