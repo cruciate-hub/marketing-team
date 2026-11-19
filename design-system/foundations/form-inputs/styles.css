@@ -219,7 +219,7 @@ a[data-wf-focus-visible] {
   padding-left: 0;
   display: flex;
   position: relative;
-  color: var(--frame--frame-marker);
+  color: var(--text--text-color-grey-medium);
   font-size: 0.8125rem;
   line-height: 1.45;
   cursor: pointer;
