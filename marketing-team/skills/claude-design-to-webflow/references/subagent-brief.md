@@ -4,7 +4,7 @@ About 40% of the corrections in the 19 Nov 2026 pricing build came from subagent
 
 ```
 You are building [section(s)] of [page] on the social.plus Webflow site (site 66e2765d540e1939a89db4bb),
-from the Claude Design board [artifact URL], version [version id]. Target page: [page id / slug], staging only.
+from the Claude Design board [artifact URL], version [version id]. Target page: [page id / slug], staging only. Stefan chose [original page / copy]; build only there. If a choice comes up that the brief does not settle (original or copy, which pages, a new class or component), stop and ask; never decide it yourself.
 
 Load the skill `claude-design-to-webflow` first and follow its five gates. Webflow is king: the site's
 components, class chains and variables win over the board; never change a Webflow variable or shared class
