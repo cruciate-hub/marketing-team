@@ -25,7 +25,7 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 
 ### 1. Brief
 - [ ] Target page confirmed with Stefan (id and slug), and it's staging. Ask him, before building, whether the build goes on the original page or on a copy; never pick it yourself (Principle 7, Pitfall 139). A copy page stays a copy until Stefan says otherwise.
-- [ ] Board read fresh with `Artifact read` right now (not from memory, not an earlier read). Note the version the read or the last publish reports; if there is none, the read time.
+- [ ] Board read fresh with `Artifact read` right now (not from memory, not an earlier read). Read all its comment threads too, and make sure every request in them is applied on the board before building (Pitfall 155). Note the version the read or the last publish reports; if there is none, the read time.
 - [ ] Board sections listed in order, each with what it shows.
 - [ ] Webflow MCP ready: send `session_id: "start"` on the first call and reuse the issued `ses_` id; choose one `agent_id` (model|harness|suffix) for the whole task. `webflow_guide_tool` once (its output is large: save it and grep it), `data_agent_instructions_tool search_instructions`.
 - [ ] Does the target page already hold a build? Then map and restyle what is there (Pitfall 88) and run the check against it first; never rebuild it blind.
@@ -34,12 +34,13 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 - [ ] For each board section: the Webflow component or existing section it maps to, and its exact class chain. Sources: the section's `## Webflow note` in `design-system/sections/**/section.md` (public repo: your checkout, or `git clone --depth 1 https://github.com/cruciate-hub/marketing-team.git /tmp/cruciate-hub-marketing-team`, or `git -C` that folder `pull` if it exists), then `data_component_tool query_components` (keywords: section, logo, card, button, icon, form), then an existing page's `query_elements children_depth:-1`. A note without a chain: take the chain from a page that uses it and add it to the note. Never a nearby site section because it looks similar (Pitfall 124).
 - [ ] Framed sections use the full chain `section padding_Y background-color_dark border-top c-framed` (Pitfall 132; `site-conventions.md` rule 4).
 - [ ] New classes, variables or components: none, or each named with its reason and approved by Stefan.
+- [ ] Every board element whose closest component looks different (a text link vs a pill button) is raised with Stefan before building; his pick goes onto the board too (Pitfall 154).
 - [ ] Roles file for the check written, starting from `scripts/examples/pricing.roles.json` as a template (one role per section, in order, plus the elements that carry the look; `references/check-board.md`).
 
 ### 3. Build
 - [ ] Structure with `data_whtml_builder`, existing class names only, no `css` param; styles with `data_style_tool`, colours and fonts bound to variables, sizes in rem.
 - [ ] Buttons, links, icons, nav, footer, logo wall and other recurring sections are component instances.
-- [ ] Text uses the site's global tag styles: `h1`-`h6` and `p` get no class. Add a class to a text element only for something the tag style can't give (a utility like `text-size-small`, or a width cap with `max-CH-<n>`), and name it in the report (Pitfall 136).
+- [ ] Text uses the site's global tag styles: `h1`-`h6` and `p` get no class. Supporting text uses `text-size-small` (or `-tiny` / `-large`), never another component's class (Pitfall 149). Add a class to a text element only for something the tag style can't give (a utility like `text-size-small`, or a width cap with `max-CH-<n>`), and name it in the report (Pitfall 136).
 - [ ] Before editing a shared class or component: list every page it reaches (`includeInstanceCount`, `query_styles`) and say so. Never experiment on a shared component or Collection List (Pitfall 90).
 - [ ] Before a large change: snapshot what you replace (element tree, embed code, freeform code) to a local file, as the rollback.
 - [ ] Images: uploaded to the asset library (WebP, sized for their slot, about 2x), bound by asset id; decorative images `alt=""`, content images a real alt.
@@ -48,6 +49,11 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 ### 4. Check
 - [ ] Publish to staging, then confirm it landed (new class or text in the fetched page).
 - [ ] Run `node scripts/check-board.mjs` at 1440/800/390. No FAIL left unexplained; each Webflow-owned difference is a NOTE in `known` and on the "Webflow won" list.
+- [ ] Never report "done" or ask Stefan to review before this gate ran. A full-page screenshot is not the check: crop each section, compare with the board at each width, and check every grid's column count at 800 against the board's `--cells-tablet` (Pitfalls 145, 146). Webflow's `safe-publish` checks changes and metadata, not layout.
+- [ ] Measure spacing: in every container, sibling distance (`next.top - prev.bottom`) equals the board; site text classes add their own bottom margins on top of gaps and padding (Pitfall 152). Hover the clickable cards: no image keeps a baked-in background (Pitfall 153).
+- [ ] Measure alignment in repeated cards: equal offsets for dividers and copy blocks in every card (Pitfall 147). Custom lists: no bullet from the global `li` style (Pitfall 148).
+- [ ] The same check on every page the built page links to (its contact and form pages); `scrollWidth === innerWidth` at 1440 and 390 (Pitfalls 143, 144).
+- [ ] Every avatar, customer logo, pill, icon and small text matched to the newest page that has it, no legacy styling left (Pitfall 141).
 - [ ] Look at the side-by-side images yourself, section by section, including every line and "+" marker.
 - [ ] Accessibility: the script's axe check passes (no serious or critical). Webflow's `accessibility-audit` skill is an optional extra where installed.
 
@@ -71,17 +77,17 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 
 ## Pitfalls by topic (numbers in `references/pitfalls.md`, which never change)
 
-- **Board and design source:** 59-62, 86, 88, 124-126, 134, 135, 139
-- **Components, classes and variables:** 140, 136, 137, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
+- **Board and design source:** 59-62, 86, 88, 124-126, 134, 135, 139, 154, 155
+- **Components, classes and variables:** 149, 140, 136, 137, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
 - **Framed sections and frame lines:** 80-87, 91-95, 132, 133
 - **whtml, element and API quirks:** 9, 23-29, 37, 42, 46, 47, 51, 54, 66, 68, 69, 74, 76, 78, 98-101, 114, 127
-- **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129
+- **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129, 146-148, 152, 153
 - **Custom code and scripts:** 3, 11-15, 33, 40, 43, 49, 50, 104, 119
 - **Nav and menus:** 26, 27, 34, 38, 39, 44
 - **CMS:** 89, 99, 102, 111, 116-118, 120, 121
-- **Assets, icons and fonts:** 24, 48, 112, 115
+- **Assets, icons and fonts:** 24, 48, 112, 115, 151
 - **Accessibility and semantics:** 75, 76, 79, 108, 115
-- **Checking and verification:** 19, 21, 31, 32, 45, 57, 60, 63, 77, 87, 103, 125, 133
+- **Checking and verification:** 19, 21, 31, 32, 45, 57, 60, 63, 77, 87, 103, 125, 133, 141, 142, 143, 144, 145, 150
 - **Publishing:** 10, 21
 
 ## References
