@@ -9,7 +9,7 @@ The only Webflow build skill for social.plus website pages. Before it: `brand-me
 
 ## Principles
 
-**Ground rule: native first.** Every look is built with native Webflow styles, classes, variables, states and assets before any custom code. When the API can't reach something Webflow does natively (the Checked state of a custom checkbox, Designer-only settings), the answer is a short Designer step for Stefan, not an embed. Code is the last resort, only for what Webflow cannot express at all, and it needs Stefan's OK (Stefan, 19 Nov 2026; checkbox example in Pitfall 138).
+**Ground rule: native first.** Every look is built with native Webflow styles, classes, variables, states and assets before any custom code. When the API can't reach something Webflow does natively (the Checked state of a custom checkbox, Designer-only settings), the answer is a short Designer step for Stefan, not an embed. Code is the last resort, only for what Webflow cannot express at all, and it needs Stefan's OK (Stefan, 19 Nov 2026; checkbox example in Pitfall 138). Native also means **visible in the Designer**: write every property the way the Style panel writes it, so Stefan can find and edit it there. Before writing a property, read an existing site class that uses it and copy its property names. Gap is always the pair `grid-column-gap` + `grid-row-gap`; never bare `gap`, `row-gap` or `column-gap` (Pitfall 156).
 
 1. **Webflow is king.** Webflow's components, class chains, variables, gutters and type scale are the source of truth. The board adapts to Webflow; never change a Webflow variable or shared class to match a board (Pitfall 134).
 2. **Reuse first.** Existing component → existing class chain → new native class (Stefan's OK first) → code last. Never hand-build what a component already does (Pitfalls 64, 70, 131).
@@ -40,6 +40,7 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 ### 3. Build
 - [ ] Structure with `data_whtml_builder`, existing class names only, no `css` param; styles with `data_style_tool`, colours and fonts bound to variables, sizes in rem.
 - [ ] Buttons, links, icons, nav, footer, logo wall and other recurring sections are component instances.
+- [ ] Spacing comes from the site, not the board's gap: a text stack (eyebrow, heading, paragraph, button group) gets **no gap**, because the site's text classes already space it with their bottom margins (12/12/24px). Add a gap only where the site's margins don't space the items (icon rows, card grids, stacks of non-text elements), and name it in the report. Never translate a board's `gap` into Webflow 1:1 (Pitfalls 152, 156).
 - [ ] Text uses the site's global tag styles: `h1`-`h6` and `p` get no class. Supporting text uses `text-size-small` (or `-tiny` / `-large`), never another component's class (Pitfall 149). Add a class to a text element only for something the tag style can't give (a utility like `text-size-small`, or a width cap with `max-CH-<n>`), and name it in the report (Pitfall 136).
 - [ ] Before editing a shared class or component: list every page it reaches (`includeInstanceCount`, `query_styles`) and say so. Never experiment on a shared component or Collection List (Pitfall 90).
 - [ ] Before a large change: snapshot what you replace (element tree, embed code, freeform code) to a local file, as the rollback.
@@ -47,10 +48,11 @@ Work in this order. Each gate must pass before the next step. If one fails, stop
 - [ ] Fix the whtml quirks right after each call: links, raw `href`/`rel`, `focusable`, `for=""`, buttons turned into links, images (Pitfalls 23, 66, 74, 101, 127; `api-and-code.md`).
 
 ### 4. Check
+- [ ] Before publishing: `query_styles` every new or edited class with `include_properties` and every breakpoint; any bare `gap`, `row-gap` or `column-gap` is a FAIL, as is a gap on a text stack. Fix, then publish (Pitfall 156).
 - [ ] Publish to staging, then confirm it landed (new class or text in the fetched page).
 - [ ] Run `node scripts/check-board.mjs` at 1440/800/390. No FAIL left unexplained; each Webflow-owned difference is a NOTE in `known` and on the "Webflow won" list.
 - [ ] Never report "done" or ask Stefan to review before this gate ran. A full-page screenshot is not the check: crop each section, compare with the board at each width, and check every grid's column count at 800 against the board's `--cells-tablet` (Pitfalls 145, 146). Webflow's `safe-publish` checks changes and metadata, not layout.
-- [ ] Measure spacing: in every container, sibling distance (`next.top - prev.bottom`) equals the board; site text classes add their own bottom margins on top of gaps and padding (Pitfall 152). Hover the clickable cards: no image keeps a baked-in background (Pitfall 153).
+- [ ] Measure spacing: in every container, sibling distance (`next.top - prev.bottom`) equals the board, and is put in the report as board vs staging per container (e.g. hero 12/12/24 vs 12/12/24). Where staging is wider, a gap is stacking on the margins: remove the gap, don't lower it; site text classes add their own bottom margins on top of gaps and padding (Pitfall 152). Hover the clickable cards: no image keeps a baked-in background (Pitfall 153).
 - [ ] Measure alignment in repeated cards: equal offsets for dividers and copy blocks in every card (Pitfall 147). Custom lists: no bullet from the global `li` style (Pitfall 148).
 - [ ] The same check on every page the built page links to (its contact and form pages); `scrollWidth === innerWidth` at 1440 and 390 (Pitfalls 143, 144).
 - [ ] Every avatar, customer logo, pill, icon and small text matched to the newest page that has it, no legacy styling left (Pitfall 141).
@@ -81,7 +83,7 @@ Brief them with `references/subagent-brief.md` (it carries the gates), and check
 - **Components, classes and variables:** 149, 140, 136, 137, 2, 6, 41, 18, 20, 22, 52, 53, 56, 64, 65, 67, 70-73, 89, 90, 97, 122, 123, 130, 131
 - **Framed sections and frame lines:** 80-87, 91-95, 132, 133
 - **whtml, element and API quirks:** 9, 23-29, 37, 42, 46, 47, 51, 54, 66, 68, 69, 74, 76, 78, 98-101, 114, 127
-- **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129, 146-148, 152, 153
+- **CSS and layout traps:** 1, 4, 5, 7, 8, 16, 17, 30, 35, 36, 55, 58, 96, 105-107, 109, 110, 113, 128, 129, 146-148, 152, 153, 156
 - **Custom code and scripts:** 3, 11-15, 33, 40, 43, 49, 50, 104, 119
 - **Nav and menus:** 26, 27, 34, 38, 39, 44
 - **CMS:** 89, 99, 102, 111, 116-118, 120, 121
