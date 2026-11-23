@@ -709,7 +709,7 @@ The pick is #1 unless a lower option has a clearly better fit (on-topic paragrap
 
 Write a casual-but-professional reply. The tone is direct, friendly, no corporate fluff — like texting a business contact. Every line sits flush-left so the reply renders cleanly in email, LinkedIn, Slack and any chat box where markdown doesn't render.
 
-**Reciprocal-side governance.** The reciprocal side of every exchange — what social.plus gives back — is governed by the `marketing-team:link-building-vetter` skill (Tier-1 exclusion, one-exchange-link-per-article cap). The close asks the partner what would work for them; it never pre-commits our articles or anchors.
+**Reciprocal-side governance.** The reciprocal side of every exchange — what social.plus gives back — is governed by the `marketing-team:link-building-vetter` skill (Tier-1 exclusion, restricted categories). The close asks the partner what would work for them; it never pre-commits our articles or anchors.
 
 **One reply per contact.** A flat pasted list of domains is one contact and gets one consolidated reply, even when research per domain ran in parallel. Only split when Stefan says the domains belong to different contacts.
 
