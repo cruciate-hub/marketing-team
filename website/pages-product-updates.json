@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-02T11:51:46.752Z",
-    "itemCount": 71,
+    "generatedAt": "2026-11-23T14:08:27.607Z",
+    "itemCount": 72,
     "collectionId": "66e2765d540e1939a89db971",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/product-update/introducing-moderation-rule-builder-moderation-on-your-terms",
+      "metaTitle": "Introducing Moderation Rule Builder: Moderation on Your Terms",
+      "metaDescription": "The social.plus Moderation Rule Builder lets your team set its own moderation rules, choose how each one responds, and test it before it goes live.",
+      "content": "# Introducing Moderation Rule Builder: Moderation on Your Terms\n## What is the social.plus Moderation Rule Builder\n## One rule, from first condition to live\n## Match the response to the behavior\n## Catch the pattern, not just the post\n## Built around your users"
+    },
     {
       "url": "https://www.social.plus/product-update/whats-new-in-social-plus-october-2026",
       "metaTitle": "What's new in social.plus | October 2026",
