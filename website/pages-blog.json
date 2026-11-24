@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-18T09:35:57.868Z",
-    "itemCount": 272,
+    "generatedAt": "2026-11-24T05:50:05.955Z",
+    "itemCount": 273,
     "collectionId": "66e2765d540e1939a89db6a4",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/blog/how-to-build-moderation-rules-that-fit-your-app",
+      "metaTitle": "How to Build Moderation Rules That Fit Your App ",
+      "metaDescription": "How to build moderation rules from conditions, responses and testing, plus ready-to-adapt rules for wellness, retail, marketplaces, media and gaming.",
+      "content": "# How to Build Moderation Rules That Fit Your App \n## The three parts of every moderation rule\n## Start with the behavior, not the keyword\n## Use AND to narrow, OR to widen, NOT to exempt\n## Choose the lightest response that solves the problem\n## Test the rule, then switch it on\n## Good rules for five kinds of apps\n### Fitness and wellness: let people make the grey-area calls\n### Retail: catch repeat offenders before they escalate\n### Travel and marketplaces: keep reported content from lingering\n### Media and entertainment: protect the moment a post goes viral\n### Gaming and live events: slow down chat flooding\n## Where to start"
+    },
     {
       "url": "https://www.social.plus/blog/whoop-humans-why-whoop-built-its-own-social-graph",
       "metaTitle": "Whoop Humans: Why Whoop Built Its Own Social Graph",
