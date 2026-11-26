@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-26T11:09:12.874Z",
-    "itemCount": 85,
+    "generatedAt": "2026-11-26T14:37:28.249Z",
+    "itemCount": 86,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/complete-follower-and-following-lists-in-the-sdks",
+      "metaTitle": "Complete Follower and Following Lists in the SDKs",
+      "metaDescription": "The SDKs now support retrieving a complete list of the users you follow and the users who follow you in one call, making it easier to show Unfollow and Remove follower options across different user lists.",
+      "content": "# Complete Follower and Following Lists in the SDKs"
+    },
     {
       "url": "https://www.social.plus/release-note/auto-play-video-in-feed-while-scrolling",
       "metaTitle": "Auto-Play Video in Feed While Scrolling",
