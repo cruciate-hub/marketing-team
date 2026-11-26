@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-02T11:55:30.362Z",
-    "itemCount": 83,
+    "generatedAt": "2026-11-26T10:47:56.279Z",
+    "itemCount": 84,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/moderation-rule-builder-for-custom-moderation-responses",
+      "metaTitle": "Moderation Rule Builder for Custom Moderation Responses",
+      "metaDescription": "Teams can now build moderation rules directly in the Console by combining conditions such as keywords, links, posting speed, account age, report counts, and AI harm categories, then choosing a response from flag and hide to delete, global mute, or global ban.",
+      "content": "# Moderation Rule Builder for Custom Moderation Responses"
+    },
     {
       "url": "https://www.social.plus/release-note/gif-support-in-comments-and-posts",
       "metaTitle": "GIF Support in Comments and Posts",
