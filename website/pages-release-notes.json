@@ -1,11 +1,17 @@
 {
   "_meta": {
-    "generatedAt": "2026-11-26T10:47:56.279Z",
-    "itemCount": 84,
+    "generatedAt": "2026-11-26T11:09:12.874Z",
+    "itemCount": 85,
     "collectionId": "697713f21a4cfd3f4db2768b",
     "method": "webflow-data-api"
   },
   "pages": [
+    {
+      "url": "https://www.social.plus/release-note/auto-play-video-in-feed-while-scrolling",
+      "metaTitle": "Auto-Play Video in Feed While Scrolling",
+      "metaDescription": "Videos now start playing silently as members scroll past them, giving a quick preview of each post.",
+      "content": "# Auto-Play Video in Feed While Scrolling"
+    },
     {
       "url": "https://www.social.plus/release-note/moderation-rule-builder-for-custom-moderation-responses",
       "metaTitle": "Moderation Rule Builder for Custom Moderation Responses",
