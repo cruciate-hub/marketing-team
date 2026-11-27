@@ -29,6 +29,11 @@ Home, industry pages, /vs/ pages, contact pages, articles (blog posts, answers, 
 - Links are plain `<a>`; the dropdown toggle is a link with `role="button"` on the live site (TO CHECK: keyboard opening is script driven and not in source.html)
 - Bar height 4.5rem (72px); 1px bottom border `--border--border-hover`. On phones the links scroll sideways inside the bar (no page sideways scroll at 390px)
 
+## Attached to the nav (25 Nov 2026, feedback 55)
+- The live sub-nav no longer floats as its own bar: it is attached under the nav card. The nav card drops its bottom border and corners (4px 4px 0 0); `.sub-navbar_content` continues it (#181818, 1px #39393a, radius 0 0 4px 4px, 0 24px padding, 54px row, 16px below). The 72px bar and bottom border described above are the 7 Oct capture and no longer hold.
+- Desktop links 16px/500 #b3b3b3, 28px apart, current white with a 3px white underline. Phones (<=767px): pills #222 (current #3b41ec), 8px 16px, 14.4px/500 white, scrolling sideways.
+- On Claude Design boards this is set once in `ds/socialplus/components/megamenu.css`; boards keep their `.mm-subnav` markup.
+
 ## Webflow note
 - Checked 19 Nov 2026 (component names and instance counts, read-only).
 - Webflow components "Nav / Sub / CSS", "Nav / Sub / JS", "Nav / Chat", "Nav / Social", "Nav / Video", "Nav / Blog", "Nav / Product Updates": all render this one bar. The dropdown script is removed from source.html; reuse its classes as built (Webflow is king).
