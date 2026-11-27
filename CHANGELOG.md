@@ -1,5 +1,16 @@
 # Changelog
 
+## marketing-team 13.93
+
+`link-building-vetter` drops the one-exchange-link-per-article cap (Stefan, 23 November 2026).
+
+**Why:** social.plus blog articles carry more than one exchange link in practice. The cap made the vetter reject requests and put "this article already carries its exchange link" into partner replies, which Stefan had to remove by hand.
+
+**Changes:**
+- Removed "article already carries an exchange-placed outbound link" from both BLOCK lists in `link-building-vetter`.
+- Replaced the hard cap with a note: no per-article cap, never cite an existing exchange link to a partner, keep new links out of a paragraph that already holds one, and flag articles with 3+ exchange links to Stefan in the analysis.
+- `backlink-placement-finder`: the reciprocal-side governance line no longer mentions the per-article cap.
+
 ## marketing-team 13.92
 
 `backlink-placement-finder` goes traffic first, screens out link farms early, scores every page, and keeps partner names out of the repo (Stefan, 19 November 2026).

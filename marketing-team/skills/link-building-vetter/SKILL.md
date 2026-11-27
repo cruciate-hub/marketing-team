@@ -39,7 +39,6 @@ Score each applicable criterion 1-10:
 - Article is on the excluded list ([references/excluded-articles.md](references/excluded-articles.md))
 - Article is a Tier-1/money-page article
 - DR < 50
-- The social.plus article already carries one exchange-placed outbound link
 - Target page competes with the article's keywords
 - Branded or competitor-keyword anchor
 
@@ -91,7 +90,7 @@ Before evaluating, check article status in [references/excluded-articles.md](ref
 
 Google's link-spam policy explicitly names "excessive link exchanges" as spam. This program is the single biggest residual penalty exposure for social.plus, and it stays defensible only while it is small and genuinely editorial. Volume is a policy risk, not a growth lever.
 
-- **Hard cap: 1 exchange-placed outbound link per social.plus article, ever.** A second request on the same article is a BLOCK, regardless of quality.
+- **No per-article cap.** A social.plus article may carry more than one exchange-placed outbound link (Stefan, 23 November 2026). Never reject a request, or cite it in a partner email, because the article already has an exchange link. Do keep new links out of a paragraph that already holds a link, and when an article already carries 3 or more exchange links, say so in the analysis for Stefan (not in the email) so he can decide.
 - **Aggregate reporting:** With each approval batch, report to Stefan a running aggregate of live exchange-placed outbound links across the site. Label each figure **Measured** (from inventory or Ahrefs data) or **Estimated** — never present an estimate as a measurement.
 - **Shrink, not grow:** The default posture is net reduction. When exchange links are removed from Tier-1 posts, re-homing onto other posts requires a net reduction in total exchange links — never 1:1 re-insertion.
 - **Quarter-over-quarter check:** If aggregate exchange density rises quarter over quarter, stop approvals and flag it to Stefan as a policy-exposure decision, not a throughput question.
@@ -156,6 +155,5 @@ Before handing a draft to the user, reread it and confirm: no mid-sentence line 
 - Tier-1/money-page articles
 - DR < 50
 - Non-blog pages
-- Article already carries an exchange-placed outbound link
 - Target page competes with article keywords
 - Branded or competitor-keyword anchors
