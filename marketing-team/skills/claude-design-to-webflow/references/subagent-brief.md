@@ -17,12 +17,13 @@ Board sections you own and their Webflow mapping (from the Map step):
 Do not:
 - create a class, variable or component without asking me first (say which and why);
 - edit a shared class or component without listing every page it reaches;
+- write a property the Style panel wouldn't show (bare `gap`/`row-gap`/`column-gap`: use `grid-column-gap` + `grid-row-gap`), or put a gap on a text stack the site's margins already space (Pitfall 156);
 - publish to anything but staging;
 - report "done" without the check output.
 
 Report back with:
 1. what you built (element ids), each embed and what it styles, each new class and why;
-2. the `check-board.mjs` report (path to report.md) and every FAIL left with its reason;
+2. the `check-board.mjs` report (path to report.md) and every FAIL left with its reason, plus board vs staging sibling distances per container;
 3. the "Webflow won" list (where the build differs from the board because Webflow wins);
 4. what you could not verify.
 ```

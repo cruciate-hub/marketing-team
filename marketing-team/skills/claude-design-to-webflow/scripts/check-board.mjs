@@ -47,7 +47,7 @@ const chromePath = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrom
 const browser = await chromium.launch(chromePath ? { executablePath: chromePath } : {});
 
 async function open(src, w) {
-  const p = await browser.newPage({ viewport: { width: w, height: 900 } });
+  const p = await browser.newPage({ viewport: { width: w, height: 900 }, bypassCSP: true }); // bypassCSP: Turnstile pages block the axe script tag otherwise
   const errors = [];
   p.on('pageerror', e => errors.push(e.message));
   const target = src === 'board' ? 'file://' + board : url + (url.includes('?') ? '&' : '?') + 'check=' + Date.now();

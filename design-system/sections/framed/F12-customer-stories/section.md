@@ -14,6 +14,7 @@ Proof near the end of a product or industry page.
 Grid: three cards in frame cells. Gallery: photo tiles, the hovered story widens (swipe on phones). Photos are the library's placeholders.
 
 ## Rules
+- Use the tile as is (feedback 56): logo size and the hover widening come from `framed.css`; a page never restyles `.story-tile*` or `.uc_logo` (no fixed logo height, no white filter, no photo brightening, no extra "Read the story" line).
 - A framed section sits on the frame: framed sections only on that page, never a captured section and never a captured section wrapped in the frame (Grid and frame section).
 - Keep the structure and inner layout as source.html shows it; change only the content. Inside the frame there are cells divided by lines, no floating cards.
 - Colours, type and spacing come from the role, type-scale and layout tokens (`framed.css` and the design system's tokens); in a Webflow build use the site's variables and classes (Webflow is king); a value with no Webflow equivalent is raised as a drift, never added on the fly.
